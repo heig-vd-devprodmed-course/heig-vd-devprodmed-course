@@ -1,0 +1,14 @@
+pour que le projet fonctionne, il faut :
+    - créer un nouveau projet
+	
+	- (depuis le répertoire \laravel)
+		installer le nécessaire pour l'authentification
+			composer require laravel/breeze --dev
+			php artisan breeze:install blade
+			
+	- copier les fichiers dans les bons répertoires
+	
+    - faire les commandes suivantes : 
+         php artisan migrate:install
+         php artisan migrate
+         php artisan db:seed

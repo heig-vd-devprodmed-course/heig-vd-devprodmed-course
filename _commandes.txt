@@ -1,0 +1,46 @@
+﻿Les _..._ signifient que c'est à l'utiliisateur de donner un nom
+
+Laravel :
+---------
+laravel new _app1/laravel_                                          // pour installer le squelette d'une nouvelle application
+
+Composer :
+----------
+composer require barryvdh/laravel-debugbar --dev					// pour télécharger le débugger laravel (puis composer update)
+(composer require caouecs/laravel-lang)                             // prérequis pour le suivant ?
+composer require andrey-helldar/laravel-lang-publisher      	    // pour la gestion des langues (https://packagist.org/packages/andrey-helldar/laravel-lang-publisher)
+	php artisan lang:install fr										// Installe les fichiers pour la langue française
+composer update														// pour installer les fichiers
+composer create-project --prefer-dist laravel/laravel _nomProjet_	// crée le répertoire _nomProjet_ avec tous les fichiers nécessaires
+composer create-project --prefer-dist laravel/laravel               // crée tous les fichiers nécessaires dans le répertoire courant
+composer dumpautoload						  						// permet une maj pour une meilleure visibilité des classes
+composer require tymon/jwt-auth "1.0.*"                             // pour sécuriser une api via jwt
+
+
+Artisan :
+---------
+php artisan config:clear
+php artisan config:cache       (en cas de non fonctionnement du mail et de l'installation d'une nouvelle langue)
+php artisan jwt:secret                                      // Crée une clé secrète dans le fichier .env
+php artisan make:model _nomModele_						    // Crée le modèle
+php artisan make:auth                                       // Crée des vues (view.auth.passwords) et le controleur HomeController.php dans Http\Auth
+php artisan make:migration _create_nomTable_table_		    // pour créer le fichier migration dans Laravel (C.F. SourceFile->Database->Migrations)
+php artisan migrate:status                                  // pour controler que tout fonctionne au niveau de la bd
+php artisan migrate:install								    // pour créer la table de base nécessaire à Eloquent
+php artisan migrate										    // pour créer les tables dans MySql
+php artisan migrate:reset								    // supprime toutes les tables pécédemment crées
+php artisan make:seeder _nomDuSeeder_                       // crée une classe pour peupler une table de la bd
+php artisan db:seed                                         // pour peupler la db (si ne marche pas, classes non reconnues => composer dumpautoload)
+php artisan migrate --seed								    // Effectue une migration et un peuplement des tables ()
+php artisan migrate:status                                  // pour s'assurer que tout fonctionne entre Laravel et la base de donnée
+php artisan tinker										    // permet d'entrer des commandes dans la console :-)))
+php artisan make:middleware _nomMiddleware_				    // permet de créer un middleware
+php artisan view:clear									    // force Laravel à regénérer les vues (supprime le cache "storage/framework/views")
+php artisan config:clear                                    // En cas de problème avec les fichiers de config.
+php artisan make:rule _nomRole_
+php artisan make:request _nomRequete_
+php artisan make:controller _nomDuController_
+php artisan make:controller _nomDuController_ --resource    // pour un service web REST
+php artisan route:list 								        // pour connaitre toutes les routes
+php artisan storage:link                                    // pour faire un lien entre public et storage
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" // pour créer un fichier config/jwt.php
