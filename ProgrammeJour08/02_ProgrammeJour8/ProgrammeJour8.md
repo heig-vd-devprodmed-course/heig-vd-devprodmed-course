@@ -2,42 +2,44 @@
 
 [Documentation officielle concernant toutes les relations possibles](https://laravel.com/docs/11.x/eloquent-relationships)
 
-Lors du dernier cours nous avons appris à gérer la relation dite 1:n. 
-Aujourd'hui nous allons nous occuper de la relation dite `n:n` (`many to many`) qui nécessite une table dédiée (table pivot).
+Lors du dernier cours nous avons appris à gérer la relation dite 1:n.
+Aujourd'hui nous allons nous occuper de la relation dite `n:n` (`many to many`)
+qui nécessite une table dédiée (table pivot).
 
-La relation `n:n` consiste à avoir : 
+La relation `n:n` consiste à avoir :
 
-- un enregistrement d'une table T1 pouvant être en relation avec plusieurs enregistrements d'une table T2
+- un enregistrement d'une table T1 pouvant être en relation avec plusieurs
+  enregistrements d'une table T2
 
- - un enregistrement d'une table T2 pouvant être en relation avec plusieurs enregistrements d'une table T1
+- un enregistrement d'une table T2 pouvant être en relation avec plusieurs
+  enregistrements d'une table T1
 
-Nous allons poursuivre l'exemple du cours précédant qui consistait à avoir des personnes qui rédigent des articles, en ajoutant la possibilité d'ajouter des mots-clés aux articles.
+Nous allons poursuivre l'exemple du cours précédant qui consistait à avoir des
+personnes qui rédigent des articles, en ajoutant la possibilité d'ajouter des
+mots-clés aux articles.
 
- - un article peut avoir plusieurs mots-clés.
- - un mot-clé peut être attaché à plusieurs articles.
+- un article peut avoir plusieurs mots-clés.
+- un mot-clé peut être attaché à plusieurs articles.
 
 C'est ce que l'on nomme une relation `n:n`
 
-Tables mises		
-en place lors		                Tables à mettre
-du dernier cours                          en place
-──────────	                   aujourd'hui
-     |	     |	                     ────────────
-     |             |                                 |                     |
-     |             |                          (table pivot)          |
-`users`    `articles`         `article_motcle` `motcles`
+Tables mises en place lors Tables à mettre du dernier cours en place ──────────
+aujourd'hui | | ──────────── | | | | | | (table pivot) | `users` `articles`
+`article_motcle` `motcles`
 
-Pour ne pas tout refaire depuis le début, nous allons dupliquer le projet réalisé lors du dernier cours et nous ajouterons les fichiers et le code nécessaire pour la gestion des mots-clés.
+Pour ne pas tout refaire depuis le début, nous allons dupliquer le projet
+réalisé lors du dernier cours et nous ajouterons les fichiers et le code
+nécessaire pour la gestion des mots-clés.
 
-> Créons une nouvelle base de données et modifions le fichier `.env` pour que `Laravel` puisse s'y connecter.
+> Créons une nouvelle base de données et modifions le fichier `.env` pour que
+> `Laravel` puisse s'y connecter.
 >
 > Dans le cas de l'utilisation de `Sqlite`, il faut :
 >
-> - Ouvrir le fichier `database.sqlite` avec un éditeur de texte, 
->- sélectionner tout le texte et le supprimer,
+> - Ouvrir le fichier `database.sqlite` avec un éditeur de texte,
+> - sélectionner tout le texte et le supprimer,
 > - ne pas oublier de sauver.
->- Quitter l'éditeur de texte.
-> 
+> - Quitter l'éditeur de texte.
 
 Pour tester que tout est fonctionnel, que devons nous faire ?
 
@@ -46,8 +48,8 @@ Pour tester que tout est fonctionnel, que devons nous faire ?
 > - Créer la table `migrations` nécessaire au bon fonctionnement d'`Eloquent`.
 > - Exécuter la migration des tables `users` et `articles`
 > - Exécuter le peuplement de nos deux tables `users` et `articles`
-> - Contrôler que nos données soient bien présentes dans les tables à l'aide de `tinker`
->
+> - Contrôler que nos données soient bien présentes dans les tables à l'aide de
+>   `tinker`
 
 Commençons par créer la table `migrations`:
 
@@ -79,7 +81,7 @@ Pour voir les trois premiers articles
 App\Models\Article::limit(3)->get();
 ```
 
- Ce qui nous retourne :
+Ce qui nous retourne :
 
 ```php
 = Illuminate\Database\Eloquent\Collection {#6099
@@ -112,7 +114,8 @@ App\Models\Article::limit(3)->get();
   }
 ```
 
-Créons maintenant le fichier qui permettra la création de la table `motcles` à l'aide de la commande :
+Créons maintenant le fichier qui permettra la création de la table `motcles` à
+l'aide de la commande :
 
 ```
 php artisan make:migration create_motcles_table
@@ -152,23 +155,25 @@ return new class extends Migration
 };
 ```
 
-> Remarque : 
-> Le champ mot_url permettra la recherche par mot clé (que l'on devra transmettre dans une url).
-> Comme l'utilisateur peut entrer des caractères spéciaux (apostrophe par ex.), nous convertirons ces caractères pour qu'ils puissent êtres adaptés aux `urls`.
+> Remarque : Le champ mot_url permettra la recherche par mot clé (que l'on devra
+> transmettre dans une url). Comme l'utilisateur peut entrer des caractères
+> spéciaux (apostrophe par ex.), nous convertirons ces caractères pour qu'ils
+> puissent êtres adaptés aux `urls`.
 
 ## Remarque importante pour le nommage de la table pivot
 
-Par convention, le nom de la table pivot comprend les noms des deux tables en relation mais au 
-**SINGULIER** et par **ORDRE ALPHABETIQUE** !
+Par convention, le nom de la table pivot comprend les noms des deux tables en
+relation mais au **SINGULIER** et par **ORDRE ALPHABETIQUE** !
 
 Voici comment procéder obtenir le nom de la table pivot :
 
-La première table est `articles`, le singulier de `articles` est `article`.
-La seconde table est `motcles`, le singulier de `motcles` est `motcle`
-`article` vient avant `motcle` (ordre alphabétique)
-donc le nom de la table pivot sera `article_motcle`
+La première table est `articles`, le singulier de `articles` est `article`. La
+seconde table est `motcles`, le singulier de `motcles` est `motcle` `article`
+vient avant `motcle` (ordre alphabétique) donc le nom de la table pivot sera
+`article_motcle`
 
-Créons le fichier qui permettra la création de la table pivot `article_motcle` à l'aide de la commande :
+Créons le fichier qui permettra la création de la table pivot `article_motcle` à
+l'aide de la commande :
 
 ```
 php artisan make:migration create_article_motcle_table
@@ -225,17 +230,24 @@ php artisan migrate
 2024_04_21_134041_create_article_motcle_table ....................................... 4.86ms DONE
 ```
 
-Les tables (`users` et `articles`) ne sont pas impliquées par la migration (car elles existent déjà ;-).
+Les tables (`users` et `articles`) ne sont pas impliquées par la migration (car
+elles existent déjà ;-).
 
-> Remarque : Pour ne pas obtenir d'erreurs lors de la migration, il faut que la création des tables soient effectués dans le bon ordre. L'ordre des migrations est déterminé par la date (voir le nom du fichier migration).
-> Si l'ordre des migrations doit être changé, il suffit de modifier la date dans le nom des fichiers de migrations.
+> Remarque : Pour ne pas obtenir d'erreurs lors de la migration, il faut que la
+> création des tables soient effectués dans le bon ordre. L'ordre des migrations
+> est déterminé par la date (voir le nom du fichier migration). Si l'ordre des
+> migrations doit être changé, il suffit de modifier la date dans le nom des
+> fichiers de migrations.
 
 ## Mise en place de la relation `n:n` pour `Eloquent`
 
-La relation `n:n` entre les articles et les mot-clés se définit dans deux classes `modèles`.
+La relation `n:n` entre les articles et les mot-clés se définit dans deux
+classes `modèles`.
 
-La classe modèle `Article.php` existe déjà (nous l'avons crée lors du dernier cours)
-Il nous faut créer la nouvelle classe modèle : `Motcle.php` et ajoutons la relation qui indique qu'un mot-clé peut être référencé par plusieurs articles.
+La classe modèle `Article.php` existe déjà (nous l'avons crée lors du dernier
+cours) Il nous faut créer la nouvelle classe modèle : `Motcle.php` et ajoutons
+la relation qui indique qu'un mot-clé peut être référencé par plusieurs
+articles.
 
 ```php
 <?php
@@ -248,9 +260,9 @@ use Illuminate\Database\Eloquent\Model;
 class Motcle extends Model
 {
     use HasFactory;
-	
+
 	protected $fillable=['mot','mot_url'];
-	
+
 	public function articles() {
         return $this->belongsToMany(Article::class); // chaque mot-clé peut être référencé par
                                                      // plusieurs articles
@@ -273,19 +285,19 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    
-    // sans rien indiquer de plus, Laravel rattache automatiquement 
+
+    // sans rien indiquer de plus, Laravel rattache automatiquement
     // ce modèle à la table "articles"
     // Il cherche une table nommée comme la classe mais en rajoutant un 's'
     // => nom de la classe Article => recherche la table "articles" dans la bd
-    
+
     protected $fillable=['titre','contenu','user_id'];  // pour l'assignation de masse
-    
+
     // Relation 1:n entre un article et un user
 	// (Définie lors du dernier cours)
-	public function user() {			 
+	public function user() {
         return $this->belongsTo(User::class);
-    }                                            
+    }
 
 	// Relation n:n entre un article et les mots-clés
     public function motcles() {
@@ -294,13 +306,17 @@ class Article extends Model
 }
 ```
 
-Maintenant que les classes-modèles ont été adaptée nous pouvons passer au peuplement des différentes tables grâce aux seeders (voir dernier cours)
+Maintenant que les classes-modèles ont été adaptée nous pouvons passer au
+peuplement des différentes tables grâce aux seeders (voir dernier cours)
 
-Ajoutons quelques données aux tables `motcles` et `article_motcle` que nous venons de créer.
+Ajoutons quelques données aux tables `motcles` et `article_motcle` que nous
+venons de créer.
 
-> (De la même manière que nous avions fait lors du dernier cours pour les tables `users` et `articles` en utilisant les `seeders`)
+> (De la même manière que nous avions fait lors du dernier cours pour les tables
+> `users` et `articles` en utilisant les `seeders`)
 
-Créons un fichier `MotclesTableSeeder.php` dans le répertoire `\database\seeders` : 
+Créons un fichier `MotclesTableSeeder.php` dans le répertoire
+`\database\seeders` :
 
 ```
 php artisan make:seeder MotclesTableSeeder
@@ -320,11 +336,11 @@ use App\Models\Motcle;
 
 class MotclesTableSeeder extends Seeder
 {
-    
+
 	private function randDate() {
         return Carbon::createFromDate(null, rand(1, 12), rand(1, 28));
     }
-	
+
 	/**
      * Run the database seeds.
      */
@@ -345,9 +361,10 @@ class MotclesTableSeeder extends Seeder
 
 Nous obtiendrons de cette manière vingt mots-clés (mot1, mot2, ..., mot20)
 
-Créons maintenant un nouveau fichier permettant le peuplement de la table `article_motcle` et complétons-le :
+Créons maintenant un nouveau fichier permettant le peuplement de la table
+`article_motcle` et complétons-le :
 
-> Remarque : Attention au nom :wink:
+> Remarque : Attention au nom
 
 ```php
 <?php
@@ -377,7 +394,7 @@ class ArticleMotcleTableSeeder extends Seeder
 				$article = Article::find($i);
 				// on ajoute la relation dans la table ArticleMotcle
 				$article->motcles()->attach($numbers[$j]);
-                 // ou 
+                 // ou
                  // $motcle = Motcle::find($j);
                  // $motcle->articles()->attach($i);
             }
@@ -386,17 +403,21 @@ class ArticleMotcleTableSeeder extends Seeder
 }
 ```
 
-Ce code ajoute aléatoirement entre 3 et 6 des 20 mots-clés aux 100 articles de notre base de données.
+Ce code ajoute aléatoirement entre 3 et 6 des 20 mots-clés aux 100 articles de
+notre base de données.
 
-> (Plus vraiment nécessaire avec `Laravel` 11)
-> Pour s'assurer que `Laravel` tienne compte de tous les fichiers que nous venons de créer (mise à jour du fichier autoload), lançons la commande :
+> (Plus vraiment nécessaire avec `Laravel` 11) Pour s'assurer que `Laravel`
+> tienne compte de tous les fichiers que nous venons de créer (mise à jour du
+> fichier autoload), lançons la commande :
 >
 > ```
 > composer dumpautoload
 > ```
->
 
-Nous avons vu lors du dernier cours qu'il fallait renseigner un fichier pour que les peuplements de nos tables se fassent dans le bon ordre. Il s'agit du fichier : `DatabaseSeeder.php` qui se trouve dans le même répertoire que les `seeders` que nous venons de créer.
+Nous avons vu lors du dernier cours qu'il fallait renseigner un fichier pour que
+les peuplements de nos tables se fassent dans le bon ordre. Il s'agit du fichier
+: `DatabaseSeeder.php` qui se trouve dans le même répertoire que les `seeders`
+que nous venons de créer.
 
 Editons ce fichier pour le mettre à jour :
 
@@ -423,16 +444,19 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
-> Puisque les données existent déjà dans les tables `users` et `articles`, il faut commenter les deux premières lignes ! (Sinon cela générerait une erreur)
->
+> Puisque les données existent déjà dans les tables `users` et `articles`, il
+> faut commenter les deux premières lignes ! (Sinon cela générerait une erreur)
 
-Peuplons nos deux tables (`motcles` et `article_motcle`) à l'aide de la commande :
+Peuplons nos deux tables (`motcles` et `article_motcle`) à l'aide de la commande
+:
 
 ```
 php artisan db:seed
 ```
 
-> Si pour une raison ou une autre vous aimeriez supprimer les tables dans la base de donnée (autre que SQLite), voici les commandes SQL nécessaires (à faire dans cet ordre dans votre SGBD ;-)
+> Si pour une raison ou une autre vous aimeriez supprimer les tables dans la
+> base de donnée (autre que SQLite), voici les commandes SQL nécessaires (à
+> faire dans cet ordre dans votre SGBD ;-)
 >
 > - ```
 >   drop table article_motcle;
@@ -456,9 +480,11 @@ php artisan db:seed
 >
 > Si vous avez utilisé SQLite :
 >
-> - Il suffit de supprimer le fichier `database.sqlite` et le créer à nouveau (ou vider son contenu)
+> - Il suffit de supprimer le fichier `database.sqlite` et le créer à nouveau
+>   (ou vider son contenu)
 >
-> Remarque : Pour lancer la création des tables et leur peuplement simultanément, il existe la commande : 
+> Remarque : Pour lancer la création des tables et leur peuplement
+> simultanément, il existe la commande :
 >
 > ```
 > php artisan migrate --seed
@@ -506,7 +532,8 @@ Qui nous retourne :
   }
 ```
 
-Pour contrôler que notre relation `n:n` fonctionne bien, nous allons tout d'abord demander la liste des mots-clés de l'article ayant l'identifiant : 1
+Pour contrôler que notre relation `n:n` fonctionne bien, nous allons tout
+d'abord demander la liste des mots-clés de l'article ayant l'identifiant : 1
 
 ```
 App\Models\Article::findOrFail(1)->motcles()->get()
@@ -585,8 +612,9 @@ App\Models\Article::findOrFail(1)->motcles()->get()
   }
 ```
 
-Testons maintenant que la relation fonctionne aussi dans l'autre sens.
-Nous allons demander la liste des trois premiers articles contenant le mot-clé ayant l'identifiant : 1
+Testons maintenant que la relation fonctionne aussi dans l'autre sens. Nous
+allons demander la liste des trois premiers articles contenant le mot-clé ayant
+l'identifiant : 1
 
 ```
 App\Models\Motcle::findOrFail(1)->articles()->limit(3)->get()
@@ -635,13 +663,17 @@ App\Models\Motcle::findOrFail(1)->articles()->limit(3)->get()
   }
 ```
 
-Maintenant que tout fonctionne au niveau des données, nous pouvons peaufiner l'interface utilisateur de notre application et ajouter la gestion des mots-clés.
+Maintenant que tout fonctionne au niveau des données, nous pouvons peaufiner
+l'interface utilisateur de notre application et ajouter la gestion des
+mots-clés.
 
-Les mots-clés vont être entrés dans un champ texte et devront être séparés par des virgules (pas d'espaces entre les mots-clés).
-Malgré le grand nombre de validations offertes par défaut, Laravel ne dispose pas d'une telle règle. 
-Nous allons donc créer une règle de validation personnalisée pour ce cas.
+Les mots-clés vont être entrés dans un champ texte et devront être séparés par
+des virgules (pas d'espaces entre les mots-clés). Malgré le grand nombre de
+validations offertes par défaut, Laravel ne dispose pas d'une telle règle. Nous
+allons donc créer une règle de validation personnalisée pour ce cas.
 
-Editons le fichier `ArticleRequest.php` que nous avions créé lors du dernier cours et ajoutons notre nouvelle règle à l'aide d'une expression régulière :
+Editons le fichier `ArticleRequest.php` que nous avions créé lors du dernier
+cours et ajoutons notre nouvelle règle à l'aide d'une expression régulière :
 
 ```php
 <?php
@@ -677,18 +709,21 @@ class ArticleRequest extends FormRequest
 }
 ```
 
-Il nous faut aussi personnaliser le message d'erreur correspondant dans le fichier `laravel\vendor\laravel\framework\src\Illuminate\Translation\lang\en\validation.php`
+Il nous faut aussi personnaliser le message d'erreur correspondant dans le
+fichier
+`laravel\vendor\laravel\framework\src\Illuminate\Translation\lang\en\validation.php`
 Aux alentours de la ligne 173, nous trouvons les lignes suivantes :
 
 ```php
 'custom' => [
      'attribute-name' => [
          'rule-name' => 'custom-message',
-     ]   
+     ]
 ],
 ```
 
-Cette section nous permet d'ajouter des message personnalisés. Modifions cette section de la manière suivante :
+Cette section nous permet d'ajouter des message personnalisés. Modifions cette
+section de la manière suivante :
 
 ```php
 'custom' => [
@@ -700,7 +735,8 @@ Cette section nous permet d'ajouter des message personnalisés. Modifions cette 
 
 Nous pouvons maintenant passer à la modification de notre contrôleur :
 
-Voici son contenu tel que nous l'avons laissé lors du dernier cours (sans la gestion des mot-clés) :
+Voici son contenu tel que nous l'avons laissé lors du dernier cours (sans la
+gestion des mot-clés) :
 
 ```php
 <?php
@@ -715,7 +751,7 @@ use Illuminate\Routing\Controllers\Middleware;
 class ArticleController extends Controller implements HasMiddleware
 {
     protected $nbArticlesParPage = 4;
-    
+
     public static function middleware(): array
     {
         return [
@@ -723,7 +759,7 @@ class ArticleController extends Controller implements HasMiddleware
             new Middleware('admin', only: ['destroy']),
         ];
     }
-    
+
     public function index() {
         $articles=Article::with('user')
                 ->orderBy('articles.created_at','desc')
@@ -753,7 +789,7 @@ class ArticleController extends Controller implements HasMiddleware
      * Remove the specified resource from storage.
      */
     public function destroy($id) {
-        Article::findOrFail($id)->delete();  
+        Article::findOrFail($id)->delete();
         return redirect()->back();
     }
 }
@@ -777,7 +813,7 @@ use Illuminate\Routing\Controllers\Middleware;
 class ArticleController extends Controller implements HasMiddleware
 {
     protected $nbArticlesParPage = 4;
-    
+
     public static function middleware(): array
     {
         return [
@@ -785,7 +821,7 @@ class ArticleController extends Controller implements HasMiddleware
             new Middleware('admin', only: ['destroy']),
         ];
     }
-    
+
     public function index() {
         $articles=Article::with('user')
                 ->orderBy('articles.created_at','desc')
@@ -840,7 +876,7 @@ class ArticleController extends Controller implements HasMiddleware
         $article->delete();
         return redirect()->back();
     }
-	
+
 	public function articlesAyantMotcle($motcle) {
         $articles = Article::with('user', 'motcles')
             ->orderBy('articles.created_at', 'desc')
@@ -856,7 +892,8 @@ class ArticleController extends Controller implements HasMiddleware
 }
 ```
 
-> Remarque : C'est dans la méthode `store(...)` du contrôleur qu'on attache le/les mot-clés à un article; grâce à l'instruction  : 
+> Remarque : C'est dans la méthode `store(...)` du contrôleur qu'on attache
+> le/les mot-clés à un article; grâce à l'instruction :
 >
 > ```php
 > ...
@@ -866,7 +903,9 @@ class ArticleController extends Controller implements HasMiddleware
 >
 > (Exactement comme on a fait dans le seeder : `ArticleMotcleTableSeeder.php`)
 >
-> C'est dans la méthode `destroy(...)` du contrôleur qu'on supprime les relations de la table pivot avant la destruction d'un article; grâce à l'instruction :
+> C'est dans la méthode `destroy(...)` du contrôleur qu'on supprime les
+> relations de la table pivot avant la destruction d'un article; grâce à
+> l'instruction :
 >
 > ```php
 > ...
@@ -874,15 +913,18 @@ class ArticleController extends Controller implements HasMiddleware
 > ...
 > ```
 
-Comme nous avons ajouté une méthode `articlesAyantMotcle(...)` permettant la recherche des articles qui comportent le mot-clé passé en paramètre, il faut ajouter une nouvelle route dans le fichier `web.php`
+Comme nous avons ajouté une méthode `articlesAyantMotcle(...)` permettant la
+recherche des articles qui comportent le mot-clé passé en paramètre, il faut
+ajouter une nouvelle route dans le fichier `web.php`
 
 ```
 Route::get('articles/motcle/{motcle}', [ArticleController::class, 'articlesAyantMotcle']);
 ```
 
-Nous pouvons passer à la mise à jour de la vue permettant l'affichage des articles.
-Il faut ajouter l'implémentation de l'affichage des mots-clés de chaque article.
-(La seule chose à modifier est la balise `<header>...</header>` de la section `@section('contenu')` `\resources\views\view_articles.blade.php`
+Nous pouvons passer à la mise à jour de la vue permettant l'affichage des
+articles. Il faut ajouter l'implémentation de l'affichage des mots-clés de
+chaque article. (La seule chose à modifier est la balise `<header>...</header>`
+de la section `@section('contenu')` `\resources\views\view_articles.blade.php`
 
 ```php+HTML
 @extends('template')
@@ -893,7 +935,7 @@ Il faut ajouter l'implémentation de l'affichage des mots-clés de chaque articl
     <a href="{{route('articles.create')}}" class="btn btn-info">Cr&eacute;er un article</a>
     <a href="{{url("logout")}}" class="btn btn-warning">Deconnexion</a>
 </div>
-@else 
+@else
 <a href="{{url("login")}}" class="btn btn-info pull-right">Se connecter</a>
 @endif
 @endsection
@@ -938,7 +980,8 @@ Il faut ajouter l'implémentation de l'affichage des mots-clés de chaque articl
 @endsection
 ```
 
-Pour pouvoir visualiser l'effet de nos modifications, il suffit de taper l'url suivante  :
+Pour pouvoir visualiser l'effet de nos modifications, il suffit de taper l'url
+suivante :
 
 ```
 http://localhost:8000/articles
@@ -948,9 +991,11 @@ http://localhost:8000/articles
 
 Yes !, les mots-clés s'affichent !
 
-Il reste encore l'implémentation de l'ajout de mot(s)-clé(s) lors de la création d'un nouvel article.
+Il reste encore l'implémentation de l'ajout de mot(s)-clé(s) lors de la création
+d'un nouvel article.
 
-Ajoutons un champ texte permettant la saisie des mots-clés dans la vue existante `\resources\views\view_ajoute_article.blade.php`
+Ajoutons un champ texte permettant la saisie des mots-clés dans la vue existante
+`\resources\views\view_ajoute_article.blade.php`
 
 ```php+HTML
 @extends('template')
@@ -986,7 +1031,8 @@ Ajoutons un champ texte permettant la saisie des mots-clés dans la vue existant
 
 Nous avons terminé les adaptations de notre code.
 
-Pour pouvoir tester les nouvelles fonctionnalités de notre application, il suffit de s'authentifier et créer un nouvel article.
+Pour pouvoir tester les nouvelles fonctionnalités de notre application, il
+suffit de s'authentifier et créer un nouvel article.
 
 ![AjoutArticleAvecMotsClesSansVirgule](img\AjoutArticleAvecMotsClesSansVirgule.png)
 
@@ -996,4 +1042,4 @@ Pour pouvoir tester les nouvelles fonctionnalités de notre application, il suff
 
 ![NouveauMessageOk](img\NouveauMessageOk.png)
 
-Yes ! nous avons implémenté correctement une relation n:n dans `Laravel` :thumbsup:
+Yes ! nous avons implémenté correctement une relation n:n dans `Laravel`

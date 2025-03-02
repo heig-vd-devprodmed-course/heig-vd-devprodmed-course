@@ -1,13 +1,17 @@
 # `API (Application Programming Interface)`
 
-Nous allons voir aujourd'hui comment créer une `API`et comment générer des données fictives mais réalistes dans une base de données.
+Nous allons voir aujourd'hui comment créer une `API`et comment générer des
+données fictives mais réalistes dans une base de données.
 
-________________________
+---
 
-Une `API`, ou `interface de programmation d’application`, permet de transmettre des données entre des applications logicielles d’une manière standardisée.
-De nombreux services offrent des `API` publiques qui permettent à quiconque d’envoyer et de recevoir du contenu issu de ces services.
-Les `API` qui fonctionnent sur Internet en utilisant des URL `http://` sont appelées des `API web`.
-Donc grâce au Web, on peut envoyer une "demande" à une `API` pour obtenir des informations.
+Une `API`, ou `interface de programmation d’application`, permet de transmettre
+des données entre des applications logicielles d’une manière standardisée. De
+nombreux services offrent des `API` publiques qui permettent à quiconque
+d’envoyer et de recevoir du contenu issu de ces services. Les `API` qui
+fonctionnent sur Internet en utilisant des URL `http://` sont appelées des
+`API web`. Donc grâce au Web, on peut envoyer une "demande" à une `API` pour
+obtenir des informations.
 
 Par exemple une `API` peut :
 
@@ -16,10 +20,13 @@ Par exemple une `API` peut :
 - stocker des informations GPS en vue d'afficher une localisation sur une carte
 - rendre le nom, prénom et téléphone du responsable
 
-L'avantage d'une `API` c'est que cela permet l'interopérabilité entre différentes plateformes et différents langages.
-Une `API` peut-être avoir été écrit à l'aide d'un langage X (par exemple ``php`` sur une plateforme mac) et peut être consommé par un langage Y (par exemple java sur une plateforme ``windows``)
+L'avantage d'une `API` c'est que cela permet l'interopérabilité entre
+différentes plateformes et différents langages. Une `API` peut-être avoir été
+écrit à l'aide d'un langage X (par exemple `php` sur une plateforme mac) et peut
+être consommé par un langage Y (par exemple java sur une plateforme `windows`)
 
-On s'affranchi ainsi des problèmes de compatibilités (de plateformes et langages) :slightly_smiling_face:
+On s'affranchi ainsi des problèmes de compatibilités (de plateformes et
+langages) :slightly_smiling_face:
 
 ## Notre première `API`
 
@@ -31,7 +38,9 @@ Commençons par créer une application vierge à l'aide de la commande :
 laravel new appApiRest/laravel
 ```
 
-Dans les versions précédente à `Lavarel 11` tout ce qui était nécessaire pour la création d'une `API` était installé par défaut. Ce n'est plus le cas depuis `Laravel 11` (ce qui permet d'alléger l'installation de base).
+Dans les versions précédente à `Lavarel 11` tout ce qui était nécessaire pour la
+création d'une `API` était installé par défaut. Ce n'est plus le cas depuis
+`Laravel 11` (ce qui permet d'alléger l'installation de base).
 
 La commande suivante permet d'installer tout ce dont nous avons besoin :
 
@@ -39,14 +48,16 @@ La commande suivante permet d'installer tout ce dont nous avons besoin :
 php artisan install:api
 ```
 
-Nous allons maintenant créer une route, mais cette fois-ci nous n'allons pas la créer dans le fichier ``web.php``, mais dans le fichier ``api.php`` qui vient d'être installé et qui se trouve dans le même répertoire (`/routes`)
+Nous allons maintenant créer une route, mais cette fois-ci nous n'allons pas la
+créer dans le fichier `web.php`, mais dans le fichier `api.php` qui vient d'être
+installé et qui se trouve dans le même répertoire (`/routes`)
 
-> Remarque : 
+> Remarque :
 >
 > - Les routes pour les applications-web => `web.php`
 > - Les routes pour les `API` => `api.php`
 
-Voici le fichier ``\routes\api.php`` tel qu'il est par défaut :
+Voici le fichier `\routes\api.php` tel qu'il est par défaut :
 
 ```php+HTML
 <?php
@@ -60,7 +71,8 @@ Route::get('/user', function (Request $request) {
 
 ```
 
-Ajoutons maintenant notre route qui va nous retourner les données d'une personne :
+Ajoutons maintenant notre route qui va nous retourner les données d'une personne
+:
 
 ```php
 <?php
@@ -89,7 +101,9 @@ Mettons notre application à disposition :
 php artisan serve
 ```
 
-Pour tester que notre `API` fonctionne, il suffit d'appeler la route. Mais attention, pour que cela fonctionne il faut mettre l'url ``/api/`` devant le nom nom de la route.
+Pour tester que notre `API` fonctionne, il suffit d'appeler la route. Mais
+attention, pour que cela fonctionne il faut mettre l'url `/api/` devant le nom
+nom de la route.
 
 ```
 http://localhost:8000/api/personne
@@ -101,20 +115,24 @@ Ce qui nous retourne :
 {"prenom":"Joe","nom":"Bar"}
 ```
 
-``Youpee``, ça marche !
+`Youpee`, ça marche !
 
-Coder l'information en dur au niveau de la route nous a permis de tester que cela fonctionne.
-Passons maintenant à la mise en place "réelle" avec les données provenant d'une base de données.
+Coder l'information en dur au niveau de la route nous a permis de tester que
+cela fonctionne. Passons maintenant à la mise en place "réelle" avec les données
+provenant d'une base de données.
 
-Créons une `classe-modèle` `Personne` ainsi qu'une `migration` et une ``factory`` (nous allons découvrir son rôle ci-dessous) à l'aide de la commande :
+Créons une `classe-modèle` `Personne` ainsi qu'une `migration` et une `factory`
+(nous allons découvrir son rôle ci-dessous) à l'aide de la commande :
 
 ```
 php artisan make:model Personne -mf
 ```
 
-(`m`: pour créer une `migration`, `f`: pour une `factory` :slightly_smiling_face:)
+(`m`: pour créer une `migration`, `f`: pour une `factory`
+:slightly_smiling_face:)
 
-Pour définir les champs de la table ``personnes`` éditions le fichier `\database\migration\....create_personnes_table.php`
+Pour définir les champs de la table `personnes` éditions le fichier
+`\database\migration\....create_personnes_table.php`
 
 ```php
 <?php
@@ -151,9 +169,11 @@ return new class extends Migration
 };
 ```
 
-Comme son nom l'indique une ``factory`` est une fabrique.
-La ``factory`` que nous avons créé se trouve dans le répertoire `\database\factories\PersonneFactory.php` 
-Editons ce fichier et modifions-le pour pouvoir créer facilement des personnes avec des données fictives mais réalistes !
+Comme son nom l'indique une `factory` est une fabrique. La `factory` que nous
+avons créé se trouve dans le répertoire
+`\database\factories\PersonneFactory.php` Editons ce fichier et modifions-le
+pour pouvoir créer facilement des personnes avec des données fictives mais
+réalistes !
 
 ```php
 <?php
@@ -167,7 +187,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PersonneFactory extends Factory
 {
-	
+
     /**
      * Define the model's default state.
      *
@@ -186,16 +206,18 @@ class PersonneFactory extends Factory
 }
 ```
 
-Mais qu'est ce qu'un ``faker`` ?
-Un ``faker`` est une classe qui produit des données `fake` (Fictives, mais réalistes)
+Mais qu'est ce qu'un `faker` ? Un `faker` est une classe qui produit des données
+`fake` (Fictives, mais réalistes)
 
-Maintenant que notre fabrique est prête, il nous faut un ``seeder`` pour peupler notre table :
+Maintenant que notre fabrique est prête, il nous faut un `seeder` pour peupler
+notre table :
 
 ```
 php artisan make:seeder PersonnesTableSeeder
 ```
 
-Nous allons ajouter le code permettant de créer 20 personnes à l'aide de notre ``factory`` :
+Nous allons ajouter le code permettant de créer 20 personnes à l'aide de notre
+`factory` :
 
 ```php
 <?php
@@ -220,7 +242,9 @@ class PersonnesTableSeeder extends Seeder
 }
 ```
 
-N'oublions pas d'ajouter la ligne dans le fichier ``\database\seeds\DatabaseSeeder.php`` qui permet l'exécution du `Seeder` pour le peuplement de notre table dans la base de données.
+N'oublions pas d'ajouter la ligne dans le fichier
+`\database\seeds\DatabaseSeeder.php` qui permet l'exécution du `Seeder` pour le
+peuplement de notre table dans la base de données.
 
 ```php
 <?php
@@ -243,7 +267,8 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
-N'oublions pas de mettre à jour la classe-modèle `\app\Models\Personne.php` pour permettre l'assignation de masse.
+N'oublions pas de mettre à jour la classe-modèle `\app\Models\Personne.php` pour
+permettre l'assignation de masse.
 [Voir la documentation officielle](https://laravel.com/docs/11.x/eloquent#mass-assignment)
 
 ```php
@@ -257,7 +282,7 @@ use Illuminate\Database\Eloquent\Model;
 class Personne extends Model
 {
     use HasFactory;
-	
+
 	protected $fillable = [
         'prenom',
 		'nom',
@@ -268,10 +293,11 @@ class Personne extends Model
 }
 ```
 
-Pour simplifier le développement de notre `API` nous allons utiliser le SGBD `sqlite` 
-(La configuration se fait dans le fichier `.env` :wink:)
+Pour simplifier le développement de notre `API` nous allons utiliser le SGBD
+`sqlite` (La configuration se fait dans le fichier `.env` )
 
-Voilà, nous sommes prêts pour créer les différentes tables (migrations, personnes, ...) et y ajouter les données
+Voilà, nous sommes prêts pour créer les différentes tables (migrations,
+personnes, ...) et y ajouter les données
 
 ```
 php artisan migrate
@@ -310,7 +336,7 @@ Plutôt sympa non ? C'est mieux que `Lorem ipsum dolor sit amet` !
 
 Pour plus d'info sur le [`Faker`](https://github.com/fzaninotto/Faker)
 
-Ajoutons une nouvelle route dans le fichier ``\routes\api.php``
+Ajoutons une nouvelle route dans le fichier `\routes\api.php`
 
 ```php
 <?php
@@ -336,7 +362,7 @@ Route::get('/personnes/{id}', function(int $id) {
 });
 ```
 
-Et testons pour voir que tout fonctionne : 
+Et testons pour voir que tout fonctionne :
 
 ```
 http://localhost:8000/api/personnes/1
@@ -348,8 +374,8 @@ Qui nous retourne :
 {"id":1,"prenom":"Haskell","nom":"Lemke","tel":"475-690-6982","email":"willis39@example.org","ville":"Bergnaumstad","created_at":"2024-04-23T12:06:59.000000Z","updated_at":"2024-04-23T12:06:59.000000Z"}
 ```
 
-Il est temps de structurer un peu notre code, car ce n'est pas à la route de nous retourner le résultat.
-Le rôle appartient au contrôleur.
+Il est temps de structurer un peu notre code, car ce n'est pas à la route de
+nous retourner le résultat. Le rôle appartient au contrôleur.
 
 Créons un nouveau contrôleur :
 
@@ -357,7 +383,8 @@ Créons un nouveau contrôleur :
 php artisan make:controller PersonneController
 ```
 
-Editons notre contrôleur : ``app\Http\Controllers\PersonneController.php`  et ajoutons une méthode
+Editons notre contrôleur : ``app\Http\Controllers\PersonneController.php` et
+ajoutons une méthode
 
 ```php
 <?php
@@ -413,15 +440,19 @@ Qui nous retourne :
 
 C'est bien la même résultat, mais avec un code mieux structuré.
 
-Pour être compatible avec l'état de l'art des API nous allons encapsuler les données d'une personne dans une structure nommée `data`. Pour ce faire, nous allons créer une nouvelle classe à l'aide de la commande :
+Pour être compatible avec l'état de l'art des API nous allons encapsuler les
+données d'une personne dans une structure nommée `data`. Pour ce faire, nous
+allons créer une nouvelle classe à l'aide de la commande :
 
 ```
 php artisan make:resource PersonneResource
 ```
 
-La nouvelle classe est accessible ici : ``\app\Http\Resources\PersonneResource.php`` 
+La nouvelle classe est accessible ici :
+`\app\Http\Resources\PersonneResource.php`
 
-Nous n'avons pas à faire de modifications dans cette classe :hand: il nous faut juste adapter notre contrôleur :thumbsup:
+Nous n'avons pas à faire de modifications dans cette classe :hand: il nous faut
+juste adapter notre contrôleur
 
 ```php
 <?php
@@ -451,10 +482,10 @@ Ce qui nous retourne :
 {"data":{"id":1,"prenom":"Haskell","nom":"Lemke","tel":"475-690-6982","email":"willis39@example.org","ville":"Bergnaumstad","created_at":"2024-04-23T12:06:59.000000Z","updated_at":"2024-04-23T12:06:59.000000Z"}}
 ```
 
-Nous découvrons la ``clé`` : ``data`` contenant la `valeur : une personne`
+Nous découvrons la `clé` : `data` contenant la `valeur : une personne`
 
-Nous savons qu'une route `Route::resource(...)` permet d'accéder à sept méthodes d'un contrôleur.
-Qu'en est-il du type de route : `Route::apiResource(...)` ? 
+Nous savons qu'une route `Route::resource(...)` permet d'accéder à sept méthodes
+d'un contrôleur. Qu'en est-il du type de route : `Route::apiResource(...)` ?
 
 ```php
 <?php
@@ -497,15 +528,17 @@ DELETE          api/personnes/{personne} ............ personnes.destroy › Pers
 ...
 ```
 
-Ce type de route nous "génère" cinq routes dont une ``Get``: ``api/personnes`` pour retourner toutes les personnes.
+Ce type de route nous "génère" cinq routes dont une `Get`: `api/personnes` pour
+retourner toutes les personnes.
 
-Créons une nouvelle classe ``resource`` pour encapsuler la liste (collection) de toutes les personnes
+Créons une nouvelle classe `resource` pour encapsuler la liste (collection) de
+toutes les personnes
 
 ```
 php artisan make:resource PersonneResourceCollection --collection
 ```
 
- Nous pouvons ajouter les méthodes `show() et index()` dans notre contrôleur :
+Nous pouvons ajouter les méthodes `show() et index()` dans notre contrôleur :
 
 ```php
 <?php
@@ -521,11 +554,11 @@ class PersonneController extends Controller
 	//public function rendPersonne(int $id): PersonneResource {
     //    return new PersonneResource(Personnes::findOrFail($id));
     //}
-    
+
     public function show(int $id): PersonneResource {
         return new PersonneResource(Personne::findOrFail($id));
     }
-    
+
     public function index(): PersonneResourceCollection {
         return new PersonneResourceCollection(Personne::paginate(10)); // les 10 premières
         //return new PersonneResourceCollection(Personne::all()); // toutes les personnes
@@ -559,14 +592,17 @@ http://localhost:8000/api/personnes?page=2
 
 Trop chouette non ?
 
-En fait c'est presque hyper chouette... mais les données fictives sont en anglais... 
+En fait c'est presque hyper chouette... mais les données fictives sont en
+anglais...
 
 Ce serait hyper trop chouette si on pouvait les générer en français non ?
 
-Eh bien oui, la personne qui a développé le `Faker` a pensé à tout... 
-Pour "franciser" les données, il suffit de changer un paramètre, mais le tout c'est de savoir où :slightly_smiling_face:
+Eh bien oui, la personne qui a développé le `Faker` a pensé à tout... Pour
+"franciser" les données, il suffit de changer un paramètre, mais le tout c'est
+de savoir où :slightly_smiling_face:
 
-On se rappelle que c'est le fichier `.env` qui contient les différents paramètres de notre application.
+On se rappelle que c'est le fichier `.env` qui contient les différents
+paramètres de notre application.
 
 Il suffit de changer la ligne :
 
@@ -598,7 +634,7 @@ On repeuple les tables à l'aide de la commande :
 php artisan db:seed
 ```
 
-et le tour est joué ! Nos données correspondent mieux à nos besoins :thumbsup:
+et le tour est joué ! Nos données correspondent mieux à nos besoins
 
 ```
 http://localhost:8000/api/personnes
@@ -612,7 +648,8 @@ http://localhost:8000/api/personnes
 
 Ça c'est vraiment hyper trop chouette !
 
-Pour terminer nous allons juste encore peaufiner notre `Route::apiResource(...)` car nous n'avons implémenté que deux des cinq méthodes...
+Pour terminer nous allons juste encore peaufiner notre `Route::apiResource(...)`
+car nous n'avons implémenté que deux des cinq méthodes...
 
 ```php
 ...
@@ -620,12 +657,14 @@ Route::apiResource('/personnes', PersonneController::class)->only(['index', 'sho
 ...
 ```
 
-__________________
+---
 
 Voici en résumé ce que nous avons appris aujourd'hui :
 
-- nous savons comment générer des données fictives (mais réaliste) dans nos tables grâce aux :
-  - `faker` 
+- nous savons comment générer des données fictives (mais réaliste) dans nos
+  tables grâce aux :
+  - `faker`
   - `factory`
-- nous savons comment "personnaliser" ces données en fonction du pays ou l'on se trouve 
+- nous savons comment "personnaliser" ces données en fonction du pays ou l'on se
+  trouve
 - nous savons comment implémenter une api dans `Laravel`

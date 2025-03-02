@@ -1,14 +1,14 @@
 # ACL - Attribution d'un rôle à un utilisateur.
 
-Hello et bienvenue pour cette partie qui consiste à mettre en œuvre un contrôle d'accès dans `Laravel`.
+Hello et bienvenue pour cette partie qui consiste à mettre en œuvre un contrôle
+d'accès dans `Laravel`.
 
 Grâce à ce que nous allons voir ci-dessous, il sera possible :
 
 - Dans les vues :
 
-  - Afficher des parties dédiées à certains rôles. (Administrateur, modérateur, etc.)
-
-  
+  - Afficher des parties dédiées à certains rôles. (Administrateur, modérateur,
+    etc.)
 
 - Dans les contrôleurs :
 
@@ -26,10 +26,12 @@ composer require laravel/breeze --dev
 php artisan breeze:install blade
 ```
 
-Pour rediriger l'utilisateur après son identification nous pouvons modifier deux contrôleurs qui ont été ajouté lors de la mise en place de l'authentification.
+Pour rediriger l'utilisateur après son identification nous pouvons modifier deux
+contrôleurs qui ont été ajouté lors de la mise en place de l'authentification.
 
-Il s'agit d'abord du contrôleur `app/Http/Controllers/Auth/RegisteredUserController.php`
-Il suffit de changer la ligne 49 :
+Il s'agit d'abord du contrôleur
+`app/Http/Controllers/Auth/RegisteredUserController.php` Il suffit de changer la
+ligne 49 :
 
 ```
 return redirect(RouteServiceProvider::HOME);
@@ -41,14 +43,15 @@ en
 return redirect('/');
 ```
 
-et celle du contrôleur `app/Http/Controllers/Auth/AuthenticatedSessionController.php`
-Changer la ligne 32 :
+et celle du contrôleur
+`app/Http/Controllers/Auth/AuthenticatedSessionController.php` Changer la ligne
+32 :
 
 ```
 return redirect()->intended(RouteServiceProvider::HOME);
 ```
 
-en 
+en
 
 ```
 return redirect()->intended('/');
@@ -62,12 +65,16 @@ Ajoutons une nouvelle route et sa méthode associée.
 Route::get('logout', [LoginController::class, 'logout']);
 ```
 
-> Remarques : 
+> Remarques :
 >
-> - Ne pas oublier le `use` de la classe `App\Http\Controllers\Auth\LoginController`
-> - Lors de la mise en place de l'authentification quelques nouvelles routes ont été ajoutée.
+> - Ne pas oublier le `use` de la classe
+>   `App\Http\Controllers\Auth\LoginController`
+> - Lors de la mise en place de l'authentification quelques nouvelles routes ont
+>   été ajoutée.
 
-Créons un nouveau contrôleur `LoginController.php` dans `\app\Http\Controllers\Auth` et  ajoutons la méthode `logout()` (sans oublier le `use` pour la classe `Auth.php`)
+Créons un nouveau contrôleur `LoginController.php` dans
+`\app\Http\Controllers\Auth` et ajoutons la méthode `logout()` (sans oublier le
+`use` pour la classe `Auth.php`)
 
 ```php
 <?php
@@ -77,7 +84,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
-{   
+{
     public function logout() {
         Auth::logout();
         return redirect('/');
@@ -87,7 +94,8 @@ class LoginController extends Controller
 
 ## Partie 2
 
-Ajoutons un champ supplémentaire `user_type` dans la migration de la table `users`pour pouvoir attribuer un rôle à un utilisateur.
+Ajoutons un champ supplémentaire `user_type` dans la migration de la table
+`users`pour pouvoir attribuer un rôle à un utilisateur.
 
 ```php
 ...
@@ -122,7 +130,9 @@ Ajoutons un champ supplémentaire `user_type` dans la migration de la table `use
 ...
 ```
 
-Puisqu'on a ajouté un champ dans la table `users`, il faut adapter la classe modèle `User.php` correspondant à cette table en rajoutant une entrée (`user_type`) dans le tableau de la propriété `$fillable`
+Puisqu'on a ajouté un champ dans la table `users`, il faut adapter la classe
+modèle `User.php` correspondant à cette table en rajoutant une entrée
+(`user_type`) dans le tableau de la propriété `$fillable`
 
 ```php
 ...
@@ -141,7 +151,8 @@ Puisqu'on a ajouté un champ dans la table `users`, il faut adapter la classe mo
 ...
 ```
 
-Ajoutons maintenant deux utilisateurs avec des rôles différents pour faire nos tests grâce à un `seeder`
+Ajoutons maintenant deux utilisateurs avec des rôles différents pour faire nos
+tests grâce à un `seeder`
 
 ```
 php artisan make:seeder UsersTableSeeder
@@ -169,9 +180,10 @@ php artisan make:seeder UsersTableSeeder
 ...
 ```
 
-> Remarque : N'oubliez pas le use des la classe DB et Hash :wink:
+> Remarque : N'oubliez pas le use des la classe DB et Hash
 
-Ajouter le seeder que l'on vient de créer dans le fichier `app\database\seeders\DatabaseSeeder.php`
+Ajouter le seeder que l'on vient de créer dans le fichier
+`app\database\seeders\DatabaseSeeder.php`
 
 ```php
 ...
@@ -221,14 +233,14 @@ Modifions le fichier (existant) `laravel\app\Providers\AuthServiceProvider.php`
     public function boot(): void
     {
         $this->registerPolicies();
-        
+
         /**
          * Rend true si l'utilisateur a le rôle "Role1"
          */
         Gate::define('isRole1', function (User $user) {
         	return $user->user_type == 'Role1';
         });
-    
+
         /**
          * Rend true si l'utilisateur a le rôle "Role2"
          */
@@ -246,9 +258,11 @@ Modifions le fichier (existant) `laravel\app\Providers\AuthServiceProvider.php`
 
 ## Partie 4 - Ajout du tag Blade @can dans une vue
 
-Nous allons utiliser un nouveau tag de `Blade` : @can  [voir doc. officielle](https://laravel.com/docs/10.x/authorization#via-blade-templates)
+Nous allons utiliser un nouveau tag de `Blade` : @can
+[voir doc. officielle](https://laravel.com/docs/10.x/authorization#via-blade-templates)
 
-Pour cette partie nous allons simplement modifier la vue existante `welcome.blade.php` et ajouter une partie avant la partie finale de la page :
+Pour cette partie nous allons simplement modifier la vue existante
+`welcome.blade.php` et ajouter une partie avant la partie finale de la page :
 
 ```html
 ...
@@ -285,13 +299,14 @@ en
 </html>
 ```
 
-Voilà, c'est fait. Nous n'avons plus qu'à tester que tout est fonctionnel :slightly_smiling_face:
+Voilà, c'est fait. Nous n'avons plus qu'à tester que tout est fonctionnel
+:slightly_smiling_face:
 
 Lançons l'application
 
 ![Welcome](img\Welcome.png)
 
- Authentifions nous avec :
+Authentifions nous avec :
 
 ```
 email1@gmx.ch
@@ -332,8 +347,8 @@ et ajoutons une méthode à notre contrôleur avec le code suivant :
 ...
 ```
 
-> Remarque : Ne pas oubliez le use de la bonne classe `Gate` 
->                     (Il y plusieurs classes `Gate` !!) :
+> Remarque : Ne pas oubliez le use de la bonne classe `Gate` (Il y plusieurs
+> classes `Gate` !!) :
 >
 > ```php
 > use Illuminate\Support\Facades\Gate;
@@ -349,7 +364,7 @@ Route::get('/myMethod', [MyController::class, 'myMethod']);
 
 Nous pouvons passer aux tests :slightly_smiling_face:
 
- Lançons l'application est authentifions nous avec :
+Lançons l'application est authentifions nous avec :
 
 ```
 email1@gmx.ch
@@ -373,12 +388,10 @@ email2@gmx.ch
 password2
 ```
 
-
-
 ![MyMethodRole2](img\MyMethodRole2.png)
-
-
 
 Voilà, nous sommes au terme de cette partie.
 
-Nous avons vu comment implémenter un contrôle d'accès simple dans `Laravel` et sommes capables d'ajouter dans notre application des fonctionnalités réservées à certains rôles.
+Nous avons vu comment implémenter un contrôle d'accès simple dans `Laravel` et
+sommes capables d'ajouter dans notre application des fonctionnalités réservées à
+certains rôles.

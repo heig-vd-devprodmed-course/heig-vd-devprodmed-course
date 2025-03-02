@@ -291,7 +291,7 @@ Que vous soyez débutant-e ou expert-e en développement d'application web,
 
 Se rendre dans l'`App Store` et installer `Xcode`
 
-> Remarque : Prévoir du temps... :roll_eyes:
+> Remarque : Prévoir du temps...
 
 Lancer `Xcode`, qui va installer les derniers composants nécessaires. Fermer
 `Xcode`. Redémarrer.
@@ -318,7 +318,7 @@ Lancer un `terminal` sur mac.
 > - Demandez à `Siri` de lancer le `Terminal`
 
 Une fois dans le `Terminal` lancez la commande (!!!!!! le tout sur 1 seule ligne
-:wink: :
+:
 
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -401,7 +401,7 @@ quel est le terminal utilisé.
 > - `bash` utilisé par défaut sur les anciens `Mac`
 >
 > Pour connaître le terminal utilisé, il suffit de lancer une commande que le
-> `mac`ne connaît pas et de jeter un œil au message d'erreur :wink:
+> `mac`ne connaît pas et de jeter un œil au message d'erreur
 >
 > tapons :
 >
@@ -463,7 +463,7 @@ base (icône maison) qui porte normalement votre nom.
 > Le tilde (~) s'obtient à l'aide de la combinaison de touche `OPTION` et `N`
 > puis espace.
 
-Les fichiers cachés sont maintenant visibles :thumbsup:
+Les fichiers cachés sont maintenant visibles
 
 Pour éditer ou créer le fichier
 `.zprofile nous allons utiliser l'éditeur de texte `macvim`fraîchement installé. Dans un`terminal`,
@@ -542,7 +542,7 @@ Dézippez le fichier et ajoutez le répertoire `php-8.x` dans un dossier nommé
 Téléchargez la dernière version du gestionnaire de libraire `Composer`
 (https://getcomposer.org/download/)
 
-Suivez les étapes et veillez à choisir la bonne version de `php` :eyes:
+Suivez les étapes et veillez à choisir la bonne version de `php`
 
 > Remarques :
 >
@@ -667,7 +667,7 @@ Which database will your application use? [MySQL]:
 Tapez sur la touche "return" pour indiquer qu'on désire utiliser `MySQL` comme
 SGBD.
 
-Voilà, le squelette d'une nouvelle application `Laravel` a été créé :smiley:
+Voilà, le squelette d'une nouvelle application `Laravel` a été créé
 
 Concrètement, il s'agit d'un répertoire `monApp1` contenant un sous-répertoire
 `laravel` qui contient tous les répertoires et fichiers constituant le squelette
@@ -856,8 +856,7 @@ Route::get('maison', function() {
 });
 ```
 
-Retenons juste pour l'instant qu'il est possible de donner un nom à une route
-:wink:.
+Retenons juste pour l'instant qu'il est possible de donner un nom à une route .
 
 Il est possible de transformer les informations relatives à une route en
 paramètres. Voici comment procéder :

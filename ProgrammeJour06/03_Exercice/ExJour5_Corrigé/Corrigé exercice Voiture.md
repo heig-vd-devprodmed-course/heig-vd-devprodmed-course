@@ -2,7 +2,8 @@
 
 ## Création d'un fichier texte nommé `database.sqlite`
 
-Cette étape consiste à créer un fichier texte vide nommé `database.sqlite` dans le répertoire `laravel\database`
+Cette étape consiste à créer un fichier texte vide nommé `database.sqlite` dans
+le répertoire `laravel\database`
 
 Une fois que ce fichier a été créé, il faut configurer le ficher `.env`
 
@@ -25,21 +26,25 @@ Ce qui crée la table `migrations` que Laravel a besoin.
 
 ## Partie Laravel
 
-Maintenant que notre base de données est prête nous pouvons nous occuper de notre application.
+Maintenant que notre base de données est prête nous pouvons nous occuper de
+notre application.
 
 ### Migration
 
-Pour pouvoir stocker les informations relatives à une voiture, il nous faut une nouvelle table dans notre base de données.
+Pour pouvoir stocker les informations relatives à une voiture, il nous faut une
+nouvelle table dans notre base de données.
 
 ```
 php artisan make:migration create_voitures_table
 ```
 
-Ce qui a pour effet de créer un nouveau fichier dans le répertoire `\database\migrations` :
+Ce qui a pour effet de créer un nouveau fichier dans le répertoire
+`\database\migrations` :
 
 `2021_03_26_152254_create_voitures_table.php`
 
-Editions maintenant ce fichier pour y mettre les informations relatives à notre table et ses champs :
+Editions maintenant ce fichier pour y mettre les informations relatives à notre
+table et ses champs :
 
 ```php
 <?php
@@ -85,9 +90,11 @@ Pour créer la table dans notre base de données, il faut lancer la commande :
 php artisan migrate
 ```
 
-Pour voir les tables crées dans `DB Browser for SQLite`, il suffit d'ouvrir à nouveau le fichier `database.sqlite`
+Pour voir les tables crées dans `DB Browser for SQLite`, il suffit d'ouvrir à
+nouveau le fichier `database.sqlite`
 
-Passons maintenant à la `classe-modèle` pour que les commandes `Eloquent` puissent fonctionner
+Passons maintenant à la `classe-modèle` pour que les commandes `Eloquent`
+puissent fonctionner
 
 Rappelons-nous : Une table => une `classe-modèle`
 
@@ -113,13 +120,14 @@ class Voiture extends Model
 {
     use HasFactory;
     protected $table='voitures';
-    public $timestamps=false;    
+    public $timestamps=false;
 }
 ```
 
 Maintenant que la classe existe tout est prêt pour `Eloquent`.
 
-Nous pouvons lancer `tinker` pour tester que tout fonctionne. :slightly_smiling_face:
+Nous pouvons lancer `tinker` pour tester que tout fonctionne.
+:slightly_smiling_face:
 
 ```
 php artisan tinker
@@ -138,7 +146,7 @@ php artisan tinker
 => 1.2
 >>> $voiture->save();
 => true
->>> 
+>>>
 ```
 
 `Youpee`, notre voiture a été crée.
@@ -160,9 +168,10 @@ Pour s'en rendre compte :
    }
 ```
 
-Tout est fonctionnel :thumbsup:
+Tout est fonctionnel
 
-Pour notre formulaire nous avons besoin d'une vue et pour une vue nous avons besoin d'un `template`.
+Pour notre formulaire nous avons besoin d'une vue et pour une vue nous avons
+besoin d'un `template`.
 
 Commençons par notre `template : template.blade.php` :
 
@@ -183,7 +192,8 @@ Commençons par notre `template : template.blade.php` :
 </html>
 ```
 
-Puis ajoutons notre vue pour le formulaire `view_rend_formulaire_voiture.blade.php`
+Puis ajoutons notre vue pour le formulaire
+`view_rend_formulaire_voiture.blade.php`
 
 ```php+HTML
 @extends('template')
@@ -239,7 +249,8 @@ Il nous faut maintenant un contrôleur qui s'occupera d'aller chercher notre vue
 php artisan make:controller VoitureController
 ```
 
-Le contrôleur est disponible dans le répertoire `app\Http\Controllers\VoitureController.php`
+Le contrôleur est disponible dans le répertoire
+`app\Http\Controllers\VoitureController.php`
 
 Ajoutons lui la méthode pour afficher notre vue :
 
@@ -257,7 +268,8 @@ class VoitureController extends Controller
 
 ```
 
-Il ne reste plus qu'à faire une route pour notre contrôleur. Editons le fichier `\routes\web.php`et ajoutons la route :
+Il ne reste plus qu'à faire une route pour notre contrôleur. Editons le fichier
+`\routes\web.php`et ajoutons la route :
 
 ```php
 Route::get('voiture', [VoitureController::class,'rendFormulaire']);
@@ -267,17 +279,17 @@ Testons voir si cela fonctionne :
 
 ![Formulaire](img/Formulaire.png)
 
-
-
 C'est pas mal !
 
-Pour valider notre requête (valider les champs de notre formulaire), il nous faut une fichier `Request`
+Pour valider notre requête (valider les champs de notre formulaire), il nous
+faut une fichier `Request`
 
 ```
 php artisan make:request VoitureRequest
 ```
 
-La commande nous crée le fichier `app\Http\Requests\VoitureRequest.php` que nous pouvons compléter avec nos contraintes :
+La commande nous crée le fichier `app\Http\Requests\VoitureRequest.php` que nous
+pouvons compléter avec nos contraintes :
 
 ```php
 <?php
@@ -333,21 +345,22 @@ class VoitureController extends Controller
     }
 
     public function traiteFormulaire(VoitureRequest $request) {
-    
+
         $unModeleVoiture = new Voiture;
         $unModeleVoiture->marque = $request->input('marque');
         $unModeleVoiture->type = $request->input('type');
         $unModeleVoiture->couleur = $request->input('couleur');
         $unModeleVoiture->cylindree = $request->input('cylindree');
         $unModeleVoiture->save();
-    
+
         return view('view_confirmation_voiture');
     }
 }
 
 ```
 
-Il nous manque la vue permettant de savoir que tout s'est bien passé `view_confirmation_voiture.blade.php`
+Il nous manque la vue permettant de savoir que tout s'est bien passé
+`view_confirmation_voiture.blade.php`
 
 ```php+HTML
 @extends('template')
@@ -365,11 +378,12 @@ Confirmation d'ajout d'une voiture
                 Voiture ajoutée avec succès
             </div>
         </div>
-    </div>                 
+    </div>
 @endsection
 ```
 
-Il ne nous reste plus qu'à ajouter la route pour la méthode de notre contrôleur :
+Il ne nous reste plus qu'à ajouter la route pour la méthode de notre contrôleur
+:
 
 ```
 Route::post('voiture', [VoitureController::class,'traiteFormulaire']);

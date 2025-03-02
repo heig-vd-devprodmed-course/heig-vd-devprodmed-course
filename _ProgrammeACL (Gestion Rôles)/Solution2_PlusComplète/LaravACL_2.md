@@ -1,10 +1,12 @@
 # ACL (Access Control List)
 
-Pour gérer les droits d'accès aux fonctionnalités, il nous faut tout d'abord un certain nombre de fonctionnalités :slightly_smiling_face:
+Pour gérer les droits d'accès aux fonctionnalités, il nous faut tout d'abord un
+certain nombre de fonctionnalités :slightly_smiling_face:
 
 ## Création de fonctionnalités
 
-Ajoutons quelques fonctionnalités à notre application grâce à un contrôleur de type `resource` qui contient automatiquement sept fonctionnalités.
+Ajoutons quelques fonctionnalités à notre application grâce à un contrôleur de
+type `resource` qui contient automatiquement sept fonctionnalités.
 
 ```
 php artisan make:controller UnControleur --resource
@@ -77,7 +79,8 @@ class UnControleur extends Controller
 }
 ```
 
-Ajoutons maintenant les routes pour nos fonctionnalités (en fait, il n'en faut qu'une pour ce type de contrôleur :slightly_smiling_face:)
+Ajoutons maintenant les routes pour nos fonctionnalités (en fait, il n'en faut
+qu'une pour ce type de contrôleur :slightly_smiling_face:)
 
 ```php
 Route::resource('tests', UnControleur::class);
@@ -126,7 +129,8 @@ GET|HEAD     verify-email .......................... verification.notice › Aut
 GET|HEAD     verify-email/{id}/{hash} .......................... verification.verify › Auth\VerifyEmailController
 ```
 
-Nous pouvons sans autre tester certaines de nos routes (les routes GET), à savoir :
+Nous pouvons sans autre tester certaines de nos routes (les routes GET), à
+savoir :
 
 - `/tests` qui nous envoie vers la méthode `index()` de notre contrôleur
 
@@ -134,19 +138,19 @@ Nous pouvons sans autre tester certaines de nos routes (les routes GET), à savo
   > localhost:8000/tests
   > ```
 
-- `/tests/create`  qui nous envoie vers la méthode `create()` de notre contrôleur
+- `/tests/create` qui nous envoie vers la méthode `create()` de notre contrôleur
 
   > ```
   > localhost:8000/tests/create
   > ```
 
-- `/tests/xxx`  qui nous envoie vers la méthode `show()`
+- `/tests/xxx` qui nous envoie vers la méthode `show()`
 
   > ```
   > localhost:8000/tests/xxx
   > ```
 
-- `/tests/xxx/edit`  qui nous envoie vers la méthode edit()
+- `/tests/xxx/edit` qui nous envoie vers la méthode edit()
 
   > ```
   > localhost:8000/tests/xxx/edit
@@ -156,8 +160,9 @@ Nous pouvons sans autre tester certaines de nos routes (les routes GET), à savo
 
 Nous allons définir trois rôles pour notre application :
 
-- un rôle `BASIC`  pour les fonctionnalités (index(), show() ))
-- un rôle `EDITEUR` permettant en plus la création, l'édition et la sauvegarde (create(), edit(), store())
+- un rôle `BASIC` pour les fonctionnalités (index(), show() ))
+- un rôle `EDITEUR` permettant en plus la création, l'édition et la sauvegarde
+  (create(), edit(), store())
 - un rôle `ADMIN` pour toutes les autres fonctionnalités (update(), destroy())
 
 Nous allons stocker ces rôles dans la classe-modèle `User` dans des constantes
@@ -183,7 +188,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-	
+
     const ROLE_BASIC = 'ROLE_BASIC';
     const ROLE_EDITEUR = 'ROLE_EDITEUR';
     const ROLE_ADMIN = 'ROLE_ADMIN';
@@ -223,7 +228,8 @@ class User extends Authenticatable
 
 ## Attributions d'un rôle à un utilisateur
 
-Pour pouvoir attribuer un rôle à un utilisateur nous allons ajouter le `role` champ dans la table `users`
+Pour pouvoir attribuer un rôle à un utilisateur nous allons ajouter le `role`
+champ dans la table `users`
 
 ```php
 <?php
@@ -277,16 +283,21 @@ protected $fillable = [
 
 ## Attributions des fonctionnalités aux différents rôles
 
-Il va nous falloir une table dédiée dans la base de données. Cette table indiquera quel rôle a le droit à quelle fonctionnalité.
-Qui dit table dit `classe-modèle`. Créons la `classe-modèle` ainsi que le fichier migration simultanément grâce à la commande :
+Il va nous falloir une table dédiée dans la base de données. Cette table
+indiquera quel rôle a le droit à quelle fonctionnalité. Qui dit table dit
+`classe-modèle`. Créons la `classe-modèle` ainsi que le fichier migration
+simultanément grâce à la commande :
 
 ```
 php artisan make:model Acl -m
 ```
 
-> Remarque : Le `-m` indique que l'on aimerait aussi créer le fichier `migration` correspondant
+> Remarque : Le `-m` indique que l'on aimerait aussi créer le fichier
+> `migration` correspondant
 
-Editons le fichier `database\migrations\...._.._.._......_create_acls_table.php` et ajoutons les champs `fonctionnalite`, `role` pour déterminer quel rôle a droit à quelle fonctionnalité. (les `timestamps` ne sont pas nécessaires)
+Editons le fichier `database\migrations\...._.._.._......_create_acls_table.php`
+et ajoutons les champs `fonctionnalite`, `role` pour déterminer quel rôle a
+droit à quelle fonctionnalité. (les `timestamps` ne sont pas nécessaires)
 
 ```php
 <?php
@@ -336,7 +347,8 @@ class Acl extends Model
 }
 ```
 
-Maintenant que la table est prête, il nous faut un seeder pour la remplir. (Qui a droit à quelle fonctionnalité)
+Maintenant que la table est prête, il nous faut un seeder pour la remplir. (Qui
+a droit à quelle fonctionnalité)
 
 ```
 php artisan make:seeder AclTableSeeder
@@ -363,33 +375,33 @@ class AclTableSeeder extends Seeder
     {
         DB::table('acls')->delete();
 
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_BASIC, 'fonctionnalite' => 'UnControleur@index']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_BASIC, 'fonctionnalite' => 'UnControleur@show']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@index']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@show']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@create']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@edit']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@store']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@index']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@show']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@create']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@edit']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@store']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@update']);
-        DB::table('acls')->insert(['role' => 
+        DB::table('acls')->insert(['role' =>
             User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@destroy']);
     }
 }
@@ -397,7 +409,8 @@ class AclTableSeeder extends Seeder
 
 ## Ajout d'utilisateurs ayant différents rôles
 
-Il nous faut maintenant au moins trois utilisateurs pour pouvoir tester les différentes possibilités.
+Il nous faut maintenant au moins trois utilisateurs pour pouvoir tester les
+différentes possibilités.
 
 ```
 php artisan make:seeder UserTableSeeder
@@ -423,20 +436,20 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->delete();
-        
+
         DB::table('users')->insert([
             'name' => 'joe',
             'email' => 'joe@email.ch',
             'password' => Hash::make('mdp_joe'),
         ]); // avec le role par défaut ;-)
-        
+
         DB::table('users')->insert([
             'name' => 'lea',
             'email' => 'lea@email.ch',
             'password' => Hash::make('mdp_lea'),
             'role' => User::ROLE_EDITEUR,
         ]);
-        
+
         DB::table('users')->insert([
             'name' => 'dom',
             'email' => 'dom@email.ch',
@@ -447,7 +460,8 @@ class UserTableSeeder extends Seeder
 }
 ```
 
-Avant de pouvoir "peupler" les tables, il nous faut définir l'ordre dans lequel doivent s'exécuter les `seeders`.
+Avant de pouvoir "peupler" les tables, il nous faut définir l'ordre dans lequel
+doivent s'exécuter les `seeders`.
 
 ```php
 <?php
@@ -471,7 +485,8 @@ class DatabaseSeeder extends Seeder
 }
 ```
 
-Nous pouvons maintenant créer nos tables et les peupler à l'aide des commandes suivantes :
+Nous pouvons maintenant créer nos tables et les peupler à l'aide des commandes
+suivantes :
 
 ```
 php artisan migrate:install
@@ -497,8 +512,8 @@ Pour s'assurer que tout fonctionne, nous pouvons lancer l'outil `tinker`
 php artisan tinker
 ```
 
-Pour connaître les fonctionnalités qui sont autorisées pour le rôle `ROLE_EDITEUR` : 
-(à l'aide d'un select, c'est aussi possible ;-)
+Pour connaître les fonctionnalités qui sont autorisées pour le rôle
+`ROLE_EDITEUR` : (à l'aide d'un select, c'est aussi possible ;-)
 
 ```
 >>> Acl::select('fonctionnalite')->where('Role',User::ROLE_EDITEUR)->get();
@@ -563,7 +578,9 @@ Pour voir nos trois utilisateurs :
    }
 ```
 
-Comme nous avons implémenté l'authentification, il nous est possible de nous `logger` dans l'application, mais aucune de nos fonctionnalités est protégée. Pour s'en apercevoir il suffit de taper l'URL suivante :
+Comme nous avons implémenté l'authentification, il nous est possible de nous
+`logger` dans l'application, mais aucune de nos fonctionnalités est protégée.
+Pour s'en apercevoir il suffit de taper l'URL suivante :
 
 ```
 http://localhost:8000/tests
@@ -571,7 +588,9 @@ http://localhost:8000/tests
 
 Comment faire ?
 
-Il suffit d'utiliser le middleware `auth` prévu à cet effet. Pour "activer" un middleware, nous devons l'intercaler entre une route et un contrôleur. Nous avons deux possibilités : 
+Il suffit d'utiliser le middleware `auth` prévu à cet effet. Pour "activer" un
+middleware, nous devons l'intercaler entre une route et un contrôleur. Nous
+avons deux possibilités :
 
 - soit le faire depuis le constructeur du contrôleur (qu'il faut ajouter)
 
@@ -579,7 +598,7 @@ Il suffit d'utiliser le middleware `auth` prévu à cet effet. Pour "activer" un
   ...
   class UnControleur extends Controller
   {
-      
+
       public function __construct() {
           $this->middleware('auth');
       }
@@ -598,9 +617,10 @@ Il suffit de choisir une des possibilités et de retaper l'URL :
 http://localhost:8000/tests
 ```
 
-Cette fois-ci nous sommes obligés de nous authentifier :thumbsup:
+Cette fois-ci nous sommes obligés de nous authentifier
 
-Comment autoriser les utilisateurs à accéder aux fonctionnalités auxquelles ils ont droit ?
+Comment autoriser les utilisateurs à accéder aux fonctionnalités auxquelles ils
+ont droit ?
 
 Et bien nous allons créer notre propre `middleware`.
 
@@ -635,10 +655,10 @@ class AclMiddleware
         if (is_null(auth()->user())) {
             return redirect()->route('login');
         }
-        
+
         // On récupère le rôle de l'utilisateur
         $role = auth()->user()->getAttributes()['role'];
-        
+
         // On récupère le nom de la fonctionnalité que l'utilisateur essaye d'accéder
         // (après un peu de nettoyage; la fonctionnalité se trouve après le dernier \)
         // $request->route()->getActionName() : "App\Http\Controllers\UnControleur@index"
@@ -646,7 +666,7 @@ class AclMiddleware
         $fonctionnalite = substr($request->route()->getActionName(),
                 strrpos($request->route()->getActionName(), '\\') + 1);
         // On contrôle que le rôle de l'utilisateur a accès à cette fonctionnalité
-        $aAccesA = (Acl::where('role', $role)->where('fonctionnalite', 
+        $aAccesA = (Acl::where('role', $role)->where('fonctionnalite',
                 $fonctionnalite)->count() != 0);
 
         // Si il n'a pas accès à cette fonctionnalité, on arrête le traitement
@@ -655,15 +675,17 @@ class AclMiddleware
             //return response()->json(['message' => 'Forbidden'], 403);
         }
 
-        // On passe la requête plus loin 
+        // On passe la requête plus loin
         // (soit au middleware suivant, soit au contrôleur)
         return $next($request);
     }
 }
 ```
 
-Une fois que le middleware existe, il faut encore l'enregistrer dans la liste des middleware disponibles par l'application et lui donner un nom (`acl`)
-(Il s'agit de compléter le tableau pointé par la propriété `$middlewareAliases` du fichier `\app\Http\Kernel.php`
+Une fois que le middleware existe, il faut encore l'enregistrer dans la liste
+des middleware disponibles par l'application et lui donner un nom (`acl`) (Il
+s'agit de compléter le tableau pointé par la propriété `$middlewareAliases` du
+fichier `\app\Http\Kernel.php`
 
 ```php
 ...
@@ -724,14 +746,15 @@ email : joe@email.ch
 password : mdp_joe
 ```
 
-Joe étant un utilisateur avec le ROLE_BASIC, il a accès à la méthode `index()`. Le navigateur affichera donc :
+Joe étant un utilisateur avec le ROLE_BASIC, il a accès à la méthode `index()`.
+Le navigateur affichera donc :
 
 ```
 Fonctionnalité index
 ```
 
-Par contre Joe n'a pas accès à la méthode `create()` 
-(qui s'accède grâce à l'URL suivante : `http://localhost:8000/tests/create`)
+Par contre Joe n'a pas accès à la méthode `create()` (qui s'accède grâce à l'URL
+suivante : `http://localhost:8000/tests/create`)
 
 Le navigateur affichera donc :
 
@@ -739,7 +762,8 @@ Le navigateur affichera donc :
 403 | Forbidden
 ```
 
-Nous pouvons maintenant faire un `loggout` (depuis `http://localhost:8000`) et nous connecter avec un utilisateur ayant un peu plus de droits.
+Nous pouvons maintenant faire un `loggout` (depuis `http://localhost:8000`) et
+nous connecter avec un utilisateur ayant un peu plus de droits.
 
 ```
 email : lea@email.ch
@@ -754,4 +778,5 @@ Fonctionnalité create
 
 YES ! :muscle:
 
-Bravo, être arrivés au terme de cette mise en place de la gestion d'accès à des fonctionnalités d'une application `Laravel` :slightly_smiling_face:
+Bravo, être arrivés au terme de cette mise en place de la gestion d'accès à des
+fonctionnalités d'une application `Laravel` :slightly_smiling_face:

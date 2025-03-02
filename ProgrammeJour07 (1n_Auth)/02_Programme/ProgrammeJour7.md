@@ -1,24 +1,32 @@
 # Jour 7 (Relation 1:N)
 
-Aujourd'hui, nous allons créer deux tables dans une base de données et les mettre en relation. 
+Aujourd'hui, nous allons créer deux tables dans une base de données et les
+mettre en relation.
 
-Il existe plusieurs type de relations, la plus répandue et la plus simple consiste à faire correspondre un enregistrement d'une table à plusieurs enregistrements d'une autre table. 
+Il existe plusieurs type de relations, la plus répandue et la plus simple
+consiste à faire correspondre un enregistrement d'une table à plusieurs
+enregistrements d'une autre table.
 
 Ce type de relation est appelé : relation `1:N`
 
 Voici quelques exemples :
 
-- Une personne peut avoir plusieurs voitures, mais une voiture n'appartient qu'a un seul propriétaire.
-- Une personne peut avoir plusieurs numéros de téléphones, un numéro correspond à une personne.
-- Une personne peut rédiger plusieurs articles, un article a été rédigé par une personne.
+- Une personne peut avoir plusieurs voitures, mais une voiture n'appartient qu'a
+  un seul propriétaire.
+- Une personne peut avoir plusieurs numéros de téléphones, un numéro correspond
+  à une personne.
+- Une personne peut rédiger plusieurs articles, un article a été rédigé par une
+  personne.
 
 ## Blog
 
-L'exemple que nous allons implémenter aujourd'hui est un blog dont voici les caractéristiques :
+L'exemple que nous allons implémenter aujourd'hui est un blog dont voici les
+caractéristiques :
 
-- Les utilisateurs de notre application pourront se connecter, rédiger des articles puis se déconnecter.
+- Les utilisateurs de notre application pourront se connecter, rédiger des
+  articles puis se déconnecter.
 - Les visiteurs de notre site pourrons consulter tous les articles.
-- Les administrateurs auront le droit de supprimer des articles.	
+- Les administrateurs auront le droit de supprimer des articles.
 
 Commençons par la création d'un nouveau projet `Laravel`.
 
@@ -26,7 +34,8 @@ Commençons par la création d'un nouveau projet `Laravel`.
 laravel new app_un_n/laravel
 ```
 
-Pour développer rapidement, nous allons utiliser le SGBD `Sqlite` qui ne nécessite pas de serveur. (cf. dernier cours)
+Pour développer rapidement, nous allons utiliser le SGBD `Sqlite` qui ne
+nécessite pas de serveur. (cf. dernier cours)
 
 Le fichier `.env`devrait donc être configuré pour l'utilisation de `Sqlite`
 
@@ -34,15 +43,18 @@ Le fichier `.env`devrait donc être configuré pour l'utilisation de `Sqlite`
 DB_CONNECTION=sqlite
 ```
 
-Les migrations de bases ont déjà été faites et le fichier `database.sqlite` contient déjà les tables de bases.
+Les migrations de bases ont déjà été faites et le fichier `database.sqlite`
+contient déjà les tables de bases.
 
-> Remarque : Si une erreur s'est produite, c'est peut-être que vous avez oublié d'activer l'extension correspondante à `Sqlite` dans le fichier php.ini. Pour savoir quel fichier php.ini modifier, il faut taper la commande : 
+> Remarque : Si une erreur s'est produite, c'est peut-être que vous avez oublié
+> d'activer l'extension correspondante à `Sqlite` dans le fichier php.ini. Pour
+> savoir quel fichier php.ini modifier, il faut taper la commande :
 >
 > ```
 > php --ini
 > ```
 >
-> qui retourne par exemple : 
+> qui retourne par exemple :
 >
 > ```
 > Configuration File (php.ini) Path: C:\WINDOWS
@@ -51,7 +63,8 @@ Les migrations de bases ont déjà été faites et le fichier `database.sqlite` 
 > Additional .ini files parsed:      (none)
 > ```
 >
-> Il suffit d'éditer le fichier `php.ini` et d'activer l'extension (en enlevant le point virgule ;-)
+> Il suffit d'éditer le fichier `php.ini` et d'activer l'extension (en enlevant
+> le point virgule ;-)
 >
 > ```
 > ...
@@ -59,17 +72,21 @@ Les migrations de bases ont déjà été faites et le fichier `database.sqlite` 
 > ...
 > ```
 
-Malheureusement, la table `users` présente de base dans `Laravel` ne correspond pas tout à fait à nos besoins..., nous allons la modifier.
+Malheureusement, la table `users` présente de base dans `Laravel` ne correspond
+pas tout à fait à nos besoins..., nous allons la modifier.
 
-Déplaçons nous dans le répertoire `database\migrations` et éditons le fichier `0001_01_01_000000_create_users_table.php` et adaptons le contenu des méthodes `up()` (avec le même contenu que lors du dernier cours) pour que le champ `id` s'incrémente automatiquement et pour disposer d'un champ supplémentaire `admin`
+Déplaçons nous dans le répertoire `database\migrations` et éditons le fichier
+`0001_01_01_000000_create_users_table.php` et adaptons le contenu des méthodes
+`up()` (avec le même contenu que lors du dernier cours) pour que le champ `id`
+s'incrémente automatiquement et pour disposer d'un champ supplémentaire `admin`
 
 > ```php
 > <?php
-> 
+>
 > use Illuminate\Database\Migrations\Migration;
 > use Illuminate\Database\Schema\Blueprint;
 > use Illuminate\Support\Facades\Schema;
-> 
+>
 > return new class extends Migration
 > {
 >     /**
@@ -87,13 +104,13 @@ Déplaçons nous dans le répertoire `database\migrations` et éditons le fichie
 >             $table->rememberToken();
 >             $table->timestamps();
 >         });
-> 
+>
 >         Schema::create('password_reset_tokens', function (Blueprint $table) {
 >             $table->string('email')->primary();
 >             $table->string('token');
 >             $table->timestamp('created_at')->nullable();
 >         });
-> 
+>
 >         Schema::create('sessions', function (Blueprint $table) {
 >             $table->string('id')->primary();
 >             $table->foreignId('user_id')->nullable()->index();
@@ -103,7 +120,7 @@ Déplaçons nous dans le répertoire `database\migrations` et éditons le fichie
 >             $table->integer('last_activity')->index();
 >         });
 >     }
-> 
+>
 >     /**
 >      * Reverse the migrations.
 >      */
@@ -116,7 +133,9 @@ Déplaçons nous dans le répertoire `database\migrations` et éditons le fichie
 > };
 > ```
 
-Créons à présent un nouveau fichier de migration (code qui va permettre de créer/supprimer une nouvelle table dans la bd) nommé `create_articles_table` à l'aide de la commande :
+Créons à présent un nouveau fichier de migration (code qui va permettre de
+créer/supprimer une nouvelle table dans la bd) nommé `create_articles_table` à
+l'aide de la commande :
 
 ```
  php artisan make:migration create_articles_table
@@ -167,7 +186,8 @@ return new class extends Migration
 };
 ```
 
-Nous devons maintenant supprimer toutes les tables dans notre base de donnée à l'aide de la commande :
+Nous devons maintenant supprimer toutes les tables dans notre base de donnée à
+l'aide de la commande :
 
 ```
 php artisan migrate:rollback
@@ -198,19 +218,26 @@ Ce qui devrait afficher :
   2024_04_14_122846_create_articles_table .............................. 2.68ms DONE
 ```
 
-Pour visualiser ces tables nous pouvons utiliser le programme `DB Browser for Sqlite`
+Pour visualiser ces tables nous pouvons utiliser le programme
+`DB Browser for Sqlite`
 
 ## Relation 1:N dans les classes-modèles
 
-Nous l'avons vu lors du dernier cours : chaque table nécessite une classe modèle. La classe User est existe déjà par défaut dans `Laravel`. Par contre il faudra créer la classe modèle `Article` qui n'existe pas.
+Nous l'avons vu lors du dernier cours : chaque table nécessite une classe
+modèle. La classe User est existe déjà par défaut dans `Laravel`. Par contre il
+faudra créer la classe modèle `Article` qui n'existe pas.
 
-La relation 1:N se définit dans les deux classes "modèle" impliquées (`User.php`, `Article.php`)
+La relation 1:N se définit dans les deux classes "modèle" impliquées
+(`User.php`, `Article.php`)
 
-Dans la classe `User.php` nous devons indiquer qu'un utilisateur peut posséder plusieurs articles.
+Dans la classe `User.php` nous devons indiquer qu'un utilisateur peut posséder
+plusieurs articles.
 
-Dans la classe `Articles.php` nous devons indiquer qu'un article appartient à un utilisateur.
+Dans la classe `Articles.php` nous devons indiquer qu'un article appartient à un
+utilisateur.
 
-Reprenons les modifications que nous avions apporté lors du dernier cours à la classe `\laravel\app\Models\User.php` et ajoutons la méthode `articles()`
+Reprenons les modifications que nous avions apporté lors du dernier cours à la
+classe `\laravel\app\Models\User.php` et ajoutons la méthode `articles()`
 
 ```php
 <?php
@@ -257,7 +284,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
+
     // DEFINITON DE LA RELATION x:N
     public function articles() {                 // NOUVEAU !!!!!!!!
         return $this->hasMany(Article::class);   // Relation (1:)N
@@ -265,7 +292,8 @@ class User extends Authenticatable
 }
 ```
 
-Créons la classe "modèle" Article et complétons la avec les instructions suivantes :
+Créons la classe "modèle" Article et complétons la avec les instructions
+suivantes :
 
 ```php
 <?php
@@ -278,14 +306,14 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    
-    // sans rien indiquer de plus, Laravel rattache automatiquement 
+
+    // sans rien indiquer de plus, Laravel rattache automatiquement
     // ce modèle à la table "articles"
     // Il cherche une table nommée comme la classe mais en rajoutant un 's'
     // => nom de la classe Article => recherche la table "articles" dans la bd
-    
+
     protected $fillable=['titre','contenu','user_id'];  // pour plus tard ;-)
-    
+
     public function user() {			        // NOUVEAU !!!!!!!!!!
         return $this->belongsTo(User::class);    // Relation 1(:N)
     }                                            // NOUVEAU !!!!!!!!!!
@@ -308,22 +336,25 @@ public function articles() {                  // NOUVEAU !!!!!!!!
 }                                             // NOUVEAU !!!!!!!!
 ```
 
-## Peuplement des tables `users` et `articles` 
+## Peuplement des tables `users` et `articles`
 
-Pour faciliter nos tests nous allons créer des enregistrements (aléatoires) dans nos tables.
+Pour faciliter nos tests nous allons créer des enregistrements (aléatoires) dans
+nos tables.
 
-Pour ajouter des enregistrements dans une table, il nous faut des instructions. 
-Les instructions se mettent dans une méthode. 
-Une méthode doit se trouver dans une classe. 
-Il nous faut donc une nouvelle classe.
+Pour ajouter des enregistrements dans une table, il nous faut des instructions.
+Les instructions se mettent dans une méthode. Une méthode doit se trouver dans
+une classe. Il nous faut donc une nouvelle classe.
 
 ## Seeder
 
-Dans `Laravel`, une classe qui permet le peuplement d'une table se nomme un `seeder`. 
+Dans `Laravel`, une classe qui permet le peuplement d'une table se nomme un
+`seeder`.
 
-Pour créer un `seeder` nous avons la commande  `php artisan make:seeder NomNouvelleClasse`
+Pour créer un `seeder` nous avons la commande
+`php artisan make:seeder NomNouvelleClasse`
 
-Comme nous voulons des enregistrements dans la table `user` et dans la table `articles`, il nous faut deux classes `seeder` :
+Comme nous voulons des enregistrements dans la table `user` et dans la table
+`articles`, il nous faut deux classes `seeder` :
 
 - `UsersTableSeeder`
 - `ArticlesTableSeeder`
@@ -338,7 +369,8 @@ php artisan make:seeder UsersTableSeeder
 php artisan make:seeder ArticlesTableSeeder
 ```
 
-Ces deux classes sont maintenant disponibles dans le répertoire : `\laravel\database\seeders`
+Ces deux classes sont maintenant disponibles dans le répertoire :
+`\laravel\database\seeders`
 
 Modifions la classe `UsersTableSeeder.php` pour créer 10 utilisateurs :
 
@@ -367,7 +399,8 @@ class UsersTableSeeder extends Seeder {
 }
 ```
 
-Puis la classe `ArticlesTableSeeder.php` qui va créer 100 articles produits par des utilisateurs (déterminé aléatoirement)
+Puis la classe `ArticlesTableSeeder.php` qui va créer 100 articles produits par
+des utilisateurs (déterminé aléatoirement)
 
 ```php
 <?php
@@ -394,7 +427,7 @@ class ArticlesTableSeeder extends Seeder
     public function run(): void {
         for ($i = 1; $i <= 100; $i++) {
             $date = $this->randDate();
-            Article::create(['titre'=> 'Titre' .$i, 
+            Article::create(['titre'=> 'Titre' .$i,
                              'contenu' => 'Contenu ' . $i . ' Lorem ipsum dolor sit amet, consectetur ' .
                                                      'adipiscing elit. Proin vel auctor libero, quis venenatis ' .
                                                      'augue. Curabitur a pulvinar tortor, vitae condimentum ' .
@@ -413,9 +446,11 @@ class ArticlesTableSeeder extends Seeder
 
 L'ordre du peuplement des tables est très important.
 
-Comme les articles sont rattachés à des utilisateurs (`users`), il est important de créer d'abord les utilisateurs puis les articles.
+Comme les articles sont rattachés à des utilisateurs (`users`), il est important
+de créer d'abord les utilisateurs puis les articles.
 
-Cet ordre (`users` puis `articles`) se définit dans la méthode `run()` de la classe existante : `\laravel\database\seeds\DatabaseSeeder.php`
+Cet ordre (`users` puis `articles`) se définit dans la méthode `run()` de la
+classe existante : `\laravel\database\seeds\DatabaseSeeder.php`
 
 ```php
 <?php
@@ -441,16 +476,17 @@ class DatabaseSeeder extends Seeder
 
 ## Création des enregistrements
 
- Lançons le peuplement de nos deux tables :
+Lançons le peuplement de nos deux tables :
 
 ```
 php artisan db:seed
 ```
 
-> Si la commande précédente génère une erreur, c'est que `Laravel` n'a pas "vu" nos nouvelles classes.
-> (Il faut mettre à jour la classe qui permet l'`autoload`)
+> Si la commande précédente génère une erreur, c'est que `Laravel` n'a pas "vu"
+> nos nouvelles classes. (Il faut mettre à jour la classe qui permet
+> l'`autoload`)
 >
-> Pour s'assurer que `Laravel` prenne en compte nos deux nouvelles classes 
+> Pour s'assurer que `Laravel` prenne en compte nos deux nouvelles classes
 > (`UsersTableSeeder`, `ArticlesTableSeeder`) lançons la commande :
 >
 > ```
@@ -467,7 +503,8 @@ INFO  Seeding database.
   Database\Seeders\ArticlesTableSeeder .......................................... 299 ms DONE
 ```
 
-A l'aide de l'outil `DB Browser for Sqlite` nous pouvons constater que nos tables sont bien remplies :slightly_smiling_face:
+A l'aide de l'outil `DB Browser for Sqlite` nous pouvons constater que nos
+tables sont bien remplies :slightly_smiling_face:
 
 Voici les enregistrements de la table `users` :
 
@@ -477,7 +514,8 @@ Voici quelques enregistrements (16/100) de la table articles :
 
 ![Articles](img\Articles.png)
 
-Nous pouvons bien sûr aussi utiliser l'outil `tinker` pour s'assurer de la présence des enregistrements dans nos deux tables (`users` et `articles`)  
+Nous pouvons bien sûr aussi utiliser l'outil `tinker` pour s'assurer de la
+présence des enregistrements dans nos deux tables (`users` et `articles`)
 
 ```
 php artisan tinker
@@ -607,7 +645,8 @@ Qui nous retourne :
   }
 ```
 
-Demandons maintenant (à `tinker`) de nous afficher les articles appartenant à l'utilisateur ayant l'identifiant : 1
+Demandons maintenant (à `tinker`) de nous afficher les articles appartenant à
+l'utilisateur ayant l'identifiant : 1
 
 ```
 >>> App\Models\User::findOrFail(1)->articles
@@ -662,11 +701,12 @@ Demandons maintenant (à `tinker`) de nous afficher les articles appartenant à 
   }
 ```
 
-Le résultat diffère un peu chez vous car le peuplement des tables s'est fait de manière aléatoire.
-(Voir le code des `Seeders` ci-dessus)
-Il y a peut-être plus ou peut être moins d'articles. (N articles)
+Le résultat diffère un peu chez vous car le peuplement des tables s'est fait de
+manière aléatoire. (Voir le code des `Seeders` ci-dessus) Il y a peut-être plus
+ou peut être moins d'articles. (N articles)
 
-Nous pouvons maintenant demander à tinker à qui appartient l'article ayant l'identifiant : 10
+Nous pouvons maintenant demander à tinker à qui appartient l'article ayant
+l'identifiant : 10
 
 ```
 App\Models\Article::findOrFail(10)->user
@@ -688,15 +728,18 @@ Tinker nous répond :
   }
 ```
 
-L'identifiant de l'utilisateur est surement différent chez vous ! Par contre ce qui est sûr, c'est qu'il y a qu'un seul utilisateur (1 utilisateur)
+L'identifiant de l'utilisateur est surement différent chez vous ! Par contre ce
+qui est sûr, c'est qu'il y a qu'un seul utilisateur (1 utilisateur)
 
-Relation 1:N                =>            1 utilisateur : N articles :slightly_smiling_face:
+Relation 1:N => 1 utilisateur : N articles :slightly_smiling_face:
 
-Tout est en place au niveau des données. Nous pouvons maintenant implémenter notre application.
+Tout est en place au niveau des données. Nous pouvons maintenant implémenter
+notre application.
 
 ## Contrôleur
 
-Créons notre contrôleur. (Ce sera comme lors du dernier cours un contrôleur de type ressource)
+Créons notre contrôleur. (Ce sera comme lors du dernier cours un contrôleur de
+type ressource)
 
 ```
 php artisan make:controller ArticleController --resource
@@ -712,9 +755,10 @@ Par défaut, ce contrôleur possède les méthodes suivantes :
 - update(Request $request, $id)
 - destroy()
 
-Mais cela ne veut pas dire que nous devons toutes les avoir. 
+Mais cela ne veut pas dire que nous devons toutes les avoir.
 
-Nous pouvons supprimer celles que nous n'utiliserons pas. (`show`, `edit`, `update`)
+Nous pouvons supprimer celles que nous n'utiliserons pas. (`show`, `edit`,
+`update`)
 
 ```php
 <?php
@@ -767,9 +811,11 @@ Route::resource('articles', ArticleController::class, ['except'=>['show','edit',
 
 > N'oublions pas le `use` pour la classe `ArticleController`
 
-Comme nous n'utiliserons pas les trois méthodes  (`show`, `edit`, `update`) nous avons supprimé les routes qui y mènent (`['except'=>['show','edit','update']]`)
+Comme nous n'utiliserons pas les trois méthodes (`show`, `edit`, `update`) nous
+avons supprimé les routes qui y mènent (`['except'=>['show','edit','update']]`)
 
-> Rappel : Pour voir toutes les routes et leur méthodes associées dans le contrôleur il y a la commande que nous avons vu lors du dernier cours : 
+> Rappel : Pour voir toutes les routes et leur méthodes associées dans le
+> contrôleur il y a la commande que nous avons vu lors du dernier cours :
 >
 > ```
 > php artisan route:list
@@ -855,7 +901,7 @@ use App\Models\Article;
 class ArticleController extends Controller
 {
     protected $nbArticlesParPage = 4;
-    
+
     public function index() {
         $articles=Article::with('user')
                 ->orderBy('articles.created_at','desc')
@@ -863,22 +909,25 @@ class ArticleController extends Controller
         $links=$articles->render();
         return view('view_articles', compact('articles','links'));
     }
-    
+
     public function create() {}
-    
+
     public function store(Request $request) {}
-    
+
     public function destroy($id) {}
 }
 ```
 
-Nous pouvons tester l'état actuel de notre application en lançant notre application :
+Nous pouvons tester l'état actuel de notre application en lançant notre
+application :
 
 ```
 http://localhost:8000/articles
 ```
 
-Pour obtenir une navigation plus aisée entre les différentes pages, nous pouvons configurer `Laravel` pour l'utilisation de `bootstrap` pour le rendu. [Documentation](https://laravel.com/docs/11.x/pagination#using-bootstrap)
+Pour obtenir une navigation plus aisée entre les différentes pages, nous pouvons
+configurer `Laravel` pour l'utilisation de `bootstrap` pour le rendu.
+[Documentation](https://laravel.com/docs/11.x/pagination#using-bootstrap)
 
 `app\Providers\AppServiceProvider.php`
 
@@ -920,17 +969,20 @@ Nous allons nous occuper maintenant de l'authentification.
 
 ## Authentification
 
-Pour implémenter une authentification dans Laravel, il nous faut l'outil `npm`. (Pour plus d'info : [npm](https://www.npmjs.com/get-npm))
+Pour implémenter une authentification dans Laravel, il nous faut l'outil `npm`.
+(Pour plus d'info : [npm](https://www.npmjs.com/get-npm))
 
-Pour savoir si `npm` est installé sur votre ordinateur, il suffit de taper la commande suivante :
+Pour savoir si `npm` est installé sur votre ordinateur, il suffit de taper la
+commande suivante :
 
 ```
 npm
 ```
 
-Si rien ne se passe, il faut l'installer. 
+Si rien ne se passe, il faut l'installer.
 
-`npm` fait partie de Node.js. En installant Node.js, `npm` sera installé automatiquement.
+`npm` fait partie de Node.js. En installant Node.js, `npm` sera installé
+automatiquement.
 
 ```
 https://nodejs.org/fr/download/
@@ -938,9 +990,10 @@ https://nodejs.org/fr/download/
 
 Vous pouvez validez toutes les options proposées par défaut.
 
-Une fois l'installation terminée, il faut fermer la fenêtre de la ligne de commande, puis l'ouvrir à nouveau.
+Une fois l'installation terminée, il faut fermer la fenêtre de la ligne de
+commande, puis l'ouvrir à nouveau.
 
-En tapant la commande : 
+En tapant la commande :
 
 ```
 npm
@@ -987,13 +1040,15 @@ Ce qui nous indique que `npm` est installé.
 
 Nous pouvons donc passer à l'implémentation de l'authentification.
 
-Demandons maintenant à `Laravel` d'installer la libraire `Breeze` pour faciliter l'authentification.
+Demandons maintenant à `Laravel` d'installer la libraire `Breeze` pour faciliter
+l'authentification.
 
 ```
 composer require laravel/breeze --dev
 ```
 
-Une fois que la libraire a été téléchargée, nous pouvons installer les vues d'authentification `blade` à l'aide de la commande :
+Une fois que la libraire a été téléchargée, nous pouvons installer les vues
+d'authentification `blade` à l'aide de la commande :
 
 ```
 php artisan breeze:install blade
@@ -1007,7 +1062,8 @@ Patientez ! jusqu'au message :
 
 Voilà, c'est installé.
 
-> Remarque importante ! : L'installation a modifié le fichier `web.php` en y ajouter des routes et a SUPPRIME NOS routes... et  les `use` !
+> Remarque importante ! : L'installation a modifié le fichier `web.php` en y
+> ajouter des routes et a SUPPRIME NOS routes... et les `use` !
 >
 > Il est donc important de les rajouter !
 >
@@ -1017,15 +1073,18 @@ Voilà, c'est installé.
 > ...
 > ```
 
-Dans le répertoire `/resources/views` nous pouvons voir (entre autre) un nouveau répertoire `/auth` contenant des vues supplémentaires. :wink:
+Dans le répertoire `/resources/views` nous pouvons voir (entre autre) un nouveau
+répertoire `/auth` contenant des vues supplémentaires.
 
-Pour voir que l'authentification est fonctionnelle, il suffit de lancer notre application.
+Pour voir que l'authentification est fonctionnelle, il suffit de lancer notre
+application.
 
 ![Authentification](img\Authentification.png)
 
-Nous pouvons observer en haut à droite de la fenêtre, deux nouveaux liens `Log in` et `Register`
+Nous pouvons observer en haut à droite de la fenêtre, deux nouveaux liens
+`Log in` et `Register`
 
-Cliquons sur `Log In` et identifions nous avec les informations suivantes : 
+Cliquons sur `Log In` et identifions nous avec les informations suivantes :
 
 - `E-Mail Address` : `email1@gmx.ch`
 - `Password` : `password1`
@@ -1034,10 +1093,13 @@ Nous obtenons le résultat suivant :
 
 ![Logged](img\Logged.png)
 
-Pour rediriger l'utilisateur après son identification ou son inscription nous pouvons modifier deux contrôleurs qui ont été ajouté lors de la mise en place de l'authentification.
+Pour rediriger l'utilisateur après son identification ou son inscription nous
+pouvons modifier deux contrôleurs qui ont été ajouté lors de la mise en place de
+l'authentification.
 
-Il s'agit d'abord du contrôleur `app/Http/Controllers/Auth/RegisteredUserController.php`
-Il suffit de changer la ligne 48 :
+Il s'agit d'abord du contrôleur
+`app/Http/Controllers/Auth/RegisteredUserController.php` Il suffit de changer la
+ligne 48 :
 
 ```
 return redirect(route('dashboard', absolute: false));
@@ -1049,21 +1111,22 @@ en
 return redirect('/articles');
 ```
 
-et celle du contrôleur `app/Http/Controllers/Auth/AuthenticatedSessionController.php`
-Changer la ligne 31 :
+et celle du contrôleur
+`app/Http/Controllers/Auth/AuthenticatedSessionController.php` Changer la ligne
+31 :
 
 ```
 return redirect()->intended(route('dashboard', absolute: false));
 ```
 
-en 
+en
 
 ```
 return redirect()->intended('/articles');
 ```
 
-Et pour rediriger l'utilisateur après son `logout`
-Changer la ligne 46 du fichier `app/Http/Controllers/Auth/AuthenticatedSessionController.php` :
+Et pour rediriger l'utilisateur après son `logout` Changer la ligne 46 du
+fichier `app/Http/Controllers/Auth/AuthenticatedSessionController.php` :
 
 ```
 return redirect('/');
@@ -1081,12 +1144,13 @@ return redirect('/articles');
 
 Nous allons maintenant configurer un `middleware` pour la gestion des droits.
 
-Un `middleware` effectue un traitement à l'arrivée d'une requête ou à son départ.
-Par exemple, la gestion des sessions ou des cookies se fait dans un middleware.
-Nous pouvons avoir autant de `middleware` que l'on veut. 
-Les `middleware` se chaînent les uns à la suite des autres.
-Chacun effectue son traitement et transmet la requête ou la réponse au suivant.
-Un `middleware` n'est rien d'autre qu'une classe. [Voir documentation](https://laravel.com/docs/11.x/middleware)
+Un `middleware` effectue un traitement à l'arrivée d'une requête ou à son
+départ. Par exemple, la gestion des sessions ou des cookies se fait dans un
+middleware. Nous pouvons avoir autant de `middleware` que l'on veut. Les
+`middleware` se chaînent les uns à la suite des autres. Chacun effectue son
+traitement et transmet la requête ou la réponse au suivant. Un `middleware`
+n'est rien d'autre qu'une classe.
+[Voir documentation](https://laravel.com/docs/11.x/middleware)
 
 Créons notre `middleware` `Admin.php` à l'aide de la commande :
 
@@ -1094,7 +1158,8 @@ Créons notre `middleware` `Admin.php` à l'aide de la commande :
 php artisan make:middleware Admin
 ```
 
-Nous pouvons éditer notre classe `Admin.php` qui se trouve dans le répertoire : `app\Http\Middleware\`
+Nous pouvons éditer notre classe `Admin.php` qui se trouve dans le répertoire :
+`app\Http\Middleware\`
 
 ```php
 <?php
@@ -1119,10 +1184,12 @@ class Admin
 }
 ```
 
-Modifions la méthode `handle(...)` pour indiquer à Laravel que si l'utilisateur n'est pas un administrateur, on le redirige sur l'affichage des articles du blog.
+Modifions la méthode `handle(...)` pour indiquer à Laravel que si l'utilisateur
+n'est pas un administrateur, on le redirige sur l'affichage des articles du
+blog.
 
 ```php
-	public function handle(Request $request, Closure $next): Response 
+	public function handle(Request $request, Closure $next): Response
     {
 		if ($request->user()->admin) {
 			return $next($request);
@@ -1133,9 +1200,11 @@ Modifions la méthode `handle(...)` pour indiquer à Laravel que si l'utilisateu
 
 Une fois le `middleware` créé, il faut l'enregistrer dans `Laravel`.
 
-Cela se fait dans le fichier `/bootstrap/app.php` [Voir documentation](https://laravel.com/docs/11.x/middleware#registering-middleware) 
+Cela se fait dans le fichier `/bootstrap/app.php`
+[Voir documentation](https://laravel.com/docs/11.x/middleware#registering-middleware)
 
-L'enregistrement d'un `middleware` se fait à l'aide de la méthode `->withMiddleware(...)`
+L'enregistrement d'un `middleware` se fait à l'aide de la méthode
+`->withMiddleware(...)`
 
 Voici la valeur par défaut (ligne 13) :
 
@@ -1145,7 +1214,8 @@ Voici la valeur par défaut (ligne 13) :
 })
 ```
 
-et voici sa nouvelle valeur (on y ajoute un alias afin de simplifier son appel) : 
+et voici sa nouvelle valeur (on y ajoute un alias afin de simplifier son appel)
+:
 
 ```php
 ->withMiddleware(function (Middleware $middleware) {
@@ -1161,7 +1231,8 @@ Adaptons maintenant notre application.
 
 Modifions notre contrôleur :
 
-- activation des deux middleware (1 existant `auth` + celui que l'on vient de créer `admin`) dans une méthode de classe :wink:
+- activation des deux middleware (1 existant `auth` + celui que l'on vient de
+  créer `admin`) dans une méthode de classe
 - redirection vers le formulaire pour la création d'un nouvel article
 - enregistrement des données d'un nouvel article
 - suppression d'un article d'après si identifiant
@@ -1179,7 +1250,7 @@ use Illuminate\Routing\Controllers\Middleware; // ne pas oublier
 class ArticleController extends Controller implements HasMiddleware // ne pas oublier
 {
     protected $nbArticlesParPage = 4;
-    
+
     // NE PAS OUBLIER D'INDIQUER QUE LA CLASSE IMPLEMENTS HasMiddleware
     // Et le use correspondant !!!
     public static function middleware(): array
@@ -1189,7 +1260,7 @@ class ArticleController extends Controller implements HasMiddleware // ne pas ou
             new Middleware('admin', only: ['destroy']),
         ];
     }
-    
+
     public function index() {
         $articles=Article::with('user')
                 ->orderBy('articles.created_at','desc')
@@ -1219,13 +1290,14 @@ class ArticleController extends Controller implements HasMiddleware // ne pas ou
      * Remove the specified resource from storage.
      */
     public function destroy($id) {
-        Article::findOrFail($id)->delete();  
+        Article::findOrFail($id)->delete();
         return redirect()->back();
     }
 }
 ```
 
-Modifions notre vue permettant d'afficher la liste des articles `\resources\view\view_articles.blade.php`
+Modifions notre vue permettant d'afficher la liste des articles
+`\resources\view\view_articles.blade.php`
 
 ```php+HTML
 @extends('template')
@@ -1236,7 +1308,7 @@ Modifions notre vue permettant d'afficher la liste des articles `\resources\view
     <a href='{{route("articles.create")}}' class='btn btn-info'>Cr&eacute;er un article</a>
     <a href='{{url("logout")}}' class='btn btn-warning'>Deconnexion</a>
 </div>
-@else 
+@else
 <a href='{{url("login")}}' class='btn btn-info pull-right'>Se connecter</a>
 @endif
 @endsection
@@ -1275,16 +1347,16 @@ Modifions notre vue permettant d'afficher la liste des articles `\resources\view
 @endsection
 ```
 
-Comme nous avons ajouté une possibilité de se déconnecter ( `logout` en méthode `get` (`a href..`) , il nous faut une dernière route :
+Comme nous avons ajouté une possibilité de se déconnecter ( `logout` en méthode
+`get` (`a href..`) , il nous faut une dernière route :
 
 ```
 ...
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 ```
 
- 
-
-Ajout d'une nouvelle vue pour le formulaire de création d'un nouvel article (`\resources\views\view_ajoute_article.blade.php`) :
+Ajout d'une nouvelle vue pour le formulaire de création d'un nouvel article
+(`\resources\views\view_ajoute_article.blade.php`) :
 
 ```php+HTML
 @extends('template')
@@ -1320,7 +1392,7 @@ Classe de validation des champs du formulaire de création d'un nouvel article :
 php artisan make:request ArticleRequest
 ```
 
-Mise à jour du fichier de validation (`app\Http\Requests\ArticleRequest`) : 
+Mise à jour du fichier de validation (`app\Http\Requests\ArticleRequest`) :
 
 ```php+HTML
 <?php
@@ -1356,21 +1428,27 @@ class ArticleRequest extends FormRequest
 
 Voilà notre application est fonctionnelle :slightly_smiling_face:
 
-> Remarques : 
+> Remarques :
 >
-> Pour voir les différentes possibilités à œuvre, il est nécessaire de se connecter avec différents rôles :
+> Pour voir les différentes possibilités à œuvre, il est nécessaire de se
+> connecter avec différents rôles :
 >
 > - admin
 > - utilisateur normal
 >
-> Comme les rôles ont été attribués aléatoirement lors du `seed`, il faut aller voir dans la table `users` à l'aide de `tinker` ou de `DB Browser for SQLite`
+> Comme les rôles ont été attribués aléatoirement lors du `seed`, il faut aller
+> voir dans la table `users` à l'aide de `tinker` ou de `DB Browser for SQLite`
 
 Voici un résumé de ce que nous avons appris aujourd'hui :
 
-- Nous savons comment ajouter rapidement des enregistrement dans une base de donnée grâce aux `Seeders`.
-- Nous savons implémenter une relation 1:N dans `Laravel` à l'aide des méthodes :
+- Nous savons comment ajouter rapidement des enregistrement dans une base de
+  donnée grâce aux `Seeders`.
+- Nous savons implémenter une relation 1:N dans `Laravel` à l'aide des méthodes
+  :
   - `->belongsTo(...)`
   - `->hasMany(...)`
 - Nous savons mettre en place une authentification.
-- Nous avons mis en place un `middleware` pour pouvoir accéder à différentes fonctionnalités (si on est admin ou pas)
-- Nous savons comment rediriger l'utilisateur après son identification, enregistrement ou `logout`
+- Nous avons mis en place un `middleware` pour pouvoir accéder à différentes
+  fonctionnalités (si on est admin ou pas)
+- Nous savons comment rediriger l'utilisateur après son identification,
+  enregistrement ou `logout`

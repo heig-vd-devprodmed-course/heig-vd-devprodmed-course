@@ -343,11 +343,11 @@ Route::get('/article/{id}', function ($id) {
 });
 ```
 
-## Question 13 - Donnée
+## Question 14 - Donnée
 
 **Comment transmettre plusieurs paramètres à une vue ?**
 
-## Question 13 - Réponse
+## Question 14 - Réponse
 
 1. Enchaînement de `with()` :
 

@@ -18,19 +18,23 @@ Lancer un navigateur web
 localhost:8000
 ```
 
-Le serveur devrait répondre et le navigateur devrait afficher la page de bienvenue (vue `welcome`)
+Le serveur devrait répondre et le navigateur devrait afficher la page de
+bienvenue (vue `welcome`)
 
 ## Contrôleur
 
-Nous allons maintenant crée un contrôleur pour y placer la logique permettant de récupérer les artistes commençant par la lettre du choix de l'utilisateur. 
+Nous allons maintenant crée un contrôleur pour y placer la logique permettant de
+récupérer les artistes commençant par la lettre du choix de l'utilisateur.
 
-Pour créer un contrôleur, on passe par la ligne de commande. (Toujours se mettre dans le dossier où se trouve notre app `...\laravel`)
+Pour créer un contrôleur, on passe par la ligne de commande. (Toujours se mettre
+dans le dossier où se trouve notre app `...\laravel`)
 
 ```php
 php artisan make:controller ArtistesController
 ```
 
-La commande a généré un fichier `ArtistesController.php` dans le répertoire `\app\Http\Controllers\ArtistesController.php`
+La commande a généré un fichier `ArtistesController.php` dans le répertoire
+`\app\Http\Controllers\ArtistesController.php`
 
 Nous allons maintenant éditer ce fichier et y ajouter la logique
 
@@ -48,7 +52,7 @@ class ArtistesController extends Controller {
 
     public function afficheArtistes($premiereLettre = false) {
         $artistes = $this->rendArtistes();
-        
+
         // S'il y a une premiere lettre
         if ($premiereLettre) {
             $selectionArtistes = [];
@@ -61,12 +65,12 @@ class ArtistesController extends Controller {
             // on récupère tous les artistes
             $selectionArtistes = $artistes;
         }
-        
+
         // On transmet les artistes à la vue pour l'affichage
         return view('view_artistes')->with('artistes', $selectionArtistes);
     }
-    
-    private function rendArtistes() {    
+
+    private function rendArtistes() {
         $artistes = array(
             array(
                 "prenom" => "Amy",
@@ -93,7 +97,8 @@ class ArtistesController extends Controller {
 }
 ```
 
-Ajoutons maintenant une route qui nous mènera à la méthode `afficheArtistes` du contrôleur
+Ajoutons maintenant une route qui nous mènera à la méthode `afficheArtistes` du
+contrôleur
 
 ## Route
 
@@ -103,20 +108,25 @@ Contenu du fichier `\routes\web.php`
 Route::get('artistes/{premiereLettre?}', [ArtistesController::class,'afficheArtistes'])->where(['premiereLettre' => '[a-zA-Z]']);
 ```
 
-Cette route permet de rediriger vers la méthode `afficheArtistes` du contrôleur `ArtistesController`
+Cette route permet de rediriger vers la méthode `afficheArtistes` du contrôleur
+`ArtistesController`
 
-> Remarque : Ne pas oublier `use App\Http\Controllers\ArtistesController;` :wink:
+> Remarque : Ne pas oublier `use App\Http\Controllers\ArtistesController;`
 
 ## Vue
 
-Dans le contrôleur la dernière ligne de la méthode `afficheArtistes()` nous envoie vers la vue `view_artistes.blade.php` qui n'existe encore pas. Nous allons donc la créer.
+Dans le contrôleur la dernière ligne de la méthode `afficheArtistes()` nous
+envoie vers la vue `view_artistes.blade.php` qui n'existe encore pas. Nous
+allons donc la créer.
 
-Pour commencer nous allons factoriser tout les détails de notre vue dans un `template`Blade.
-Notre vue n'aura donc plus qu'à se focaliser sur l'affichage des artistes.
+Pour commencer nous allons factoriser tout les détails de notre vue dans un
+`template`Blade. Notre vue n'aura donc plus qu'à se focaliser sur l'affichage
+des artistes.
 
-> Remarque : Le fichier `template` ainsi que le fichier pour la `vue` se créent à la main (via un éditeur de code)
+> Remarque : Le fichier `template` ainsi que le fichier pour la `vue` se créent
+> à la main (via un éditeur de code)
 
-Contenu du fichier "`template`"  `\resources\views\template.blade.php`
+Contenu du fichier "`template`" `\resources\views\template.blade.php`
 
 ```php+HTML
 <!doctype html>
@@ -132,7 +142,8 @@ Contenu du fichier "`template`"  `\resources\views\template.blade.php`
 </html>
 ```
 
-Contenu de la vue `\resources\views\view_artistes.blade.php` basée sur le template ci-dessus.
+Contenu de la vue `\resources\views\view_artistes.blade.php` basée sur le
+template ci-dessus.
 
 ```php+HTML
 @extends('template')
@@ -171,9 +182,10 @@ Contenu du fichier `\routes\web.php`
 Route::get('proverbesV1', [ProverbesController::class,'afficheDixProverbes'])
 ```
 
-Cette route permet de rediriger vers la méthode ```afficheProverbes``` du contrôleur `ProverbesController`
+Cette route permet de rediriger vers la méthode `afficheProverbes` du contrôleur
+`ProverbesController`
 
-> Remarque : Ne pas oublier `use App\Http\Controllers\ProverbesController;` :wink:
+> Remarque : Ne pas oublier `use App\Http\Controllers\ProverbesController;`
 
 ## Contrôleur
 
@@ -202,7 +214,7 @@ class ProverbesController extends Controller {
 						 "ni vu ni connu",
 						 "Paris ne s’est pas fait en un jour",
 						 "rien ne sert de courir, il faut partir à temps",];
-        
+
         // on transmet les dix proverbes à la vue qui va les afficher
 		return view('view_proverbesV1')->with('proverbes', $dixProverbes);
     }
@@ -242,9 +254,10 @@ Il ne reste plus qu'à tester.
 localhost:8000/proverbesV1
 ```
 
--------------------------------
+---
 
-Pour la suite, nous allons utiliser les concepts de la POO pour structurer notre code.
+Pour la suite, nous allons utiliser les concepts de la POO pour structurer notre
+code.
 
 Les proverbes peuvent provenir de plusieurs sources :
 
@@ -254,13 +267,18 @@ Les proverbes peuvent provenir de plusieurs sources :
 
 ## Structuration du code
 
-Nous allons créer nos propres classes que nous allons mettre dans un nouveau répertoire.
+Nous allons créer nos propres classes que nous allons mettre dans un nouveau
+répertoire.
 
-Créons tout d'abord le répertoire : `\Gestionnaires` dans le répertoire `\app` de notre application.
+Créons tout d'abord le répertoire : `\Gestionnaires` dans le répertoire `\app`
+de notre application.
 
-Ce qui nous donne : `\app\Gestionnaires` 
+Ce qui nous donne : `\app\Gestionnaires`
 
-Quelque soit la source des proverbes (codé en dur, fichier, on-line), il nous faut des proverbes que nous mettrons chaque fois dans un tableau. Il nous faudra aussi connaître la source de nos proverbes. Créons pour ceci une interface au sens POO du terme.
+Quelque soit la source des proverbes (codé en dur, fichier, on-line), il nous
+faut des proverbes que nous mettrons chaque fois dans un tableau. Il nous faudra
+aussi connaître la source de nos proverbes. Créons pour ceci une interface au
+sens POO du terme.
 
 Fichier : `app\Gestionnaires\IGestionnaireProverbes.php`
 
@@ -275,12 +293,12 @@ namespace App\Gestionnaires;
  *      - Indiquer d'où proviennent ces proverbes
  */
 interface IGestionnaireProverbes {
-    
+
     /**
      * Doit rendre un tableau de proverbes
      */
     public function rendProverbes();
-    
+
     /**
      * Doit indiquer d'où proviennent les proverbes (chaîne de caractère)
      */
@@ -290,7 +308,7 @@ interface IGestionnaireProverbes {
 
 Créons maintenant un gestionnaire par source de donnée et spécialisons le code.
 
-Voici le gestionnaire pour les proverbes codés en dur. 
+Voici le gestionnaire pour les proverbes codés en dur.
 
 Fichier : `app\Gestionnaires\GestionnaireProverbesHardcode.php`
 
@@ -304,7 +322,7 @@ namespace App\Gestionnaires;
  * Remarque : les proverbes sont hardcodés
  */
 class GestionnaireProverbesHardcode implements IGestionnaireProverbes {
-    
+
     /**
      * Rend une série de proverbes.
      * @return type Un tableau contenant tous les proverbes
@@ -332,10 +350,10 @@ class GestionnaireProverbesHardcode implements IGestionnaireProverbes {
             "tomber pour mieux se relever"];
         return $proverbes;
     }
-    
+
     /**
      * Permet de savoir d'où proviennent les proverbes
-     * @return string "Source : Proverbes hardcodés"    
+     * @return string "Source : Proverbes hardcodés"
      */
     public function rendSource() {
         return "Source : Proverbes hardcodés";
@@ -343,7 +361,9 @@ class GestionnaireProverbesHardcode implements IGestionnaireProverbes {
 }
 ```
 
-Plutôt que de coder en dur les proverbes, nous pouvons les mettre dans un fichier texte. Ainsi, il sera plus facile d'ajouter ou de supprimer des proverbes dans notre application. Créons le fichier contenant les proverbes :
+Plutôt que de coder en dur les proverbes, nous pouvons les mettre dans un
+fichier texte. Ainsi, il sera plus facile d'ajouter ou de supprimer des
+proverbes dans notre application. Créons le fichier contenant les proverbes :
 
 Fichier : `\storage\app\proverbes.txt`
 
@@ -393,10 +413,10 @@ class GestionnaireProverbesFichierTexte implements IGestionnaireProverbes {
         $proverbes = file($path);
         return $proverbes;
     }
-    
+
     /**
      * Permet de savoir d'où proviennent les proverbes
-     * @return string "Source : Proverbes provenant d'un fichier texte"    
+     * @return string "Source : Proverbes provenant d'un fichier texte"
      */
     public function rendSource() {
         return "Source : Proverbes provenant d'un fichier texte";
@@ -404,7 +424,9 @@ class GestionnaireProverbesFichierTexte implements IGestionnaireProverbes {
 }
 ```
 
-Plutôt que de mettre les proverbes dans un fichier, nous pouvons aller les chercher sur un site on-line (`wikipedia` par exemple). Voici le gestionnaire correspondant :
+Plutôt que de mettre les proverbes dans un fichier, nous pouvons aller les
+chercher sur un site on-line (`wikipedia` par exemple). Voici le gestionnaire
+correspondant :
 
 Fichier : `app\Gestionnaires\GestionnaireProverbesWikipedia.php`
 
@@ -440,7 +462,7 @@ class GestionnaireProverbesWikipedia implements IGestionnaireProverbes {
         }
         return $tagsTexte;
     }
-    
+
     // Le contenu texte des tags li ne contiennent pas tous des proverbes.
     // Du coup il faut "nettoyer" un peu.
     private function recupereUniquementProverbes($tagsTexte) {
@@ -469,7 +491,7 @@ class GestionnaireProverbesWikipedia implements IGestionnaireProverbes {
         } while (!$fin && ($pos < count($tagsTexte)));
         return $proverbes;
     }
-    
+
     /**
      * Récupere tous les proverbes français de wikipedia online
      * @return type Un tableau contenant tous les proverbes
@@ -483,7 +505,7 @@ class GestionnaireProverbesWikipedia implements IGestionnaireProverbes {
 
     /**
      * Permet de savoir d'où proviennent les proverbes
-     * @return string "Source : Proverbes provenant de wikipédia"    
+     * @return string "Source : Proverbes provenant de wikipédia"
      */
     public function rendSource() {
         return "Source : Proverbes provenant de wikipédia";
@@ -491,7 +513,7 @@ class GestionnaireProverbesWikipedia implements IGestionnaireProverbes {
 }
 ```
 
-## Contrôleur  V2
+## Contrôleur V2
 
 Il nous faut maintenant une nouvelle méthode dans le contrôleur.
 
@@ -501,7 +523,7 @@ public function afficheDixProverbesV2() {
         //$gestionnaire = new GestionnaireProverbesHardcode();
 		//$gestionnaire = new GestionnaireProverbesFichierTexte();
         $gestionnaire = new GestionnaireProverbesWikipedia();
-        $proverbes = $gestionnaire->rendProverbes();   
+        $proverbes = $gestionnaire->rendProverbes();
         //        On "pêche" dix proverbes au hasard en codant nous même ...
         //        for ($i = 1; $i <= 10; $i++) {
         //            $taille = sizeof($proverbes);
@@ -512,12 +534,12 @@ public function afficheDixProverbesV2() {
         //            unset($proverbes[$index]);
         //            array_push($dixProverbes, $proverbe);
         //        }
-        //        
+        //
         // ou on pêche dix proverbes au hasard à l'aide des fonctions php
         $dixProverbes = array_map(function($index) use ($proverbes) {
             return $proverbes[$index];
         }, array_rand($proverbes, 10));
-        
+
         // on transmet les dix proverbes à la vue qui va les afficher
         return view('view_proverbesV2', ['source' => $gestionnaire->rendSource(),
             'proverbes' => $dixProverbes]);
@@ -537,7 +559,8 @@ Route::get('proverbesV2', [ProverbesController::class,'afficheDixProverbesV2']);
 
 ## Vue V2
 
-Enfin, puisque nous avons trois sources de données possibles, il serait bien de savoir d'où proviennent les données.
+Enfin, puisque nous avons trois sources de données possibles, il serait bien de
+savoir d'où proviennent les données.
 
 Contenu de la vue `\resources\views\view_proverbesV2.blade.php`
 
@@ -566,7 +589,8 @@ Voilà, il ne reste plus qu'à tester
 http://localhost:8000/proverbesV2
 ```
 
-> Pour changer la source de données, il suffit de commenter, décommenter les lignes de votre choix dans le contrôleur.
+> Pour changer la source de données, il suffit de commenter, décommenter les
+> lignes de votre choix dans le contrôleur.
 >
 > ```php
 > //$gestionnaire = new GestionnaireProverbesHardcode();

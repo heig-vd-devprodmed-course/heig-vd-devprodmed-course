@@ -1,13 +1,14 @@
 # Jour 6
 
-Aujourd'hui, nous allons nous occuper d'un cas qui se retrouve dans la plupart des applications; à savoir la gestion des utilisateurs.
+Aujourd'hui, nous allons nous occuper d'un cas qui se retrouve dans la plupart
+des applications; à savoir la gestion des utilisateurs.
 
-Au terme de ce cours, nous serons capables de : 
+Au terme de ce cours, nous serons capables de :
 
 - créer
 - afficher
 - modifier
-- supprimer 
+- supprimer
 
 des utilisateurs de notre base de données.
 
@@ -15,9 +16,12 @@ des utilisateurs de notre base de données.
 
 Créons pour commencer un nouveau projet `Laravel` vide avec comme SGBD Sqlite
 
-La base de donnée `database.sqlite` existe déjà, et le fichier `.env` est déjà configuré pour que `Laravel` puisse s'y connecter (Cf. cours précédant)
+La base de donnée `database.sqlite` existe déjà, et le fichier `.env` est déjà
+configuré pour que `Laravel` puisse s'y connecter (Cf. cours précédant)
 
-Pas besoin de lancer la commande d'initialisation de la base de données (création de la table `migrations` de base nécessaire à `Laravel`) car c'est déjà fait ;-)
+Pas besoin de lancer la commande d'initialisation de la base de données
+(création de la table `migrations` de base nécessaire à `Laravel`) car c'est
+déjà fait ;-)
 
 > ```php
 > php artisan migrate:install
@@ -31,13 +35,15 @@ Pas besoin de lancer la commande d'initialisation de la base de données (créat
 
 ## Migration
 
-Pour pouvoir stocker les données des utilisateurs, nous avons besoin d'une table.
+Pour pouvoir stocker les données des utilisateurs, nous avons besoin d'une
+table.
 
-`Laravel` possède déjà un fichier de migration permettant de disposer d'une table `users`. 
+`Laravel` possède déjà un fichier de migration permettant de disposer d'une
+table `users`.
 
 Il s'agit du fichier :
 
-​	`laravel\database\migrations\0001_01_01_000000_create_users_table.php`
+​ `laravel\database\migrations\0001_01_01_000000_create_users_table.php`
 
 La table `users` sera crée lorsque nous exécuterons ce fichier de migration.
 
@@ -46,7 +52,7 @@ Editons ce fichier pour y apporter quelques modifications.
 Les modifications portent sur :
 
 - L'identifiant que l'on aimerait qu'il soit défini automatiquement
-- ajout d'un champ permettant de savoir si l'utilisateur est un administrateur 
+- ajout d'un champ permettant de savoir si l'utilisateur est un administrateur
 
 ```php
 <?php
@@ -82,7 +88,8 @@ return new class extends Migration
 
 ```
 
-`Laravel 11` a déjà exécuté les migration et la table `users` existe dans déjà ! Il faut donc détruire les tables existantes.
+`Laravel 11` a déjà exécuté les migration et la table `users` existe dans déjà !
+Il faut donc détruire les tables existantes.
 
 ```
 php artisan migrate:rollback
@@ -101,23 +108,32 @@ php artisan migrate
 
 ```
 
-Voilà, la table `users` (et d'autres ;-) ont été crées dans notre base de donnée.
+Voilà, la table `users` (et d'autres ;-) ont été crées dans notre base de
+donnée.
 
-> Pour voir ces tables, nous pouvons lancer le client graphique `DB Browser for SQLite`
->[DB Browser](https://sqlitebrowser.org/dl/)
+> Pour voir ces tables, nous pouvons lancer le client graphique
+> `DB Browser for SQLite` >[DB Browser](https://sqlitebrowser.org/dl/)
 
 ## Modèle
 
-Nous avons vu lors du dernier cours que `Laravel` avait besoin d'une classe `modèle` pour pouvoir interagir avec une table.
+Nous avons vu lors du dernier cours que `Laravel` avait besoin d'une classe
+`modèle` pour pouvoir interagir avec une table.
 
 On peut dire pour l'instant : **Une table => un modèle.**
 
-`Laravel` a prévu la table `users`, donc a aussi prévu la classe `modèle` qui va avec. Il s'agit du fichier : `\app\Models\User.php`
+`Laravel` a prévu la table `users`, donc a aussi prévu la classe `modèle` qui va
+avec. Il s'agit du fichier : `\app\Models\User.php`
 
-Comme nous avons apporté des modifications dans la table `users`, il faut adapter la classe `modèle` en y ajoutant le champ `is_admin` dans la propriété (tableau) `$fillable`
+Comme nous avons apporté des modifications dans la table `users`, il faut
+adapter la classe `modèle` en y ajoutant le champ `is_admin` dans la propriété
+(tableau) `$fillable`
 
-> La propriété `$fillable` est utilisée à l'intérieur du modèle. Elle permet de définir les champs à prendre en compte lorsque l'utilisateur insère ou met à jour des données.
-> Seuls les champs marqués contenu dans la propriété `$fillable` seront utilisés lors de l'insertion ou la mise à jour des données. Les données sont donc mises en correspondance avec les champs défini dans `$fillable` avant d'être envoyées à la table.
+> La propriété `$fillable` est utilisée à l'intérieur du modèle. Elle permet de
+> définir les champs à prendre en compte lorsque l'utilisateur insère ou met à
+> jour des données. Seuls les champs marqués contenu dans la propriété
+> `$fillable` seront utilisés lors de l'insertion ou la mise à jour des données.
+> Les données sont donc mises en correspondance avec les champs défini dans
+> `$fillable` avant d'être envoyées à la table.
 >
 > [Documentation officielle](https://laravel.com/docs/11.x/eloquent#mass-assignment)
 
@@ -176,9 +192,13 @@ N'oublions pas de sauvegarder la modification :slightly_smiling_face:
 
 ## Tinker (interpréteur de commandes Eloquent)
 
-Avant de se lancer dans la suite de la production de notre application (création de Template, Vues, Contrôleur) nous pouvons tester que ce que nous avons mis en place grâce à un outil de `Laravel` qui s'appelle `tinker`.
+Avant de se lancer dans la suite de la production de notre application (création
+de Template, Vues, Contrôleur) nous pouvons tester que ce que nous avons mis en
+place grâce à un outil de `Laravel` qui s'appelle `tinker`.
 
-`Tinker` est un outil (en ligne de commande) qui nous permet de tester les commandes (que nous ferons dans le contrôleur) de création, affichage, modification et/ou suppression des utilisateurs dans notre base de données.
+`Tinker` est un outil (en ligne de commande) qui nous permet de tester les
+commandes (que nous ferons dans le contrôleur) de création, affichage,
+modification et/ou suppression des utilisateurs dans notre base de données.
 
 Pour "lancer" `tinker`, lancer la commande :
 
@@ -186,7 +206,8 @@ Pour "lancer" `tinker`, lancer la commande :
 php artisan tinker
 ```
 
-Pour créer un nouvel utilisateur il faut créer un nouvel objet `User` (notre classe `modèle`) :
+Pour créer un nouvel utilisateur il faut créer un nouvel objet `User` (notre
+classe `modèle`) :
 
 ```php
 $unUser = new App\Models\User;
@@ -224,7 +245,8 @@ Retournons dans DB Browser pour voir si notre nouvel utilisateur s'y trouve :
 
 ![DB Browser Joe](img\DB Browser Joe.png)
 
-Plutôt que de passer de `tinker` à `DB Browser`, nous aurions pu rester dans `tinker`, pour voir que notre utilisateur a bien été créé.
+Plutôt que de passer de `tinker` à `DB Browser`, nous aurions pu rester dans
+`tinker`, pour voir que notre utilisateur a bien été créé.
 
 Relançons `tinker`
 
@@ -232,7 +254,8 @@ Relançons `tinker`
 php artisan tinker
 ```
 
-Pour voir tous les utilisateurs nous pouvons lancer la commande `Eloquent` suivante :
+Pour voir tous les utilisateurs nous pouvons lancer la commande `Eloquent`
+suivante :
 
 ```php
 App\Models\User::all();
@@ -257,7 +280,8 @@ App\Models\User::all();
   }
 ```
 
-Pour modifier un utilisateur en particulier (pour nous celui qui a l'identifiant : 1)
+Pour modifier un utilisateur en particulier (pour nous celui qui a l'identifiant
+: 1)
 
 ```php
 $unUser = App\Models\User::findOrFail(1);
@@ -289,13 +313,15 @@ ou nous aurions pu plus simplement taper :
 App\Models\User::findOrFail(1)->delete();
 ```
 
-Pour ajouter un nouvel utilisateur dans la base de données nous pouvons utiliser une seule commande, il suffit de mettre les différentes données dans un tableau :wink:
+Pour ajouter un nouvel utilisateur dans la base de données nous pouvons utiliser
+une seule commande, il suffit de mettre les différentes données dans un tableau
 
 ```
 App\Models\User::create(['name'=> "Test", 'email'=> "test@test.ch",'password'=>"testpassword"]);
 ```
 
-Pour éviter à chaque fois de devoir retaper le `namespace` de la classe, nous pouvons informer `tinker` de la manière suivante :
+Pour éviter à chaque fois de devoir retaper le `namespace` de la classe, nous
+pouvons informer `tinker` de la manière suivante :
 
 ```
 use App\Models\User;
@@ -308,9 +334,14 @@ User::all();
 C'est aussi simple que cela.
 
 `tinker` est l'outil qui nous permet de tester des commandes `Eloquent`.
-`Eloquent` est l'outil [ORM](https://fr.wikipedia.org/wiki/Mapping_objet-relationnel) (`Object-Relational-Mapping`) de `Laravel` qui permet de travailler en mode objet pour interagir avec la base de données plutôt que de devoir faire des commandes SQL.
+`Eloquent` est l'outil
+[ORM](https://fr.wikipedia.org/wiki/Mapping_objet-relationnel)
+(`Object-Relational-Mapping`) de `Laravel` qui permet de travailler en mode
+objet pour interagir avec la base de données plutôt que de devoir faire des
+commandes SQL.
 
-Pour en savoir plus sur les commandes :  [`Eloquent`](https://laravel.com/docs/11.x/eloquent)
+Pour en savoir plus sur les commandes :
+[`Eloquent`](https://laravel.com/docs/11.x/eloquent)
 
 # Application
 
@@ -320,13 +351,15 @@ Nous pouvons maintenant nous atteler à la construction de :
 - vues
 - requête
 - contrôleur
-- route 
+- route
 
-Nous allons maintenant créer un contrôleur un peu particulier. 
+Nous allons maintenant créer un contrôleur un peu particulier.
 
 Un contrôleur de type `resource`.
 
-Un contrôleur de type `resource` est un contrôleur qui contient par défaut un certain nombre de méthodes permettant de faire des traitement "classiques" dans la base de données.
+Un contrôleur de type `resource` est un contrôleur qui contient par défaut un
+certain nombre de méthodes permettant de faire des traitement "classiques" dans
+la base de données.
 
 La commande pour créer un contrôleur de type `resource` est :
 
@@ -334,10 +367,10 @@ La commande pour créer un contrôleur de type `resource` est :
 php artisan make:controller UserController --resource
 ```
 
-Un fichier `UserController.php` se trouve maintenant dans le répertoire que nous connaissons bien : 	
-	`app\Http\Controllers\`
+Un fichier `UserController.php` se trouve maintenant dans le répertoire que nous
+connaissons bien : `app\Http\Controllers\`
 
-Editons-le et découvrons ce qu'il contient : 
+Editons-le et découvrons ce qu'il contient :
 
 ```php
 <?php
@@ -406,23 +439,28 @@ class UserController extends Controller
 }
 ```
 
-Nous pouvons découvrir sept méthodes qui vont nous permettre la gestion complète de la table `users`
+Nous pouvons découvrir sept méthodes qui vont nous permettre la gestion complète
+de la table `users`
 
- - index() : pour nous permettre d'afficher la liste des utilisateurs
- - create() : pour pouvoir renvoyer un formulaire permettant de créer un nouvel utilisateur
- - store() : pour sauvegarder les données d'un nouvel utilisateur
- - show() : pour afficher toutes les données d'un utilisateur
- - pour pouvoir renvoyer un formulaire permettant de modifier les données d'un utilisateur
- - update() : pour pouvoir modifier les données d'un utilisateur
- - destroy() : et enfin pour pouvoir supprimer les données d'un utilisateur
+- index() : pour nous permettre d'afficher la liste des utilisateurs
+- create() : pour pouvoir renvoyer un formulaire permettant de créer un nouvel
+  utilisateur
+- store() : pour sauvegarder les données d'un nouvel utilisateur
+- show() : pour afficher toutes les données d'un utilisateur
+- pour pouvoir renvoyer un formulaire permettant de modifier les données d'un
+  utilisateur
+- update() : pour pouvoir modifier les données d'un utilisateur
+- destroy() : et enfin pour pouvoir supprimer les données d'un utilisateur
 
-Une seule route suffit (`web.php`) pour pouvoir accéder à toutes les méthodes de notre contrôleur-`resource` :point_up:, il s'agit de la route :
+Une seule route suffit (`web.php`) pour pouvoir accéder à toutes les méthodes de
+notre contrôleur-`resource` :point_up:, il s'agit de la route :
 
 ```
 Route::resource('user', UserController::class);
 ```
 
-Pour pouvoir visualiser toutes les routes proposées par notre projet `Laravel`, il existe la commande suivante 
+Pour pouvoir visualiser toutes les routes proposées par notre projet `Laravel`,
+il existe la commande suivante
 
 ```
 php artisan route:list
@@ -430,7 +468,10 @@ php artisan route:list
 
 Voici ce que devrait vous retourner l'exécution de cette commande.
 
-> Si une erreur du genre `...ReflectionException::("Class "UserController" does not exist")` se produit, c'est que vous avez oublié le `use` du contrôleur dans le fichier `web.php` :wink:
+> Si une erreur du genre
+> `...ReflectionException::("Class "UserController" does not exist")` se
+> produit, c'est que vous avez oublié le `use` du contrôleur dans le fichier
+> `web.php`
 
 ```
 ...
@@ -450,7 +491,8 @@ Voici ce que devrait vous retourner l'exécution de cette commande.
                                                                                                    Showing [12] routes
 ```
 
-On y retrouve, entre autres, les sept url qui pointent sur les sept méthodes de notre contrôleur :thumbsup:
+On y retrouve, entre autres, les sept url qui pointent sur les sept méthodes de
+notre contrôleur
 
 ## Template
 
@@ -475,7 +517,8 @@ Créons maintenant le `template` (`template.blade.php`)
 </html>
 ```
 
-Il nous faut maintenant la vue permettant de visualiser la liste de tous les utilisateurs (`view_index.blade.php`)
+Il nous faut maintenant la vue permettant de visualiser la liste de tous les
+utilisateurs (`view_index.blade.php`)
 
 ## Liste de tous les utilisateurs
 
@@ -529,7 +572,8 @@ Il nous faut maintenant la vue permettant de visualiser la liste de tous les uti
 @endsection
 ```
 
-Avant de pouvoir tester notre vue, il nous faut ajouter le code nécessaire dans la méthode `index()` du contrôleur :
+Avant de pouvoir tester notre vue, il nous faut ajouter le code nécessaire dans
+la méthode `index()` du contrôleur :
 
 ```php
     public function index()
@@ -543,23 +587,25 @@ Avant de pouvoir tester notre vue, il nous faut ajouter le code nécessaire dans
 ```
 
 > Remarque : Attention de ne pas oublier le `use` pour la classe `User` !
->
 
 ```
 use App\Models\User;
 ```
 
-Pour tester notre vue, nous pouvons lancer notre application et choisir la route `/user` 
+Pour tester notre vue, nous pouvons lancer notre application et choisir la route
+`/user`
 
 ```
 localhost:8000/user
 ```
 
-Nous découvrons le résultat (dont le contenu dépend des tests effectués avec tinker ou DB Browser ;-) :
+Nous découvrons le résultat (dont le contenu dépend des tests effectués avec
+tinker ou DB Browser ;-) :
 
 ![VueIndex](img\VueIndex.png)
 
-Nous pouvons maintenant passer à la vue permettant de créer un nouvel utilisateur (`view_create.blade.php`)
+Nous pouvons maintenant passer à la vue permettant de créer un nouvel
+utilisateur (`view_create.blade.php`)
 
 ## Création d'un utilisateur
 
@@ -576,11 +622,11 @@ Nous pouvons maintenant passer à la vue permettant de créer un nouvel utilisat
                 <form method="POST" action="{{route('user.store')}}" accept-charset="UTF-8" class="form-horizontalpanel">
                     @csrf
                     <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-                        <input type="text" name="name" placeholder="Nom" class="form-control">  
+                        <input type="text" name="name" placeholder="Nom" class="form-control">
                         {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
-                        <input type="email" name="email" placeholder="Email" class="form-control">  
+                        <input type="email" name="email" placeholder="Email" class="form-control">
                         {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
@@ -610,7 +656,8 @@ Nous pouvons maintenant passer à la vue permettant de créer un nouvel utilisat
 @endsection
 ```
 
-Il nous faut maintenant créer la classe de validation des champs du formulaire de création d'un utilisateur (`UserCreateRequest.php`)
+Il nous faut maintenant créer la classe de validation des champs du formulaire
+de création d'un utilisateur (`UserCreateRequest.php`)
 
 ```
 php artisan make:request UserCreateRequest
@@ -618,7 +665,9 @@ php artisan make:request UserCreateRequest
 
 Ce qui crée le fichier `laravel\app\Http\Requests\UserCreateRequest.php`
 
-Dans ce fichier nous passons le retour de la méthode `authorize` à `true` et complétons la méthode `rules()` avec les contraintes pour chaque champs du formulaire. Ce qui nous donne :
+Dans ce fichier nous passons le retour de la méthode `authorize` à `true` et
+complétons la méthode `rules()` avec les contraintes pour chaque champs du
+formulaire. Ce qui nous donne :
 
 ```php+HTML
 <?php
@@ -647,14 +696,15 @@ class UserCreateRequest extends FormRequest
         return [
             'name'=>'required|max:255|unique:users', // champ obligatoire et unique dans la table 'users'
             'email'=>'required|email|max:255|unique:users', // champ obligatoire, de type email, max 255 caractères, et unique dans la table 'users'
-            'password'=>'required|confirmed|min:6' // champ obligatoire et qui doit correspondre à ce qui est entré dans le champ de confirmation. 
+            'password'=>'required|confirmed|min:6' // champ obligatoire et qui doit correspondre à ce qui est entré dans le champ de confirmation.
                                                    // Le champ doit se nommer comme le champ password avec _confirmation à la fin ;-)
         ];
     }
 }
 ```
 
-Avant de tester la création d'un nouvel utilisateur nous devons modifier quelques points dans notre contrôleur :
+Avant de tester la création d'un nouvel utilisateur nous devons modifier
+quelques points dans notre contrôleur :
 
 - compléter la méthode `create()`
 
@@ -664,7 +714,9 @@ Avant de tester la création d'un nouvel utilisateur nous devons modifier quelqu
   }
   ```
 
-- ajouter une méthode `setIsAdmin` pour la gestion de la case à cocher (car si la case n'est pas cochée le champ n'apparaît pas dans `$request` donc il nous faut l'ajouter)
+- ajouter une méthode `setIsAdmin` pour la gestion de la case à cocher (car si
+  la case n'est pas cochée le champ n'apparaît pas dans `$request` donc il nous
+  faut l'ajouter)
 
   ```php
   private function setIsAdmin(Request $request) {
@@ -674,7 +726,7 @@ Avant de tester la création d'un nouvel utilisateur nous devons modifier quelqu
   }
   ```
 
-- compléter la méthode  `store(...)` de notre contrôleur
+- compléter la méthode `store(...)` de notre contrôleur
 
   ```php
   public function store(UserCreateRequest $request) {
@@ -684,10 +736,13 @@ Avant de tester la création d'un nouvel utilisateur nous devons modifier quelqu
   }
   ```
 
-  > Remarque : Attention, le type du paramètre `$request` à changé ! 
-  > 					Il faut donc ajouter le `use` correspondant : `use App\Http\Requests\UserCreateRequest;`
+  > Remarque : Attention, le type du paramètre `$request` à changé ! Il faut
+  > donc ajouter le `use` correspondant :
+  > `use App\Http\Requests\UserCreateRequest;`
 
-Pour tester notre vue de création d'un utilisateur, nous pouvons lancer notre application et choisir la route `/user` et cliquer sur le bouton `Ajouter un utilisateur`
+Pour tester notre vue de création d'un utilisateur, nous pouvons lancer notre
+application et choisir la route `/user` et cliquer sur le bouton
+`Ajouter un utilisateur`
 
 ![AjouterUtilisateur](img\AjouterUtilisateur.png)
 
@@ -701,11 +756,13 @@ Un message de confirmation nous informe que l'utilisateur a été créé :
 
 ![Confirmation](img\Confirmation.png)
 
-Pour découvrir une fonctionnalité que nous avons implémenté, il faut que nous disposions de plus de quatre utilisateurs. Ajoutons autant d'utilisateurs que nécessaire pour découvrir la barre de navigation !
+Pour découvrir une fonctionnalité que nous avons implémenté, il faut que nous
+disposions de plus de quatre utilisateurs. Ajoutons autant d'utilisateurs que
+nécessaire pour découvrir la barre de navigation !
 
 ![BarreNavigation](img\BarreNavigation.png)
 
-C'est chouette non ? :smiley:
+C'est chouette non ?
 
 # Visualisation des données d'un utilisateur
 
@@ -747,7 +804,8 @@ public function show(string $id) {
 
 Nous sommes prêts pour tester la nouvelle fonctionnalité !
 
-Pour accéder plus rapidement à notre vue globale des utilisateur, il suffit de changer la route principale de notre fichier `web.php` en :
+Pour accéder plus rapidement à notre vue globale des utilisateur, il suffit de
+changer la route principale de notre fichier `web.php` en :
 
 ```php
 Route::get('/', function () {
@@ -755,13 +813,15 @@ Route::get('/', function () {
 });
 ```
 
-Lançons l'application et cliquons sur un des boutons verts `Voir` pour découvrir le détail d'un utilisateur :
+Lançons l'application et cliquons sur un des boutons verts `Voir` pour découvrir
+le détail d'un utilisateur :
 
 ![FicheUtilisateur](img\FicheUtilisateur.png)
 
 ## Modification d'un utilisateur
 
-Passons maintenant à la vue permettant la modification des données d'un utilisateur : (`view_edit.blade.php`)
+Passons maintenant à la vue permettant la modification des données d'un
+utilisateur : (`view_edit.blade.php`)
 
 ```php+HTML
 
@@ -778,11 +838,11 @@ Passons maintenant à la vue permettant la modification des données d'un utilis
                     @csrf
                     @method('PUT')
                     <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-                        <input type="text" name="name" value="{{$user->name}}" placeholder="Nom" class="form-control">  
+                        <input type="text" name="name" value="{{$user->name}}" placeholder="Nom" class="form-control">
                         {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
-                        <input type="email" name="email" value="{{$user->email}}" placeholder="Email" class="form-control">  
+                        <input type="email" name="email" value="{{$user->email}}" placeholder="Email" class="form-control">
                         {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group">
@@ -809,7 +869,8 @@ Passons maintenant à la vue permettant la modification des données d'un utilis
 @endsection
 ```
 
-Ajoutons une nouvelle classe pour la validation de notre formulaire de modification des données d'un utilisateur (`UserUpdateRequest.php`)
+Ajoutons une nouvelle classe pour la validation de notre formulaire de
+modification des données d'un utilisateur (`UserUpdateRequest.php`)
 
 ```php
 <?php
@@ -863,7 +924,8 @@ Complétons la méthode `update(...)` de notre contrôleur :
 	}
 ```
 
-Sans oublier (`use App\Http\Requests\UserUpdateRequest;`) :slightly_smiling_face:
+Sans oublier (`use App\Http\Requests\UserUpdateRequest;`)
+:slightly_smiling_face:
 
 C'est bon, nous pouvons tester la modification d'un utilisateur.
 

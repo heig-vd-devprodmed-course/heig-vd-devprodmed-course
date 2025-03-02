@@ -2,7 +2,8 @@
 
 ## Créer un projet vide avec `Laravel 11` permettant l'authentification (`breeze avec blade`) et `Sqlite` comme SGBD
 
-> La base de données `database.sqlite` contient déjà un certain nombre de tables car l'exécution des migrations a déjà été faite.
+> La base de données `database.sqlite` contient déjà un certain nombre de tables
+> car l'exécution des migrations a déjà été faite.
 
 Comme nous allons modifier la table `users` supprimons là de la base de données.
 
@@ -10,13 +11,19 @@ Comme nous allons modifier la table `users` supprimons là de la base de donnée
 php artisan migrate:rollback
 ```
 
-## Mise à jour de la table `users` 
+## Mise à jour de la table `users`
 
-Dans la donnée, il est spécifié qu'il y a un administrateur doit être avertir lors d'une mise à jour du tableau des trois meilleurs scores.
-Il existe déjà une migration pour la table `users` dans `Laravel`, mais celle-ci ne comporte pas de champ pour spécifier qu'un utilisateur peut être un administrateur. Il faut donc ajouter un champ `admin` de type booléen.
-De plus, l'`id` d'un `user` ne s'incrémente pas par défaut et nous n'utiliserons pas les deux champs `timestamps`
+Dans la donnée, il est spécifié qu'il y a un administrateur doit être avertir
+lors d'une mise à jour du tableau des trois meilleurs scores. Il existe déjà une
+migration pour la table `users` dans `Laravel`, mais celle-ci ne comporte pas de
+champ pour spécifier qu'un utilisateur peut être un administrateur. Il faut donc
+ajouter un champ `admin` de type booléen. De plus, l'`id` d'un `user` ne
+s'incrémente pas par défaut et nous n'utiliserons pas les deux champs
+`timestamps`
 
-Editons le fichier `database\migrations\0001_01_01_000000_create_users_table.php` pour apporter les modifications suivantes.
+Editons le fichier
+`database\migrations\0001_01_01_000000_create_users_table.php` pour apporter les
+modifications suivantes.
 
 ```php
 ...
@@ -36,15 +43,18 @@ Editons le fichier `database\migrations\0001_01_01_000000_create_users_table.php
 
 ## Ajout d'une nouvelle table `scores`
 
-Si l'utilisateur est authentifié, on doit pouvoir afficher ses différents scores.
+Si l'utilisateur est authentifié, on doit pouvoir afficher ses différents
+scores.
 
-Comme un utilisateur peut avoir plusieurs scores, il faut donc implémenter une relation `1:n`
+Comme un utilisateur peut avoir plusieurs scores, il faut donc implémenter une
+relation `1:n`
 
 Il faut une nouvelle table "scores" contenant :
-   - la date à laquelle a été effectué le score
-   - le pourcentage de bonnes réponses, 
-   - le temps effectué
-   - et enfin l'identifiant de l'utilisateur à qui correspond le score
+
+- la date à laquelle a été effectué le score
+- le pourcentage de bonnes réponses,
+- le temps effectué
+- et enfin l'identifiant de l'utilisateur à qui correspond le score
 
 ```
 php artisan make:migration create_scores_table
@@ -79,7 +89,8 @@ php artisan migrate
 
 ## Implémentation des classes-"modèles"
 
-Pour qu'Eloquent puisse fonctionner avec la table "scores", il faut ajouter le modèle `Score` et y implémenter la relation `1:n`
+Pour qu'Eloquent puisse fonctionner avec la table "scores", il faut ajouter le
+modèle `Score` et y implémenter la relation `1:n`
 
 ```
 php artisan make:model Score
@@ -109,7 +120,8 @@ class Score extends Model {
 }
 ```
 
-Il faut aussi adapter la classe modèle `User` pour mettre à jour la propriété `$fillable` et terminer l'implémentation de la relation `1:n`
+Il faut aussi adapter la classe modèle `User` pour mettre à jour la propriété
+`$fillable` et terminer l'implémentation de la relation `1:n`
 
 ```php
 <?php
@@ -159,18 +171,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-	
+
 	public function scores() {
         return $this->hasMany(Score::class);
     }
 }
 ```
 
-
-
 ## Peuplement des tables pour faciliter les tests (`Seed`)
 
-Pour tester que nos tables correspondent à nos besoins, peuplons la table `users` et la table `scores` avec quelques données :
+Pour tester que nos tables correspondent à nos besoins, peuplons la table
+`users` et la table `scores` avec quelques données :
 
 ```
 php artisan make:seeder UsersTableSeeder
@@ -179,7 +190,7 @@ php artisan make:seeder UsersTableSeeder
 ```php
 ...
 use Illuminate\Support\Facades\DB;
-    
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -219,7 +230,7 @@ class ScoresTableSeeder extends Seeder
     private function randDate() {
         return Carbon::createFromDate(2022, rand(1,12), rand(1,28));
     }
-    
+
     public function run(): void
     {
         DB::table('scores')->delete();
@@ -236,7 +247,8 @@ class ScoresTableSeeder extends Seeder
 }
 ```
 
-Remarque : Il ne faut pas oublier de définir l'ordre d'exécution des `Seeders` dans le fichier existant `DatabaseSeeder.php`
+Remarque : Il ne faut pas oublier de définir l'ordre d'exécution des `Seeders`
+dans le fichier existant `DatabaseSeeder.php`
 
 ```php
 ...
@@ -257,7 +269,9 @@ php artisan db:seed
 
 ## Tests pour déterminer si la relation `1:n` fonctionne
 
-A l'aide de l'outil `tinker` nous pouvons faire quelques requêtes Eloquent pour contrôler que l'implémentation que nous avons effectué fonctionne. Pour lancer `tinker` :
+A l'aide de l'outil `tinker` nous pouvons faire quelques requêtes Eloquent pour
+contrôler que l'implémentation que nous avons effectué fonctionne. Pour lancer
+`tinker` :
 
 ```
 php artisan tinker
@@ -268,7 +282,6 @@ Pour récupérer les données de l'admin :
 ```
 App\Models\User::where('admin', 1)->first();
 ```
-
 
 Pour récupérer les données des utilisateurs qui ne sont pas admin :
 
@@ -300,7 +313,8 @@ Pour récupérer les trois meilleurs scores triés par nombre de secondes :
 App\Models\Score::orderBy('nbSecondes','ASC')->take(3)->get();
 ```
 
-Pour récupérer les scores de l'utilisateur ayant l'identifiant 3 trié par nombre de secondes :
+Pour récupérer les scores de l'utilisateur ayant l'identifiant 3 trié par nombre
+de secondes :
 
 ```
 App\Models\Score::where('user_id','3')->orderBy('nbSecondes','ASC')->get();
@@ -312,8 +326,8 @@ Pour récupérer les noms des utilisateurs dont l'identifiant est 1,3 ou 5 :
 App\Models\User::whereIn('id', array(1, 3, 5))->get('name');
 ```
 
-Pour récupérer les trois meilleurs scores des utilisateurs ayant répondu juste à toutes les questions (100%) :
-(Avec les différentes étapes pour y arriver)
+Pour récupérer les trois meilleurs scores des utilisateurs ayant répondu juste à
+toutes les questions (100%) : (Avec les différentes étapes pour y arriver)
 
 ```
 App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get();
@@ -345,20 +359,24 @@ Pour créer un nouveau contrôleur :
 php artisan make:controller ScoreController --resource
 ```
 
-Pour accéder aux différentes méthodes de notre contrôleur nous pouvons créer des routes dans le fichier `web.php`
+Pour accéder aux différentes méthodes de notre contrôleur nous pouvons créer des
+routes dans le fichier `web.php`
 
 ```php
 ...
 use App\Http\Controllers\ScoreController;
 ...
-    
+
 Route::get('/', [ScoreController::class, 'index']);
 Route::resource('score', ScoreController::class, ['except'=>['show','edit','update','delete','create']]);
 
 ...
 ```
 
-Remarque : Nous n'utiliserons pas les méthodes `show, edit, update, delete et create`, nous pouvons donc les enlever du contrôleur. (Nous aurions pu créer un contrôleur "conventionnel" et y ajouter deux routes :wink:)
+Remarque : Nous n'utiliserons pas les méthodes
+`show, edit, update, delete et create`, nous pouvons donc les enlever du
+contrôleur. (Nous aurions pu créer un contrôleur "conventionnel" et y ajouter
+deux routes )
 
 Ajoutons maintenant la logique dans notre contrôleur :
 
@@ -371,7 +389,7 @@ use App\Models\Score;
 class ScoreController extends Controller
 {
     public function index() {
-        return view('view_page1')->with('tableauMeilleursScores', 
+        return view('view_page1')->with('tableauMeilleursScores',
                 $this->rendTableauMeilleursScores());
     }
 
@@ -519,14 +537,15 @@ Route::post('page2', [ScoreController::class, 'rendPage2']);
 
 ## Contrôle des champs pour le formulaire de soumission des réponses aux questions sur les livrets :
 
-Pour valider les réponses données par l'utilisateur nous pouvons implémenter un contrôle à l'aide d'une classe (`Request`)
-Pour créer cette classe, lançons la commande :
+Pour valider les réponses données par l'utilisateur nous pouvons implémenter un
+contrôle à l'aide d'une classe (`Request`) Pour créer cette classe, lançons la
+commande :
 
 ```
 php artisan make:request ScoreRequest
 ```
 
-​	et complétons son contenu :
+​ et complétons son contenu :
 
 ```php
 <?php
@@ -564,14 +583,15 @@ class ScoreRequest extends FormRequest
 }
 ```
 
-
-
 ## Redirection après login et `logout`
 
-Pour rediriger l'utilisateur après son identification ou son inscription nous pouvons modifier deux contrôleurs qui ont été ajouté lors de la mise en place de l'authentification.
+Pour rediriger l'utilisateur après son identification ou son inscription nous
+pouvons modifier deux contrôleurs qui ont été ajouté lors de la mise en place de
+l'authentification.
 
-Il s'agit d'abord du contrôleur `app/Http/Controllers/Auth/RegisteredUserController.php`
-Il suffit de changer la ligne 48 :
+Il s'agit d'abord du contrôleur
+`app/Http/Controllers/Auth/RegisteredUserController.php` Il suffit de changer la
+ligne 48 :
 
 ```
 return redirect(route('dashboard', absolute: false));
@@ -583,24 +603,27 @@ en
 return redirect('/');
 ```
 
-et celle du contrôleur `app/Http/Controllers/Auth/AuthenticatedSessionController.php`
-Changer la ligne 31 :
+et celle du contrôleur
+`app/Http/Controllers/Auth/AuthenticatedSessionController.php` Changer la ligne
+31 :
 
 ```
 return redirect()->intended(route('dashboard', absolute: false));
 ```
 
-en 
+en
 
 ```
 return redirect()->intended('/');
 ```
 
-Et pour rediriger l'utilisateur après son `logout`, il n'y a rien a faire puisqu'on va directement à la racine :wink:
+Et pour rediriger l'utilisateur après son `logout`, il n'y a rien a faire
+puisqu'on va directement à la racine
 
 ## Création des vues nécessaires (`view_page1`, `view_page2`, `view_page3` et `view_email`)
 
-Commençons par factoriser tout le nécessaire dans le fichier `template.blade.php` :
+Commençons par factoriser tout le nécessaire dans le fichier
+`template.blade.php` :
 
 ```php
 <!doctype html>
@@ -623,7 +646,7 @@ Commençons par factoriser tout le nécessaire dans le fichier `template.blade.p
                 <div class="btn-group pull-right">
                     <a href="{{url('logout')}}" class="btn btn-warning">Logout</a>
                 </div>
-                @else 
+                @else
                 <div class="btn-group pull-right">
                     <a href="{{url('login')}}" class="btn btn-info pull-right">Login</a>
                 </div>
@@ -657,7 +680,7 @@ Puis la `view_page1.blade.php`
         @csrf
         <input type="submit" value="Go">
     </form>
-    <u>Tableau des 3 meilleurs scores :</u> 
+    <u>Tableau des 3 meilleurs scores :</u>
     @foreach($tableauMeilleursScores as $score)
 {{$score['date']}}   {{$score['user']}}   {{$score['temps']}}
     @endforeach
@@ -759,13 +782,16 @@ Passons maintenant à la `view_page3.blade.php` (Affichage les résultats)
 @endsection
 ```
 
-Avant de créer un répertoire `img` et copier les images `faux.png` et `juste.png` dedans, il faut créer un lien virtuel entre le répertoire `\public` et le répertoire `\storage\app\public`
+Avant de créer un répertoire `img` et copier les images `faux.png` et
+`juste.png` dedans, il faut créer un lien virtuel entre le répertoire `\public`
+et le répertoire `\storage\app\public`
 
 ```
 php artisan storage:link
 ```
 
-Créons maintenant le répertoire `\img` dans `\storage\app\public` et ajoutons les images `faux.png` et `juste.png` dedans.
+Créons maintenant le répertoire `\img` dans `\storage\app\public` et ajoutons
+les images `faux.png` et `juste.png` dedans.
 
 Il ne reste plus que la vue pour la mise en forme du mail `view_mail.blade.php`
 
@@ -788,9 +814,11 @@ Il ne reste plus que la vue pour la mise en forme du mail `view_mail.blade.php`
 
 ## Mise à jour du fichier `.env` pour configuration d'une messagerie
 
-Pour que l'envoi du mail fonctionne, il ne faut pas oublier de mettre les champs à jour dans le fichier `.env`
+Pour que l'envoi du mail fonctionne, il ne faut pas oublier de mettre les champs
+à jour dans le fichier `.env`
 
-> Attention à ne pas le laisser traîner n'importe où...  (dans le cas où vous utilisez une vraie messagerie ;-)
+> Attention à ne pas le laisser traîner n'importe où... (dans le cas où vous
+> utilisez une vraie messagerie ;-)
 
 Dans le cas de l'utilisation de `mailpit` :
 
@@ -807,20 +835,19 @@ MAIL_FROM_NAME="${APP_NAME}"
 ...
 ```
 
-- Télécharger le serveur SMTP/HTTP correspondant à votre OS à l'adresse suivante (si besoin) :
-  [`mailpit`](https://github.com/axllent/mailpit)
-  
+- Télécharger le serveur SMTP/HTTP correspondant à votre OS à l'adresse suivante
+  (si besoin) : [`mailpit`](https://github.com/axllent/mailpit)
 - lancer les serveurs SMTP et HTTP
 
   ```
   mailpit
   ```
 
-  
-
 Voilà, notre application est fonctionnelle :slightly_smiling_face:
 
-Pour voir les mails qui ont été envoyés par `Laravel` (s'il y en a), il suffit d'interroger le serveur HTTP (port 8025 à ne pas confondre avec le port 1025 du serveur SMTP) de `mailpit`
+Pour voir les mails qui ont été envoyés par `Laravel` (s'il y en a), il suffit
+d'interroger le serveur HTTP (port 8025 à ne pas confondre avec le port 1025 du
+serveur SMTP) de `mailpit`
 
 ```
 localhost:8025
