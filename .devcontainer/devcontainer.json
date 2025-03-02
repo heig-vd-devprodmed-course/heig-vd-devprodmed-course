@@ -1,5 +1,5 @@
 {
-	"name": "HEIG-VD MVP Course Development Container",
+	"name": "HEIG-VD DevProdMéd Course Development Container",
 	"dockerComposeFile": "docker-compose.yaml",
 	"service": "devcontainer",
 	"workspaceFolder": "/workspace",
