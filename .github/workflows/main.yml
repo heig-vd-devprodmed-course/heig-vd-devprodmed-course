@@ -29,13 +29,13 @@ jobs:
         uses: docker://marpteam/marp-cli:v4.1.1
         with:
           entrypoint: sh
-          args: build-all-presentations.sh
+          args: build-all-presentations-and-quiz.sh
 
       - name: Build presentations with Marp
         uses: docker://pandoc/extra
         with:
           entrypoint: sh
-          args: build-all-presentations.sh
+          args: build-all-support-and-exercises.sh
 
       - name: Upload files
         uses: actions/upload-artifact@v4
@@ -46,9 +46,9 @@ jobs:
             **/*/*.jpeg
             **/*/*.png
             **/*/*.svg
-            **/*/SUPPORT_DE_COURS.md
-            **/*/EXERCICES.md
-            **/*/SOLUTIONS.md
+            **/*/*-support-de-cours.pdf
+            **/*/*-exercices.pdf
+            **/*/*-solutions.pdf
             **/*/*-presentation.pdf
             **/*/*-quiz.pdf
             **/*/index.html

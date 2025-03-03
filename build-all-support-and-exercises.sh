@@ -2,20 +2,14 @@
 
 ## Variables
 WORKDIR=$(pwd)
-MARP_DOCKER_IMAGE="marpteam/marp-cli:v4.1.1"
 PANDOC_DOCKER_IMAGE="pandoc/extra"
 
 ## Script
 
-
-# Check if Marp is installed locally
-if command -v "marp-cli.js" > /dev/null 2>&1; then
-    echo "Marp installed locally, using it..."
-    MARP_CMD="marp-cli.js"
-else
-    echo "Marp not installed, using its Docker image..."
-    MARP_CMD="docker run --rm --entrypoint=\"marp-cli.js\" --volume=\"$WORKDIR\":/home/marp/app $MARP_DOCKER_IMAGE"
-fi
+echo "Removing all previous generated presentations and quizzes..."
+rm -f **/*/*-support-de-cours.pdf || true
+rm -f **/*/*-exercices.pdf || true
+rm -f **/*/*-solutions.pdf || true
 
 # Check if Pandoc is installed locally
 if command -v "pandoc" > /dev/null 2>&1; then
@@ -53,13 +47,6 @@ find . -mindepth 3 -maxdepth 3 -type f -name "SOLUTIONS.md" -exec sh -c '
     done
 ' sh {} +
 
-# Convert presentations
-echo "Converting presentations to HTML..."
-eval "$MARP_CMD --parallel $(nproc) **/*-presentation/README.md **/*-quiz/README.md"
-
-echo "Converting presentations to PDF..."
-eval "$MARP_CMD --parallel $(nproc) --pdf **/*-presentation/README.md **/*-quiz/README.md"
-
 # Rename files
 echo "Renaming generated PDFs..."
 find . -mindepth 3 -maxdepth 3 -type f \( -name "EXERCICES.pdf" -o -name "SUPPORT_DE_COURS.pdf" -o -name "SOLUTIONS.pdf" \) -exec sh -c '
@@ -74,26 +61,5 @@ find . -mindepth 3 -maxdepth 3 -type f \( -name "EXERCICES.pdf" -o -name "SUPPOR
 ' sh {} +
 
 
-echo "Renaming HTML files to 'index.html'..."
-find . -mindepth 3 -maxdepth 3 -type f -name "README.html" -exec sh -c '
-    mv "$1" "$(dirname "$1")/index.html"
-' sh {} \;
-
-echo "Renaming presentation files to match parent directory..."
-find . -mindepth 3 -maxdepth 3 -path "*-presentation/README.pdf" -exec sh -c '
-    for file; do
-        chapter_name=$(basename "$(dirname "$(dirname "$file")")")
-        mv "$file" "$(dirname "$file")/$chapter_name-presentation.pdf"
-    done
-' sh {} +
-
-echo "Renaming quiz files to match parent directory..."
-find . -mindepth 3 -maxdepth 3 -path "*-quiz/README.pdf" -exec sh -c '
-    for file; do
-        chapter_name=$(basename "$(dirname "$(dirname "$file")")")
-        mv "$file" "$(dirname "$file")/$chapter_name-quiz.pdf"
-    done
-' sh {} +
-
-echo "All presentations and quizzes processed successfully!"
+echo "All support de cours, exercices and solutions processed successfully!"
 
