@@ -84,7 +84,7 @@ _paginate: false
 - Il permet de créer des vues plus facilement
 - Il permet d'insérer des données dynamiques dans les vues
 
-## Exemple de @yield `\resources\views\template.blade.php`
+## `\resources\views\template.blade.php`
 
 ```html
 <!DOCTYPE html>
@@ -108,13 +108,17 @@ _paginate: false
 ## Exemple de @yield (suite) `\resources\views\contacts.blade.php`
 
 ```html
-@extends('template') @section('content')
+@extends('template')
+<!-- Hérite de template.blade.php -->
+@section('content')
+<!-- Définit la section content -->
 <main>
 	<p>Nom : Despentes</p>
 	<p>Prénom : Virginie</p>
 	<p>Email : virginie.despentes@forest.com</p>
 </main>
 @endsection
+<!-- Fin de la section content -->
 ```
 
 ## Exemple de @include (suite) `\resources\views\footer.blade.php`
