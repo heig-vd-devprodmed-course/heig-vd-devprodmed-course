@@ -425,7 +425,7 @@ Créons maintenant la vue permettant de l'afficher. Voici son contenu :
 @section('contenu')
   <p>
     Voici ma première image :<br><br>
-    <img src="{{ asset('storage/images/img01.png') }}" alt="Mon image" />
+    <img src="{{ asset('storage/images/image.png') }}" alt="Mon image" />
   </p>
 @endsection
 ```
