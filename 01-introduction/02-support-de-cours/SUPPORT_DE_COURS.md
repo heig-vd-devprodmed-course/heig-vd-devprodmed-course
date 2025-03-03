@@ -7,17 +7,21 @@
   - [Qu’est-ce que `Laravel` ?](#quest-ce-que-laravel-)
   - [Pourquoi utiliser `Laravel` ?](#pourquoi-utiliser-laravel-)
   - [Que fait `Laravel` ?](#que-fait-laravel-)
-  - [Voici quelques-unes des fonctionnalités les plus importantes :](#voici-quelques-unes-des-fonctionnalités-les-plus-importantes-)
+  - [Voici quelques-unes des fonctionnalités les plus importantes](#voici-quelques-unes-des-fonctionnalités-les-plus-importantes)
   - [Résumé](#résumé)
 - [Installation sur `Mac`](#installation-sur-mac)
+  - [Installation de `Xcode`](#installation-de-xcode)
+  - [Installation de Homebrew](#installation-de-homebrew)
+  - [Installation de `php`, `composer`et un éditeur de texte `macVim`](#installation-de-php-composeret-un-éditeur-de-texte-macvim)
 - [Installation sur `Windows`](#installation-sur-windows)
+  - [Installation de `php` 8](#installation-de-php-8)
   - [Installation de `Composer`](#installation-de-composer)
 - [Pratique](#pratique)
   - [Installation](#installation)
   - [Création d'un squelette d'application `Laravel` (`Windows` et `Mac`)](#création-dun-squelette-dapplication-laravel-windows-et-mac)
-  - [Repérer les répertoires et fichiers de bases de `Laravel`.](#repérer-les-répertoires-et-fichiers-de-bases-de-laravel)
-  - [Changer le comportement d'une application `Laravel`.](#changer-le-comportement-dune-application-laravel)
-  - [Résumé :](#résumé-)
+  - [Repérer les répertoires et fichiers de bases de `Laravel`](#repérer-les-répertoires-et-fichiers-de-bases-de-laravel)
+  - [Changer le comportement d'une application `Laravel`](#changer-le-comportement-dune-application-laravel)
+  - [Résumé](#résumé-1)
 
 Le développement d’applications web et de sites est devenu de plus en plus
 simple ces dernières années. Même les plus novices en matière de technologie
@@ -31,7 +35,7 @@ est `Laravel`.
 
 ### Qu’est-ce que `Laravel` ?
 
-#### `Laravel` est un `framework PHP` multi-plateforme permettant de créer des applications web.
+#### `Laravel` est un `framework PHP` multi-plateforme permettant de créer des applications web
 
 `Laravel` permet à un développeur de tirer parti d’une vaste bibliothèque de
 fonctionnalités pré-programmées (telles que l’authentification, le routage et la
@@ -107,7 +111,7 @@ la vue.
 
 Voici quelques-uns des avantages spécifiques de `Laravel` :
 
-- #### `Laravel` est facile à apprendre;
+- #### `Laravel` est facile à apprendre
 
   > pour qui possède :
   >
@@ -184,7 +188,7 @@ Voici quelques-uns des avantages spécifiques de `Laravel` :
 
 ### Que fait `Laravel` ?
 
-### Voici quelques-unes des fonctionnalités les plus importantes :
+### Voici quelques-unes des fonctionnalités les plus importantes
 
 #### Traitement des routes
 
@@ -287,7 +291,7 @@ Que vous soyez débutant-e ou expert-e en développement d'application web,
 
 ## Installation sur `Mac`
 
-#### Installation de `Xcode`
+### Installation de `Xcode`
 
 Se rendre dans l'`App Store` et installer `Xcode`
 
@@ -296,9 +300,9 @@ Se rendre dans l'`App Store` et installer `Xcode`
 Lancer `Xcode`, qui va installer les derniers composants nécessaires. Fermer
 `Xcode`. Redémarrer.
 
-#### Installation de Homebrew
+### Installation de Homebrew
 
-Se rendre à l'url https://brew.sh/fr/
+Se rendre à l'url <https://brew.sh/fr/>
 
 Lancer un `terminal` sur mac.
 
@@ -320,19 +324,19 @@ Lancer un `terminal` sur mac.
 Une fois dans le `Terminal` lancez la commande (!!!!!! le tout sur 1 seule ligne
 :
 
-```
+```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Entrez votre mot de passe et patientez durant l'installation (cela prend un peu
 de temps)
 
-#### Installation de `php`, [`composer`](https://getcomposer.org/doc/00-intro.md)et un éditeur de texte [`macVim`](https://www.vim.org/)
+### Installation de `php`, [`composer`](https://getcomposer.org/doc/00-intro.md)et un éditeur de texte [`macVim`](https://www.vim.org/)
 
 Toujours depuis le `terminal`, installez `php`, `composer` et `macvim` à l'aide
 de la commande :
 
-```
+```bash
 brew install php composer macvim
 ```
 
@@ -340,13 +344,13 @@ Patientez durant l'installation de ces trois outils.
 
 Pour vous assurer que `php` est installé correctement tapez :
 
-```
+```bash
 php --version
 ```
 
 ou
 
-```
+```bash
 php -v
 ```
 
@@ -355,37 +359,37 @@ php -v
 
 Pour savoir où est le fichier `php.ini`
 
-```
+```bash
 php --ini
 ```
 
 Pour s'assurer que `Composer` est installé, taper :
 
-```
+```bash
 composer
 ```
 
 #### Installation de [`Valet`](https://laravel.com/docs/10.x/valet#:~:text=Laravel%20Valet%20is%20a%20development,background%20when%20your%20machine%20starts.&text=In%20other%20words%2C%20Valet%20is,roughly%207%20MB%20of%20RAM.) à l'aide de `Composer`
 
-```
+```bash
 composer global require laravel/valet
 ```
 
 #### Installation du générateur de squelette d'application `Laravel`
 
-```
+```bash
 composer global require laravel/installer
 ```
 
 Les commandes :
 
-```
+```bash
 laravel
 ```
 
 et
 
-```
+```bash
 valet
 ```
 
@@ -405,13 +409,13 @@ quel est le terminal utilisé.
 >
 > tapons :
 >
-> ```
+> ```bash
 > whoareyou
 > ```
 >
 > Si on obtient le message :
 >
-> ```
+> ```bash
 > zsh : command not found : whoareyou
 > ```
 >
@@ -419,7 +423,7 @@ quel est le terminal utilisé.
 >
 > Si par contre on obtient le message suivant :
 >
-> ```
+> ```bash
 > -bash: whoareyou: command not found
 > ```
 >
@@ -430,7 +434,7 @@ quel est le terminal utilisé.
 > Si le terminal utilisé est un `bash`, voici la commande permettant de passer à
 > `zsh`
 >
-> ```
+> ```bash
 > chsh -s $(which zsh)
 > ```
 
@@ -440,13 +444,13 @@ dans notre répertoire de base (maison). Or, les fichiers commençant par un poi
 (.) sont par cachés par défaut par notre `Mac`. Pour pouvoir visualiser ces
 fichiers, lancez la commande suivante :
 
-```
+```bash
 defaults write com.apple.finder AppleShowAllFiles TRUE
 ```
 
 Puis, pour fermer tous les `Finder` qui seraient ouvert, lancez la commande
 
-```
+```bash
 killall Finder
 ```
 
@@ -456,7 +460,7 @@ base (icône maison) qui porte normalement votre nom.
 > Sinon, dans le menu du haut choisissez `Aller` puis `Allez au dossier...` et
 > tapez :
 >
-> ```
+> ```bash
 > ~/
 > ```
 >
@@ -466,10 +470,10 @@ base (icône maison) qui porte normalement votre nom.
 Les fichiers cachés sont maintenant visibles
 
 Pour éditer ou créer le fichier
-`.zprofile nous allons utiliser l'éditeur de texte `macvim`fraîchement installé. Dans un`terminal`,
+`.zprofile nous allons utiliser l'éditeur de texte`macvim`fraîchement installé. Dans un`terminal`,
 lancez la commande :
 
-```
+```bash
 mvim ~/.zprofile
 ```
 
@@ -481,7 +485,7 @@ votre clavier.
 
 Ajoutez la ligne suivante (export...) :
 
-```
+```bash
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 ```
 
@@ -489,7 +493,7 @@ Pour quitter le mode `insertion` tapez la touche `ESC` (Le carré noir devrait �
 nouveau clignoter), puis pour sauver et quitter, tapez les 3 (TROIS) lettres
 suivantes :
 
-```
+```bash
 :wq
 ```
 
@@ -498,7 +502,7 @@ du `terminal` puis ouvrir un nouveau `terminal`.
 
 La commande :
 
-```
+```bash
 laravel
 ```
 
@@ -506,7 +510,7 @@ devrait maintenant fonctionner.
 
 Ainsi que la commande :
 
-```
+```bash
 valet
 ```
 
@@ -517,9 +521,9 @@ Voilà, tout est prêt.
 
 ## Installation sur `Windows`
 
-#### Installation de `php` 8 :
+### Installation de `php` 8
 
-Téléchargez (https://www.php.net/downloads.php) la dernière version stable de
+Téléchargez (<https://www.php.net/downloads.php>) la dernière version stable de
 `php 8`
 
 Dézippez le fichier et ajoutez le répertoire `php-8.x` dans un dossier nommé
@@ -527,20 +531,20 @@ Dézippez le fichier et ajoutez le répertoire `php-8.x` dans un dossier nommé
 
 > Exemple :
 >
-> ```
+> ```bash
 > C:\PHP\PHP-8.x
 > ```
 >
 > ou
 >
-> ```
+> ```bash
 > C:\Program Files\PHP\PHP-8.x
 > ```
 
 ### Installation de `Composer`
 
 Téléchargez la dernière version du gestionnaire de libraire `Composer`
-(https://getcomposer.org/download/)
+(<https://getcomposer.org/download/>)
 
 Suivez les étapes et veillez à choisir la bonne version de `php`
 
@@ -554,7 +558,7 @@ Suivez les étapes et veillez à choisir la bonne version de `php`
 
 Pour savoir où est le fichier `php.ini`
 
-```
+```bash
 php --ini
 ```
 
@@ -562,7 +566,7 @@ Ouvrez le fichier `php.ini` et :
 
 - Mettre la variable `display_errors` à `On` (ligne ~503)
 
-```
+```bash
 display_errors = On
 ```
 
@@ -578,7 +582,7 @@ et activez les extensions suivantes : (ligne ~923)
 Dans une fenêtre de type `invite de commande` (Cliquez sur l'icône `windows` en
 bas à gauche de votre écran et tapez : cmd ) Lancez la commande :
 
-```
+```bash
 composer global require "laravel/installer"
 ```
 
@@ -624,13 +628,13 @@ déplacer dans le répertoire désiré
 
 puis taper :
 
-```
+```bash
 laravel new monApp1/laravel
 ```
 
 L'installeur vous demande alors de répondre à quelques questions :
 
-```
+```bash
 Would you like to install a starter kit? [No starter kit]:
   [none     ] No starter kit
   [breeze   ] Laravel Breeze
@@ -639,7 +643,7 @@ Would you like to install a starter kit? [No starter kit]:
 
 Tapez sur la touche "return" pour indiquer qu'on ne désire pas de "starter kit".
 
-```
+```bash
 Which testing framework do you prefer? [Pest]:
   [0] Pest
   [1] PHPUnit
@@ -648,14 +652,14 @@ Which testing framework do you prefer? [Pest]:
 Tapez sur la touche "return" pour indiquer qu'on désire utiliser `Pest` comme
 outil de `testing`.
 
-```
+```bash
 Would you like to initialize a Git repository? (yes/no) [no]:
 ```
 
 Tapez sur la touche "return" pour indiquer qu'on ne désire pas utiliser `Git`
 pour l'instant.
 
-```
+```bash
 Which database will your application use? [MySQL]:
   [mysql  ] MySQL
   [mariadb] MariaDB
@@ -676,29 +680,30 @@ d'une application de base qui fonctionne.
 Pour rendre l'application disponible via un browser, il suffit de se déplacer en
 ligne de commande dans le répertoire `monApp1/laravel` et taper la commande :
 
-```
+```bash
 php artisan serve
 ```
 
 > Remarque : Si besoin, on peut choisir le port
 >
-> ```
+> ```bash
 > php artisan serve --port=8080
 > ```
 >
 > (Le port par défaut est le port : 8000)
 
-Un message nous indique que l'application est disponible : http://127.0.0.1:8000
+Un message nous indique que l'application est disponible :
+<http://127.0.0.1:8000>
 
 Il suffit de lancer un browser et de taper comme adresse :
 
-```
+```bash
 localhost:8000
 ```
 
 ou
 
-```
+```bash
 127.0.0.1:8000
 ```
 
@@ -707,7 +712,7 @@ ou
 Pour stopper l'application, il suffit de faire `CRTL` + `C` dans la fenêtre
 correspondante à la ligne de commande ou simplement fermer la fenêtre.
 
-### Repérer les répertoires et fichiers de bases de `Laravel`.
+### Repérer les répertoires et fichiers de bases de `Laravel`
 
 Liste des répertoires :
 
@@ -739,7 +744,7 @@ Route::get('/', function () {
 La vue `welcome` se trouve dans le répertoire `resources/views`, il s'agit du
 fichier `welcome.blade.php`
 
-### Changer le comportement d'une application `Laravel`.
+### Changer le comportement d'une application `Laravel`
 
 Familiarisons-nous d'abord avec le concept de routes.
 
@@ -908,15 +913,15 @@ Route::get('{n}', function($n) {
 
 Et testons pour voir si cela fonctionne :
 
-```
+```bash
 localhost:8000/1
 ```
 
-```
+```bash
 localhost:8000/2
 ```
 
-```
+```bash
 localhost:8000/3
 ```
 
@@ -952,15 +957,15 @@ Et voici comment récupérer la donnée $n dans la vue :
 
 Testons nos modifications
 
-```
+```bash
 localhost:8000/1
 ```
 
-```
+```bash
 localhost:8000/2
 ```
 
-```
+```bash
 localhost:8000/3
 ```
 
@@ -991,7 +996,7 @@ modification suivante :
 </html>
 ```
 
-### Résumé :
+### Résumé
 
 Le fichier `routes\web.php` permet de configurer les `urls` auxquelles notre
 application répondra. Nous pouvons récupérer les différentes parties de nos

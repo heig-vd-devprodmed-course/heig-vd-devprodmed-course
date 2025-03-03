@@ -6,7 +6,15 @@ Ecrire le code permettant d'afficher la table de multiplication de son choix :
 
 url : ...../livret/5 => affiche le livret 5
 
-affiche : 1 _ 5 = 5 2 _ 5 = 10 ... 12 \* 5 = 60
+affiche :
+
+```php
+1 * 5 = 5
+2 * 5 = 10
+3 * 5 = 15
+...
+12 * 5 = 60
+```
 
 url : ...../livret/7 => affiche le livret 7
 
@@ -22,11 +30,11 @@ comprises).
 
 Ecrire le code permettant aux `urls` :
 
-```
+```php
 .../page1
 ```
 
-```
+```php
 .../Page1
 ```
 
@@ -36,8 +44,10 @@ d'accéder au même contenu.
 
 Ecrire le code permettant de rediriger l'utilisateur sur le site suivant :
 
+```bash
     url : .../cff/Lausanne/8:30/Yverdon       => redirige vers
-    https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Lausanne&nach=Yverdon&datum=19.02.2024&zeit=08:30&suche=true
+    https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml ?von=Lausanne&nach=Yverdon&datum=19.02.2024&zeit=08:30&suche=true
+```
 
 > Remarques :
 >

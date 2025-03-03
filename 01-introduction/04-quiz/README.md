@@ -49,7 +49,7 @@ style: |
       font-size: 2rem;
   }
 headingDivider: 6
---->
+-->
 
 # Quiz 1 - Laravel
 

@@ -49,7 +49,7 @@ style: |
       font-size: 2rem;
   }
 headingDivider: 6
---->
+-->
 
 # Quiz 1 - Blade et contrôleur
 
@@ -57,31 +57,6 @@ headingDivider: 6
 _class: lead
 _paginate: false
 -->
-
-## Question 1 - Donnée
-
-> **Où se trouvent les fichiers définissant les routes dans Laravel ?**
-
-Indice : Laravel organise ses fichiers par responsabilité. Les routes sont
-stockées dans un dossier spécifique.
-
-## Question 1 - Réponse
-
-Le répertoire contenant les routes est : `/routes`
-
-```bash
-.
-├── app
-├── bootstrap
-├── config
-├── database
-├── public
-├── resources
-├── routes
-.
-```
-
-[Documentation officielle](https://laravel.com/docs/10.x/routing)
 
 ## Question 1 - Donnée
 

@@ -31,10 +31,7 @@ de Blade.
    puis d'en tirer dix aléatoirement.
 2. Stocker la liste des proverbes dans un fichier texte, les charger dans un
    tableau puis en tirer dix aléatoirement.
-
-Challenge :
-
-3. Récupérer tous les proverbes proposés par le lien
+3. [Challenge] Récupérer tous les proverbes proposés par le lien
    [Liste de proverbes](https://fr.wiktionary.org/wiki/Annexe:Liste_de_proverbes_français)
    à l'aide d'un objet
 
