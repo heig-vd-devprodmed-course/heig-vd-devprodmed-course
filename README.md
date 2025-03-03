@@ -19,3 +19,7 @@ Suisse !
 Merci à toutes les personnes qui ont travaillé dur pour rendre ce cours possible
 ! Veuillez lire le fichier [`ATTRIBUTION.md`](./ATTRIBUTION.md) pour plus de
 détails.
+
+## Sources utiles
+
+- [Best Practices](https://github.com/alexeymezenin/laravel-best-practices/blob/master/french.md)
