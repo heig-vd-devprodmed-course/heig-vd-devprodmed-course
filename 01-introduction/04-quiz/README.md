@@ -315,7 +315,7 @@ Exemple :
 > ce renommage effectué, Blade sera actif. Simple non ? Exemple : `article.php`
 > => `article.blade.php`
 
-## Question 13 - Donnée
+## Question 14 - Donnée
 
 **Comment transmettre un paramètre à une vue depuis une route ?**
 
@@ -325,7 +325,7 @@ Dans la vue `article.blade.php` :
 <p>Article numéro : {{ $id }}</p>
 ```
 
-## Question 13 - Réponse
+## Question 14 - Réponse
 
 Avec `with()` :
 
@@ -343,11 +343,11 @@ Route::get('/article/{id}', function ($id) {
 });
 ```
 
-## Question 14 - Donnée
+## Question 15 - Donnée
 
 **Comment transmettre plusieurs paramètres à une vue ?**
 
-## Question 14 - Réponse
+## Question 15 - Réponse
 
 1. Enchaînement de `with()` :
 
@@ -355,7 +355,7 @@ Route::get('/article/{id}', function ($id) {
 return view('article')->with('id', $id)->with('color', $color);
 ```
 
-2. Passage d’un tableau associatif :
+1. Passage d’un tableau associatif :
 
 ```php
 return view('article', ['id' => $id, 'color' => $color]);

@@ -76,7 +76,7 @@ utilisé.
 
 `@yield('titre')` sera remplacé par :
 
-```
+```html
 Template Laravel
 ```
 
@@ -108,9 +108,11 @@ Dans votre navigateur préféré taper l'url suivante :
 
 Vous devriez voir apparaître le message suivant dans le navigateur :
 
-    Excellent choix !
+```bash
+Excellent choix !
 
-    L'article 3 de couleur rouge est tout simplement magnifique.
+L'article 3 de couleur rouge est tout simplement magnifique.
+```
 
 Bravo !
 
@@ -133,12 +135,13 @@ requêtes "filtrées" et de passer le/les résultat(s) vers les vues appropriée
 Voici comment créer un contrôleur (rdv dans la console de commande, placé dans
 le répertoire `\laravel`)
 
-```
+```bash
  php artisan make:controller MonPremierControleur
 ```
 
-Vous devriez avoir maintenant un nouveau fichier dans le répertoire ::
-`/app/Http/Controllers/MonPremierControleur.php` avec le contenu suivant :
+Vous devriez avoir maintenant un nouveau fichier dans le répertoire
+`/app/Http/Controllers` nommé `MonPremierControleur.php` contenant le code
+suivant :
 
 ```php
 <?php
@@ -259,7 +262,7 @@ Voilà c'est fonctionnel, il ne suffit plus qu'à tester :
 
 Si votre navigateur affiche :
 
-```
+```bash
 2 : rouge
 ```
 
@@ -361,10 +364,12 @@ boucle permettant de construire le tableau `html` contenant tous les artistes.
 
 L'exécution du code devrait vous afficher ce qui suit :
 
+```bash
     Amy     Winehouse  14-09-1983
     Janis   Joplin     19-01-1943
     Jo      Bar        19-01-1943
     Janis   Siegel     12-01-1990
+```
 
 ## Ajout de ressource(s) à une application `Laravel` (Image)
 
@@ -373,26 +378,26 @@ Voyons maintenant comment gérer une ressource, plus particulièrement une image
 Créons un répertoire `images` dans le répertoire `\storage\app\public`, comme le
 spécifie la documentation officielle de `Laravel`
 ([Où placer les ressources : images, `css`, scripts, sons, vidéos](https://laravel.com/docs/11.x/filesystem#the-public-disk))
-Plaçons dans celui-ci une image par exemple : `img01.png`
+Plaçons dans celui-ci une image par exemple : `image.png`
 
-![img01](img/img01.png)
+![image.png](https://images.unsplash.com/photo-1586810146927-6503e5eb48fd?fit=crop&h=720)
 
 Comme indiqué dans la documentation, il est nécessaire de faire une lien virtuel
 à l'aide de la commande :
 
-```
+```bash
 php artisan storage:link
 ```
 
 Voici le résultat de la commande :
 
-```
+```bash
 The [...\laravel\public\storage] link has been connected to [...\laravel\storage\app\public].
 The links have been created.
 ```
 
 Ce lien permet de rendre le contenu du répertoire `\storage\app\public`
-accessible depuis le répertoire `\public`de notre application.
+accessible depuis le répertoire `\public` de notre application.
 
 Pour s'en rendre compte, il faut ouvrir un explorateur de fichier (ou un finder)
 et aller dans le répertoire `/public`. Nous y trouvons le fameux lien virtuel.
@@ -430,7 +435,7 @@ et d'appeler la vue.
 
 Bravo !
 
-## Résumé :
+## Résumé
 
 En résumé, voici ce que nous savons faire :
 

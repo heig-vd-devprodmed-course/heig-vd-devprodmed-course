@@ -70,7 +70,7 @@ _paginate: false
 
 <small>Ce travail est sous licence CC BY-SA 4.0.</small>
 
-## Bienvenue au cours DévProdMéd !
+## Bienvenue au cours DévProdMéd
 
 <!-- _class: lead -->
 
@@ -84,7 +84,7 @@ Vincent Guidoux
 
 🎭🌿📖🛠️🌀
 
-vincent.guidoux1@heig-vd.ch · https://github.com/Nortalle
+<vincent.guidoux1@heig-vd.ch> · <https://github.com/Nortalle>
 
 ## Comment me contacter
 
@@ -93,7 +93,7 @@ suivants pour toute question relative au cours :
 
 - En personne
 - Teams
-- Par e-mail : vincent.guidoux1@heig-vd.ch
+- Par e-mail : <vincent.guidoux1@heig-vd.ch>
 
 ## Plus de détails dans le support de cours
 
@@ -107,7 +107,7 @@ Cette présentation est un résumé du support de cours.
 - Décrire ce qu'est Laravel
 - Être capable d'initier un projet Laravel
 
-!bg right:40%
+![bg right:40%](https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
 
 ## Objectifs du cours (1/2)
 
@@ -148,8 +148,6 @@ Le cours sera évalué sur plusieurs aspects :
 - Durée minimale de 45 minutes
 - Devrait utiliser la plateforme d'évaluation en ligne de la HEIG-VD
 
-!bg right:40%
-
 ## Qu'est-ce que Laravel ?
 
 <!-- _class: lead -->
@@ -168,8 +166,7 @@ de fonctionnalités pré-programmées.
 Utilise des concepts de POO comme les classes, les objets, l’héritage et le
 polymorphisme pour structurer le code.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
 
 <!-- https://unsplash.com/photos/brown-wooden-blocks-on-black-surface-ANIqg7a7u1g -->
 
@@ -178,8 +175,7 @@ polymorphisme pour structurer le code.
 PHP est un langage de script open source, côté serveur, utilisé pour le
 développement web. Il est interprété au moment de l’exécution.
 
-!bg right:40%
-(https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?fit=crop&h=720)
 
 <!-- https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
 
@@ -188,8 +184,7 @@ développement web. Il est interprété au moment de l’exécution.
 Principalement un framework de développement Backend, mais offre quelques
 fonctionnalités Frontend.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?fit=crop&h=720)
 
 <!-- https://unsplash.com/photos/photo-of-gray-building-9drS5E_Rguc -->
 
@@ -198,8 +193,7 @@ fonctionnalités Frontend.
 Le modèle gère les données, la vue affiche les données et le contrôleur gère les
 interactions entre le modèle et la vue.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1610389051254-64849803c8fd?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1610389051254-64849803c8fd?fit=crop&h=720)
 
 <!-- https://unsplash.com/photos/man-in-black-and-white-checkered-dress-shirt-drinking-from-brown-and-white-ceramic-mug-T42j_xLOqw0 -->
 
@@ -212,8 +206,7 @@ interactions entre le modèle et la vue.
 Accessible pour ceux qui ont des notions de POO, HTML et des systèmes de gestion
 de bases de données relationnelles.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1610471512331-02a5d7d2532f?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1610471512331-02a5d7d2532f?fit=crop&h=720)
 
 <!-- https://unsplash.com/photos/brown-wooden-bridge-over-river-qlheiI2e_ec -->
 
@@ -222,8 +215,7 @@ de bases de données relationnelles.
 Simplifie les tâches courantes comme le routage, l’authentification, la
 migration et la mise en cache.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1586810146927-6503e5eb48fd?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1586810146927-6503e5eb48fd?fit=crop&h=720)
 
 <!-- simple -->
 
@@ -232,8 +224,7 @@ migration et la mise en cache.
 Propose des kits de démarrage pour les personnes débutantes et des
 fonctionnalités avancées pour les plus expérimentées.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1728207056108-18b04ad24e1e?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1728207056108-18b04ad24e1e?fit=crop&h=720)
 
 <!-- https://unsplash.com/photos/a-train-station-with-escalators-and-stairs-6yAq97HGxjU -->
 
@@ -242,8 +233,7 @@ fonctionnalités avancées pour les plus expérimentées.
 Hautement évolutif et peut traiter des millions de requêtes par mois grâce à des
 systèmes de cache rapides et distribués.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1612753666134-2792aa809104?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1612753666134-2792aa809104?fit=crop&h=720)
 
 <!-- darwin -->
 
@@ -251,8 +241,7 @@ systèmes de cache rapides et distribués.
 
 Vaste communauté et une bibliothèque d’applications et de paquets disponibles.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1520627977056-c307aeb9a625?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1520627977056-c307aeb9a625?fit=crop&h=720)
 
 <!-- forum -->
 
@@ -261,8 +250,7 @@ Vaste communauté et une bibliothèque d’applications et de paquets disponible
 De nombreuses entreprises utilisent ce framework pour créer des sites web
 fonctionnels et intuitifs.
 
-!bg right:40%
-(https://images.unsplash.com/photo-1462212210333-335063b676bc?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1462212210333-335063b676bc?fit=crop&h=720)
 
 <!-- used -->
 
@@ -275,8 +263,7 @@ fonctionnels et intuitifs.
 - Sessions
 - Validation des données
 
-!bg right:40%
-(https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
 
 ## Que fait Laravel ? (2/2)
 
@@ -287,10 +274,9 @@ fonctionnels et intuitifs.
 - E-mail
 - Notifications (SMS/Slack)
 
-!bg right:40%
-(https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
+![bg right:40%](https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
 
-## Sources (1/3)
+<!-- ## Sources (1/3)
 
 - Illustration principale par Annie Spratt (https://unsplash.com/@anniespratt)
   sur Unsplash
@@ -347,4 +333,4 @@ fonctionnels et intuitifs.
 
 [^1]:
     Unsplash
-    (https://unsplash.com/photos/white-wall-tiles-in-close-up-photography-OZ2BNYfF_xM)
+    (https://unsplash.com/photos/white-wall-tiles-in-close-up-photography-OZ2BNYfF_xM) -->

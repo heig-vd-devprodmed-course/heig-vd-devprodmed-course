@@ -6,7 +6,15 @@ Ecrire le code permettant d'afficher la table de multiplication de son choix :
 
 url : ...../livret/5 => affiche le livret 5
 
-affiche : 1 _ 5 = 5 2 _ 5 = 10 ... 12 \* 5 = 60
+affiche :
+
+```php
+1 * 5 = 5
+2 * 5 = 10
+3 * 5 = 15
+...
+12 * 5 = 60
+```
 
 url : ...../livret/7 => affiche le livret 7
 
@@ -45,11 +53,11 @@ Route::get('livret/{table}', function($table) {
 
 Ecrire le code permettant aux `urls` :
 
-```
+```php
 .../page1
 ```
 
-```
+```php
 .../Page1
 ```
 
@@ -90,8 +98,10 @@ Route::get('{page}', function($page) {
 
 Ecrire le code permettant de rediriger l'utilisateur sur le site suivant :
 
+```bash
     url : .../cff/Lausanne/8:30/Yverdon       => redirige vers
-    https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Lausanne&nach=Yverdon&datum=19.02.2024&zeit=08:30&suche=true
+    https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml ?von=Lausanne&nach=Yverdon&datum=19.02.2024&zeit=08:30&suche=true
+```
 
 > Remarques :
 >
@@ -105,22 +115,16 @@ Ecrire le code permettant de rediriger l'utilisateur sur le site suivant :
 Définir un paramètre optionnel dans l'url permettant de choisir ou non la date
 du voyage.
 
-## Exercice 3 - Solution :
-
-```php
-Route::get('cff/{depart}/{heure}/{arrivee}', function($depart, $heure, $arrivee) {
-    $date = date('d.m.Y');
-    return redirect("https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=$depart&nach=$arrivee&datum=$date&zeit=$heure&suche=true");
-});
-```
-
-Avec un paramètre optionnel :
+## Exercice 3 - Solution
 
 ```php
 Route::get('cff/{depart}/{heure}/{arrivee}/{date?}', function($depart, $heure, $arrivee, $date = null) {
     if ($date === null) {
         $date = date('d.m.Y');
     }
-    return redirect("https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=$depart&nach=$arrivee&datum=$date&zeit=$heure&suche=true");
+    return redirect(
+        "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml" .
+        "?von=$depart&nach=$arrivee&datum=$date&zeit=$heure&suche=true"
+    );
 });
 ```
