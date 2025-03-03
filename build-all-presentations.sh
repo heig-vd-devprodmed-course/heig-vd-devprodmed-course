@@ -7,13 +7,6 @@ PANDOC_DOCKER_IMAGE="pandoc/extra"
 
 ## Script
 
-echo "Removing all previous generated presentations and quizzes..."
-rm -f **/*/*-presentation.pdf || true
-rm -f **/*/*-support-de-cours.pdf || true
-rm -f **/*/*-exercices.pdf || true
-rm -f **/*/*-solutions.pdf || true
-rm -f **/*/*-quiz.pdf || true
-rm -f **/*/index.html || true
 
 # Check if Marp is installed locally
 if command -v "marp-cli.js" > /dev/null 2>&1; then
@@ -24,7 +17,14 @@ else
     MARP_CMD="docker run --rm --entrypoint=\"marp-cli.js\" --volume=\"$WORKDIR\":/home/marp/app $MARP_DOCKER_IMAGE"
 fi
 
-PANDOC_CMD="docker run --rm --volume \"$WORKDIR:/data\" --user $(id -u):$(id -g) $PANDOC_DOCKER_IMAGE --from=gfm --template eisvogel -V linkcolor=blue --highlight-style tango -V monofont='Courier New'"
+# Check if Pandoc is installed locally
+if command -v "pandoc" > /dev/null 2>&1; then
+    echo "Pandoc installed locally, using it..."
+    PANDOC_CMD="pandoc --from=gfm --template eisvogel -V linkcolor=blue --highlight-style tango -V monofont='Courier New'"
+else
+    echo "Pandoc not installed, using its Docker image..."
+    PANDOC_CMD="docker run --rm --volume \"$WORKDIR:/data\" --user $(id -u):$(id -g) $PANDOC_DOCKER_IMAGE --from=gfm --template eisvogel -V linkcolor=blue --highlight-style tango -V monofont='Courier New'"
+fi
 
 # Convert support de cours to PDF
 echo "Converting support de cours to PDF..."
