@@ -132,9 +132,9 @@ Route::get('/article/{id}', function ($id) {
 > une ou plusieurs fois) `$color` doit être soit rouge, soit vert, soit bleu.
 
 ```php
-    Route::get('user/{id}/{color}', function($id, $color) {
-        // action(s) à effectuer
-    })->where(['id' => '[0-9]+', 'color' => 'rouge|vert|bleu']);
+Route::get('user/{id}/{color}', function($id, $color) {
+    // action(s) à effectuer
+})->where(['id' => '[0-9]+', 'color' => 'rouge|vert|bleu']);
 ```
 
 ## Question 6 - Réponse (2/2)
@@ -142,11 +142,11 @@ Route::get('/article/{id}', function ($id) {
 ​ Avec du code.
 
 ```php
-    Route::get('user/{id}/{color}', function($id, $color) {
-        if (preg_match('/[0-9]+/', $id) && in_array($color, ['rouge', 'vert', 'bleu'])) {
-            // action(s) à effectuer
-        }
-    });
+Route::get('user/{id}/{color}', function($id, $color) {
+    if (preg_match('/[0-9]+/', $id) && in_array($color, ['rouge', 'vert', 'bleu'])) {
+        // action(s) à effectuer
+    }
+});
 ```
 
 [preg_match](https://www.php.net/manual/en/function.preg-match.php)
