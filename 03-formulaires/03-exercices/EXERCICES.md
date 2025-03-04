@@ -1,9 +1,11 @@
-## Exercice :
+# Formulaires - Exercices
+
+## Exercice 1 - Donnée
 
 On vous demande d'afficher un planning d'entrevues avec des personnes de votre
 choix. sous la forme :
 
-![agenda](img\agenda.png)
+![agenda](images/agenda.png)
 
 Les personnes sont stockées dans un fichier sur le serveur.
 
@@ -44,7 +46,7 @@ saisit ensuite :
 
 Puis clique sur le bouton permettant d'envoyer ces informations au serveur.
 
-![checkbox](img\checkbox.png)
+![checkbox](images/checkbox.png)
 
 Le serveur renvoie ensuite l'agenda des entrevues à l'utilisateur.
 

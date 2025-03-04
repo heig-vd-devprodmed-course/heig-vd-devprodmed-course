@@ -3,8 +3,8 @@
 ## Exercice 1 - Donnée
 
 Reprendre le code du contrôleur permettant d'afficher le tableau
-multidimensionnel (Voir : ProgrammeJour2) et le modifier pour pouvoir n'afficher
-que les artistes commençant par une lettre définie.
+multidimensionnel (Voir : `02-blade-controleur-support-de-cours`) et le modifier
+pour pouvoir n'afficher que les artistes commençant par une lettre définie.
 
 ```bash
 Ex : .../artistes/j		: n'affiche que les artistes dont le nom commence par J

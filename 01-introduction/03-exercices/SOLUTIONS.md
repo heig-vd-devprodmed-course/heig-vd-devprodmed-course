@@ -1,4 +1,4 @@
-# Introduction - Solutions
+# Introduction - Exercices et solutions
 
 ## Exercice 1 - Donnée
 

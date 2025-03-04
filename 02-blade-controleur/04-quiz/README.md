@@ -67,6 +67,9 @@ _paginate: false
 Cela correspond à un modèle que l'on peut réutiliser. Cela permet d'éviter de
 répéter du code (d'où moins d'erreur et gain de temps).
 
+Documentation :
+[Directives Blade](https://laravel.com/docs/9.x/blade#blade-directives)
+
 ## Question 2 - Donnée
 
 > **Comment se nomme le "tag" permettant d'injecter du code dans un `template`
@@ -134,7 +137,7 @@ class ContactController extends Controller {
 
 ---
 
-Non. C'est l'order des paramètres qui compte. Comme dans cette exemple :
+Non. C'est l'ordre des paramètres qui compte. Comme dans cette exemple :
 `\routes\web.php`
 
 ```php
