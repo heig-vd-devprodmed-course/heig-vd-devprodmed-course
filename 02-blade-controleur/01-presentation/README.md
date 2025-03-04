@@ -113,9 +113,9 @@ _paginate: false
 @section('content')
 <!-- Définit la section content -->
 <main>
-	<p>Nom : Despentes</p>
-	<p>Prénom : Virginie</p>
-	<p>Email : virginie.despentes@forest.com</p>
+	<p>Nom : {{ $nom }}</p>
+	<p>Prénom : {{ $prenom }}</p>
+	<p>Email : {{ email }}</p>
 </main>
 @endsection
 <!-- Fin de la section content -->
@@ -230,17 +230,17 @@ Route::get('/contacts/{id}/{office}', [ContactController::class, 'show']);
 ```php
 class ContactController extends Controller {
     public function list() {
-        $contacts = [
+        $contactsModel = [
             ['id' => 1, 'office' => 'Lausanne'],
             ['id' => 2, 'office' => 'Yverdon']
         ];
-        return view('contacts', ['contacts' => $contacts]);
+        return view('contactsView', ['contactArray' => $contactsModel]);
 ```
 
-`\resources\views\contacts.blade.php`
+`\resources\views\contactsView.blade.php`
 
 ```html
-@foreach ($contacts as $contact)
+@foreach ($contactArray as $contact)
 <p>{{ $contact['id'] }} - {{ $contact['office'] }}</p>
 @endforeach
 ```
