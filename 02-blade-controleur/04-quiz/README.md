@@ -103,110 +103,70 @@ de centraliser le traitement de données provenant de formulaires.
 
 ## Question 6 - Donnée
 
-> **Que doit-on ajouter dans le contrôleur pour qu'il fonctionne ?**
+> **Comment "lier" une route à une méthode d'un contrôleur ?**
 
-## Question 6 - Réponse
+---
 
-Il faut lui ajouter des méthodes (appelées par les routes)
+`\routes\web.php`
+
+```php
+Route::get('contacts/{contactId}', [ContactController::class, 'getContacts']);
+```
+
+`\app\Http\Controllers\ContactController.php`
+
+```php
+class ContactController extends Controller {
+    public function getContacts($contactId) {
+        return view('contact', ['id' => $contactId]);
+```
+
+`\resources\views\contact.blade.php`
+
+```php
+<h1>Contact n° {{$id}}</h1>
+```
 
 ## Question 7 - Donnée
 
-> **Comment "lier" une route à une méthode d'un contrôleur ?**
+> **Est-ce que le nom des paramètres de la méthode du contrôleur doit être le
+> même que celui de la route ?**
 
-## Question 7 - Réponse
+---
+
+Non. C'est l'order des paramètres qui compte. Comme dans cette exemple :
+`\routes\web.php`
 
 ```php
-Route::get('afficheForm', [NomController::class, 'afficheForm']);
+Route ::get('/teams/{teamId}/players/{playerId}', [TeamController::class, 'show']);
 ```
 
-Remarque : Attention à ne pas oublier la clause `use` pour la classe
-`NomController`
+`\app\Http\Controllers\TeamController.php`
+
+```php
+class TeamController extends Controller {
+    public function show($teamNumber, $playerNumber) {
+        return view('team', ['equipeId' => $teamNumber, 'joueuseId' => $playerNumber]);
+```
+
+`\resources\views\team.blade.php`
+
+```html
+<h1>Équipe {{$equipeId}} - Joueuse {{$joueuseId}}</h1>
+```
 
 ## Question 8 - Donnée
 
-> **Comment envoie-t-on des paramètres de la route au contrôleur ?**
+> **Pourquoi devons-nous créer un lien entre `\storage\app\public` et
+> `\public\storage` et comment ?**
 
 ## Question 8 - Réponse
 
-Cela se fait automatiquement (Il n'y a rien a faire ;-)
+Pour que les fichiers stockés dans `\storage\app\public` soient accessibles
+depuis le navigateur. Cela se fait avec la commande :
 
-## Question 9 - Donnée
-
-> \*\*Comment récupère-t-on les paramètres envoyés par la route dans le
-> contrôleur
-
-## Question 9 - Réponse
-
-Grâce aux paramètres de la méthode. Remarque : Il ne doivent pas forcément se
-nommer de la même manière que dans la route !
-
-Exemple de route appelant la méthode `test` du contrôleur `MonController`
-
-```php
-Route ::get('article/{n}/couleur/{c}', [MonController::class, 'test']);
+```bash
+php artisan storage:link
 ```
 
-Méthode `test(...)` du contrôleur `MonController` :
-
-```php
-//...
-
-// $n reçoit la première valeur envoyée (celle de {n})
-// $a reçoit la seconde valeur envoyée (celle de {c})
-public function test($n, $a) {
-    return $n . " : " .$a;
-}
-
-//...
-```
-
-## Question 10 - Donnée
-
-> **Comment envoie-t-on des paramètres du contrôleur à la vue ?**
-
-## Question 10 - Réponse
-
-Avec
-
-```php
-->with('nomDuParametreDansVue', $nomDuParametreAEnvoyer)
-```
-
-Ex :
-
-```php
-return view('maVue2')->with('artistes', $artistes);
-```
-
-Remarque : `nomDuParametreDansVue` peut être différent de
-`$nomDuParametreAEnvoyer` Ex :
-
-```php
-return view('maVue2')->with('lesArtistes', $artistes);
-```
-
-## Question 11 - Donnée
-
-> **Comment récupère-t-on les paramètres envoyés par le contrôleur dans la vue
-> ?**
-
-## Question 11 - Réponse
-
-Avec :
-
-```php
-{{$nomDuParametreDansVue}}
-```
-
-## Question 12 - Donnée
-
-> **A l'aide de quelles instructions peut-on construire dynamiquement une vue
-> ?**
-
-## Question 12 - Réponse
-
-A l'aide des directives Blade : Avec `@foreach` `@for` `@if` `@...`
-
-Documentation :
-
-[Directives Blade](https://laravel.com/docs/9.x/blade#blade-directives)
+[Sources](https://laravel.com/docs/8.x/filesystem#the-public-disk)

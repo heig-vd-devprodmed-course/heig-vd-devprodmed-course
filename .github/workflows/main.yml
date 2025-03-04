@@ -55,26 +55,26 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  create-index-page-for-github-pages:
-    runs-on: ubuntu-latest
-    needs: build-and-upload-course-presentations
-    steps:
-      - name: Download course presentations
-        uses: actions/download-artifact@v4
-        with:
-          name: course-presentations
+  # create-index-page-for-github-pages:
+  #   runs-on: ubuntu-latest
+  #   needs: build-and-upload-course-presentations
+  #   steps:
+  #     - name: Download course presentations
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: course-presentations
 
-      - name: Install packages
-        run: sudo apt install --yes tree
+  #     - name: Install packages
+  #       run: sudo apt install --yes tree
 
-      - name: Generate index.html with tree
-        run: |
-          tree -H '.' --noreport --dirsfirst -T 'HEIG-VD DevProdMéd Course' -P "*.html|*.pdf" --prune --charset utf-8 -o index.html
+  #     - name: Generate index.html with tree
+  #       run: |
+  #         tree -H '.' --noreport --dirsfirst -T 'HEIG-VD DevProdMéd Course' -P "*.html|*.pdf" --prune --charset utf-8 -o index.html
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
+  #     - name: Upload artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: .
 
   # publish-course-presentations-to-github-pages:
   #   needs: create-index-page-for-github-pages
