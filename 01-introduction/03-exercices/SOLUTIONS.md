@@ -29,6 +29,7 @@ comprises).
 ## Exercice 1 - Solution
 
 ```php
+<!-- routes/web.php -->
 Route::get('livret/{table}', function($table) {
     if ($table < 2 || $table > 12) {
         return "La table de multiplication doit être comprise entre 2 et 12";
@@ -42,6 +43,7 @@ Route::get('livret/{table}', function($table) {
 Ou avec `where` :
 
 ```php
+<!-- routes/web.php -->
 Route::get('livret/{table}', function($table) {
     for ($i = 1; $i <= 12; $i++) {
         echo "$i * $table = " . $i * $table . "<br>";
@@ -49,13 +51,34 @@ Route::get('livret/{table}', function($table) {
 })->where('table', '[2-9]|1[0-2]');
 ```
 
-## Exercice 2 - Donnée
-
-Ecrire le code permettant aux `urls` :
+ou avec des vues
 
 ```php
-.../page1
+<!-- routes/web.php -->
+Route::get('/livretVue/{n}', function ($n) {
+    return view('livret')->with("n",$n);
+})->where(['n' => '[2-9]|1[0-2]']);
 ```
+
+```html
+<!-- resources/views/livret.blade.php -->
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Livret {{$n}}</title>
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<?php
+	for ($mult = 1; $mult <= 12; $mult++) {
+		echo $mult . ' * ' . $n . ' = ' . $mult * $n, '<br>'; } ?>
+	</body>
+</html>
+```
+
+## Exercice 2 - Donnée Ecrire le code permettant aux `urls` : ```php .../page1
 
 ```php
 .../Page1
@@ -66,6 +89,7 @@ d'accéder au même contenu.
 ## Exercice 2 - Solution
 
 ```php
+<!-- routes/web.php -->
 Route::get('page1', function() {
     return "Page 1";
 });
@@ -75,18 +99,14 @@ Route::get('Page1', function() {
 });
 ```
 
-ou avec une seule route :
+ou avec `where` :
 
 ```php
-Route::get('{page}', function($page) {
-    if (strtolower($page) === 'page1') {
-        return "Page 1";
-    }
-    return redirect('page1');
-});
+<!-- routes/web.php -->
+Route::get('{p}age1', function ($p) {
+    return "Bien joué";
+})->where('p', '[P|p]');
 ```
-
-ou avec `where` :
 
 ```php
 Route::get('{page}', function($page) {
@@ -118,6 +138,7 @@ du voyage.
 ## Exercice 3 - Solution
 
 ```php
+<!-- routes/web.php -->
 Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDate = 0) {
 	if ($strDate) {
         // Il est impératif que la date soit sur 10 caractères
@@ -150,6 +171,7 @@ Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDat
 ```
 
 ```php
+<!-- routes/web.php -->
 use Illuminate\Support\Facades\Route;
 use DateTime;
 
