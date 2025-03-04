@@ -5,7 +5,6 @@ WORKDIR=$(pwd)
 PANDOC_DOCKER_IMAGE="pandoc/extra"
 
 ## Script
-
 echo "Removing all previous generated presentations and quizzes..."
 rm -f **/*/*-support-de-cours.pdf || true
 rm -f **/*/*-exercices.pdf || true
