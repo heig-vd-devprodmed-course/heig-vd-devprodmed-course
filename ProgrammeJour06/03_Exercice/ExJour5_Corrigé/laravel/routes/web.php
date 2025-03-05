@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('voiture', [VoitureController::class,'rendFormulaire']);
-Route::post('voiture', [VoitureController::class,'traiteFormulaire']);
+Route::get('/voiture', [VoitureController::class, 'rendFormulaire']);
+Route::post('voiture', [VoitureController::class, 'traiteFormulaire']);

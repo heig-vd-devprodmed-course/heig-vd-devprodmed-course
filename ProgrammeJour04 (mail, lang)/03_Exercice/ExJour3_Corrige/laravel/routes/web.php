@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('agenda', [AgendaController::class,'afficheFormulaire']);
-Route::post('agenda', [AgendaController::class,'traiteFormulaire']);
+Route::get('/agenda', [AgendaController::class, 'afficheFormulaire']);
+Route::post('agenda', [AgendaController::class, 'traiteFormulaire']);

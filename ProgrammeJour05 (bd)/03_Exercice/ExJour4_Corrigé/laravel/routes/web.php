@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('manif', [ManifController::class,'rendFormManif']);
-Route::post('manif', [ManifController::class,'traiteFormManif']);
+Route::get('/manif', [ManifController::class, 'rendFormManif']);
+Route::post('manif', [ManifController::class, 'traiteFormManif']);
