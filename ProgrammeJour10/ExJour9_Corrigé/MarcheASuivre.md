@@ -322,8 +322,8 @@ App\Models\Score::where('user_id','3')->orderBy('nbSecondes','ASC')->get();
 
 Pour récupérer les noms des utilisateurs dont l'identifiant est 1,3 ou 5 :
 
-```
-App\Models\User::whereIn('id', array(1, 3, 5))->get('name');
+```php
+App\Models\User::whereIn('id', array(1, 3, 5))->get('/name');
 ```
 
 Pour récupérer les trois meilleurs scores des utilisateurs ayant répondu juste à
@@ -334,7 +334,7 @@ App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','
 ```
 
 ```
-App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get('user_id');
+App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get('/user_id');
 ```
 
 ```
@@ -530,7 +530,7 @@ Il faut ajouter encore les routes suivantes dans le fichier `web.php`
 
 ```
 ...
-Route::get('page2', [ScoreController::class, 'rendPage2']);
+Route::get('/page2', [ScoreController::class, 'rendPage2']);
 Route::post('page2', [ScoreController::class, 'rendPage2']);
 ...
 ```

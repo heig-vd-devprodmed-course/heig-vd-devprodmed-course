@@ -137,7 +137,7 @@ Contenu du fichier `\routes\web.php`
 
 ```php
 <!-- routes/web.php -->
-Route::get('artistes/{premiereLettre?}', [ArtistesController::class,'afficheArtistes'])->where(['premiereLettre' => '[a-zA-Z]']);
+Route::get('/artistes/{premiereLettre?}', [ArtistesController::class,'afficheArtistes'])->where(['premiereLettre' => '[a-zA-Z]']);
 ```
 
 Cette route permet de rediriger vers la méthode `afficheArtistes` du contrôleur
@@ -241,7 +241,7 @@ Contenu du fichier `\routes\web.php`
 
 ```php
 <!-- routes/web.php -->
-Route::get('proverbesV1', [ProverbesController::class,'afficheDixProverbes'])
+Route::get('/proverbesV1', [ProverbesController::class,'afficheDixProverbes'])
 ```
 
 Cette route permet de rediriger vers la méthode `afficheProverbes` du contrôleur
@@ -610,7 +610,7 @@ Pour pouvoir exécuter notre nouvelle méthode, il nous faut une nouvelle route
 ```php
 <!-- routes/web.php -->
 ...
-Route::get('proverbesV2', [ProverbesController::class,'afficheDixProverbesV2']);
+Route::get('/proverbesV2', [ProverbesController::class,'afficheDixProverbesV2']);
 ...
 ```
 

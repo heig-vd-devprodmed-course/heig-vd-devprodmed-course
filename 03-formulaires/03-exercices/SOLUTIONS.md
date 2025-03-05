@@ -39,7 +39,7 @@ use App\Http\Controllers\AgendaController;
 
 ...
 
-Route::get('agenda', [AgendaController::class,'afficheFormulaire']);
+Route::get('/agenda', [AgendaController::class,'afficheFormulaire']);
 Route::post('agenda', [AgendaController::class,'traiteFormulaire']);
 ```
 

@@ -30,7 +30,7 @@ comprises).
 
 ```php
 <!-- routes/web.php -->
-Route::get('livret/{table}', function($table) {
+Route::get('/livret/{table}', function($table) {
     if ($table < 2 || $table > 12) {
         return "La table de multiplication doit être comprise entre 2 et 12";
     }
@@ -44,7 +44,7 @@ Ou avec `where` :
 
 ```php
 <!-- routes/web.php -->
-Route::get('livret/{table}', function($table) {
+Route::get('/livret/{table}', function($table) {
     for ($i = 1; $i <= 12; $i++) {
         echo "$i * $table = " . $i * $table . "<br>";
     }
@@ -90,11 +90,11 @@ d'accéder au même contenu.
 
 ```php
 <!-- routes/web.php -->
-Route::get('page1', function() {
+Route::get('/page1', function() {
     return "Page 1";
 });
 
-Route::get('Page1', function() {
+Route::get('/Page1', function() {
     return redirect('page1');
 });
 ```
@@ -103,13 +103,13 @@ ou avec `where` :
 
 ```php
 <!-- routes/web.php -->
-Route::get('{p}age1', function ($p) {
+Route::get('/{p}age1', function ($p) {
     return "Bien joué";
 })->where('p', '[P|p]');
 ```
 
 ```php
-Route::get('{page}', function($page) {
+Route::get('/{page}', function($page) {
     return "Page 1";
 })->where('page', 'page1|Page1');
 ```
@@ -139,7 +139,7 @@ du voyage.
 
 ```php
 <!-- routes/web.php -->
-Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDate = 0) {
+Route::get('/cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDate = 0) {
 	if ($strDate) {
         // Il est impératif que la date soit sur 10 caractères
         // Ex1 : 31.01.2020
@@ -175,7 +175,7 @@ Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDat
 use Illuminate\Support\Facades\Route;
 use DateTime;
 
-Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDate = null) {
+Route::get('/cff/{dep}/{hm}/{arr}/{strDate?}', function ($dep, $hm, $arr, $strDate = null) {
 
     // Vérifie et formate la date fournie, sinon utilise la date du jour
     $strDate = validateAndFormatDate($strDate) ?? (new DateTime())->format("d.m.Y");

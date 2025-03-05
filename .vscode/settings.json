@@ -13,7 +13,7 @@
   "files.insertFinalNewline": true,
   "markdown.extension.toc.levels": "2..3",
   "markdown.marp.breaks": "off",
-  "markdown.marp.html": "all",
+  "markdown.marp.html": "all", 
   "markdown.marp.themes": [".marp/theme.css"],
   "markdownlint.config": {
     "no-duplicate-heading": {
@@ -25,5 +25,9 @@
   },
   "plantuml.render": "PlantUMLServer",
   "plantuml.server": "http://localhost:9090",
+	"prettier.printWidth": 80,
+	"prettier.proseWrap": "always",
+	"prettier.tabWidth": 2,
+	"prettier.useTabs": true
   "workbench.activityBar.orientation": "vertical"
 }

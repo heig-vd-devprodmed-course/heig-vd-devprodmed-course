@@ -63,7 +63,7 @@ notre formulaire.
 
 ```php
 <!-- routes/web.php -->
-Route::get('afficheFormulaire', function () {
+Route::get('/afficheFormulaire', function () {
     return view('view_form');
 });
 ```
@@ -105,7 +105,7 @@ pour la rediriger vers notre contrôleur.
 ```php
 <!-- routes/web.php -->
 use App\Http\Controllers\FormController;
-Route::get('afficheFormulaire', [FormController::class,'afficheForm']);
+Route::get('/afficheFormulaire', [FormController::class,'afficheForm']);
 ```
 
 > Attention à ne pas oublier le `use` de `FormController` avec le bon

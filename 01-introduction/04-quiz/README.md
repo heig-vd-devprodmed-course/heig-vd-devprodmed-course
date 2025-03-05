@@ -132,7 +132,7 @@ Route::get('/article/{id}', function ($id) {
 > une ou plusieurs fois) `$color` doit être soit rouge, soit vert, soit bleu.
 
 ```php
-Route::get('user/{id}/{color}', function($id, $color) {
+Route::get('/user/{id}/{color}', function($id, $color) {
     // action(s) à effectuer
 })->where(['id' => '[0-9]+', 'color' => 'rouge|vert|bleu']);
 ```
@@ -142,7 +142,7 @@ Route::get('user/{id}/{color}', function($id, $color) {
 ​ Avec du code.
 
 ```php
-Route::get('user/{id}/{color}', function($id, $color) {
+Route::get('/user/{id}/{color}', function($id, $color) {
     if (preg_match('/[0-9]+/', $id) && in_array($color, ['rouge', 'vert', 'bleu'])) {
         // action(s) à effectuer
     }
@@ -169,7 +169,7 @@ Route::get('/', function() {
 Redirection vers une route nommée :
 
 ```php
-Route::get('redirect/', function() {
+Route::get('/redirect/', function() {
     return redirect()->route('home');
 });
 ```
@@ -184,7 +184,7 @@ Route::get('redirect/', function() {
 Redirection vers une route nommée :
 
 ```php
-	Route ::get('redirect/', function() {
+	Route ::get('/redirect/', function() {
 		return redirect()->route('home') ;
 	}) ;
 ```
@@ -192,7 +192,7 @@ Redirection vers une route nommée :
 ​ Redirection vers une URL :
 
 ```php
-	Route ::get('redirect/2', function() {
+	Route ::get('/redirect/2', function() {
 		return redirect('https://example.com');
 	})
 ```
@@ -226,7 +226,7 @@ vues sont stockées dans :
 > Accéder à l'url `/article` permet d'afficher la vue `article.php`
 
 ```php
-Route ::get('article', function() {
+Route ::get('/article', function() {
     return view('article') ;
 }) ;
 ```

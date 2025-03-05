@@ -272,7 +272,7 @@ Il ne reste plus qu'à faire une route pour notre contrôleur. Editons le fichie
 `\routes\web.php`et ajoutons la route :
 
 ```php
-Route::get('voiture', [VoitureController::class,'rendFormulaire']);
+Route::get('/voiture', [VoitureController::class,'rendFormulaire']);
 ```
 
 Testons voir si cela fonctionne :

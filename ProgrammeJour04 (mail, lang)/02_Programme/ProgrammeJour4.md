@@ -91,7 +91,7 @@ Créons maintenant la route (`get`) `contact` pour obtenir notre formulaire (
 ```php
 use App\Http\Controllers\ContactController;
 //...
-Route::get('contact', [ContactController::class,'rendFormulaire']);
+Route::get('/contact', [ContactController::class,'rendFormulaire']);
 ```
 
 ## Contrôleur

@@ -35,11 +35,12 @@ Zweifel Robin
 ## Routes `\routes\web.php`
 
 ```php
-Route::get('agenda', [AgendaController::class,'afficheFormulaire']);
+Route::get('/agenda', [AgendaController::class,'afficheFormulaire']);
 Route::post('agenda', [AgendaController::class,'traiteFormulaire']);
 ```
 
-> Remarque : N'oubliez pas le `use` pour la classe `AgendaController` (qui n'existe encore pas ;-)
+> Remarque : N'oubliez pas le `use` pour la classe `AgendaController` (qui
+> n'existe encore pas ;-)
 
 ## Contrôleur `\app\Http\Controllers\AgendaController.php`
 
@@ -68,7 +69,7 @@ class AgendaController extends Controller {
     }
 
     public function traiteFormulaire(Request $request) {
-        if ($request->input('personnes') !== null && 
+        if ($request->input('personnes') !== null &&
                 $request->input('heureDebut') !== null &&
                 $request->input('heureFin') != null) {
             $personnes = $request->input('personnes');
@@ -89,7 +90,7 @@ class AgendaController extends Controller {
             $dtFin = new DateTime($fin);
             if ($dtDebut>$dtFin) {
                 $dtTmp = $dtFin;
-                $dtFin = $dtDebut; 
+                $dtFin = $dtDebut;
                 $dtDebut = $dtFin;
                 $tmp = $fin;
                 $fin = $debut;
@@ -118,9 +119,9 @@ class AgendaController extends Controller {
                 $plagesFin[] = $plageFin;
             }
         } else {
-            return redirect('agenda'); 
+            return redirect('agenda');
         }
-        return view('view_affiche_agenda')->with(['personnes' => $personnes, 
+        return view('view_affiche_agenda')->with(['personnes' => $personnes,
                                                   'plagesDebut' => $plagesDebut,
                                                   'plagesFin' => $plagesFin]);
     }
@@ -221,4 +222,3 @@ Agenda (Exercice Jour 3)
 </div>
 @endsection
 ```
-

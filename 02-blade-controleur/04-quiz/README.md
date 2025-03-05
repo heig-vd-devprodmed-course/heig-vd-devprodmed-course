@@ -113,7 +113,7 @@ de centraliser le traitement de données provenant de formulaires.
 `\routes\web.php`
 
 ```php
-Route::get('contacts/{contactId}', [ContactController::class, 'getContacts']);
+Route::get('/contacts/{contactId}', [ContactController::class, 'getContacts']);
 ```
 
 `\app\Http\Controllers\ContactController.php`
