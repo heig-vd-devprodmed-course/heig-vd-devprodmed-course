@@ -3,7 +3,7 @@ marp: true
 ---
 
 <!--
-theme: gaia
+theme: custom-marp-theme
 size: 16:9
 paginate: true
 author: V. Guidoux, avec l'aide de GitHub Copilot
@@ -11,51 +11,6 @@ title: HEIG-VD DévProdMéd - Cours Laravel
 description: Blade et contrôleur pour le cours DévProdMéd à la HEIG-VD, Suisse
 header: "**Blade et contrôleur**"
 footer: "**HEIG-VD** - DévProdMéd Course 2024-2025 - CC BY-SA 4.0"
-style: |
-    :root {
-        --color-background: #fff;
-        --color-highlight: #f96;
-        --color-dimmed: #888;
-        --color-headings: #7d8ca3;
-    }
-    blockquote {
-        font-style: italic;
-    }
-    table {
-        width: 100%;
-    }
-    th:first-child {
-        width: 15%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        color: var(--color-headings);
-    }
-    h2, h3, h4, h5, h6 {
-        font-size: 1.5rem;
-    }
-    h1 a:link, h2 a:link, h3 a:link, h4 a:link, h5 a:link, h6 a:link {
-        text-decoration: none;
-    }
-    section:not(.lead) > p, blockquote {
-        text-align: justify;
-    }
-    section:has(h1) {
-        padding: 50px;
-    }
-    section:has(h1) > header {
-        display: none;
-    }
-    section > header {
-        font-size: 50%;
-    }
-    .two-columns {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-    }
-    .center {
-        text-align: center;
-    }
 headingDivider: 6
 -->
 
@@ -84,48 +39,51 @@ _paginate: false
 - Il permet de créer des vues plus facilement
 - Il permet d'insérer des données dynamiques dans les vues
 
-## `\resources\views\template.blade.php`
+---
 
 ```html
+<!-- \resources\views\template.blade.php -->
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<title>Mon contact</title>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	</head>
-	<body>
-		<header>
-			<h1>Mon contact</h1>
-		</header>
-		@yield('content')
-		<!-- content -->
-		@include('footer')
-	</body>
+  <head>
+    <title>Mon contact</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header>
+      <h1>Mon contact</h1>
+    </header>
+    @yield('content')
+    <!-- content -->
+    @include('footer')
+  </body>
 </html>
 ```
 
-## Exemple de @yield (suite) `\resources\views\contacts.blade.php`
+## Exemple de @yield (suite)
 
 ```html
+<!-- \resources\views\contacts.blade.php -->
 @extends('template')
 <!-- Hérite de template.blade.php -->
 @section('content')
 <!-- Définit la section content -->
 <main>
-	<p>Nom : Despentes</p>
-	<p>Prénom : Virginie</p>
-	<p>Email : virginie.despentes@forest.com</p>
+  <p>Nom : {{ $nom }}</p>
+  <p>Prénom : {{ $prenom }}</p>
+  <p>Email : {{ email }}</p>
 </main>
 @endsection
 <!-- Fin de la section content -->
 ```
 
-## Exemple de @include (suite) `\resources\views\footer.blade.php`
+## Exemple de @include (suite) ``
 
 ```html
+<!-- \resources\views\footer.blade.php -->
 <footer>
-	<p>HEIG-VD</p>
+  <p>HEIG-VD</p>
 </footer>
 ```
 
@@ -134,15 +92,15 @@ _paginate: false
 ```html
 <!DOCTYPE html>
 <html lang="fr">
-	<!-- ... -->
-	<body>
-		<header>
-			<h1>Mon contact</h1>
-		</header>
-		@yield('content')
-		<!-- content -->
-		@include('footer')
-	</body>
+  <!-- ... -->
+  <body>
+    <header>
+      <h1>Mon contact</h1>
+    </header>
+    @yield('content')
+    <!-- content -->
+    @include('footer')
+  </body>
 </html>
 ```
 
@@ -150,18 +108,18 @@ _paginate: false
 
 ```html
 <main>
-	<p>Nom : Despentes</p>
-	<p>
-		Email : @if ($email) {{
-		<!-- $email est une variable passée à la vue -->
-		$email
-		<!-- Affiche $email si défini -->
-		}} @else
-		<!-- Si $email n'est pas défini -->
-		Pas d'email
-		<!-- Affiche "Pas d'email" -->
-		@endif
-	</p>
+  <p>Nom : Despentes</p>
+  <p>
+    Email : @if ($email) {{
+    <!-- $email est une variable passée à la vue -->
+    $email
+    <!-- Affiche $email si défini -->
+    }} @else
+    <!-- Si $email n'est pas défini -->
+    Pas d'email
+    <!-- Affiche "Pas d'email" -->
+    @endif
+  </p>
 </main>
 ```
 
@@ -230,17 +188,17 @@ Route::get('/contacts/{id}/{office}', [ContactController::class, 'show']);
 ```php
 class ContactController extends Controller {
     public function list() {
-        $contacts = [
+        $contactsModel = [
             ['id' => 1, 'office' => 'Lausanne'],
             ['id' => 2, 'office' => 'Yverdon']
         ];
-        return view('contacts', ['contacts' => $contacts]);
+        return view('contactsView', ['contactArray' => $contactsModel]);
 ```
 
-`\resources\views\contacts.blade.php`
+`\resources\views\contactsView.blade.php`
 
 ```html
-@foreach ($contacts as $contact)
+@foreach ($contactArray as $contact)
 <p>{{ $contact['id'] }} - {{ $contact['office'] }}</p>
 @endforeach
 ```

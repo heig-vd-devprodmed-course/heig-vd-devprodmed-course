@@ -755,9 +755,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('1', function() {return 'page 1';});
-Route::get('2', function() {return 'page 2';});
-Route::get('3', function() {return 'page 3';});
+Route::get('/1', function() {return 'page 1';});
+Route::get('/2', function() {return 'page 2';});
+Route::get('/3', function() {return 'page 3';});
 ```
 
 et testons-les !
@@ -779,7 +779,7 @@ Route::get('/', function () {
 
 //...
 
-Route::get('{n}', function($n) {
+Route::get('/{n}', function($n) {
     return "page $n";
 })->where('n', '[1-3]');
 ```
@@ -804,7 +804,7 @@ Route::get('/', function () {
 
 //...
 
-Route::get('afficheDate', function () {
+Route::get('/afficheDate', function () {
     $date = now();
     echo 'Voici le détail de la variable $date : ' . '<br>';
     echo '<br>';
@@ -823,7 +823,7 @@ Route::get('/', function () {
 
 //...
 
-Route::get('afficheDate2', function () {
+Route::get('/afficheDate2', function () {
     $date = now();
     dd($date);
 });
@@ -837,7 +837,7 @@ Il est possible de rediriger une route sur une url. Voici comment procéder :
 ```php
 //...
 
-Route::get('cff', function() {
+Route::get('/cff', function() {
     return redirect('https://www.sbb.ch/fr/');
 });
 ```
@@ -856,7 +856,7 @@ Route::get('/', function () {
 et voici comment rediriger sur une route nommée :
 
 ```php
-Route::get('maison', function() {
+Route::get('/maison', function() {
     return redirect()->route('home');
 });
 ```
@@ -867,7 +867,7 @@ Il est possible de transformer les informations relatives à une route en
 paramètres. Voici comment procéder :
 
 ```php
-Route::get('uneRoute/{param1}/{param2}/{param3?}', function ($param1, $param2, $param3 = "Laravel") {
+Route::get('/uneRoute/{param1}/{param2}/{param3?}', function ($param1, $param2, $param3 = "Laravel") {
     return $param1 . " " . $param2 . " " . $param3;
 });
 ```
@@ -906,7 +906,7 @@ Créons une vue `article.php` dans le répertoire `resources/views` :
 et changeons la route crée précédemment pour y accéder.
 
 ```php
-Route::get('{n}', function($n) {
+Route::get('/{n}', function($n) {
     return view('article');
 })->where('n', '[1-3]');
 ```
@@ -934,7 +934,7 @@ numéro $n à la vue.
 Voici comment procéder :
 
 ```php
-Route::get('{n}', function($n) {
+Route::get('/{n}', function($n) {
     return view('article')->with('n',$n);
 })->where('n', '[1-3]');
 ```

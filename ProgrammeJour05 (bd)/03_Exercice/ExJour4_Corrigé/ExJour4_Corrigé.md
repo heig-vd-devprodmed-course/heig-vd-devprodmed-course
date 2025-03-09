@@ -1,10 +1,12 @@
-Corrigé ExerciceJour4 (Manifestation) :
-==========
+# Corrigé ExerciceJour4 (Manifestation) :
+
 ## Config Mail (`.env`)
 
-Puis lancer le serveur mail `mailpit` [source](https://github.com/axllent/mailpit)
+Puis lancer le serveur mail `mailpit`
+[source](https://github.com/axllent/mailpit)
 
-Une fois que le serveur mail est lancé (sur localhost), nous pouvons configurer le fichier `.env` 
+Une fois que le serveur mail est lancé (sur localhost), nous pouvons configurer
+le fichier `.env`
 
 ```none
 MAIL_MAILER=smtp
@@ -17,13 +19,13 @@ MAIL_FROM_ADDRESS=laravel@laravel_heig.ch
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-## Routes (`web.php`) : 
+## Routes (`web.php`) :
 
 ```php
 use App\Http\Controllers\ManifController;
 //...
-Route::get('manif', [ManifController::class,'rendFormManif']);
-Route::post('manif', [ManifController::class,'traiteFormManif']);
+Route::get('/manif', [ManifController::class,'rendFormManif']);
+Route::post('/manif', [ManifController::class,'traiteFormManif']);
 ```
 
 ## Contrôleur (`ManifController.php`) :
@@ -31,8 +33,6 @@ Route::post('manif', [ManifController::class,'traiteFormManif']);
 ```
 php artisan make:controller ManifController
 ```
-
-
 
 ```php
 <?php
@@ -51,15 +51,15 @@ class ManifController extends Controller {
     }
 
     public function traiteFormManif(ManifRequest $request) {
-        
+
 		$request->validate(['fin' => [new ManifRuleV10($request->debut)]]);
 		//$request->validate(['fin' => new ManifRule($request->debut)]);
-		
+
 		// Envoi d'un mail
 		Mail::send('view_manif_mail', $request->all(), function($message){
 			$message->to('admin@supermanif.ch')->subject('Prochaine manifestation');
         });
-        
+
         return view('view_manif_confirm');
     }
 }
@@ -122,7 +122,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class ManifRuleV10 implements ValidationRule
 {
-	
+
 	protected $debut;
 
     /**
@@ -134,7 +134,7 @@ class ManifRuleV10 implements ValidationRule
 		//dd("yes !");
         $this->debut = $debut;
     }
-	
+
     /**
      * Run the validation rule.
      *
@@ -168,15 +168,15 @@ class ManifRuleV10 implements ValidationRule
 >
 > ```php
 > <?php
-> 
+>
 > namespace App\Rules;
-> 
+>
 > use Illuminate\Contracts\Validation\Rule;
-> 
+>
 > class ManifRule implements Rule {
-> 
+>
 >     protected $debut;
-> 
+>
 >     /**
 >      * Create a new rule instance.
 >      *
@@ -185,7 +185,7 @@ class ManifRuleV10 implements ValidationRule
 >     public function __construct($debut) {
 >         $this->debut = $debut;
 >     }
-> 
+>
 >     /**
 >      * Determine if the validation rule passes.
 >      *
@@ -199,7 +199,7 @@ class ManifRuleV10 implements ValidationRule
 >         $dateAuMaximum = date('Y-m-d', strtotime($this->debut . ' + 5 days'));
 >         return $value >= $dateAuMinimum && $value <= $dateAuMaximum;
 >     }
-> 
+>
 >     /**
 >      * Get the validation error message.
 >      *
@@ -214,7 +214,6 @@ class ManifRuleV10 implements ValidationRule
 >     }
 > }
 > ```
->
 
 ## Message(s) customisé(s)
 
@@ -243,21 +242,33 @@ return [
 `template.blade.php`
 
 ```html
-<!doctype html>
-<html lang='fr'>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <title>
-            Mon joli formulaire
-        </title>
-        <link media="all" type="text/css" rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link media="all" type="text/css" rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-        <style> textarea {resize:none} </style>
-    </head>
-    <body>
-        @yield('contenu')
-    </body>
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Mon joli formulaire</title>
+		<link
+			media="all"
+			type="text/css"
+			rel="stylesheet"
+			href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		/>
+		<link
+			media="all"
+			type="text/css"
+			rel="stylesheet"
+			href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+		/>
+		<style>
+			textarea {
+				resize: none;
+			}
+		</style>
+	</head>
+	<body>
+		@yield('contenu')
+	</body>
 </html>
 ```
 
@@ -300,19 +311,21 @@ return [
 `view_manif_mail.blade.php`
 
 ```html
-<!doctype html>
-<html lang='fr'>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h2>Manifestation</h2>
-        <p>La prochaine manifestation aura lieu du {{date('d.m.Y', strtotime($debut))}} au {{date('d.m.Y', strtotime($fin))}} à {{$lieu}}.</p>
-        <p>Avec nos meilleures salutations.</p>
-        <p>Le comité</p>
-    </body>
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<h2>Manifestation</h2>
+		<p>
+			La prochaine manifestation aura lieu du {{date('d.m.Y',
+			strtotime($debut))}} au {{date('d.m.Y', strtotime($fin))}} à {{$lieu}}.
+		</p>
+		<p>Avec nos meilleures salutations.</p>
+		<p>Le comité</p>
+	</body>
 </html>
-
 ```
 
 `view_manif_confirm.blade.php`
@@ -331,4 +344,5 @@ return [
 @endsection
 ```
 
-Pour contrôler les mails qui ont été envoyés il suffit d'aller consulter le serveur mail `Mailpit` à l'aide d'un navigateur à l'adresse : `localhost:8025`
+Pour contrôler les mails qui ont été envoyés il suffit d'aller consulter le
+serveur mail `Mailpit` à l'aide d'un navigateur à l'adresse : `localhost:8025`

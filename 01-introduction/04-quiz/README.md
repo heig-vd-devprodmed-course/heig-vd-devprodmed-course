@@ -3,7 +3,7 @@ marp: true
 ---
 
 <!--
-theme: gaia
+theme: custom-marp-theme
 size: 16:9
 paginate: true
 author: J. Hess et V. Guidoux, avec l'aide de GitHub Copilot
@@ -11,43 +11,6 @@ title: HEIG-VD DévProdMéd - Cours Laravel
 description: Quiz pour le cours DévProdMéd à la HEIG-VD, Suisse
 header: "**Quiz 1**"
 footer: "**HEIG-VD** - DévProdMéd Course 2024-2025 - CC BY-SA 4.0"
-style: |
-  :root {
-      --color-background: #fff;
-      --color-foreground: #333;
-      --color-highlight: #f96;
-      --color-dimmed: #888;
-      --color-headings: #7d8ca3;
-  }
-  blockquote {
-      font-style: italic;
-  }
-  table {
-      width: 100%;
-  }
-  h1, h2, h3, h4, h5, h6 {
-      color: var(--color-headings);
-  }
-  h2, h3, h4, h5, h6 {
-      font-size: 1.5rem;
-  }
-  section:not(.lead) > p, blockquote {
-      text-align: justify;
-  }
-  .two-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-  }
-  .center {
-      text-align: center;
-  }
-  section.small  {
-      font-size: 1.5rem;
-  }
-  section.small h2 {
-      font-size: 2rem;
-  }
 headingDivider: 6
 -->
 
@@ -169,9 +132,9 @@ Route::get('/article/{id}', function ($id) {
 > une ou plusieurs fois) `$color` doit être soit rouge, soit vert, soit bleu.
 
 ```php
-    Route::get('user/{id}/{color}', function($id, $color) {
-        // action(s) à effectuer
-    })->where(['id' => '[0-9]+', 'color' => 'rouge|vert|bleu']);
+Route::get('/user/{id}/{color}', function($id, $color) {
+    // action(s) à effectuer
+})->where(['id' => '[0-9]+', 'color' => 'rouge|vert|bleu']);
 ```
 
 ## Question 6 - Réponse (2/2)
@@ -179,11 +142,11 @@ Route::get('/article/{id}', function ($id) {
 ​ Avec du code.
 
 ```php
-    Route::get('user/{id}/{color}', function($id, $color) {
-        if (preg_match('/[0-9]+/', $id) && in_array($color, ['rouge', 'vert', 'bleu'])) {
-            // action(s) à effectuer
-        }
-    });
+Route::get('/user/{id}/{color}', function($id, $color) {
+    if (preg_match('/[0-9]+/', $id) && in_array($color, ['rouge', 'vert', 'bleu'])) {
+        // action(s) à effectuer
+    }
+});
 ```
 
 [preg_match](https://www.php.net/manual/en/function.preg-match.php)
@@ -206,7 +169,7 @@ Route::get('/', function() {
 Redirection vers une route nommée :
 
 ```php
-Route::get('redirect/', function() {
+Route::get('/redirect/', function() {
     return redirect()->route('home');
 });
 ```
@@ -221,7 +184,7 @@ Route::get('redirect/', function() {
 Redirection vers une route nommée :
 
 ```php
-	Route ::get('redirect/', function() {
+	Route ::get('/redirect/', function() {
 		return redirect()->route('home') ;
 	}) ;
 ```
@@ -229,7 +192,7 @@ Redirection vers une route nommée :
 ​ Redirection vers une URL :
 
 ```php
-	Route ::get('redirect/2', function() {
+	Route ::get('/redirect/2', function() {
 		return redirect('https://example.com');
 	})
 ```
@@ -263,7 +226,7 @@ vues sont stockées dans :
 > Accéder à l'url `/article` permet d'afficher la vue `article.php`
 
 ```php
-Route ::get('article', function() {
+Route ::get('/article', function() {
     return view('article') ;
 }) ;
 ```

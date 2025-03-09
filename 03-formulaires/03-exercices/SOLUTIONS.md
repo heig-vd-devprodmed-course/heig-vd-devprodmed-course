@@ -35,6 +35,10 @@ Zweifel Robin
 ## Routes `\routes\web.php`
 
 ```php
+use App\Http\Controllers\AgendaController;
+
+...
+
 Route::get('/agenda', [AgendaController::class,'afficheFormulaire']);
 Route::post('/agenda', [AgendaController::class,'traiteFormulaire']);
 ```

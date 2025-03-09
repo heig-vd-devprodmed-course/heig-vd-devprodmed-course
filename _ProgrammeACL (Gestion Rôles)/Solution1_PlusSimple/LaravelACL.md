@@ -62,7 +62,7 @@ Il ne reste plus qu'à gérer la déconnexion (`logout`).
 Ajoutons une nouvelle route et sa méthode associée.
 
 ```php
-Route::get('logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout']);
 ```
 
 > Remarques :

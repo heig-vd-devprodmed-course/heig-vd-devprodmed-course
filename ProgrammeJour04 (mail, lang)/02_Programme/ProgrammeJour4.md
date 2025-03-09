@@ -91,7 +91,7 @@ Créons maintenant la route (`get`) `contact` pour obtenir notre formulaire (
 ```php
 use App\Http\Controllers\ContactController;
 //...
-Route::get('contact', [ContactController::class,'rendFormulaire']);
+Route::get('/contact', [ContactController::class,'rendFormulaire']);
 ```
 
 ## Contrôleur
@@ -124,7 +124,7 @@ Créons une nouvelle route (post) `contact`
 ## Route Traite Formulaire
 
 ```php
-Route::post('contact', [ContactController::class,'valideEtTraiteFormulaire']);
+Route::post('/contact', [ContactController::class,'valideEtTraiteFormulaire']);
 ```
 
 ## Classe pour validation des champs d'un formulaire

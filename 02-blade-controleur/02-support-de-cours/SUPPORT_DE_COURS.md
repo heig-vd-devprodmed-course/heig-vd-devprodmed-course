@@ -96,7 +96,7 @@ Voilà notre vue est prête.
 Préparons une route pour accéder à cette vue dans le fichier `/routes/web.php`
 
 ```php
-Route ::get('article/{n}/couleur/{c}', function($n, $c){
+Route ::get('/article/{n}/couleur/{c}', function($n, $c){
    return view('maVue')->with('numero', $n)->with('couleur', $c);
 })->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ```
@@ -227,7 +227,7 @@ Maintenant que nous avons compris, occupons nous de la route concernant le
 numéro d'article et sa couleur.
 
 ```php
-Route ::get('article/{n}/couleur/{c}', function($n, $c){
+Route ::get('/article/{n}/couleur/{c}', function($n, $c){
    return view('maVue')->with('numero', $n)->with('couleur', $c);
 })->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ```
@@ -253,7 +253,7 @@ Puis ajoutons une nouvelle route :
 
 ```php
 ...
-Route::get('articleTest/{n}/couleur/{c}', [MonPremierControleur::class,'test'])->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
+Route::get('/articleTest/{n}/couleur/{c}', [MonPremierControleur::class,'test'])->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ...
 ```
 
@@ -284,7 +284,7 @@ des boucles. Chaque directive correspond à un tag `@nomDuTag`
 Créons tout d'abord une route qui nous mène à une méthode d'un contrôleur.
 
 ```php
-Route::get('afficheTab', [MonPremierControleur::class,'afficheTab']);
+Route::get('/afficheTab', [MonPremierControleur::class,'afficheTab']);
 ```
 
 Puis, créons dans le contrôleur une méthode contenant un tableau que nous

@@ -917,8 +917,8 @@ Comme nous avons ajouté une méthode `articlesAyantMotcle(...)` permettant la
 recherche des articles qui comportent le mot-clé passé en paramètre, il faut
 ajouter une nouvelle route dans le fichier `web.php`
 
-```
-Route::get('articles/motcle/{motcle}', [ArticleController::class, 'articlesAyantMotcle']);
+```php
+Route::get('/articles/motcle/{motcle}', [ArticleController::class, 'articlesAyantMotcle']);
 ```
 
 Nous pouvons passer à la mise à jour de la vue permettant l'affichage des

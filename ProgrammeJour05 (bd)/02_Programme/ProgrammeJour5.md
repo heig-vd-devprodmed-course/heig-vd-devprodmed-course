@@ -455,8 +455,8 @@ public function traiteFormulaire(NewsletterRequest $request) {
 Il ne manque plus que les deux routes :
 
 ```php
-Route::get('newsletter', [NewsletterController::class, 'rendFormulaire']);
-Route::post('newsletter', [NewsletterController::class, 'traiteFormulaire']);
+Route::get('/newsletter', [NewsletterController::class, 'rendFormulaire']);
+Route::post('/newsletter', [NewsletterController::class, 'traiteFormulaire']);
 ```
 
 Voilà, notre application est terminée.
