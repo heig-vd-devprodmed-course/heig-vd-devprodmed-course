@@ -1,58 +1,44 @@
 # Formulaire : Exercices
 
-Créer un formulaire permettant de saisir :
+**Consigne** : Créer un formulaire pour l’enregistrement d’une manifestation.
 
-- Une date de début
-- Une date de fin
-- Lieu
+Votre formulaire doit permettre de saisir :
 
-La première date défini le début d'une manifestation. La seconde date, la fin de
-la manifestation. Le lieu est le nom de la ville où la manifestation à Lieu
+- Une date de début de la manifestation.
+- Une date de fin de la manifestation.
+- Le lieu (ville où l’événement se déroule).
 
-Remarques :
+**Contraintes à respecter**
 
-- Les dates doivent être valides et doivent être dans le futur. Si aujourd'hui
-  nous sommes le 13 mars 2024, la date de début doit au moins être le 14 mars
-  2024
+Dates :
 
-- La manifestation doit durer au moins 3 jours, mais pas plus de 5.
+- La date de début doit être dans le futur (au moins demain).
+- La manifestation doit durer entre 3 et 5 jours.
 
-- Le lieu débute avec une majuscule, suivi de minuscules, au moins trois
-  lettres)
+Lieu :
 
-- Une fois que les trois champs sont valides, il faut envoyer un mail, au
-  responsable de la manifestation, contenant le message suivant :
+- Doit contenir au moins 3 lettres.
+- Doit commencer par une majuscule, suivie de minuscules.
 
-  ```txt
-  La prochaine manifestation aura lieu du :
+Une fois les champs valides :
 
-  	21 mars au 24 mars 2024 à Paris.
+Un e-mail est envoyé au responsable.
 
-  Avec nos meilleures salutations.
+Le message contient :
 
-  Le comité.
-
-  ```
-
-- Une fois que le mail a été envoyé, l'utilisateur du formulaire doit en être
-  informé.
-
-  ```
-  Merci. Votre message concernant la prochaine manifestation a été envoyé au responsable
-  ```
-
-[Documentation officielle](https://laravel.com/docs/11.x/validation)
-
-[Liste des validateurs prédéfinis](https://laravel.com/docs/11.x/validation#available-validation-rules)
-
-Conseils : Procédez par étapes, commencer par une contrainte puis ajouter les
-suivantes.
-
-> <u>Challenge :</u>
+> La prochaine manifestation aura lieu du : 21 mars au 24 mars 2024 à Paris.
 >
-> Le défi est de pouvoir définir des contraintes basées sur plusieurs champs.
+> Avec nos meilleures salutations.
 >
-> Indications : Une des solutions est de créer une classe `Rule` contenant le
-> code puis valider la requête dans le contrôleur. (voir la documentation
-> officielle
-> [Personnaliser une validation](https://laravel.com/docs/11.x/validation#custom-validation-rules)
+> Le comité.
+
+Un message de confirmation s'affiche :
+
+> Merci. Votre message concernant la prochaine manifestation a été envoyé au
+> responsable.
+
+**Ressources utiles**
+
+- [Documentation Laravel - Validation](https://laravel.com/docs/11.x/validation)
+- [Liste des règles de validation](https://laravel.com/docs/11.x/validation#available-validation-rules)
+- [Règles personnalisées (Rule)](https://laravel.com/docs/11.x/validation#custom-validation-rules)
