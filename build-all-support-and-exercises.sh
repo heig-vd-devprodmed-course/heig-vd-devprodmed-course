@@ -24,7 +24,9 @@ echo "Converting support de cours to PDF..."
 find . -mindepth 3 -maxdepth 3 -type f -name "SUPPORT_DE_COURS.md" -exec sh -c '
     for file in "$@"; do
         echo "Processing $file..."
-        '"$PANDOC_CMD"' -o "$(dirname "$file")/SUPPORT_DE_COURS.pdf" "$file"
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/SUPPORT_DE_COURS.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
     done
 ' sh {} +
 
@@ -33,7 +35,9 @@ echo "Converting exercices to PDF..."
 find . -mindepth 3 -maxdepth 3 -type f -name "EXERCICES.md" -exec sh -c '
     for file in "$@"; do
         echo "Processing $file..."
-        '"$PANDOC_CMD"' -o "$(dirname "$file")/EXERCICES.pdf" "$file"
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/EXERCICES.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
     done
 ' sh {} +
 
@@ -42,7 +46,9 @@ echo "Converting solutions to PDF..."
 find . -mindepth 3 -maxdepth 3 -type f -name "SOLUTIONS.md" -exec sh -c '
     for file in "$@"; do
         echo "Processing $file..."
-        '"$PANDOC_CMD"' -o "$(dirname "$file")/SOLUTIONS.pdf" "$file"
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/SOLUTIONS.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
     done
 ' sh {} +
 
