@@ -63,7 +63,7 @@ find . -mindepth 3 -maxdepth 3 -path "*-feedbacks/README.pdf" -exec sh -c '
         chapter_name=$(basename "$chapter_dir")
         short_chapter_name=$(echo "$chapter_name" | cut -c1-2)  # Garde seulement les 2 premiers caractères
         clean_chapter_name=$(echo "$chapter_name" | cut -c4-)  # Supprime les 3 premiers caractères
-        mv "$file" "$(dirname "$file")/${short_chapter_name}-05-feedbacks-${clean_chapter_name}.pdf"
+        mv "$file" "$(dirname "$file")/${short_chapter_name}-00-feedbacks-${clean_chapter_name}.pdf"
     done
 ' sh {} +
 
