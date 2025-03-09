@@ -40,8 +40,8 @@ _class: lead
 
 ### 1. Exercices et ressources complémentaires
 
-> "Les exercices demandent parfois d'aller chercher plus loin que la matière vue
-> en cours. Ce serait bien d'avoir des liens pour nous aider."
+> Les exercices demandent parfois d'aller chercher plus loin que la matière vue
+> en cours. Ce serait bien d'avoir des liens pour nous aider.
 
 **Action** : Ajouter des liens et ressources pour faciliter la recherche
 d’informations.
