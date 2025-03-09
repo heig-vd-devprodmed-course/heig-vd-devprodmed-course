@@ -54,7 +54,8 @@ suivants pour toute question relative au cours :
 
 <!-- _class: lead -->
 
-Cette présentation est un résumé du support de cours.
+Ce document est une introduction. Consultez le support de cours pour une
+explication détaillée et les exercices pratiques.
 
 ## Objectifs
 
@@ -230,6 +231,28 @@ fonctionnels et intuitifs.
 - Notifications (SMS/Slack)
 
 ![bg right:40%](https://images.unsplash.com/photo-1619261530623-2171166909e8?fit=crop&h=720)
+
+## Questions
+
+<!-- _class: lead -->
+
+Est-ce que vous avez des questions ?
+
+## À vous de jouer !
+
+- Prendre connaissance du support de cours
+- Poser des questions si nécessaire
+
+![bg right:40%][illustration-a-vous-de-jouer]
+
+## Sources
+
+- [Illustration][illustration-a-vous-de-jouer] par
+  [Nikita Kachanovsky](https://unsplash.com/@nkachanovskyyy) sur
+  [Unsplash](https://unsplash.com/photos/white-sony-ps4-dualshock-controller-over-persons-palm-FJFPuE1MAOM)
+
+[illustration-a-vous-de-jouer]:
+	https://images.unsplash.com/photo-1509198397868-475647b2a1e5?fit=crop&h=720
 
 <!-- ## Sources (1/3)
 
