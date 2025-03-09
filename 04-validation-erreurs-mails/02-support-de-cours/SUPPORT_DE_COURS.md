@@ -412,6 +412,8 @@ class ContactController extends Controller {
 Si vous allez sur `http://localhost:8000/contact`, vous devriez voir le
 formulaire de contact.
 
+![formulaire](./images/formulaire.png)
+
 Il nous reste à construire la partie permettant de traiter les données provenant
 du formulaire.
 
@@ -668,6 +670,8 @@ Démarrez Mailpit :
 mailpit
 ```
 
+![mailpit](./images/mailpit.png)
+
 Accessible à `http://localhost:8025`. Allez sur `http://localhost:8025/` pour
 voir la boîte mail fictive.
 
@@ -794,3 +798,5 @@ APP_LOCALE=fr
 
 Vous pouvez tester en soumettant un formulaire avec des erreurs et voir les
 nouveaux messages en français.
+
+![frValidation](./images/frValidation.png)

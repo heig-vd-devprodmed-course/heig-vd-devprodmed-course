@@ -22,11 +22,11 @@ else
 fi
 
 # Convert presentations
-echo "Converting presentations to HTML..."
-eval "$MARP_CMD --config-file .marp/config.yaml --parallel $(nproc) **/*-presentation/README.md **/*-quiz/README.md"
+echo "Converting presentations, quiz, and feedbacks to HTML..."
+eval "$MARP_CMD --config-file .marp/config.yaml --parallel $(nproc) **/*-presentation/README.md **/*-quiz/README.md **/*-feedbacks/README.md"
 
-echo "Converting presentations to PDF..."
-eval "$MARP_CMD --config-file .marp/config.yaml --parallel $(nproc) --pdf **/*-presentation/README.md **/*-quiz/README.md"
+echo "Converting presentations, quiz, and feedbacks to PDF..."
+eval "$MARP_CMD --config-file .marp/config.yaml --parallel $(nproc) --pdf **/*-presentation/README.md **/*-quiz/README.md **/*-feedbacks/README.md"
 
 # Rename files
 echo "Renaming HTML files to 'index.html'..."
@@ -53,6 +53,17 @@ find . -mindepth 3 -maxdepth 3 -path "*-quiz/README.pdf" -exec sh -c '
         short_chapter_name=$(echo "$chapter_name" | cut -c1-2)  # Garde seulement les 2 premiers caractères
         clean_chapter_name=$(echo "$chapter_name" | cut -c4-)  # Supprime les 3 premiers caractères
         mv "$file" "$(dirname "$file")/${short_chapter_name}-04-quiz-${clean_chapter_name}.pdf"
+    done
+' sh {} +
+
+echo "Renaming feedbacks files..."
+find . -mindepth 3 -maxdepth 3 -path "*-feedbacks/README.pdf" -exec sh -c '
+    for file; do
+        chapter_dir=$(dirname "$(dirname "$file")")
+        chapter_name=$(basename "$chapter_dir")
+        short_chapter_name=$(echo "$chapter_name" | cut -c1-2)  # Garde seulement les 2 premiers caractères
+        clean_chapter_name=$(echo "$chapter_name" | cut -c4-)  # Supprime les 3 premiers caractères
+        mv "$file" "$(dirname "$file")/${short_chapter_name}-05-feedbacks-${clean_chapter_name}.pdf"
     done
 ' sh {} +
 
