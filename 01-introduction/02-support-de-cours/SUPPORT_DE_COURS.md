@@ -105,7 +105,7 @@ modèle. En d’autres termes, le contrôleur prend les requêtes de l’utilisa
 récupère les informations requises dans le modèle, les traite et les renvoie à
 la vue.
 
-![mvc](img/mvc.png)
+![mvc](images/mvc.png)
 
 ### Pourquoi utiliser `Laravel` ?
 
