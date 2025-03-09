@@ -11,47 +11,10 @@ title: HEIG-VD DévProdMéd - Cours Laravel
 description: Quiz pour le cours DévProdMéd à la HEIG-VD, Suisse
 header: "**Quiz 2**"
 footer: "**HEIG-VD** - DévProdMéd Course 2024-2025 - CC BY-SA 4.0"
-style: |
-  :root {
-      --color-background: #fff;
-      --color-foreground: #333;
-      --color-highlight: #f96;
-      --color-dimmed: #888;
-      --color-headings: #7d8ca3;
-  }
-  blockquote {
-      font-style: italic;
-  }
-  table {
-      width: 100%;
-  }
-  h1, h2, h3, h4, h5, h6 {
-      color: var(--color-headings);
-  }
-  h2, h3, h4, h5, h6 {
-      font-size: 1.5rem;
-  }
-  section:not(.lead) > p, blockquote {
-      text-align: justify;
-  }
-  .two-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-  }
-  .center {
-      text-align: center;
-  }
-  section.small  {
-      font-size: 1.5rem;
-  }
-  section.small h2 {
-      font-size: 2rem;
-  }
 headingDivider: 6
 -->
 
-# Quiz 1 - Blade et contrôleur
+# Quiz 2 - Blade et contrôleur
 
 <!--
 _class: lead
