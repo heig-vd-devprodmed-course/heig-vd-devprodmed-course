@@ -136,3 +136,9 @@ php artisan storage:link
 ```
 
 [Sources](https://laravel.com/docs/8.x/filesystem#the-public-disk)
+
+## Questions
+
+<!-- _class: lead -->
+
+Est-ce que vous avez des questions ?

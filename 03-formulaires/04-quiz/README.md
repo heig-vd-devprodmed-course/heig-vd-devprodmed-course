@@ -127,3 +127,9 @@ Route::post('/traiteFormulaire', function (Request $request) {
     echo $request->input('prenom');
 });
 ```
+
+## Questions
+
+<!-- _class: lead -->
+
+Est-ce que vous avez des questions ?
