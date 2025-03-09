@@ -16,10 +16,18 @@
   - [Contenu Initial de `ContactRequest.php`](#contenu-initial-de-contactrequestphp)
   - [Activation de la Classe et Ajout des Règles de Validation](#activation-de-la-classe-et-ajout-des-règles-de-validation)
   - [Affichage des Messages d'Erreur](#affichage-des-messages-derreur)
+- [Vue (Contenu Email)](#vue-contenu-email)
+  - [Création de la Vue `view_contenu_email.blade.php`](#création-de-la-vue-view_contenu_emailbladephp)
+- [Vue (Confirmation de réception des informations)](#vue-confirmation-de-réception-des-informations)
+  - [Création de la Vue `view_confirmation.blade.php`](#création-de-la-vue-view_confirmationbladephp)
+  - [Pourquoi afficher une page de confirmation ?](#pourquoi-afficher-une-page-de-confirmation-)
 - [Configuration de l'Envoi d'Email](#configuration-de-lenvoi-demail)
   - [Installation et Configuration de Mailpit](#installation-et-configuration-de-mailpit)
-- [Tests PHPUnit](#tests-phpunit)
 - [Récapitulatif](#récapitulatif)
+- [Résolution des Erreurs Possibles](#résolution-des-erreurs-possibles)
+  - [Erreur "View \[view\_contenu\_email\] not found"](#erreur-view-view_contenu_email-not-found)
+  - [Erreur "View \[view\_confirmation\] not found"](#erreur-view-view_confirmation-not-found)
+  - [Erreur après modification des vues](#erreur-après-modification-des-vues)
 - [Ajout d'une Nouvelle Langue pour les Messages d'Erreur](#ajout-dune-nouvelle-langue-pour-les-messages-derreur)
   - [Publier les fichiers de langue](#publier-les-fichiers-de-langue)
   - [Installer la Bibliothèque `laravel-lang`](#installer-la-bibliothèque-laravel-lang)
@@ -335,6 +343,74 @@ prévu l'affichage des erreurs :
 Avec cette approche, **l'expérience utilisateur est améliorée**, et les erreurs
 sont clairement affichées à côté des champs concernés.
 
+## Vue (Contenu Email)
+
+Une fois le formulaire soumis et validé, nous envoyons un email contenant les
+informations saisies.  
+Laravel nous permet de créer une **vue dédiée au contenu de l'email**, qui sera
+utilisée par `Mail::send()` dans le contrôleur.
+
+### Création de la Vue `view_contenu_email.blade.php`
+
+Ajoutez ce fichier dans `resources/views/` :
+
+```php
+<!-- resources/views/view_contenu_email.blade.php -->
+<!doctype html>
+<html lang='fr'>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h2>Prise de contact</h2>
+        <p>Voici les informations reçues :</p>
+        <ul>
+            <li><strong>Nom</strong> : {{ $nom }}</li>
+            <li><strong>Email</strong> : {{ $email }}</li>
+            <li><strong>Message</strong> : {{ $texte }}</li>
+        </ul>
+    </body>
+</html>
+```
+
+> [!TIP]
+>
+> - Permet de **structurer** l'email avec du HTML.
+> - Facilement **modifiable** sans toucher au code du contrôleur.
+> - Assure un **meilleur rendu** sur les clients de messagerie.
+
+## Vue (Confirmation de réception des informations)
+
+Après l'envoi de l'email, l'utilisateur doit être informé du succès de son
+action.  
+Nous allons créer une **vue de confirmation** qui s'affichera après validation
+du formulaire.
+
+### Création de la Vue `view_confirmation.blade.php`
+
+Ajoutez ce fichier dans `resources/views/` :
+
+```php
+<!-- resources/views/view_confirmation.blade.php -->
+@extends('template_contact')
+
+@section('contenu')
+<br>
+<div class="col-sm-offset-3 col-sm-6">
+    <div class="panel panel-info">
+        <div class="panel-heading">Information</div>
+        <div class="panel-body">Merci, vos informations ont bien été transmises à l'administrateur.</div>
+    </div>
+</div>
+@endsection
+```
+
+### Pourquoi afficher une page de confirmation ?
+
+- Évite que l'utilisateur soumette plusieurs fois le formulaire.
+- Confirme que l'action a bien été prise en compte.
+- Améliore l'**expérience utilisateur**.
+
 ## Configuration de l'Envoi d'Email
 
 Ajoutez ces paramètres dans `.env` :
@@ -369,27 +445,6 @@ mailpit
 
 Accessible à `http://localhost:8025`
 
-## Tests PHPUnit
-
-```php
-// tests/Feature/ContactFormTest.php
-namespace Tests\Feature;
-
-use Tests\TestCase;
-
-class ContactFormTest extends TestCase {
-    public function test_validation_du_formulaire() {
-        $response = $this->post('/contact', [
-            'nom' => '',
-            'email' => 'invalid-email',
-            'texte' => ''
-        ]);
-
-        $response->assertSessionHasErrors(['nom', 'email', 'texte']);
-    }
-}
-```
-
 ## Récapitulatif
 
 - Création d'un formulaire et affichage des erreurs de validation
@@ -400,11 +455,34 @@ class ContactFormTest extends TestCase {
 - Ajout d'une nouvelle langue pour les messages d'erreur
 - Tests unitaires pour vérifier le bon fonctionnement
 
-  **Tout est prêt ! Il ne vous reste plus qu'à tester et expérimenter !** 🎉
+  **Tout est prêt ! Il ne vous reste plus qu'à tester et expérimenter !**
+
+## Résolution des Erreurs Possibles
+
+### Erreur "View [view_contenu_email] not found"
+
+Si vous rencontrez cette erreur, **vérifiez que le fichier
+`view_contenu_email.blade.php` existe bien** dans `resources/views/`.
+
+### Erreur "View [view_confirmation] not found"
+
+Assurez-vous d'avoir bien créé `view_confirmation.blade.php` dans
+`resources/views/`.
+
+### Erreur après modification des vues
+
+Laravel met en cache les vues pour améliorer les performances.  
+Si une vue ne semble pas être prise en compte, **vide le cache avec ces
+commandes** :
+
+```bash
+php artisan view:clear
+php artisan cache:clear
+```
 
 ## Ajout d'une Nouvelle Langue pour les Messages d'Erreur
 
-Par daut, Laravel affiche les messages d'erreur en anglais. Nous allons voir
+Par défaut, Laravel affiche les messages d'erreur en anglais. Nous allons voir
 comment ajouter le français.
 
 ### Publier les fichiers de langue
@@ -419,12 +497,12 @@ php artisan lang:publish
 Cela crée une structure comme celle-ci :
 
 ```
- lang/
-     en/
-        auth.php
-        pagination.php
-        passwords.php
-        validation.php
+lang/
+ ├── en/
+ │   ├── auth.php
+ |   ├── pagination.php
+ |   ├── passwords.php
+ |   ├── validation.php
 ```
 
 ### Installer la Bibliothèque `laravel-lang`
@@ -444,14 +522,18 @@ php artisan lang:update
 
 Cela ajoutera le dossier `/fr` dans `lang/` :
 
-```
- lang/
-     en/
-        validation.php
-     fr/
-        validation.php
-    en.json
-    fr.json
+```txt
+lang/
+ ├── fr/
+ |   ├── actions.php
+ │   ├── auth.php
+ │   ├── http-statuses.php
+ |   ├── pagination.php
+ |   ├── passwords.php
+ |   ├── validation.php
+ ├── en/
+│   ├── ...
+
 ```
 
 ### Modifier le fichier `.env` pour définir le français
