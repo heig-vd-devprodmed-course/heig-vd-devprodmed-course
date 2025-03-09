@@ -25,6 +25,13 @@ _paginate: false
 
 <small>Ce travail est sous licence CC BY-SA 4.0.</small>
 
+## Plus de détails dans le support de cours
+
+<!-- _class: lead -->
+
+Ce document est une introduction. Consultez le support de cours pour une
+explication détaillée et les exercices pratiques.
+
 ## Objectifs
 
 - Découvrir de nouvelles fonctionnalités de Blade (outil de templating)
@@ -45,19 +52,19 @@ _paginate: false
 <!-- \resources\views\template.blade.php -->
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>Mon contact</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <header>
-      <h1>Mon contact</h1>
-    </header>
-    @yield('content')
-    <!-- content -->
-    @include('footer')
-  </body>
+	<head>
+		<title>Mon contact</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<header>
+			<h1>Mon contact</h1>
+		</header>
+		@yield('content')
+		<!-- content -->
+		@include('footer')
+	</body>
 </html>
 ```
 
@@ -70,9 +77,9 @@ _paginate: false
 @section('content')
 <!-- Définit la section content -->
 <main>
-  <p>Nom : {{ $nom }}</p>
-  <p>Prénom : {{ $prenom }}</p>
-  <p>Email : {{ email }}</p>
+	<p>Nom : {{ $nom }}</p>
+	<p>Prénom : {{ $prenom }}</p>
+	<p>Email : {{ email }}</p>
 </main>
 @endsection
 <!-- Fin de la section content -->
@@ -83,7 +90,7 @@ _paginate: false
 ```html
 <!-- \resources\views\footer.blade.php -->
 <footer>
-  <p>HEIG-VD</p>
+	<p>HEIG-VD</p>
 </footer>
 ```
 
@@ -92,15 +99,15 @@ _paginate: false
 ```html
 <!DOCTYPE html>
 <html lang="fr">
-  <!-- ... -->
-  <body>
-    <header>
-      <h1>Mon contact</h1>
-    </header>
-    @yield('content')
-    <!-- content -->
-    @include('footer')
-  </body>
+	<!-- ... -->
+	<body>
+		<header>
+			<h1>Mon contact</h1>
+		</header>
+		@yield('content')
+		<!-- content -->
+		@include('footer')
+	</body>
 </html>
 ```
 
@@ -108,18 +115,18 @@ _paginate: false
 
 ```html
 <main>
-  <p>Nom : Despentes</p>
-  <p>
-    Email : @if ($email) {{
-    <!-- $email est une variable passée à la vue -->
-    $email
-    <!-- Affiche $email si défini -->
-    }} @else
-    <!-- Si $email n'est pas défini -->
-    Pas d'email
-    <!-- Affiche "Pas d'email" -->
-    @endif
-  </p>
+	<p>Nom : Despentes</p>
+	<p>
+		Email : @if ($email) {{
+		<!-- $email est une variable passée à la vue -->
+		$email
+		<!-- Affiche $email si défini -->
+		}} @else
+		<!-- Si $email n'est pas défini -->
+		Pas d'email
+		<!-- Affiche "Pas d'email" -->
+		@endif
+	</p>
 </main>
 ```
 
@@ -216,6 +223,24 @@ Pour ajouter une image à notre application `Laravel`
 <img src="{{ asset('storage/images/photo.jpg') }}" alt="Photo de profil" />
 ```
 
-## Questions ?
+## Questions
 
 <!-- _class: lead -->
+
+Est-ce que vous avez des questions ?
+
+## À vous de jouer !
+
+- Prendre connaissance du support de cours
+- Poser des questions si nécessaire
+
+![bg right:40%][illustration-a-vous-de-jouer]
+
+## Sources
+
+- [Illustration][illustration-a-vous-de-jouer] par
+  [Erik Mclean](https://unsplash.com/@introspectivedsgn) sur
+  [Unsplash](https://unsplash.com/photos/person-holding-red-and-white-playing-card-8tNQnMXDK7A)
+
+[illustration-a-vous-de-jouer]:
+	https://images.unsplash.com/photo-1620336655174-32ccc95d0e2d?fit=crop&h=720

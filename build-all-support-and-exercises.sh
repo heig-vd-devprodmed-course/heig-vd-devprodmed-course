@@ -24,7 +24,9 @@ echo "Converting support de cours to PDF..."
 find . -mindepth 3 -maxdepth 3 -type f -name "SUPPORT_DE_COURS.md" -exec sh -c '
     for file in "$@"; do
         echo "Processing $file..."
-        '"$PANDOC_CMD"' -o "$(dirname "$file")/SUPPORT_DE_COURS.pdf" "$file"
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/SUPPORT_DE_COURS.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
     done
 ' sh {} +
 
@@ -33,7 +35,9 @@ echo "Converting exercices to PDF..."
 find . -mindepth 3 -maxdepth 3 -type f -name "EXERCICES.md" -exec sh -c '
     for file in "$@"; do
         echo "Processing $file..."
-        '"$PANDOC_CMD"' -o "$(dirname "$file")/EXERCICES.pdf" "$file"
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/EXERCICES.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
     done
 ' sh {} +
 
@@ -42,23 +46,35 @@ echo "Converting solutions to PDF..."
 find . -mindepth 3 -maxdepth 3 -type f -name "SOLUTIONS.md" -exec sh -c '
     for file in "$@"; do
         echo "Processing $file..."
-        '"$PANDOC_CMD"' -o "$(dirname "$file")/SOLUTIONS.pdf" "$file"
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/SOLUTIONS.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
     done
 ' sh {} +
 
-# Rename files
+# Renommer les fichiers générés
 echo "Renaming generated PDFs..."
 find . -mindepth 3 -maxdepth 3 -type f \( -name "EXERCICES.pdf" -o -name "SUPPORT_DE_COURS.pdf" -o -name "SOLUTIONS.pdf" \) -exec sh -c '
     for file in "$@"; do
-        chapter_name=$(basename "$(dirname "$(dirname "$file")")")
+        chapter_dir=$(dirname "$(dirname "$file")")
+        chapter_name=$(basename "$chapter_dir")
+        short_chapter_name=$(echo "$chapter_name" | cut -c1-2)  # Garde seulement les 2 premiers caractères
+        clean_chapter_name=$(echo "$chapter_name" | cut -c4-)  # Supprime les 3 premiers caractères
+
         case "$file" in
-            *EXERCICES.pdf) mv "$file" "$(dirname "$file")/$chapter_name-exercices.pdf" ;;
-            *SUPPORT_DE_COURS.pdf) mv "$file" "$(dirname "$file")/$chapter_name-support-de-cours.pdf" ;;
-            *SOLUTIONS.pdf) mv "$file" "$(dirname "$file")/$chapter_name-solutions.pdf" ;;
+            *SUPPORT_DE_COURS.pdf)
+                new_name="${short_chapter_name}-02-support-de-cours-${clean_chapter_name}.pdf"
+                ;;
+            *EXERCICES.pdf)
+                new_name="${short_chapter_name}-03-exercices-${clean_chapter_name}.pdf"
+                ;;
+            *SOLUTIONS.pdf)
+                new_name="${short_chapter_name}-03-solutions-${clean_chapter_name}.pdf"
+                ;;
         esac
+
+        mv "$file" "$(dirname "$file")/$new_name"
     done
 ' sh {} +
 
-
 echo "All support de cours, exercices and solutions processed successfully!"
-

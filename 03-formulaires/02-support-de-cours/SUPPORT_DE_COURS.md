@@ -71,7 +71,9 @@ Route::get('/afficheFormulaire', function () {
 Et testons pour voir que tout fonctionne. (Déployons l'application, puis à
 l'aide d'un navigateur accédons à l'url `.../afficheFormulaire`)
 
-Un formulaire devrait s'afficher.
+Un formulaire devrait s'afficher :
+
+![Formulaire](./images/formulaire.png)
 
 ## Redirection du traitement de la requête
 

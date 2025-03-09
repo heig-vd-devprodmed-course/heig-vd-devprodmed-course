@@ -22,6 +22,13 @@ _class: lead
 _paginate: false
 -->
 
+## Plus de détails dans le support de cours
+
+<!-- _class: lead -->
+
+Ce document est une introduction. Consultez le support de cours pour une
+explication détaillée et les exercices pratiques.
+
 ## Objectifs
 
 - Être capable de créer un formulaire HTML (vue) pour pouvoir saisir des
@@ -58,9 +65,9 @@ class TeamController extends Controller {
 
 ```html
 <form action="/forms/submit" method="post" accept-charset="UTF-8">
-  <label for="nom">Entrez votre nom : </label>
-  <input name="nom" type="text" id="nom" />
-  <input type="submit" name="submit" value="Envoyer" />
+	<label for="nom">Entrez votre nom : </label>
+	<input name="nom" type="text" id="nom" />
+	<input type="submit" name="submit" value="Envoyer" />
 </form>
 ```
 
@@ -81,3 +88,25 @@ Résulat :
 - Lorsque le formulaire est posté, `Laravel` vérifie que ce jeton soit le même
   que celui enregistré en session.
 - Si ce n'est pas le cas, `Laravel` ne traitera pas le formulaire.
+
+## Questions
+
+<!-- _class: lead -->
+
+Est-ce que vous avez des questions ?
+
+## À vous de jouer !
+
+- Prendre connaissance du support de cours
+- Poser des questions si nécessaire
+
+![bg right:40%][illustration-a-vous-de-jouer]
+
+## Sources
+
+- [Illustration][illustration-a-vous-de-jouer] par
+  [Erik Mclean](https://unsplash.com/@introspectivedsgn) sur
+  [Unsplash](https://unsplash.com/photos/person-holding-red-and-white-playing-card-8tNQnMXDK7A)
+
+[illustration-a-vous-de-jouer]:
+	https://images.unsplash.com/photo-1620336655174-32ccc95d0e2d?fit=crop&h=720

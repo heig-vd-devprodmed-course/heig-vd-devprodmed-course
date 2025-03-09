@@ -325,3 +325,9 @@ return view('article', ['id' => $id, 'color' => $color]);
 ```
 
 [Documentation](https://laravel.com/docs/10.x/views#passing-data-to-views)
+
+## Questions
+
+<!-- _class: lead -->
+
+Est-ce que vous avez des questions ?
