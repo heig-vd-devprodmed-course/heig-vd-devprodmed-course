@@ -11,7 +11,11 @@
 - [Création de la Vue du Formulaire](#création-de-la-vue-du-formulaire)
 - [Déclaration des Routes](#déclaration-des-routes)
 - [Création du Contrôleur](#création-du-contrôleur)
-- [Validation des Champs](#validation-des-champs)
+- [Classe pour validation des champs d'un formulaire](#classe-pour-validation-des-champs-dun-formulaire)
+  - [Création de la Classe de Validation](#création-de-la-classe-de-validation)
+  - [Contenu Initial de `ContactRequest.php`](#contenu-initial-de-contactrequestphp)
+  - [Activation de la Classe et Ajout des Règles de Validation](#activation-de-la-classe-et-ajout-des-règles-de-validation)
+  - [Affichage des Messages d'Erreur](#affichage-des-messages-derreur)
 - [Configuration de l'Envoi d'Email](#configuration-de-lenvoi-demail)
   - [Installation et Configuration de Mailpit](#installation-et-configuration-de-mailpit)
 - [Tests PHPUnit](#tests-phpunit)
@@ -205,19 +209,84 @@ class ContactController extends Controller {
 }
 ```
 
-## Validation des Champs
+## Classe pour validation des champs d'un formulaire
+
+Lorsque nous envoyons un formulaire, il est essentiel de vérifier que les
+informations fournies par l'utilisateur sont correctes avant de les traiter.  
+Laravel propose un moyen structuré de gérer ces validations en utilisant des
+**FormRequests**.
+
+### Création de la Classe de Validation
+
+Laravel nous permet de générer une classe de validation avec la commande
+suivante :
+
+```bash
+php artisan make:request ContactRequest
+```
+
+Cela crée un fichier dans le dossier `app/Http/Requests/` :
+
+```
+app/
+ ├── Http/
+ │   ├── Requests/
+ │   │   ├── ContactRequest.php  # Classe de validation du formulaire
+```
+
+### Contenu Initial de `ContactRequest.php`
 
 ```php
 // app/Http/Requests/ContactRequest.php
+<?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest {
+    /**
+     * Détermine si l'utilisateur est autorisé à faire cette requête.
+     */
     public function authorize(): bool {
-        return true;
+        return false; // Par défaut, l'accès est refusé.
     }
 
+    /**
+     * Définit les règles de validation des champs du formulaire.
+     */
+    public function rules(): array {
+        return [
+            //
+        ];
+    }
+}
+```
+
+### Activation de la Classe et Ajout des Règles de Validation
+
+Nous devons maintenant autoriser l'utilisation de cette classe et définir les
+contraintes pour chaque champ.
+
+```php
+// app/Http/Requests/ContactRequest.php
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ContactRequest extends FormRequest {
+    /**
+     * Détermine si l'utilisateur est autorisé à faire cette requête.
+     */
+    public function authorize(): bool {
+        return true; // On autorise l'utilisation de la classe.
+    }
+
+    /**
+     * Définit les règles de validation des champs du formulaire.
+     */
     public function rules(): array {
         return [
             'nom' => 'bail|required|min:3|max:20|alpha',
@@ -227,6 +296,44 @@ class ContactRequest extends FormRequest {
     }
 }
 ```
+
+- `bail` : Arrête la validation dès la première erreur pour un champ.
+- `required` : Le champ est obligatoire.
+- `min:3` : Le champ `nom` doit contenir au moins 3 caractères.
+- `max:20` : Le champ `nom` ne peut pas dépasser 20 caractères.
+- `alpha` : Le champ `nom` ne doit contenir que des lettres.
+- `email` : Vérifie que le champ `email` contient une adresse valide.
+- `max:250` : Le champ `texte` est limité à 250 caractères.
+
+Donc, lorsque nous regardons le contrôleur, nous pouvons voir que la méthode
+`valideEtTraiteFormulaire()` prend un objet de type `ContactRequest` en
+paramètre. grâce à cela, Laravel appliquera automatiquement la validation :
+
+- Laravel appliquera **automatiquement** la validation définie dans
+  `ContactRequest.php` **avant** d'exécuter la méthode
+  `valideEtTraiteFormulaire()`.
+- Si des erreurs sont détectées, Laravel **redirigera l'utilisateur** vers le
+  formulaire avec les messages d'erreur appropriés.
+
+> [!TIP]
+>
+> La documentation officielle de Laravel fournit une liste complète des règles
+> de validation disponibles :
+> [https://laravel.com/docs/12.x/validation#available-validation-rules](https://laravel.com/docs/12.x/validation#available-validation-rules)
+
+### Affichage des Messages d'Erreur
+
+Dans la vue du formulaire (`view_formulaire_contact.blade.php`), nous avons déjà
+prévu l'affichage des erreurs :
+
+```php
+<input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}"
+       name="nom" type="text" value="{{ old('nom') }}">
+{!! $errors->first('nom', '<div class="invalid-feedback">:message</div>') !!}
+```
+
+Avec cette approche, **l'expérience utilisateur est améliorée**, et les erreurs
+sont clairement affichées à côté des champs concernés.
 
 ## Configuration de l'Envoi d'Email
 
