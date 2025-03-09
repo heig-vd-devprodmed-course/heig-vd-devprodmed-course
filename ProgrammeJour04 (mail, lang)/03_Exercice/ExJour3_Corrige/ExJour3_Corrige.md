@@ -36,7 +36,7 @@ Zweifel Robin
 
 ```php
 Route::get('/agenda', [AgendaController::class,'afficheFormulaire']);
-Route::post('agenda', [AgendaController::class,'traiteFormulaire']);
+Route::post('/agenda', [AgendaController::class,'traiteFormulaire']);
 ```
 
 > Remarque : N'oubliez pas le `use` pour la classe `AgendaController` (qui

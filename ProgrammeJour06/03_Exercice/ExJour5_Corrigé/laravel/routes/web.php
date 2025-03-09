@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/voiture', [VoitureController::class, 'rendFormulaire']);
-Route::post('voiture', [VoitureController::class, 'traiteFormulaire']);
+Route::post('/voiture', [VoitureController::class, 'traiteFormulaire']);

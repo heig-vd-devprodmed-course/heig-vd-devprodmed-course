@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/agenda', [AgendaController::class, 'afficheFormulaire']);
-Route::post('agenda', [AgendaController::class, 'traiteFormulaire']);
+Route::post('/agenda', [AgendaController::class, 'traiteFormulaire']);

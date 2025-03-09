@@ -146,7 +146,7 @@ Ajoutons une nouvelle route pour pouvoir récupérer les informations.
 
 ```php
 <!-- routes/web.php -->
-Route::post('traiteFormulaire', [FormController::class,'traiteForm']);
+Route::post('/traiteFormulaire', [FormController::class,'traiteForm']);
 ```
 
 C'est bien `Route::post` et non `Route::get` qu'il faut taper !

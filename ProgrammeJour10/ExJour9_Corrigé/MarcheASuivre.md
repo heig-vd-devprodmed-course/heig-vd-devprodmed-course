@@ -531,7 +531,7 @@ Il faut ajouter encore les routes suivantes dans le fichier `web.php`
 ```
 ...
 Route::get('/page2', [ScoreController::class, 'rendPage2']);
-Route::post('page2', [ScoreController::class, 'rendPage2']);
+Route::post('/page2', [ScoreController::class, 'rendPage2']);
 ...
 ```
 

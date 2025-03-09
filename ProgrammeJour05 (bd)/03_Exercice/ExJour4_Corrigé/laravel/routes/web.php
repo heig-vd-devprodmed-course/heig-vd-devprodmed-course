@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/manif', [ManifController::class, 'rendFormManif']);
-Route::post('manif', [ManifController::class, 'traiteFormManif']);
+Route::post('/manif', [ManifController::class, 'traiteFormManif']);

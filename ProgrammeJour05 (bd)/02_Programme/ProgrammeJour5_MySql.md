@@ -523,7 +523,7 @@ Il ne manque plus que les deux routes :
 
 ```php
 Route::get('/email', 'EmailController@rendFormulaire');
-Route::post('email','EmailController@traiteFormulaire');
+Route::post('/email','EmailController@traiteFormulaire');
 ```
 
 Voilà, notre application est terminée.

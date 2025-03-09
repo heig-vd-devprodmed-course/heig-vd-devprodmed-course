@@ -386,7 +386,7 @@ Il ne nous reste plus qu'à ajouter la route pour la méthode de notre contrôle
 :
 
 ```
-Route::post('voiture', [VoitureController::class,'traiteFormulaire']);
+Route::post('/voiture', [VoitureController::class,'traiteFormulaire']);
 ```
 
 Voilà, notre application est fonctionnelle :slightly_smiling_face:

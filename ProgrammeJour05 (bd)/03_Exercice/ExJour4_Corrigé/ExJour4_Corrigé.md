@@ -25,7 +25,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 use App\Http\Controllers\ManifController;
 //...
 Route::get('/manif', [ManifController::class,'rendFormManif']);
-Route::post('manif', [ManifController::class,'traiteFormManif']);
+Route::post('/manif', [ManifController::class,'traiteFormManif']);
 ```
 
 ## Contrôleur (`ManifController.php`) :

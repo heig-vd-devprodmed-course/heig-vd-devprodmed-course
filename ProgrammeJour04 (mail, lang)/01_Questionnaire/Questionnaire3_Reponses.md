@@ -107,7 +107,7 @@ comment ?, Si non, pourquoi ?)
 > ```php
 > use Illuminate\Http\Request;  // ne pas oublier d'indiquer où est la classe Request !
 >
-> Route::post('traiteFormulaire', function (Request $request) {
+> Route::post('/traiteFormulaire', function (Request $request) {
 >  	dd($request->all());      // P.S. On voit notre jeton :-) (token)
 > });
 > ```

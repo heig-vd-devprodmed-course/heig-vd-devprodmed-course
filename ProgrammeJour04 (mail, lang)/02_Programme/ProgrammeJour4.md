@@ -124,7 +124,7 @@ Créons une nouvelle route (post) `contact`
 ## Route Traite Formulaire
 
 ```php
-Route::post('contact', [ContactController::class,'valideEtTraiteFormulaire']);
+Route::post('/contact', [ContactController::class,'valideEtTraiteFormulaire']);
 ```
 
 ## Classe pour validation des champs d'un formulaire
