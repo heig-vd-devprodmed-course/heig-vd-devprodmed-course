@@ -4,7 +4,7 @@
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
-- [Rappel `GET` et `POST`](#rappel-get-et-post)
+- [Rappel `GET` et `POST` (Pas besoin de pratiquer, juste comprendre)](#rappel-get-et-post-pas-besoin-de-pratiquer-juste-comprendre)
   - [GET](#get)
   - [POST](#post)
 - [Scénario](#scénario)
@@ -53,7 +53,7 @@
 - Utiliser la fonction old() pour conserver les valeurs saisies en cas d'erreur.
 - Configurer et tester l'envoi d'e-mails dans Laravel à l’aide de Mailpit.
 
-## Rappel `GET` et `POST`
+## Rappel `GET` et `POST` (Pas besoin de pratiquer, juste comprendre)
 
 Les méthodes `GET` et `POST` sont utilisées pour envoyer des données à un
 serveur web. Elles sont utilisées dans les formulaires HTML pour envoyer des
@@ -73,6 +73,44 @@ données saisies par l'utilisateur.
 - Visible par tout le monde dans la barre d’adresse du navigateur.
 - Peut être mis en cache.
 
+#### Exemple - Recherche de mots dans un dictionnaire
+
+Un formulaire permettant de rechercher des mots dans une langue spécifique.  
+L'URL générée sera du type `/words/german?wordsPerPage=5&query=haus`.
+
+```php
+<!-- routes/web.php -->
+use Illuminate\Http\Request;
+
+Route::get('/words/{lang}', function ($lang, Request $request) {
+    // Récupération des paramètres de l'URL
+    $query = $request->query('query', '');
+    $wordsPerPage = $request->query('wordsPerPage', 10);
+
+    ...
+});
+```
+
+```blade
+<!-- resources/views/search_form.blade.php -->
+@extends('template')
+
+@section('contenu')
+<form action="{{ url('/words/german') }}" method="get">
+    <label for="query">Rechercher un mot :</label>
+    <input type="text" id="query" name="query" value="{{ request('query') }}">
+
+    <label for="wordsPerPage">Mots par page :</label>
+    <input type="number" id="wordsPerPage" name="wordsPerPage" value="{{ request('wordsPerPage', 10) }}">
+
+    <button type="submit">Rechercher</button>
+</form>
+@endsection
+```
+
+L'URL contient directement les paramètres de la requête
+(`?query=haus&wordsPerPage=5`). C'est adapté aux recherches et aux filtres.
+
 ### POST
 
 - Permet d’envoyer une grande quantité de données via le corps de la requête.
@@ -84,6 +122,51 @@ données saisies par l'utilisateur.
 - Recommandé pour l’envoi de mots de passe ou d’informations sensibles.
 - Les variables ne sont pas visibles dans l’URL.
 - Ne peut pas être mis en cache.
+
+#### Exemple - Création de compte utilisateur
+
+Un formulaire permettant d'envoyer les informations d'inscription à la route
+`/register`.
+
+```php
+// routes/web.php
+Route::get('/register', function () {
+    return view('register_form');
+});
+
+Route::post('/register', function (Request $request) {
+    // Récupération des données du formulaire (sans validation pour simplifier l'exemple)
+    $name = $request->input('name');
+    $email = $request->input('email');
+
+    return view('register_success', compact('name', 'email'));
+});
+```
+
+```blade
+<!-- resources/views/register_form.blade.php -->
+@extends('template')
+
+@section('contenu')
+<form action="{{ url('/register') }}" method="post">
+    @csrf
+    <label for="name">Nom :</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required>
+
+    <button type="submit">S'inscrire</button>
+</form>
+@endsection
+```
+
+Les données sensibles (nom, email) sont envoyées via le corps de la requête
+HTTP, ce qui est plus sécurisé.
+
+> **Remarque :** Ces exemples utilisent la logique dans les routes (`web.php`)
+> pour simplifier la compréhension. **En production, il est recommandé
+> d’utiliser des contrôleurs pour une meilleure séparation du code.**
 
 ## Scénario
 
