@@ -100,8 +100,6 @@ Nous allons mettre en place un formulaire avec les étapes suivantes :
 
 ## Création du projet
 
-> [!TIP]
->
 > Vous n'avez pas besoin de créer un nouveau projet si vous avez déjà suivi les
 > étapes précédentes. Vous pouvez continuer avec le projet existant.
 
@@ -441,8 +439,6 @@ paramètre. grâce à cela, Laravel appliquera automatiquement la validation :
 - Si des erreurs sont détectées, Laravel **redirigera l'utilisateur** vers le
   formulaire avec les messages d'erreur appropriés.
 
-> [!TIP]
->
 > La documentation officielle de Laravel fournit une liste complète des règles
 > de validation disponibles :
 > [https://laravel.com/docs/12.x/validation#available-validation-rules](https://laravel.com/docs/12.x/validation#available-validation-rules)
@@ -511,8 +507,6 @@ Ajoutez ce fichier dans `resources/views/` :
 </html>
 ```
 
-> [!TIP]
->
 > - Permet de **structurer** l'email avec du HTML.
 > - Facilement **modifiable** sans toucher au code du contrôleur.
 > - Assure un **meilleur rendu** sur les clients de messagerie.
@@ -555,8 +549,6 @@ Il faut compléter le fichier `.env` (qui se trouve à la racine) de l'applicati
 pour que `Laravel` puisse utiliser la messagerie de votre choix. (Dans notre cas
 nous utiliserons [mailpit](https://github.com/axllent/mailpit/wiki))
 
-> [!WARNING]
->
 > Attention à ne pas laisser ce fichier n'importe où ! (Ex : `Github`)
 
 Modifier ces paramètres dans `.env` :
