@@ -35,7 +35,7 @@ _paginate: false
 
 Vincent Guidoux
 
-!w:200
+![w:200](./images/vincent-guidoux.png)
 
 🎭🌿📖🛠️🌀
 
