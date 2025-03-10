@@ -669,6 +669,7 @@ mailpit
 - **Windows** :  
   Téléchargez la version correspondante ici :  
   [https://github.com/axllent/mailpit/releases](https://github.com/axllent/mailpit/releases)
+  Sélectionnez la version pour amd64 (64 bits) ou autre selon votre système.
 
 ```bash
 # Terminal (dans le dossier où se trouve le fichier mailpit.exe)
