@@ -659,15 +659,20 @@ brew tap axllent/apps
 brew install mailpit
 ```
 
-- **Windows** :  
-  Téléchargez la version correspondante ici :  
-  [https://github.com/axllent/mailpit/releases](https://github.com/axllent/mailpit/releases)
-
-Démarrez Mailpit :
+Démarrez Mailpit sur Mac :
 
 ```bash
 # Terminal (n'importe où)
 mailpit
+```
+
+- **Windows** :  
+  Téléchargez la version correspondante ici :  
+  [https://github.com/axllent/mailpit/releases](https://github.com/axllent/mailpit/releases)
+
+```bash
+# Terminal (dans le dossier où se trouve le fichier mailpit.exe)
+.\mailpit.exe
 ```
 
 ![mailpit](./images/mailpit.png)
