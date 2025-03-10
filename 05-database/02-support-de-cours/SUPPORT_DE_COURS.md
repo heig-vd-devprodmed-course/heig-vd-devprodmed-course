@@ -1,13 +1,16 @@
-# Jour 5 – Bases de données avec Laravel (SQLite)
+# Jour 5
+
+Aujourd'hui, nous allons aborder le thème des bases de données avec Laravel, en
+utilisant SQLite comme exemple pratique.
 
 ## Table des matières
 
+- [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [Présentation complète de SQLite](#présentation-complète-de-sqlite)
 - [Scénario](#scénario)
 - [Configuration de SQLite avec Laravel](#configuration-de-sqlite-avec-laravel)
-- [Création de la base de données SQLite](#création-de-la-base-de-données-sqlite)
-- [Migrations Laravel](#migrations)
+- [Migrations Laravel](#migrations-laravel)
 - [Création d'un modèle Eloquent](#création-dun-modèle-eloquent)
 - [Formulaire pour la newsletter](#formulaire-pour-la-newsletter)
 - [Validation des données avec FormRequest](#validation-des-données-avec-formrequest)
@@ -17,20 +20,16 @@
 - [Récapitulatif](#récapitulatif)
 - [Ressources complémentaires](#ressources-complémentaires)
 
----
-
 ## Objectifs
 
 À la fin de cette séance, vous devriez être capable de :
 
-- Lister les étapes pour intégrer SQLite avec Laravel.
-- Décrire précisément comment configurer Laravel avec une base SQLite.
+- Lister les étapes nécessaires pour intégrer SQLite avec Laravel.
+- Décrire comment configurer Laravel pour utiliser une base de données SQLite.
 - Identifier les étapes de création et d'utilisation des migrations Laravel.
 - Appliquer le modèle Eloquent pour manipuler simplement une base de données.
-- Énumérer et appliquer les étapes pour créer, valider et traiter un formulaire.
+- Énumérer les étapes pour créer, valider et traiter un formulaire.
 - Vérifier les données avec l'outil DB Browser for SQLite.
-
----
 
 ## Présentation complète de SQLite
 
@@ -84,41 +83,26 @@ extension=pdo_sqlite
 extension=sqlite3
 ```
 
----
+## Migrations Laravel
 
-## Création de la base de données SQLite
+Les migrations facilitent la création et la gestion de tables en Laravel.
 
-Pour créer votre base, Laravel se chargera automatiquement du reste dès que vous
-lancerez une migration. Pour vérifier que tout fonctionne, exécutez dans votre
-terminal :
+Créons la migration pour la table `emails` :
 
 ```bash
-php artisan migrate:install
-```
-
----
-
-## Migrations
-
-Les migrations permettent de gérer facilement la structure de votre base de
-données.
-
-Créez une migration :
-
-```bash
-# Terminal
+# Terminal (dans le dossier racine de votre projet)
 php artisan make:migration creation_table_emails
 ```
 
-Éditez le fichier généré pour créer la table `emails` :
+Modifiez la migration ainsi créée :
 
 ```php
-// database/migrations/2024_xx_xx_creation_table_emails.php
+// database/migrations/2024_03_18_creation_table_emails.php
 public function up(): void
 {
     Schema::create('emails', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('email', 100);
+        $table->string('email', 100)->unique(); // chaque email doit être unique
     });
 }
 
@@ -128,24 +112,23 @@ public function down(): void
 }
 ```
 
-Exécutez ensuite :
+Lancez la migration :
 
 ```bash
+# Terminal (dans le dossier racine de votre projet)
 php artisan migrate
 ```
 
----
-
 ## Création d'un modèle Eloquent
 
-Utilisez Eloquent, l'ORM intégré à Laravel, pour simplifier vos interactions
-avec la base de données.
+Créez le modèle Eloquent correspondant à la table `emails` :
 
 ```bash
+# Terminal (dans le dossier racine de votre projet)
 php artisan make:model Email
 ```
 
-Complétez votre modèle :
+Complétez ce modèle ainsi :
 
 ```php
 // app/Models/Email.php
@@ -163,11 +146,9 @@ class Email extends Model
 }
 ```
 
----
-
 ## Formulaire pour la newsletter
 
-Créez un template Blade `template_newsletter.blade.php` :
+Créez un template Blade nommé `template_newsletter.blade.php` :
 
 ```html
 <!-- resources/views/template_newsletter.blade.php -->
@@ -187,35 +168,46 @@ Créez un template Blade `template_newsletter.blade.php` :
 </html>
 ```
 
-Créez ensuite une vue `view_newsletter_formulaire.blade.php` :
+Créez la vue pour le formulaire d'inscription :
 
-```html
+```blade
 <!-- resources/views/view_newsletter_formulaire.blade.php -->
-@extends('template_newsletter') @section('titre') Formulaire d'inscription
-@endsection @section('contenu')
+@extends('template_newsletter')
+
+@section('titre') Inscription Newsletter @endsection
+
+@section('contenu')
 <form method="POST" action="{{ url('newsletter') }}">
-	@csrf
-	<input
-		name="email"
-		type="email"
-		placeholder="Votre email"
-		value="{{ old('email') }}"
-	/>
-	{!! $errors->first('email', '<small>:message</small>') !!}
-	<button type="submit">Envoyer</button>
+    @csrf
+    <input name="email" type="email" placeholder="Votre email" value="{{ old('email') }}" required>
+    @error('email')<div class="text-danger">{{ $message }}</div>@enderror
+    <button type="submit">Envoyer</button>
 </form>
 @endsection
 ```
 
----
+Créez également la vue de confirmation d'inscription :
+
+```html
+<!-- resources/views/view_newsletter_confirm_inscription.blade.php -->
+@extends('template_newsletter') @section('titre') Confirmation d'inscription
+@endsection @section('contenu')
+<div class="alert alert-success">
+	Merci ! Vous êtes bien inscrit à la newsletter.
+</div>
+@endsection
+```
 
 ## Validation des données avec FormRequest
 
-Créez une classe de validation :
+Créez la classe de validation :
 
 ```bash
+# Terminal (dans le dossier racine de votre projet)
 php artisan make:request NewsletterRequest
 ```
+
+Définissez vos règles :
 
 ```php
 // app/Http/Requests/NewsletterRequest.php
@@ -228,20 +220,21 @@ public function rules(): array {
 }
 ```
 
----
-
 ## Contrôleur NewsletterController
 
-Créez un contrôleur :
+Créez votre contrôleur :
 
 ```bash
+# Terminal (dans le dossier racine du projet)
 php artisan make:controller NewsletterController
 ```
 
-Ajoutez ces méthodes :
+Complétez votre contrôleur :
 
 ```php
 // app/Http/Controllers/NewsletterController.php
+use App\Models\Email;
+use App\Http\Requests\NewsletterRequest;
 
 public function rendFormulaire() {
     return view('view_newsletter_formulaire');
@@ -253,11 +246,9 @@ public function traiteFormulaire(NewsletterRequest $request) {
 }
 ```
 
----
-
 ## Routes
 
-Ajoutez ces routes :
+Définissez vos routes dans `web.php` :
 
 ```php
 // routes/web.php
@@ -267,10 +258,25 @@ Route::get('/newsletter', [NewsletterController::class, 'rendFormulaire']);
 Route::post('/newsletter', [NewsletterController::class, 'traiteFormulaire']);
 ```
 
----
+## Tester et vérifier les données
+
+Installez [DB Browser for SQLite](https://sqlitebrowser.org/dl/) pour visualiser
+facilement le contenu de votre base `database.sqlite`.
+
+- Lancez l'outil
+- Ouvrez votre fichier `database.sqlite`
+- Vérifiez la présence et le contenu de la table `emails`
+
+## Récapitulatif
+
+- Configuration de SQLite avec Laravel
+- Création et gestion de bases de données via migrations
+- Manipulation simplifiée des données avec Eloquent
+- Validation rigoureuse des données utilisateur
+- Vérification avec un outil graphique simple (DB Browser for SQLite)
 
 ## Ressources complémentaires
 
-- [Laravel SQLite](https://laravel.com/docs/database)
-- [Laravel Eloquent](https://laravel.com/docs/eloquent)
-- [DB Browser for SQLite](https://sqlitebrowser.org/)
+- [Documentation officielle Laravel Database](https://laravel.com/docs/database)
+- [Eloquent ORM - Laravel](https://laravel.com/docs/eloquent)
+- [DB Browser for SQLite](https://sqlitebrowser.org/dl/)
