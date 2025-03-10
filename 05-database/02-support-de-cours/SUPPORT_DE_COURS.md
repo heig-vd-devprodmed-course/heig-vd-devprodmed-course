@@ -8,6 +8,7 @@ utilisant SQLite comme exemple pratique.
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [Présentation complète de SQLite](#présentation-complète-de-sqlite)
+- [Présentation de l'ORM (Eloquent)](#présentation-de-lorm-eloquent)
 - [Scénario](#scénario)
 - [Configuration de SQLite avec Laravel](#configuration-de-sqlite-avec-laravel)
 - [Migrations Laravel](#migrations-laravel)
@@ -51,15 +52,54 @@ logiciels grand public (Firefox, Skype, applications Apple et Android, etc.) et
 est particulièrement adaptée aux systèmes embarqués et applications mobiles du
 fait de sa légèreté (moins de 600 Ko).
 
----
+Points clés :
+
+- **Léger** (moins de 600 Ko)
+- **Intégré** directement dans les applications
+- **Stockage** dans un seul fichier
+- **Très utilisé** (Firefox, Chrome, iOS, Android, etc.)
+
+## Présentation de l'ORM (Eloquent)
+
+Un **ORM (Object-Relational Mapping)** est un outil de programmation qui permet
+de manipuler une base de données relationnelle à travers une représentation en
+objets.
+
+Autrement dit, un ORM permet aux développeurs d'interagir avec une base de
+données sans écrire directement du code SQL. Les interactions (comme créer,
+lire, modifier, ou supprimer des données) se font via des objets et des méthodes
+en langage de programmation orienté objet, ce qui facilite la gestion des
+données et la maintenance du code.
+
+Dans Laravel, l'ORM utilisé est appelé **Eloquent**. Il offre une syntaxe simple
+et intuitive pour manipuler les données de la base. Chaque table de la base de
+données est représentée par une classe (modèle) et chaque ligne de la table
+devient une instance de cette classe.
+
+**Exemple sans ORM (SQL direct) :**
+
+```sql
+INSERT INTO emails (email) VALUES ('exemple@exemple.com');
+```
+
+Avec Eloquent :
+
+```php
+// Avec le modèle Email (Eloquent)
+Email::create(['email' => 'exemple@exemple.com']);
+```
+
+La deuxième version est beaucoup plus simple à lire, à maintenir, et évite les
+erreurs SQL courantes.
+
+Documentation officielle :
+[Laravel Eloquent ORM](https://laravel.com/docs/eloquent)
 
 ## Scénario
 
 Nous allons permettre à un utilisateur de s'inscrire à une newsletter.
 L'utilisateur saisira son email via un formulaire, que Laravel enregistrera
 ensuite dans une base SQLite.
-
----
 
 ## Configuration de SQLite avec Laravel
 
