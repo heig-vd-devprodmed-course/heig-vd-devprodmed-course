@@ -173,7 +173,7 @@ Voici quelques-uns des avantages spécifiques de `Laravel` :
 
   - [`Laravel.io`](https://laravel.io/)
   - [`Reddit`](https://www.reddit.com/r/laravel/)
-  - [`Laracasts`](https://laracasts.com/).
+  - [`Laracasts`](https://laracasts.com/)
 
 - #### `Laravel` est largement utilisé
 
