@@ -111,23 +111,6 @@ Ou plus simplement :
 $prenom = $request->prenom;
 ```
 
-## Question 6 - Donnée
-
-> **Peut-on récupérer les informations d'un formulaire directement dans une
-> route ? Si oui, comment ?**
-
-## Question 6 - Réponse
-
-Oui, en utilisant `Request` comme paramètre de la fonction de la route :
-
-```php
-use Illuminate\Http\Request;
-
-Route::post('/traiteFormulaire', function (Request $request) {
-    echo $request->input('prenom');
-});
-```
-
 ## Questions
 
 <!-- _class: lead -->
