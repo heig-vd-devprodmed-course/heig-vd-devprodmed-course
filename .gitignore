@@ -4,16 +4,16 @@
 *~
 
 ## macOS
-
+ 
 # Files created by macOS Finder
 .DS_Store
 
 ## Marp
 
 # Outputs
-*.html
+*.html 
 *.pdf
-
+ 
 ## Windows
 
 # Windows thumbnail cache files
@@ -21,3 +21,6 @@ Thumbs.db
 
 # Folder config file
 [Dd]esktop.ini
+
+# node_modules
+node_modules/

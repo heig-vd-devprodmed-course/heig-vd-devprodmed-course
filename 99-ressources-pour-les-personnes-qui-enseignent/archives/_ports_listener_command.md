@@ -1,31 +1,29 @@
-# Ports listener command
+Mac :
 
-## Mac
-
-```bash
+```
 sudo lsof -PiTCP -sTCP:LISTEN
 ```
 
-## Windows
+Windows :
 
-1. ```bash
+1. ```
    resmon (puis cliquer sur l'onglet réseau)
    ```
 
    ou
 
-2. ```bash
+2. ```
    netstat -abn
    ```
 
    ou
 
-3. ```bash
+3. ```
    netstat -nao
    ```
 
    ou
 
-4. ```bash
+4. ```
    netstat -abn -p UDP   (ou IP, IPv6, ICMP, ICMPv6, TCP, TCPv6, UDPv6)
    ```

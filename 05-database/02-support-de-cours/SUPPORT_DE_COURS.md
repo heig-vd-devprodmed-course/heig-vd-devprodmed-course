@@ -172,17 +172,15 @@ Complétez ce modèle ainsi :
 
 ```php
 // app/Models/Email.php
-<?php
-
-namespace App\Models;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model
 {
-    protected $table = 'emails';
-    public $timestamps = false;
-    protected $fillable = ['email'];
+	protected $table = 'emails';
+	public $timestamps = false;
+	protected $fillable = ['email'];
 }
 ```
 
@@ -214,15 +212,26 @@ Créez la vue pour le formulaire d'inscription :
 <!-- resources/views/view_newsletter_formulaire.blade.php -->
 @extends('template_newsletter')
 
-@section('titre') Inscription Newsletter @endsection
+@section('titre')
+	Inscription Newsletter
+@endsection
 
 @section('contenu')
-<form method="POST" action="{{ url('newsletter') }}">
-    @csrf
-    <input name="email" type="email" placeholder="Votre email" value="{{ old('email') }}" required>
-    @error('email')<div class="text-danger">{{ $message }}</div>@enderror
-    <button type="submit">Envoyer</button>
-</form>
+	<form method="POST" action="{{ url('newsletter') }}">
+		@csrf
+		<input
+			name="email"
+			type="email"
+			placeholder="Votre email"
+			value="{{ old('email') }}"
+			required
+		/>
+		@error('email')
+			<div class="text-danger">{{ $message }}</div>
+		@enderror
+
+		<button type="submit">Envoyer</button>
+	</form>
 @endsection
 ```
 

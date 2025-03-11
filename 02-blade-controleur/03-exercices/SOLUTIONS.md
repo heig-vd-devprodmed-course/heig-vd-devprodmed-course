@@ -72,59 +72,60 @@ Nous allons maintenant éditer ce fichier et y ajouter la logique
 
 ```php
 <!-- app/Http/Controllers/ArtistesController.php -->
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request; // pas encore utilisé
 use DateTime;
 
-class ArtistesController extends Controller {
+class ArtistesController extends Controller
+{
+	public function afficheArtistes($premiereLettre = false)
+	{
+		$artistes = $this->rendArtistes();
 
-    public function afficheArtistes($premiereLettre = false) {
-        $artistes = $this->rendArtistes();
-
-        // S'il y a une premiere lettre
-        if ($premiereLettre) {
-            $selectionArtistes = [];
-            foreach ($artistes as $artiste) {
-                if ($artiste['nom'][0] === $premiereLettre) {
+		// S'il y a une premiere lettre
+		if ($premiereLettre) {
+			$selectionArtistes = [];
+			foreach ($artistes as $artiste) {
+				if ($artiste['nom'][0] === $premiereLettre) {
 					$selectionArtistes[] = $artiste;
-                }
-            }
-        } else {
-            // on récupère tous les artistes
-            $selectionArtistes = $artistes;
-        }
+				}
+			}
+		} else {
+			// on récupère tous les artistes
+			$selectionArtistes = $artistes;
+		}
 
-        // On transmet les artistes à la vue pour l'affichage
-        return view('view_artistes')->with('artistes', $selectionArtistes);
-    }
+		// On transmet les artistes à la vue pour l'affichage
+		return view('view_artistes')->with('artistes', $selectionArtistes);
+	}
 
-    private function rendArtistes() {
-        $artistes = array(
-            array(
-                "prenom" => "Amy",
-                "nom" => "Winehouse",
-                "dateNaissance" => new DateTime('14-09-1983')
-            ),
-            array(
-                "prenom" => "Janis",
-                "nom" => "Joplin",
-                "dateNaissance" => new DateTime('19-01-1943')
-            ),
-            array(
-                "prenom" => "Jo",
-                "nom" => "Bar",
-                "dateNaissance" => new DateTime('19-01-1943')
-            ),
-            array(
-                "prenom" => "Janis",
-                "nom" => "Siegel",
-                "dateNaissance" => new DateTime('12-01-1990')
-            ));
-        return $artistes;
-    }
+	private function rendArtistes()
+	{
+		$artistes = [
+			[
+				'prenom' => 'Amy',
+				'nom' => 'Winehouse',
+				'dateNaissance' => new DateTime('14-09-1983'),
+			],
+			[
+				'prenom' => 'Janis',
+				'nom' => 'Joplin',
+				'dateNaissance' => new DateTime('19-01-1943'),
+			],
+			[
+				'prenom' => 'Jo',
+				'nom' => 'Bar',
+				'dateNaissance' => new DateTime('19-01-1943'),
+			],
+			[
+				'prenom' => 'Janis',
+				'nom' => 'Siegel',
+				'dateNaissance' => new DateTime('12-01-1990'),
+			],
+		];
+		return $artistes;
+	}
 }
 ```
 
@@ -255,32 +256,33 @@ Contenu du fichier `\app\Http\Controllers\ProverbesController.php`
 
 ```php
 <!-- app/Http/Controllers/ProverbesController.php -->
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gestionnaires\GestionnaireProverbesFichierTexte;
 use App\Gestionnaires\GestionnaireProverbesHardcode;
 use App\Gestionnaires\GestionnaireProverbesWikipedia;
 
-class ProverbesController extends Controller {
+class ProverbesController extends Controller
+{
+	public function afficheDixProverbesV1()
+	{
+		$dixProverbes = [
+			'beaucoup de bruit pour rien',
+			'ce qui doit être sera',
+			'diseur de bons mots, mauvais caractère',
+			'eau trouble ne fait pas miroir',
+			'gober des mouches',
+			'jamais deux sans trois',
+			'mieux vaut être seul que mal accompagné',
+			'ni vu ni connu',
+			'Paris ne s’est pas fait en un jour',
+			'rien ne sert de courir, il faut partir à temps',
+		];
 
-    public function afficheDixProverbesV1() {
-        $dixProverbes = ["beaucoup de bruit pour rien",
-						 "ce qui doit être sera",
-						 "diseur de bons mots, mauvais caractère",
-						 "eau trouble ne fait pas miroir",
-						 "gober des mouches",
-						 "jamais deux sans trois",
-						 "mieux vaut être seul que mal accompagné",
-						 "ni vu ni connu",
-						 "Paris ne s’est pas fait en un jour",
-						 "rien ne sert de courir, il faut partir à temps",];
-
-        // on transmet les dix proverbes à la vue qui va les afficher
+		// on transmet les dix proverbes à la vue qui va les afficher
 		return view('view_proverbesV1')->with('proverbes', $dixProverbes);
-    }
+	}
 }
 ```
 
@@ -342,26 +344,24 @@ sens POO du terme.
 
 ```php
 <!-- app/Gestionnaires/IGestionnaireProverbes.php -->
-<?php
-
-namespace App\Gestionnaires;
+<?php namespace App\Gestionnaires;
 
 /**
  * Tous les gestionnaires de proverbes doivent :
  *      - Rendre des proverbes
  *      - Indiquer d'où proviennent ces proverbes
  */
-interface IGestionnaireProverbes {
+interface IGestionnaireProverbes
+{
+	/**
+	 * Doit rendre un tableau de proverbes
+	 */
+	public function rendProverbes();
 
-    /**
-     * Doit rendre un tableau de proverbes
-     */
-    public function rendProverbes();
-
-    /**
-     * Doit indiquer d'où proviennent les proverbes (chaîne de caractère)
-     */
-    public function rendSource();
+	/**
+	 * Doit indiquer d'où proviennent les proverbes (chaîne de caractère)
+	 */
+	public function rendSource();
 }
 ```
 
@@ -371,51 +371,52 @@ Voici le gestionnaire pour les proverbes codés en dur.
 
 ```php
 <!-- app/Gestionnaires/GestionnaireProverbesHardcode.php -->
-<?php
-
-namespace App\Gestionnaires;
+<?php namespace App\Gestionnaires;
 
 /**
  * Rend une série de proverbes.
  * Remarque : les proverbes sont hardcodés
  */
-class GestionnaireProverbesHardcode implements IGestionnaireProverbes {
+class GestionnaireProverbesHardcode implements IGestionnaireProverbes
+{
+	/**
+	 * Rend une série de proverbes.
+	 * @return type Un tableau contenant tous les proverbes
+	 */
+	public function rendProverbes()
+	{
+		$proverbes = [
+			'à bon entendeur salut',
+			'beaucoup de bruit pour rien',
+			'ce qui doit être sera',
+			'diseur de bons mots, mauvais caractère',
+			'eau trouble ne fait pas miroir',
+			'fagot bien lié est à moitié porté',
+			'gober des mouches',
+			'herbe connue soit bienvenue',
+			'il faut se méfier de l’eau qui dort',
+			'jamais deux sans trois',
+			'l’amour est aveugle',
+			'mieux vaut être seul que mal accompagné',
+			'ni vu ni connu',
+			'œil pour œil, dent pour dent',
+			'Paris ne s’est pas fait en un jour',
+			'quand le chat n’est pas là, les souris dansent',
+			'rien ne sert de courir, il faut partir à temps',
+			'si jeunesse savait, si vieillesse pouvait',
+			'tomber pour mieux se relever',
+		];
+		return $proverbes;
+	}
 
-    /**
-     * Rend une série de proverbes.
-     * @return type Un tableau contenant tous les proverbes
-     */
-    public function rendProverbes() {
-        $proverbes = [
-            "à bon entendeur salut",
-            "beaucoup de bruit pour rien",
-            "ce qui doit être sera",
-            "diseur de bons mots, mauvais caractère",
-            "eau trouble ne fait pas miroir",
-            "fagot bien lié est à moitié porté",
-            "gober des mouches",
-            "herbe connue soit bienvenue",
-            "il faut se méfier de l’eau qui dort",
-            "jamais deux sans trois",
-            "l’amour est aveugle",
-            "mieux vaut être seul que mal accompagné",
-            "ni vu ni connu",
-            "œil pour œil, dent pour dent",
-            "Paris ne s’est pas fait en un jour",
-            "quand le chat n’est pas là, les souris dansent",
-            "rien ne sert de courir, il faut partir à temps",
-            "si jeunesse savait, si vieillesse pouvait",
-            "tomber pour mieux se relever"];
-        return $proverbes;
-    }
-
-    /**
-     * Permet de savoir d'où proviennent les proverbes
-     * @return string "Source : Proverbes hardcodés"
-     */
-    public function rendSource() {
-        return "Source : Proverbes hardcodés";
-    }
+	/**
+	 * Permet de savoir d'où proviennent les proverbes
+	 * @return string "Source : Proverbes hardcodés"
+	 */
+	public function rendSource()
+	{
+		return 'Source : Proverbes hardcodés';
+	}
 }
 ```
 
@@ -450,33 +451,33 @@ Créons maintenant le gestionnaire correspondant.
 
 ```php
 <!-- app/Gestionnaires/GestionnaireProverbesFichierTexte.php -->
-<?php
-
-namespace App\Gestionnaires;
+<?php namespace App\Gestionnaires;
 
 /**
  * Rend une série de proverbes.
  * Remarque : les proverbes proviennent du fichier : \storage\app\proverbes.txt
  */
-class GestionnaireProverbesFichierTexte implements IGestionnaireProverbes {
+class GestionnaireProverbesFichierTexte implements IGestionnaireProverbes
+{
+	/**
+	 * Récupere tous les proverbes du fichier : \storage\app\proverbes.txt
+	 * @return type Un tableau contenant tous les proverbes
+	 */
+	public function rendProverbes()
+	{
+		$path = storage_path('app/proverbes.txt');
+		$proverbes = file($path);
+		return $proverbes;
+	}
 
-     /**
-     * Récupere tous les proverbes du fichier : \storage\app\proverbes.txt
-     * @return type Un tableau contenant tous les proverbes
-     */
-    public function rendProverbes() {
-        $path = storage_path('app/proverbes.txt');
-        $proverbes = file($path);
-        return $proverbes;
-    }
-
-    /**
-     * Permet de savoir d'où proviennent les proverbes
-     * @return string "Source : Proverbes provenant d'un fichier texte"
-     */
-    public function rendSource() {
-        return "Source : Proverbes provenant d'un fichier texte";
-    }
+	/**
+	 * Permet de savoir d'où proviennent les proverbes
+	 * @return string "Source : Proverbes provenant d'un fichier texte"
+	 */
+	public function rendSource()
+	{
+		return "Source : Proverbes provenant d'un fichier texte";
+	}
 }
 ```
 
@@ -486,9 +487,7 @@ correspondant :
 
 ```php
 <!-- app/Gestionnaires/GestionnaireProverbesWikipedia.php -->
-<?php
-
-namespace App\Gestionnaires;
+<?php namespace App\Gestionnaires;
 
 use DOMDocument;
 
@@ -496,75 +495,81 @@ use DOMDocument;
  * Rend une série de proverbes.
  * Remarque : les proverbes proviennent de wikipédia (online)
  */
-class GestionnaireProverbesWikipedia implements IGestionnaireProverbes {
+class GestionnaireProverbesWikipedia implements IGestionnaireProverbes
+{
+	// Récupère le contenu (texte) des tags li de l'url spécifiée
+	// La fonction retourne un tableau de chaînes de caractères
+	private function recupereTagsLi($url)
+	{
+		$doc = new DOMDocument();
+		// On récupère le contenu html
+		libxml_use_internal_errors(true);
+		$doc->loadHTMLFile($url);
+		libxml_use_internal_errors(false);
+		// On récupère tous les éléments <li> du code html
+		// car les proverbes y figurent
+		$tagsLi = $doc->getElementsByTagName('li');
+		// On met le contenu texte (des tags li) dans un tableau
+		$tagsTexte = [];
+		for ($i = 0; $i < $tagsLi->length; $i++) {
+			$tagLi = $tagsLi->item($i);
+			$tagsTexte[] = $tagLi->nodeValue;
+		}
+		return $tagsTexte;
+	}
 
-    // Récupère le contenu (texte) des tags li de l'url spécifiée
-    // La fonction retourne un tableau de chaînes de caractères
-    private function recupereTagsLi($url) {
-        $doc = new DOMDocument();
-        // On récupère le contenu html
-        libxml_use_internal_errors(true);
-        $doc->loadHTMLFile($url);
-        libxml_use_internal_errors(false);
-        // On récupère tous les éléments <li> du code html
-        // car les proverbes y figurent
-        $tagsLi = $doc->getElementsByTagName("li");
-        // On met le contenu texte (des tags li) dans un tableau
-        $tagsTexte = [];
-        for ($i = 0; $i < $tagsLi->length; $i++) {
-            $tagLi = $tagsLi->item($i);
-            $tagsTexte[] = $tagLi->nodeValue;
-        }
-        return $tagsTexte;
-    }
-
-    // Le contenu texte des tags li ne contiennent pas tous des proverbes.
-    // Du coup il faut "nettoyer" un peu.
-    private function recupereUniquementProverbes($tagsTexte) {
-        //dd($tagsTexte);
-        $proverbes = [];
-        $trouveDeclancheurEnregistrement = false;
-        $pos=-1;
-        $fin = false;
-        // parcours de tous les tags <li> pour ne garder que les bons
-        do {
-            $pos++;
-            $tagTexte = $tagsTexte[$pos];
-            if (!$trouveDeclancheurEnregistrement) {
-				if ($pos==71) {
-                    $trouveDeclancheurEnregistrement = true;
+	// Le contenu texte des tags li ne contiennent pas tous des proverbes.
+	// Du coup il faut "nettoyer" un peu.
+	private function recupereUniquementProverbes($tagsTexte)
+	{
+		//dd($tagsTexte);
+		$proverbes = [];
+		$trouveDeclancheurEnregistrement = false;
+		$pos = -1;
+		$fin = false;
+		// parcours de tous les tags <li> pour ne garder que les bons
+		do {
+			$pos++;
+			$tagTexte = $tagsTexte[$pos];
+			if (!$trouveDeclancheurEnregistrement) {
+				if ($pos == 71) {
+					$trouveDeclancheurEnregistrement = true;
 					$proverbes[] = $tagTexte;
-                }
-            } else {
-                // on s'arrête lorsqu'on a trouvé le mot Wiktionnaire
-                if (str_contains($tagTexte, "Wiktionnaire")) {
-                    $fin = true;
-                } else {
-                    $proverbes[] = $tagTexte;
-                }
-            }
-        } while (!$fin && ($pos < count($tagsTexte)));
-        return $proverbes;
-    }
+				}
+			} else {
+				// on s'arrête lorsqu'on a trouvé le mot Wiktionnaire
+				if (str_contains($tagTexte, 'Wiktionnaire')) {
+					$fin = true;
+				} else {
+					$proverbes[] = $tagTexte;
+				}
+			}
+		} while (!$fin && $pos < count($tagsTexte));
+		return $proverbes;
+	}
 
-    /**
-     * Récupere tous les proverbes français de wikipedia online
-     * @return type Un tableau contenant tous les proverbes
-     */
-    public function rendProverbes() {
-        $url = 'https://fr.wiktionary.org/wiki/Annexe:' . 'Liste_de_proverbes_fran%C3%A7ais';
-        $tagsLiTexte = $this->recupereTagsLi($url);
-        $proverbes = $this->recupereUniquementProverbes($tagsLiTexte);
-        return $proverbes;
-    }
+	/**
+	 * Récupere tous les proverbes français de wikipedia online
+	 * @return type Un tableau contenant tous les proverbes
+	 */
+	public function rendProverbes()
+	{
+		$url =
+			'https://fr.wiktionary.org/wiki/Annexe:' .
+			'Liste_de_proverbes_fran%C3%A7ais';
+		$tagsLiTexte = $this->recupereTagsLi($url);
+		$proverbes = $this->recupereUniquementProverbes($tagsLiTexte);
+		return $proverbes;
+	}
 
-    /**
-     * Permet de savoir d'où proviennent les proverbes
-     * @return string "Source : Proverbes provenant de wikipédia"
-     */
-    public function rendSource() {
-        return "Source : Proverbes provenant de wikipédia";
-    }
+	/**
+	 * Permet de savoir d'où proviennent les proverbes
+	 * @return string "Source : Proverbes provenant de wikipédia"
+	 */
+	public function rendSource()
+	{
+		return 'Source : Proverbes provenant de wikipédia';
+	}
 }
 ```
 

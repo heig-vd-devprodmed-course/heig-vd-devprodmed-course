@@ -101,7 +101,7 @@ Laravel utilise un objet de type `Request` :
 use Illuminate\Http\Request;
 
 Route::post('/traiteFormulaire', function (Request $request) {
-    return $request->input('prenom');
+	return $request->input('prenom');
 });
 ```
 

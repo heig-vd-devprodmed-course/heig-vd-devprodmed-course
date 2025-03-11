@@ -21,61 +21,61 @@ use Illuminate\Http\Request;
 
 class UnControleur extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return "Fonctionnalité index";
-    }
+	/**
+	 * Display a listing of the resource.
+	 */
+	public function index()
+	{
+		return 'Fonctionnalité index';
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return "Fonctionnalité create";
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 */
+	public function create()
+	{
+		return 'Fonctionnalité create';
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        return "Fonctionnalité store";
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(Request $request)
+	{
+		return 'Fonctionnalité store';
+	}
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return "Fonctionnalité show";
-    }
+	/**
+	 * Display the specified resource.
+	 */
+	public function show(string $id)
+	{
+		return 'Fonctionnalité show';
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return "Fonctionnalité edit";
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 */
+	public function edit(string $id)
+	{
+		return 'Fonctionnalité edit';
+	}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        return "Fonctionnalité update";
-    }
+	/**
+	 * Update the specified resource in storage.
+	 */
+	public function update(Request $request, string $id)
+	{
+		return 'Fonctionnalité update';
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        return "Fonctionnalité destroy";
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 */
+	public function destroy(string $id)
+	{
+		return 'Fonctionnalité destroy';
+	}
 }
 ```
 
@@ -187,42 +187,35 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+	use HasApiTokens, HasFactory, Notifiable;
 
-    const ROLE_BASIC = 'ROLE_BASIC';
-    const ROLE_EDITEUR = 'ROLE_EDITEUR';
-    const ROLE_ADMIN = 'ROLE_ADMIN';
-    const ROLES = [User::ROLE_BASIC, User::ROLE_EDITEUR, User::ROLE_ADMIN];
+	const ROLE_BASIC = 'ROLE_BASIC';
+	const ROLE_EDITEUR = 'ROLE_EDITEUR';
+	const ROLE_ADMIN = 'ROLE_ADMIN';
+	const ROLES = [User::ROLE_BASIC, User::ROLE_EDITEUR, User::ROLE_ADMIN];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $fillable = ['name', 'email', 'password'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	/**
+	 * The attributes that should be cast.
+	 *
+	 * @var array<string, string>
+	 */
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+	];
 }
 ```
 
@@ -239,32 +232,31 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-		   $table->enum('role', User::ROLES)->default(User::ROLE_BASIC);  // <- Ajout d'un rôle par défaut
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('users', function (Blueprint $table) {
+			$table->id();
+			$table->string('name');
+			$table->string('email')->unique();
+			$table->timestamp('email_verified_at')->nullable();
+			$table->string('password');
+			$table->enum('role', User::ROLES)->default(User::ROLE_BASIC); // <- Ajout d'un rôle par défaut
+			$table->rememberToken();
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('users');
+	}
 };
 ```
 
@@ -306,27 +298,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('acls', function (Blueprint $table) {
-            $table->id();
-            $table->string('fonctionnalite');
-            $table->string('role');
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('acls', function (Blueprint $table) {
+			$table->id();
+			$table->string('fonctionnalite');
+			$table->string('role');
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('acls');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('acls');
+	}
 };
 ```
 
@@ -342,7 +333,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acl extends Model
 {
-    use HasFactory;
+	use HasFactory;
 	protected $fillable = ['fonctionnalite', 'role'];
 }
 ```
@@ -368,42 +359,70 @@ use App\Models\User;
 
 class AclTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        DB::table('acls')->delete();
+	/**
+	 * Run the database seeds.
+	 */
+	public function run(): void
+	{
+		DB::table('acls')->delete();
 
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_BASIC, 'fonctionnalite' => 'UnControleur@index']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_BASIC, 'fonctionnalite' => 'UnControleur@show']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@index']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@show']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@create']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@edit']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_EDITEUR, 'fonctionnalite' => 'UnControleur@store']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@index']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@show']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@create']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@edit']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@store']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@update']);
-        DB::table('acls')->insert(['role' =>
-            User::ROLE_ADMIN, 'fonctionnalite' => 'UnControleur@destroy']);
-    }
+		DB::table('acls')->insert([
+			'role' => User::ROLE_BASIC,
+			'fonctionnalite' => 'UnControleur@index',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_BASIC,
+			'fonctionnalite' => 'UnControleur@show',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_EDITEUR,
+			'fonctionnalite' => 'UnControleur@index',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_EDITEUR,
+			'fonctionnalite' => 'UnControleur@show',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_EDITEUR,
+			'fonctionnalite' => 'UnControleur@create',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_EDITEUR,
+			'fonctionnalite' => 'UnControleur@edit',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_EDITEUR,
+			'fonctionnalite' => 'UnControleur@store',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@index',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@show',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@create',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@edit',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@store',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@update',
+		]);
+		DB::table('acls')->insert([
+			'role' => User::ROLE_ADMIN,
+			'fonctionnalite' => 'UnControleur@destroy',
+		]);
+	}
 }
 ```
 
@@ -428,35 +447,35 @@ use Illuminate\Support\Facades\DB;
 
 class UserTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        DB::table('users')->delete();
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		DB::table('users')->delete();
 
-        DB::table('users')->insert([
-            'name' => 'joe',
-            'email' => 'joe@email.ch',
-            'password' => Hash::make('mdp_joe'),
-        ]); // avec le role par défaut ;-)
+		DB::table('users')->insert([
+			'name' => 'joe',
+			'email' => 'joe@email.ch',
+			'password' => Hash::make('mdp_joe'),
+		]); // avec le role par défaut ;-)
 
-        DB::table('users')->insert([
-            'name' => 'lea',
-            'email' => 'lea@email.ch',
-            'password' => Hash::make('mdp_lea'),
-            'role' => User::ROLE_EDITEUR,
-        ]);
+		DB::table('users')->insert([
+			'name' => 'lea',
+			'email' => 'lea@email.ch',
+			'password' => Hash::make('mdp_lea'),
+			'role' => User::ROLE_EDITEUR,
+		]);
 
-        DB::table('users')->insert([
-            'name' => 'dom',
-            'email' => 'dom@email.ch',
-            'password' => Hash::make('mdp_dom'),
-            'role' => User::ROLE_ADMIN,
-        ]);
-    }
+		DB::table('users')->insert([
+			'name' => 'dom',
+			'email' => 'dom@email.ch',
+			'password' => Hash::make('mdp_dom'),
+			'role' => User::ROLE_ADMIN,
+		]);
+	}
 }
 ```
 
@@ -472,16 +491,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $this->call(AclTableSeeder::class);
-        $this->call(UserTableSeeder::class);
-    }
+	/**
+	 * Seed the application's database.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		$this->call(AclTableSeeder::class);
+		$this->call(UserTableSeeder::class);
+	}
 }
 ```
 
@@ -617,7 +636,7 @@ Il suffit de choisir une des possibilités et de retaper l'URL :
 http://localhost:8000/tests
 ```
 
-Cette fois-ci nous sommes obligés de nous authentifier
+Cette fois-ci nous sommes obligés de nous authentifier :thumbsup:
 
 Comment autoriser les utilisateurs à accéder aux fonctionnalités auxquelles ils
 ont droit ?
@@ -644,41 +663,45 @@ use App\Models\Acl;
 
 class AclMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
-    {
-        // Pour que notre middleware fonctionne, il faut que l'utilisateur soit authentifié
-        if (is_null(auth()->user())) {
-            return redirect()->route('login');
-        }
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+	 */
+	public function handle(Request $request, Closure $next): Response
+	{
+		// Pour que notre middleware fonctionne, il faut que l'utilisateur soit authentifié
+		if (is_null(auth()->user())) {
+			return redirect()->route('login');
+		}
 
-        // On récupère le rôle de l'utilisateur
-        $role = auth()->user()->getAttributes()['role'];
+		// On récupère le rôle de l'utilisateur
+		$role = auth()->user()->getAttributes()['role'];
 
-        // On récupère le nom de la fonctionnalité que l'utilisateur essaye d'accéder
-        // (après un peu de nettoyage; la fonctionnalité se trouve après le dernier \)
-        // $request->route()->getActionName() : "App\Http\Controllers\UnControleur@index"
-        // $fonctionnalite : "UnControleur@index"
-        $fonctionnalite = substr($request->route()->getActionName(),
-                strrpos($request->route()->getActionName(), '\\') + 1);
-        // On contrôle que le rôle de l'utilisateur a accès à cette fonctionnalité
-        $aAccesA = (Acl::where('role', $role)->where('fonctionnalite',
-                $fonctionnalite)->count() != 0);
+		// On récupère le nom de la fonctionnalité que l'utilisateur essaye d'accéder
+		// (après un peu de nettoyage; la fonctionnalité se trouve après le dernier \)
+		// $request->route()->getActionName() : "App\Http\Controllers\UnControleur@index"
+		// $fonctionnalite : "UnControleur@index"
+		$fonctionnalite = substr(
+			$request->route()->getActionName(),
+			strrpos($request->route()->getActionName(), '\\') + 1
+		);
+		// On contrôle que le rôle de l'utilisateur a accès à cette fonctionnalité
+		$aAccesA =
+			Acl::where('role', $role)
+				->where('fonctionnalite', $fonctionnalite)
+				->count() != 0;
 
-        // Si il n'a pas accès à cette fonctionnalité, on arrête le traitement
-        if (!$aAccesA) {
-            abort(403);
-            //return response()->json(['message' => 'Forbidden'], 403);
-        }
+		// Si il n'a pas accès à cette fonctionnalité, on arrête le traitement
+		if (!$aAccesA) {
+			abort(403);
+			//return response()->json(['message' => 'Forbidden'], 403);
+		}
 
-        // On passe la requête plus loin
-        // (soit au middleware suivant, soit au contrôleur)
-        return $next($request);
-    }
+		// On passe la requête plus loin
+		// (soit au middleware suivant, soit au contrôleur)
+		return $next($request);
+	}
 }
 ```
 
@@ -709,7 +732,9 @@ Passons à l'activation du `middleware`.
 - soit par la route (où l'on peut chaîner les middleware)
 
   ```php
-  Route::resource('tests', UnControleur::class)->middleware('auth')->middleware('acl');
+  Route::resource('tests', UnControleur::class)
+  	->middleware('auth')
+  	->middleware('acl');
   ```
 
 - soit par le contrôleur

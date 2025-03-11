@@ -1,75 +1,68 @@
 # Corrigé Exercice Voiture CRUD
 
 pour que le projet fonctionne, il faut :
-   - créer une nouvelle app `Laravel`
-   - déplacer les fichiers dans les répertoires de l'app `Laravel`
-    - faire les commandes suivantes : 
-        - `php artisan migrate:install`
-    - `php artisan migrate`
+
+- créer une nouvelle app `Laravel`
+- déplacer les fichiers dans les répertoires de l'app `Laravel`
+- faire les commandes suivantes :
+  - `php artisan migrate:install`
+- `php artisan migrate`
 
 Voilà l'application est prête à fonctionner !
 
+---
 
-
---------------------------------------------
-
-Marche à suivre
-===============
+# Marche à suivre
 
 1.) Configurer le fichier `.env` pour travailler avec SQLite
 
 2.) Créer le fichier `database.sqlite` dans `\laravel\database\`
 
-3.) Contrôler que tout fonctionne :
-    `php artisan migrate:install`
+3.) Contrôler que tout fonctionne : `php artisan migrate:install`
 
-4.) Création d'une migration
-    `php artisan make:migration create_voitures_table`
-	=> crée un nouveau fichier dans le répertoire `\laravel\database\migrations`
+4.) Création d'une migration `php artisan make:migration create_voitures_table`
+=> crée un nouveau fichier dans le répertoire `\laravel\database\migrations`
 
 5.) Mise à jour de la méthode up() dans la migration
-    
 
-	public function up()
-	{
-	    Schema::create('voitures', function (Blueprint $table) {
-	        $table->increments('id');
-	        $table->string('marque', 30);
-	        $table->string('type', 30);
-	        $table->string('couleur', 30);
-	        $table->decimal('cylindree', 3, 1);
-	    });
-	}
+    public function up()
+    {
+        Schema::create('voitures', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('marque', 30);
+            $table->string('type', 30);
+            $table->string('couleur', 30);
+            $table->decimal('cylindree', 3, 1);
+        });
+    }
 
-6.) Création des nouvelles tables dans `database.sqlite`
-    `php artisan migrate`
-	
+6.) Création des nouvelles tables dans `database.sqlite` `php artisan migrate`
 7.) Création du fichier Model pour la table voitures
-	`php artisan make:model Voiture`
-	=> crée un nouveau fichier `\laravel\app\Models`
-	
-8.) Mise à jour du fichier `\laravel\app\Models\Voiture.php`
+`php artisan make:model Voiture` => crée un nouveau fichier
+`\laravel\app\Models` 8.) Mise à jour du fichier
+`\laravel\app\Models\Voiture.php`
 
-	<?php
-	namespace App\Models;
-	
-	use Illuminate\Database\Eloquent\Factories\HasFactory;
-	use Illuminate\Database\Eloquent\Model;
-	
-	class Voiture extends Model	{
-		use HasFactory;
-	
-		protected $table='voitures';
-	
-		protected $fillable = [
-			'marque', 'type', 'couleur', 'cylindree', 
-		];
-	
-		public $timestamps=false;
-	}
+    <?php
+    namespace App\Models;
 
-> Remarque : L'attribut `$fillable` est nécessaire pour pouvoir faire une "assignation de masse"
->                     lors du `create` dans le contrôleur ;-) [doc](https://laravel.com/docs/9.x/eloquent#mass-assignment)
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+
+    class Voiture extends Model	{
+    	use HasFactory;
+
+    	protected $table='voitures';
+
+    	protected $fillable = [
+    		'marque', 'type', 'couleur', 'cylindree',
+    	];
+
+    	public $timestamps=false;
+    }
+
+> Remarque : L'attribut `$fillable` est nécessaire pour pouvoir faire une
+> "assignation de masse" lors du `create` dans le contrôleur ;-)
+> [doc](https://laravel.com/docs/9.x/eloquent#mass-assignment)
 
 9.) Test que la classe modèle fonctionne bien
 
@@ -87,21 +80,16 @@ php artisan tinker
 	=> 1.2
 	>>> $voiture->save();
 	=> true
-	>>> 
+	>>>
 ```
 
-10.) Maintenant que tout est prêt au niveau de la base de données, on peut créer un contrôleur
-     `php artisan make:controller VoitureController --resource`
-	 => crée un fichier dans le répertoire `\laravel\app\Http\Controllers`
-	 
-11.) Créons maintenant les "sept" routes pour les sept méthodes du contrôleur
-     `Route::resource('voiture', VoitureController::class);`
-      sans oublier le use ;-)
-      `use App\Http\Controllers\VoitureController;`
-	 
-12.) Pour contrôler que les routes existent
-     `php artisan route:list`
-	 
+10.) Maintenant que tout est prêt au niveau de la base de données, on peut créer
+un contrôleur `php artisan make:controller VoitureController --resource` => crée
+un fichier dans le répertoire `\laravel\app\Http\Controllers` 11.) Créons
+maintenant les "sept" routes pour les sept méthodes du contrôleur
+`Route::resource('voiture', VoitureController::class);` sans oublier le use ;-)
+`use App\Http\Controllers\VoitureController;` 12.) Pour contrôler que les routes
+existent `php artisan route:list`
 
 ```
 ...
@@ -114,14 +102,12 @@ DELETE          voiture/{voiture} ..... voiture.destroy › VoitureController@de
 GET|HEAD        voiture/{voiture}/edit. voiture.edit › VoitureController@edit
 ```
 
- 13.) Création d'un fichier `...Request` pour la validation du formulaire
-      `php artisan make:request VoitureRequest`
-	  => création d'un fichier dans le répertoire `\laravel\app\Http\Request`
-	 
+13.) Création d'un fichier `...Request` pour la validation du formulaire
+`php artisan make:request VoitureRequest` => création d'un fichier dans le
+répertoire `\laravel\app\Http\Request`
 
- 14.) mise à jour de la méthode `authorize()` à `true`
-      mise à jour du tableau permettant les validations
-	 
+14.) mise à jour de la méthode `authorize()` à `true` mise à jour du tableau
+permettant les validations
 
 ```php
   public function authorize() {
@@ -143,11 +129,9 @@ GET|HEAD        voiture/{voiture}/edit. voiture.edit › VoitureController@edit
   }
 ```
 
- 15.) Mise à jour des sept méthodes du contrôleur
-     // sans oublier les "use" pour la classe modèle et `VoitureRequest`
-	 `use App\Models\Voiture;`
-     `use App\Http\Requests\VoitureRequest;`
-
+15.) Mise à jour des sept méthodes du contrôleur // sans oublier les "use" pour
+la classe modèle et `VoitureRequest` `use App\Models\Voiture;`
+`use App\Http\Requests\VoitureRequest;`
 
 ```php
 /**
@@ -234,4 +218,5 @@ public function destroy($id)
 }
 ```
 
- 16.) création du `template` et des `vues` (voir le répertoire `\laravel\resources\views`)
+16.) création du `template` et des `vues` (voir le répertoire
+`\laravel\resources\views`)

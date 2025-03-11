@@ -55,33 +55,32 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateVoituresTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('voitures', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('marque', 30);
-            $table->string('type', 30);
-            $table->string('couleur', 30);
-            $table->decimal('cylindree', 3, 1);
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('voitures', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('marque', 30);
+			$table->string('type', 30);
+			$table->string('couleur', 30);
+			$table->decimal('cylindree', 3, 1);
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('voitures');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('voitures');
+	}
 }
-
 ```
 
 Pour créer la table dans notre base de données, il faut lancer la commande :
@@ -118,9 +117,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Voiture extends Model
 {
-    use HasFactory;
-    protected $table='voitures';
-    public $timestamps=false;
+	use HasFactory;
+	protected $table = 'voitures';
+	public $timestamps = false;
 }
 ```
 
@@ -168,7 +167,7 @@ Pour s'en rendre compte :
    }
 ```
 
-Tout est fonctionnel
+Tout est fonctionnel :thumbsup:
 
 Pour notre formulaire nous avons besoin d'une vue et pour une vue nous avons
 besoin d'un `template`.
@@ -261,18 +260,18 @@ namespace App\Http\Controllers;
 
 class VoitureController extends Controller
 {
-    public function rendFormulaire() {
-        return view('view_rend_formulaire_voiture');
-    }
+	public function rendFormulaire()
+	{
+		return view('view_rend_formulaire_voiture');
+	}
 }
-
 ```
 
 Il ne reste plus qu'à faire une route pour notre contrôleur. Editons le fichier
 `\routes\web.php`et ajoutons la route :
 
 ```php
-Route::get('/voiture', [VoitureController::class,'rendFormulaire']);
+Route::get('voiture', [VoitureController::class, 'rendFormulaire']);
 ```
 
 Testons voir si cela fonctionne :
@@ -300,32 +299,31 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class VoitureRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'marque'=>'required|min:2|max:30|alpha',
-        	'type'=>'required|in:break,cabriolet,SUV,limousine,pickup',
-            'couleur'=>'required|min:2|max:30|alpha',
-            'cylindree'=>'required|regex:/^[0-9]+(\.[0-9]?)?$/',
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return [
+			'marque' => 'required|min:2|max:30|alpha',
+			'type' => 'required|in:break,cabriolet,SUV,limousine,pickup',
+			'couleur' => 'required|min:2|max:30|alpha',
+			'cylindree' => 'required|regex:/^[0-9]+(\.[0-9]?)?$/',
+		];
+	}
 }
-
 ```
 
 Nous pouvons ajouter la méthode qui permettra la validation de nos champs :
@@ -340,23 +338,23 @@ use App\Models\Voiture;
 
 class VoitureController extends Controller
 {
-    public function rendFormulaire() {
-        return view('view_rend_formulaire_voiture');
-    }
+	public function rendFormulaire()
+	{
+		return view('view_rend_formulaire_voiture');
+	}
 
-    public function traiteFormulaire(VoitureRequest $request) {
+	public function traiteFormulaire(VoitureRequest $request)
+	{
+		$unModeleVoiture = new Voiture();
+		$unModeleVoiture->marque = $request->input('marque');
+		$unModeleVoiture->type = $request->input('type');
+		$unModeleVoiture->couleur = $request->input('couleur');
+		$unModeleVoiture->cylindree = $request->input('cylindree');
+		$unModeleVoiture->save();
 
-        $unModeleVoiture = new Voiture;
-        $unModeleVoiture->marque = $request->input('marque');
-        $unModeleVoiture->type = $request->input('type');
-        $unModeleVoiture->couleur = $request->input('couleur');
-        $unModeleVoiture->cylindree = $request->input('cylindree');
-        $unModeleVoiture->save();
-
-        return view('view_confirmation_voiture');
-    }
+		return view('view_confirmation_voiture');
+	}
 }
-
 ```
 
 Il nous manque la vue permettant de savoir que tout s'est bien passé
@@ -386,7 +384,7 @@ Il ne nous reste plus qu'à ajouter la route pour la méthode de notre contrôle
 :
 
 ```
-Route::post('/voiture', [VoitureController::class,'traiteFormulaire']);
+Route::post('voiture', [VoitureController::class,'traiteFormulaire']);
 ```
 
 Voilà, notre application est fonctionnelle :slightly_smiling_face:

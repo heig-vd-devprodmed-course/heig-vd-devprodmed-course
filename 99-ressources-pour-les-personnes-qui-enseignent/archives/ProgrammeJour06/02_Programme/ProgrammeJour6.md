@@ -61,31 +61,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            //$table->id();
-            $table->increments('id');     				// <---
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('is_admin')->default(false);    // <---
-            $table->rememberToken();
-            $table->timestamps();
-        });
-        //...
-    }
-    //...
-}
-
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up(): void
+	{
+		Schema::create('users', function (Blueprint $table) {
+			//$table->id();
+			$table->increments('id'); // <---
+			$table->string('name');
+			$table->string('email')->unique();
+			$table->timestamp('email_verified_at')->nullable();
+			$table->string('password');
+			$table->boolean('is_admin')->default(false); // <---
+			$table->rememberToken();
+			$table->timestamps();
+		});
+		//...
+	}
+	//...
+};
 ```
 
 `Laravel 11` a déjà exécuté les migration et la table `users` existe dans déjà !
@@ -149,42 +147,34 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+	use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'is_admin',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $fillable = ['name', 'email', 'password', 'is_admin'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array
+	{
+		return [
+			'email_verified_at' => 'datetime',
+			'password' => 'hashed',
+		];
+	}
 }
 ```
 
@@ -210,13 +200,13 @@ Pour créer un nouvel utilisateur il faut créer un nouvel objet `User` (notre
 classe `modèle`) :
 
 ```php
-$unUser = new App\Models\User;
+$unUser = new App\Models\User();
 ```
 
 Nous devons maintenant renseigner chaque champ de notre objet :
 
 ```php
-$unUser->name = "Joe";
+$unUser->name = 'Joe';
 ```
 
 puis appuyer sur la touche `return`
@@ -228,7 +218,7 @@ $unUser->email = 'joe@gmail.com';
 puis appuyer sur la touche `return`
 
 ```php
-$unUser->password = "heyjoe";
+$unUser->password = 'heyjoe';
 ```
 
 Nous sommes prêts pour envoyer notre objet dans notre base de données :
@@ -315,6 +305,7 @@ App\Models\User::findOrFail(1)->delete();
 
 Pour ajouter un nouvel utilisateur dans la base de données nous pouvons utiliser
 une seule commande, il suffit de mettre les différentes données dans un tableau
+:wink:
 
 ```
 App\Models\User::create(['name'=> "Test", 'email'=> "test@test.ch",'password'=>"testpassword"]);
@@ -381,61 +372,61 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+	/**
+	 * Display a listing of the resource.
+	 */
+	public function index()
+	{
+		//
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 */
+	public function create()
+	{
+		//
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(Request $request)
+	{
+		//
+	}
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+	/**
+	 * Display the specified resource.
+	 */
+	public function show(string $id)
+	{
+		//
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 */
+	public function edit(string $id)
+	{
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+	/**
+	 * Update the specified resource in storage.
+	 */
+	public function update(Request $request, string $id)
+	{
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 */
+	public function destroy(string $id)
+	{
+		//
+	}
 }
 ```
 
@@ -471,7 +462,7 @@ Voici ce que devrait vous retourner l'exécution de cette commande.
 > Si une erreur du genre
 > `...ReflectionException::("Class "UserController" does not exist")` se
 > produit, c'est que vous avez oublié le `use` du contrôleur dans le fichier
-> `web.php`
+> `web.php` :wink:
 
 ```
 ...
@@ -492,7 +483,7 @@ Voici ce que devrait vous retourner l'exécution de cette commande.
 ```
 
 On y retrouve, entre autres, les sept url qui pointent sur les sept méthodes de
-notre contrôleur
+notre contrôleur :thumbsup:
 
 ## Template
 
@@ -762,7 +753,7 @@ nécessaire pour découvrir la barre de navigation !
 
 ![BarreNavigation](img\BarreNavigation.png)
 
-C'est chouette non ?
+C'est chouette non ? :smiley:
 
 # Visualisation des données d'un utilisateur
 
@@ -809,7 +800,7 @@ changer la route principale de notre fichier `web.php` en :
 
 ```php
 Route::get('/', function () {
-    return redirect('user');
+	return redirect('user');
 });
 ```
 
@@ -879,27 +870,29 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest {
+class UserUpdateRequest extends FormRequest
+{
+	/**
+	 * Determine if the user is authorized to make this request.
+	 */
+	public function authorize(): bool
+	{
+		return true;
+	}
 
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array {
-        $id = $this->user; // on récupère l'identifiant de l'utilisateur
-        return [
-            'name' => 'required|max:255|unique:users,name,' . $id, // . $id est une option qui permet d'exclure l'id de la règle unique
-            'email' => 'required|email|max:255|unique:users,email,' . $id
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+	 */
+	public function rules(): array
+	{
+		$id = $this->user; // on récupère l'identifiant de l'utilisateur
+		return [
+			'name' => 'required|max:255|unique:users,name,' . $id, // . $id est une option qui permet d'exclure l'id de la règle unique
+			'email' => 'required|email|max:255|unique:users,email,' . $id,
+		];
+	}
 }
 ```
 

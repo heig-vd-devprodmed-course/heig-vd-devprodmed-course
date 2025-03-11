@@ -87,49 +87,48 @@ s'incrémente automatiquement et pour disposer d'un champ supplémentaire `admin
 > use Illuminate\Database\Schema\Blueprint;
 > use Illuminate\Support\Facades\Schema;
 >
-> return new class extends Migration
-> {
->     /**
->      * Run the migrations.
->      */
->     public function up(): void
->     {
->         Schema::create('users', function (Blueprint $table) {
->             $table->increments('id');   // <---
->             $table->string('name');
->             $table->string('email')->unique();
->             $table->timestamp('email_verified_at')->nullable();
->             $table->string('password');
->             $table->boolean('admin')->default(false); // <---
->             $table->rememberToken();
->             $table->timestamps();
->         });
+> return new class extends Migration {
+> 	/**
+> 	 * Run the migrations.
+> 	 */
+> 	public function up(): void
+> 	{
+> 		Schema::create('users', function (Blueprint $table) {
+> 			$table->increments('id'); // <---
+> 			$table->string('name');
+> 			$table->string('email')->unique();
+> 			$table->timestamp('email_verified_at')->nullable();
+> 			$table->string('password');
+> 			$table->boolean('admin')->default(false); // <---
+> 			$table->rememberToken();
+> 			$table->timestamps();
+> 		});
 >
->         Schema::create('password_reset_tokens', function (Blueprint $table) {
->             $table->string('email')->primary();
->             $table->string('token');
->             $table->timestamp('created_at')->nullable();
->         });
+> 		Schema::create('password_reset_tokens', function (Blueprint $table) {
+> 			$table->string('email')->primary();
+> 			$table->string('token');
+> 			$table->timestamp('created_at')->nullable();
+> 		});
 >
->         Schema::create('sessions', function (Blueprint $table) {
->             $table->string('id')->primary();
->             $table->foreignId('user_id')->nullable()->index();
->             $table->string('ip_address', 45)->nullable();
->             $table->text('user_agent')->nullable();
->             $table->longText('payload');
->             $table->integer('last_activity')->index();
->         });
->     }
+> 		Schema::create('sessions', function (Blueprint $table) {
+> 			$table->string('id')->primary();
+> 			$table->foreignId('user_id')->nullable()->index();
+> 			$table->string('ip_address', 45)->nullable();
+> 			$table->text('user_agent')->nullable();
+> 			$table->longText('payload');
+> 			$table->integer('last_activity')->index();
+> 		});
+> 	}
 >
->     /**
->      * Reverse the migrations.
->      */
->     public function down(): void
->     {
->         Schema::dropIfExists('users');
->         Schema::dropIfExists('password_reset_tokens');
->         Schema::dropIfExists('sessions');
->     }
+> 	/**
+> 	 * Reverse the migrations.
+> 	 */
+> 	public function down(): void
+> 	{
+> 		Schema::dropIfExists('users');
+> 		Schema::dropIfExists('password_reset_tokens');
+> 		Schema::dropIfExists('sessions');
+> 	}
 > };
 > ```
 
@@ -151,38 +150,38 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-         Schema::create('articles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->string('titre',80);
-            $table->text('contenu');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users')
-                    ->onDelete('restrict')
-                    ->onUpdate('restrict');
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('articles', function (Blueprint $table) {
+			$table->increments('id');
+			$table->timestamps();
+			$table->string('titre', 80);
+			$table->text('contenu');
+			$table->integer('user_id')->unsigned();
+			$table
+				->foreign('user_id')
+				->references('id')
+				->on('users')
+				->onDelete('restrict')
+				->onUpdate('restrict');
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('articles');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('articles');
+	}
 };
 ```
 
@@ -251,44 +250,38 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+	use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'admin',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $fillable = ['name', 'email', 'password', 'admin'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+	/**
+	 * The attributes that should be cast.
+	 *
+	 * @var array<string, string>
+	 */
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+		'password' => 'hashed',
+	];
 
-    // DEFINITON DE LA RELATION x:N
-    public function articles() {                 // NOUVEAU !!!!!!!!
-        return $this->hasMany(Article::class);   // Relation (1:)N
-    }                                            // NOUVEAU !!!!!!!!
+	// DEFINITON DE LA RELATION x:N
+	public function articles()
+	{
+		// NOUVEAU !!!!!!!!
+		return $this->hasMany(Article::class); // Relation (1:)N
+	} // NOUVEAU !!!!!!!!
 }
 ```
 
@@ -305,18 +298,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    // sans rien indiquer de plus, Laravel rattache automatiquement
-    // ce modèle à la table "articles"
-    // Il cherche une table nommée comme la classe mais en rajoutant un 's'
-    // => nom de la classe Article => recherche la table "articles" dans la bd
+	// sans rien indiquer de plus, Laravel rattache automatiquement
+	// ce modèle à la table "articles"
+	// Il cherche une table nommée comme la classe mais en rajoutant un 's'
+	// => nom de la classe Article => recherche la table "articles" dans la bd
 
-    protected $fillable=['titre','contenu','user_id'];  // pour plus tard ;-)
+	protected $fillable = ['titre', 'contenu', 'user_id']; // pour plus tard ;-)
 
-    public function user() {			        // NOUVEAU !!!!!!!!!!
-        return $this->belongsTo(User::class);    // Relation 1(:N)
-    }                                            // NOUVEAU !!!!!!!!!!
+	public function user()
+	{
+		// NOUVEAU !!!!!!!!!!
+		return $this->belongsTo(User::class); // Relation 1(:N)
+	} // NOUVEAU !!!!!!!!!!
 }
 ```
 
@@ -383,19 +378,22 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User; // Utilisation de la classe "Modèle" ;-)
 
-class UsersTableSeeder extends Seeder {
-
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void {
-        for ($i = 1; $i <= 10; $i++) {
-            User::create(['name' => 'Nom' . $i,
-                             'email' => 'email' . $i . '@gmx.ch',
-                             'password' => 'password' . $i,
-                             'admin' => rand(0, 1)]);
-        }
-    }
+class UsersTableSeeder extends Seeder
+{
+	/**
+	 * Run the database seeds.
+	 */
+	public function run(): void
+	{
+		for ($i = 1; $i <= 10; $i++) {
+			User::create([
+				'name' => 'Nom' . $i,
+				'email' => 'email' . $i . '@gmx.ch',
+				'password' => 'password' . $i,
+				'admin' => rand(0, 1),
+			]);
+		}
+	}
 }
 ```
 
@@ -414,31 +412,37 @@ use App\Models\Article; // Utilisation de la classe "Modèle" ;-)
 
 class ArticlesTableSeeder extends Seeder
 {
-    private function randDate() {
-        $nbJours = rand(-2800, 0);
-        return Carbon::now()->addDays($nbJours);
-    }
+	private function randDate()
+	{
+		$nbJours = rand(-2800, 0);
+		return Carbon::now()->addDays($nbJours);
+	}
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run(): void {
-        for ($i = 1; $i <= 100; $i++) {
-            $date = $this->randDate();
-            Article::create(['titre'=> 'Titre' .$i,
-                             'contenu' => 'Contenu ' . $i . ' Lorem ipsum dolor sit amet, consectetur ' .
-                                                     'adipiscing elit. Proin vel auctor libero, quis venenatis ' .
-                                                     'augue. Curabitur a pulvinar tortor, vitae condimentum ' .
-                                                     'libero. Cras eu massa sed lorem mattis lacinia. ' .
-                                                     'Vestibulum id feugiat turpis. Proin a lorem ligula.',
-                              'user_id' => rand(1, 10),
-                              'created_at' => $date,
-                              'updated_at' => $date,
-                            ]);
-        }
-    }
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run(): void
+	{
+		for ($i = 1; $i <= 100; $i++) {
+			$date = $this->randDate();
+			Article::create([
+				'titre' => 'Titre' . $i,
+				'contenu' =>
+					'Contenu ' .
+					$i .
+					' Lorem ipsum dolor sit amet, consectetur ' .
+					'adipiscing elit. Proin vel auctor libero, quis venenatis ' .
+					'augue. Curabitur a pulvinar tortor, vitae condimentum ' .
+					'libero. Cras eu massa sed lorem mattis lacinia. ' .
+					'Vestibulum id feugiat turpis. Proin a lorem ligula.',
+				'user_id' => rand(1, 10),
+				'created_at' => $date,
+				'updated_at' => $date,
+			]);
+		}
+	}
 }
 ```
 
@@ -461,16 +465,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $this->call(UsersTableSeeder::class);
-        $this->call(ArticlesTableSeeder::class);
-    }
+	/**
+	 * Seed the application's database.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		$this->call(UsersTableSeeder::class);
+		$this->call(ArticlesTableSeeder::class);
+	}
 }
 ```
 
@@ -769,44 +773,46 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+	/**
+	 * Display a listing of the resource.
+	 */
+	public function index()
+	{
+		//
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 */
+	public function create()
+	{
+		//
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(Request $request)
+	{
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 */
+	public function destroy(string $id)
+	{
+		//
+	}
 }
 ```
 
 ## Route
 
 ```php
-Route::resource('articles', ArticleController::class, ['except'=>['show','edit','update']]);
+Route::resource('articles', ArticleController::class, [
+	'except' => ['show', 'edit', 'update'],
+]);
 ```
 
 > N'oublions pas le `use` pour la classe `ArticleController`
@@ -900,21 +906,22 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    protected $nbArticlesParPage = 4;
+	protected $nbArticlesParPage = 4;
 
-    public function index() {
-        $articles=Article::with('user')
-                ->orderBy('articles.created_at','desc')
-                ->paginate($this->nbArticlesParPage);
-        $links=$articles->render();
-        return view('view_articles', compact('articles','links'));
-    }
+	public function index()
+	{
+		$articles = Article::with('user')
+			->orderBy('articles.created_at', 'desc')
+			->paginate($this->nbArticlesParPage);
+		$links = $articles->render();
+		return view('view_articles', compact('articles', 'links'));
+	}
 
-    public function create() {}
+	public function create() {}
 
-    public function store(Request $request) {}
+	public function store(Request $request) {}
 
-    public function destroy($id) {}
+	public function destroy($id) {}
 }
 ```
 
@@ -941,21 +948,21 @@ use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
+	/**
+	 * Register any application services.
+	 */
+	public function register(): void
+	{
+		//
+	}
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        Paginator::useBootstrapFour();
-    }
+	/**
+	 * Bootstrap any application services.
+	 */
+	public function boot(): void
+	{
+		Paginator::useBootstrapFour();
+	}
 }
 ```
 
@@ -1074,7 +1081,7 @@ Voilà, c'est installé.
 > ```
 
 Dans le répertoire `/resources/views` nous pouvons voir (entre autre) un nouveau
-répertoire `/auth` contenant des vues supplémentaires.
+répertoire `/auth` contenant des vues supplémentaires. :wink:
 
 Pour voir que l'authentification est fonctionnelle, il suffit de lancer notre
 application.
@@ -1172,15 +1179,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Admin
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
-    {
-        return $next($request);
-    }
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+	 */
+	public function handle(Request $request, Closure $next): Response
+	{
+		return $next($request);
+	}
 }
 ```
 
@@ -1232,7 +1239,7 @@ Adaptons maintenant notre application.
 Modifions notre contrôleur :
 
 - activation des deux middleware (1 existant `auth` + celui que l'on vient de
-  créer `admin`) dans une méthode de classe
+  créer `admin`) dans une méthode de classe :wink:
 - redirection vers le formulaire pour la création d'un nouvel article
 - enregistrement des données d'un nouvel article
 - suppression d'un article d'après si identifiant
@@ -1249,50 +1256,53 @@ use Illuminate\Routing\Controllers\Middleware; // ne pas oublier
 
 class ArticleController extends Controller implements HasMiddleware // ne pas oublier
 {
-    protected $nbArticlesParPage = 4;
+	protected $nbArticlesParPage = 4;
 
-    // NE PAS OUBLIER D'INDIQUER QUE LA CLASSE IMPLEMENTS HasMiddleware
-    // Et le use correspondant !!!
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('auth', except: ['index']),
-            new Middleware('admin', only: ['destroy']),
-        ];
-    }
+	// NE PAS OUBLIER D'INDIQUER QUE LA CLASSE IMPLEMENTS HasMiddleware
+	// Et le use correspondant !!!
+	public static function middleware(): array
+	{
+		return [
+			new Middleware('auth', except: ['index']),
+			new Middleware('admin', only: ['destroy']),
+		];
+	}
 
-    public function index() {
-        $articles=Article::with('user')
-                ->orderBy('articles.created_at','desc')
-                ->paginate($this->nbArticlesParPage);
-        $links=$articles->render();
-        return view('view_articles', compact('articles','links'));
-    }
+	public function index()
+	{
+		$articles = Article::with('user')
+			->orderBy('articles.created_at', 'desc')
+			->paginate($this->nbArticlesParPage);
+		$links = $articles->render();
+		return view('view_articles', compact('articles', 'links'));
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('view_ajoute_article');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 */
+	public function create()
+	{
+		return view('view_ajoute_article');
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ArticleRequest $request) {
-       $inputs=array_merge($request->all(), ['user_id'=>$request->user()->id]);
-       Article::create($inputs);
-       return redirect(route('articles.index'));
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(ArticleRequest $request)
+	{
+		$inputs = array_merge($request->all(), ['user_id' => $request->user()->id]);
+		Article::create($inputs);
+		return redirect(route('articles.index'));
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id) {
-        Article::findOrFail($id)->delete();
-        return redirect()->back();
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 */
+	public function destroy($id)
+	{
+		Article::findOrFail($id)->delete();
+		return redirect()->back();
+	}
 }
 ```
 

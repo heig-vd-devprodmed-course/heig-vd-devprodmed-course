@@ -96,8 +96,8 @@ Voilà notre vue est prête.
 Préparons une route pour accéder à cette vue dans le fichier `/routes/web.php`
 
 ```php
-Route ::get('/article/{n}/couleur/{c}', function($n, $c){
-   return view('maVue')->with('numero', $n)->with('couleur', $c);
+Route::get('/article/{n}/couleur/{c}', function ($n, $c) {
+	return view('maVue')->with('numero', $n)->with('couleur', $c);
 })->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ```
 
@@ -152,7 +152,7 @@ use Illuminate\Http\Request;
 
 class MonPremierControleur extends Controller
 {
-    //
+	//
 }
 ```
 
@@ -173,9 +173,10 @@ use Illuminate\Http\Request;
 
 class MonPremierControleur extends Controller
 {
-    public function maMethodeDansControleur() {
-        return view('welcome');
-    }
+	public function maMethodeDansControleur()
+	{
+		return view('welcome');
+	}
 }
 ```
 
@@ -186,14 +187,14 @@ le contrôleur. Modifiez la route :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 ```
 
 Pour qu'elle ressemble à ceci :
 
 ```php
-Route::get('/', [MonPremierControleur::class,'maMethodeDansControleur']);
+Route::get('/', [MonPremierControleur::class, 'maMethodeDansControleur']);
 ```
 
 Pour pouvoir utiliser cette classe, il faut ajouter la directive
@@ -227,8 +228,8 @@ Maintenant que nous avons compris, occupons nous de la route concernant le
 numéro d'article et sa couleur.
 
 ```php
-Route ::get('/article/{n}/couleur/{c}', function($n, $c){
-   return view('maVue')->with('numero', $n)->with('couleur', $c);
+Route::get('/article/{n}/couleur/{c}', function ($n, $c) {
+	return view('maVue')->with('numero', $n)->with('couleur', $c);
 })->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ```
 
@@ -284,7 +285,7 @@ des boucles. Chaque directive correspond à un tag `@nomDuTag`
 Créons tout d'abord une route qui nous mène à une méthode d'un contrôleur.
 
 ```php
-Route::get('/afficheTab', [MonPremierControleur::class,'afficheTab']);
+Route::get('/afficheTab', [MonPremierControleur::class, 'afficheTab']);
 ```
 
 Puis, créons dans le contrôleur une méthode contenant un tableau que nous

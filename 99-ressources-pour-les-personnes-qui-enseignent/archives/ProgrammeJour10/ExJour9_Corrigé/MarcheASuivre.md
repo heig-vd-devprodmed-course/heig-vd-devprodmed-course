@@ -105,18 +105,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Score extends Model {
+class Score extends Model
+{
+	use HasFactory;
 
-    use HasFactory;
+	protected $table = 'scores';
+	public $timestamps = false;
+	protected $fillable = [
+		'effectue_le',
+		'pourcentageBonnesReponses',
+		'nbSecondes',
+		'user_id',
+	];
 
-    protected $table = 'scores';
-    public $timestamps = false;
-    protected $fillable = ['effectue_le', 'pourcentageBonnesReponses', 'nbSecondes', 'user_id'];
-
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
-
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }
 ```
 
@@ -136,45 +141,38 @@ use App\Models\Score;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+	use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-		'admin',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $fillable = ['name', 'email', 'password', 'admin'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-        ];
-    }
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array
+	{
+		return [
+			'password' => 'hashed',
+		];
+	}
 
-	public function scores() {
-        return $this->hasMany(Score::class);
-    }
+	public function scores()
+	{
+		return $this->hasMany(Score::class);
+	}
 }
 ```
 
@@ -322,8 +320,8 @@ App\Models\Score::where('user_id','3')->orderBy('nbSecondes','ASC')->get();
 
 Pour récupérer les noms des utilisateurs dont l'identifiant est 1,3 ou 5 :
 
-```php
-App\Models\User::whereIn('id', array(1, 3, 5))->get('/name');
+```
+App\Models\User::whereIn('id', array(1, 3, 5))->get('name');
 ```
 
 Pour récupérer les trois meilleurs scores des utilisateurs ayant répondu juste à
@@ -334,7 +332,7 @@ App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','
 ```
 
 ```
-App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get('/user_id');
+App\Models\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get('user_id');
 ```
 
 ```
@@ -376,7 +374,7 @@ Route::resource('score', ScoreController::class, ['except'=>['show','edit','upda
 Remarque : Nous n'utiliserons pas les méthodes
 `show, edit, update, delete et create`, nous pouvons donc les enlever du
 contrôleur. (Nous aurions pu créer un contrôleur "conventionnel" et y ajouter
-deux routes )
+deux routes :wink:)
 
 Ajoutons maintenant la logique dans notre contrôleur :
 
@@ -530,8 +528,8 @@ Il faut ajouter encore les routes suivantes dans le fichier `web.php`
 
 ```
 ...
-Route::get('/page2', [ScoreController::class, 'rendPage2']);
-Route::post('/page2', [ScoreController::class, 'rendPage2']);
+Route::get('page2', [ScoreController::class, 'rendPage2']);
+Route::post('page2', [ScoreController::class, 'rendPage2']);
 ...
 ```
 
@@ -556,30 +554,25 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ScoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 */
+	public function authorize(): bool
+	{
+		return true;
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            "reponses.*" => [
-                'required',
-                'numeric',
-                'min:2',
-                'max:144',
-            ]
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+	 */
+	public function rules(): array
+	{
+		return [
+			'reponses.*' => ['required', 'numeric', 'min:2', 'max:144'],
+		];
+	}
 }
 ```
 
@@ -618,7 +611,7 @@ return redirect()->intended('/');
 ```
 
 Et pour rediriger l'utilisateur après son `logout`, il n'y a rien a faire
-puisqu'on va directement à la racine
+puisqu'on va directement à la racine :wink:
 
 ## Création des vues nécessaires (`view_page1`, `view_page2`, `view_page3` et `view_email`)
 

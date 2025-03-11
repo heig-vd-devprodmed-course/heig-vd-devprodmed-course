@@ -130,28 +130,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('motcles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->string('mot', 50)->unique();
-            $table->string('mot_url', 60)->unique();
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('motcles', function (Blueprint $table) {
+			$table->increments('id');
+			$table->timestamps();
+			$table->string('mot', 50)->unique();
+			$table->string('mot_url', 60)->unique();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('motcles');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('motcles');
+	}
 };
 ```
 
@@ -188,34 +187,39 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('article_motcle', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->integer('article_id')->unsigned();
-            $table->integer('motcle_id')->unsigned();
-            $table->foreign('article_id')->references('id')->on('articles')
-                    ->onDelete('restrict')
-                    ->onUpdate('restrict');
-            $table->foreign('motcle_id')->references('id')->on('motcles')
-                    ->onDelete('restrict')
-                    ->onUpdate('restrict');
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('article_motcle', function (Blueprint $table) {
+			$table->increments('id');
+			$table->timestamps();
+			$table->integer('article_id')->unsigned();
+			$table->integer('motcle_id')->unsigned();
+			$table
+				->foreign('article_id')
+				->references('id')
+				->on('articles')
+				->onDelete('restrict')
+				->onUpdate('restrict');
+			$table
+				->foreign('motcle_id')
+				->references('id')
+				->on('motcles')
+				->onDelete('restrict')
+				->onUpdate('restrict');
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('article_motcle');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('article_motcle');
+	}
 };
 ```
 
@@ -259,14 +263,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Motcle extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-	protected $fillable=['mot','mot_url'];
+	protected $fillable = ['mot', 'mot_url'];
 
-	public function articles() {
-        return $this->belongsToMany(Article::class); // chaque mot-clé peut être référencé par
-                                                     // plusieurs articles
-    }
+	public function articles()
+	{
+		return $this->belongsToMany(Article::class); // chaque mot-clé peut être référencé par
+		// plusieurs articles
+	}
 }
 ```
 
@@ -284,25 +289,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    // sans rien indiquer de plus, Laravel rattache automatiquement
-    // ce modèle à la table "articles"
-    // Il cherche une table nommée comme la classe mais en rajoutant un 's'
-    // => nom de la classe Article => recherche la table "articles" dans la bd
+	// sans rien indiquer de plus, Laravel rattache automatiquement
+	// ce modèle à la table "articles"
+	// Il cherche une table nommée comme la classe mais en rajoutant un 's'
+	// => nom de la classe Article => recherche la table "articles" dans la bd
 
-    protected $fillable=['titre','contenu','user_id'];  // pour l'assignation de masse
+	protected $fillable = ['titre', 'contenu', 'user_id']; // pour l'assignation de masse
 
-    // Relation 1:n entre un article et un user
+	// Relation 1:n entre un article et un user
 	// (Définie lors du dernier cours)
-	public function user() {
-        return $this->belongsTo(User::class);
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
 	// Relation n:n entre un article et les mots-clés
-    public function motcles() {
-        return $this->belongsToMany(Motcle::class);
-    }
+	public function motcles()
+	{
+		return $this->belongsToMany(Motcle::class);
+	}
 }
 ```
 
@@ -336,26 +343,26 @@ use App\Models\Motcle;
 
 class MotclesTableSeeder extends Seeder
 {
-
-	private function randDate() {
-        return Carbon::createFromDate(null, rand(1, 12), rand(1, 28));
-    }
+	private function randDate()
+	{
+		return Carbon::createFromDate(null, rand(1, 12), rand(1, 28));
+	}
 
 	/**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        for ($i = 1; $i <= 20; $i++) {
-            $date = $this->randDate();
-            Motcle::create([
-                'mot' => 'mot' . $i,
-                'mot_url' => 'mot' . $i,
-                'created_at' => $date,
-                'updated_at' => $date]
-            );
-        }
-    }
+	 * Run the database seeds.
+	 */
+	public function run(): void
+	{
+		for ($i = 1; $i <= 20; $i++) {
+			$date = $this->randDate();
+			Motcle::create([
+				'mot' => 'mot' . $i,
+				'mot_url' => 'mot' . $i,
+				'created_at' => $date,
+				'updated_at' => $date,
+			]);
+		}
+	}
 }
 ```
 
@@ -364,7 +371,7 @@ Nous obtiendrons de cette manière vingt mots-clés (mot1, mot2, ..., mot20)
 Créons maintenant un nouveau fichier permettant le peuplement de la table
 `article_motcle` et complétons-le :
 
-> Remarque : Attention au nom
+> Remarque : Attention au nom :wink:
 
 ```php
 <?php
@@ -378,28 +385,28 @@ use App\Models\Motcle;
 
 class ArticleMotcleTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        for ($i = 1; $i <= 100; $i++) {
+	/**
+	 * Run the database seeds.
+	 */
+	public function run(): void
+	{
+		for ($i = 1; $i <= 100; $i++) {
 			// on dispose de 20 mots-clés
-            $numbers = range(1, 20);
-            shuffle($numbers);
+			$numbers = range(1, 20);
+			shuffle($numbers);
 			// on prend entre 3 et 6 mots-clés au hasard
-            $n = rand(3, 6);
-            for ($j = 1; $j <= $n; $j++) {
+			$n = rand(3, 6);
+			for ($j = 1; $j <= $n; $j++) {
 				// on récupère l'article ayant l'id = $i
 				$article = Article::find($i);
 				// on ajoute la relation dans la table ArticleMotcle
 				$article->motcles()->attach($numbers[$j]);
-                 // ou
-                 // $motcle = Motcle::find($j);
-                 // $motcle->articles()->attach($i);
-            }
-        }
-    }
+				// ou
+				// $motcle = Motcle::find($j);
+				// $motcle->articles()->attach($i);
+			}
+		}
+	}
 }
 ```
 
@@ -431,16 +438,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        //$this->call(UsersTableSeeder::class);              // <-----
-        //$this->call(ArticlesTableSeeder::class);           // <-----
-        $this->call(MotclesTableSeeder::class);              // <-----
-        $this->call(ArticleMotcleTableSeeder::class);        // <-----
-    }
+	/**
+	 * Seed the application's database.
+	 */
+	public function run(): void
+	{
+		//$this->call(UsersTableSeeder::class);              // <-----
+		//$this->call(ArticlesTableSeeder::class);           // <-----
+		$this->call(MotclesTableSeeder::class); // <-----
+		$this->call(ArticleMotcleTableSeeder::class); // <-----
+	}
 }
 ```
 
@@ -461,19 +468,15 @@ php artisan db:seed
 > - ```
 >   drop table article_motcle;
 >   ```
->
 > - ```
 >   drop table motcles;
 >   ```
->
 > - ```
 >   drop table articles;
 >   ```
->
 > - ```
 >   drop table users;
 >   ```
->
 > - ```
 >   drop table migrations;
 >   ```
@@ -684,28 +687,30 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ArticleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 */
+	public function authorize(): bool
+	{
+		return true;
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            'titre'=>'required|max:80',
-            'contenu'=>'required',
-            // ajout de l'expression régulière de validation des mots-clés
-            'motcles' => ['Regex:/^[A-Za-z0-9-àéèêëïôùû]{1,50}?(,[A-Za-z0-9-àéèêëïôùû]{1,50})*$/'],
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+	 */
+	public function rules(): array
+	{
+		return [
+			'titre' => 'required|max:80',
+			'contenu' => 'required',
+			// ajout de l'expression régulière de validation des mots-clés
+			'motcles' => [
+				'Regex:/^[A-Za-z0-9-àéèêëïôùû]{1,50}?(,[A-Za-z0-9-àéèêëïôùû]{1,50})*$/',
+			],
+		];
+	}
 }
 ```
 
@@ -750,48 +755,51 @@ use Illuminate\Routing\Controllers\Middleware;
 
 class ArticleController extends Controller implements HasMiddleware
 {
-    protected $nbArticlesParPage = 4;
+	protected $nbArticlesParPage = 4;
 
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('auth', except: ['index']),
-            new Middleware('admin', only: ['destroy']),
-        ];
-    }
+	public static function middleware(): array
+	{
+		return [
+			new Middleware('auth', except: ['index']),
+			new Middleware('admin', only: ['destroy']),
+		];
+	}
 
-    public function index() {
-        $articles=Article::with('user')
-                ->orderBy('articles.created_at','desc')
-                ->paginate($this->nbArticlesParPage);
-        $links=$articles->render();
-        return view('view_articles', compact('articles','links'));
-    }
+	public function index()
+	{
+		$articles = Article::with('user')
+			->orderBy('articles.created_at', 'desc')
+			->paginate($this->nbArticlesParPage);
+		$links = $articles->render();
+		return view('view_articles', compact('articles', 'links'));
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('view_ajoute_article');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 */
+	public function create()
+	{
+		return view('view_ajoute_article');
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ArticleRequest $request) {
-       $inputs=array_merge($request->all(), ['user_id'=>$request->user()->id]);
-       Article::create($inputs);
-       return redirect(route('articles.index'));
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(ArticleRequest $request)
+	{
+		$inputs = array_merge($request->all(), ['user_id' => $request->user()->id]);
+		Article::create($inputs);
+		return redirect(route('articles.index'));
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id) {
-        Article::findOrFail($id)->delete();
-        return redirect()->back();
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 */
+	public function destroy($id)
+	{
+		Article::findOrFail($id)->delete();
+		return redirect()->back();
+	}
 }
 ```
 
@@ -809,86 +817,91 @@ use Illuminate\Support\Str;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
-
 class ArticleController extends Controller implements HasMiddleware
 {
-    protected $nbArticlesParPage = 4;
+	protected $nbArticlesParPage = 4;
 
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('auth', except: ['index']),
-            new Middleware('admin', only: ['destroy']),
-        ];
-    }
+	public static function middleware(): array
+	{
+		return [
+			new Middleware('auth', except: ['index']),
+			new Middleware('admin', only: ['destroy']),
+		];
+	}
 
-    public function index() {
-        $articles=Article::with('user')
-                ->orderBy('articles.created_at','desc')
-                ->paginate($this->nbArticlesParPage);
-        $links=$articles->render();
-        return view('view_articles', compact('articles','links'));
-    }
+	public function index()
+	{
+		$articles = Article::with('user')
+			->orderBy('articles.created_at', 'desc')
+			->paginate($this->nbArticlesParPage);
+		$links = $articles->render();
+		return view('view_articles', compact('articles', 'links'));
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('view_ajoute_article');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 */
+	public function create()
+	{
+		return view('view_ajoute_article');
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ArticleRequest $request) {
-        $inputs = array_merge($request->all(), ['user_id' => $request->user()->id]);
-        $article = Article::create($inputs);
-        if (isset($inputs['motcles'])) {
-            $tabMotcles = explode(',', $inputs['motcles']);
-            foreach ($tabMotcles as $motcle) {
-                // trim(...) enlève les espaces superflux en début et en fin de chaîne
-                $motcle = trim($motcle);
-                // Str::slug génère une nouvelle chaîne similaire à $motcle mais adaptée aus urls
-                // adaptation des caractères accentués et/ou caractères spéciaux
-                $mot_url = Str::slug($motcle);
-                $mot_ref = Motcle::where('mot_url', $mot_url)->first();
-                if (is_null($mot_ref)) {
-                    $mot_ref = new Motcle([
-                        'mot' => $motcle,
-                        'mot_url' => $mot_url
-                    ]);
-                    $article->motcles()->save($mot_ref);
-                } else {
-                    $article->motcles()->attach($mot_ref->id);
-                }
-            }
-        }
-        return redirect(route('articles.index'));
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(ArticleRequest $request)
+	{
+		$inputs = array_merge($request->all(), ['user_id' => $request->user()->id]);
+		$article = Article::create($inputs);
+		if (isset($inputs['motcles'])) {
+			$tabMotcles = explode(',', $inputs['motcles']);
+			foreach ($tabMotcles as $motcle) {
+				// trim(...) enlève les espaces superflux en début et en fin de chaîne
+				$motcle = trim($motcle);
+				// Str::slug génère une nouvelle chaîne similaire à $motcle mais adaptée aus urls
+				// adaptation des caractères accentués et/ou caractères spéciaux
+				$mot_url = Str::slug($motcle);
+				$mot_ref = Motcle::where('mot_url', $mot_url)->first();
+				if (is_null($mot_ref)) {
+					$mot_ref = new Motcle([
+						'mot' => $motcle,
+						'mot_url' => $mot_url,
+					]);
+					$article->motcles()->save($mot_ref);
+				} else {
+					$article->motcles()->attach($mot_ref->id);
+				}
+			}
+		}
+		return redirect(route('articles.index'));
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id) {
-        $article = Article::findOrFail($id);
-        $article->motcles()->detach();
-        $article->delete();
-        return redirect()->back();
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 */
+	public function destroy($id)
+	{
+		$article = Article::findOrFail($id);
+		$article->motcles()->detach();
+		$article->delete();
+		return redirect()->back();
+	}
 
-	public function articlesAyantMotcle($motcle) {
-        $articles = Article::with('user', 'motcles')
-            ->orderBy('articles.created_at', 'desc')
-            ->whereRelation('motcles', 'mot_url', $motcle)
-            // Il existe pleins de possibilités :-)
-            // ->whereRelation('motcles', 'mot_url', 'like', '%'.$motcle.'%')
-            // ->whereRelation('reviews', 'stars', '>=', 3)
-            ->paginate($this->nbArticlesParPage);
-        $links=$articles->render();
-        return view('view_articles', compact('articles','links'))
-                ->with('info', 'Résultats pour la recherche du mot-clé : ' . $motcle);
-    }
+	public function articlesAyantMotcle($motcle)
+	{
+		$articles = Article::with('user', 'motcles')
+			->orderBy('articles.created_at', 'desc')
+			->whereRelation('motcles', 'mot_url', $motcle)
+			// Il existe pleins de possibilités :-)
+			// ->whereRelation('motcles', 'mot_url', 'like', '%'.$motcle.'%')
+			// ->whereRelation('reviews', 'stars', '>=', 3)
+			->paginate($this->nbArticlesParPage);
+		$links = $articles->render();
+		return view('view_articles', compact('articles', 'links'))->with(
+			'info',
+			'Résultats pour la recherche du mot-clé : ' . $motcle
+		);
+	}
 }
 ```
 
@@ -917,8 +930,8 @@ Comme nous avons ajouté une méthode `articlesAyantMotcle(...)` permettant la
 recherche des articles qui comportent le mot-clé passé en paramètre, il faut
 ajouter une nouvelle route dans le fichier `web.php`
 
-```php
-Route::get('/articles/motcle/{motcle}', [ArticleController::class, 'articlesAyantMotcle']);
+```
+Route::get('articles/motcle/{motcle}', [ArticleController::class, 'articlesAyantMotcle']);
 ```
 
 Nous pouvons passer à la mise à jour de la vue permettant l'affichage des
@@ -1043,3 +1056,4 @@ suffit de s'authentifier et créer un nouvel article.
 ![NouveauMessageOk](img\NouveauMessageOk.png)
 
 Yes ! nous avons implémenté correctement une relation n:n dans `Laravel`
+:thumbsup:

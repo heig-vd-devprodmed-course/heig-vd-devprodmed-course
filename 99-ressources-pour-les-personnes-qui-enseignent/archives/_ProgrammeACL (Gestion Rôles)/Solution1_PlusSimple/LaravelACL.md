@@ -62,7 +62,7 @@ Il ne reste plus qu'à gérer la déconnexion (`logout`).
 Ajoutons une nouvelle route et sa méthode associée.
 
 ```php
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('logout', [LoginController::class, 'logout']);
 ```
 
 > Remarques :
@@ -85,10 +85,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function logout() {
-        Auth::logout();
-        return redirect('/');
-    }
+	public function logout()
+	{
+		Auth::logout();
+		return redirect('/');
+	}
 }
 ```
 
@@ -180,7 +181,7 @@ php artisan make:seeder UsersTableSeeder
 ...
 ```
 
-> Remarque : N'oubliez pas le use des la classe DB et Hash
+> Remarque : N'oubliez pas le use des la classe DB et Hash :wink:
 
 Ajouter le seeder que l'on vient de créer dans le fichier
 `app\database\seeders\DatabaseSeeder.php`

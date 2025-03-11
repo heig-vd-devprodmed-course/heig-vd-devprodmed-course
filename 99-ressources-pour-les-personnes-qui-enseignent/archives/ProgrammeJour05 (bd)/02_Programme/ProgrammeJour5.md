@@ -50,7 +50,6 @@ Avant de pouvoir utiliser `Laravel` avec une base de données, il faut :
     Pour ce faire, le suffit de créer un fichier texte vide nommé
     `database.sqlite` dans le répertoire `\laravel\database` de notre
     application.
-
   - Indiquons maintenant à `Laravel` quel gestionnaire de base de données
     utiliser.
 
@@ -78,7 +77,7 @@ Avant de pouvoir utiliser `Laravel` avec une base de données, il faut :
     // A EFFACER DB_PASSWORD=
     ```
 
-La configuration est terminée
+La configuration est terminée :smiley:
 
 ## Création de la base de données `Sqlite`
 
@@ -174,7 +173,7 @@ Nous obtenons un nouveau fichier qui se trouve dans le répertoire
 > - `0001_01_000002_create_jobs_table.php`
 
 ```php
-`2024_03_18_......_creation_table_emails.php` // celle que nous venons de créer
+`2024_03_18_......_creation_table_emails.php`; // celle que nous venons de créer
 ```
 
 Editions le fichier que nous venons de créer : `..._creation_table_emails`
@@ -279,7 +278,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model
 {
-    use HasFactory;
+	use HasFactory;
 }
 ```
 
@@ -295,9 +294,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model
 {
-    use HasFactory;
-    protected $table='emails';
-    public $timestamps=false;
+	use HasFactory;
+	protected $table = 'emails';
+	public $timestamps = false;
 }
 ```
 
@@ -321,7 +320,7 @@ Nous allons :
 Créons tout d'abord le `template`. `template_newsletter.blade.php :`
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
@@ -455,13 +454,13 @@ public function traiteFormulaire(NewsletterRequest $request) {
 Il ne manque plus que les deux routes :
 
 ```php
-Route::get('/newsletter', [NewsletterController::class, 'rendFormulaire']);
-Route::post('/newsletter', [NewsletterController::class, 'traiteFormulaire']);
+Route::get('newsletter', [NewsletterController::class, 'rendFormulaire']);
+Route::post('newsletter', [NewsletterController::class, 'traiteFormulaire']);
 ```
 
 Voilà, notre application est terminée.
 
-Nous disposons maintenant d'un gestionnaire de newsletter fonctionnel
+Nous disposons maintenant d'un gestionnaire de newsletter fonctionnel :smiley:
 
 L'email saisi dans le formulaire a été stocké dans la base de données, mais
 comment contrôler ???

@@ -76,9 +76,9 @@ Laravel propose plusieurs méthodes pour valider un formulaire :
 
   ```php
   $request->validate([
-      'nom' => 'required|min:3|max:20|alpha',
-      'email' => 'required|email',
-      'message' => 'required|max:250'
+  	'nom' => 'required|min:3|max:20|alpha',
+  	'email' => 'required|email',
+  	'message' => 'required|max:250',
   ]);
   ```
 
@@ -86,14 +86,16 @@ Laravel propose plusieurs méthodes pour valider un formulaire :
 
 - **Utilisation d’une `FormRequest` dédiée :**
   ```php
-  class ContactRequest extends FormRequest {
-      public function rules(): array {
-          return [
-              'nom' => 'required|min:3|max:20|alpha',
-              'email' => 'required|email',
-              'message' => 'required|max:250'
-          ];
-      }
+  class ContactRequest extends FormRequest
+  {
+  	public function rules(): array
+  	{
+  		return [
+  			'nom' => 'required|min:3|max:20|alpha',
+  			'email' => 'required|email',
+  			'message' => 'required|max:250',
+  		];
+  	}
   }
   ```
 
@@ -102,8 +104,8 @@ Laravel propose plusieurs méthodes pour valider un formulaire :
 Laravel simplifie l’envoi d’e-mails grâce à son API `Mail::send()` :
 
 ```php
-Mail::send('view_contenu_email', $request->all(), function($message) {
-    $message->to('admin@example.com')->subject('Nouveau message via formulaire');
+Mail::send('view_contenu_email', $request->all(), function ($message) {
+	$message->to('admin@example.com')->subject('Nouveau message via formulaire');
 });
 ```
 

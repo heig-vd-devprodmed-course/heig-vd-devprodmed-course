@@ -24,8 +24,8 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```php
 use App\Http\Controllers\ManifController;
 //...
-Route::get('/manif', [ManifController::class,'rendFormManif']);
-Route::post('/manif', [ManifController::class,'traiteFormManif']);
+Route::get('manif', [ManifController::class, 'rendFormManif']);
+Route::post('manif', [ManifController::class, 'traiteFormManif']);
 ```
 
 ## Contrôleur (`ManifController.php`) :
@@ -44,24 +44,25 @@ use App\Http\Requests\ManifRequest;
 use App\Rules\ManifRuleV10;
 use Mail;
 
-class ManifController extends Controller {
+class ManifController extends Controller
+{
+	public function rendFormManif()
+	{
+		return view('view_manif_form');
+	}
 
-    public function rendFormManif() {
-        return view('view_manif_form');
-    }
-
-    public function traiteFormManif(ManifRequest $request) {
-
+	public function traiteFormManif(ManifRequest $request)
+	{
 		$request->validate(['fin' => [new ManifRuleV10($request->debut)]]);
 		//$request->validate(['fin' => new ManifRule($request->debut)]);
 
 		// Envoi d'un mail
-		Mail::send('view_manif_mail', $request->all(), function($message){
+		Mail::send('view_manif_mail', $request->all(), function ($message) {
 			$message->to('admin@supermanif.ch')->subject('Prochaine manifestation');
-        });
+		});
 
-        return view('view_manif_confirm');
-    }
+		return view('view_manif_confirm');
+	}
 }
 ```
 
@@ -78,29 +79,31 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ManifRequest extends FormRequest {
+class ManifRequest extends FormRequest
+{
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize() {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules() {
-        return [
-            'debut' => 'required|after_or_equal:tomorrow',
-            'fin' => 'required|after:debut',
-            'lieu' => 'required|min:3|regex:[^[A-Z].*]'
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return [
+			'debut' => 'required|after_or_equal:tomorrow',
+			'fin' => 'required|after:debut',
+			'lieu' => 'required|min:3|regex:[^[A-Z].*]',
+		];
+	}
 }
 ```
 
@@ -122,39 +125,39 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class ManifRuleV10 implements ValidationRule
 {
-
 	protected $debut;
 
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct($debut) {
+	/**
+	 * Create a new rule instance.
+	 *
+	 * @return void
+	 */
+	public function __construct($debut)
+	{
 		//dd("yes !");
-        $this->debut = $debut;
-    }
+		$this->debut = $debut;
+	}
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
-     */
-    public function validate(string $attribute, mixed $value, Closure $fail): void
-    {
-         //dd($attribute);
-         //dd($value);
+	/**
+	 * Run the validation rule.
+	 *
+	 * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+	 */
+	public function validate(string $attribute, mixed $value, Closure $fail): void
+	{
+		//dd($attribute);
+		//dd($value);
 		$value = date('Y-m-d', strtotime($value));
-         $dateAuMinimum = date('Y-m-d', strtotime($this->debut . ' + 3 days'));
-         $dateAuMaximum = date('Y-m-d', strtotime($this->debut . ' + 5 days'));
+		$dateAuMinimum = date('Y-m-d', strtotime($this->debut . ' + 3 days'));
+		$dateAuMaximum = date('Y-m-d', strtotime($this->debut . ' + 5 days'));
 		if (!($value >= $dateAuMinimum && $value <= $dateAuMaximum)) {
-		   // va chercher le message correspondant à `wongperiod`
-            // dans le fichier \lang\en\validation2.php
-            // ou              \lang\fr\validation2.php
-            // en fonction de la langue configurée dans \config\app.php
-            $fail(__('validation2.wrongperiod')); // https://laravel.com/docs/11.x/localization
+			// va chercher le message correspondant à `wongperiod`
+			// dans le fichier \lang\en\validation2.php
+			// ou              \lang\fr\validation2.php
+			// en fonction de la langue configurée dans \config\app.php
+			$fail(__('validation2.wrongperiod')); // https://laravel.com/docs/11.x/localization
 		}
-    }
+	}
 }
 ```
 
@@ -173,45 +176,48 @@ class ManifRuleV10 implements ValidationRule
 >
 > use Illuminate\Contracts\Validation\Rule;
 >
-> class ManifRule implements Rule {
+> class ManifRule implements Rule
+> {
+> 	protected $debut;
 >
->     protected $debut;
+> 	/**
+> 	 * Create a new rule instance.
+> 	 *
+> 	 * @return void
+> 	 */
+> 	public function __construct($debut)
+> 	{
+> 		$this->debut = $debut;
+> 	}
 >
->     /**
->      * Create a new rule instance.
->      *
->      * @return void
->      */
->     public function __construct($debut) {
->         $this->debut = $debut;
->     }
+> 	/**
+> 	 * Determine if the validation rule passes.
+> 	 *
+> 	 * @param  string  $attribute
+> 	 * @param  mixed  $value
+> 	 * @return bool
+> 	 */
+> 	public function passes($attribute, $value)
+> 	{
+> 		$value = date('Y-m-d', strtotime($value));
+> 		$dateAuMinimum = date('Y-m-d', strtotime($this->debut . ' + 3 days'));
+> 		$dateAuMaximum = date('Y-m-d', strtotime($this->debut . ' + 5 days'));
+> 		return $value >= $dateAuMinimum && $value <= $dateAuMaximum;
+> 	}
 >
->     /**
->      * Determine if the validation rule passes.
->      *
->      * @param  string  $attribute
->      * @param  mixed  $value
->      * @return bool
->      */
->     public function passes($attribute, $value) {
->         $value = date('Y-m-d', strtotime($value));
->         $dateAuMinimum = date('Y-m-d', strtotime($this->debut . ' + 3 days'));
->         $dateAuMaximum = date('Y-m-d', strtotime($this->debut . ' + 5 days'));
->         return $value >= $dateAuMinimum && $value <= $dateAuMaximum;
->     }
->
->     /**
->      * Get the validation error message.
->      *
->      * @return string
->      */
->     public function message() {
->         // va chercher le message correspondant à `wongperiod`
->         // dans le fichier \lang\en\validation2.php
->         // ou              \lang\fr\validation2.php
->         // en fonction de la langue configurée dans \config\app.php
->         return __('validation2.wrongperiod'); // https://laravel.com/docs/11.x/localization
->     }
+> 	/**
+> 	 * Get the validation error message.
+> 	 *
+> 	 * @return string
+> 	 */
+> 	public function message()
+> 	{
+> 		// va chercher le message correspondant à `wongperiod`
+> 		// dans le fichier \lang\en\validation2.php
+> 		// ou              \lang\fr\validation2.php
+> 		// en fonction de la langue configurée dans \config\app.php
+> 		return __('validation2.wrongperiod'); // https://laravel.com/docs/11.x/localization
+> 	}
 > }
 > ```
 
@@ -223,7 +229,7 @@ class ManifRuleV10 implements ValidationRule
 <?php
 
 return [
-    'wrongperiod' => 'The event must last at least 3 days and at most 5 days.',
+	'wrongperiod' => 'The event must last at least 3 days and at most 5 days.',
 ];
 ```
 
@@ -233,7 +239,8 @@ return [
 <?php
 
 return [
-    'wrongperiod' => 'La manifestation doit durer au moins 3 jours et au maximum 5 jours.',
+	'wrongperiod' =>
+		'La manifestation doit durer au moins 3 jours et au maximum 5 jours.',
 ];
 ```
 
@@ -242,7 +249,7 @@ return [
 `template.blade.php`
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
@@ -311,7 +318,7 @@ return [
 `view_manif_mail.blade.php`
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />

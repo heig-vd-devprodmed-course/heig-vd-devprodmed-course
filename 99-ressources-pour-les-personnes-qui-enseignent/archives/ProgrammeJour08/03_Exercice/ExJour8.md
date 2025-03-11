@@ -1,7 +1,8 @@
 # Exercice :
 
-1.) Ecrire un code Laravel permettant de gérer des voitures pouvant disposer d'accessoires 
-	 (Autoradio, kit mains-libres, navigateur GPS, écrans passagers, ...)
+1.) Ecrire un code Laravel permettant de gérer des voitures pouvant disposer
+d'accessoires (Autoradio, kit mains-libres, navigateur GPS, écrans passagers,
+...)
 
 On doit pouvoir :
 

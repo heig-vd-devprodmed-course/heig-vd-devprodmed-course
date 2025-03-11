@@ -1,9 +1,9 @@
-Exercice :
-----------
-Ecrire une application Laravel permettant : 
+## Exercice :
+
+Ecrire une application Laravel permettant :
 
 - d'ajouter
-- d'afficher, 
+- d'afficher,
 - de modifier
 - de supprimer
 

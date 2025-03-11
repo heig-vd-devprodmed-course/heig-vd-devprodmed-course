@@ -80,7 +80,7 @@ Exemple dans `web.php` :
 
 ```php
 Route::get('/', function () {
-    return '<h1>Bienvenue sur Laravel</h1>';
+	return '<h1>Bienvenue sur Laravel</h1>';
 });
 ```
 
@@ -97,7 +97,7 @@ La route doit être définie dans `web.php` :
 
 ```php
 Route::get('/contact', function () {
-    return '<h1>Contactez-nous</h1>';
+	return '<h1>Contactez-nous</h1>';
 });
 ```
 
@@ -114,7 +114,7 @@ Une route avec un paramètre dynamique se définit ainsi :
 
 ```php
 Route::get('/article/{id}', function ($id) {
-    return 'Article numéro ' . $id;
+	return 'Article numéro ' . $id;
 });
 ```
 
@@ -132,8 +132,8 @@ Route::get('/article/{id}', function ($id) {
 > une ou plusieurs fois) `$color` doit être soit rouge, soit vert, soit bleu.
 
 ```php
-Route::get('/user/{id}/{color}', function($id, $color) {
-    // action(s) à effectuer
+Route::get('/user/{id}/{color}', function ($id, $color) {
+	// action(s) à effectuer
 })->where(['id' => '[0-9]+', 'color' => 'rouge|vert|bleu']);
 ```
 
@@ -142,10 +142,13 @@ Route::get('/user/{id}/{color}', function($id, $color) {
 ​ Avec du code.
 
 ```php
-Route::get('/user/{id}/{color}', function($id, $color) {
-    if (preg_match('/[0-9]+/', $id) && in_array($color, ['rouge', 'vert', 'bleu'])) {
-        // action(s) à effectuer
-    }
+Route::get('/user/{id}/{color}', function ($id, $color) {
+	if (
+		preg_match('/[0-9]+/', $id) &&
+		in_array($color, ['rouge', 'vert', 'bleu'])
+	) {
+		// action(s) à effectuer
+	}
 });
 ```
 
@@ -161,16 +164,16 @@ Une route nommée facilite les redirections et les liens. Définition d’une ro
 nommée :
 
 ```php
-Route::get('/', function() {
-    return '<h1>Accueil</h1>';
+Route::get('/', function () {
+	return '<h1>Accueil</h1>';
 })->name('home');
 ```
 
 Redirection vers une route nommée :
 
 ```php
-Route::get('/redirect/', function() {
-    return redirect()->route('home');
+Route::get('/redirect/', function () {
+	return redirect()->route('home');
 });
 ```
 
@@ -184,17 +187,17 @@ Route::get('/redirect/', function() {
 Redirection vers une route nommée :
 
 ```php
-	Route ::get('/redirect/', function() {
-		return redirect()->route('home') ;
-	}) ;
+Route::get('/redirect/', function () {
+	return redirect()->route('home');
+});
 ```
 
 ​ Redirection vers une URL :
 
 ```php
-	Route ::get('/redirect/2', function() {
-		return redirect('https://example.com');
-	})
+Route::get('/redirect/2', function () {
+	return redirect('https://example.com');
+});
 ```
 
 ## Question 9 - Donnée
@@ -226,9 +229,9 @@ vues sont stockées dans :
 > Accéder à l'url `/article` permet d'afficher la vue `article.php`
 
 ```php
-Route ::get('/article', function() {
-    return view('article') ;
-}) ;
+Route::get('/article', function () {
+	return view('article');
+});
 ```
 
 ## Question 11 - Donnée
@@ -294,7 +297,7 @@ Avec `with()` :
 
 ```php
 Route::get('/article/{id}', function ($id) {
-    return view('article')->with('id', $id);
+	return view('article')->with('id', $id);
 });
 ```
 
@@ -302,7 +305,7 @@ Avec un tableau associatif :
 
 ```php
 Route::get('/article/{id}', function ($id) {
-    return view('article', ['id' => $id]);
+	return view('article', ['id' => $id]);
 });
 ```
 

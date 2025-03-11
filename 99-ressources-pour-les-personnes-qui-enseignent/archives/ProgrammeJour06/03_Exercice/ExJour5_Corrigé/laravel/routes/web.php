@@ -15,8 +15,8 @@ use App\Http\Controllers\VoitureController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
-Route::get('/voiture', [VoitureController::class, 'rendFormulaire']);
-Route::post('/voiture', [VoitureController::class, 'traiteFormulaire']);
+Route::get('voiture', [VoitureController::class, 'rendFormulaire']);
+Route::post('voiture', [VoitureController::class, 'traiteFormulaire']);

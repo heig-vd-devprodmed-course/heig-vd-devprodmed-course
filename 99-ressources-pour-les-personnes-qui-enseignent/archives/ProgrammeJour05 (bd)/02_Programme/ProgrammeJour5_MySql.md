@@ -126,7 +126,7 @@ DB_USERNAME=laravel
 DB_PASSWORD=laravelPsw
 ```
 
-Les configurations sont terminées
+Les configurations sont terminées :smiley:
 
 Il est maintenant temps d'aborder une nouvelle notion de Laravel : Les
 migrations
@@ -161,7 +161,6 @@ Migration table created successfully.
 >
 > - Le serveur de base de données est-il en fonction ? (Il doit avoir été
 >   démarré ;-)
->
 > - Est-ce que l'extension correspondant à MySql dans le fichier "php.ini"
 >   est-elle active ?
 >
@@ -352,7 +351,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model
 {
-    //
+	//
 }
 ```
 
@@ -367,10 +366,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model
 {
-    protected $table='emails';
-    public $timestamps=false;
+	protected $table = 'emails';
+	public $timestamps = false;
 }
-
 ```
 
 On indique ici :
@@ -393,7 +391,7 @@ Nous allons :
 Créons tout d'abord le template ( templateEmail.blade.php ) :
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
@@ -522,8 +520,8 @@ public function traiteFormulaire(EmailRequest $request) {
 Il ne manque plus que les deux routes :
 
 ```php
-Route::get('/email', 'EmailController@rendFormulaire');
-Route::post('/email','EmailController@traiteFormulaire');
+Route::get('email', 'EmailController@rendFormulaire');
+Route::post('email', 'EmailController@traiteFormulaire');
 ```
 
 Voilà, notre application est terminée.

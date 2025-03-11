@@ -9,3 +9,8 @@
   Louis [@hadrylouis](https://github.com/hadrylouis) is licensed under a
   [Creative Commons Attribution-ShareAlike 4.0 International](https://github.com/heig-vd-dai-course/heig-vd-dai-course/blob/main/LICENSE.md)
   license.
+- [HEIG-VD ProgServ1 Course](https://github.com/heig-vd-progserv1-course/heig-vd-progserv1-course)
+  by Ludovic Delafontaine [@ludelafo](https://github.com/ludelafo/) is licensed
+  under a
+  [Creative Commons Attribution-ShareAlike 4.0 International](https://github.com/heig-vd-progserv1-course/heig-vd-progserv1-course/blob/main/LICENSE.md)
+  license.

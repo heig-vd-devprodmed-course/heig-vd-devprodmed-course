@@ -84,12 +84,12 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //})->middleware('auth:sanctum');
 
-Route::get('/personne', function() {
-    $personne = [
-        'prenom' => 'Joe',
-        'nom' => 'Bar',
-    ];
-    return $personne;
+Route::get('/personne', function () {
+	$personne = [
+		'prenom' => 'Joe',
+		'nom' => 'Bar',
+	];
+	return $personne;
 });
 ```
 
@@ -141,31 +141,30 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('personnes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('prenom');
-            $table->string('nom');
-            $table->string('tel');
-            $table->string('email');
-            $table->string('ville');
-            $table->timestamps();
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('personnes', function (Blueprint $table) {
+			$table->bigIncrements('id');
+			$table->string('prenom');
+			$table->string('nom');
+			$table->string('tel');
+			$table->string('email');
+			$table->string('ville');
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('personnes');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('personnes');
+	}
 };
 ```
 
@@ -187,22 +186,21 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PersonneFactory extends Factory
 {
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function definition(): array
+	{
+		return [
 			'prenom' => $this->faker->firstName,
 			'nom' => $this->faker->lastName,
 			'tel' => $this->faker->phoneNumber,
 			'email' => $this->faker->safeEmail,
 			'ville' => $this->faker->city,
 		];
-    }
+	}
 }
 ```
 
@@ -231,14 +229,14 @@ use App\Models\Personne;
 
 class PersonnesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-       DB::table('personnes')->delete(); // :-)
-	   Personne::factory()->count(20)->create();
-    }
+	/**
+	 * Run the database seeds.
+	 */
+	public function run(): void
+	{
+		DB::table('personnes')->delete(); // :-)
+		Personne::factory()->count(20)->create();
+	}
 }
 ```
 
@@ -257,13 +255,13 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        $this->call(PersonnesTableSeeder::class);
-    }
+	/**
+	 * Seed the application's database.
+	 */
+	public function run(): void
+	{
+		$this->call(PersonnesTableSeeder::class);
+	}
 }
 ```
 
@@ -281,20 +279,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Personne extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-	protected $fillable = [
-        'prenom',
-		'nom',
-        'email',
-        'tel',
-        'ville'
-    ];
+	protected $fillable = ['prenom', 'nom', 'email', 'tel', 'ville'];
 }
 ```
 
 Pour simplifier le développement de notre `API` nous allons utiliser le SGBD
-`sqlite` (La configuration se fait dans le fichier `.env` )
+`sqlite` (La configuration se fait dans le fichier `.env` :wink:)
 
 Voilà, nous sommes prêts pour créer les différentes tables (migrations,
 personnes, ...) et y ajouter les données
@@ -346,7 +338,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Personne;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 })->middleware('auth:sanctum');
 
 //Route::get('/personne', function() {
@@ -357,8 +349,8 @@ Route::get('/user', function (Request $request) {
 //    return $personne;
 //});
 
-Route::get('/personnes/{id}', function(int $id) {
-   return Personne::findOrFail($id);
+Route::get('/personnes/{id}', function (int $id) {
+	return Personne::findOrFail($id);
 });
 ```
 
@@ -395,9 +387,10 @@ use App\Models\Personne;
 
 class PersonneController extends Controller
 {
-    public function rendPersonne(int $id) {
-        return Personne::findOrFail($id);
-    }
+	public function rendPersonne(int $id)
+	{
+		return Personne::findOrFail($id);
+	}
 }
 ```
 
@@ -452,7 +445,7 @@ La nouvelle classe est accessible ici :
 `\app\Http\Resources\PersonneResource.php`
 
 Nous n'avons pas à faire de modifications dans cette classe :hand: il nous faut
-juste adapter notre contrôleur
+juste adapter notre contrôleur :thumbsup:
 
 ```php
 <?php
@@ -464,9 +457,10 @@ use App\Http\Resources\PersonneResource;
 
 class PersonneController extends Controller
 {
-    public function rendPersonne(int $id) {
-        return new PersonneResource(Personne::findOrFail($id));
-    }
+	public function rendPersonne(int $id)
+	{
+		return new PersonneResource(Personne::findOrFail($id));
+	}
 }
 ```
 
@@ -552,17 +546,19 @@ use App\Http\Resources\PersonneResourceCollection;
 class PersonneController extends Controller
 {
 	//public function rendPersonne(int $id): PersonneResource {
-    //    return new PersonneResource(Personnes::findOrFail($id));
-    //}
+	//    return new PersonneResource(Personnes::findOrFail($id));
+	//}
 
-    public function show(int $id): PersonneResource {
-        return new PersonneResource(Personne::findOrFail($id));
-    }
+	public function show(int $id): PersonneResource
+	{
+		return new PersonneResource(Personne::findOrFail($id));
+	}
 
-    public function index(): PersonneResourceCollection {
-        return new PersonneResourceCollection(Personne::paginate(10)); // les 10 premières
-        //return new PersonneResourceCollection(Personne::all()); // toutes les personnes
-    }
+	public function index(): PersonneResourceCollection
+	{
+		return new PersonneResourceCollection(Personne::paginate(10)); // les 10 premières
+		//return new PersonneResourceCollection(Personne::all()); // toutes les personnes
+	}
 }
 ```
 
@@ -634,7 +630,7 @@ On repeuple les tables à l'aide de la commande :
 php artisan db:seed
 ```
 
-et le tour est joué ! Nos données correspondent mieux à nos besoins
+et le tour est joué ! Nos données correspondent mieux à nos besoins :thumbsup:
 
 ```
 http://localhost:8000/api/personnes

@@ -99,13 +99,13 @@ Chauvet => CUT
     App\Score::where('user_id','10')->orderBy('nbSecondes','ASC')->get();
 
     Pour récupérer les noms des utilisateurs dont l'id est 1,3 ou 5 :
-    App\User::whereIn('id', array(1, 3, 5))->get('/name');
+    App\User::whereIn('id', array(1, 3, 5))->get('name');
 
     Développemet de la requête pour récupérer les trois meilleurs scores des utilisateurs ayant répondu juste à toutes les questions (100%) :
 
     App\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get();
 
-    App\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get('/user_id');
+    App\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get('user_id');
 
     App\Score::where('pourcentageBonnesReponses',100)->orderBy('nbSecondes','ASC')->take(3)->get(['user_id','nbSecondes']);
 

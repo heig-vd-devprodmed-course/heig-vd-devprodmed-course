@@ -61,10 +61,8 @@ Le serveur renvoie ensuite l'agenda des entrevues à l'utilisateur.
 > - Progressez par petits pas. Commencez avec un formulaire statique ne
 >   contenant que deux cases à cocher (pour deux personnes) Lorsque vous êtes
 >   capables de savoir quelle(s) personne(s) ont été cochées, passez à la suite.
->
 > - Les classes [`DateTime`](https://www.php.net/manual/fr/class.datetime.php),
 >   [`DateInterval`](https://www.php.net/manual/fr/class.dateinterval.php) de
 >   `php` permettent de gérer le temps.
->
 > - ou, plus simplement la classe [`Carbon`](https://carbon.nesbot.com/docs/)
 >   faisant déjà partie de chaque application `Laravel`
