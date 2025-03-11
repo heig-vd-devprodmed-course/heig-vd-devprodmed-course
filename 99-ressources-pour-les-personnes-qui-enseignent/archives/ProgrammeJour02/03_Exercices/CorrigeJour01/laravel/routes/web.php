@@ -31,7 +31,7 @@ Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function (
 	$dep,
 	$hm,
 	$arr,
-	$strDate = 0
+	$strDate = 0,
 ) {
 	if ($strDate) {
 		// Il est impératif que la date soit sur 10 caractères
@@ -65,6 +65,6 @@ Route::get('cff/{dep}/{hm}/{arr}/{strDate?}', function (
 			$strDate .
 			'&zeit=' .
 			$hm .
-			'&suche=true'
+			'&suche=true',
 	);
 });

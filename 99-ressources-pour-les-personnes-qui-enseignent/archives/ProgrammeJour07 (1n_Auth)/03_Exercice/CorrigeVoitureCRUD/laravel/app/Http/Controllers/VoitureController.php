@@ -40,7 +40,7 @@ class VoitureController extends Controller
 	{
 		$voiture = Voiture::create($request->all());
 		return redirect('voiture')->withOk(
-			'La ' . $voiture->marque . ' a été ajoutée.'
+			'La ' . $voiture->marque . ' a été ajoutée.',
 		);
 	}
 

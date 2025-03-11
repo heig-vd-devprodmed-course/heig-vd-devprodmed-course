@@ -33,7 +33,7 @@ class AgendaController extends Controller
 			$fin = $request->input('heureFin');
 			$dureePause = $request->input('dureePause');
 			if ($dureePause !== null) {
-				list($heures, $minutes) = explode(':', $dureePause);
+				[$heures, $minutes] = explode(':', $dureePause);
 				$deltaTsecPause = $heures * 3600 + $minutes * 60;
 			} else {
 				$deltaTsecPause = 0;
@@ -54,9 +54,9 @@ class AgendaController extends Controller
 			}
 			$deltaT = $dtFin->diff($dtDebut); //Retourne un intervalle !
 			// echo $deltaT->format('%h %i %s'),'<br>';
-			list($heures, $minutes, $secondes) = explode(
+			[$heures, $minutes, $secondes] = explode(
 				' ',
-				$deltaT->format('%h %i %s')
+				$deltaT->format('%h %i %s'),
 			); // Format pour objet DateInterval
 			$deltaTsec = $heures * 3600 + $minutes * 60 + $secondes;
 			$nbPersonnes = count($personnes);
@@ -73,13 +73,13 @@ class AgendaController extends Controller
 				$deltaTdepuisDebutArrondi = round($deltaTdepuisDebut);
 				$dtTmp->add(
 					DateInterval::createFromDateString(
-						"$deltaTdepuisDebutArrondi seconds"
-					)
+						"$deltaTdepuisDebutArrondi seconds",
+					),
 				); // ne prend pas les virgule !!!!
 				$plageDebut = $dtTmp->format('H:i');
 				$plagesDebut[] = $plageDebut;
 				$dtTmp->add(
-					DateInterval::createFromDateString("$deltaTrdvArrondi seconds")
+					DateInterval::createFromDateString("$deltaTrdvArrondi seconds"),
 				);
 				$plageFin = $dtTmp->format('H:i');
 				$plagesFin[] = $plageFin;

@@ -10,7 +10,8 @@
 		{
 			"files": ["*.php"],
 			"options": {
-				"parser": "php"
+				"parser": "php",
+				"phpVersion": "8.2"
 			}
 		},
 		{
