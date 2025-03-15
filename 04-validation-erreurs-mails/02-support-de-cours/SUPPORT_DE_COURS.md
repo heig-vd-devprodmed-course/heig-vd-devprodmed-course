@@ -42,15 +42,16 @@
 
 ## Objectifs
 
-À la fin de cette séance, vous devriez être capable de :
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
 
 - Lister les étapes nécessaires pour valider un formulaire dans Laravel.
 - Décrire le fonctionnement des messages d'erreur et leur affichage dynamique.
-- Identifier comment Laravel gère la validation des champs via FormRequest.
+- Identifier comment Laravel gère la validation des champs via `FormRequest`.
 - Appliquer une validation sur un formulaire en respectant les bonnes pratiques.
 - Énumérer les étapes pour ajouter une nouvelle langue et traduire les messages
   d'erreur.
-- Utiliser la fonction old() pour conserver les valeurs saisies en cas d'erreur.
+- Utiliser la fonction `old()` pour conserver les valeurs saisies en cas
+  d'erreur.
 - Configurer et tester l'envoi d'e-mails dans Laravel à l’aide de Mailpit.
 
 ## Rappel `GET` et `POST` (Pas besoin de pratiquer, juste comprendre)

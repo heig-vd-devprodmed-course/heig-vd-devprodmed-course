@@ -3,6 +3,7 @@
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
+- [Objectifs](#objectifs)
 - [Présentation de `Laravel`](#présentation-de-laravel)
   - [Qu’est-ce que `Laravel` ?](#quest-ce-que-laravel-)
   - [Pourquoi utiliser `Laravel` ?](#pourquoi-utiliser-laravel-)
@@ -30,6 +31,26 @@ sont devenus assez habiles avec des produits tels que `WordPress` et `Wix`.
 Pour les développeurs plus avancés, il existe une multitude d’outils permettant
 de simplifier le processus de développement. L’un de ces outils les plus utiles
 est `Laravel`.
+
+## Objectifs
+
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
+
+- Installer un environnement de développement Laravel.
+- Créer un squelette d'application Laravel à l'aide de la ligne de commande.
+- Repérer et comprendre l'organisation des répertoires et fichiers de base de
+  Laravel.
+- Modifier le comportement d'une application Laravel en manipulant les routes.
+- Comprendre et appliquer le motif d'architecture MVC utilisé par Laravel.
+- Gérer la création et l'affichage des vues avec le moteur de template Blade.
+- Transmettre et exploiter des données entre les routes et les vues.
+- Utiliser les fonctionnalités de base de Laravel pour simplifier le
+  développement web.
+
+De plus, les personnes qui étudient devraient avoir pu :
+
+- Installer un environnement de développement Laravel
+- Créer un squelette d'application Laravel à l'aide de la ligne de commande
 
 ## Présentation de `Laravel`
 

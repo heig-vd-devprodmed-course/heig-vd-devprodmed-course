@@ -2,9 +2,21 @@
 
 ## Objectifs
 
-- Découvrir de nouvelles fonctionnalités de Blade (outil de templating)
-- Découvrir la notion de "contrôleur"
-- Gérer des ressources (images, ...)
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
+
+- Concevoir et structurer des vues avec Blade en utilisant des templates
+  réutilisables.
+- Créer des vues dynamiques basées sur des templates et transmettre des
+  paramètres aux vues.
+- Expliquer le rôle d’un contrôleur dans une application Laravel et
+  l’implémenter pour organiser la logique métier.
+- Configurer des routes pour diriger les requêtes HTTP vers les contrôleurs
+  appropriés.
+- Manipuler des données dans un contrôleur et les transmettre à une vue.
+- Utiliser les directives Blade, comme `@foreach`, pour afficher dynamiquement
+  des données dans une vue.
+- Gérer des ressources (comme les images) en les stockant et en les intégrant
+  dans une application Laravel.
 
 ## Création d'une nouvelle application
 

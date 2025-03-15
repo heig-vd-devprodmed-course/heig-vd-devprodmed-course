@@ -23,7 +23,7 @@ utilisant SQLite comme exemple pratique.
 
 ## Objectifs
 
-À la fin de cette séance, vous devriez être capable de :
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
 
 - Lister les étapes nécessaires pour intégrer SQLite avec Laravel.
 - Décrire comment configurer Laravel pour utiliser une base de données SQLite.

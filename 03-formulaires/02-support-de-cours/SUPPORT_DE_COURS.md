@@ -2,12 +2,15 @@
 
 ## Objectifs
 
-- Créer un formulaire HTML (vue) pour pouvoir saisir des informations.
-- Envoyer les informations du formulaire (requête) à une route
-- Rediriger le traitement de la requête (de la route vers le contrôleur)
-- Déléguer le traitement de l'affichage du résultat à une vue (du contrôleur à
-  une vue)
-- Se prémunir contre les attaques de type CSRF (`Cross-Site Request Forgery`)
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
+
+- Créer un formulaire HTML avec Blade pour la saisie d’informations.
+- Configurer une route pour recevoir et traiter les données d’un formulaire.
+- Définir un contrôleur pour gérer le traitement des requêtes issues d’un
+  formulaire.
+- Transmettre les données d’un formulaire du contrôleur vers une vue pour
+  affichage.
+- Appliquer la protection CSRF dans les formulaires pour sécuriser les requêtes.
 
 ## Création d'une nouvelle application
 
