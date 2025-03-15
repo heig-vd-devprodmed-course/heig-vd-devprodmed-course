@@ -158,6 +158,21 @@ extension=pdo_sqlite
 extension=sqlite3
 ```
 
+Aussi, remarquez le fichier `.env` qui contient la configuration de votre
+application Laravel :
+
+```env
+DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=laravel
+# DB_USERNAME=root
+# DB_PASSWORD=
+```
+
+Nous pouvons voir que la connexion à la base de données est configurée pour
+SQLite.
+
 ## Création du modèle Newsletter et de la migration
 
 Créez un modèle `Newsletter` et une migration pour la table `newsletters` :
@@ -237,6 +252,11 @@ return new class extends Migration {
 	}
 };
 ```
+
+- La méthode `up()` crée la table `newsletters` avec les champs `id`, `email` et
+  `timestamps`.
+- La méthode `down()` supprime la table `newsletters`. Elle est utilisée pour
+  annuler la migration. Très utile en cas d'erreur ou dans le cadre de tests.
 
 Lancez la migration :
 

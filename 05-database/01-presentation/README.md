@@ -122,6 +122,40 @@ Schema::create('newsletters', function (Blueprint $table) {
 });
 ```
 
+### `up()` : Création de la table
+
+La méthode `up()` est exécutée lorsque lors d'une migration avec :
+
+```bash
+php artisan migrate
+```
+
+```php
+public function up() {
+    Schema::create('newsletters', function (Blueprint $table) {
+        $table->id();
+        $table->string('email')->unique();
+        $table->timestamps();
+    });
+}
+```
+
+### `down()` : Suppression de la table
+
+La méthode `down()` est exécutée lorsque l’on annule une migration avec :
+
+```bash
+php artisan migrate:rollback
+```
+
+```php
+public function down() {
+    Schema::dropIfExists('newsletters');
+    // Permet de revenir à un état antérieur en cas d’erreur.
+    // Facilite la gestion des migrations dans un environnement de développement.
+}
+```
+
 ### Commandes utiles
 
 - Appliquer une migration :
