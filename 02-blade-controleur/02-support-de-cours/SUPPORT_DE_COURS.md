@@ -2,9 +2,21 @@
 
 ## Objectifs
 
-- Découvrir de nouvelles fonctionnalités de Blade (outil de templating)
-- Découvrir la notion de "contrôleur"
-- Gérer des ressources (images, ...)
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
+
+- Concevoir et structurer des vues avec Blade en utilisant des templates
+  réutilisables.
+- Créer des vues dynamiques basées sur des templates et transmettre des
+  paramètres aux vues.
+- Expliquer le rôle d’un contrôleur dans une application Laravel et
+  l’implémenter pour organiser la logique métier.
+- Configurer des routes pour diriger les requêtes HTTP vers les contrôleurs
+  appropriés.
+- Manipuler des données dans un contrôleur et les transmettre à une vue.
+- Utiliser les directives Blade, comme `@foreach`, pour afficher dynamiquement
+  des données dans une vue.
+- Gérer des ressources (comme les images) en les stockant et en les intégrant
+  dans une application Laravel.
 
 ## Création d'une nouvelle application
 
@@ -96,8 +108,8 @@ Voilà notre vue est prête.
 Préparons une route pour accéder à cette vue dans le fichier `/routes/web.php`
 
 ```php
-Route ::get('/article/{n}/couleur/{c}', function($n, $c){
-   return view('maVue')->with('numero', $n)->with('couleur', $c);
+Route::get('/article/{n}/couleur/{c}', function ($n, $c) {
+	return view('maVue')->with('numero', $n)->with('couleur', $c);
 })->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ```
 
@@ -152,7 +164,7 @@ use Illuminate\Http\Request;
 
 class MonPremierControleur extends Controller
 {
-    //
+	//
 }
 ```
 
@@ -173,9 +185,10 @@ use Illuminate\Http\Request;
 
 class MonPremierControleur extends Controller
 {
-    public function maMethodeDansControleur() {
-        return view('welcome');
-    }
+	public function maMethodeDansControleur()
+	{
+		return view('welcome');
+	}
 }
 ```
 
@@ -186,14 +199,14 @@ le contrôleur. Modifiez la route :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 ```
 
 Pour qu'elle ressemble à ceci :
 
 ```php
-Route::get('/', [MonPremierControleur::class,'maMethodeDansControleur']);
+Route::get('/', [MonPremierControleur::class, 'maMethodeDansControleur']);
 ```
 
 Pour pouvoir utiliser cette classe, il faut ajouter la directive
@@ -227,8 +240,8 @@ Maintenant que nous avons compris, occupons nous de la route concernant le
 numéro d'article et sa couleur.
 
 ```php
-Route ::get('/article/{n}/couleur/{c}', function($n, $c){
-   return view('maVue')->with('numero', $n)->with('couleur', $c);
+Route::get('/article/{n}/couleur/{c}', function ($n, $c) {
+	return view('maVue')->with('numero', $n)->with('couleur', $c);
 })->where(['n' => '[0-9]+', 'c' => 'rouge|vert|bleu']);
 ```
 
@@ -284,7 +297,7 @@ des boucles. Chaque directive correspond à un tag `@nomDuTag`
 Créons tout d'abord une route qui nous mène à une méthode d'un contrôleur.
 
 ```php
-Route::get('/afficheTab', [MonPremierControleur::class,'afficheTab']);
+Route::get('/afficheTab', [MonPremierControleur::class, 'afficheTab']);
 ```
 
 Puis, créons dans le contrôleur une méthode contenant un tableau que nous

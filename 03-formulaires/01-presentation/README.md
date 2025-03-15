@@ -44,7 +44,10 @@ explication détaillée et les exercices pratiques.
 `\routes\web.php`
 
 ```php
-Route ::get('/teams/{teamId}/players/{playerId}', [TeamController::class, 'show']);
+Route::get('/teams/{teamId}/players/{playerId}', [
+	TeamController::class,
+	'show',
+]);
 ```
 
 `\app\Http\Controllers\TeamController.php`

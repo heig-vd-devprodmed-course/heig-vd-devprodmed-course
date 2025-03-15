@@ -1,7 +1,14 @@
 {
-	"[php]": {
-		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+	"[blade]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"prettier.documentSelectors": [
+		"**/*.{sh,js,jsx,ts,tsx,vue,html,css,scss,less,json,md,mdx,graphql,yaml,yml,blade.php,php}"
+	],
+	"[php]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
 	"cSpell.language": "fr,en",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnPaste": true,
@@ -25,8 +32,5 @@
 	},
 	"plantuml.render": "PlantUMLServer",
 	"plantuml.server": "http://localhost:9090",
-	"prettier.printWidth": 80,
-	"prettier.proseWrap": "always",
-	"prettier.tabWidth": 2,
-	"prettier.useTabs": true
+	"prettier.configPath": ".prettierrc"
 }

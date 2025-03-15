@@ -104,7 +104,10 @@ Non. C'est l'ordre des paramètres qui compte. Comme dans cette exemple :
 `\routes\web.php`
 
 ```php
-Route ::get('/teams/{teamId}/players/{playerId}', [TeamController::class, 'show']);
+Route::get('/teams/{teamId}/players/{playerId}', [
+	TeamController::class,
+	'show',
+]);
 ```
 
 `\app\Http\Controllers\TeamController.php`

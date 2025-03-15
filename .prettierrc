@@ -1,0 +1,24 @@
+{
+	"endOfLine": "lf",
+	"printWidth": 80,
+	"proseWrap": "always",
+	"tabWidth": 2,
+	"singleQuote": true,
+	"useTabs": true,
+	"plugins": ["prettier-plugin-blade", "@prettier/plugin-php"],
+	"overrides": [
+		{
+			"files": ["*.php"],
+			"options": {
+				"parser": "php",
+				"phpVersion": "8.2"
+			}
+		},
+		{
+			"files": ["*.blade.php"],
+			"options": {
+				"parser": "blade"
+			}
+		}
+	]
+}

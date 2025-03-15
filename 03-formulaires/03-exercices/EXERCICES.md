@@ -9,32 +9,24 @@ choix. sous la forme :
 
 Les personnes sont stockées dans un fichier sur le serveur.
 
-```
-Baur Ophélie
-Benkais Leyla
-Boumasmoud Yousra
-Bourqui Jeremy
-Crettaz Kilian
-Fourel Nathan
-Lam Larry
-Luyet Jessica
-Mertenat Martin
-Mettraux Steve
-Najjar Louka
-Paiva Oliveira Kevin
-Perroset Jade
-Robert Thomas
-Rodriguez Alan
-Roulet Alexandre
-Ruffieux Mikaël
-Schaller Camille
-Urfer Lionel
-Vestergaard Mikkel
-Wagnières Sébastien
-Walpen Alison
-Zerika Karim
-Zweifel Nathan
-Zweifel Robin
+```txt
+Clémentine Delait
+Nzinga
+Margaret Hamilton
+Ada Lovelace
+Las Mariposas
+Josephina Van Gorkum
+Lozen
+Annette Kellerman
+Delia Akeley
+Joséphine Baker
+Tove Jansson
+Agnodice
+Leymah Gbowee
+Giorgina Reid
+Christine Jorgensen
+Wu Zetian
+Mary Anning
 ```
 
 L'utilisateur doit pouvoir cocher les personnes qu'il désire entrevoir. Il
@@ -61,10 +53,8 @@ Le serveur renvoie ensuite l'agenda des entrevues à l'utilisateur.
 > - Progressez par petits pas. Commencez avec un formulaire statique ne
 >   contenant que deux cases à cocher (pour deux personnes) Lorsque vous êtes
 >   capables de savoir quelle(s) personne(s) ont été cochées, passez à la suite.
->
 > - Les classes [`DateTime`](https://www.php.net/manual/fr/class.datetime.php),
 >   [`DateInterval`](https://www.php.net/manual/fr/class.dateinterval.php) de
 >   `php` permettent de gérer le temps.
->
 > - ou, plus simplement la classe [`Carbon`](https://carbon.nesbot.com/docs/)
 >   faisant déjà partie de chaque application `Laravel`

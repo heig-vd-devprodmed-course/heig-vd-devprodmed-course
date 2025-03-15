@@ -71,9 +71,8 @@ Route::get('/livretVue/{n}', function ($n) {
 		<script src="script.js"></script>
 	</head>
 	<body>
-		<?php
-	for ($mult = 1; $mult <= 12; $mult++) {
-		echo $mult . ' * ' . $n . ' = ' . $mult * $n, '<br>'; } ?>
+		<?php for ($mult = 1; $mult <= 12; $mult++) { echo $mult . ' * ' . $n . ' =
+		' . $mult * $n, '<br />'; } ?>
 	</body>
 </html>
 ```
@@ -102,15 +101,14 @@ Route::get('/Page1', function() {
 ou avec `where` :
 
 ```php
-<!-- routes/web.php -->
 Route::get('/{p}age1', function ($p) {
-    return "Bien joué";
+	return 'Bien joué';
 })->where('p', '[P|p]');
 ```
 
 ```php
-Route::get('/{page}', function($page) {
-    return "Page 1";
+Route::get('/{page}', function ($page) {
+	return 'Page 1';
 })->where('page', 'page1|Page1');
 ```
 
@@ -127,7 +125,6 @@ Ecrire le code permettant de rediriger l'utilisateur sur le site suivant :
 >
 > - La gare de départ, l'heure de départ ainsi que la gare d'arrivée doivent
 >   être définie dans l'url.
->
 > - La date doit être celle du jour
 
 ## Exercice 3 - Challenge

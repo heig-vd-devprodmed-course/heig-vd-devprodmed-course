@@ -3,6 +3,7 @@
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
+- [Objectifs](#objectifs)
 - [Présentation de `Laravel`](#présentation-de-laravel)
   - [Qu’est-ce que `Laravel` ?](#quest-ce-que-laravel-)
   - [Pourquoi utiliser `Laravel` ?](#pourquoi-utiliser-laravel-)
@@ -30,6 +31,26 @@ sont devenus assez habiles avec des produits tels que `WordPress` et `Wix`.
 Pour les développeurs plus avancés, il existe une multitude d’outils permettant
 de simplifier le processus de développement. L’un de ces outils les plus utiles
 est `Laravel`.
+
+## Objectifs
+
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
+
+- Installer un environnement de développement Laravel.
+- Créer un squelette d'application Laravel à l'aide de la ligne de commande.
+- Repérer et comprendre l'organisation des répertoires et fichiers de base de
+  Laravel.
+- Modifier le comportement d'une application Laravel en manipulant les routes.
+- Comprendre et appliquer le motif d'architecture MVC utilisé par Laravel.
+- Gérer la création et l'affichage des vues avec le moteur de template Blade.
+- Transmettre et exploiter des données entre les routes et les vues.
+- Utiliser les fonctionnalités de base de Laravel pour simplifier le
+  développement web.
+
+De plus, les personnes qui étudient devraient avoir pu :
+
+- Installer un environnement de développement Laravel
+- Créer un squelette d'application Laravel à l'aide de la ligne de commande
 
 ## Présentation de `Laravel`
 
@@ -173,7 +194,7 @@ Voici quelques-uns des avantages spécifiques de `Laravel` :
 
   - [`Laravel.io`](https://laravel.io/)
   - [`Reddit`](https://www.reddit.com/r/laravel/)
-  - [`Laracasts`](https://laracasts.com/).
+  - [`Laracasts`](https://laracasts.com/)
 
 - #### `Laravel` est largement utilisé
 
@@ -737,7 +758,7 @@ Voici son contenu :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 ```
 
@@ -752,12 +773,18 @@ Créons d'autres routes :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
-Route::get('/1', function() {return 'page 1';});
-Route::get('/2', function() {return 'page 2';});
-Route::get('/3', function() {return 'page 3';});
+Route::get('/1', function () {
+	return 'page 1';
+});
+Route::get('/2', function () {
+	return 'page 2';
+});
+Route::get('/3', function () {
+	return 'page 3';
+});
 ```
 
 et testons-les !
@@ -774,13 +801,13 @@ Remplaçons les trois routes précédentes par celle-ci :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 //...
 
-Route::get('/{n}', function($n) {
-    return "page $n";
+Route::get('/{n}', function ($n) {
+	return "page $n";
 })->where('n', '[1-3]');
 ```
 
@@ -799,17 +826,17 @@ Nous pouvons ajouter quelques commande `php` dans la fonction :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 //...
 
 Route::get('/afficheDate', function () {
-    $date = now();
-    echo 'Voici le détail de la variable $date : ' . '<br>';
-    echo '<br>';
-    var_dump($date);
-    echo '<br><br>';
+	$date = now();
+	echo 'Voici le détail de la variable $date : ' . '<br>';
+	echo '<br>';
+	var_dump($date);
+	echo '<br><br>';
 	echo "Aujourd'hui, nous sommes le " . $date;
 });
 ```
@@ -818,14 +845,14 @@ Pour afficher le contenu d'une variable la commande dd(...) est très pratique :
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 //...
 
 Route::get('/afficheDate2', function () {
-    $date = now();
-    dd($date);
+	$date = now();
+	dd($date);
 });
 ```
 
@@ -837,8 +864,8 @@ Il est possible de rediriger une route sur une url. Voici comment procéder :
 ```php
 //...
 
-Route::get('/cff', function() {
-    return redirect('https://www.sbb.ch/fr/');
+Route::get('/cff', function () {
+	return redirect('https://www.sbb.ch/fr/');
 });
 ```
 
@@ -849,15 +876,15 @@ Il est possible de donner un nom à une route.
 
 ```php
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 })->name('home');
 ```
 
 et voici comment rediriger sur une route nommée :
 
 ```php
-Route::get('/maison', function() {
-    return redirect()->route('home');
+Route::get('/maison', function () {
+	return redirect()->route('home');
 });
 ```
 
@@ -867,8 +894,12 @@ Il est possible de transformer les informations relatives à une route en
 paramètres. Voici comment procéder :
 
 ```php
-Route::get('/uneRoute/{param1}/{param2}/{param3?}', function ($param1, $param2, $param3 = "Laravel") {
-    return $param1 . " " . $param2 . " " . $param3;
+Route::get('/uneRoute/{param1}/{param2}/{param3?}', function (
+	$param1,
+	$param2,
+	$param3 = 'Laravel'
+) {
+	return $param1 . ' ' . $param2 . ' ' . $param3;
 });
 ```
 
@@ -906,8 +937,8 @@ Créons une vue `article.php` dans le répertoire `resources/views` :
 et changeons la route crée précédemment pour y accéder.
 
 ```php
-Route::get('/{n}', function($n) {
-    return view('article');
+Route::get('/{n}', function ($n) {
+	return view('article');
 })->where('n', '[1-3]');
 ```
 
@@ -934,8 +965,8 @@ numéro $n à la vue.
 Voici comment procéder :
 
 ```php
-Route::get('/{n}', function($n) {
-    return view('article')->with('n',$n);
+Route::get('/{n}', function ($n) {
+	return view('article')->with('n', $n);
 })->where('n', '[1-3]');
 ```
 
@@ -950,7 +981,7 @@ Et voici comment récupérer la donnée $n dans la vue :
     </head>
     <body>
         <div>Ma première vue</div>
-        <div>article : <?php echo $n ?></div>
+        <div>article : <?php echo $n; ?></div>
     </body>
 </html>
 ```

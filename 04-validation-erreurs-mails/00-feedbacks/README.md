@@ -66,8 +66,9 @@ d’informations.
 **Action** : nouvelles slides avec un code plus lisible.
 
 ```php
-function hello($name) {
-    return "Hello, $name!";
+function hello($name)
+{
+	return "Hello, $name!";
 }
 
 echo hello('Nzinga, reine du Ndongo et du Matamba');

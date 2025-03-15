@@ -8,3 +8,9 @@ sudo apt install --yes jpegoptim optipng
 
 ## Install packages to optimize documents (ps2pdf)
 sudo apt install --yes ghostscript
+
+## Install packages to interact with SQLite databases
+sudo apt install --yes sqlite3
+
+## Install NPM packages
+npm install

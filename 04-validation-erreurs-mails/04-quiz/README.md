@@ -42,8 +42,8 @@ _paginate: false
 
    ```php
    $request->validate([
-       'email' => 'required|email',
-       'password' => 'required|min:8'
+   	'email' => 'required|email',
+   	'password' => 'required|min:8',
    ]);
    ```
 
@@ -51,13 +51,15 @@ _paginate: false
 
 2. **Avec une `FormRequest` dédiée (validation avancée)**
    ```php
-   class RegisterRequest extends FormRequest {
-       public function rules(): array {
-           return [
-               'email' => 'required|email',
-               'password' => 'required|min:8'
-           ];
-       }
+   class RegisterRequest extends FormRequest
+   {
+   	public function rules(): array
+   	{
+   		return [
+   			'email' => 'required|email',
+   			'password' => 'required|min:8',
+   		];
+   	}
    }
    ```
 
@@ -73,7 +75,7 @@ cas d’erreur ou de rechargement de la page.
 Exemple :
 
 ```blade
-<input type="text" name="nom" value="{{ old('nom') }}">
+<input type="text" name="nom" value="{{ old('nom') }}" />
 ```
 
 ## Question 4 - Donnée
@@ -90,8 +92,8 @@ Exemple :
 
 ```blade
 <form method="POST" action="/submit">
-    @csrf
-    <input type="text" name="nom">
+	@csrf
+	<input type="text" name="nom" />
 </form>
 ```
 
@@ -164,7 +166,7 @@ Exemple :
 
 ```blade
 @if ($errors->has('email'))
-    <p class="error">{{ $errors->first('email') }}</p>
+	<p class="error">{{ $errors->first('email') }}</p>
 @endif
 ```
 
@@ -206,7 +208,7 @@ Il s’agit de la classe `Mail`, fournie par Laravel.
 
 ```php
 Mail::send('view_email', $data, function ($message) {
-    $message->to('user@example.com')->subject('Bienvenue');
+	$message->to('user@example.com')->subject('Bienvenue');
 });
 ```
 

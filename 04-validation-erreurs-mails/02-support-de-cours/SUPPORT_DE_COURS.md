@@ -42,15 +42,16 @@
 
 ## Objectifs
 
-À la fin de cette séance, vous devriez être capable de :
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
 
 - Lister les étapes nécessaires pour valider un formulaire dans Laravel.
 - Décrire le fonctionnement des messages d'erreur et leur affichage dynamique.
-- Identifier comment Laravel gère la validation des champs via FormRequest.
+- Identifier comment Laravel gère la validation des champs via `FormRequest`.
 - Appliquer une validation sur un formulaire en respectant les bonnes pratiques.
 - Énumérer les étapes pour ajouter une nouvelle langue et traduire les messages
   d'erreur.
-- Utiliser la fonction old() pour conserver les valeurs saisies en cas d'erreur.
+- Utiliser la fonction `old()` pour conserver les valeurs saisies en cas
+  d'erreur.
 - Configurer et tester l'envoi d'e-mails dans Laravel à l’aide de Mailpit.
 
 ## Rappel `GET` et `POST` (Pas besoin de pratiquer, juste comprendre)
@@ -96,15 +97,25 @@ Route::get('/words/{lang}', function ($lang, Request $request) {
 @extends('template')
 
 @section('contenu')
-<form action="{{ url('/words/german') }}" method="get">
-    <label for="query">Rechercher un mot :</label>
-    <input type="text" id="query" name="query" value="{{ request('query') }}">
+	<form action="{{ url('/words/german') }}" method="get">
+		<label for="query">Rechercher un mot :</label>
+		<input
+			type="text"
+			id="query"
+			name="query"
+			value="{{ request('query') }}"
+		/>
 
-    <label for="wordsPerPage">Mots par page :</label>
-    <input type="number" id="wordsPerPage" name="wordsPerPage" value="{{ request('wordsPerPage', 10) }}">
+		<label for="wordsPerPage">Mots par page :</label>
+		<input
+			type="number"
+			id="wordsPerPage"
+			name="wordsPerPage"
+			value="{{ request('wordsPerPage', 10) }}"
+		/>
 
-    <button type="submit">Rechercher</button>
-</form>
+		<button type="submit">Rechercher</button>
+	</form>
 @endsection
 ```
 
@@ -131,15 +142,15 @@ Un formulaire permettant d'envoyer les informations d'inscription à la route
 ```php
 // routes/web.php
 Route::get('/register', function () {
-    return view('register_form');
+	return view('register_form');
 });
 
 Route::post('/register', function (Request $request) {
-    // Récupération des données du formulaire (sans validation pour simplifier l'exemple)
-    $name = $request->input('name');
-    $email = $request->input('email');
+	// Récupération des données du formulaire (sans validation pour simplifier l'exemple)
+	$name = $request->input('name');
+	$email = $request->input('email');
 
-    return view('register_success', compact('name', 'email'));
+	return view('register_success', compact('name', 'email'));
 });
 ```
 
@@ -148,16 +159,16 @@ Route::post('/register', function (Request $request) {
 @extends('template')
 
 @section('contenu')
-<form action="{{ url('/register') }}" method="post">
-    @csrf
-    <label for="name">Nom :</label>
-    <input type="text" id="name" name="name" required>
+	<form action="{{ url('/register') }}" method="post">
+		@csrf
+		<label for="name">Nom :</label>
+		<input type="text" id="name" name="name" required />
 
-    <label for="email">Email :</label>
-    <input type="email" id="email" name="email" required>
+		<label for="email">Email :</label>
+		<input type="email" id="email" name="email" required />
 
-    <button type="submit">S'inscrire</button>
-</form>
+		<button type="submit">S'inscrire</button>
+	</form>
 @endsection
 ```
 
@@ -358,10 +369,7 @@ données.
 use App\Http\Controllers\ContactController;
 
 Route::get('/contact', [ContactController::class, 'rendFormulaire']);
-Route::post('/contact', [
-    ContactController::class,
-    'valideEtTraiteFormulaire'
-]);
+Route::post('/contact', [ContactController::class, 'valideEtTraiteFormulaire']);
 ```
 
 ## Création du Contrôleur
@@ -378,29 +386,28 @@ Dans le contrôleur, nous allons ajouter deux méthodes `rendFormulaire()` et
 
 ```php
 // app/Http/Controllers/ContactController.php
-<?php
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest; // Import de la classe de validation
 use Illuminate\Support\Facades\Mail; // Import de la classe Mail
 
-class ContactController extends Controller {
+class ContactController extends Controller
+{
+	public function rendFormulaire()
+	{
+		return view('view_formulaire_contact');
+	}
 
-    public function rendFormulaire() {
-        return view('view_formulaire_contact');
-    }
+	public function valideEtTraiteFormulaire(ContactRequest $request)
+	{
+		Mail::send('view_contenu_email', $request->all(), function ($message) {
+			$message
+				->to('admin@example.com')
+				->subject('Nouveau message via formulaire de contact');
+		});
 
-    public function valideEtTraiteFormulaire(ContactRequest $request) {
-        Mail::send(
-            'view_contenu_email',
-            $request->all(),
-            function($message) {
-            $message->to('admin@example.com')
-            ->subject('Nouveau message via formulaire de contact');
-        });
-
-        return view('view_confirmation');
-    }
+		return view('view_confirmation');
+	}
 }
 ```
 
@@ -447,28 +454,29 @@ app/
 
 ```php
 // app/Http/Requests/ContactRequest.php
-<?php
-
-namespace App\Http\Requests;
+<?php namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest {
-    /**
-     * Détermine si l'utilisateur est autorisé à faire cette requête.
-     */
-    public function authorize(): bool {
-        return false; // Par défaut, l'accès est refusé.
-    }
+class ContactRequest extends FormRequest
+{
+	/**
+	 * Détermine si l'utilisateur est autorisé à faire cette requête.
+	 */
+	public function authorize(): bool
+	{
+		return false; // Par défaut, l'accès est refusé.
+	}
 
-    /**
-     * Définit les règles de validation des champs du formulaire.
-     */
-    public function rules(): array {
-        return [
-            //
-        ];
-    }
+	/**
+	 * Définit les règles de validation des champs du formulaire.
+	 */
+	public function rules(): array
+	{
+		return [
+				//
+			];
+	}
 }
 ```
 
@@ -479,30 +487,31 @@ contraintes pour chaque champ.
 
 ```php
 // app/Http/Requests/ContactRequest.php
-<?php
-
-namespace App\Http\Requests;
+<?php namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest {
-    /**
-     * Détermine si l'utilisateur est autorisé à faire cette requête.
-     */
-    public function authorize(): bool {
-        return true; // On autorise l'utilisation de la classe.
-    }
+class ContactRequest extends FormRequest
+{
+	/**
+	 * Détermine si l'utilisateur est autorisé à faire cette requête.
+	 */
+	public function authorize(): bool
+	{
+		return true; // On autorise l'utilisation de la classe.
+	}
 
-    /**
-     * Définit les règles de validation des champs du formulaire.
-     */
-    public function rules(): array {
-        return [
-            'nom' => 'bail|required|min:3|max:20|alpha',
-            'email' => 'required|email',
-            'texte' => 'required|max:250'
-        ];
-    }
+	/**
+	 * Définit les règles de validation des champs du formulaire.
+	 */
+	public function rules(): array
+	{
+		return [
+			'nom' => 'bail|required|min:3|max:20|alpha',
+			'email' => 'required|email',
+			'texte' => 'required|max:250',
+		];
+	}
 }
 ```
 
@@ -552,13 +561,11 @@ utilisée par `Mail::send()` dans le contrôleur.
 Laravel fournit une API simple pour envoyer des e-mails.
 
 ```php
-        Mail::send(
-            'view_contenu_email',
-            $request->all(),
-            function($message) {
-            $message->to('admin@example.com')
-            ->subject('Nouveau message via formulaire de contact');
-        });
+Mail::send('view_contenu_email', $request->all(), function ($message) {
+	$message
+		->to('admin@example.com')
+		->subject('Nouveau message via formulaire de contact');
+});
 ```
 
 - `Mail::send()` : Envoie un email.
@@ -659,15 +666,21 @@ brew tap axllent/apps
 brew install mailpit
 ```
 
-- **Windows** :  
-  Téléchargez la version correspondante ici :  
-  [https://github.com/axllent/mailpit/releases](https://github.com/axllent/mailpit/releases)
-
-Démarrez Mailpit :
+Démarrez Mailpit sur Mac :
 
 ```bash
 # Terminal (n'importe où)
 mailpit
+```
+
+- **Windows** :  
+  Téléchargez la version correspondante ici :  
+  [https://github.com/axllent/mailpit/releases](https://github.com/axllent/mailpit/releases) Sélectionnez
+  la version pour amd64 (64 bits) ou autre selon votre système.
+
+```bash
+# Terminal (dans le dossier où se trouve le fichier mailpit.exe)
+.\mailpit.exe
 ```
 
 ![mailpit](./images/mailpit.png)
