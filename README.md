@@ -46,9 +46,6 @@ méthodes d'enseignement et d'apprentissage, et les méthodes d'évaluation.
 | [09](#-cours-09) | API Rest                                                | 🔴 À faire                                  |
 | [10](#-cours-10) | Finalisation et récapitulatif de l'unité d'enseignement | 🔴 À faire                                  |
 
-[^etat-de-la-redaction]:
-    🟢 Complet = Complet, 🟡 En cours = En cours, 🔴 À faire = À faire
-
 ## 🕐 Cours 01
 
 ### Introduction à Laravel
@@ -196,3 +193,8 @@ détails.
 ## Sources utiles
 
 - [Best Practices](https://github.com/alexeymezenin/laravel-best-practices/blob/master/french.md)
+
+[^etat-de-la-redaction]:
+    🟢 Complet : le cours est complet et prêt à être utilisé. 🟡 En cours : le
+    cours est en cours de rédaction/de relecture. 🔴 À faire : le cours n'a pas
+    encore été rédigé.

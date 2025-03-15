@@ -7,32 +7,24 @@ choix. sous la forme :
 
 Les personnes sont stockées dans un fichier sur le serveur.
 
-```
-Baur Ophélie
-Benkais Leyla
-Boumasmoud Yousra
-Bourqui Jeremy
-Crettaz Kilian
-Fourel Nathan
-Lam Larry
-Luyet Jessica
-Mertenat Martin
-Mettraux Steve
-Najjar Louka
-Paiva Oliveira Kevin
-Perroset Jade
-Robert Thomas
-Rodriguez Alan
-Roulet Alexandre
-Ruffieux Mikaël
-Schaller Camille
-Urfer Lionel
-Vestergaard Mikkel
-Wagnières Sébastien
-Walpen Alison
-Zerika Karim
-Zweifel Nathan
-Zweifel Robin
+```txt
+Clémentine Delait
+Nzinga
+Margaret Hamilton
+Ada Lovelace
+Las Mariposas
+Josephina Van Gorkum
+Lozen
+Annette Kellerman
+Delia Akeley
+Joséphine Baker
+Tove Jansson
+Agnodice
+Leymah Gbowee
+Giorgina Reid
+Christine Jorgensen
+Wu Zetian
+Mary Anning
 ```
 
 L'utilisateur doit pouvoir cocher les personnes qu'il désire entrevoir. Il
