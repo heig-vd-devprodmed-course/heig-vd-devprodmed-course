@@ -1,7 +1,7 @@
 # HEIG-VD Cours de DevProdMéd
 
 Bienvenue sur le dépôt principal de l'unité d'enseignement
-[_Développement et Production Média_](https://gaps.heig-vd.ch/consultation/fiches/uv/uv.php?id=6082)
+[_Développement et Production Média (DévProdMéd)_](https://gaps.heig-vd.ch/consultation/fiches/uv/uv.php?id=6082)
 enseigné à la
 [Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud (HEIG-VD)](https://heig-vd.ch),
 Suisse !
@@ -24,7 +24,7 @@ Suisse !
 ## ➡️ Par où commencer ?
 
 Vous ne savez pas par où commencer ? Jetez un œil à l'introduction du cours
-[`Introduction - Support de cours`](./01-introduction//02-support-de-cours/README.md)
+[`Introduction - Support de cours`](./01-introduction//02-support-de-cours/SUPPORT_DE_COURS.md)
 pour en savoir plus.
 
 ## 📅 Programme
