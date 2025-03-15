@@ -7,18 +7,18 @@ utilisant SQLite comme exemple pratique.
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
+- [Résultat](#résultat)
 - [Présentation complète de SQLite](#présentation-complète-de-sqlite)
 - [Présentation de l'ORM (Eloquent)](#présentation-de-lorm-eloquent)
 - [Scénario](#scénario)
-- [Configuration de SQLite avec Laravel](#configuration-de-sqlite-avec-laravel)
-- [Migrations Laravel](#migrations-laravel)
-- [Création d'un modèle Eloquent](#création-dun-modèle-eloquent)
+- [Votre projet Laravel](#votre-projet-laravel)
+- [Création du modèle Newsletter et de la migration](#création-du-modèle-newsletter-et-de-la-migration)
+	- [Qu'est-ce que le "Mass Assignment" ?](#quest-ce-que-le-mass-assignment-)
 - [Formulaire pour la newsletter](#formulaire-pour-la-newsletter)
-- [Validation des données avec FormRequest](#validation-des-données-avec-formrequest)
+- [Validation des données](#validation-des-données)
 - [Contrôleur NewsletterController](#contrôleur-newslettercontroller)
 - [Routes](#routes)
-- [Tester et vérifier les données](#tester-et-vérifier-les-données)
-- [Récapitulatif](#récapitulatif)
+- [Vérifier les données](#vérifier-les-données)
 - [Ressources complémentaires](#ressources-complémentaires)
 
 ## Objectifs
@@ -31,6 +31,12 @@ utilisant SQLite comme exemple pratique.
 - Appliquer le modèle Eloquent pour manipuler simplement une base de données.
 - Énumérer les étapes pour créer, valider et traiter un formulaire.
 - Vérifier les données avec l'outil DB Browser for SQLite.
+
+## Résultat
+
+Vous pouvez trouver le code source complet de ce support de cours dans le dépôt
+GitHub suivant
+<https://github.com/heig-vd-devprodmed-course/05-database-support-de-cours>
 
 ## Présentation complète de SQLite
 
@@ -80,14 +86,14 @@ devient une instance de cette classe.
 **Exemple sans ORM (SQL direct) :**
 
 ```sql
-INSERT INTO emails (email) VALUES ('exemple@exemple.com');
+INSERT INTO newsletters (email) VALUES ('exemple@exemple.com');
 ```
 
 Avec Eloquent :
 
 ```php
 // Avec le modèle Email (Eloquent)
-Email::create(['email' => 'exemple@exemple.com']);
+Newsletter::create(['email' => 'exemple@exemple.com']);
 ```
 
 La deuxième version est beaucoup plus simple à lire, à maintenir, et évite les
@@ -98,9 +104,9 @@ Documentation officielle :
 
 ## Scénario
 
-Nous allons permettre à un utilisateur de s'inscrire à une newsletter.
-L'utilisateur saisira son email via un formulaire, que Laravel enregistrera
-ensuite dans une base SQLite.
+Nous allons permettre à une personne de s'inscrire à une newsletter. Une
+personne saisira son email via un formulaire, que Laravel enregistrera ensuite
+dans une base SQLite.
 
 ## Votre projet Laravel
 
@@ -296,8 +302,8 @@ Un·e pirate pourrait envoyer une requête HTTP contenant un champ supplémentai
 }
 ```
 
-Si Laravel accepte ce champ et l'enregistre, la personne devient
-**administrateur·rice** ! 😱
+Si Laravel accepte ce champ et l'enregistre, la personne devient administratrice
+!
 
 **Comment se protéger ?**
 
@@ -321,15 +327,15 @@ Avec cette configuration, si quelqu'un essaie d'envoyer `is_admin`, Laravel
 
 ## Formulaire pour la newsletter
 
-Créez un template Blade nommé `template_newsletter.blade.php` :
+Créez un template Blade nommé `template.blade.php` :
 
 ```bash
 # Terminal (dans le dossier racine de votre projet)
-php artisan make:view template_newsletter
+php artisan make:view template
 ```
 
 ```php
-<!-- resources/views/template_newsletter.blade.php -->
+<!-- resources/views/template.blade.php -->
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -350,19 +356,25 @@ Créez la vue pour le formulaire d'inscription :
 
 ```bash
 # Terminal (dans le dossier racine de votre projet)
-php artisan make:view view_newsletter_formulaire
+php artisan make:view newsletters.form
 ```
 
+> [!TIP]
+>
+> C'est bien d'organiser vos vues dans des dossiers pour mieux les retrouver.
+> Ici, nous avons créé un dossier `newsletters` pour y stocker les vues liées à
+> la newsletter.
+
 ```php
-<!-- resources/views/view_newsletter_formulaire.blade.php -->
-@extends('template_newsletter')
+<!-- resources/views/newsletters/form.blade.php -->
+@extends('template')
 
 @section('titre')
 	Inscription Newsletter
 @endsection
 
 @section('contenu')
-	<form method="POST" action="{{ url('newsletter') }}">
+	<form method="POST" action="{{ url('newsletters') }}">
 		@csrf
 		<input
 			name="email"
@@ -380,23 +392,65 @@ php artisan make:view view_newsletter_formulaire
 @endsection
 ```
 
-Créez également la vue de confirmation d'inscription :
+- La directive `old('email')` permet de conserver la valeur saisie par
+  l'utilisateur en cas d'erreur.
+- La directive `@error('email')` affiche un message d'erreur si le champ `email`
+  n'est pas valide.
+
+Créez une vue pour afficher toutes les inscriptions à la newsletter :
 
 ```bash
 # Terminal (dans le dossier racine de votre projet)
-php artisan make:view view_newsletter_confirm_inscription
+php artisan make:view newsletters.index
 ```
 
 ```php
-@extends('template_newsletter')
+<!-- resources/views/newsletters/index.blade.php -->
+@extends('template')
+
 @section('titre')
-	<span>Confirmation d&apos;inscription</span>
-@endsection @section('contenu')
-<div class="alert alert-success">
-	Merci ! Vous êtes bien inscrit à la newsletter.
-</div>
+	Liste des inscriptions à la newsletter
+@endsection
+
+@section('contenu')
+	@if (session('success'))
+		<div class="alert alert-success">
+			{{ session('success') }}
+		</div>
+	@endif
+
+	<h2>Liste des abonnés</h2>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>N°</th>
+				<th>Email</th>
+				<th>Date d&apos;inscription</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach ($newsletters as $newsletter)
+				<tr>
+					<td>{{ $loop->iteration }}</td>
+					<td>{{ $newsletter->email }}</td>
+					<td>{{ $newsletter->created_at->format('d/m/Y H:i') }}</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
+
+	<a href="{{ route('newsletters.form') }}" class="btn btn-primary">
+		Ajouter une adresse
+	</a>
 @endsection
 ```
+
+- `&apos;` est le code HTML pour l'apostrophe `'`.
+- `@if (session('success'))` affiche un message de succès si l'inscription a
+  réussi.
+- `@foreach ($newsletters as $newsletter)` parcourt la liste des inscriptions à
+  la newsletter.
 
 ## Validation des données
 
@@ -426,18 +480,40 @@ Modifiez le contrôleur `NewsletterController` pour traiter les données :
 
 ```php
 // app/Http/Controllers/NewsletterController.php
-use App\Models\Email;
+<?php namespace App\Http\Controllers;
+
+use App\Models\Newsletter;
 use App\Http\Requests\NewsletterRequest;
 
-public function rendFormulaire() {
-    return view('view_newsletter_formulaire');
-}
+class NewsletterController extends Controller
+{
+	public function form()
+	{
+		return view('newsletters.form');
+	}
 
-public function traiteFormulaire(NewsletterRequest $request) {
-    Email::create(['email' => $request->email]);
-    return view('view_newsletter_confirm_inscription');
+	public function create(NewsletterRequest $request)
+	{
+		Newsletter::create(['email' => $request->email]);
+		return redirect()
+			->route('newsletters.index')
+			->with('success', 'Inscription réussie !');
+	}
+
+	// Affiche la liste des emails inscrits
+	public function index()
+	{
+		$newsletters = Newsletter::all();
+		return view('newsletters.index', compact('newsletters'));
+	}
 }
 ```
+
+- La méthode `form()` affiche le formulaire d'inscription.
+- La méthode `create()` traite les données du formulaire. Si les données sont
+  valides, elles sont enregistrées dans la base de données. Et l'utilisateur est
+  redirigé vers la liste des inscriptions.
+- La méthode `index()` affiche la liste des emails inscrits.
 
 ## Routes
 
@@ -446,34 +522,56 @@ Définissez vos routes dans `web.php` :
 ```php
 // routes/web.php
 <?php
+use App\Models\Newsletter;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\NewsletterController;
 
-Route::get('/newsletter', [NewsletterController::class, 'rendFormulaire']);
-Route::post('/newsletter', [NewsletterController::class, 'traiteFormulaire']);
+Route::get('/newsletters/form', [NewsletterController::class, 'form'])->name(
+	'newsletters.form'
+);
+Route::post('/newsletters', [NewsletterController::class, 'create'])->name(
+	'newsletters.create'
+);
+
+Route::get('/newsletters', [NewsletterController::class, 'index'])->name(
+	'newsletters.index'
+);
 
 ```
 
-## Page qui liste les emails
+Il peut être utile de nommer vos routes pour les retrouver plus facilement.
+Aussi, prenez l'habitude de nommer vos routes avec des noms explicites. Le
+pluriel est souvent utilisé pour les noms de ressources.
 
-Créez une route pour afficher la liste des emails :
+Lancez votre serveur :
 
-```php
-// routes/web.php
-Route::get('/emails', function () {
-	return Email::all();
-});
+```bash
+# Terminal (dans le dossier racine de votre projet)
+php artisan serve
 ```
 
-## Tester et vérifier les données
+Ouvrez votre navigateur et allez à l'adresse
+<http://localhost:8000/newsletters/>.
 
-Installez [DB Browser for SQLite](https://sqlitebrowser.org/dl/) pour visualiser
-facilement le contenu de votre base `database.sqlite`.
+Vous devriez voir le formulaire d'inscription à la newsletter :
 
-- Lancez l'outil
-- Ouvrez votre fichier `database.sqlite`
-- Vérifiez la présence et le contenu de la table `emails`
+![Formulaire d'inscription à la newsletter](./images/resultat.png)
+
+## Vérifier les données
+
+Plusieurs méthodes pour vérifier les données :
+
+- Installez [DB Browser for SQLite](https://sqlitebrowser.org/dl/) pour
+  visualiser facilement le contenu de votre base `database.sqlite`.
+
+  - Lancez l'outil
+  - Ouvrez votre fichier `database.sqlite`
+  - Vérifiez la présence et le contenu de la table `emails`
+
+- Intallez l'extension `qwtel.sqlite-viewer` dans Visual Studio Code pour
+  visualiser les données directement dans l'éditeur. La version gratuite est
+  suffisante pour visualiser les données.
 
 ## Ressources complémentaires
 

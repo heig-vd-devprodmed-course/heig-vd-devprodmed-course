@@ -7,14 +7,14 @@ theme: custom-marp-theme
 size: 16:9
 paginate: true
 author: V. Guidoux
-title: Database avec Laravel
-description: Database
-header: "**Database**"
+title: Bases de données avec Laravel
+description: Introduction à l'utilisation de bases de données avec SQLite et Eloquent ORM
+header: "**Bases de données avec Laravel**"
 footer: "**HEIG-VD** - DévProdMéd Course 2024-2025 - CC BY-SA 4.0"
 headingDivider: 6
 -->
 
-# Database
+# Bases de données avec Laravel
 
 <!--
 _class: lead
@@ -34,9 +34,156 @@ explication détaillée et les exercices pratiques.
 
 ## Objectifs (1/2)
 
-À la fin de cette séance, vous devriez être capable de :
+- Lister les étapes nécessaires pour intégrer SQLite avec Laravel.
+- Décrire comment configurer Laravel pour utiliser une base de données.
+- Identifier les étapes de création et d'utilisation des migrations Laravel.
+- Appliquer le modèle Eloquent ORM pour manipuler une base de données.
+- Énumérer les étapes pour créer, valider et traiter un formulaire.
+- Vérifier les données avec DB Browser for SQLite.
 
-## Objectifs (2/2)
+## Qu'est-ce que SQLite ?
+
+- Système de Gestion de Bases de Données (SGBD).
+- Contrairement à MySQL ou PostgreSQL, pas besoin de serveur.
+- Base stockée dans un simple fichier (`database.sqlite`).
+- Léger (~600 Ko) et utilisé dans de nombreux logiciels et applications mobiles.
+
+## ORM : Object-Relational Mapping
+
+Exemple d'utilisation :
+
+```sql
+INSERT INTO newsletters (email) VALUES ('exemple@exemple.com');
+```
+
+Avec Laravel et Eloquent :
+
+```php
+Newsletter::create(['email' => 'exemple@exemple.com']);
+```
+
+## Eloquent ORM : Manipuler une base en PHP
+
+**Eloquent** est l’ORM de Laravel qui permet d’utiliser une base **sans écrire
+du SQL**.
+
+Chaque table est représentée par une **classe modèle**.
+
+Exemple :
+
+```php
+class Newsletter extends Model
+{
+	protected $fillable = ['email'];
+}
+```
+
+## Exemples d'utilisation
+
+Ajouter un enregistrement :
+
+```php
+Newsletter::create(['email' => 'test@example.com']);
+```
+
+Récupérer des données :
+
+```php
+$newsletters = Newsletter::all();
+```
+
+## Création du projet Laravel avec SQLite
+
+```bash
+laravel new cours-5-database --database=sqlite --pest --no-interaction
+```
+
+**Options importantes** :
+
+- `--database=sqlite` : Définit SQLite comme base de données.
+- `--pest` : Ajoute le framework de test **Pest**.
+- `--no-interaction` : Lance l’installation **sans prompts**.
+
+## Migrations : Définir la structure de la base
+
+**Créer une migration et un modèle :**
+
+```bash
+php artisan make:model Newsletter --migration --controller
+```
+
+**Fichier de migration généré :**
+
+```php
+Schema::create('newsletters', function (Blueprint $table) {
+	$table->id();
+	$table->string('email')->unique();
+	$table->timestamps();
+});
+```
+
+### Commandes utiles
+
+- Appliquer une migration :
+
+  ```bash
+  php artisan migrate
+  ```
+
+- Annuler la dernière migration :
+
+  ```bash
+  php artisan migrate:rollback
+  ```
+
+## Validation des données
+
+**Création d’une validation avec `FormRequest`**
+
+```bash
+php artisan make:request NewsletterRequest
+```
+
+**Ajout des règles de validation (`NewsletterRequest.php`)** :
+
+```php
+public function rules(): array {
+    return ['email' => 'required|email|unique:newsletters'];
+}
+```
+
+## Routes
+
+**Déclaration des routes dans `web.php`** :
+
+```php
+Route::get('/newsletters/form', [NewsletterController::class, 'form'])->name(
+	'newsletters.form'
+);
+Route::post('/newsletters', [NewsletterController::class, 'create'])->name(
+	'newsletters.create'
+);
+Route::get('/newsletters', [NewsletterController::class, 'index'])->name(
+	'newsletters.index'
+);
+```
+
+## Vérification des données
+
+**Méthodes pour visualiser la base SQLite** :
+
+1. **Avec DB Browser for SQLite**
+
+   - Ouvrir `database.sqlite`.
+   - Vérifier la table `newsletters`.
+
+2. **Avec une extension VS Code** (`qwtel.sqlite-viewer`)
+   - Permet d’afficher les données directement dans l'éditeur.
+
+## Ressources complémentaires
+
+- **[Documentation Laravel Database](https://laravel.com/docs/database)**
+- **[Eloquent ORM - Laravel](https://laravel.com/docs/eloquent)**
 
 ## Questions
 
