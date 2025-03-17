@@ -173,6 +173,10 @@ Exemple :
 @endif
 ```
 
+```php
+{!! $errors->first('email', '<p class="error">:message</p>') !!}
+```
+
 ## Question 9 - Donnée
 
 > **Quel est le fichier à modifier pour configurer l'envoi d'email dans Laravel
@@ -226,8 +230,6 @@ Mail::send('view_email', $data, function ($message) {
 3. **Une fonction de callback** pour définir les paramètres de l'email :
    - `to('destinataire@example.com')` → définit le destinataire.
    - `subject('Objet du mail')` → définit l’objet.
-
-Cela permet de tester l’envoi sans réellement envoyer d’email.
 
 ## Question 13 - Donnée
 
