@@ -150,6 +150,9 @@ Vous trouverez ci-joint le contenu pour le prochain cours,
 Pour les personnes qui veulent avoir accès aux fichiers originaux,
 communiquez-moi vos identifiants Github, et vous pouvez aller sur ces liens :
 
+Résumé :
+https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/06-operation-crud/README.md
+
 Support de cours :
 https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/06-operation-crud/02-support-de-cours/SUPPORT_DE_COURS.md
 
@@ -171,6 +174,9 @@ Vous trouverez ci-joint le contenu pour le prochain cours,
 Pour les personnes qui veulent avoir accès aux fichiers originaux,
 communiquez-moi vos identifiants Github, et vous pouvez aller sur ces liens :
 
+Résumé :
+https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/
+
 Support de cours
 :https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/07-authentification-middleware-relation-1-a-n/02-support-de-cours/SUPPORT_DE_COURS.md
 
@@ -188,6 +194,9 @@ Vous trouverez ci-joint le contenu pour le prochain cours,
 
 Pour les personnes qui veulent avoir accès aux fichiers originaux,
 communiquez-moi vos identifiants Github, et vous pouvez aller sur ces liens :
+
+Résumé :
+https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/
 
 Support de cours :
 https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/08-relation-n-a-n/02-support-de-cours/SUPPORT_DE_COURS.md
