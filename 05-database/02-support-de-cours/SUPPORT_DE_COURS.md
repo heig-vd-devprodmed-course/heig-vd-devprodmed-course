@@ -278,7 +278,8 @@ Imaginons que nous ayons un modèle `User` avec les champs suivants :
 - `name`
 - `email`
 - `password`
-- `is_admin` (pour savoir si c'est un·e administrateur·rice)
+- `is_admin` (pour savoir si c'est une personne qui a des droits
+  d'administration)
 
 Au lieu d'assigner chaque valeur une par une comme ceci :
 
@@ -305,13 +306,12 @@ Cela rend le code plus **court, lisible et efficace**.
 **Le problème de sécurité du "Mass Assignment"**
 
 Le problème, c'est que si on ne définit pas **précisément** quels champs sont
-modifiables en masse, un·e attaquant·e pourrait envoyer des données
-malveillantes.
+modifiables en masse, une personne malveillante pourrait ajouter des champs
+supplémentaires à la requête et les enregistrer dans la base de données.
 
 **Exemple d'attaque**
 
-Un·e pirate pourrait envoyer une requête HTTP contenant un champ supplémentaire
-:
+Une pirate pourrait envoyer une requête HTTP contenant un champ supplémentaire :
 
 ```json
 {
