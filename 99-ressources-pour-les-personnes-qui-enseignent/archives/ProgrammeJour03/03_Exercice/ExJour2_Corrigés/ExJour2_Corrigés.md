@@ -135,7 +135,7 @@ des artistes.
 
 Contenu du fichier "`template`" `\resources\views\template.blade.php`
 
-```php+HTML
+```php
 <!doctype html>
 <html lang="fr">
     <head>
@@ -152,7 +152,7 @@ Contenu du fichier "`template`" `\resources\views\template.blade.php`
 Contenu de la vue `\resources\views\view_artistes.blade.php` basée sur le
 template ci-dessus.
 
-```php+HTML
+```php
 @extends('template')
 
 @section('titre')
@@ -239,7 +239,7 @@ Nous avons déjà un fichier `template`, il ne reste qu'à créer une vue
 
 Contenu de la vue `\resources\views\view_proverbesV1.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('titre')
@@ -586,7 +586,7 @@ savoir d'où proviennent les données.
 
 Contenu de la vue `\resources\views\view_proverbesV2.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('titre')

@@ -174,7 +174,7 @@ besoin d'un `template`.
 
 Commençons par notre `template : template.blade.php` :
 
-```php+HTML
+```php
 <!doctype html>
 <html lang="fr">
     <head>
@@ -194,7 +194,7 @@ Commençons par notre `template : template.blade.php` :
 Puis ajoutons notre vue pour le formulaire
 `view_rend_formulaire_voiture.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('titre')
@@ -360,7 +360,7 @@ class VoitureController extends Controller
 Il nous manque la vue permettant de savoir que tout s'est bien passé
 `view_confirmation_voiture.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('titre')

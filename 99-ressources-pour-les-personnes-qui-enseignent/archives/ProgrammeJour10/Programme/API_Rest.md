@@ -59,16 +59,15 @@ installé et qui se trouve dans le même répertoire (`/routes`)
 
 Voici le fichier `\routes\api.php` tel qu'il est par défaut :
 
-```php+HTML
+```php
 <?php
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 })->middleware('auth:sanctum');
-
 ```
 
 Ajoutons maintenant notre route qui va nous retourner les données d'une personne

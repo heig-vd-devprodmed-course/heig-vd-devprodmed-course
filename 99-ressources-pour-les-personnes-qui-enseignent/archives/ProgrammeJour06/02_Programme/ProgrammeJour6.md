@@ -489,7 +489,7 @@ notre contrôleur :thumbsup:
 
 Créons maintenant le `template` (`template.blade.php`)
 
-```php+HTML
+```php
 <!doctype html>
 <html lang='fr'>
     <head>
@@ -513,7 +513,7 @@ utilisateurs (`view_index.blade.php`)
 
 ## Liste de tous les utilisateurs
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -600,7 +600,7 @@ utilisateur (`view_create.blade.php`)
 
 ## Création d'un utilisateur
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -660,7 +660,7 @@ Dans ce fichier nous passons le retour de la méthode `authorize` à `true` et
 complétons la méthode `rules()` avec les contraintes pour chaque champs du
 formulaire. Ce qui nous donne :
 
-```php+HTML
+```php
 <?php
 
 namespace App\Http\Requests;
@@ -669,28 +669,28 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 */
+	public function authorize(): bool
+	{
+		return true;
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            'name'=>'required|max:255|unique:users', // champ obligatoire et unique dans la table 'users'
-            'email'=>'required|email|max:255|unique:users', // champ obligatoire, de type email, max 255 caractères, et unique dans la table 'users'
-            'password'=>'required|confirmed|min:6' // champ obligatoire et qui doit correspondre à ce qui est entré dans le champ de confirmation.
-                                                   // Le champ doit se nommer comme le champ password avec _confirmation à la fin ;-)
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+	 */
+	public function rules(): array
+	{
+		return [
+			'name' => 'required|max:255|unique:users', // champ obligatoire et unique dans la table 'users'
+			'email' => 'required|email|max:255|unique:users', // champ obligatoire, de type email, max 255 caractères, et unique dans la table 'users'
+			'password' => 'required|confirmed|min:6', // champ obligatoire et qui doit correspondre à ce qui est entré dans le champ de confirmation.
+			// Le champ doit se nommer comme le champ password avec _confirmation à la fin ;-)
+		];
+	}
 }
 ```
 
@@ -761,7 +761,7 @@ Passons maintenant à la visualisation des données d'un utilisateur.
 
 Pour ce faire, il nous faut une nouvelle vue (`view_show.blade.php`)
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -814,7 +814,7 @@ le détail d'un utilisateur :
 Passons maintenant à la vue permettant la modification des données d'un
 utilisateur : (`view_edit.blade.php`)
 
-```php+HTML
+```php
 
 @extends('template')
 

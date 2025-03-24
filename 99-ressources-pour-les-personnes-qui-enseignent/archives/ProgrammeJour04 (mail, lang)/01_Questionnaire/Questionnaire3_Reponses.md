@@ -9,7 +9,7 @@ de type `CSRF` ?
 
 > Il faut insérer le tag Blade `@csrf` juste après l'entête d'un formulaire
 >
-> ```php+HTML
+> ```php
 > <form action="{{ url('traiteFormulaire') }}" method="post" accept-charset="UTF-8">
 >     @csrf
 >     <label for="nom">Entrez votre nom : </label>

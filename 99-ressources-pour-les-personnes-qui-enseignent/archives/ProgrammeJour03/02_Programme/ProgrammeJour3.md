@@ -25,7 +25,7 @@ Blade.
 Etape 1 : Créer le template (`template_form.blade.php`) sur lequel sera basé
 notre vue.
 
-```php+HTML
+```php
 <!DOCTYPE html>
 <html lang='fr'>
     <head>
@@ -39,7 +39,7 @@ notre vue.
 
 Etape 2 : Créer la vue (`view_form.blade.php`) qui hérite de notre `template`
 
-```php+HTML
+```php
 @extends('template_form')
 
 @section('contenu')
@@ -115,7 +115,7 @@ d'un formulaire.
 
 Analysons le code de notre formulaire :
 
-```php+HTML
+```php
 @extends('template_form')
 
 @section('contenu')
@@ -175,7 +175,7 @@ return view('view_resultat')->with('requete', $request);
 
 Créons une nouvelle vue (`view_resultat.blade.php`) avec le code suivant :
 
-```php+HTML
+```php
 @extends('template_form')
 
 @section('contenu')

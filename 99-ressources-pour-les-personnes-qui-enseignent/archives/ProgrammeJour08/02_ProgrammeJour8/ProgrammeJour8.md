@@ -939,7 +939,7 @@ articles. Il faut ajouter l'implémentation de l'affichage des mots-clés de
 chaque article. (La seule chose à modifier est la balise `<header>...</header>`
 de la section `@section('contenu')` `\resources\views\view_articles.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('header')
@@ -1010,7 +1010,7 @@ d'un nouvel article.
 Ajoutons un champ texte permettant la saisie des mots-clés dans la vue existante
 `\resources\views\view_ajoute_article.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')

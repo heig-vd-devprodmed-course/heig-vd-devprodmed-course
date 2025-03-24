@@ -655,7 +655,7 @@ Commençons par factoriser tout le nécessaire dans le fichier
 
 Puis la `view_page1.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -683,7 +683,7 @@ Puis la `view_page1.blade.php`
 
 Passons à la `view_page2.blade.php` (Affichage des 22 questions)
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -728,13 +728,13 @@ Une ou/des réponse(s) n'étaient pas valide ! Voici de nouvelles questions :
 
 Passons maintenant à la `view_page3.blade.php` (Affichage les résultats)
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
 <div>
     <table>
-            <?php $no = 1 ?>
+            <?php $no = 1; ?>
     <tr>
     @foreach($resultats['QR'] as $resultat)
         <td align="right">{{$resultat['question']}}</td>
@@ -750,7 +750,7 @@ Passons maintenant à la `view_page3.blade.php` (Affichage les résultats)
         @if ($no%3 === 0)
           </tr><tr>
         @endif
-                <?php $no++ ?>
+                <?php $no++; ?>
     @endforeach
     </tr>
     </table>
@@ -788,7 +788,7 @@ les images `faux.png` et `juste.png` dedans.
 
 Il ne reste plus que la vue pour la mise en forme du mail `view_mail.blade.php`
 
-```php+HTML
+```php
 <!doctype html>
 <html lang='fr'>
     <head>

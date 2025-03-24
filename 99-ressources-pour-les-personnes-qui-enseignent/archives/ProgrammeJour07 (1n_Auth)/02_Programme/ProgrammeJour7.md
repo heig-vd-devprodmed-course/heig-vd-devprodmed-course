@@ -831,7 +831,7 @@ avons supprimé les routes qui y mènent (`['except'=>['show','edit','update']]`
 
 Voici le template Blade `\resources\view\template.blade.php`
 
-```php+HTML
+```php
 <!doctype html>
 <html lang='fr'>
     <head>
@@ -862,7 +862,7 @@ Voici le template Blade `\resources\view\template.blade.php`
 
 Voici la vue Blade `\resources\view\view_articles.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('header')
@@ -1309,7 +1309,7 @@ class ArticleController extends Controller implements HasMiddleware // ne pas ou
 Modifions notre vue permettant d'afficher la liste des articles
 `\resources\view\view_articles.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('header')
@@ -1368,7 +1368,7 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 Ajout d'une nouvelle vue pour le formulaire de création d'un nouvel article
 (`\resources\views\view_ajoute_article.blade.php`) :
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -1404,7 +1404,7 @@ php artisan make:request ArticleRequest
 
 Mise à jour du fichier de validation (`app\Http\Requests\ArticleRequest`) :
 
-```php+HTML
+```php
 <?php
 
 namespace App\Http\Requests;
@@ -1413,26 +1413,26 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ArticleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 */
+	public function authorize(): bool
+	{
+		return true;
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
-    public function rules(): array
-    {
-        return [
-            'titre'=>'required|max:80',
-            'contenu'=>'required'
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+	 */
+	public function rules(): array
+	{
+		return [
+			'titre' => 'required|max:80',
+			'contenu' => 'required',
+		];
+	}
 }
 ```
 

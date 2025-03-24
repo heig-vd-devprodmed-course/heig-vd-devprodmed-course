@@ -194,33 +194,32 @@ Indiquons dans la méthode `down()` que nous désirons supprimer la table `email
 
 Voilà le code correspondant :
 
-```php+HTML
+```php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('emails', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email', 100);
-        });
-    }
+return new class extends Migration {
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('emails', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('email', 100);
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('emails');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('emails');
+	}
 };
 ```
 
@@ -353,7 +352,7 @@ Créons tout d'abord le `template`. `template_newsletter.blade.php :`
 Ensuite la vue qui fourni le formulaire. `view_newsletter_formulaire.blade.php`
 :
 
-```php+HTML
+```php
 @extends('template_newsletter')
 
 @section('titre')
