@@ -1,4 +1,4 @@
-# Cours 00
+# Cours 06
 
 ## Ressources
 
