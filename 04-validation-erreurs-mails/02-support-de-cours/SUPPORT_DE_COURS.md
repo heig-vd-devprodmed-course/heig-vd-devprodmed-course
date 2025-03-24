@@ -92,7 +92,7 @@ Route::get('/words/{lang}', function ($lang, Request $request) {
 });
 ```
 
-```blade
+```php
 <!-- resources/views/search_form.blade.php -->
 @extends('template')
 
@@ -154,7 +154,7 @@ Route::post('/register', function (Request $request) {
 });
 ```
 
-```blade
+```php
 <!-- resources/views/register_form.blade.php -->
 @extends('template')
 
@@ -354,7 +354,7 @@ Nous allons créer un template Blade pour uniformiser l'affichage de nos vues.
 - `{{ old('nom') }}` : Récupère la valeur précédemment saisie.
 - `{!!` et `!!}` : Permettent d'insérer du code HTML dans une vue.
 - `{!! $errors->first() !!}` : Affiche le message d'erreur si le champ `nom`
-  n'est pas valide.
+  n'est pas valide. Si le champ est valide, rien ne s'affiche.
 - Gestion des erreurs pour chaque champ du formulaire. Si une erreur est
   détectée, un message s'affiche à côté du champ concerné. `$errors->first()`
   permet d'afficher le premier message d'erreur pour un champ donné.

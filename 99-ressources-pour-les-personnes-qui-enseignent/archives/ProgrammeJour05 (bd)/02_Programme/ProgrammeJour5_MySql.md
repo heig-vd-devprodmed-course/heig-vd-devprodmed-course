@@ -245,7 +245,7 @@ Indiquons dans la méthode `down()` que nous désirons supprimer la table `email
 
 Voilà le code correspondant :
 
-```php+HTML
+```php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -254,30 +254,29 @@ use Illuminate\Support\Facades\Schema;
 
 class CreationTableEmails extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('emails', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email', 100);
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('emails', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('email', 100);
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('emails');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('emails');
+	}
 }
-
 ```
 
 Pour créer cette table dans la base de données, il suffit exécuter la migration
@@ -423,7 +422,7 @@ Créons tout d'abord le template ( templateEmail.blade.php ) :
 
 Ensuite la vue qui fourni le formulaire ( vueRendFormulaireEmail.blade.php ) :
 
-```php+HTML
+```php
 @extends('templateEmail')
 
 @section('titre')

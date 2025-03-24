@@ -69,7 +69,7 @@ notre première vue "customisée"
 Créons le fichier texte : `\resources\views\maVue.blade.php` basé sur le
 template que nous venons de créer.
 
-```php+HTML
+```php
 @extends('monTemplate')
 
 @section('titre')
@@ -96,7 +96,7 @@ et
 
 `@yield('contenu')` sera remplacé par :
 
-```php+HTML
+```php
 <p>Excellent choix !</p>
 <p>L&apos;article {{$numero}} de couleur {{$couleur}} est tout simplement magnifique</p>
 ```
@@ -428,7 +428,7 @@ De même pour les `URLs` :
 
 Créons maintenant la vue permettant de l'afficher. Voici son contenu :
 
-```php+HTML
+```php
 @extends('monTemplate')
 
 @section('titre')

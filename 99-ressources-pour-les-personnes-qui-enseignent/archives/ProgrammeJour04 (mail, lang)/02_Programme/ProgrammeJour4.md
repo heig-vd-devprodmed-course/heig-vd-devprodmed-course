@@ -31,7 +31,7 @@ Créons un template (qui utilise Bootstrap pour le rendu graphique)
 
 Voici le contenu du template ( `template_contact.blade.php` ) :
 
-```php+HTML
+```php
 <!doctype html>
 <html lang='fr'>
     <head>
@@ -52,7 +52,7 @@ Voici le contenu du template ( `template_contact.blade.php` ) :
 
 Et voici la vue basée sur le template ( `view_formulaire_contact.blade.php` )
 
-```php+HTML
+```php
 @extends('template_contact')
 
 @section('contenu')
@@ -378,7 +378,7 @@ Il ne nous reste plus qu'à construire :
 Commençons par la vue destinée au contenu de l'e-mail
 (`view_contenu_email.blade.php`) :
 
-```php+HTML
+```php
 <!doctype html>
 <html lang='fr'>
     <head>
@@ -401,7 +401,7 @@ Commençons par la vue destinée au contenu de l'e-mail
 Créons maintenant la vue de confirmation de réception des informations
 (`view_confirmation.blade.php`)
 
-```php+HTML
+```php
 @extends('template_contact')
 
 @section('contenu')

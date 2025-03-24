@@ -138,7 +138,7 @@ Route::get('article/{n}', function ($n) {
 
 > ​ avec `{{$nomParametreDansVue}}`
 
-```php+HTML
+```php
 	<p> {{ $numero }} </p>
 ```
 

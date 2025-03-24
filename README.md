@@ -39,12 +39,12 @@ méthodes d'enseignement et d'apprentissage, et les méthodes d'évaluation.
 | [02](#-cours-02) | Blade & Contrôleur                                      | 🟢 Complet                                  |
 | [03](#-cours-03) | Formulaires                                             | 🟢 Complet                                  |
 | [04](#-cours-04) | Validation, erreurs et mails                            | 🟢 Complet                                  |
-| [05](#-cours-05) | Database                                                | 🟡 En cours                                 |
-| [06](#-cours-06) | Opération CRUD                                          | 🔴 À faire                                  |
-| [07](#-cours-07) | Authentification, middleware et relation 1 à n          | 🔴 À faire                                  |
-| [08](#-cours-08) | Relation n à n                                          | 🔴 À faire                                  |
-| [09](#-cours-09) | API Rest                                                | 🔴 À faire                                  |
-| [10](#-cours-10) | Finalisation et récapitulatif de l'unité d'enseignement | 🔴 À faire                                  |
+| [05](#-cours-05) | Database                                                | 🟢 Complet                                  |
+| [06](#-cours-06) | Opération CRUD                                          | 🟢 Complet                                  |
+| [07](#-cours-07) | Authentification, middleware, relation `Story` → `User` | 🔴 À faire                                  |
+| [08](#-cours-08) | Relations avancées + validation conditionnelle          | 🔴 À faire                                  |
+| [09](#-cours-09) | API REST avancée + versionnement                        | 🔴 À faire                                  |
+| [10](#-cours-10) | Finalisation du projet, démo, feedback croisé           | 🔴 À faire                                  |
 
 ## 🕐 Cours 01
 
@@ -123,6 +123,7 @@ méthodes d'enseignement et d'apprentissage, et les méthodes d'évaluation.
 - Exercices : [Exercices](./06-operation-crud/03-exercices/EXERCICES.md) ·
   [Solutions](./06-operation-crud/03-exercices/SOLUTIONS.md)
 - Quiz : [Quiz](./06-operation-crud/04-quiz/README.md)
+- Projet : [Projet](./06-operation-crud/05-projet/PROJET.md)
 
 [Voir les détails](./06-operation-crud/README.md)
 

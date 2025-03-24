@@ -499,7 +499,7 @@ return [
 
 `view_manif_form.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -555,7 +555,7 @@ return [
 
 `view_manif_confirm.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')

@@ -278,7 +278,8 @@ Imaginons que nous ayons un modèle `User` avec les champs suivants :
 - `name`
 - `email`
 - `password`
-- `is_admin` (pour savoir si c'est un·e administrateur·rice)
+- `is_admin` (pour savoir si c'est une personne qui a des droits
+  d'administration)
 
 Au lieu d'assigner chaque valeur une par une comme ceci :
 
@@ -305,13 +306,12 @@ Cela rend le code plus **court, lisible et efficace**.
 **Le problème de sécurité du "Mass Assignment"**
 
 Le problème, c'est que si on ne définit pas **précisément** quels champs sont
-modifiables en masse, un·e attaquant·e pourrait envoyer des données
-malveillantes.
+modifiables en masse, une personne malveillante pourrait ajouter des champs
+supplémentaires à la requête et les enregistrer dans la base de données.
 
 **Exemple d'attaque**
 
-Un·e pirate pourrait envoyer une requête HTTP contenant un champ supplémentaire
-:
+Une pirate pourrait envoyer une requête HTTP contenant un champ supplémentaire :
 
 ```json
 {
@@ -376,7 +376,7 @@ Créez la vue pour le formulaire d'inscription :
 
 ```bash
 # Terminal (dans le dossier racine de votre projet)
-php artisan make:view newsletters.form
+php artisan make:view newsletters.create
 ```
 
 > [!TIP]
@@ -386,7 +386,7 @@ php artisan make:view newsletters.form
 > la newsletter.
 
 ```php
-<!-- resources/views/newsletters/form.blade.php -->
+<!-- resources/views/newsletters/create.blade.php -->
 @extends('template')
 
 @section('titre')
@@ -460,7 +460,7 @@ php artisan make:view newsletters.index
 		</tbody>
 	</table>
 
-	<a href="{{ route('newsletters.form') }}" class="btn btn-primary">
+	<a href="{{ route('newsletters.createView') }}" class="btn btn-primary">
 		Ajouter une adresse
 	</a>
 @endsection
@@ -507,9 +507,9 @@ use App\Http\Requests\NewsletterRequest;
 
 class NewsletterController extends Controller
 {
-	public function form()
+	public function createView()
 	{
-		return view('newsletters.form');
+		return view('newsletters.create');
 	}
 
 	public function create(NewsletterRequest $request)
@@ -529,7 +529,7 @@ class NewsletterController extends Controller
 }
 ```
 
-- La méthode `form()` affiche le formulaire d'inscription.
+- La méthode `createView()` affiche le formulaire d'inscription.
 - La méthode `create()` traite les données du formulaire. Si les données sont
   valides, elles sont enregistrées dans la base de données. Et l'utilisateur est
   redirigé vers la liste des inscriptions.
@@ -547,9 +547,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\NewsletterController;
 
-Route::get('/newsletters/form', [NewsletterController::class, 'form'])->name(
-	'newsletters.form'
-);
+Route::get('/newsletters/create', [
+	NewsletterController::class,
+	'createView',
+])->name('newsletters.createView');
 Route::post('/newsletters', [NewsletterController::class, 'create'])->name(
 	'newsletters.create'
 );

@@ -141,7 +141,7 @@ class AgendaController extends Controller
 
 ## Template `\resources\views\template.blade.php`
 
-```php+HTML
+```php
 <!doctype html>
 <html lang='fr'>
     <head>
@@ -162,7 +162,7 @@ class AgendaController extends Controller
 
 ## Vue Formulaire `\resources\views\view_form_checkbox.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('contenu')
@@ -201,7 +201,7 @@ class AgendaController extends Controller
 
 ## Vue Agenda `\resources\views\view_affiche_agenda.blade.php`
 
-```php+HTML
+```php
 @extends('template')
 
 @section('titre')

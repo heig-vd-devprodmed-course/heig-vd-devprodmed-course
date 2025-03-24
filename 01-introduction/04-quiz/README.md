@@ -265,7 +265,7 @@ Blade, le moteur de templating de Laravel, permet d'écrire du HTML dynamique.
 
 Exemple :
 
-```blade
+```php
 <h1>Bonjour, {{ $nom }}</h1>
 ```
 

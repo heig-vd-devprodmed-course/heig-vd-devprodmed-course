@@ -50,6 +50,7 @@ _paginate: false
 ## Réponse 2 - Réponse (2/2)
 
 2. **Avec une `FormRequest` dédiée (validation avancée)**
+
    ```php
    class RegisterRequest extends FormRequest
    {
@@ -74,7 +75,7 @@ cas d’erreur ou de rechargement de la page.
 
 Exemple :
 
-```blade
+```php
 <input type="text" name="nom" value="{{ old('nom') }}" />
 ```
 
@@ -90,7 +91,7 @@ Exemple :
 
 Exemple :
 
-```blade
+```php
 <form method="POST" action="/submit">
 	@csrf
 	<input type="text" name="nom" />
@@ -134,6 +135,7 @@ php artisan make:request NomDeMaRequest
 ## Réponse 7 - Réponse (1/2)
 
 1. **Autoriser l'utilisation de la requête** en modifiant `authorize()` :
+
    ```php
    public function authorize(): bool {
        return true;
@@ -143,6 +145,7 @@ php artisan make:request NomDeMaRequest
 ## Réponse 7 - Réponse (2/2)
 
 2. **Définir les règles de validation** dans `rules()` :
+
    ```php
    public function rules(): array {
        return [
@@ -164,10 +167,14 @@ L’objet `$errors`, qui permet d’accéder aux erreurs de validation.
 
 Exemple :
 
-```blade
+```php
 @if ($errors->has('email'))
 	<p class="error">{{ $errors->first('email') }}</p>
 @endif
+```
+
+```php
+{!! $errors->first('email', '<p class="error">:message</p>') !!}
 ```
 
 ## Question 9 - Donnée
@@ -223,8 +230,6 @@ Mail::send('view_email', $data, function ($message) {
 3. **Une fonction de callback** pour définir les paramètres de l'email :
    - `to('destinataire@example.com')` → définit le destinataire.
    - `subject('Objet du mail')` → définit l’objet.
-
-Cela permet de tester l’envoi sans réellement envoyer d’email.
 
 ## Question 13 - Donnée
 

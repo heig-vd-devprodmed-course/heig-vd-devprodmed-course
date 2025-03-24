@@ -356,7 +356,7 @@ Route::get('{n}', function ($n) {
 
 Et voici comment récupérer la donnée $n dans la vue :
 
-```php+HTML
+```php
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -365,7 +365,7 @@ Et voici comment récupérer la donnée $n dans la vue :
     </head>
     <body>
         <div>Ma première vue</div>
-        <div>article : <?php echo $n ?></div>
+        <div>article : <?php echo $n; ?></div>
     </body>
 </html>
 ```
@@ -395,7 +395,7 @@ l'extension `.blade.php`
 Renommons notre vue `article.php` en `article.blade.php` et apportons la
 modification suivante :
 
-```php+HTML
+```php
 <html>
 
     <head>
