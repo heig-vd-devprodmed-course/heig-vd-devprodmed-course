@@ -123,7 +123,7 @@ méthodes d'enseignement et d'apprentissage, et les méthodes d'évaluation.
 - Exercices : [Exercices](./06-operation-crud/03-exercices/EXERCICES.md) ·
   [Solutions](./06-operation-crud/03-exercices/SOLUTIONS.md)
 - Quiz : [Quiz](./06-operation-crud/04-quiz/README.md)
-- Projet : [Projet](./06-operation-crud/05-projet/README.md)
+- Projet : [Projet](./06-operation-crud/05-projet/PROJET.md)
 
 [Voir les détails](./06-operation-crud/README.md)
 

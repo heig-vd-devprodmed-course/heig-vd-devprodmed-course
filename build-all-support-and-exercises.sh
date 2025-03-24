@@ -52,9 +52,21 @@ find . -mindepth 3 -maxdepth 3 -type f -name "SOLUTIONS.md" -exec sh -c '
     done
 ' sh {} +
 
+
+# Convert projects to PDF
+echo "Converting projects to PDF..."
+find . -mindepth 3 -maxdepth 3 -type f -name "PROJET.md" -exec sh -c '
+    for file in "$@"; do
+        echo "Processing $file..."
+        dir_path=$(dirname "$file")
+        image_path="$dir_path/images"
+        '"$PANDOC_CMD"' -o "$dir_path/PROJET.pdf" --resource-path="$dir_path:$image_path:/data" "$file"
+    done
+' sh {} +
+
 # Renommer les fichiers générés
 echo "Renaming generated PDFs..."
-find . -mindepth 3 -maxdepth 3 -type f \( -name "EXERCICES.pdf" -o -name "SUPPORT_DE_COURS.pdf" -o -name "SOLUTIONS.pdf" \) -exec sh -c '
+find . -mindepth 3 -maxdepth 3 -type f \( -name "EXERCICES.pdf" -o -name "SUPPORT_DE_COURS.pdf" -o -name "SOLUTIONS.pdf" -o -name "PROJET.pdf" \) -exec sh -c '
     for file in "$@"; do
         chapter_dir=$(dirname "$(dirname "$file")")
         chapter_name=$(basename "$chapter_dir")
@@ -70,6 +82,9 @@ find . -mindepth 3 -maxdepth 3 -type f \( -name "EXERCICES.pdf" -o -name "SUPPOR
                 ;;
             *SOLUTIONS.pdf)
                 new_name="${short_chapter_name}-03-solutions-${clean_chapter_name}.pdf"
+                ;;
+            *PROJET.pdf)
+                new_name="${short_chapter_name}-05-projet-${clean_chapter_name}.pdf"
                 ;;
         esac
 

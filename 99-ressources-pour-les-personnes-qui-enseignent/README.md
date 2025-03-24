@@ -6,6 +6,17 @@
 - [Avant le cours](#avant-le-cours)
   - [Email envoyé aux personnes qui étudient avant le premier cours](#email-envoyé-aux-personnes-qui-étudient-avant-le-premier-cours)
 - [Pendant le cours](#pendant-le-cours)
+- [Mails avant les cours](#mails-avant-les-cours)
+  - [Cours 01](#cours-01)
+  - [Cours 02](#cours-02)
+  - [Cours 03](#cours-03)
+  - [Cours 04](#cours-04)
+  - [Cours 05](#cours-05)
+  - [Cours 06](#cours-06)
+  - [Cours 07](#cours-07)
+  - [Cours 08](#cours-08)
+  - [Cours 09](#cours-09)
+  - [Cours 10](#cours-10)
 
 ## Avant le cours
 
@@ -147,6 +158,9 @@ https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main
 
 Solutions :
 https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/06-operation-crud/03-exercices/SOLUTIONS.md
+
+Projet :
+https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/06-operation-crud/05-projet/PROJET.md
 
 ### Cours 07
 

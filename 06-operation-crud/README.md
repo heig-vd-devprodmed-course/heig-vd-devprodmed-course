@@ -7,7 +7,7 @@
 - Exercices : [Exercices](./03-exercices/EXERCICES.md) ·
   [Solutions](./03-exercices/SOLUTIONS.md)
 - Quiz : [Quiz](./04-quiz/README.md)
-- Projet : [Projet](./05-projet/README.md)
+- Projet : [Projet](./05-projet/PROJET.md)
 
 ## Objectifs
 
