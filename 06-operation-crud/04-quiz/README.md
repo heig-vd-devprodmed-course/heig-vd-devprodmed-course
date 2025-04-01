@@ -55,9 +55,9 @@ logique métier du contrôleur.
 
 ## Réponse 4 - Réponse
 
-Oui ! Laravel charge automatiquement `routes/api.php` avec le middleware `api`.
-Les routes sont préfixées avec `/api` par défaut, et les réponses sont formatées
-en JSON.
+Non, il faut exécuter la commande `php artisan install:api` pour configurer le
+middleware `api` et le préfixe `/api`. Cela permet de séparer les routes API des
+routes web.
 
 ## Question 5 - Donnée
 

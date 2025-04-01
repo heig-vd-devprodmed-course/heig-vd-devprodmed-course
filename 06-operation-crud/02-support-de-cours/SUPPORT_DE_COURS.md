@@ -27,6 +27,11 @@
   - [Supprimer une newsletter](#supprimer-une-newsletter)
 - [Synthèse et bonnes pratiques REST](#synthèse-et-bonnes-pratiques-rest)
   - [Annexe sur les conventions REST + DDD](#annexe-sur-les-conventions-rest--ddd)
+- [Adding a Delete Form](#adding-a-delete-form)
+  - [Blade Form Example (Delete a Newsletter)](#blade-form-example-delete-a-newsletter)
+  - [Explanation of Each Part:](#explanation-of-each-part)
+  - [Route Definition (for clarity)](#route-definition-for-clarity)
+  - [Controller Method (Destroy)](#controller-method-destroy)
 
 ## Objectifs
 
@@ -131,7 +136,7 @@ Côté Vue, les noms des méthodes suivent la même logique.
 
 ## Modèle et Migration Newsletter
 
-ssurez-vous que le modèle `Newslett.php` contient la bonne configuration :
+Assurez-vous que le modèle `Newsletter.php` contient la bonne configuration :
 
 ```php
 // app/Models/Newsletter.php
@@ -223,23 +228,84 @@ Route::delete('/newsletters/{id}/delete', [
 
 **Fichier : routes/api.php**
 
+Une `API`, ou `interface de programmation d’application`, permet de transmettre
+des données entre des applications logicielles d’une manière standardisée. De
+nombreux services offrent des `API` publiques qui permettent à quiconque
+d’envoyer et de recevoir du contenu issu de ces services. Les `API` qui
+fonctionnent sur Internet en utilisant des URL `http://` sont appelées des
+`API web`. Donc grâce au Web, on peut envoyer une "demande" à une `API` pour
+obtenir des informations.
+
+Par exemple une `API` peut :
+
+- mettre à disposition une carte géographique d'après des coordonnées
+- mettre à disposition les prévisions météo d'après un nom de ville
+- stocker des informations GPS en vue d'afficher une localisation sur une carte
+- rendre le nom, prénom et téléphone du responsable
+
+L'avantage d'une `API` c'est que cela permet l'interopérabilité entre
+différentes plateformes et différents langages. Une `API` peut-être avoir été
+écrit à l'aide d'un langage X (par exemple `php` sur une plateforme mac) et peut
+être consommé par un langage Y (par exemple java sur une plateforme `windows`)
+
+On s'affranchi ainsi des problèmes de compatibilités (de plateformes et
+langages) :slightly_smiling_face:
+
+Dans les versions précédente à `Lavarel 11` tout ce qui était nécessaire pour la
+création d'une `API` était installé par défaut. Ce n'est plus le cas depuis
+`Laravel 11` (ce qui permet d'alléger l'installation de base).
+
+La commande suivante permet d'installer tout ce dont nous avons besoin :
+
+```bash
+php artisan install:api
+```
+
+Nous allons maintenant créer une route, mais cette fois-ci nous n'allons pas la
+créer dans le fichier `web.php`, mais dans le fichier `api.php` qui vient d'être
+installé et qui se trouve dans le même répertoire (`/routes`)
+
+> Remarque :
+>
+> - Les routes pour les applications-web => `web.php`
+> - Les routes pour les `API` => `api.php`
+
+Voici le fichier `\routes\api.php` tel qu'il est par défaut :
+
 ```php
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+	return $request->user();
+})->middleware('auth:sanctum');
+```
+
+Nous allons le modifier pour y ajouter nos routes :
+
+```php
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsletterApiController;
 
-Route::get('/newsletters', [NewsletterApiController::class, 'getNewsletters']);
-Route::get('/newsletters/{id}', [
+Route::get('newsletters', [NewsletterApiController::class, 'getNewsletters']);
+Route::get('newsletters/{id}', [
 	NewsletterApiController::class,
 	'getNewsletter',
 ]);
-Route::post('/newsletters', [
+Route::post('newsletters', [
 	NewsletterApiController::class,
 	'createNewsletter',
 ]);
-Route::put('/newsletters/{id}', [
+Route::put('newsletters/{id}', [
 	NewsletterApiController::class,
 	'updateNewsletter',
 ]);
-Route::delete('/newsletters/{id}', [
+Route::delete('newsletters/{id}', [
 	NewsletterApiController::class,
 	'deleteNewsletter',
 ]);
@@ -382,17 +448,6 @@ curl -X DELETE http://localhost:8000/api/newsletters/1
 - Les contrôleurs sont spécialisés (Vue vs API)
 - Les `FormRequest` centralisent la validation des données
 
-Parfait, tu as tout structuré de manière claire et progressive, avec une belle
-séparation entre :
-
-- **Supports de cours** (par jour)
-- **Fichiers d’exercices** (`EXERCICES.md`) par chapitre
-- **Corrigés complets** (`SOLUTIONS.md`) par chapitre
-
-Et en plus, pour le **Jour 6**, tu as bien extrait la section d’exercices dans
-un fichier dédié, qui correspond exactement à ce que tu avais en tête
-initialement dans le plan.
-
 ### Annexe sur les conventions REST + DDD
 
 Un tableau récapitulatif pourrait synthétiser :
@@ -404,3 +459,79 @@ Un tableau récapitulatif pourrait synthétiser :
 | POST       | /api/newsletters      | Créer     | createNewsletter()    |
 | PUT        | /api/newsletters/{id} | Modifier  | updateNewsletter($id) |
 | DELETE     | /api/newsletters/{id} | Supprimer | deleteNewsletter($id) |
+
+## Adding a Delete Form
+
+In Laravel, deleting a resource using a form involves specifying the HTTP DELETE
+method via form spoofing. Here's how you can implement it clearly and
+effectively.
+
+### Blade Form Example (Delete a Newsletter)
+
+Here's an example of a Blade form to delete a newsletter resource:
+
+```blade
+<form
+	method="POST"
+	action="{{ route('newsletters.delete', ['id' => $newsletter->id]) }}"
+>
+	@csrf
+	<!-- Protects against Cross-Site Request Forgery -->
+	@method('DELETE')
+	<!-- Specifies the HTTP DELETE method -->
+
+	<input
+		type="submit"
+		value="Delete"
+		class="btn btn-danger btn-block"
+		onclick="return confirm('Are you sure you want to delete this newsletter?');"
+	/>
+</form>
+```
+
+### Explanation of Each Part:
+
+- **`method="POST"`**: HTML forms only support GET and POST methods directly. To
+  use DELETE (or PUT/PATCH), Laravel uses method spoofing.
+
+- **`action="{{ route('newsletters.delete', ['id' => $newsletter->id]) }}"`**:
+  This generates a URL to the Laravel route responsible for deletion
+  (`DELETE /newsletters/{id}/delete`). Ensure the route exists and points to the
+  correct method (`destroy`) in your Vue controller
+  (`NewsletterViewController`).
+
+- **`@csrf`**: Laravel's built-in directive that generates a token to prevent
+  Cross-Site Request Forgery attacks.
+
+- **`@method('DELETE')`**: This directive tells Laravel to interpret the form
+  submission as a DELETE request, even though it's technically sent as POST.
+
+- **`onclick="return confirm('Are you sure...?');"`**: Provides a confirmation
+  prompt to prevent accidental deletions.
+
+### Route Definition (for clarity)
+
+Ensure your route in `routes/web.php` is defined clearly:
+
+```php
+Route::delete('/newsletters/{id}/delete', [
+	NewsletterViewController::class,
+	'destroy',
+])->name('newsletters.delete');
+```
+
+### Controller Method (Destroy)
+
+The corresponding method in your controller might look like this:
+
+```php
+public function destroy($id)
+{
+    Newsletter::findOrFail($id)->delete();
+
+    return redirect()->route('newsletters.index')->with('success', 'Newsletter deleted successfully.');
+}
+```
+
+This provides a full workflow from form submission to resource deletion,
+maintaining best practices in RESTful architecture.
