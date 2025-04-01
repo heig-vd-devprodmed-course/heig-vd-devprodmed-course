@@ -27,11 +27,11 @@
   - [Supprimer une newsletter](#supprimer-une-newsletter)
 - [Synthèse et bonnes pratiques REST](#synthèse-et-bonnes-pratiques-rest)
   - [Annexe sur les conventions REST + DDD](#annexe-sur-les-conventions-rest--ddd)
-- [Adding a Delete Form](#adding-a-delete-form)
-  - [Blade Form Example (Delete a Newsletter)](#blade-form-example-delete-a-newsletter)
-  - [Explanation of Each Part:](#explanation-of-each-part)
-  - [Route Definition (for clarity)](#route-definition-for-clarity)
-  - [Controller Method (Destroy)](#controller-method-destroy)
+- [Ajouter une Formulaire de Suppression](#ajouter-une-formulaire-de-suppression)
+  - [Exemple de Formulaire Blade (Supprimer une Newsletter)](#exemple-de-formulaire-blade-supprimer-une-newsletter)
+  - [Explication de chaque partie :](#explication-de-chaque-partie-)
+  - [Définition de la route (pour plus de clarté)](#définition-de-la-route-pour-plus-de-clarté)
+  - [Méthode du contrôleur (Destruction)](#méthode-du-contrôleur-destruction)
 
 ## Objectifs
 
@@ -460,15 +460,16 @@ Un tableau récapitulatif pourrait synthétiser :
 | PUT        | /api/newsletters/{id} | Modifier  | updateNewsletter($id) |
 | DELETE     | /api/newsletters/{id} | Supprimer | deleteNewsletter($id) |
 
-## Adding a Delete Form
+## Ajouter une Formulaire de Suppression
 
-In Laravel, deleting a resource using a form involves specifying the HTTP DELETE
-method via form spoofing. Here's how you can implement it clearly and
-effectively.
+Dans Laravel, la suppression d'une ressource via un formulaire implique de
+spécifier la méthode HTTP DELETE via le spoofing de formulaire. Voici comment
+vous pouvez l'implémenter de manière claire et efficace.
 
-### Blade Form Example (Delete a Newsletter)
+### Exemple de Formulaire Blade (Supprimer une Newsletter)
 
-Here's an example of a Blade form to delete a newsletter resource:
+Voici un exemple de formulaire Blade pour supprimer une ressource de newsletter
+:
 
 ```blade
 <form
@@ -489,29 +490,27 @@ Here's an example of a Blade form to delete a newsletter resource:
 </form>
 ```
 
-### Explanation of Each Part:
+### Explication de chaque partie :
 
-- **`method="POST"`**: HTML forms only support GET and POST methods directly. To
-  use DELETE (or PUT/PATCH), Laravel uses method spoofing.
-
-- **`action="{{ route('newsletters.delete', ['id' => $newsletter->id]) }}"`**:
-  This generates a URL to the Laravel route responsible for deletion
-  (`DELETE /newsletters/{id}/delete`). Ensure the route exists and points to the
-  correct method (`destroy`) in your Vue controller
+- **`method="POST"`** : Les formulaires HTML ne supportent que les méthodes GET
+  et POST directement. Pour utiliser DELETE (ou PUT/PATCH), Laravel utilise le
+  spoofing de méthode.
+- **`action="{{ route('newsletters.delete', ['id' => $newsletter->id]) }}"`** :
+- Cela génère une URL vers la route Laravel responsable de la suppression
+  (`DELETE /newsletters/{id}/delete`). Assurez-vous que la route existe et
+  pointe vers la méthode correcte (`destroy`) dans votre contrôleur Vue
   (`NewsletterViewController`).
+- **`@csrf`** : Directive intégrée de Laravel qui génère un jeton pour prévenir
+  les attaques de falsification de requête inter-sites (CSRF).
+- **`@method('DELETE')`** : Cette directive indique à Laravel d'interpréter la
+  soumission du formulaire comme une requête DELETE, même si elle est
+  techniquement envoyée en tant que POST.
+- **`onclick="return confirm('Are you sure...?');"`** : Fournit une invite de
+  confirmation pour éviter les suppressions accidentelles.
 
-- **`@csrf`**: Laravel's built-in directive that generates a token to prevent
-  Cross-Site Request Forgery attacks.
+### Définition de la route (pour plus de clarté)
 
-- **`@method('DELETE')`**: This directive tells Laravel to interpret the form
-  submission as a DELETE request, even though it's technically sent as POST.
-
-- **`onclick="return confirm('Are you sure...?');"`**: Provides a confirmation
-  prompt to prevent accidental deletions.
-
-### Route Definition (for clarity)
-
-Ensure your route in `routes/web.php` is defined clearly:
+Assurez-vous que votre route dans `routes/web.php` est définie clairement :
 
 ```php
 Route::delete('/newsletters/{id}/delete', [
@@ -520,9 +519,9 @@ Route::delete('/newsletters/{id}/delete', [
 ])->name('newsletters.delete');
 ```
 
-### Controller Method (Destroy)
+### Méthode du contrôleur (Destruction)
 
-The corresponding method in your controller might look like this:
+La méthode correspondante dans votre contrôleur pourrait ressembler à ceci :
 
 ```php
 public function destroy($id)
@@ -533,5 +532,4 @@ public function destroy($id)
 }
 ```
 
-This provides a full workflow from form submission to resource deletion,
-maintaining best practices in RESTful architecture.
+Cette approche fournit un flux de travail complet, de la soumission du
