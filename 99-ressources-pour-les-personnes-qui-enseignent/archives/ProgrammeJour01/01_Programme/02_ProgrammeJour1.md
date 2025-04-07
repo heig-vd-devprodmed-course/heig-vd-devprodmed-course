@@ -76,7 +76,7 @@ Which database will your application use? [MySQL]:
 Tapez sur la touche "return" pour indiquer qu'on désire utiliser `MySQL` comme
 SGBD.
 
-Voilà, le squelette d'une nouvelle application `Laravel` a été créé :smiley:
+Voilà, le squelette d'une nouvelle application `Laravel` a été créé
 
 Concrètement, il s'agit d'un répertoire `monApp1` contenant un sous-répertoire
 `laravel` qui contient tous les répertoires et fichiers constituant le squelette
@@ -271,8 +271,7 @@ Route::get('maison', function () {
 });
 ```
 
-Retenons juste pour l'instant qu'il est possible de donner un nom à une route
-:wink:.
+Retenons juste pour l'instant qu'il est possible de donner un nom à une route .
 
 Il est possible de transformer les informations relatives à une route en
 paramètres. Voici comment procéder :

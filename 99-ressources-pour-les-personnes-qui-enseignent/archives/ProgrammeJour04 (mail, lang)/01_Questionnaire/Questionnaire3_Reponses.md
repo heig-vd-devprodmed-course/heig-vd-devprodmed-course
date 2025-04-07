@@ -78,7 +78,7 @@ de type `CSRF` ?
 ?
 
 > L'objet est de type `Request` et on peut nommer la variable (qui y fait
-> référence) comme on veut :wink: (Dans les exemples réalisés, il se nomme :
+> référence) comme on veut (Dans les exemples réalisés, il se nomme :
 > `$request`)
 
 6.) Quelle instruction permet de récupérer la valeur du champ `"prenom"` d'un

@@ -374,7 +374,7 @@ Route::resource('score', ScoreController::class, ['except'=>['show','edit','upda
 Remarque : Nous n'utiliserons pas les méthodes
 `show, edit, update, delete et create`, nous pouvons donc les enlever du
 contrôleur. (Nous aurions pu créer un contrôleur "conventionnel" et y ajouter
-deux routes :wink:)
+deux routes )
 
 Ajoutons maintenant la logique dans notre contrôleur :
 
@@ -611,7 +611,7 @@ return redirect()->intended('/');
 ```
 
 Et pour rediriger l'utilisateur après son `logout`, il n'y a rien a faire
-puisqu'on va directement à la racine :wink:
+puisqu'on va directement à la racine
 
 ## Création des vues nécessaires (`view_page1`, `view_page2`, `view_page3` et `view_email`)
 
@@ -836,7 +836,7 @@ MAIL_FROM_NAME="${APP_NAME}"
   mailpit
   ```
 
-Voilà, notre application est fonctionnelle :slightly_smiling_face:
+Voilà, notre application est fonctionnelle
 
 Pour voir les mails qui ont été envoyés par `Laravel` (s'il y en a), il suffit
 d'interroger le serveur HTTP (port 8025 à ne pas confondre avec le port 1025 du

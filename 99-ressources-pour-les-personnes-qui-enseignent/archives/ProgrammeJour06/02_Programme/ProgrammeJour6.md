@@ -178,7 +178,7 @@ class User extends Authenticatable
 }
 ```
 
-N'oublions pas de sauvegarder la modification :slightly_smiling_face:
+N'oublions pas de sauvegarder la modification
 
 ## Tinker (interpréteur de commandes Eloquent)
 
@@ -305,7 +305,6 @@ App\Models\User::findOrFail(1)->delete();
 
 Pour ajouter un nouvel utilisateur dans la base de données nous pouvons utiliser
 une seule commande, il suffit de mettre les différentes données dans un tableau
-:wink:
 
 ```
 App\Models\User::create(['name'=> "Test", 'email'=> "test@test.ch",'password'=>"testpassword"]);
@@ -462,7 +461,7 @@ Voici ce que devrait vous retourner l'exécution de cette commande.
 > Si une erreur du genre
 > `...ReflectionException::("Class "UserController" does not exist")` se
 > produit, c'est que vous avez oublié le `use` du contrôleur dans le fichier
-> `web.php` :wink:
+> `web.php`
 
 ```
 ...
@@ -483,7 +482,7 @@ Voici ce que devrait vous retourner l'exécution de cette commande.
 ```
 
 On y retrouve, entre autres, les sept url qui pointent sur les sept méthodes de
-notre contrôleur :thumbsup:
+notre contrôleur
 
 ## Template
 
@@ -753,7 +752,7 @@ nécessaire pour découvrir la barre de navigation !
 
 ![BarreNavigation](img\BarreNavigation.png)
 
-C'est chouette non ? :smiley:
+C'est chouette non ?
 
 # Visualisation des données d'un utilisateur
 
@@ -918,7 +917,6 @@ Complétons la méthode `update(...)` de notre contrôleur :
 ```
 
 Sans oublier (`use App\Http\Requests\UserUpdateRequest;`)
-:slightly_smiling_face:
 
 C'est bon, nous pouvons tester la modification d'un utilisateur.
 

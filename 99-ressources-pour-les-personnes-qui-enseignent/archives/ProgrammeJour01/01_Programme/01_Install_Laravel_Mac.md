@@ -31,7 +31,7 @@ Lancer un `terminal` sur mac.
 > - Demandez à `Siri` de lancer le `Terminal`
 
 Une fois dans le `Terminal` lancez la commande (!!!!!! le tout sur 1 seule ligne
-:wink: :
+:
 
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -114,7 +114,7 @@ quel est le terminal utilisé.
 > - `bash` utilisé par défaut sur les anciens `Mac`
 >
 > Pour connaître le terminal utilisé, il suffit de lancer une commande que le
-> `mac`ne connaît pas et de jeter un œil au message d'erreur :wink:
+> `mac`ne connaît pas et de jeter un œil au message d'erreur
 >
 > tapons :
 >
@@ -176,7 +176,7 @@ base (icône maison) qui porte normalement votre nom.
 > Le tilde (~) s'obtient à l'aide de la combinaison de touche `OPTION` et `N`
 > puis espace.
 
-Les fichiers cachés sont maintenant visibles :thumbsup:
+Les fichiers cachés sont maintenant visibles
 
 Pour éditer ou créer le fichier
 `.zprofile nous allons utiliser l'éditeur de texte `macvim`fraîchement installé. Dans un`terminal`,

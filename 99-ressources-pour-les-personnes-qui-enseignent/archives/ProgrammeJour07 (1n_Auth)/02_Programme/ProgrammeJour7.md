@@ -508,7 +508,7 @@ INFO  Seeding database.
 ```
 
 A l'aide de l'outil `DB Browser for Sqlite` nous pouvons constater que nos
-tables sont bien remplies :slightly_smiling_face:
+tables sont bien remplies
 
 Voici les enregistrements de la table `users` :
 
@@ -735,7 +735,7 @@ Tinker nous répond :
 L'identifiant de l'utilisateur est surement différent chez vous ! Par contre ce
 qui est sûr, c'est qu'il y a qu'un seul utilisateur (1 utilisateur)
 
-Relation 1:N => 1 utilisateur : N articles :slightly_smiling_face:
+Relation 1:N => 1 utilisateur : N articles
 
 Tout est en place au niveau des données. Nous pouvons maintenant implémenter
 notre application.
@@ -1081,7 +1081,7 @@ Voilà, c'est installé.
 > ```
 
 Dans le répertoire `/resources/views` nous pouvons voir (entre autre) un nouveau
-répertoire `/auth` contenant des vues supplémentaires. :wink:
+répertoire `/auth` contenant des vues supplémentaires.
 
 Pour voir que l'authentification est fonctionnelle, il suffit de lancer notre
 application.
@@ -1239,7 +1239,7 @@ Adaptons maintenant notre application.
 Modifions notre contrôleur :
 
 - activation des deux middleware (1 existant `auth` + celui que l'on vient de
-  créer `admin`) dans une méthode de classe :wink:
+  créer `admin`) dans une méthode de classe
 - redirection vers le formulaire pour la création d'un nouvel article
 - enregistrement des données d'un nouvel article
 - suppression d'un article d'après si identifiant
@@ -1436,7 +1436,7 @@ class ArticleRequest extends FormRequest
 }
 ```
 
-Voilà notre application est fonctionnelle :slightly_smiling_face:
+Voilà notre application est fonctionnelle
 
 > Remarques :
 >

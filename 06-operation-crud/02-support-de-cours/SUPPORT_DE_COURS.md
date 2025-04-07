@@ -249,7 +249,7 @@ différentes plateformes et différents langages. Une `API` peut-être avoir ét
 être consommé par un langage Y (par exemple java sur une plateforme `windows`)
 
 On s'affranchi ainsi des problèmes de compatibilités (de plateformes et
-langages) :slightly_smiling_face:
+langages)
 
 Dans les versions précédente à `Lavarel 11` tout ce qui était nécessaire pour la
 création d'une `API` était installé par défaut. Ce n'est plus le cas depuis

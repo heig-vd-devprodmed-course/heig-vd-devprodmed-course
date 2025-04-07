@@ -41,7 +41,7 @@ Ecrire le code permettant de rediriger l'utilisateur sur le site suivant :
 >
 > - La gare de départ, l'heure de départ ainsi que la gare d'arrivée doivent
 >   être définie dans l'url.
-> - La date doit être celle du jour :wink:
+> - La date doit être celle du jour
 
 ## Challenge :
 

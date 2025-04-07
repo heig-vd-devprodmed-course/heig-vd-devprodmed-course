@@ -126,7 +126,6 @@ class Voiture extends Model
 Maintenant que la classe existe tout est prêt pour `Eloquent`.
 
 Nous pouvons lancer `tinker` pour tester que tout fonctionne.
-:slightly_smiling_face:
 
 ```
 php artisan tinker
@@ -167,7 +166,7 @@ Pour s'en rendre compte :
    }
 ```
 
-Tout est fonctionnel :thumbsup:
+Tout est fonctionnel
 
 Pour notre formulaire nous avons besoin d'une vue et pour une vue nous avons
 besoin d'un `template`.
@@ -387,4 +386,4 @@ Il ne nous reste plus qu'à ajouter la route pour la méthode de notre contrôle
 Route::post('voiture', [VoitureController::class,'traiteFormulaire']);
 ```
 
-Voilà, notre application est fonctionnelle :slightly_smiling_face:
+Voilà, notre application est fonctionnelle

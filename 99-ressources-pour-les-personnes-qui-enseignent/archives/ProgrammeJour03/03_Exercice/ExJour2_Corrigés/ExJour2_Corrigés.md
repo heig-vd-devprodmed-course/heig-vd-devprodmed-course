@@ -118,7 +118,6 @@ Cette route permet de rediriger vers la méthode `afficheArtistes` du contrôleu
 `ArtistesController`
 
 > Remarque : Ne pas oublier `use App\Http\Controllers\ArtistesController;`
-> :wink:
 
 ## Vue
 
@@ -194,7 +193,6 @@ Cette route permet de rediriger vers la méthode `afficheProverbes` du contrôle
 `ProverbesController`
 
 > Remarque : Ne pas oublier `use App\Http\Controllers\ProverbesController;`
-> :wink:
 
 ## Contrôleur
 

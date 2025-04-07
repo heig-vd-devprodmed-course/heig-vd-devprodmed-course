@@ -126,7 +126,7 @@ DB_USERNAME=laravel
 DB_PASSWORD=laravelPsw
 ```
 
-Les configurations sont terminées :smiley:
+Les configurations sont terminées
 
 Il est maintenant temps d'aborder une nouvelle notion de Laravel : Les
 migrations

@@ -41,7 +41,7 @@ méthodes d'enseignement et d'apprentissage, et les méthodes d'évaluation.
 | [04](#-cours-04) | Validation, erreurs et mails                            | 🟢 Complet                                  |
 | [05](#-cours-05) | Database                                                | 🟢 Complet                                  |
 | [06](#-cours-06) | Opération CRUD                                          | 🟢 Complet                                  |
-| [07](#-cours-07) | Authentification, middleware, relation `Story` → `User` | 🔴 À faire                                  |
+| [07](#-cours-07) | Authentification, middleware, relation `Story` → `User` | 🟡 En cours                                 |
 | [08](#-cours-08) | Relations avancées + validation conditionnelle          | 🔴 À faire                                  |
 | [09](#-cours-09) | API REST avancée + versionnement                        | 🔴 À faire                                  |
 | [10](#-cours-10) | Finalisation du projet, démo, feedback croisé           | 🔴 À faire                                  |

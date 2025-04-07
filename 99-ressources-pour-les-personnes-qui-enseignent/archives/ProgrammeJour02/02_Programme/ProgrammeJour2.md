@@ -17,7 +17,7 @@ laravel new MonApp2/laravel
 
 Puis exécutez l'application pour s'assurer que tout fonctionne correctement.
 
-> php artisan serve (dans le bon répertoire :wink:, puis dans votre browser)
+> php artisan serve (dans le bon répertoire , puis dans votre browser)
 
 Nous avons vu au cours précédent que `Laravel` possède un outil de templating
 nommé [Blade](https://laravel.com/docs/11.x/blade#introduction). Pour que Blade
@@ -267,7 +267,7 @@ Si votre navigateur affiche :
 C'est que tout fonctionne !
 
 C'est aussi simple que cela. Les paramètres sont transmis directement de la vue
-au contrôleur :smiley:
+au contrôleur
 
 Maintenant que nous avons compris l'articulation entre route, vue et contrôleur,
 il est temps d'approfondir un peu nos connaissances de Blade (le moteur de

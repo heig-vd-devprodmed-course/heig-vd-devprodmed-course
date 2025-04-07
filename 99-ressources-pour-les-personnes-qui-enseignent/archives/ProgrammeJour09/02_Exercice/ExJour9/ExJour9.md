@@ -115,4 +115,4 @@ Chauvet => CUT
 
 ---
 
-Bon travail :sun_with_face:
+Bon travail

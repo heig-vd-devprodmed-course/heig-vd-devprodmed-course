@@ -26,7 +26,7 @@ différentes plateformes et différents langages. Une `API` peut-être avoir ét
 être consommé par un langage Y (par exemple java sur une plateforme `windows`)
 
 On s'affranchi ainsi des problèmes de compatibilités (de plateformes et
-langages) :slightly_smiling_face:
+langages)
 
 ## Notre première `API`
 
@@ -127,8 +127,7 @@ Créons une `classe-modèle` `Personne` ainsi qu'une `migration` et une `factory
 php artisan make:model Personne -mf
 ```
 
-(`m`: pour créer une `migration`, `f`: pour une `factory`
-:slightly_smiling_face:)
+(`m`: pour créer une `migration`, `f`: pour une `factory` )
 
 Pour définir les champs de la table `personnes` éditions le fichier
 `\database\migration\....create_personnes_table.php`
@@ -285,7 +284,7 @@ class Personne extends Model
 ```
 
 Pour simplifier le développement de notre `API` nous allons utiliser le SGBD
-`sqlite` (La configuration se fait dans le fichier `.env` :wink:)
+`sqlite` (La configuration se fait dans le fichier `.env` )
 
 Voilà, nous sommes prêts pour créer les différentes tables (migrations,
 personnes, ...) et y ajouter les données
@@ -443,8 +442,8 @@ php artisan make:resource PersonneResource
 La nouvelle classe est accessible ici :
 `\app\Http\Resources\PersonneResource.php`
 
-Nous n'avons pas à faire de modifications dans cette classe :hand: il nous faut
-juste adapter notre contrôleur :thumbsup:
+Nous n'avons pas à faire de modifications dans cette classe il nous faut juste
+adapter notre contrôleur
 
 ```php
 <?php
@@ -594,7 +593,7 @@ Ce serait hyper trop chouette si on pouvait les générer en français non ?
 
 Eh bien oui, la personne qui a développé le `Faker` a pensé à tout... Pour
 "franciser" les données, il suffit de changer un paramètre, mais le tout c'est
-de savoir où :slightly_smiling_face:
+de savoir où
 
 On se rappelle que c'est le fichier `.env` qui contient les différents
 paramètres de notre application.
@@ -629,7 +628,7 @@ On repeuple les tables à l'aide de la commande :
 php artisan db:seed
 ```
 
-et le tour est joué ! Nos données correspondent mieux à nos besoins :thumbsup:
+et le tour est joué ! Nos données correspondent mieux à nos besoins
 
 ```
 http://localhost:8000/api/personnes

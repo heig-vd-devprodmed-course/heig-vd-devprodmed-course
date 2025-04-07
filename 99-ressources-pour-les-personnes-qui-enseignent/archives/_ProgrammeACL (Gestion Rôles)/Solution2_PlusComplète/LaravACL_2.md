@@ -1,7 +1,7 @@
 # ACL (Access Control List)
 
 Pour gérer les droits d'accès aux fonctionnalités, il nous faut tout d'abord un
-certain nombre de fonctionnalités :slightly_smiling_face:
+certain nombre de fonctionnalités
 
 ## Création de fonctionnalités
 
@@ -80,7 +80,7 @@ class UnControleur extends Controller
 ```
 
 Ajoutons maintenant les routes pour nos fonctionnalités (en fait, il n'en faut
-qu'une pour ce type de contrôleur :slightly_smiling_face:)
+qu'une pour ce type de contrôleur )
 
 ```php
 Route::resource('tests', UnControleur::class);
@@ -636,7 +636,7 @@ Il suffit de choisir une des possibilités et de retaper l'URL :
 http://localhost:8000/tests
 ```
 
-Cette fois-ci nous sommes obligés de nous authentifier :thumbsup:
+Cette fois-ci nous sommes obligés de nous authentifier
 
 Comment autoriser les utilisateurs à accéder aux fonctionnalités auxquelles ils
 ont droit ?
@@ -754,7 +754,7 @@ Pour aider `Laravel` à "voir" notre `middleware`.
 composer dumpautoload
 ```
 
-Il ne reste plus qu'à tester :slightly_smiling_face:
+Il ne reste plus qu'à tester
 
 Dans notre navigateur accédons à l'URL suivante :
 
@@ -801,7 +801,7 @@ Cette fois-ci l'URL : `http://localhost:8000/tests/create` affichera :
 Fonctionnalité create
 ```
 
-YES ! :muscle:
+YES !
 
 Bravo, être arrivés au terme de cette mise en place de la gestion d'accès à des
-fonctionnalités d'une application `Laravel` :slightly_smiling_face:
+fonctionnalités d'une application `Laravel`

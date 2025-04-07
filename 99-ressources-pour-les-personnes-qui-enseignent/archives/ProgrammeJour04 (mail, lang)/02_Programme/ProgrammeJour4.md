@@ -479,7 +479,7 @@ répertoire `\laravel` de notre application)
 composer require laravel-lang/common --dev
 ```
 
-> Veuillez patienter durant la génération du fichier autoload :wink:
+> Veuillez patienter durant la génération du fichier autoload
 
 Nous pouvons maintenant ajouter une nouvelle langue à notre application
 
@@ -530,7 +530,6 @@ APP_LOCALE=fr
 ```
 
 Notre application affiche désormais les messages en français.
-:slightly_smiling_face:
 
 ![frValidation](img\frValidation.png)
 

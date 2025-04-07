@@ -25,7 +25,7 @@ Dézippez le fichier et ajoutez le répertoire `php-8.x` dans un dossier nommé
 Téléchargez la dernière version du gestionnaire de libraire `Composer`
 (https://getcomposer.org/download/)
 
-Suivez les étapes et veillez à choisir la bonne version de `php` :eyes:
+Suivez les étapes et veillez à choisir la bonne version de `php`
 
 > Remarques :
 >

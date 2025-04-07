@@ -371,7 +371,7 @@ Nous obtiendrons de cette manière vingt mots-clés (mot1, mot2, ..., mot20)
 Créons maintenant un nouveau fichier permettant le peuplement de la table
 `article_motcle` et complétons-le :
 
-> Remarque : Attention au nom :wink:
+> Remarque : Attention au nom
 
 ```php
 <?php
@@ -1056,4 +1056,3 @@ suffit de s'authentifier et créer un nouvel article.
 ![NouveauMessageOk](img\NouveauMessageOk.png)
 
 Yes ! nous avons implémenté correctement une relation n:n dans `Laravel`
-:thumbsup:

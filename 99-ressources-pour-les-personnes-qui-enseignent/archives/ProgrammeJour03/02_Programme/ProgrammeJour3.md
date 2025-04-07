@@ -101,7 +101,7 @@ Route::get('afficheFormulaire', [FormController::class, 'afficheForm']);
 ```
 
 > Attention à ne pas oublier le `use` de `FormController` avec le bon
-> `namespace` :wink:
+> `namespace`
 
 Et testons pour voir que tout fonctionne. (Dans votre navigateur tapons l'url
 `.../afficheFormulaire`)
@@ -153,8 +153,7 @@ public function traiteForm(Request $request) {
 ```
 
 > Remarque : avec l'instruction `dd($request);` on peut consulter le détail de
-> l'objet. (Evidemment, il faut enlever les // pour voir la fonction à œuvre
-> :wink:)
+> l'objet. (Evidemment, il faut enlever les // pour voir la fonction à œuvre )
 
 Testons maintenant que la soumission du formulaire fonctionne à l'aide de notre
 navigateur.
@@ -250,7 +249,7 @@ Nous pouvons maintenant visualiser le `token` (jeton)
 Chaque formulaire que nous créerons devra contenir le tag `@csrf` pour pouvoir
 fonctionner correctement.
 
-Nous serons ainsi protégés :smiley:
+Nous serons ainsi protégés
 
 ## Récapitulatif de ce que nous savons faire :
 

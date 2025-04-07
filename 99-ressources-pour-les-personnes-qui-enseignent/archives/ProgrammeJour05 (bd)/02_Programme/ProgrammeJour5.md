@@ -77,7 +77,7 @@ Avant de pouvoir utiliser `Laravel` avec une base de données, il faut :
     // A EFFACER DB_PASSWORD=
     ```
 
-La configuration est terminée :smiley:
+La configuration est terminée
 
 ## Création de la base de données `Sqlite`
 
@@ -459,7 +459,7 @@ Route::post('newsletter', [NewsletterController::class, 'traiteFormulaire']);
 
 Voilà, notre application est terminée.
 
-Nous disposons maintenant d'un gestionnaire de newsletter fonctionnel :smiley:
+Nous disposons maintenant d'un gestionnaire de newsletter fonctionnel
 
 L'email saisi dans le formulaire a été stocké dans la base de données, mais
 comment contrôler ???
@@ -481,7 +481,7 @@ tables (Exemple : table `emails`)
 
 ---
 
-Petites réflexions :thinking:
+Petites réflexions
 
 - Que se passe-t-il si on soumet au serveur une adresse email déjà existante ?
 

@@ -181,7 +181,7 @@ php artisan make:seeder UsersTableSeeder
 ...
 ```
 
-> Remarque : N'oubliez pas le use des la classe DB et Hash :wink:
+> Remarque : N'oubliez pas le use des la classe DB et Hash
 
 Ajouter le seeder que l'on vient de créer dans le fichier
 `app\database\seeders\DatabaseSeeder.php`
@@ -301,7 +301,6 @@ en
 ```
 
 Voilà, c'est fait. Nous n'avons plus qu'à tester que tout est fonctionnel
-:slightly_smiling_face:
 
 Lançons l'application
 
@@ -363,7 +362,7 @@ Route::get('/myMethod', [MyController::class, 'myMethod']);
 ...
 ```
 
-Nous pouvons passer aux tests :slightly_smiling_face:
+Nous pouvons passer aux tests
 
 Lançons l'application est authentifions nous avec :
 

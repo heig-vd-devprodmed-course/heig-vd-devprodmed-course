@@ -55,4 +55,4 @@ Le serveur renvoie ensuite l'agenda des entrevues à l'utilisateur.
 >   [`DateInterval`](https://www.php.net/manual/fr/class.dateinterval.php) de
 >   `php` permettent de gérer le temps.
 > - ou, plus simplement la classe [`Carbon`](https://carbon.nesbot.com/docs/)
->   faisant déjà partie de chaque application `Laravel` :wink:
+>   faisant déjà partie de chaque application `Laravel`
