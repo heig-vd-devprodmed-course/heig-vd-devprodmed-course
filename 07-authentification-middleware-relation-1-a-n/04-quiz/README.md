@@ -8,13 +8,13 @@ size: 16:9
 paginate: true
 author: V. Guidoux
 title: HEIG-VD DévProdMéd - Cours Laravel
-description: Quiz - Database
-header: "**Quiz 5**"
+description: Quiz - middleware et relation 1:n
+header: "**Quiz 7**"
 footer: "**HEIG-VD** - DévProdMéd Course 2024-2025 - CC BY-SA 4.0"
 headingDivider: 6
 -->
 
-# Quiz 5 - Database
+# Quiz 7 - middleware et relation 1:n
 
 <!--
 _class: lead
