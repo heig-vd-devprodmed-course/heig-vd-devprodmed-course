@@ -7,8 +7,9 @@
   - [Collaboration \& Pérennité](#collaboration--pérennité)
   - [Librairies et dépendances](#librairies-et-dépendances)
   - [FAQ — Questions fréquentes](#faq--questions-fréquentes)
-- [Récapitulatif](#récapitulatif)
-- [Ressources complémentaires](#ressources-complémentaires)
+- [Workflow et Git](#workflow-et-git)
+- [Mettre en place un pipeline de CI/CD pour la livraison/le déploiement continu d'applications](#mettre-en-place-un-pipeline-de-cicd-pour-la-livraisonle-déploiement-continu-dapplications)
+- [Ressources](#ressources)
 
 ## Projet Laravel
 
@@ -160,12 +161,6 @@ Git.
 # Files created by macOS Finder
 .DS_Store
 
-## Marp
-
-# Outputs
-*.html
-*.pdf
-
 ## Windows
 
 # Windows thumbnail cache files
@@ -178,28 +173,7 @@ Thumbs.db
 node_modules/
 
 # Laravel
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-/auth.json
-/.fleet
-/.idea
-/.nova
-/.zed
+... # Généré par Laravel
 ```
 
 **`.gitattributes`** : Ce fichier permet de définir des attributs spécifiques
@@ -375,6 +349,44 @@ différente d’une bibliothèque... et tout casser sans le savoir.
 Parce que ce sont des dossiers générés automatiquement à partir des fichiers
 `.lock`. Les mettre sur Git rend le dépôt énorme et inutilement compliqué.
 
-## Récapitulatif
+## Workflow et Git
 
-## Ressources complémentaires
+Que vos projets soient petits ou grands, il est essentiel d'avoir un bon
+workflow de développement. Cela vous aide à rester organisé et à documenter
+votre travail.
+
+Dès que vous avez une idée ou une tache à réaliser, créez une **issue** sur
+GitHub. Cela vous permet de garder une trace de ce que vous devez faire et
+d'éviter de perdre des idées. Une fois que vous avez créé une issue, créez une
+**branche** pour travailler dessus. Cela vous permet de garder votre code
+organisé et de ne pas mélanger différentes tâches.
+
+Une fois que vous avez terminé votre tâche, ouvrez une **pull request**. Cela
+vous permet de demander à une personne d'examiner votre code avant de l'ajouter
+au projet principal. Cela permet de s'assurer que le code est de bonne qualité
+et qu'il ne casse rien. Une fois que la pull request est approuvée, vous pouvez
+la fusionner dans la branche principale.
+
+Voici un exemple de workflow de développement :
+
+1. Créez une issue sur GitHub pour la tâche que vous devez réaliser.
+2. Créez une branche pour travailler sur cette tâche.
+3. Travaillez sur la tâche et faites des commits réguliers.
+4. Ouvrez une pull request pour demander à une personne d'examiner votre code.
+5. Une fois que la pull request est approuvée, fusionnez-la dans la branche
+   principale.
+6. Supprimez la branche une fois la pull request fusionnée.
+
+Plus de détails sur le workflow GitFlow :
+<https://www.atlassian.com/fr/git/tutorials/comparing-workflows/gitflow-workflow>
+
+## Mettre en place un pipeline de CI/CD pour la livraison/le déploiement continu d'applications
+
+Je vous invite à regarder le support de cours suivants :
+[MVP - Mettre en place un pipeline de CI/CD pour la livraison/le déploiement continu d'applications](https://github.com/heig-vd-mvp-course/heig-vd-mvp-course/blob/main/10-cours-hebergement-et-deploiement-de-services/02-support-de-cours/README.md#mettre-en-place-un-pipeline-de-cicd-pour-la-livraisonle-d%C3%A9ploiement-continu-dapplications)
+
+## Ressources
+
+Projets montrés dans cette présentation :
+
+- [Spotin.ch](https://github.com/spotin/spotin)
