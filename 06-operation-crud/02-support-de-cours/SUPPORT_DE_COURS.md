@@ -29,7 +29,7 @@
   - [Annexe sur les conventions REST + DDD](#annexe-sur-les-conventions-rest--ddd)
 - [Ajouter une Formulaire de Suppression](#ajouter-une-formulaire-de-suppression)
   - [Exemple de Formulaire Blade (Supprimer une Newsletter)](#exemple-de-formulaire-blade-supprimer-une-newsletter)
-  - [Explication de chaque partie :](#explication-de-chaque-partie-)
+  - [Explication de chaque partie](#explication-de-chaque-partie)
   - [Définition de la route (pour plus de clarté)](#définition-de-la-route-pour-plus-de-clarté)
   - [Méthode du contrôleur (Destruction)](#méthode-du-contrôleur-destruction)
 
@@ -490,7 +490,7 @@ Voici un exemple de formulaire Blade pour supprimer une ressource de newsletter
 </form>
 ```
 
-### Explication de chaque partie :
+### Explication de chaque partie
 
 - **`method="POST"`** : Les formulaires HTML ne supportent que les méthodes GET
   et POST directement. Pour utiliser DELETE (ou PUT/PATCH), Laravel utilise le
