@@ -53,16 +53,24 @@ avez une idée de projet plus personnel, validez-la avec l’équipe enseignante
 > choisir entre plusieurs actions ("entrer dans la grotte", "fuir", etc.),
 > chaque choix menant à un autre chapitre.
 
+Exemples:
+
+- <https://book.onivers.com/book/nc>
+- Life is Strange, DONTNOD Entertainment
+- <https://www.choiceofgames.com/>
+
+Outils pour créer des histoires interactives : <https://twinery.org/>
+
 ## Évaluation
 
 Chaque partie du projet sera évaluée selon plusieurs catégories. Le barème
 repose sur plusieurs critères, chacun valant 2 point.
 
-Les parties frontend et backend sont notées séparément.
-
 - 0 point - Le travail est insuffisant
 - 1 point - Le travail est réalisé
 - 2 points - Le travail est bien réalisé (sans la nécessité d'être parfait)
+
+Les parties frontend et backend sont notées séparément.
 
 Note maximale : (nombre de points obtenus / nombre de points maximum) × 5 + 1
 
