@@ -7,20 +7,18 @@
 - [Objectifs pédagogiques](#objectifs-pédagogiques)
 - [Consignes générales](#consignes-générales)
 - [Évaluation](#évaluation)
-  - [Critères côté Laravel](#critères-côté-laravel)
-  - [Critères côté Vue.js](#critères-côté-vuejs)
-  - [Critères transversaux (collaboration, présentation, qualité)](#critères-transversaux-collaboration-présentation-qualité)
+  - [Critères Backend](#critères-backend)
+  - [Critères frontend](#critères-frontend)
 - [Contraintes techniques](#contraintes-techniques)
 - [Conseils](#conseils)
 - [Livrables et rendu](#livrables-et-rendu)
-- [Présentation orale](#présentation-orale)
 - [Feedback](#feedback)
 
 ## Introduction
 
 Ce projet vous invite à créer une application complète mêlant **backend
 Laravel** et **frontend Vue.js**, sous forme d’une fiction interactive où les
-choix du·de la joueur·se influencent le récit.
+choix influencent le récit.
 
 L'objectif est de concevoir un système de navigation dynamique, stocké en base
 de données, et rendu disponible à travers une API REST que le frontend
@@ -31,7 +29,8 @@ consommera.
 À l’issue de ce travail pratique, les personnes qui étudient devraient être
 capables de :
 
-- Concevoir et développer une application web complète de type SPA.
+- Concevoir et développer une application web complète de type SPA (Single Page
+  Application).
 - Implémenter un backend Laravel structuré avec des routes RESTful.
 - Créer une API versionnée avec validation, middleware, et relations Eloquent.
 - Gérer un frontend Vue.js pour naviguer dans une histoire à choix multiples.
@@ -47,52 +46,75 @@ Vous développerez une application web en deux parties :
 - **Frontend Vue.js** : responsable de l’affichage interactif de la fiction,
   utilisable sur navigateur et mobile.
 
-Le thème « livre dont vous êtes le héros » est recommandé mais non obligatoire.
-Si vous avez une idée de projet plus personnel, validez-la avec l’équipe
-enseignante.
+Le thème "histoire interactive" est recommandé mais non obligatoire. Si vous
+avez une idée de projet plus personnel, validez-la avec l’équipe enseignante.
 
 ## Évaluation
 
 Chaque partie du projet sera évaluée selon plusieurs catégories. Le barème
-repose sur plusieurs critères, chacun valant 0,2 point.
+repose sur plusieurs critères, chacun valant 2 point.
 
-### Critères côté Laravel
+Les parties frontend et backend sont notées séparément.
 
-| #   | Critère                                                                              | Points |
-| --- | ------------------------------------------------------------------------------------ | ------ |
-| 1   | Migrations, modèles et relations correctement définis (`Story`, `Chapter`, `Choice`) | 0.2    |
-| 2   | Validation via `FormRequest` pour les opérations de création/modification            | 0.2    |
-| 3   | API RESTful versionnée (`/api/v1/...`) avec routes bien nommées                      | 0.2    |
-| 4   | Contrôleurs correctement structurés, logique métier claire                           | 0.2    |
-| 5   | Authentification Laravel (sanctum ou JWT) implémentée                                | 0.2    |
-| 6   | Middleware protègent les routes d’édition/ajout                                      | 0.2    |
-| 8   | Gestion des erreurs API (404, 422, etc.)                                             | 0.2    |
-| 9   | Réponses structurées (JSON clair, status code adaptés)                               | 0.2    |
+- 0 point - Le travail est insuffisant
+- 1 point - Le travail est réalisé
+- 2 points - Le travail est bien réalisé (sans la nécessité d'être parfait)
 
-### Critères côté Vue.js
+Note maximale : (nombre de points obtenus / nombre de points maximum) × 5 + 1
 
-| #   | Critère                                                                | Points |
-| --- | ---------------------------------------------------------------------- | ------ |
-| 10  | Affichage d’une liste d’histoires (récupérées via l’API)               | 0.2    |
-| 11  | Navigation dynamique entre les chapitres selon les choix               | 0.2    |
-| 12  | Affichage lisible, clair et réactif du contenu                         | 0.2    |
-| 13  | Interface responsive (mobile/desktop)                                  | 0.2    |
-| 14  | Affichage conditionnel ou sauvegarde de progression (bonus si présent) | 0.2    |
+### Critères Backend
 
-### Critères transversaux (collaboration, présentation, qualité)
+| #     | Critère                                                                                     | Points |
+| ----- | ------------------------------------------------------------------------------------------- | ------ |
+| 1     | Migrations, modèles et relations correctement définis (`Story`, `Chapter`, `Choice`, etc..) | 2      |
+| 2     | Validation via `FormRequest` pour les opérations de création/modification                   | 2      |
+| 3     | API RESTful versionnée (`/api/...`) avec routes bien nommées                                | 2      |
+| 4     | Contrôleurs correctement structurés, logique métier claire                                  | 2      |
+| 5     | Authentification Laravel implémentée                                                        | 2      |
+| 6     | Middleware protègent les routes d’édition/ajout                                             | 2      |
+| 8     | Gestion des erreurs API (404, 422, etc.)                                                    | 2      |
+| 9     | Réponses structurées (JSON clair, status code adaptés)                                      | 2      |
+| 10    | Code lisible, commenté, structuré                                                           | 2      |
+| 11    | Le projet est fonctionnel de bout en bout                                                   | 2      |
+| 12    | README structuré expliquant le projet et son installation                                   | 2      |
+| 13    | Utilisation du contrôle de version (commits clairs, branches si possible)                   | 2      |
+| TOTAL |                                                                                             | 26     |
 
-| #   | Critère                                                                   | Points |
-| --- | ------------------------------------------------------------------------- | ------ |
-| 15  | README structuré expliquant le projet et son installation                 | 0.2    |
-| 16  | Utilisation du contrôle de version (commits clairs, branches si possible) | 0.2    |
-| 18  | Présentation claire et structurée, temps respecté                         | 0.2    |
-| 19  | Réponses précises et complètes lors des questions                         | 0.2    |
-| 20  | Code lisible, commenté, structuré (backend et frontend)                   | 0.2    |
-| 21  | Le projet est fonctionnel de bout en bout                                 | 0.2    |
-| 23  | Qualité de l’expérience utilisateur (design, fluidité)                    | 0.2    |
-| 24  | Gestion correcte des erreurs utilisateur côté frontend (choix invalides)  | 0.2    |
+### Critères frontend
 
-**Note finale = (somme des points \* 0.2)**
+(Les informations ci-dessous sont à titre indicatif et peuvent être adaptées)
+
+#### Critères rendu
+
+| #     | Critère                                                                   | Points |
+| ----- | ------------------------------------------------------------------------- | ------ |
+| 1     | Affichage d’une liste d’histoires (récupérées via l’API)                  | 2      |
+| 2     | Navigation dynamique entre les chapitres selon les choix                  | 2      |
+| 3     | Affichage lisible, clair et réactif du contenu                            | 2      |
+| 4     | Interface responsive (mobile/desktop)                                     | 2      |
+| 5     | Affichage conditionnel                                                    | 2      |
+| 6     | Sauvegarde de progression                                                 | 2      |
+| 7     | Code lisible, commenté, structuré                                         | 2      |
+| 8     | Qualité de l’expérience utilisateur (design, fluidité)                    | 2      |
+| 9     | Gestion correcte des erreurs utilisateur côté frontend (choix invalides)  | 2      |
+| 10    | Le projet est fonctionnel de bout en bout                                 | 2      |
+| 11    | README structuré expliquant le projet et son installation                 | 2      |
+| 12    | Utilisation du contrôle de version (commits clairs, branches si possible) | 2      |
+| TOTAL |                                                                           | 24     |
+
+#### Critères présentation
+
+(Les informations ci-dessous sont à titre indicatif et peuvent être adaptées)
+
+| #     | Critère                                                              | Points |
+| ----- | -------------------------------------------------------------------- | ------ |
+| 1     | L'élocution est claire et compréhensible                             | 2      |
+| 2     | Les informations sont claires et bien présentées                     | 2      |
+| 3     | Les contenus présentés sont pertinents et supportent l'argumentation | 2      |
+| 4     | Le temps imparti est respecté                                        | 2      |
+| 5     | Les réponses aux questions sont pertinentes                          | 2      |
+| 6     | Les retours sont écoutés et pris en compte                           | 2      |
+| TOTAL |                                                                      | 12     |
 
 ## Contraintes techniques
 
@@ -102,6 +124,8 @@ repose sur plusieurs critères, chacun valant 0,2 point.
 - Projet disponible sur GitHub
 - Une documentation minimale (`README.md`) doit permettre de tester facilement
   l'application
+- Vous n'avez pas besoin d'implémenter les JWT, mais vous pouvez utiliser les
+  cookies
 
 ## Conseils
 
@@ -118,14 +142,15 @@ Vous devez fournir :
 - L’URL du dépôt GitHub (backend + frontend)
 - Un fichier `README.md` clair pour expliquer l'installation et les choix
   techniques
-- Une démonstration du projet (vidéo ou présentation en direct)
 
-**Rendu final** : date à déterminer.
+Le rendu est à faire pour le dimanche 11 mai 2025 à 23h59.
 
-## Présentation orale
+Une présentation aura lieu du côté frontend pour l'examen de WebMobUI. Elle aura
+lieu le jour de l'examen. Vous pouvez encore modifier les aspects cosmétiques de
+votre projet jusqu'à la date de la présentation, mais pas les aspects
+techniques.
 
-Chaque personne dispose de **?? minutes** pour présenter son projet, suivies de
-?? minutes de questions. Préparez une démonstration fonctionnelle et claire.
+**Rendu final** : le dimanche 11 mai 2025 à 23h59.
 
 ## Feedback
 
