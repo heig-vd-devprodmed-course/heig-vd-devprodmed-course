@@ -18,13 +18,25 @@
 - [Mise à jour du contrôleur](#mise-à-jour-du-contrôleur)
 - [Authentification](#authentification)
 - [Middleware](#middleware)
+- [FAQ (Questions fréquentes)](#faq-questions-fréquentes)
+  - [Pourquoi faut-il utiliser `migrate:rollback` puis `migrate` ?](#pourquoi-faut-il-utiliser-migraterollback-puis-migrate-)
+  - [Pourquoi `hasMany()` dans `User` et `belongsTo()` dans `Article` ?](#pourquoi-hasmany-dans-user-et-belongsto-dans-article-)
+  - [Que se passe-t-il si on supprime un utilisateur lié à des articles ?](#que-se-passe-t-il-si-on-supprime-un-utilisateur-lié-à-des-articles-)
+  - [Que fait `composer dump-autoload` ?](#que-fait-composer-dump-autoload-)
+- [Schéma visuel de la relation 1:N](#schéma-visuel-de-la-relation-1n)
+- [✏️ Exercice suggéré](#️-exercice-suggéré)
 
 ## Objectifs
 
 À l'issue de ce cours, les personnes qui étudient devraient être capables de :
 
-- Créer une base de données et des tables
-- Créer des relations entre les tables
+- Lister les étapes de création d'une relation 1:N avec Eloquent.
+- Créer des tables liées entre elles avec des clés étrangères.
+- Configurer les relations dans les classes modèles Laravel.
+- Utiliser des seeders pour peupler des tables en respectant les dépendances.
+- Afficher des données liées (utilisateur ↔ articles) avec Blade.
+- Mettre en place une authentification simple avec Breeze.
+- Appliquer un middleware pour restreindre l'accès selon un rôle (`admin`).
 
 ## Déroulement
 
@@ -103,62 +115,47 @@ contient déjà les tables de bases.
 Malheureusement, la table `users` présente de base dans `Laravel` ne correspond
 pas tout à fait à nos besoins..., nous allons la modifier.
 
-Déplaçons nous dans le répertoire `database\migrations` et éditons le fichier
-`0001_01_01_000000_create_users_table.php` et adaptons le contenu des méthodes
-`up()` (avec le même contenu que lors du dernier cours) pour que le champ `id`
-s'incrémente automatiquement et pour disposer d'un champ supplémentaire `admin`
+**Ajout de la colonne `admin` à la table `users`**
 
-> ```php
-> <?php
->
-> use Illuminate\Database\Migrations\Migration;
-> use Illuminate\Database\Schema\Blueprint;
-> use Illuminate\Support\Facades\Schema;
->
-> return new class extends Migration {
-> 	/**
-> 	 * Run the migrations.
-> 	 */
-> 	public function up(): void
-> 	{
-> 		Schema::create('users', function (Blueprint $table) {
-> 			$table->increments('id'); // <---
-> 			$table->string('name');
-> 			$table->string('email')->unique();
-> 			$table->timestamp('email_verified_at')->nullable();
-> 			$table->string('password');
-> 			$table->boolean('admin')->default(false); // <---
-> 			$table->rememberToken();
-> 			$table->timestamps();
-> 		});
->
-> 		Schema::create('password_reset_tokens', function (Blueprint $table) {
-> 			$table->string('email')->primary();
-> 			$table->string('token');
-> 			$table->timestamp('created_at')->nullable();
-> 		});
->
-> 		Schema::create('sessions', function (Blueprint $table) {
-> 			$table->string('id')->primary();
-> 			$table->foreignId('user_id')->nullable()->index();
-> 			$table->string('ip_address', 45)->nullable();
-> 			$table->text('user_agent')->nullable();
-> 			$table->longText('payload');
-> 			$table->integer('last_activity')->index();
-> 		});
-> 	}
->
-> 	/**
-> 	 * Reverse the migrations.
-> 	 */
-> 	public function down(): void
-> 	{
-> 		Schema::dropIfExists('users');
-> 		Schema::dropIfExists('password_reset_tokens');
-> 		Schema::dropIfExists('sessions');
-> 	}
-> };
-> ```
+Dans un premier temps, Laravel crée automatiquement une table `users` via une
+migration de base. Il est **déconseillé de modifier cette migration
+directement**.
+
+Pour respecter les bonnes pratiques, il faut créer une **nouvelle migration**
+qui vient ajouter la colonne `admin`.
+
+```bash
+php artisan make:migration add_admin_to_users_table --table=users
+```
+
+Puis éditer le fichier généré pour y placer :
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+	public function up(): void
+	{
+		Schema::table('users', function (Blueprint $table) {
+			$table->boolean('admin')->default(false)->after('password');
+		});
+	}
+
+	public function down(): void
+	{
+		Schema::table('users', function (Blueprint $table) {
+			$table->dropColumn('admin');
+		});
+	}
+};
+```
+
+Cela garantit que le **versionnage des migrations reste propre** et que chaque
+modification de structure de base de données est **traçable et réversible**.
 
 Créons à présent un nouveau fichier de migration (code qui va permettre de
 créer/supprimer une nouvelle table dans la bd) nommé `create_articles_table` à
@@ -1490,3 +1487,46 @@ Voici un résumé de ce que nous avons appris aujourd'hui :
   fonctionnalités (si on est admin ou pas)
 - Nous savons comment rediriger l'utilisateur après son identification,
   enregistrement ou `logout`
+
+## FAQ (Questions fréquentes)
+
+### Pourquoi faut-il utiliser `migrate:rollback` puis `migrate` ?
+
+Lorsque vous modifiez une migration déjà existante, Laravel ne prend pas en
+compte les modifications si la table existe déjà. Il faut donc **revenir en
+arrière** avec `rollback`, puis **rejouer** la migration.
+
+### Pourquoi `hasMany()` dans `User` et `belongsTo()` dans `Article` ?
+
+Cela reflète la logique suivante :
+
+- Un utilisateur **possède plusieurs articles** (`hasMany`)
+- Un article **appartient à un utilisateur** (`belongsTo`)
+
+### Que se passe-t-il si on supprime un utilisateur lié à des articles ?
+
+Avec `onDelete('restrict')`, Laravel empêchera la suppression de l’utilisateur
+s’il a des articles liés. On pourrait aussi utiliser `cascade` pour que ses
+articles soient automatiquement supprimés, mais cela dépend des besoins métier.
+
+### Que fait `composer dump-autoload` ?
+
+Cette commande met à jour la **liste des classes disponibles** pour
+l'autoloading. Elle est utile lorsque Laravel ne trouve pas un fichier
+nouvellement créé (comme un Seeder ou un Middleware).
+
+## Schéma visuel de la relation 1:N
+
+```
+USER (1) --------- (N) ARTICLE
+ |                     |
+ hasMany()        belongsTo()
+```
+
+## ✏️ Exercice suggéré
+
+Ajoutez une table `Commentaires` liée aux `Articles` avec une relation 1:N.  
+Chaque commentaire aura un contenu, une date, et sera lié à un utilisateur et un
+article.  
+Implémentez les migrations, modèles, relations et une vue simple qui affiche les
+commentaires d’un article.
