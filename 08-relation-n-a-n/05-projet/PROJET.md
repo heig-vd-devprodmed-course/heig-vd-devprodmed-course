@@ -163,14 +163,71 @@ Vous devez fournir :
 - Un fichier `README.md` clair pour expliquer l'installation et les choix
   techniques
 
-Le rendu est à faire pour le dimanche 11 mai 2025 à 23h59.
-
-Une présentation aura lieu du côté frontend pour l'examen de WebMobUI. Les
-présentations côté backend auront lieu lors de la dernière séance de cours, à la
-semaine 12 (du 12 au 16 mai 2025). Vous aurez 6 minutes pour présenter votre
-projet, suivies de 2 minutes de questions.
-
 **Rendu final** : le dimanche 11 mai 2025 à 23h59.
+
+Une présentation aura lieu du côté frontend pour l'examen de WebMobUI.
+
+Les présentations côté backend auront lieu lors de la dernière séance de cours,
+à la semaine 12 (du 12 au 16 mai 2025). Vous aurez 6 minutes pour présenter
+votre projet, suivies de 2 minutes de questions. Et se feront devant toute la
+classe.
+
+La classe 52/1 passera le mardi 13 mai 2025 de 13h15 à 16h30 avec ce planning :
+
+| Heure | Nom                | Prénom    |
+| ----- | ------------------ | --------- |
+| 13h15 | Abessolo           | Joshua    |
+| 13h24 | Bartolacelli       | Cédric    |
+| 13h32 | Bugnon             | Léa       |
+| 13h40 | Chappalley         | Robin     |
+| 13h48 | Desgalier          | Michaël   |
+| 13h56 | Du Bois            | Jonas     |
+| 14h04 | Espinasse          | Christel  |
+| 14h12 | Hungerbühler       | Alexandre |
+| 14h20 | Imfeld             | Théo      |
+| 14h28 | Jaccard            | Mathilde  |
+| 14h36 | Joliat             | Thibaud   |
+| 14h55 | Makumbi Mbuka      | Agathe    |
+| 15h03 | Mangold            | Laure     |
+| 15h11 | Mayor              | Joanah    |
+| 15h19 | Nussbaumer         | Thibaud   |
+| 15h27 | Rosset             | Doriane   |
+| 15h35 | Rossier            | Estelle   |
+| 15h43 | Rurangirwa         | Vincent   |
+| 15h51 | Teixeira Gonçalves | Samuel    |
+| 15h59 | Tille              | Cédrine   |
+| 16h07 | Tranchida          | Anna      |
+| 16h15 | Zima-Tukala        | Aurélia   |
+
+Voici l'ordre de passage aléatoire généré à partir de ta liste initiale. Si tu
+veux en générer un nouveau ou exporter ce tableau, fais-moi signe !
+
+La classe 52/2 passera le vendredi 16 mai 2025 de 08h30 à 12h00 avec ce planning
+:
+
+| Heure | Nom                | Prénom     |
+| ----- | ------------------ | ---------- |
+| 08h30 | Bossel             | Malory     |
+| 08h38 | Maret              | Maximilien |
+| 08h46 | Wojciechowski      | Victor     |
+| 08h54 | Magnenat           | Loriane    |
+| 09h02 | Ançay              | Mathilde   |
+| 09h10 | Vecchi             | Valentine  |
+| 09h18 | Crettex            | Lorie      |
+| 09h26 | Pinard             | Jonathan   |
+| 09h34 | Bolay              | Estelle    |
+| 09h42 | Chautems           | Emma       |
+| 09h50 | Al-Dabboussi       | Najwa      |
+| 10h25 | Degirmenci         | Jasmine    |
+| 10h33 | Pottier            | Cristian   |
+| 10h41 | Salvi              | Florian    |
+| 10h49 | Lehner             | Ellen      |
+| 10h57 | Mamin              | Lilou      |
+| 11h05 | Schmutz            | Colin      |
+| 11h13 | do Rego dos Santos | Kevin      |
+| 11h21 | Bouriot            | Marc       |
+| 11h29 | Pinto Vale         | Daniel     |
+| 11h37 | Favre              | Joé        |
 
 ## Feedback
 
