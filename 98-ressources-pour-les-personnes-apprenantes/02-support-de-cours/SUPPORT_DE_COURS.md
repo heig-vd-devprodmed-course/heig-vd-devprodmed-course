@@ -32,71 +32,72 @@ Voici un projet Laravel :
 
 ```bash
 .
-├── .vscode
-│   ├── extensions.json
-│   └── settings.json
-├── app
-│   ├── Http
-│   ├── Models
-│   └── Providers
-├── artisan
-├── bootstrap
-│   ├── app.php
-│   ├── cache
-│   └── providers.php
-├── composer.json
-├── composer.lock
-├── config
-│   ├── app.php
-│   ├── auth.php
-│   ├── cache.php
-│   ├── database.php
-│   ├── filesystems.php
-│   ├── logging.php
-│   ├── mail.php
-│   ├── queue.php
-│   ├── sanctum.php
-│   ├── services.php
-│   └── session.php
-├── database
-│   ├── database.sqlite
-│   ├── factories
-│   ├── migrations
-│   └── seeders
-├── LICENSE
-├── node_modules
-│   └── ...
-├── package.json
-├── package-lock.json
-├── phpunit.xml
-├── public
-│   ├── favicon.ico
-│   ├── index.php
-│   └── robots.txt
-├── README.md
-├── resources
-│   ├── css
-│   ├── js
-│   └── views
-├── routes
-│   ├── api.php
-│   ├── console.php
-│   └── web.php
-├── storage
-│   ├── app
-│   ├── framework
-│   └── logs
-├── tests
-│   ├── Feature
-│   ├── Pest.php
-│   ├── TestCase.php
-│   └── Unit
-├── vendor
-│   └── ...
-├── .gitattributes
-├── .gitignore
-├── .prettierrc
-└── vite.config.js
+.
+  .vscode/
+    extensions.json
+    settings.json
+  app/
+    Http/
+    Models/
+    Providers/
+  artisan
+  bootstrap/
+    app.php
+    cache/
+    providers.php
+  composer.json
+  composer.lock
+  config/
+    app.php
+    auth.php
+    cache.php
+    database.php
+    filesystems.php
+    logging.php
+    mail.php
+    queue.php
+    sanctum.php
+    services.php
+    session.php
+  database/
+    database.sqlite
+    factories/
+    migrations/
+    seeders/
+  LICENSE
+  node_modules/
+    ...
+  package.json
+  package-lock.json
+  phpunit.xml
+  public/
+    favicon.ico
+    index.php
+    robots.txt
+  README.md
+  resources/
+    css/
+    js/
+    views/
+  routes/
+    api.php
+    console.php
+    web.php
+  storage/
+    app/
+    framework/
+    logs/
+  tests/
+    Feature/
+    Pest.php
+    TestCase.php
+    Unit/
+  vendor/
+    ...
+  .gitattributes
+  .gitignore
+  .prettierrc
+  vite.config.js
 ```
 
 ### Collaboration & Pérennité
@@ -364,7 +365,7 @@ composer install
 Composer lit le fichier `composer.lock` et installe exactement ce qui est
 indiqué, garantissant la stabilité du projet.
 
-> ⚠️ **À ne jamais supprimer** : le fichier `composer.lock` est crucial pour la
+> **À ne jamais supprimer** : le fichier `composer.lock` est crucial pour la
 > pérennité et la reproductibilité du projet.
 
 #### Node.js (npm)
@@ -476,7 +477,7 @@ Plus de détails sur le workflow GitFlow :
 Je vous invite à regarder le support de cours suivants :
 [MVP - Mettre en place un pipeline de CI/CD pour la livraison/le déploiement continu d'applications](https://github.com/heig-vd-mvp-course/heig-vd-mvp-course/blob/main/10-cours-hebergement-et-deploiement-de-services/02-support-de-cours/README.md#mettre-en-place-un-pipeline-de-cicd-pour-la-livraisonle-d%C3%A9ploiement-continu-dapplications)
 
-> 🔍 **Glossaire**
+> **Glossaire**
 >
 > - **Prettier** : outil de formatage automatique du code.
 > - **.lock** : fichier qui verrouille les versions exactes des dépendances.

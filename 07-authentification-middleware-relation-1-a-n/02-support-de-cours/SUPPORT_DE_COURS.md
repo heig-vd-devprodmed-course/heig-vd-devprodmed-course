@@ -24,7 +24,7 @@
   - [Que se passe-t-il si on supprime un utilisateur lié à des articles ?](#que-se-passe-t-il-si-on-supprime-un-utilisateur-lié-à-des-articles-)
   - [Que fait `composer dump-autoload` ?](#que-fait-composer-dump-autoload-)
 - [Schéma visuel de la relation 1:N](#schéma-visuel-de-la-relation-1n)
-- [✏️ Exercice suggéré](#️-exercice-suggéré)
+- [Exercice suggéré](#exercice-suggéré)
 
 ## Objectifs
 
@@ -34,7 +34,7 @@
 - Créer des tables liées entre elles avec des clés étrangères.
 - Configurer les relations dans les classes modèles Laravel.
 - Utiliser des seeders pour peupler des tables en respectant les dépendances.
-- Afficher des données liées (utilisateur ↔ articles) avec Blade.
+- Afficher des données liées (utilisateur < - > articles) avec Blade.
 - Mettre en place une authentification simple avec Breeze.
 - Appliquer un middleware pour restreindre l'accès selon un rôle (`admin`).
 
@@ -1517,13 +1517,13 @@ nouvellement créé (comme un Seeder ou un Middleware).
 
 ## Schéma visuel de la relation 1:N
 
-```
+```bash
 USER (1) --------- (N) ARTICLE
  |                     |
  hasMany()        belongsTo()
 ```
 
-## ✏️ Exercice suggéré
+## Exercice suggéré
 
 Ajoutez une table `Commentaires` liée aux `Articles` avec une relation 1:N.  
 Chaque commentaire aura un contenu, une date, et sera lié à un utilisateur et un

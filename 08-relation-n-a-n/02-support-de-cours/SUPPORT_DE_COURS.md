@@ -90,33 +90,9 @@ mots-clés aux articles.
 
 C'est ce que l'on nomme une relation `n:n`
 
-Tables mises en place lors Tables à mettre du dernier cours en place ──────────
-aujourd'hui | | ──────────── | | | | | | (table pivot) | `users` `articles`
-`article_motcle` `motcles`
-
 Pour ne pas tout refaire depuis le début, nous allons dupliquer le projet
 réalisé lors du dernier cours et nous ajouterons les fichiers et le code
 nécessaire pour la gestion des mots-clés.
-
-> Créons une nouvelle base de données et modifions le fichier `.env` pour que
-> `Laravel` puisse s'y connecter.
->
-> Dans le cas de l'utilisation de `Sqlite`, il faut :
->
-> - Ouvrir le fichier `database.sqlite` avec un éditeur de texte,
-> - sélectionner tout le texte et le supprimer,
-> - ne pas oublier de sauver.
-> - Quitter l'éditeur de texte.
-
-Pour tester que tout est fonctionnel, que devons nous faire ?
-
-> Voici la marche à suivre :
->
-> - Créer la table `migrations` nécessaire au bon fonctionnement d'`Eloquent`.
-> - Exécuter la migration des tables `users` et `articles`
-> - Exécuter le peuplement de nos deux tables `users` et `articles`
-> - Contrôler que nos données soient bien présentes dans les tables à l'aide de
->   `tinker`
 
 Commençons par créer la table `migrations`:
 
