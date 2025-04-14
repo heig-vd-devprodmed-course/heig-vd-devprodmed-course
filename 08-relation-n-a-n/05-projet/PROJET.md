@@ -68,6 +68,8 @@ Note maximale : (nombre de points obtenus / nombre de points maximum) × 5 + 1
 
 ### Critères Backend
 
+#### Critères rendu
+
 | #     | Critère                                                                                     | Points |
 | ----- | ------------------------------------------------------------------------------------------- | ------ |
 | 1     | Migrations, modèles et relations correctement définis (`Story`, `Chapter`, `Choice`, etc..) | 2      |
@@ -83,6 +85,20 @@ Note maximale : (nombre de points obtenus / nombre de points maximum) × 5 + 1
 | 12    | README structuré expliquant le projet et son installation                                   | 2      |
 | 13    | Utilisation du contrôle de version (commits clairs, branches si possible)                   | 2      |
 | TOTAL |                                                                                             | 26     |
+
+#### Critères présentation
+
+(Les informations ci-dessous sont à titre indicatif et peuvent être adaptées)
+
+| #     | Critère                                                              | Points |
+| ----- | -------------------------------------------------------------------- | ------ |
+| 1     | L'élocution est claire et compréhensible                             | 2      |
+| 2     | Les informations sont claires et bien présentées                     | 2      |
+| 3     | Les contenus présentés sont pertinents et supportent l'argumentation | 2      |
+| 4     | Le temps imparti est respecté                                        | 2      |
+| 5     | Les réponses aux questions sont pertinentes                          | 2      |
+| 6     | Les retours sont écoutés et pris en compte                           | 2      |
+| TOTAL |                                                                      | 12     |
 
 ### Critères frontend
 
@@ -149,10 +165,10 @@ Vous devez fournir :
 
 Le rendu est à faire pour le dimanche 11 mai 2025 à 23h59.
 
-Une présentation aura lieu du côté frontend pour l'examen de WebMobUI. Elle aura
-lieu le jour de l'examen. Vous pouvez encore modifier les aspects cosmétiques de
-votre projet jusqu'à la date de la présentation, mais pas les aspects
-techniques.
+Une présentation aura lieu du côté frontend pour l'examen de WebMobUI. Les
+présentations côté backend auront lieu lors de la dernière séance de cours, à la
+semaine 12 (du 12 au 16 mai 2025). Vous aurez 6 minutes pour présenter votre
+projet, suivies de 2 minutes de questions.
 
 **Rendu final** : le dimanche 11 mai 2025 à 23h59.
 
