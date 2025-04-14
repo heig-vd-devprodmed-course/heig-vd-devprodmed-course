@@ -753,7 +753,9 @@ class ArticleRequest extends FormRequest
 			'titre' => 'required|max:80',
 			'contenu' => 'required',
 			// ajout de l'expression régulière de validation des mots-clés
-			'motcles' => ['regex:/^[\pL0-9_-]+(,[\pL0-9_-]+)*$/u'],
+			'motcles' => [
+				'Regex:/^[A-Za-z0-9-àéèêëïôùû]{1,50}?(,[A-Za-z0-9-àéèêëïôùû]{1,50})*$/',
+			],
 		];
 	}
 }
