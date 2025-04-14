@@ -109,7 +109,7 @@ Mail::send('view_contenu_email', $request->all(), function ($message) {
 });
 ```
 
-> ⚠ Il est recommandé d'utiliser une solution comme Mailpit pour tester les
+> Il est recommandé d'utiliser une solution comme Mailpit pour tester les
 > e-mails en développement.
 
 ## Configuration et test avec Mailpit
