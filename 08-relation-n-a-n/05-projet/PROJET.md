@@ -1,16 +1,5 @@
 # Travail pratique : Créer une fiction interactive multi-plateforme (Laravel + Vue.js)
 
-<https://github.com/heig-vd-devprodmed-course>
-
-[Markdown](./README.md) · [PDF](./FICHE_EVALUATION.pdf)
-
-**L. Delafontaine et [Ton/ta collègue]**
-
-Ce travail est sous licence
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-![Illustration principale](./images/interactive-fiction.jpg)
-
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
