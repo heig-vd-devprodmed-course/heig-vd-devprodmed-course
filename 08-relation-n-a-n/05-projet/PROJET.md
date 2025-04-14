@@ -49,6 +49,10 @@ Vous développerez une application web en deux parties :
 Le thème "histoire interactive" est recommandé mais non obligatoire. Si vous
 avez une idée de projet plus personnel, validez-la avec l’équipe enseignante.
 
+> Ex. : une application dans laquelle une personne lit un paragraphe et doit
+> choisir entre plusieurs actions ("entrer dans la grotte", "fuir", etc.),
+> chaque choix menant à un autre chapitre.
+
 ## Évaluation
 
 Chaque partie du projet sera évaluée selon plusieurs catégories. Le barème
@@ -124,8 +128,8 @@ Note maximale : (nombre de points obtenus / nombre de points maximum) × 5 + 1
 - Projet disponible sur GitHub
 - Une documentation minimale (`README.md`) doit permettre de tester facilement
   l'application
-- Vous n'avez pas besoin d'implémenter les JWT, mais vous pouvez utiliser les
-  cookies
+- Vous pouvez stocker le token de session dans un cookie pour gérer
+  l’authentification dans le frontend.
 
 ## Conseils
 
