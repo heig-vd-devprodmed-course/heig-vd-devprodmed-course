@@ -3,13 +3,28 @@
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
+- [Objectifs pédagogiques](#objectifs-pédagogiques)
 - [Projet Laravel](#projet-laravel)
-  - [Collaboration \& Pérennité](#collaboration--pérennité)
-  - [Librairies et dépendances](#librairies-et-dépendances)
-  - [FAQ — Questions fréquentes](#faq--questions-fréquentes)
+	- [Collaboration \& Pérennité](#collaboration--pérennité)
+	- [Librairies et dépendances](#librairies-et-dépendances)
+	- [FAQ — Questions fréquentes](#faq--questions-fréquentes)
 - [Workflow et Git](#workflow-et-git)
 - [Mettre en place un pipeline de CI/CD pour la livraison/le déploiement continu d'applications](#mettre-en-place-un-pipeline-de-cicd-pour-la-livraisonle-déploiement-continu-dapplications)
 - [Ressources](#ressources)
+
+## Objectifs pédagogiques
+
+À l'issue de ce cours, les personnes qui étudient devraient être capables de :
+
+- Identifier les fichiers clés d’un projet Laravel.
+- Mettre en place un environnement de développement cohérent en équipe.
+- Expliquer le rôle des fichiers `.gitignore`, `.gitattributes`, `.env` et
+  `.prettierrc`.
+- Appliquer les bonnes pratiques pour l'installation et la gestion des
+  dépendances Composer et npm.
+- Mettre en place un formateur de code dans VSCode.
+- Comprendre le rôle des fichiers `.lock` pour la reproductibilité.
+- Distinguer les rôles des fichiers de configuration dans `.vscode/`.
 
 ## Projet Laravel
 
@@ -255,14 +270,14 @@ comprendre le projet rapidement.
 Ce projet est un template Laravel pour démarrer un projet rapidement, il sera
 utilisé pour tous les exercices et support de cours de DévProdMéd.
 
-## Pour personnes qui étudient ou sans connaissance de Docker et devcontainer
+## Installation pour le développement local
 
 ### Prérequis
 
 Les prérequis suivants sont nécessaires pour lancer le projet en local :
 
 - [PHP](https://www.php.net/downloads) (version 8.4.4 ou supérieure)
-- [Laravel](https://laravel.com/docs/8.x/installation) (version 5.14.0 ou
+- [Laravel](https://laravel.com/docs/12.x/installation) (version 12.0 ou
   supérieure)
 - [Composer](https://getcomposer.org/download/) (version 2.8.6 ou supérieure)
 
@@ -292,6 +307,9 @@ php artisan key:generate
 php artisan serve
 ```
 
+Une fois le serveur démarré, vous pouvez accéder à l'application à l'adresse
+`http://localhost:8000`.
+
 ## Mettre un formatteur de code en place dans VSCode
 
 ### Prérequis
@@ -306,55 +324,15 @@ code dans VSCode :
 ### Mettre en place un formateur de code dans VSCode
 
 - Installez l'extension `esbenp.prettier-vscode` dans VSCode
-- Mettez à jour les dépandances du projet avec la commande suivante :
+- Mettez à jour les dépendances du projet avec la commande suivante :
 
   ```bash
   # Installez les dépendances de développement
   npm install
   ```
 
-Si ça fonctionne, c'est grace aux fichier `.prettierrc` et
+Si ça fonctionne, c'est grace aux fichiers `.prettierrc` et
 `.vscode/settings.json` qui sont déjà configurés pour le projet.
-
-## Pour personnes qui enseignent avec connaissance de Docker et devcontainer
-
-### Prérequis
-
-Les prérequis suivants sont nécessaires pour lancer le projet en local :
-
-- [Docker](https://docs.docker.com/get-docker/)
-- [Visual Studio Code](https://code.visualstudio.com/download) must be
-  installed.
-
-### Démarer l'application pour le développement en local
-
-Ouvrez ce dossier dans Visual Studio Code, et ouvrez-le dans un conteneur de
-développement. Dans un terminal, exécutez les commandes suivantes :
-
-```bash
-# Installez les dépendances du projet
-composer install
-
-# Installez les dépendances de développement
-npm install
-
-# Copiez le fichier .env.example et renommez-le en .env
-
-## Unix
-cp .env.example .env
-
-## Windows
-copy .env.example .env
-
-# Exécutez les migrations
-php artisan migrate
-
-# Générez une clé d'application
-php artisan key:generate
-
-# Démarrez le serveur de développement
-php artisan serve
-```
 ````
 
 ### Librairies et dépendances
@@ -498,12 +476,31 @@ Plus de détails sur le workflow GitFlow :
 Je vous invite à regarder le support de cours suivants :
 [MVP - Mettre en place un pipeline de CI/CD pour la livraison/le déploiement continu d'applications](https://github.com/heig-vd-mvp-course/heig-vd-mvp-course/blob/main/10-cours-hebergement-et-deploiement-de-services/02-support-de-cours/README.md#mettre-en-place-un-pipeline-de-cicd-pour-la-livraisonle-d%C3%A9ploiement-continu-dapplications)
 
+> 🔍 **Glossaire**
+>
+> - **Prettier** : outil de formatage automatique du code.
+> - **.lock** : fichier qui verrouille les versions exactes des dépendances.
+> - **CI/CD** : Intégration et Déploiement Continus.
+> - **VSCode** : éditeur de texte très utilisé dans le développement web.
+> - **Git** : système de contrôle de version pour suivre les modifications du
+>   code.
+> - **GitHub** : plateforme de gestion de code source et de collaboration.
+> - **Composer** : gestionnaire de dépendances pour PHP.
+> - **npm** : gestionnaire de paquets pour JavaScript.
+> - **Laravel** : framework PHP pour le développement d'applications web.
+> - **Node.js** : environnement d'exécution JavaScript côté serveur.
+> - **Docker** : outil pour créer et gérer des conteneurs d'applications.
+> - **Devcontainer** : environnement de développement isolé et reproductible.
+> - **Markdown** : langage de balisage léger pour formater du texte.
+> - **Blade** : moteur de templates pour Laravel.
+> - **SQLite** : base de données légère et intégrée.
+> - **PHP** : langage de programmation côté serveur.
+> - **HTML** : langage de balisage pour créer des pages web.
+> - **CSS** : langage de style pour mettre en forme les pages web.
+> - **JavaScript** : langage de programmation pour le développement web.
+
 ## Ressources
 
 Projets montrés dans cette présentation :
 
 - [Spotin.ch](https://github.com/spotin/spotin)
-
-```
-
-```
