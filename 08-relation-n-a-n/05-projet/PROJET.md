@@ -207,9 +207,6 @@ La classe 52/1 passera le mardi 13 mai 2025 de 13h15 à 16h30 avec ce planning :
 | 16h07 | Tranchida          | Anna      |
 | 16h15 | Zima-Tukala        | Aurélia   |
 
-Voici l'ordre de passage aléatoire généré à partir de ta liste initiale. Si tu
-veux en générer un nouveau ou exporter ce tableau, fais-moi signe !
-
 La classe 52/2 passera le vendredi 16 mai 2025 de 08h30 à 12h00 avec ce planning
 :
 
