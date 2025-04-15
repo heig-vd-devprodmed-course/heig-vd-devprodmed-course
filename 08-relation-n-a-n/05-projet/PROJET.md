@@ -171,7 +171,7 @@ Vous devez fournir :
 - Un fichier `README.md` clair pour expliquer l'installation et les choix
   techniques
 
-**Rendu final** : le dimanche 11 mai 2025 à 23h59.
+**Rendu final** : le lundi 12 mai 2025 à 23h59.
 
 Une présentation aura lieu du côté frontend pour l'examen de WebMobUI.
 

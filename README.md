@@ -33,18 +33,18 @@ Les détails de chaque cours composant l'unité d'enseignement sont disponibles
 ci-dessous. Chaque cours est détaillée avec les contenus, les objectifs, les
 méthodes d'enseignement et d'apprentissage, et les méthodes d'évaluation.
 
-|            Cours | Contenu(s)                                              | État de la rédaction[^etat-de-la-redaction] |
-| ---------------: | :------------------------------------------------------ | :------------------------------------------ |
-| [01](#-cours-01) | Introduction à Laravel                                  | 🟢 Complet                                  |
-| [02](#-cours-02) | Blade & Contrôleur                                      | 🟢 Complet                                  |
-| [03](#-cours-03) | Formulaires                                             | 🟢 Complet                                  |
-| [04](#-cours-04) | Validation, erreurs et mails                            | 🟢 Complet                                  |
-| [05](#-cours-05) | Database                                                | 🟢 Complet                                  |
-| [06](#-cours-06) | Opération CRUD                                          | 🟢 Complet                                  |
-| [07](#-cours-07) | Authentification, middleware, relation `Story` → `User` | 🟡 En cours                                 |
-| [08](#-cours-08) | Relations avancées + validation conditionnelle          | 🔴 À faire                                  |
-| [09](#-cours-09) | API REST avancée + versionnement                        | 🔴 À faire                                  |
-| [10](#-cours-10) | Finalisation du projet, démo, feedback croisé           | 🔴 À faire                                  |
+|            Cours | Contenu(s)                                                | État de la rédaction[^etat-de-la-redaction] |
+| ---------------: | :-------------------------------------------------------- | :------------------------------------------ |
+| [01](#-cours-01) | Introduction à Laravel                                    | 🟢 Complet                                  |
+| [02](#-cours-02) | Blade & Contrôleur                                        | 🟢 Complet                                  |
+| [03](#-cours-03) | Formulaires                                               | 🟢 Complet                                  |
+| [04](#-cours-04) | Validation, erreurs et mails                              | 🟢 Complet                                  |
+| [05](#-cours-05) | Database                                                  | 🟢 Complet                                  |
+| [06](#-cours-06) | Opération CRUD                                            | 🟢 Complet                                  |
+| [07](#-cours-07) | Authentification, middleware, relation `Story` → `User`   | 🟢 Complet                                  |
+| [08](#-cours-08) | Relations avancées + validation conditionnelle            | 🟢 Complet                                  |
+| [09](#-cours-09) | API REST avancée + versionnement + Finalisation du projet | 🔴 À faire                                  |
+| [10](#-cours-10) | Démo, feedback croisé                                     | 🔴 À faire                                  |
 
 ## 🕐 Cours 01
 
