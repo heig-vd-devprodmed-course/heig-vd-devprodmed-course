@@ -13,6 +13,12 @@
 - [Conseils](#conseils)
 - [Livrables et rendu](#livrables-et-rendu)
 - [Feedback](#feedback)
+- [Foire aux questions (FAQ)](#foire-aux-questions-faq)
+  - [Q: Est-ce que l'authentification peut être faite avec Breeze ?](#q-est-ce-que-lauthentification-peut-être-faite-avec-breeze-)
+  - [Q: J'ai fait un API controller pour chaque ressource (un pour `chapter`, un pour `choice`, un pour `story`). Est-ce juste ?](#q-jai-fait-un-api-controller-pour-chaque-ressource-un-pour-chapter-un-pour-choice-un-pour-story-est-ce-juste-)
+  - [Q: Le but est bien d'aller chercher les `stories`, `chapters` et `choices` dans la base de données via les routes API pour les afficher dans le frontend ?](#q-le-but-est-bien-daller-chercher-les-stories-chapters-et-choices-dans-la-base-de-données-via-les-routes-api-pour-les-afficher-dans-le-frontend-)
+  - [Q: J'utilise `php artisan serve` pour tester mon projet. Est-ce correct ou faut-il utiliser `npm run dev` ?](#q-jutilise-php-artisan-serve-pour-tester-mon-projet-est-ce-correct-ou-faut-il-utiliser-npm-run-dev-)
+  - [Q: Faut-il pouvoir créer un compte admin pour modifier les histoires et chapitres ?](#q-faut-il-pouvoir-créer-un-compte-admin-pour-modifier-les-histoires-et-chapitres-)
 
 ## Introduction
 
@@ -240,3 +246,63 @@ Les notes et remarques vous seront envoyées via Teams.
 Pour toute question ou réclamation, contactez l’équipe enseignante. Chaque
 personne est encouragée à proposer des améliorations ou poser des questions sur
 le projet via Teams.
+
+## Foire aux questions (FAQ)
+
+### Q: Est-ce que l'authentification peut être faite avec Breeze ?
+
+**A:** Oui. Breeze est un starter kit officiel de Laravel pour ajouter
+rapidement une authentification complète (connexion, inscription, mot de passe
+oublié, etc.).  
+Voir la documentation :
+[Laravel Breeze](https://laravel.com/docs/12.x/starter-kits#breeze)
+
+### Q: J'ai fait un API controller pour chaque ressource (un pour `chapter`, un pour `choice`, un pour `story`). Est-ce juste ?
+
+**A:** Oui, c'est exactement ce qu'il faut faire. Chaque contrôleur gère les
+opérations CRUD de sa propre ressource, dans le respect des bonnes pratiques
+REST.
+
+### Q: Le but est bien d'aller chercher les `stories`, `chapters` et `choices` dans la base de données via les routes API pour les afficher dans le frontend ?
+
+**A:** Oui, tout à fait.
+
+- Le backend fournit les données via une API RESTful.
+- Le frontend Vue.js consomme ces données pour afficher l'histoire interactive.
+
+**Important :** vous pouvez remplir votre base de données avec des seeders
+Laravel. Vous n'avez pas besoin de créer les histoires manuellement via l'API.  
+Voir la documentation : [Laravel Seeding](https://laravel.com/docs/12.x/seeding)
+
+### Q: J'utilise `php artisan serve` pour tester mon projet. Est-ce correct ou faut-il utiliser `npm run dev` ?
+
+**A:** Les deux commandes servent à des choses différentes :
+
+- `php artisan serve` ➔ démarre le **backend Laravel** (API, etc.).
+- `npm run dev` ➔ démarre le **serveur de développement du frontend** (par
+  exemple Vite) avec **hot reload** (rechargement automatique lors des
+  modifications).
+
+Laravel propose aussi une commande combinée `composer run dev` qui lance
+backend + frontend ensemble.  
+Voir la documentation :
+[Laravel - Développement local](https://laravel.com/docs/12.x#running-the-development-server)
+
+### Q: Faut-il pouvoir créer un compte admin pour modifier les histoires et chapitres ?
+
+**A:** Non.
+
+- Pas besoin de développer une interface de gestion des histoires.
+- Il suffit d'avoir une authentification fonctionnelle (ex: avec Breeze).
+- Protégez au moins une route API avec une authentification (`auth` middleware).
+
+**Exemple d'idée :** protéger une route permettant de modifier un message
+d'accueil, d'afficher un changelog, etc.
+
+**Important :**  
+Les histoires et chapitres peuvent être préparés à l'avance avec des seeders.  
+L'objectif est de vérifier votre capacité à implémenter une authentification et
+à protéger des routes.
+
+_Pour toute question supplémentaire, n'hésitez pas à contacter l'équipe
+enseignante !_
