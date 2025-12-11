@@ -1,14 +1,7 @@
 {
-	"[blade]": {
+	"[markdown]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"prettier.documentSelectors": [
-		"**/*.{sh,js,jsx,ts,tsx,vue,html,css,scss,less,json,md,mdx,graphql,yaml,yml,blade.php,php}"
-	],
-	"[php]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-
 	"cSpell.language": "fr,en",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnPaste": true,
@@ -28,9 +21,23 @@
 		},
 		"no-emphasis-as-heading": false,
 		"no-hard-tabs": false,
-		"no-inline-html": false
+		"no-inline-html": false,
+		"no-trailing-punctuation": false
 	},
 	"plantuml.render": "PlantUMLServer",
-	"plantuml.server": "http://localhost:9090",
-	"prettier.configPath": ".prettierrc"
+	"plantuml.server": "http://localhost:9090"
+
+	// Vincent's configuration
+	// "[blade]": {
+	// 	"editor.defaultFormatter": "esbenp.prettier-vscode"
+	// },
+	// "prettier.documentSelectors": [
+	// 	"**/*.{sh,js,jsx,ts,tsx,vue,html,css,scss,less,json,md,mdx,graphql,yaml,yml,blade.php,php}"
+	// ],
+	// "[php]": {
+	// 	"editor.defaultFormatter": "esbenp.prettier-vscode"
+	// },
+	//
+	// Ludovic's configuration
+	// "intelephense.format.braces": "k&r",
 }

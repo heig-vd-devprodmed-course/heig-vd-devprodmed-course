@@ -1,6 +1,6 @@
 ---
 description: Instructions for GitHub Copilot in this repository.
-applyTo: '**/*'
+applyTo: "**/*"
 ---
 
 # Project guidelines
@@ -10,7 +10,7 @@ consistency and readability across all documents.
 
 ## Who am I?
 
-I am a lecturer at a university of applied sciences (HES-SO) in Switzerland,
+I am a lecturer at a university of applied sciences in Switzerland (HES-SO),
 teaching Bachelor degree courses. This repository contains the materials for my
 course.
 
@@ -29,9 +29,9 @@ course materials.
 
 I might sometimes make my requests in French, especially when referring to
 specific course content or terminology that is best expressed in French, but
-always respond in English. When making changes to course materials, ensure that
-the language used is the one specified in the material itself (French or
-English), regardless of the language of the request.
+always respond in English. When making changes to the course, ensure that the
+language used is the one specified in the material itself (French or English),
+regardless of the language of the request.
 
 I might make mistakes or provide incomplete information in my requests. If you
 notice any errors or inconsistencies, please point them out and suggest
@@ -91,125 +91,6 @@ main [README](../README.md) file of the repository.
 
 ## Course structure
 
-The course is organized into modules, each covering a specific topic in the
-course.
-
-### Files and folders structure
-
-The repository is organized as follows:
-
-```txt
-./
-├── 01-course-materials/
-│   ├── 01-this-is-course-01-with-its-own-title/
-│   │   ├── _images/
-│   │   │   └── ...
-│   │   ├── PRESENTATION.md
-│   │   └── README.md
-│   ├── 02-this-is-course-02-with-its-own-title/
-│   │   ├── _images/
-│   │   │   └── ...
-│   │   ├── PRESENTATION.md
-│   │   ├── QUIZ.md
-│   │   └── README.md
-│   ├── 03-this-is-course-03-with-its-own-title/
-│   │   ├── 01-code-examples/
-│   │   │   └── ...
-│   │   ├── 02-exercises/
-│   │   │   └── ...
-│   │   ├── _images/
-│   │   │   └── ...
-│   │   ├── PRESENTATION.md
-│   │   ├── QUIZ.md
-│   │   └── README.md
-│   ├── ...
-│   ├── xy-this-is-course-xy-with-its-own-title/
-│   │   ├── PRESENTATION.md
-│   │   ├── QUIZ.md
-│   │   └── README.md
-│   └── README.md
-├── 02-practical-works/
-│   ├── 01-practical-work-1/
-│   │   ├── _images/
-│   │   │   └── ...
-│   │   ├── PRESENTATION.md
-│   │   └── README.md
-│   ├── 02-practical-work-2/
-│   │   ├── PRESENTATION.md
-│   │   └── README.md
-│   ├── ...
-│   ├── xy-practical-work-xy/
-│   │   ├── PRESENTATION.md
-│   │   └── README.md
-│   └── README.md
-├── 03-final-evaluation/
-│   ├── 01-archives/
-│   │   ├── 2024-2025-final-evaluation/
-│   │   │   └── README.md
-│   │   └── README.md
-│   ├── PRESENTATION.md
-│   └── README.md
-├── 04-other-resources/
-│   ├── 01-resources-for-teachers/
-│   │   └── README.md
-│   └── README.md
-├── build-all-presentations.sh*
-├── LICENSE.md
-└── README.md
-```
-
-Some of these terms might be translated into French in course materials written
-in French. Here is a table with the translations:
-
-| English                | French                                       |
-| :--------------------- | :------------------------------------------- |
-| Course materials       | Matériel de cours                            |
-| Practical works        | Travaux pratiques                            |
-| Final evaluation       | Évaluation finale                            |
-| Other resources        | Autres ressources                            |
-| Resources for teachers | Ressources pour les personnes qui enseignent |
-
-Each modules are organized into folders named with a two-digit prefix followed
-by a descriptive title, separated by hyphens (e.g.,
-`01-introduction-to-programming`), to ensure proper ordering. Each module folder
-may contain:
-
-- A README file (`README.md`) that contains detailed explanations, examples, and
-  exercises related to the topic.
-- A presentation file (`PRESENTATION.md`) that provides an overview of the
-  topic.
-- A quiz file (`QUIZ.md`) that contains questions to test students' knowledge
-  and understanding of the topic.
-
-The main README file at the root of the repository provides an overview of the
-course, including its objectives, structure, and any prerequisites.
-
-### Main README file guidelines
-
-The main README file at the root of the repository should include:
-
-### Course material guidelines
-
-Course materials are located in the `01-course-contents` directory. Most of the
-time, a course material contains a `README.md` file with the main content, a
-`PRESENTATION.md` file with a summary presentation, and sometimes a `QUIZ.md`
-file with quiz questions.
-
-### Code example guidelines
-
-### Exercise guidelines
-
-### Quiz guidelines
-
-### Project-related guidelines
-
-The structure
-
-All course materials must include:
-
-```markdown
-V. Guidoux, avec l'aide de
-[GitHub Copilot](https://github.com/features/copilot).
-
-Ce travail est sous licence [CC BY-SA 4.0][licence].
-```
+Deduce the overall structure of the course based on the files and folders in the
+[template](../03-autres-ressources/01-templates/README.md) folder of the
+repository.

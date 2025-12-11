@@ -25,5 +25,3 @@ sudo apt install --yes sqlite3
 
 ## Install NPM packages
 npm install
-
-git config --global pull.rebase true
