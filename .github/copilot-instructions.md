@@ -86,11 +86,11 @@ This course follows key pedagogical principles:
 
 ## Course objectives
 
-Deduce the main learning objectives and language for the course based on the
-main [README](../README.md) file of the repository.
+Deduce the main learning objectives of the course based on the main
+[README](../README.md) file of the repository.
 
 ## Course structure
 
 Deduce the overall structure of the course based on the files and folders in the
-[template](../03-autres-ressources/01-templates/README.md) folder of the
+[template](../04-autres-ressources/01-templates/README.md) folder of the
 repository.

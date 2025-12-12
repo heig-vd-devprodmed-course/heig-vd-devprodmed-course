@@ -1,0 +1,109 @@
+# Templates
+
+This directory contains templates for various course resources:
+
+- [`support-de-cours`](./support-de-cours/): Template for a complete course
+  session, including presentation, quiz, code examples, exercises and solution.
+- [`evaluation`](./evaluation/): Template for final evaluation resources,
+  including instructions and archives.
+
+These templates can be used as a starting point for creating new course
+materials, ensuring consistency and quality across different courses and
+sessions.
+
+## Course information
+
+Use the following information for your course materials, replacing the example
+values with those specific to your course:
+
+- GitHub repository URL (`GITHUB_REPOSITORY_URL`):
+  <https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course>
+- GitHub Pages URL (`GITHUB_PAGES_URL`):
+  <https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course>
+- Course title (`COURSE_TITLE`): Développement de produits médias
+- Course code (`COURSE_CODE`): DévProdMéd
+- Course language (`COURSE_LANGUAGE`): Français
+- Course author (`COURSE_AUTHOR`): L. Delafontaine, avec l'aide de
+  [GitHub Copilot](https://github.com/features/copilot)
+- Institution (`INSTITUTION`): HEIG-VD
+- Institution URL (`INSTITUTION_URL`): <https://heig-vd.ch>
+- Academic year (`ACADEMIC_YEAR`): 2025-2026
+- License (`LICENSE_NAME`): CC BY-SA 4.0
+- License URL (`LICENSE_LINK`): `{GITHUB_REPOSITORY_URL}/blob/main/LICENSE.md`
+
+## Course structure
+
+The course structure should follow the following organization:
+
+```txt
+./
+├── 01-supports-de-cours/
+│   └── ...
+├── 02-evaluation-intermediaire/
+│   └── ...
+├── 03-mini-projet-personnel/
+│   └── ...
+├── 04-autres-ressources/
+│   └── ...
+├── build-all-presentations.sh*
+├── LICENSE.md
+└── README.md
+```
+
+The folders and subfolders are named with a two-digit prefix followed by a
+descriptive title, all in lowercase without any special characters, separated by
+hyphens (e.g., `01-introduction-to-programming`), to ensure proper ordering.
+
+### Course materials structure
+
+The directory `01-supports-de-cours/` (`COURSE_MATERIAL_FOLDER`) contains all
+course materials, organized into subdirectories for each topic.
+
+Each topic folder may contain:
+
+- A README file (`README.md`) that contains detailed explanations and examples
+  related to the topic to be covered.
+- A presentation file (`PRESENTATION.md`) that provides an overview of the
+  topic, a summarized version of the main points issued from the README file.
+- A directory for the final result (`01-resultat-final/`) that contains the
+  final code or project that students should achieve after completing the topic.
+- A directory for exercises (`02-exercices/`) that contains practical exercises
+  related to the topic with their answers.
+- Images, PlantUML diagrams, and other multimedia elements to enhance
+  understanding are stored in a `images/` subdirectory within the topic folder.
+
+Use the [`support-de-cours`](./support-de-cours/) template to create new course
+materials.
+
+### Intermediate evaluation structure
+
+The directory `02-evaluation-intermediaire/` (`EVALUATION_FOLDER`) contains all
+evaluation resources, organized into subdirectories for each evaluation.
+
+- A README file (`README.md`) that contains detailed explanations and examples
+  related to the topic to be covered.
+- A presentation file (`PRESENTATION.md`) that provides an overview of the
+  topic, a summarized version of the main points issued from the README file.
+
+Use the [`evaluation`](./evaluation/) template to create new evaluation
+resources.
+
+### Personal mini-project structure
+
+The directory `03-mini-projet-personnel/` (`PERSONAL_MINI_PROJECT_FOLDER`)
+contains all resources related to the personal mini-project assigned to students
+during the course.
+
+- A README file (`README.md`) that contains detailed explanations and examples
+  related to the topic to be covered.
+- A presentation file (`PRESENTATION.md`) that provides an overview of the
+  topic, a summarized version of the main points issued from the README file.
+
+### Other resources structure
+
+The directory `04-autres-ressources/` (`OTHER_RESOURCES_FOLDER`) contains any
+additional resources that may be useful for the course, such as templates,
+reference materials, or supplementary readings.
+
+This directory is mostly used by the teaching staff and does not usually contain
+materials for students.

@@ -1,5 +1,5 @@
 {
-	"name": "HEIG-VD DevProdMéd Course Development Container",
+	"name": "HEIG-VD DévProdMéd Course Development Container",
 	"dockerComposeFile": "compose.yaml",
 	"service": "devcontainer",
 	"runServices": ["plantuml"],
