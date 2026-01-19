@@ -9,7 +9,7 @@ applyTo: "**/*.md"
 
 - Always separate headings, paragraphs, and lists with a blank line.
 - When using apostrophes, always use typings apostrophes (`'`, `"`) instead of
-  typographic apostrophes (`’`, `“`, `”`, ).
+  typographic apostrophes (`’`, `“`, `”`).
 - Wrap long paragraphs to a maximum of 80 characters per line for better
   readability in plain text editors. Reformat as needed when editing.
 - Never use emojis in the text.

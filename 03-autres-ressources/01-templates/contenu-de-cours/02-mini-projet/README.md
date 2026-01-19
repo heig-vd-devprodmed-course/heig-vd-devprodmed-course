@@ -12,10 +12,17 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
-- [Mini-projet](#mini-projet)
+- [Objectifs](#objectifs)
+- [Conclusion](#conclusion)
 - [Solution](#solution)
 
-## Mini-projet
+## Objectifs
+
+TODO
+
+---
+
+## Conclusion
 
 TODO
 

@@ -1,17 +1,12 @@
 # Templates
 
-This directory contains templates for various course resources:
-
-- [`contenu-de-cours`](./contenu-de-cours/): Template for a complete course
-  session, including presentation, quiz, code examples, exercises and solution.
-- [`evaluation`](./evaluation/): Template for final evaluation resources,
-  including instructions.
+This directory contains templates for various course resources.
 
 These templates can be used as a starting point for creating new course
 materials, ensuring consistency and quality across different courses and
 sessions.
 
-## Course information
+## Course metadata
 
 Use the following information for your course materials, replacing the example
 values with those specific to your course:
@@ -23,7 +18,7 @@ values with those specific to your course:
 - Course title (`COURSE_TITLE`): Développement de produits médias
 - Course code (`COURSE_CODE`): DévProdMéd
 - Course language (`COURSE_LANGUAGE`): Français
-- Course author (`COURSE_AUTHOR`): L. Delafontaine, avec l'aide de
+- Course author (`AUTHOR`): L. Delafontaine, avec l'aide de
   [GitHub Copilot](https://github.com/features/copilot)
 - Institution (`INSTITUTION`): HEIG-VD
 - Institution URL (`INSTITUTION_URL`): <https://heig-vd.ch>
@@ -31,9 +26,9 @@ values with those specific to your course:
 - License (`LICENSE_NAME`): CC BY-SA 4.0
 - License URL (`LICENSE_URL`): `{GITHUB_REPOSITORY_URL}/blob/main/LICENSE.md`
 
-## Course structure
+## Repository structure
 
-The course structure should follow the following organization:
+The repository should follow the following structure:
 
 ```txt
 ./
@@ -50,7 +45,7 @@ The course structure should follow the following organization:
 ```
 
 Folder and file names should follow the course content (`COURSE_CONTENT` - see
-[Course materials structure](#course-materials-structure)) and use the course
+[Course contents structure](#course-contents-structure)) and use the course
 language (`COURSE_LANGUAGE`) for consistency.
 
 The folders and subfolders are named with a two-digit prefix followed by a
@@ -80,7 +75,7 @@ Examples of improper folder naming conventions:
 - `03-eval-modalities` (English).
 - `03-modalities-eval` (French).
 
-### Course materials structure
+## Course contents structure
 
 The directory `01-contenus-de-cours/` (`COURSE_CONTENTS_FOLDER`) contains all
 course materials, organized into subdirectories for each content.
@@ -111,7 +106,7 @@ relevant template files in the templates directory, including:
 When updating a course content, ensure that all related files and resources are
 also updated accordingly to maintain consistency.
 
-### Evaluations structure
+## Evaluations structure
 
 The directory `02-evaluations/` (`EVALUATIONS_FOLDER`) contains all evaluation
 resources, organized into subdirectories for each evaluation/evaluation type.
@@ -126,7 +121,7 @@ Each evaluation folder contains:
 Use the [`evaluation`](./evaluation/) template to create new evaluation
 resources.
 
-### Other resources structure
+## Other resources structure
 
 The directory `03-autres-ressources/` (`OTHER_RESOURCES_FOLDER`) contains any
 additional resources that may be useful for the course, such as templates,

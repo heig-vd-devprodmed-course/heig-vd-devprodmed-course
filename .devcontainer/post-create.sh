@@ -1,10 +1,16 @@
 #!/usr/bin/env sh
 
-## Configure Bash aliases
+## Configure Bash
+# Aliases for common commands
 tee -a ~/.bash_aliases > /dev/null <<"EOF"
 alias tree='tree --dirsfirst -A -F'
 alias jpegoptim='jpegoptim --strip-all --all-progressive'
 alias optipng='optipng -o5 -strip all -fix'
+EOF
+
+## Enable globstar option for recursive globbing
+tee -a ~/.bashrc > /dev/null <<"EOF"
+shopt -s globstar nullglob
 EOF
 
 ## Install required packages
@@ -23,5 +29,10 @@ sudo apt install --yes ghostscript
 ## Install packages to interact with SQLite databases
 sudo apt install --yes sqlite3
 
-## Install NPM packages
-npm install
+## Install Laravel Installer
+composer global require laravel/installer --ignore-platform-req=ext-pcntl
+
+# Add Composer global bin to PATH
+tee -a ~/.bashrc > /dev/null <<"EOF"
+export PATH="${HOME}/.config/composer/vendor/bin:${PATH}"
+EOF

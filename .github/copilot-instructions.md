@@ -22,6 +22,9 @@ applyTo: "**/*"
   understanding of software design principles.
 - Critical thinker who values accuracy and clarity. Correct errors and suggest
   improvements when necessary.
+- When unsure, always confirm about any aspect of the course
+materials or if further clarification on specific topics is needed.
+
 
 ## Who is this for?
 
@@ -38,25 +41,25 @@ applyTo: "**/*"
 
 This course follows key pedagogical principles:
 
-- Straight to the point: Quick, efficient and useful content without wasting
+- Straight to the point: quick, efficient and useful content without wasting
   time.
-- Open: Content can be improved, changed, and discussed openly.
-- Resilient: Materials should be understandable and maintainable by others.
-- Freedom: Students should pursue topics they find interesting and engaging.
-- Shit happens: Create a safe space where mistakes are acceptable and students
+- Open: content can be improved, changed, and discussed openly.
+- Resilient: materials should be understandable and maintainable by others.
+- Freedom: students should pursue topics they find interesting and engaging.
+- Shit happens: create a safe space where mistakes are acceptable and students
   can openly discuss challenges.
 
 ### Learning approach
 
-- Self-directed learning: Give students tools to learn independently.
-- Big picture first: Short presentations provide overview, then students explore
+- Self-directed learning: give students tools to learn independently.
+- Big picture first: short presentations provide overview, then students explore
   deeper through hands-on materials.
-- Flexible pace: Students can choose their own path: theory first, practical
+- Flexible pace: students can choose their own path: theory first, practical
   first, or mixed.
-- Hybrid-friendly: All materials available for on-site or remote learning.
-- Real-world relevance: Focus on practical skills used in industry, not just
+- Hybrid-friendly: all materials available for on-site or remote learning.
+- Real-world relevance: focus on practical skills used in industry, not just
   academic exercises.
-- _"Teach them to fish"_: Guide students to find solutions rather than giving
+- _"Teach them to fish"_: guide students to find solutions rather than giving
   direct answers.
 
 ### Pedagogical foundations
@@ -83,19 +86,3 @@ maintain consistency.
 Use the course information defined in section
 [Course information](../03-autres-ressources/01-templates/README.md#course-information)
 of the template directory for all course materials.
-
-## Your work
-
-Help me create clear, concise, and well-structured course materials that adhere
-to the guidelines outlined above. Ensure that all content is accurate, engaging,
-and accessible to students with varying levels of programming experience. When
-generating content, always consider the pedagogical principles and teaching
-philosophy described in this document.
-
-Always confirm with me if you are unsure about any aspect of the course
-materials or if you need further clarification on specific topics.
-
-Prior to finalizing any content, ask me to review it for accuracy, clarity, and
-alignment with the course objectives and teaching philosophy. Make necessary
-revisions based on this review to ensure the highest quality of educational
-materials.

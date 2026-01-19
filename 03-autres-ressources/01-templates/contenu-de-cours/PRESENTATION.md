@@ -3,7 +3,7 @@ marp: true
 theme: "custom-marp-theme"
 size: "16:9"
 paginate: "true"
-author: "{COURSE_AUTHOR}"
+author: "{AUTHOR}"
 description:
   "{COURSE_CONTENT} pour le cours {COURSE_CODE} enseigné à la {INSTITUTION},
   Suisse"
@@ -27,7 +27,7 @@ _paginate: false
 Visualiser le contenu complet sur GitHub [à cette
 adresse][contenu-complet-sur-github].
 
-<small>{COURSE_AUTHOR}</small>
+<small>{AUTHOR}</small>
 
 <small>Ce travail est sous licence [{LICENSE_NAME}][licence]</small>
 
