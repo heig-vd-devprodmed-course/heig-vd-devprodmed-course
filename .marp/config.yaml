@@ -2,7 +2,6 @@ allowLocalFiles: true
 browserTimeout: 120
 html: true
 jpegQuality: 75
-lang: fr
 themeSet: .
 options:
   markdown:

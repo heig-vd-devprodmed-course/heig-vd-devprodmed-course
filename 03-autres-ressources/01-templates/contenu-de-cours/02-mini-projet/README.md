@@ -1,6 +1,6 @@
 # {COURSE_CONTENT} - Mini-projet
 
-{AUTHOR}
+{AUTHOR}.
 
 Ce travail est sous licence [{LICENSE_NAME}][licence].
 

@@ -1,6 +1,6 @@
 # {COURSE_CONTENT}
 
-{AUTHOR}
+{AUTHOR}.
 
 Ce travail est sous licence [{LICENSE_NAME}][licence].
 
@@ -16,14 +16,7 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 >   [Présentation (PDF)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/{COURSE_CONTENT}-presentation.pdf)
 > - Exercices : [Accéder au contenu](./01-exercices/README.md)
 > - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md)
-
-<!--
-> - Quiz :
->   [Web]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/quiz.html)
->   ·
->   [PDF]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/{COURSE_CONTENT}-quiz.pdf)
--->
-
+>
 > **Objectifs**
 >
 > À l'issue de cette séance, les personnes qui étudient devraient être capables
@@ -39,9 +32,9 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 > Les méthodes d'enseignement et d'apprentissage utilisées pour animer la séance
 > sont les suivantes :
 >
-> - Présentation magistrale
-> - Discussions collectives
-> - Travail en autonomie
+> - Présentation magistrale.
+> - Discussions collectives.
+> - Travail en autonomie.
 >
 > **Méthodes d'évaluation**
 >
@@ -59,11 +52,8 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 > Les retours se font de la manière suivante :
 >
 > - Corrigé des exercices.
-
-<!--
-> - Corrigé du quiz.
--->
-
+> - Corrigé du mini-projet.
+>
 > L'évaluation ne donne pas lieu à une note.
 
 ## Table des matières
@@ -72,10 +62,16 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 - [Objectifs](#objectifs)
 - [Conclusion](#conclusion)
 - [Exercices](#exercices)
-- [Solution](#solution)
+- [Mini-projet](#mini-projet)
 - [À faire pour la prochaine séance](#à-faire-pour-la-prochaine-séance)
 
 ## Objectifs
+
+Ce contenu de cours a pour objectifs de permettre aux personnes qui étudient de
+TODO.
+
+De façon plus concise, à l'issue de cette séance, les personnes qui étudient
+devraient être capables de :
 
 - Objectif 1.
 - Objectif 2.
@@ -91,24 +87,28 @@ leur apprentissage.
 
 ## Exercices
 
-Nous vous invitons ensuite à réaliser les exercices du cours afin de mettre en
-pratique les concepts abordés.
+Nous vous invitons maintenant à réaliser les exercices de la séance afin de
+mettre en pratique les concepts abordés.
 
-Vous trouverez les exercices ici : [Exercices](./01-exercices/README.md).
+Vous trouverez les exercices et leur corrigé ici :
+[Exercices](./01-exercices/README.md).
 
-## Solution
+## Mini-projet
 
-Vous trouverez l
+Nous vous invitons maintenant à réaliser le mini-projet de la séance afin de
+mettre en pratique les concepts abordés.
+
+Vous trouverez les détails du mini-projet ici :
+[Mini-projet](./02-mini-projet/README.md).
 
 ## À faire pour la prochaine séance
 
 Chaque personne est libre de gérer son temps comme elle le souhaite. Cependant,
 il est recommandé pour la prochaine séance de :
 
-- Relire les supports de cours si nécessaire.
-- Finaliser l'appropriation des exemples de code qui n'ont pas été vus en
-  classe.
+- Relire le support de cours si nécessaire.
 - Finaliser les exercices qui n'ont pas été terminés en classe.
+- Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
 
 <!-- URLs -->
 

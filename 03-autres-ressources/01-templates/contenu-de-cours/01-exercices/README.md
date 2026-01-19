@@ -1,6 +1,6 @@
 # {COURSE_CONTENT} - Exercices
 
-{AUTHOR}
+{AUTHOR}.
 
 Ce travail est sous licence [{LICENSE_NAME}][licence].
 

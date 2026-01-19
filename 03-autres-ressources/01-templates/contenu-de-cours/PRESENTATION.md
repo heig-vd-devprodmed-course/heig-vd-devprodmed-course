@@ -62,12 +62,12 @@ Est-ce que vous avez des questions ?
 
 ## À vous de jouer !
 
-- (Re)lire le support de cours.
-- Explorer les exemples de code.
+- (Re)lire le contenu de cours.
 - Faire les exercices.
+- Faire le mini-projet.
 - Poser des questions si nécessaire.
 
-➡️ [Accéder au contenu complet sur GitHub.][contenu-complet-sur-github]
+➡️ [Visualiser le contenu complet sur GitHub.][contenu-complet-sur-github]
 
 **N'hésitez pas à vous entraidez si vous avez des difficultés !**
 

@@ -40,7 +40,7 @@ The course structure should follow the following organization:
 ├── 01-contenus-de-cours/
 │   └── ...
 ├── 02-evaluations/
-│   ├── 01-evaluation-ecrite/
+│   ├── 01-evaluation/
 │   └── 02-mini-projet-personnel/
 ├── 03-autres-ressources/
 │   └── ...
@@ -100,8 +100,16 @@ Each content folder contains:
   understanding are stored in a `images/` subdirectory within the content
   folder.
 
-Use the [`contenu-de-cours`](./contenu-de-cours/) template to create new course
-materials.
+When creating new course content, always read and follow the structure of all
+relevant template files in the templates directory, including:
+
+- [The main content template](./contenu-de-cours/README.md)
+- [The exercises template](./contenu-de-cours/01-exercices/README.md)
+- [The mini-project template](./contenu-de-cours/02-mini-projet/README.md)
+- [The solution template](./contenu-de-cours/02-mini-projet/solution/README.md)
+
+When updating a course content, ensure that all related files and resources are
+also updated accordingly to maintain consistency.
 
 ### Evaluations structure
 

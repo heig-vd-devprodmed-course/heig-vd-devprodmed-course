@@ -83,3 +83,19 @@ maintain consistency.
 Use the course information defined in section
 [Course information](../03-autres-ressources/01-templates/README.md#course-information)
 of the template directory for all course materials.
+
+## Your work
+
+Help me create clear, concise, and well-structured course materials that adhere
+to the guidelines outlined above. Ensure that all content is accurate, engaging,
+and accessible to students with varying levels of programming experience. When
+generating content, always consider the pedagogical principles and teaching
+philosophy described in this document.
+
+Always confirm with me if you are unsure about any aspect of the course
+materials or if you need further clarification on specific topics.
+
+Prior to finalizing any content, ask me to review it for accuracy, clarity, and
+alignment with the course objectives and teaching philosophy. Make necessary
+revisions based on this review to ensure the highest quality of educational
+materials.
