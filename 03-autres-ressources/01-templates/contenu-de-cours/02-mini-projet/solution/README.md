@@ -1,4 +1,4 @@
-# {COURSE_CONTENT} - Mini-projet
+# {COURSE_CONTENT} - Mini-projet - Solution
 
 {AUTHOR}
 
@@ -12,17 +12,12 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
-- [Mini-projet](#mini-projet)
-- [Solution](#solution)
+- [Solution du mini-projet](#solution-du-mini-projet)
 
-## Mini-projet
+## Solution du mini-projet
 
-TODO
-
-## Solution
-
-Vous pouvez trouver la solution du mini-projet à l'adresse suivante :
-[Solution](./solution/README.md).
+Ce dossier contient une solution possible au mini-projet décrit dans le document
+parent.
 
 <!-- URLs -->
 

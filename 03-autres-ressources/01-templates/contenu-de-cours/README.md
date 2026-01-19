@@ -1,4 +1,4 @@
-# {Topic of the course material}
+# {COURSE_CONTENT}
 
 {AUTHOR}
 
@@ -6,21 +6,24 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 
 > [!TIP]
 >
-> Voici quelques informations relatives à la séance et son déroulement.
+> Voici quelques informations relatives à ce contenu.
 >
 > **Ressources annexes**
 >
 > - Autres formats du support de cours :
->   [Présentation (web)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/presentation.html)
+>   [Présentation (web)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/presentation.html)
 >   ·
->   [Présentation (PDF)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/{topic-folder}-presentation.pdf)
-> - Résultat final : [Accéder au contenu](./02-mini-projet/README.md)
+>   [Présentation (PDF)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/{COURSE_CONTENT}-presentation.pdf)
 > - Exercices : [Accéder au contenu](./01-exercices/README.md)
+> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md)
+
+<!--
 > - Quiz :
->   [Web]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/quiz.html)
+>   [Web]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/quiz.html)
 >   ·
->   [PDF]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/{topic-folder}-quiz.pdf)
->
+>   [PDF]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/{COURSE_CONTENT}-quiz.pdf)
+-->
+
 > **Objectifs**
 >
 > À l'issue de cette séance, les personnes qui étudient devraient être capables
@@ -42,21 +45,25 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 >
 > **Méthodes d'évaluation**
 >
-> L'évaluation prend la forme d'exercices à réaliser en autonomie en > classe ou
-> à la maison ainsi qu'un quiz qui aura lieu à la prochaine séance.
+> L'évaluation prend la forme d'exercices et d'un mini-projet à réaliser en
+> autonomie en classe ou à la maison.
 >
 > L'évaluation se fait en utilisant les critères suivants :
 >
-> - Capacité à s'approprier des exemples de code.
-> - Capacité à appliquer les exemples de code à des situations > similaires.
 > - Capacité à répondre avec justesse.
 > - Capacité à argumenter.
+> - Capacité à réaliser les tâches demandées.
+> - Capacité à s'approprier les exemples de code.
+> - Capacité à appliquer les exemples de code à des situations similaires.
 >
 > Les retours se font de la manière suivante :
 >
 > - Corrigé des exercices.
+
+<!--
 > - Corrigé du quiz.
->
+-->
+
 > L'évaluation ne donne pas lieu à une note.
 
 ## Table des matières
@@ -105,5 +112,4 @@ il est recommandé pour la prochaine séance de :
 
 <!-- URLs -->
 
-[licence]:
-	https://github.com/heig-vd-progserv-course/heig-vd-progserv2-course/blob/main/LICENSE.md
+[licence]: {LICENSE_URL}

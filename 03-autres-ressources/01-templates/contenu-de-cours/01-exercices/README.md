@@ -1,4 +1,4 @@
-# {Topic of the course material} - Exercices
+# {COURSE_CONTENT} - Exercices
 
 {AUTHOR}
 
@@ -6,8 +6,8 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 
 > [!TIP]
 >
-> Toutes les informations relatives à ce document sont décrits dans le
-> [support de cours](../README.md).
+> Toutes les informations relatives à ce contenu sont décrites dans le
+> [contenu principal](../README.md).
 
 ## Table des matières
 
@@ -42,5 +42,4 @@ Solution de l'exercice 2.
 
 <!-- URLs -->
 
-[licence]:
-	https://github.com/heig-vd-progserv-course/heig-vd-progserv2-course/blob/main/LICENSE.md
+[licence]: {LICENSE_URL}
