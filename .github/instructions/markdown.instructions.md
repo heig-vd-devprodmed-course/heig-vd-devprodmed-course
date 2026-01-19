@@ -1,12 +1,9 @@
 ---
 description: Instructions when working with Markdown files in this repository.
-applyTo: '**/*.md'
+applyTo: "**/*.md"
 ---
 
 # Markdown guidelines
-
-When working with markdown files in this repository, please follow these
-guidelines to ensure consistency and readability across all documents.
 
 ## General formatting
 
@@ -15,6 +12,15 @@ guidelines to ensure consistency and readability across all documents.
   typographic apostrophes (`’`).
 - Wrap long paragraphs to a maximum of 80 characters per line for better
   readability in plain text editors. Reformat as needed when editing.
+- Never use emojis in the text.
+- When referencing files, folders, or documents in the repository, always use
+  relative paths/links.
+- When referencing anchors in documents, always use full names without
+  abbreviations to ensure clarity (e.g., use
+  `#introduction-to-programming`/`[link-to-external-resource]` instead of
+  `#intro-prog`/`#introduction`/`[link]`).
+- Avoid highlighting text using bold or italics unless absolutely necessary for
+  emphasis.
 
 ### Headings
 
@@ -27,9 +33,9 @@ guidelines to ensure consistency and readability across all documents.
 
 ### Code blocks
 
-- Use code blocks (triple backticks
-  `) for code examples, specifying the language for syntax highlighting (e.g., `java).
-- Use consistent indentation (2 or 4 spaces) for nested lists.
+- Use code blocks (triple backticks ` ``` `) for code examples, specifying the
+  language for syntax highlighting (e.g., `java`).
+- Use consistent indentation (2 spaces) for nested lists.
 
 ### Tables
 

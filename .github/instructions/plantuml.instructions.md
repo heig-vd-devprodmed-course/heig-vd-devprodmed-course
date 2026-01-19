@@ -5,5 +5,4 @@ applyTo: "**/*.puml, **/*.plantuml"
 
 # PlantUML guidelines
 
-When working with PlantUML files in this repository, please follow these
-guidelines to ensure consistency and readability across all documents.
+- Always use the `.puml` file extension for PlantUML files.

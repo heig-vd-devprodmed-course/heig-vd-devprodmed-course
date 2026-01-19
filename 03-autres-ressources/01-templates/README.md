@@ -2,10 +2,10 @@
 
 This directory contains templates for various course resources:
 
-- [`support-de-cours`](./support-de-cours/): Template for a complete course
+- [`contenu-de-cours`](./contenu-de-cours/): Template for a complete course
   session, including presentation, quiz, code examples, exercises and solution.
 - [`evaluation`](./evaluation/): Template for final evaluation resources,
-  including instructions and archives.
+  including instructions.
 
 These templates can be used as a starting point for creating new course
 materials, ensuring consistency and quality across different courses and
@@ -37,13 +37,12 @@ The course structure should follow the following organization:
 
 ```txt
 ./
-├── 01-supports-de-cours/
+├── 01-contenus-de-cours/
 │   └── ...
-├── 02-evaluation-intermediaire/
-│   └── ...
-├── 03-mini-projet-personnel/
-│   └── ...
-├── 04-autres-ressources/
+├── 02-evaluations/
+│   ├── 01-evaluation-ecrite/
+│   └── 02-presentation-orale/
+├── 03-autres-ressources/
 │   └── ...
 ├── build-all-presentations.sh*
 ├── LICENSE.md
@@ -54,31 +53,39 @@ The folders and subfolders are named with a two-digit prefix followed by a
 descriptive title, all in lowercase without any special characters, separated by
 hyphens (e.g., `01-introduction-to-programming`), to ensure proper ordering.
 
+When creating new folders or files, always use full names without abbreviations
+to ensure clarity (e.g., use `introduction-to-programming` instead of
+`intro-prog`/`introduction`).
+
 ### Course materials structure
 
-The directory `01-supports-de-cours/` (`COURSE_MATERIAL_FOLDER`) contains all
-course materials, organized into subdirectories for each topic.
+The directory `01-contenus-de-cours/` (`COURSE_CONTENTS_FOLDER`) contains all
+course materials, organized into subdirectories for each content.
 
-Each topic folder may contain:
+Each content folder contains:
 
 - A README file (`README.md`) that contains detailed explanations and examples
-  related to the topic to be covered.
+  related to the content to be covered.
 - A presentation file (`PRESENTATION.md`) that provides an overview of the
-  topic, a summarized version of the main points issued from the README file.
-- A directory for the final result (`01-resultat-final/`) that contains the
-  final code or project that students should achieve after completing the topic.
-- A directory for exercises (`02-exercices/`) that contains practical exercises
-  related to the topic with their answers.
+  content, a summarized version of the main points issued from the README file.
+- A directory for exercises (`01-exercices/`) that contains practical exercises
+  related to the content with their answers.
+- A directory for the mini-project (`02-mini-projet/`) that contains the
+  mini-project to be completed by students, including instructions,
+  requirements, and expected outcomes.
 - Images, PlantUML diagrams, and other multimedia elements to enhance
-  understanding are stored in a `images/` subdirectory within the topic folder.
+  understanding are stored in a `images/` subdirectory within the content
+  folder.
 
-Use the [`support-de-cours`](./support-de-cours/) template to create new course
+Use the [`contenu-de-cours`](./contenu-de-cours/) template to create new course
 materials.
 
-### Intermediate evaluation structure
+### Evaluations structure
 
-The directory `02-evaluation-intermediaire/` (`EVALUATION_FOLDER`) contains all
-evaluation resources, organized into subdirectories for each evaluation.
+The directory `02-evaluations/` (`EVALUATIONS_FOLDER`) contains all evaluation
+resources, organized into subdirectories for each evaluation/evaluation type.
+
+Each evaluation folder contains:
 
 - A README file (`README.md`) that contains detailed explanations and examples
   related to the topic to be covered.
@@ -88,20 +95,9 @@ evaluation resources, organized into subdirectories for each evaluation.
 Use the [`evaluation`](./evaluation/) template to create new evaluation
 resources.
 
-### Personal mini-project structure
-
-The directory `03-mini-projet-personnel/` (`PERSONAL_MINI_PROJECT_FOLDER`)
-contains all resources related to the personal mini-project assigned to students
-during the course.
-
-- A README file (`README.md`) that contains detailed explanations and examples
-  related to the topic to be covered.
-- A presentation file (`PRESENTATION.md`) that provides an overview of the
-  topic, a summarized version of the main points issued from the README file.
-
 ### Other resources structure
 
-The directory `04-autres-ressources/` (`OTHER_RESOURCES_FOLDER`) contains any
+The directory `03-autres-ressources/` (`OTHER_RESOURCES_FOLDER`) contains any
 additional resources that may be useful for the course, such as templates,
 reference materials, or supplementary readings.
 

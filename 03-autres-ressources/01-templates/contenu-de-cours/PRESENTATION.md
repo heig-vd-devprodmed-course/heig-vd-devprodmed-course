@@ -1,34 +1,47 @@
 ---
 marp: true
----
-
-<!--
 theme: "custom-marp-theme"
 size: "16:9"
 paginate: "true"
 author: "{COURSE_AUTHOR}"
-title: "{INSTITUTION} - {COURSE_CODE} - {Topic of the course material}"
-description: "{Topic of the course material} pour le cours {COURSE_CODE} enseigné à la {INSTITUTION}, Suisse"
+description:
+  "{COURSE_CONTENT} pour le cours {COURSE_CODE} enseigné à la {INSTITUTION},
+  Suisse"
 lang: "fr"
-header: "[**{Topic of the course material}**]({GITHUB_REPOSITORY_URL}/tree/main/{folder-of-the-presentation})"
-footer: "[**{INSTITUTION}**]({INSTITUTION_URL}) - [{COURSE_CODE} {ACADEMIC_YEAR}]({GITHUB_REPOSITORY_URL}) - [{LICENSE_NAME}]({LICENSE_LINK})"
+header: "[**{COURSE_CONTENT}**][contenu-complet-sur-github]"
+footer:
+  "[**{INSTITUTION}**]({INSTITUTION_URL}) - [{COURSE_CODE}
+  {ACADEMIC_YEAR}]({GITHUB_REPOSITORY_URL}) - [{LICENSE_NAME}][licence]"
 headingDivider: 6
--->
+---
 
-# {Topic of the course material}
+# {COURSE_CONTENT}
 
 <!--
 _class: lead
 _paginate: false
 -->
 
-[{GITHUB_REPOSITORY_URL without the protocol}]({GITHUB_REPOSITORY_URL}/tree/main/{COURSE_MATERIAL_FOLDER}/{topic-folder}/README.md)
+<{GITHUB_REPOSITORY_URL}>
+
+Visualiser le contenu complet sur GitHub [à cette
+adresse][contenu-complet-sur-github].
 
 <small>{COURSE_AUTHOR}</small>
 
 <small>Ce travail est sous licence [{LICENSE_NAME}][licence]</small>
 
 ![bg opacity:0.1][illustration-principale]
+
+## Plus de détails sur GitHub
+
+<!-- _class: lead -->
+
+_Cette présentation est un résumé du contenu complet disponible sur GitHub._
+
+_Pour plus de détails, consulter le [contenu complet sur
+GitHub][contenu-complet-sur-github] ou en cliquant sur l'en-tête de ce
+document._
 
 ## Objectifs
 
@@ -54,7 +67,7 @@ Est-ce que vous avez des questions ?
 - Faire les exercices.
 - Poser des questions si nécessaire.
 
-➡️ [Lien vers le support de cours][support-de-cours]
+➡️ [Accéder au contenu complet sur GitHub.][contenu-complet-sur-github]
 
 **N'hésitez pas à vous entraidez si vous avez des difficultés !**
 
@@ -77,8 +90,8 @@ Est-ce que vous avez des questions ?
 
 <!-- URLs -->
 
-[support-de-cours]:
-	{GITHUB_REPOSITORY_URL}/tree/main/{COURSE_MATERIAL_FOLDER}/{topic-folder}/README.md
+[contenu-complet-sur-github]:
+	{GITHUB_REPOSITORY_URL}/tree/main/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT_FOLDER}/README.md
 [licence]: {LICENSE_URL}
 
 <!-- Illustrations -->

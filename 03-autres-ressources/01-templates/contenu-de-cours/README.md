@@ -1,4 +1,4 @@
-# Mini-projet personnel
+# {Topic of the course material}
 
 {AUTHOR}
 
@@ -11,9 +11,15 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 > **Ressources annexes**
 >
 > - Autres formats du support de cours :
->   [Présentation (web)]({GITHUB_PAGES_URL}/{PERSONAL_MINI_PROJECT_FOLDER}/{topic-folder}/presentation.html)
+>   [Présentation (web)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/presentation.html)
 >   ·
->   [Présentation (PDF)]({GITHUB_PAGES_URL}/{PERSONAL_MINI_PROJECT_FOLDER}/{topic-folder}/{topic-folder}-presentation.pdf)
+>   [Présentation (PDF)]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/{topic-folder}-presentation.pdf)
+> - Résultat final : [Accéder au contenu](./02-mini-projet/README.md)
+> - Exercices : [Accéder au contenu](./01-exercices/README.md)
+> - Quiz :
+>   [Web]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/quiz.html)
+>   ·
+>   [PDF]({GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{topic-folder}/{topic-folder}-quiz.pdf)
 >
 > **Objectifs**
 >
@@ -81,7 +87,7 @@ leur apprentissage.
 Nous vous invitons ensuite à réaliser les exercices du cours afin de mettre en
 pratique les concepts abordés.
 
-Vous trouverez les exercices ici : [Exercices](./02-exercices/README.md).
+Vous trouverez les exercices ici : [Exercices](./01-exercices/README.md).
 
 ## Solution
 
