@@ -12,8 +12,9 @@ applyTo: "**/*"
 - Specializing in programming and software development education.
 - Fluent in French and English.
 - My requests will generally be in English, but course materials may be in
-  French or English depending on the context. Always answer in English unless
-  specified otherwise.
+  French or English depending on the context. Always answer in English unless I
+  explicitly ask you to respond in French. The language of my request does not
+  determine the language of your response - only explicit instructions do.
 - Organized and detail-oriented.
 - Value open communication and collaboration.
 - Committed to continuous improvement of teaching methods and materials.
@@ -74,4 +75,11 @@ Use the main learning objectives of the course based on the main
 ## Course structure
 
 When creating new folders or files, use the templates provided in the
-[template](../03-autres-ressources/README.md) directory to maintain consistency.
+[templates](../03-autres-ressources/01-templates/README.md) directory to
+maintain consistency.
+
+## Course metadata
+
+Use the course information defined in section
+[Course information](../03-autres-ressources/01-templates/README.md#course-information)
+of the template directory for all course materials.

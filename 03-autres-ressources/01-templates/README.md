@@ -29,7 +29,7 @@ values with those specific to your course:
 - Institution URL (`INSTITUTION_URL`): <https://heig-vd.ch>
 - Academic year (`ACADEMIC_YEAR`): 2025-2026
 - License (`LICENSE_NAME`): CC BY-SA 4.0
-- License URL (`LICENSE_LINK`): `{GITHUB_REPOSITORY_URL}/blob/main/LICENSE.md`
+- License URL (`LICENSE_URL`): `{GITHUB_REPOSITORY_URL}/blob/main/LICENSE.md`
 
 ## Course structure
 
@@ -41,7 +41,7 @@ The course structure should follow the following organization:
 │   └── ...
 ├── 02-evaluations/
 │   ├── 01-evaluation-ecrite/
-│   └── 02-presentation-orale/
+│   └── 02-mini-projet-personnel/
 ├── 03-autres-ressources/
 │   └── ...
 ├── build-all-presentations.sh*
@@ -49,13 +49,36 @@ The course structure should follow the following organization:
 └── README.md
 ```
 
+Folder and file names should follow the course content (`COURSE_CONTENT` - see
+[Course materials structure](#course-materials-structure)) and use the course
+language (`COURSE_LANGUAGE`) for consistency.
+
 The folders and subfolders are named with a two-digit prefix followed by a
 descriptive title, all in lowercase without any special characters, separated by
-hyphens (e.g., `01-introduction-to-programming`), to ensure proper ordering.
+hyphens, to ensure proper ordering.
 
 When creating new folders or files, always use full names without abbreviations
-to ensure clarity (e.g., use `introduction-to-programming` instead of
-`intro-prog`/`introduction`).
+to ensure clarity.
+
+### Examples
+
+Examples of proper folder naming conventions:
+
+- `01-introduction-to-programming` (English).
+- `01-introduction-a-la-programmation` (French).
+- `02-object-oriented-programming` (English).
+- `02-programmation-orientee-objet` (French).
+- `03-modalities-of-evaluation` (English).
+- `03-modalites-devaluation` (French) - Note the omission of the apostrophe.
+
+Examples of improper folder naming conventions:
+
+- `01-intro-prog` (English).
+- `01-intro-a-la-prog` (French).
+- `02-oop` (English).
+- `02-poo` (French).
+- `03-eval-modalities` (English).
+- `03-modalities-eval` (French).
 
 ### Course materials structure
 
