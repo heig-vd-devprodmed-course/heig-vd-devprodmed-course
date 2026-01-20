@@ -18,11 +18,14 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Mettre en place l'environnement de développement](#mettre-en-place-lenvironnement-de-développement)
   - [Installer et configurer Laravel Herd](#installer-et-configurer-laravel-herd)
   - [Installer et configurer Visual Studio Code](#installer-et-configurer-visual-studio-code)
+  - [Configurer Git et GitHub](#configurer-git-et-github)
   - [Valider l'installation et la configuration de l'environnement de développement](#valider-linstallation-et-la-configuration-de-lenvironnement-de-développement)
 - [Démarrer le mini-projet](#démarrer-le-mini-projet)
   - [Initialiser le projet Laravel](#initialiser-le-projet-laravel)
   - [Démarrer le serveur de développement Laravel](#démarrer-le-serveur-de-développement-laravel)
   - [Naviguer dans la structure du projet](#naviguer-dans-la-structure-du-projet)
+  - [Effectuer une modification simple](#effectuer-une-modification-simple)
+  - [Initialiser le projet Git](#initialiser-le-projet-git)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 
@@ -43,27 +46,24 @@ projet libre.
 
 Dans ce cours _"Développement de produit média (DévProdMéd)"_, vous allez créer
 une application web complète en utilisant le framework Laravel. Le mini-projet
-reprendra le concept autour d'animaux de compagnie, mais cette fois-ci en
-utilisant Laravel pour structurer et simplifier le développement.
+reprendra les concepts étudiés en _"Programmation serveur 1 (ProgServ1)"_ et
+_"Programmation serveur 2 (ProgServ2)"_, mais cette fois-ci en utilisant Laravel
+pour structurer et simplifier le développement.
 
-Au travers de Laravel, vous retrouverez des concepts vus préalablement, mais
-aussi de nouveaux concepts tels que le modèle MVC, les migrations de base de
-données, les formulaires, l'authentification, et bien plus encore.
-
-Le mini-projet du cours est un petit réseau social autour des animaux de
-compagnie. Vous allez créer une application web qui permettra aux personnes
-d'effectuer les actions suivantes sur celle-ci :
+Le mini-projet du cours est un petit réseau social. Vous allez créer une
+application web qui permettra aux personnes d'effectuer les actions suivantes
+sur celle-ci :
 
 - Se créer un compte sur la plateforme.
 - Se connecter et se déconnecter.
 - Modifier son profil utilisateur.
-- Visualiser une liste d'animaux de compagnie partagés par toutes les personnes
-  qui utilisent l'application.
-- Gérer une liste personnelle d'animaux de compagnie (ajouter, modifier,
-  supprimer).
-- Créer et partager des posts autour de la thématique des animaux de compagnie.
+- Créer et partager des posts avec un titre et une description.
 - Interagir avec les posts des autres personnes qui utilisent l'application
-  (aimer, commenter).
+  (aimer un post).
+
+Si le temps le permet, des fonctionnalités supplémentaires pourront être
+ajoutées, comme la possibilité de rajouter une ou des images aux posts, de
+commenter les posts ou de suivre d'autres utilisateur.trices.
 
 L'objectif est de construire une application web complète pour remplir ces
 fonctionnalités en utilisant Laravel.
@@ -79,7 +79,7 @@ devraient avoir pu :
 - Initialiser un projet Laravel.
 - Lancer le serveur de développement Laravel.
 - Explorer la structure d'un projet Laravel.
-- Comprendre les étapes à venir pour construire l'application web.
+- Partager le code source du projet sur GitHub.
 
 ## Avertissements et alertes
 
@@ -166,6 +166,10 @@ la configuration.
 > Vous pouvez utiliser MAMP pour ce cours, mais nous recommandons d'utiliser
 > Laravel Herd pour simplifier la configuration pour Laravel.
 
+De plus, nous allons utiliser GitHub Classroom pour gérer le code source du
+mini-projet. Cela sera l'occasion de prendre encore plus l'habitude d'utiliser
+Git et GitHub dans un contexte de développement professionnel.
+
 ### Installer et configurer Laravel Herd
 
 Laravel propose des instructions pour installer les dépendances nécessaires à
@@ -188,9 +192,14 @@ Suivez les instructions suivantes en fonction de votre système d'exploitation :
 #### Installer et configurer Laravel Herd sur Windows
 
 1. Rendez-vous sur la page de téléchargement de Laravel Herd :
-   <https://herd.laravel.com/windows> :
+   <https://herd.laravel.com/windows>.
+
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
 
    ![Laravel Herd pour Windows (1)](./images/laravel-herd-windows-01.png)
+
+   </details>
 
 2. Téléchargez la dernière version de Laravel Herd pour Windows.
 3. Exécutez le fichier téléchargé. Laravel Herd va automatiquement s'installer.
@@ -209,11 +218,19 @@ Suivez les instructions suivantes en fonction de votre système d'exploitation :
 5. Une alerte du pare-feu Windows peut apparaître. Assurez-vous d'autoriser
    l'accès pour que Laravel Herd puisse fonctionner correctement :
 
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
+
    ![Laravel Herd pour Windows (2)](./images/laravel-herd-windows-02.png)
 
    ![Laravel Herd pour Windows (3)](./images/laravel-herd-windows-03.png)
 
+   </details>
+
 6. Laissez les options par défaut et n'utilisez pas "Laravel Herd Pro" :
+
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
 
    ![Laravel Herd pour Windows (4)](./images/laravel-herd-windows-04.png)
 
@@ -223,13 +240,20 @@ Suivez les instructions suivantes en fonction de votre système d'exploitation :
 
    ![Laravel Herd pour Windows (7)](./images/laravel-herd-windows-07.png)
 
+   </details>
+
 7. Une fois l'installation terminée, ouvrez le tableau de bord de Laravel Herd.
    Celui-ci devrait ressembler à ceci :
 
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
+
    ![Laravel Herd pour Windows (8)](./images/laravel-herd-windows-08.png)
 
+   </details>
+
 Une fois l'installation terminée, vous pouvez passer à la section
-[Valider l'installation de Laravel Herd](#valider-linstallation-de-laravel-herd).
+[Valider l'installation de Laravel](#valider-linstallation-de-laravel).
 
 #### Installer et configurer Laravel Herd sur macOS
 
@@ -241,7 +265,7 @@ Une fois l'installation terminée, vous pouvez passer à la section
 4. Ouvrez Laravel Herd depuis le dossier _"Applications"_.
 
 Une fois l'installation terminée, vous pouvez passer à la section
-[Valider l'installation de Laravel Herd](#valider-linstallation-de-laravel-herd).
+[Valider l'installation de Laravel](#valider-linstallation-de-laravel).
 
 #### Installer et configurer Laravel Herd sur Linux
 
@@ -251,11 +275,11 @@ dépendances nécessaires à Laravel sur Linux
 :<https://laravel.com/docs/12.x/installation>.
 
 Une fois l'installation terminée, vous pouvez passer à la section
-[Valider l'installation de Laravel Herd](#valider-linstallation-de-laravel-herd).
+[Valider l'installation de Laravel](#valider-linstallation-de-laravel).
 
-#### Valider l'installation de Laravel Herd
+#### Valider l'installation de Laravel
 
-Maintenant que Laravel Herd est installé, nous allons vérifier que tout
+Maintenant que Laravel (Herd) est installé, nous allons vérifier que tout
 fonctionne correctement.
 
 Ouvrez un terminal (_"Invite de commandes"_, _"PowerShell"_, ou _"Windows
@@ -336,6 +360,24 @@ Ensuite, installez l'extension
 [Laravel for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=laravel.vscode-laravel)
 pour améliorer votre expérience de développement avec Laravel.
 
+#### Installer l'extension Database Client pour Visual Studio Code
+
+Ensuite, installez l'extension
+[Database Client](https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-database-client2)
+pour gérer les bases de données directement depuis Visual Studio Code.
+
+#### Choisir un dossier pour le mini-projet
+
+Choisissez un dossier sur votre système où vous souhaitez créer le projet
+Laravel pour le mini-projet. Vous pouvez créer un dossier nommé
+`devprodmed-mini-projet` dans votre dossier `Documents` par exemple.
+
+> [!IMPORTANT] Utilisez le nom `devprodmed-mini-projet` pour le dossier du
+> mini-projet. Ce nom de dossier sera utilisé dans les prochaines sections.
+
+Retenez l'emplacement de ce dossier, car vous en aurez besoin tout au long du
+cours pour réaliser le mini-projet.
+
 #### Ouvrir un terminal intégré dans Visual Studio Code
 
 Afin de ne pas avoir à basculer entre plusieurs applications, nous allons
@@ -349,15 +391,65 @@ utiliser le terminal intégré de Visual Studio Code.
 Cela vous permettra d'exécuter des commandes directement depuis Visual Studio
 sans avoir à ouvrir une application de terminal séparée.
 
+### Configurer Git et GitHub
+
+#### Valider que Git est installé
+
+Avant de continuer, assurez-vous que Git est installé et fonctionne
+correctement.
+
+Dans le terminal intégré de Visual Studio Code, exécutez la commande suivante
+pour vérifier que Git est installé correctement :
+
+```sh
+git --version
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+git version 2.52.0
+```
+
+Cela indique que Git est installé et prêt à être utilisé.
+
+#### Accéder au GitHub Classroom
+
+[GitHub Classroom](https://classroom.github.com/) est un outil qui permet de
+gérer des dépôts GitHub pour des cours.
+
+Il sera utilisé pour permettre au corps enseignant de visualiser le travail
+effectué dans le mini-projet.
+
+Il est nécessaire de rejoindre le GitHub Classroom pour accéder au dépôt du
+mini-projet.
+
+1. Accédez au lien suivant pour rejoindre le GitHub Classroom du cours :
+   <https://classroom.github.com/a/qKBHBNo4>.
+2. Si vous n'êtes pas encore connecté.e à GitHub, connectez-vous avec votre
+   compte GitHub.
+3. Choisissez votre personne dans la liste pour rejoindre le GitHub Classroom.
+4. Un dépôt GitHub privé sera créé pour vous, nommé
+   `devprodmed-mini-projet-<github-username>`.
+
+Vous devriez maintenant avoir accès à votre dépôt GitHub privé pour le
+mini-projet sur une page similaire à celle-ci :
+
+![GitHub Classroom - Mini-projet](./images/github-classroom-mini-projet.png)
+
 ### Valider l'installation et la configuration de l'environnement de développement
 
 - [x] PHP est installé et fonctionne correctement.
 - [x] Composer est installé et fonctionne correctement.
 - [x] Laravel est installé et fonctionne correctement.
 - [x] npm est installé et fonctionne correctement.
+- [x] MySQL est installé et fonctionne correctement.
 - [x] Visual Studio Code est installé et fonctionne correctement.
 - [x] L'extension Laravel pour Visual Studio Code est installée.
+- [x] Le dossier `devprodmed-mini-projet` a été ouvert dans Visual Studio Code.
 - [x] Le terminal intégré de Visual Studio Code est fonctionnel.
+- [x] Git est installé et fonctionne correctement.
+- [x] Vous avez accès au dépôt GitHub privé pour le mini-projet.
 
 ## Démarrer le mini-projet
 
@@ -366,20 +458,31 @@ sans avoir à ouvrir une application de terminal séparée.
 A présent que l'environnement de développement est prêt, nous allons initialiser
 le mini-projet avec Laravel.
 
-Dans le terminal intégré de Visual Studio Code, naviguez vers le dossier où vous
-souhaitez créer le projet Laravel pour le mini-projet, par exemple le dossier
-`Documents`.
+Après avoir ouvert le dossier de votre mini-projet dans Visual Studio Code,
+ouvrez le terminal intégré si ce n'est pas déjà fait.
 
-Ensuite, exécutez la commande suivante pour créer un nouveau projet Laravel
-nommé `devprodmed-mini-projet` :
+Ceci devrait automatiquement ouvrir l'emplacement du dossier du mini-projet dans
+le terminal intégré.
+
+Nous allons remonter d'un niveau pour pouvoir créer le projet Laravel dans le
+dossier du mini-projet:
 
 ```sh
-laravel new devprodmed-mini-projet
+cd ..
 ```
 
-Un menu interactif peut apparaître pour vous demander de choisir certaines
-options. Choisissez les options suivantes à l'aide des flèches du clavier et
-appuyez sur la touche _Entrée_ pour valider vos choix :
+Cette commande permet de naviguer dans le dossier parent du dossier actuel.
+
+Ensuite, exécutez la commande suivante pour créer un nouveau projet Laravel dans
+le dossier préalablement ouvert `devprodmed-mini-projet` :
+
+```sh
+laravel new devprodmed-mini-projet --force
+```
+
+Un menu interactif vous demande de choisir certaines options. Choisissez les
+options suivantes à l'aide des flèches du clavier et appuyez sur la touche
+_Entrée_ pour valider vos choix :
 
 ```text
    _                               _
@@ -389,6 +492,11 @@ appuyez sur la touche _Entrée_ pour valider vos choix :
   | |___| (_| | | | (_| |\ V /  __/ |
   |______\__,_|_|  \__,_| \_/ \___|_|
 
+   WARN  A new version of the Laravel installer is available. You have version 5.24.0 installed, the latest version is 5.24.2.
+
+ ┌ Would you like to update now? ───────────────────────────────┐
+ │ ● Yes / ○ No                                                 │
+ └──────────────────────────────────────────────────────────────┘
 
  ┌ Which starter kit would you like to install? ────────────────┐
  │ › ● None                                                     │
@@ -419,8 +527,8 @@ appuyez sur la touche _Entrée_ pour valider vos choix :
  └──────────────────────────────────────────────────────────────┘
 ```
 
-Cette commande va créer un nouveau dossier `devprodmed-mini-projet` contenant la
-structure de base d'un projet Laravel.
+Cette commande va créer un nouveau projet Laravel contenant la structure de base
+que nous allons explorer dans une prochaine section.
 
 ### Démarrer le serveur de développement Laravel
 
@@ -431,6 +539,9 @@ projet Laravel que vous venez de créer :
 cd devprodmed-mini-projet
 ```
 
+Cette commande permet de naviguer à nouveau dans le dossier
+`devprodmed-mini-projet` destiné au mini-projet.
+
 Ensuite, exécutez la commande suivante pour démarrer le serveur de développement
 Laravel :
 
@@ -438,15 +549,159 @@ Laravel :
 composer run dev
 ```
 
+Le serveur de développement Laravel devrait démarrer et être accessible à
+l'adresse suivante : <http://localhost:8000>.
+
+Ouvrez cette adresse dans votre navigateur web. Vous devriez voir la page
+d'accueil par défaut de Laravel :
+
+![Page d'accueil Laravel](./images/laravel-welcome-page.png)
+
+Laravel est maintenant installé et fonctionne correctement !
+
 ### Naviguer dans la structure du projet
+
+```text
+./
+├── app/
+│   ├── Http/
+│   ├── Models/
+│   └── Providers/
+├── bootstrap/
+│   ├── cache/
+│   ├── app.php
+│   └── providers.php
+├── config/
+│   ├── app.php
+│   ├── auth.php
+│   ├── cache.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── logging.php
+│   ├── mail.php
+│   ├── queue.php
+│   ├── services.php
+│   └── session.php
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   ├── seeders/
+│   └── database.sqlite
+├── node_modules/
+│   └── ...
+├── public/
+│   ├── build/
+│   ├── favicon.ico
+│   ├── hot
+│   ├── index.php
+│   └── robots.txt
+├── resources/
+│   ├── css/
+│   ├── js/
+│   └── views/
+├── routes/
+│   ├── console.php
+│   └── web.php
+├── storage/
+│   └── ...
+├── tests/
+│   └── ...
+├── vendor/
+│   ├── ...
+│   ├── autoload.php
+│   └── ...
+├── artisan*
+├── composer.json
+├── composer.lock
+├── package.json
+├── package-lock.json
+├── phpunit.xml
+├── README.md
+└── vite.config.js
+```
+
+### Effectuer une modification simple
+
+TODO
+
+### Initialiser le projet Git
+
+Afin de mettre à disposition le code source du mini-projet via GitHub, nous
+allons initialiser un dépôt Git local et le lier au dépôt GitHub distant que
+vous avez créé précédemment via GitHub Classroom.
+
+Nous allons initialiser le dépôt Git avec une branche par défaut nommée `main`.
+
+Ouvrez le terminal intégré de Visual Studio Code si ce n'est pas déjà fait.
+
+Exécutez la commande suivante pour initialiser un dépôt Git dans le dossier
+courant (`devprodmed-mini-projet`) :
+
+```sh
+git init --initial-branch main
+```
+
+Cette commande initialise un dépôt Git avec une branche par défaut nommée
+`main`.
+
+Ajoutons maintenant tous les fichiers du projet Laravel au suivi de Git en
+exécutant la commande suivante :
+
+```sh
+git add .
+```
+
+Cette commande ajoute tous les fichiers du dossier courant au suivi de Git.
+
+Validons que les fichiers ont bien été ajoutés avec la commande suivante :
+
+```sh
+git status
+```
+
+Le résultat devrait indiquer que tous les fichiers sont prêts à être validés
+(_"staged"_).
+
+Ensuite, effectuons la première validation (_"commit"_) du projet Laravel en
+exécutant la commande suivante :
+
+```sh
+git commit -m "Initialisation du projet Laravel"
+```
+
+Ensuite, exécutez la commande suivante pour lier le dépôt Git local au dépôt Git
+GitHub distant que vous avez créé précédemment via GitHub Classroom :
+
+```sh
+git remote add origin git@github.com:heig-vd-devprodmed-course-2025-2026/devprodmed-mini-projet-<github-username>.git
+```
+
+Remplacez `<github-username>` par votre nom d'utilisateur GitHub. Communément
+dans Git, `origin` est le nom par défaut donné au dépôt distant principal.
+
+Poussez les modifications initiales vers le dépôt distant en exécutant la
+commande suivante :
+
+```sh
+git push -u origin main
+```
+
+Cette commande pousse la branche `main` vers le dépôt distant `origin` et
+établit un suivi entre la branche locale et la branche distante.
+
+Vous devriez maintenant voir les fichiers du projet Laravel dans votre dépôt
+GitHub privé pour le mini-projet.
+
+Nous utiliserons Git et GitHub tout au long du mini-projet pour gérer le code
+source et suivre les modifications.
 
 ## Conclusion
 
 Félicitations ! Vous avez mis en place votre environnement de développement et
 initialisé votre projet Laravel pour le mini-projet.
 
-Vous êtes maintenant prêt à commencer à développer votre application web autour
-des animaux de compagnie en utilisant Laravel.
+Vous êtes maintenant prêt.e à commencer à développer votre propre réseau social
+en utilisant Laravel.
 
 ## Solution
 

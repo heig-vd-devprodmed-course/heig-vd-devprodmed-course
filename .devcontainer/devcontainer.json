@@ -2,15 +2,11 @@
 	"name": "HEIG-VD DévProdMéd Course Development Container",
 	"dockerComposeFile": "compose.yaml",
 	"service": "devcontainer",
-	"runServices": ["plantuml"],
+	"runServices": ["mariadb", "plantuml"],
 	"workspaceFolder": "/workspace",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"moby": false
-		},
-		"ghcr.io/devcontainers/features/php:1": {
-			"version": "8.4",
-			"installComposer": true
 		},
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "24"
@@ -19,6 +15,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"cweijan.vscode-database-client2",
 				"DavidAnson.vscode-markdownlint",
 				"esbenp.prettier-vscode",
 				"GitHub.copilot",
@@ -38,8 +35,17 @@
 		"type=bind,source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,type=bind,consistency=cached"
 	],
 	// Ports to expose on the container's network host
-	"forwardPorts": [9090],
+	"forwardPorts": [3306, 5173, 8000, 9090],
 	"portsAttributes": {
+		"3306": {
+			"label": "MariaDB Database"
+		},
+		"5173": {
+			"label": "Vite Development Server"
+		},
+		"8000": {
+			"label": "Laravel Development Server"
+		},
 		"9090": {
 			"label": "PlantUML Server"
 		}

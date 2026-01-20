@@ -26,13 +26,16 @@ sudo apt install --yes jpegoptim optipng
 # Install packages to optimize documents (ps2pdf)
 sudo apt install --yes ghostscript
 
-## Install packages to interact with SQLite databases
-sudo apt install --yes sqlite3
+# Install packages to interact with SQLite databases
+sudo apt install --yes sqlite3 php-sqlite3
+
+# Install PHP and Composer
+sudo apt install --yes php-common php-cli php-mysql php-xml composer
 
 ## Install Laravel Installer
-composer global require laravel/installer --ignore-platform-req=ext-pcntl
+composer global require laravel/installer
 
 # Add Composer global bin to PATH
 tee -a ~/.bashrc > /dev/null <<"EOF"
-export PATH="${HOME}/.config/composer/vendor/bin:${PATH}"
+export PATH="${HOME}/.composer/vendor/bin:${PATH}"
 EOF

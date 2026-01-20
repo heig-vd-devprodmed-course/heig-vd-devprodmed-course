@@ -19,7 +19,7 @@ Suisse !
 - Comprendre et utiliser les fondamentaux de sécurité dans le développement
   d'application web.
 - Réaliser des services web (_"web services"_) simples utilisant une
-  architecture "REST-Like"/"RESTful".
+  architecture _"RESTful"_.
 
 ## ➡️ Par où commencer ?
 
@@ -41,12 +41,12 @@ d'apprentissage, et les méthodes d'évaluation.
 |     04 | Formulaires et validation                                                                                       | 🔴 À faire  |
 |     05 | Authentification et autorisations                                                                               | 🔴 À faire  |
 |     06 | Mails et notifications                                                                                          | 🔴 À faire  |
-|  🚨 07 | Evaluation                                                                                                      | 🔴 À faire  |
-|     08 | Architecture REST like (API CRUD)                                                                               | 🔴 À faire  |
-|     09 | Mini-projets personnels (1/4)                                                                                   | 🔴 À faire  |
-|     10 | Mini-projets personnels (2/4)                                                                                   | 🔴 À faire  |
-|     11 | Récapitulatif du cours + Mini-projets personnels (3/4)                                                          | 🔴 À faire  |
-|  🚨 12 | Mini-projets personnels (4/4) - Présentations finales                                                           | 🔴 À faire  |
+|  🚨 07 | Evaluation 1                                                                                                    | 🔴 À faire  |
+|     08 | Architecture RESTful (1/2)                                                                                      | 🔴 À faire  |
+|     09 | Architecture RESTful (2/2)                                                                                      | 🔴 À faire  |
+|     10 | Déploiement                                                                                                     | 🔴 À faire  |
+|     11 | Récapitulatif du cours                                                                                          | 🔴 À faire  |
+|  🚨 12 | Evaluation 2                                                                                                    | 🔴 À faire  |
 
 ## 📜 Licence
 
