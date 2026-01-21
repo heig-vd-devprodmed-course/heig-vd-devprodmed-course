@@ -205,7 +205,7 @@ Suivez les instructions suivantes en fonction de votre système d'exploitation :
 3. Exécutez le fichier téléchargé. Laravel Herd va automatiquement s'installer.
 4. Une fois l'installation terminée, ouvrez Laravel Herd.
 
-   > [!WARNING]
+   > **Attention**
    >
    > J'ai (Ludovic) été confronté à un problème lors de la rédaction de ce
    > contenu. J'ai dû exécuter Laravel Herd en tant qu'administrateur la
@@ -214,6 +214,8 @@ Suivez les instructions suivantes en fonction de votre système d'exploitation :
    > Par précaution, je vous recommande d'exécuter Laravel Herd en tant
    > qu'administrateur la première fois que vous l'ouvrez (clic droit sur
    > l'icône > "Exécuter en tant qu'administrateur").
+   >
+   > Les fois suivantes, vous pourrez l'ouvrir normalement.
 
 5. Une alerte du pare-feu Windows peut apparaître. Assurez-vous d'autoriser
    l'accès pour que Laravel Herd puisse fonctionner correctement :
@@ -372,8 +374,10 @@ Choisissez un dossier sur votre système où vous souhaitez créer le projet
 Laravel pour le mini-projet. Vous pouvez créer un dossier nommé
 `devprodmed-mini-projet` dans votre dossier `Documents` par exemple.
 
-> [!IMPORTANT] Utilisez le nom `devprodmed-mini-projet` pour le dossier du
-> mini-projet. Ce nom de dossier sera utilisé dans les prochaines sections.
+> [!IMPORTANT]
+>
+> Utilisez le nom `devprodmed-mini-projet` pour le dossier du mini-projet. Ce
+> nom de dossier sera utilisé dans les prochaines sections.
 
 Retenez l'emplacement de ce dossier, car vous en aurez besoin tout au long du
 cours pour réaliser le mini-projet.
@@ -446,6 +450,7 @@ mini-projet sur une page similaire à celle-ci :
 - [x] MySQL est installé et fonctionne correctement.
 - [x] Visual Studio Code est installé et fonctionne correctement.
 - [x] L'extension Laravel pour Visual Studio Code est installée.
+- [x] L'extension Database Client pour Visual Studio Code est installée.
 - [x] Le dossier `devprodmed-mini-projet` a été ouvert dans Visual Studio Code.
 - [x] Le terminal intégré de Visual Studio Code est fonctionnel.
 - [x] Git est installé et fonctionne correctement.
@@ -561,6 +566,9 @@ Laravel est maintenant installé et fonctionne correctement !
 
 ### Naviguer dans la structure du projet
 
+Un projet Laravel possède une structure de dossiers et de fichiers bien définie.
+Voici un aperçu de la structure de base d'un projet Laravel fraîchement créé :
+
 ```text
 ./
 ├── app/
@@ -620,9 +628,74 @@ Laravel est maintenant installé et fonctionne correctement !
 └── vite.config.js
 ```
 
+Bien que le nombre de fichiers et dossiers puisse sembler intimidant au premier
+abord, il est important de comprendre que chaque dossier a un rôle spécifique
+dans le fonctionnement de l'application Laravel.
+
+Voici une brève description des dossiers et fichiers les plus importants :
+
+- `app/` : Contient le code source principal de l'application, y compris les
+  contrôleurs, les modèles, et les fournisseurs de services.
+- `bootstrap/` : Contient les fichiers de démarrage de l'application.
+- `config/` : Contient les fichiers de configuration de l'application.
+- `database/` : Contient les fichiers liés à la base de données. Vous y
+  retrouvez la base de données SQLite créée pour le projet.
+- `public/` : Contient les fichiers accessibles publiquement, y compris le point
+  d'entrée de l'application (`index.php`).
+- `resources/` : Contient les ressources de l'application, telles que les
+  fichiers CSS, JavaScript, et les vues Blade.
+- `routes/` : Contient les fichiers de définition des routes de l'application.
+- `storage/` : Contient les fichiers générés par l'application, tels que les
+  logs et les fichiers de cache.
+- `tests/` : Contient les tests automatisés de l'application.
+- `vendor/` : Contient les dépendances installées via Composer. Le fichier
+  `autoload.php` est particulièrement important car il permet le chargement
+  automatique des classes PHP.
+- `artisan` : Le script en ligne de commande de Laravel.
+- `composer.json` : Le fichier de configuration de Composer pour gérer les
+  dépendances PHP.
+- `package.json` : Le fichier de configuration npm pour gérer les dépendances
+  JavaScript.
+- `README.md` : Le fichier de documentation du projet.
+
+Nous prendrons le temps d'explorer cette structure de projet pour mieux
+comprendre comment Laravel organise le code et les ressources tout au long du
+cours.
+
 ### Effectuer une modification simple
 
-TODO
+Afin de valider que tout fonctionne correctement, nous allons effectuer une
+modification simple dans la vue d'accueil de Laravel.
+
+Ouvrez le fichier `resources/views/welcome.blade.php` dans Visual Studio Code.
+
+Modifiez le contenu de la balise `<h1>` pour qu'il affiche le texte suivant :
+
+```html
+<h1 class="mb-1 font-medium">Bienvenue dans le mini-projet DévProdMéd !</h1>
+```
+
+Enregistrez le fichier après avoir effectué la modification.
+
+Votre navigateur web devrait automatiquement refléter la modification et
+afficher le nouveau texte dans la page d'accueil de Laravel.
+
+Essayez de changer le contenu de la balise `<p>` située sous le titre pour
+valider que les modifications sont bien prises en compte avec, par exemple, le
+texte suivant :
+
+```html
+<p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
+	C'est ici que commence votre nouvelle aventure avec Laravel.
+</p>
+```
+
+Si tout fonctionne correctement, vous avez réussi à modifier une vue dans le
+projet Laravel !
+
+Nous étudierons plus en détail comment fonctionnent les vues avec Laravel dans
+les prochaines sessions du mini-projet. Pour le moment, il n'est pas nécessaire
+de revenir sur cette modification.
 
 ### Initialiser le projet Git
 
@@ -659,15 +732,87 @@ Validons que les fichiers ont bien été ajoutés avec la commande suivante :
 git status
 ```
 
-Le résultat devrait indiquer que tous les fichiers sont prêts à être validés
-(_"staged"_).
+Le résultat devrait ressembler à ceci :
 
-Ensuite, effectuons la première validation (_"commit"_) du projet Laravel en
-exécutant la commande suivante :
+```text
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   .editorconfig
+        new file:   .env.example
+        new file:   .gitattributes
+        new file:   .gitignore
+        new file:   README.md
+        new file:   app/Http/Controllers/Controller.php
+        new file:   app/Models/User.php
+        new file:   app/Providers/AppServiceProvider.php
+        new file:   artisan
+        new file:   bootstrap/app.php
+        new file:   bootstrap/cache/.gitignore
+        new file:   bootstrap/providers.php
+        new file:   composer.json
+        new file:   composer.lock
+        new file:   config/app.php
+        new file:   config/auth.php
+        new file:   config/cache.php
+        new file:   config/database.php
+        new file:   config/filesystems.php
+        new file:   config/logging.php
+        new file:   config/mail.php
+        new file:   config/queue.php
+        new file:   config/services.php
+        new file:   config/session.php
+        new file:   database/.gitignore
+        new file:   database/factories/UserFactory.php
+        new file:   database/migrations/0001_01_01_000000_create_users_table.php
+        new file:   database/migrations/0001_01_01_000001_create_cache_table.php
+        new file:   database/migrations/0001_01_01_000002_create_jobs_table.php
+        new file:   database/seeders/DatabaseSeeder.php
+        new file:   package-lock.json
+        new file:   package.json
+        new file:   phpunit.xml
+        new file:   public/.htaccess
+        new file:   public/favicon.ico
+        new file:   public/index.php
+        new file:   public/robots.txt
+        new file:   resources/css/app.css
+        new file:   resources/js/app.js
+        new file:   resources/js/bootstrap.js
+        new file:   resources/views/welcome.blade.php
+        new file:   routes/console.php
+        new file:   routes/web.php
+        new file:   storage/app/.gitignore
+        new file:   storage/app/private/.gitignore
+        new file:   storage/app/public/.gitignore
+        new file:   storage/framework/.gitignore
+        new file:   storage/framework/cache/.gitignore
+        new file:   storage/framework/cache/data/.gitignore
+        new file:   storage/framework/sessions/.gitignore
+        new file:   storage/framework/testing/.gitignore
+        new file:   storage/framework/views/.gitignore
+        new file:   storage/logs/.gitignore
+        new file:   tests/Feature/ExampleTest.php
+        new file:   tests/Pest.php
+        new file:   tests/TestCase.php
+        new file:   tests/Unit/ExampleTest.php
+        new file:   vite.config.js
+```
+
+Le résultat devrait indiquer tous les fichiers qui sont inclus dans le suivi de
+Git.
+
+Ensuite, effectuons le premier commit du projet Laravel en exécutant la commande
+suivante :
 
 ```sh
 git commit -m "Initialisation du projet Laravel"
 ```
+
+Cette commande crée un commit avec le message
+`"Initialisation du projet Laravel"`.
 
 Ensuite, exécutez la commande suivante pour lier le dépôt Git local au dépôt Git
 GitHub distant que vous avez créé précédemment via GitHub Classroom :
@@ -705,8 +850,18 @@ en utilisant Laravel.
 
 ## Solution
 
-Vous pouvez trouver la solution du mini-projet à l'adresse suivante :
-[Solution](./solution/README.md).
+La solution du mini-projet est accessible dans un dépôt GitHub dédié à l'adresse
+suivante :
+<https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-mini-projet/tree/3d3e03c75bb29953fb0141471e7600096164eeb2>.
+
+> [!NOTE]
+>
+> La solution est fournie à titre indicatif uniquement. Il est fortement
+> recommandé de développer votre propre version du mini-projet avant de
+> consulter la solution.
+>
+> De plus, cette solution référence un commit spécifique. Des modifications
+> peuvent avoir été apportées au dépôt depuis ce commit.
 
 <!-- URLs -->
 

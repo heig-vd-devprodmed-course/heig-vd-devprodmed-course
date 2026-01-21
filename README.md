@@ -12,7 +12,7 @@ Suisse !
 :
 
 - Mettre en oeuvre des architectures client-serveur en suivant des patrons de
-  concept reconnus ("design patterns" - MVC).
+  concept reconnus (_"design patterns"_ - MVC).
 - Maîtriser un framework de développement web.
 - Mettre en oeuvre une couche mapping objet-relationnel (ORM) pour la gestion
   d'une base de données.
@@ -36,14 +36,14 @@ d'apprentissage, et les méthodes d'évaluation.
 | Séance | Contenu(s)                                                                                                      | État[^etat] |
 | -----: | :-------------------------------------------------------------------------------------------------------------- | :---------- |
 |     01 | Introduction au cours + [PHP, Composer et Laravel](./01-contenus-de-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
-|     02 | Modèle MVC et système de templating Blade                                                                       | 🟡 En cours |
-|     03 | Bases de données et ORM Eloquent                                                                                | 🔴 À faire  |
-|     04 | Formulaires et validation                                                                                       | 🔴 À faire  |
-|     05 | Authentification et autorisations                                                                               | 🔴 À faire  |
-|     06 | Mails et notifications                                                                                          | 🔴 À faire  |
+|     02 | Routes, contrôleurs et paramètres                                                                               | 🟡 En cours |
+|     03 | Modèle MVC et système de templating Blade                                                                       | 🔴 À faire  |
+|     04 | Bases de données et ORM Eloquent                                                                                | 🔴 À faire  |
+|     05 | Formulaires et validation                                                                                       | 🔴 À faire  |
+|     06 | Authentification et autorisations                                                                               | 🔴 À faire  |
 |  🚨 07 | Evaluation 1                                                                                                    | 🔴 À faire  |
-|     08 | Architecture RESTful (1/2)                                                                                      | 🔴 À faire  |
-|     09 | Architecture RESTful (2/2)                                                                                      | 🔴 À faire  |
+|     08 | Mails et notifications                                                                                          | 🔴 À faire  |
+|     09 | Architecture RESTful                                                                                            | 🔴 À faire  |
 |     10 | Déploiement                                                                                                     | 🔴 À faire  |
 |     11 | Récapitulatif du cours                                                                                          | 🔴 À faire  |
 |  🚨 12 | Evaluation 2                                                                                                    | 🔴 À faire  |

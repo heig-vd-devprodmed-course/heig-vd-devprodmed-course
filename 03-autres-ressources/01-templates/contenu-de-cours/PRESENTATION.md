@@ -27,9 +27,9 @@ _paginate: false
 Visualiser le contenu complet sur GitHub [à cette
 adresse][contenu-complet-sur-github].
 
-<small>{AUTHOR}</small>
+<small>{AUTHOR}.</small>
 
-<small>Ce travail est sous licence [{LICENSE_NAME}][licence]</small>
+<small>Ce travail est sous licence [{LICENSE_NAME}][licence].</small>
 
 ![bg opacity:0.1][illustration-principale]
 

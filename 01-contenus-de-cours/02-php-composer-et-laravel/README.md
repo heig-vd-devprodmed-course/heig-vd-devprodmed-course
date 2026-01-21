@@ -15,8 +15,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 >   [Présentation (web)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-de-cours/02-php-composer-et-laravel/presentation.html)
 >   ·
 >   [Présentation (PDF)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-de-cours/02-php-composer-et-laravel/02-php-composer-et-laravel-presentation.pdf)
-> - Exercices : [Accéder au contenu](./02-exercices/README.md)
 > - Mini-projet : [Accéder au contenu](./01-mini-projet/README.md)
+> - Exercices : [Accéder au contenu](./02-exercices/README.md)
 >
 > **Objectifs**
 >
@@ -427,8 +427,8 @@ la base de données.
 
 #### Système de routing
 
-Laravel dispose d'un système de routing puissant qui permet de définir des routes
-pour gérer les requêtes HTTP.
+Laravel dispose d'un système de routing puissant qui permet de définir des
+routes pour gérer les requêtes HTTP.
 
 #### Architecture MVC
 

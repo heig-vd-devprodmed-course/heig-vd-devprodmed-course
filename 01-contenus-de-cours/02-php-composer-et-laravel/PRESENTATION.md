@@ -29,9 +29,9 @@ Visualiser le contenu complet sur GitHub [à cette
 adresse][contenu-complet-sur-github].
 
 <small>L. Delafontaine, avec l'aide de
-[GitHub Copilot](https://github.com/features/copilot)</small>
+[GitHub Copilot](https://github.com/features/copilot).</small>
 
-<small>Ce travail est sous licence [CC BY-SA 4.0][licence]</small>
+<small>Ce travail est sous licence [CC BY-SA 4.0][licence].</small>
 
 ![bg opacity:0.1][illustration-principale]
 
@@ -183,14 +183,14 @@ Quelques librairies populaires :
 
 ## PHP/Composer vs JavaScript/npm
 
-| PHP                | JavaScript          | Description                    |
-| :----------------- | :------------------ | :----------------------------- |
-| PHP                | JavaScript/Node.js  | Langage de programmation       |
-| Composer           | npm                 | Gestionnaire de dépendances    |
-| `composer.json`    | `package.json`      | Configuration du projet        |
-| `composer.lock`    | `package-lock.json` | Versions exactes               |
-| `vendor/`          | `node_modules/`     | Dossier des dépendances        |
-| Packagist          | npmjs.com           | Dépôt de paquets               |
+| PHP             | JavaScript          | Description                 |
+| :-------------- | :------------------ | :-------------------------- |
+| PHP             | JavaScript/Node.js  | Langage de programmation    |
+| Composer        | npm                 | Gestionnaire de dépendances |
+| `composer.json` | `package.json`      | Configuration du projet     |
+| `composer.lock` | `package-lock.json` | Versions exactes            |
+| `vendor/`       | `node_modules/`     | Dossier des dépendances     |
+| Packagist       | npmjs.com           | Dépôt de paquets            |
 
 Les concepts sont les mêmes d'un écosystème à l'autre.
 
