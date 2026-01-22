@@ -39,6 +39,14 @@ suivante : <TODO>.
 >
 > De plus, cette solution référence un commit spécifique. Des modifications
 > peuvent avoir été apportées au dépôt depuis ce commit.
+>
+> Pour accéder à la version exacte de la solution correspondant à ce commit,
+> vous pouvez cloner le dépôt et utiliser la commande Git suivante pour basculer
+> sur le commit spécifique :
+>
+> ```bash
+> git checkout <commit-hash>
+> ```
 
 <!-- URLs -->
 

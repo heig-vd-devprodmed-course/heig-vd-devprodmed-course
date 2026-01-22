@@ -36,9 +36,9 @@ d'apprentissage, et les méthodes d'évaluation.
 | Séance | Contenu(s)                                                                                                      | État[^etat] |
 | -----: | :-------------------------------------------------------------------------------------------------------------- | :---------- |
 |     01 | Introduction au cours + [PHP, Composer et Laravel](./01-contenus-de-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
-|     02 | Routes, contrôleurs et paramètres                                                                               | 🟡 En cours |
-|     03 | Modèle MVC et système de templating Blade                                                                       | 🔴 À faire  |
-|     04 | Bases de données et ORM Eloquent                                                                                | 🔴 À faire  |
+|     02 | Routes, paramètres et contrôleurs                                                                               | 🟡 En cours |
+|     03 | Système de templating Blade et vues                                                                             | 🔴 À faire  |
+|     04 | Bases de données, Eloquent et modèles                                                                           | 🔴 À faire  |
 |     05 | Formulaires et validation                                                                                       | 🔴 À faire  |
 |     06 | Authentification et autorisations                                                                               | 🔴 À faire  |
 |  🚨 07 | Evaluation 1                                                                                                    | 🔴 À faire  |

@@ -25,7 +25,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Démarrer le serveur de développement Laravel](#démarrer-le-serveur-de-développement-laravel)
   - [Naviguer dans la structure du projet](#naviguer-dans-la-structure-du-projet)
   - [Effectuer une modification simple](#effectuer-une-modification-simple)
-  - [Initialiser le projet Git](#initialiser-le-projet-git)
+  - [Initialiser le dépôt Git et le lier à GitHub](#initialiser-le-dépôt-git-et-le-lier-à-github)
+  - [Commencer le développement depuis un dépôt GitHub](#commencer-le-développement-depuis-un-dépôt-github)
+  - [Mettre à jour la documentation pour lancer le projet](#mettre-à-jour-la-documentation-pour-lancer-le-projet)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 
@@ -290,7 +292,7 @@ Terminal"_ sous Windows ; _"Terminal"_ sous macOS ou Linux).
 Dans le terminal, exécutez la commande suivante pour vérifier que PHP est
 installé correctement :
 
-```sh
+```bash
 php --version
 ```
 
@@ -305,7 +307,7 @@ Cela indique que PHP est installé et prêt à être utilisé.
 Ensuite, vérifiez que Composer est installé correctement en exécutant la
 commande suivante :
 
-```sh
+```bash
 composer --version
 ```
 
@@ -320,7 +322,7 @@ Cela indique que Composer est installé et prêt à être utilisé.
 Dans le terminal, exécutez la commande suivante pour vérifier que Laravel est
 installé correctement :
 
-```sh
+```bash
 laravel --version
 ```
 
@@ -336,7 +338,7 @@ Cela indique que l'outil de ligne de commande Laravel est installé et prêt à
 Dans le terminal, exécutez la commande suivante pour vérifier que npm est
 installé correctement :
 
-```sh
+```bash
 npm --version
 ```
 
@@ -405,7 +407,7 @@ correctement.
 Dans le terminal intégré de Visual Studio Code, exécutez la commande suivante
 pour vérifier que Git est installé correctement :
 
-```sh
+```bash
 git --version
 ```
 
@@ -439,7 +441,16 @@ mini-projet.
 Vous devriez maintenant avoir accès à votre dépôt GitHub privé pour le
 mini-projet sur une page similaire à celle-ci :
 
-![GitHub Classroom - Mini-projet](./images/github-classroom-mini-projet.png)
+![GitHub Classroom - Mini-projet (1)](./images/github-classroom-mini-projet-01.png)
+
+#### Accepter l'invitation à rejoindre l'organisation GitHub Classroom du cours
+
+Lorsque vous rejoignez le GitHub Classroom, une invitation est envoyée à votre
+compte GitHub pour rejoindre l'organisation GitHub du cours.
+
+Acceptez-la en vous accédant au mail associé à votre compte GitHub.
+
+Cela vous permettra de faire part de l'organisation GitHub Classroom du cours.
 
 ### Valider l'installation et la configuration de l'environnement de développement
 
@@ -472,7 +483,7 @@ le terminal intégré.
 Nous allons remonter d'un niveau pour pouvoir créer le projet Laravel dans le
 dossier du mini-projet:
 
-```sh
+```bash
 cd ..
 ```
 
@@ -481,7 +492,7 @@ Cette commande permet de naviguer dans le dossier parent du dossier actuel.
 Ensuite, exécutez la commande suivante pour créer un nouveau projet Laravel dans
 le dossier préalablement ouvert `devprodmed-mini-projet` :
 
-```sh
+```bash
 laravel new devprodmed-mini-projet --force
 ```
 
@@ -540,7 +551,7 @@ que nous allons explorer dans une prochaine section.
 Dans le terminal intégré de Visual Studio Code, naviguez dans le dossier du
 projet Laravel que vous venez de créer :
 
-```sh
+```bash
 cd devprodmed-mini-projet
 ```
 
@@ -550,7 +561,7 @@ Cette commande permet de naviguer à nouveau dans le dossier
 Ensuite, exécutez la commande suivante pour démarrer le serveur de développement
 Laravel :
 
-```sh
+```bash
 composer run dev
 ```
 
@@ -697,7 +708,7 @@ Nous étudierons plus en détail comment fonctionnent les vues avec Laravel dans
 les prochaines sessions du mini-projet. Pour le moment, il n'est pas nécessaire
 de revenir sur cette modification.
 
-### Initialiser le projet Git
+### Initialiser le dépôt Git et le lier à GitHub
 
 Afin de mettre à disposition le code source du mini-projet via GitHub, nous
 allons initialiser un dépôt Git local et le lier au dépôt GitHub distant que
@@ -710,7 +721,7 @@ Ouvrez le terminal intégré de Visual Studio Code si ce n'est pas déjà fait.
 Exécutez la commande suivante pour initialiser un dépôt Git dans le dossier
 courant (`devprodmed-mini-projet`) :
 
-```sh
+```bash
 git init --initial-branch main
 ```
 
@@ -720,7 +731,7 @@ Cette commande initialise un dépôt Git avec une branche par défaut nommée
 Ajoutons maintenant tous les fichiers du projet Laravel au suivi de Git en
 exécutant la commande suivante :
 
-```sh
+```bash
 git add .
 ```
 
@@ -728,7 +739,7 @@ Cette commande ajoute tous les fichiers du dossier courant au suivi de Git.
 
 Validons que les fichiers ont bien été ajoutés avec la commande suivante :
 
-```sh
+```bash
 git status
 ```
 
@@ -807,7 +818,7 @@ Git.
 Ensuite, effectuons le premier commit du projet Laravel en exécutant la commande
 suivante :
 
-```sh
+```bash
 git commit -m "Initialisation du projet Laravel"
 ```
 
@@ -817,7 +828,7 @@ Cette commande crée un commit avec le message
 Ensuite, exécutez la commande suivante pour lier le dépôt Git local au dépôt Git
 GitHub distant que vous avez créé précédemment via GitHub Classroom :
 
-```sh
+```bash
 git remote add origin git@github.com:heig-vd-devprodmed-course-2025-2026/devprodmed-mini-projet-<github-username>.git
 ```
 
@@ -827,7 +838,7 @@ dans Git, `origin` est le nom par défaut donné au dépôt distant principal.
 Poussez les modifications initiales vers le dépôt distant en exécutant la
 commande suivante :
 
-```sh
+```bash
 git push -u origin main
 ```
 
@@ -840,10 +851,578 @@ GitHub privé pour le mini-projet.
 Nous utiliserons Git et GitHub tout au long du mini-projet pour gérer le code
 source et suivre les modifications.
 
+### Commencer le développement depuis un dépôt GitHub
+
+Maintenant que le code source du mini-projet est disponible sur GitHub, vous
+pouvez cloner le dépôt sur n'importe quelle machine pour continuer le
+développement.
+
+Pour simuler cela, nous allons cloner le projet dans un nouveau dossier et le
+configurer pour le développement.
+
+#### Cloner le dépôt GitHub du mini-projet
+
+Dans GitHub, récupérez l'URL SSH du dépôt GitHub privé pour le mini-projet en
+cliquant sur le bouton _"Code"_ et en sélectionnant l'option _"SSH"_, comme
+illustré ci-dessous :
+
+![GitHub Classroom - Mini-projet (2)](./images/github-classroom-mini-projet-02.png)
+
+Une fois l'URL SSH copiée, retournez dans le terminal intégré de Visual Studio
+Code.
+
+Naviguez vers le dossier parent du dossier `devprodmed-mini-projet` (nous ne
+souhaitons pas cloner le dépôt à l'intérieur du dossier existant) en exécutant
+la commande suivante :
+
+```bash
+cd ..
+```
+
+Clonez le dépôt GitHub du mini-projet en exécutant la commande suivante :
+
+```bash
+git clone <url-ssh-du-depot-github>
+```
+
+Remplacez `<url-ssh-du-depot-github>` par l'URL SSH que vous avez copiée
+précédemment.
+
+Cette commande clone le dépôt GitHub dans un nouveau dossier nommé
+`devprodmed-mini-projet-<github-username>`.
+
+Vous devriez retrouver un nouveau dossier nommé
+`devprodmed-mini-projet-<github-username>` contenant le code source du
+mini-projet dans votre système de fichiers.
+
+Ouvrez ce dossier dans une nouvelle fenêtre Visual Studio Code.
+
+#### Installer les dépendances
+
+Vous remarquerez peut-être que le code source du projet Laravel diffère
+légèrement de celui que vous aviez initialement créé. Cela est dû au fait que
+Git ignore certains fichiers et dossiers par défaut, comme le dossiers
+`node_modules/`/`vendor/` contenant les dépendances installées via npm/Composer
+(respectivement), ainsi que le fichier `.env` contenant les variables
+d'environnement spécifiques à chaque machine.
+
+Lorsque vous clonez un dépôt Git, vous devez réinstaller les dépendances et
+configurer les variables d'environnement pour que le projet fonctionne
+correctement.
+
+Pour cela, il est nécessaire d'installer les dépendances PHP avec Composer et
+les dépendances JavaScript avec npm.
+
+Ouvrez le terminal intégré de Visual Studio Code si ce n'est pas déjà fait. Vous
+devriez arriver dans l'emplacement du dossier précédemment cloné
+`devprodmed-mini-projet-<github-username>`.
+
+Exécuter les commandes suivantes pour installer toutes les dépendances
+nécessaires au projet Laravel:
+
+```bash
+npm install && npm run build
+
+composer install
+```
+
+Les dépendances JavaScript et PHP devraient maintenant être installées
+correctement et les dossiers `node_modules/` et `vendor/` devraient être
+présents dans le dossier du projet.
+
+#### Configurer les variables d'environnement
+
+Une fois les dépendances installées, copiez le fichier `.env.example` pour créer
+le fichier `.env` en exécutant la commande suivante :
+
+```bash
+cp .env.example .env
+```
+
+Ouvrez le fichier `.env` dans Visual Studio Code. Ce fichier contient les
+variables d'environnement spécifiques à votre machine.
+
+Ce fichier ne doit jamais être partagé publiquement car il peut contenir des
+informations sensibles comme des mots de passe ou des clés d'API.
+
+> [!CAUTION]
+>
+> Ce fichier `.env` ne doit jamais être partagé publiquement car il peut
+> contenir des informations sensibles comme des mots de passe ou des clés d'API.
+> Vous devez toujours garder ce fichier privé et sécurisé.
+
+C'est la raison pour laquelle il est ignoré par Git via le fichier `.gitignore`
+et qu'il est nécessaire de le créer manuellement à partir du fichier
+`.env.example`. Une fois le fichier d'exemple copié, vous pouvez modifier les
+variables d'environnement selon vos besoins.
+
+Générez une clé d'application Laravel en exécutant la commande suivante dans le
+terminal intégré :
+
+```bash
+php artisan key:generate
+```
+
+Cette commande génère une clé unique pour l'application Laravel et la met à jour
+dans le fichier `.env` dans la variable `APP_KEY`.
+
+Cette clé est utilisée par Laravel pour sécuriser les sessions et autres données
+sensibles. La documentation officielle de Laravel explique plus en détail le
+rôle de cette clé : <https://laravel.com/docs/12.x/encryption#configuration>.
+
+Nous reviendrons sur ces notions plus tard dans le cours mais pour le moment, il
+suffit de savoir qu'il est nécessaire d'effectuer ces étapes pour que
+l'application Laravel fonctionne correctement.
+
+#### Créer la base de données SQLite
+
+Finalement, il est nécessaire de créer la base de données SQLite pour le projet
+avec la commande suivante :
+
+```bash
+php artisan migrate
+```
+
+Cette commande crée automatiquement pour nous la base de données et ses tables
+associées.
+
+Un menu interactif vous demande de choisir certaines options. Choisissez les
+options suivantes à l'aide des flèches du clavier et appuyez sur la touche
+_Entrée_ pour valider vos choix :
+
+```text
+   WARN  The SQLite database configured for this application does not exist: database/database.sqlite.
+
+ ┌ Would you like to create it? ────────────────────────────────┐
+ │ ● Yes / ○ No                                                 │
+ └──────────────────────────────────────────────────────────────┘
+```
+
+Différentes migrations devraient s'exécuter et créer les tables nécessaires dans
+la base de données SQLite :
+
+```text
+
+   INFO  Preparing database.
+
+  Creating migration table ......................... 7.46ms DONE
+
+   INFO  Running migrations.
+
+  0001_01_01_000000_create_users_table ............. 17.87ms DONE
+  0001_01_01_000001_create_cache_table ............. 11.70ms DONE
+  0001_01_01_000002_create_jobs_table .............. 15.33ms DONE
+```
+
+Nous reviendrons sur ces notions plus tard dans le cours mais pour le moment, il
+suffit de savoir qu'il est nécessaire d'effectuer ces étapes pour que
+l'application Laravel fonctionne correctement et crée la base de données.
+
+#### Vérifier que tout fonctionne correctement
+
+Démarrez le serveur de développement Laravel en exécutant la commande suivante
+dans le terminal intégré :
+
+```bash
+composer run dev
+```
+
+Ouvrez l'adresse <http://localhost:8000> dans votre navigateur web. Vous
+
+Vous devriez retrouver le même résultat que précédemment, avec la page d'accueil
+de Laravel affichant le texte modifié.
+
+Bravo ! Vous avez réussi à cloner le dépôt GitHub du mini-projet, installer les
+dépendances, configurer les variables d'environnement, et créer la base de
+données.
+
+N'importe utilisant Git et GitHub peut désormais cloner le projet et le
+configurer pour le développement en suivant les mêmes étapes.
+
+### Mettre à jour la documentation pour lancer le projet
+
+Afin de garder une trace des étapes nécessaires pour cloner et configurer le
+projet Laravel, nous allons mettre à jour le fichier `README.md` du dépôt GitHub
+avec les instructions que nous venons de suivre.
+
+Pour cela, nous allons utiliser diverses fonctionnalité de Git et GitHub pour
+gérer cette tâche de développement.
+
+#### Créer une issue GitHub pour cette tâche
+
+Afin de prendre en main un workflow Git et GitHub adapté au développement
+professionnel, nous allons commencer par créer une _issue_ GitHub dans le dépôt
+du mini-projet.
+
+Bien que son nom puisse prêter à confusion, une issue peut aussi être utilisée
+pour décrire une nouvelle fonctionnalité à implémenter ou encore une tâche à
+réaliser :
+
+1. Accédez à votre dépôt GitHub privé pour le mini-projet.
+2. Cliquez sur l'onglet _"Issues"_.
+3. Cliquez sur le bouton _"New issue"_.
+4. Donnez le titre suivant à l'issue : _"Ajouter les instructions de
+   développement"_. Nous vous recommandons de toujours commencer le titre d'une
+   issue par un verbe d'action à l'infinitif. Cela permet de décrire
+   explicitement ce qui doit être fait.
+5. Une description peut être ajoutée pour donner plus de contexte, mais ce n'est
+   pas obligatoire ici car l'issue est assez explicite.
+6. Cliquez sur le bouton _"Submit new issue"_ pour créer l'issue.
+
+Ceci crée une nouvelle issue dans le dépôt GitHub du mini-projet. Elle permettra
+de suivre l'avancement de cette tâche de développement.
+
+Pensez aux issues comme à des tickets de travail. Utilisez-les pour suivre les
+tâches, les fonctionnalités, les bugs, et vous vider la tête pour ne pas avoir à
+tout retenir.
+
+#### Créer une branche Git depuis l'issue
+
+Une branche permet de travailler sur une fonctionnalité ou une correction de bug
+sans affecter le code principal du projet.
+
+GitHub permet de créer une branche directement depuis une issue dans le menu à
+droite de l'issue :
+
+1. Dans l'issue que vous venez de créer, cliquez sur le bouton _"Create
+   branch"_.
+
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
+
+   ![GitHub Classroom - Mini-projet (3)](./images/github-classroom-mini-projet-03.png)
+
+   </details>
+
+2. Une modal s'ouvre pour confirmer la création de la branche. Laissez les
+   options par défaut et cliquez sur le bouton _"Create branch"_ pour confirmer.
+   Ceci crée automatiquement une nouvelle branche nommée comme le titre de
+   l'issue. Cette branche est créée à partir de la branche `main`.
+
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
+
+   ![GitHub Classroom - Mini-projet (4)](./images/github-classroom-mini-projet-04.png)
+
+   </details>
+
+3. Une nouvelle modal s'ouvre pour vous proposer les commandes Git à exécuter
+   pour basculer sur la nouvelle branche. Copiez les commandes proposées pour
+   les utiliser dans le terminal intégré de Visual Studio Code.
+
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
+
+   ![GitHub Classroom - Mini-projet (5)](./images/github-classroom-mini-projet-05.png)
+
+   </details>
+
+4. Retournez dans le terminal intégré de Visual Studio Code.
+5. Exécutez les commandes copiées précédemment pour basculer sur la nouvelle
+   branche :
+
+   ```bash
+   git fetch origin
+   git checkout 1-ajouter-les-instructions-de-développement
+   ```
+
+   La première commande récupère les dernières modifications du dépôt distant.
+   La seconde commande crée une nouvelle branche locale nommée
+   `1-ajouter-les-instructions-de-développement` et bascule dessus. La branche
+   locale est liée à la branche distante du même nom.
+
+6. Vérifiez que vous êtes bien sur la nouvelle branche en exécutant la commande
+   suivante :
+
+   ```bash
+   git branch
+   ```
+
+   Le résultat devrait ressembler à ceci :
+
+   ```text
+   * 1-ajouter-les-instructions-de-développement
+     main
+   ```
+
+   L'étoile (`*`) indique la branche courante. Vous êtes maintenant prêt.e à
+   travailler sur cette branche.
+
+#### Mettre à jour le fichier README.md
+
+Mettons à jour le fichier `README.md` avec les instructions pour cloner et
+configurer le projet Laravel.
+
+Ce README contient actuellement une description générique du projet Laravel.
+Nous allons remplacer ce contenu par les instructions que nous avons suivies
+pour cloner et configurer le projet.
+
+Cela permettra à toute personne qui clone le dépôt de savoir comment configurer
+correctement le projet pour le développement (vous y compris dans le futur).
+
+Ouvrez le fichier `README.md` dans Visual Studio Code.
+
+Remplacez le contenu actuel du fichier par les instructions suivantes :
+
+> [!NOTE]
+>
+> Vous êtes évidemment libre de reformuler ces instructions comme vous le
+> souhaitez. L'important est que les étapes nécessaires pour cloner et
+> configurer le projet soient clairement expliquées.
+>
+> Cela permettra à toute personne qui clone le dépôt de savoir comment
+> configurer correctement le projet pour le développement (vous y compris dans
+> le futur).
+
+````markdown
+# HEIG-VD DévProdMéd Course - Mini-projet
+
+Ce dépôt contient le mini-projet à réaliser dans le cadre du cours
+_"[Développement de produit média (DévProdMéd)](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)"_
+enseigné à la
+[Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud (HEIG-VD)](https://heig-vd.ch),
+Suisse.
+
+## Objectif du mini-projet
+
+L'objectif de ce mini-projet est de créer un réseau social simple en utilisant
+le framework [Laravel](https://laravel.com/). Ce projet permettra de mettre en
+pratique les concepts appris dans le cours.
+
+## Pré-requis
+
+Afin de lancer ce projet, une stack compatible avec Laravel, est requise.
+
+Voici les pré-requis nécessaires :
+
+- PHP >= 8.0.
+- Composer.
+- Node.js et npm.
+- Une base de données (MySQL, PostgreSQL, SQLite, etc.).
+- Un serveur web (Apache, Nginx, etc.).
+
+[Laravel Herd](https://helm.sh/docs/charts/laravel/) est recommandé pour une
+installation facile de Laravel et de ses dépendances.
+
+## Développement local
+
+Pour développer et tester le mini-projet en local, voici les étapes à suivre :
+
+1. Cloner ce dépôt sur votre machine locale :
+
+   ```bash
+   git clone git@github.com:heig-vd-devprodmed-course/heig-vd-devprodmed-mini-projet.git
+
+   cd heig-vd-devprodmed-mini-projet
+   ```
+
+2. Installer les dépendances avec npm et Composer :
+
+   ```bash
+   npm install && npm run build
+
+   composer install
+   ```
+
+3. Copier le fichier `.env.example` en `.env` et configurer les variables
+   d'environnement.
+4. Générer la clé d'application Laravel :
+
+   ```bash
+   php artisan key:generate
+   ```
+
+5. Créer la base de données et exécuter les migrations :
+
+   ```bash
+   php artisan migrate
+   ```
+
+6. Démarrer le serveur de développement Laravel :
+
+   ```bash
+   composer run dev
+   ```
+
+L'application sera accessible à l'adresse <http://localhost:8000>.
+````
+
+Sauvez le fichier après avoir effectué la modification.
+
+#### Commiter et pousser les modifications
+
+Une fois les modifications apportées au fichier `README.md`, il est temps de
+commiter et pousser ces modifications vers le dépôt GitHub.
+
+Dans le terminal intégré de Visual Studio Code, exécutez les commandes suivantes
+pour ajouter le fichier modifié au suivi de Git, créer un commit, et pousser les
+modifications vers le dépôt distant :
+
+```bash
+git add README.md
+
+git commit -m "Ajouter les instructions de développement"
+
+git push
+```
+
+Vous remarquerez peut-être que cette fois-ci, la commande `git push` n'a pas
+besoin de l'option `-u` car la branche locale est déjà liée à la branche
+distante.
+
+Vous pouvez toujours vérifier le détail de votre dépôt Git avec la commande
+suivante :
+
+```bash
+git status
+```
+
+#### Créer une pull request GitHub
+
+Dans la terminologie GitHub, une pull request (PR) est une demande de fusion de
+modifications d'une branche vers une autre branche. Dans notre cas, nous allons
+créer une PR pour fusionner la branche
+`1-ajouter-les-instructions-de-développement` dans la branche `main`.
+
+GitHub propose une interface conviviale pour visualiser et gérer les pull
+requests.
+
+Lorsque vous avez poussé vos modifications, GitHub affiche généralement une
+notification proposant de créer une pull request comme suit :
+
+![GitHub Classroom - Mini-projet (6)](./images/github-classroom-mini-projet-06.png)
+
+Vous pouvez également créer une pull request manuellement en suivant ces étapes
+:
+
+1. Accédez à votre dépôt GitHub privé pour le mini-projet.
+2. Cliquez sur l'onglet _"Pull requests"_.
+3. Cliquez sur le bouton _"New pull request"_.
+4. Sélectionnez la branche source (_compare_)
+   `1-ajouter-les-instructions-de-développement` et la branche de destination
+   `main` (_base_).
+
+   <details>
+   <summary>Cliquer ici pour voir une capture d'écran illustrant l'étape</summary>
+
+   ![GitHub Classroom - Mini-projet (7)](./images/github-classroom-mini-projet-07.png)
+
+   </details>
+
+5. Cliquez sur le bouton _"Create pull request"_.
+6. Donnez un titre à la pull request. Par défaut, elle prend le message du
+   dernier commit, qui peut ne pas représenter la totalité des modifications
+   apportées. Je (Ludovic) recommande d'utiliser le titre de l'issue associée
+   créée précédemment : _"Ajouter les instructions de développement"_.
+7. Ajoutez une description si nécessaire. Ici, comme le titre de la pull request
+   est explicite, ce n'est pas obligatoire.
+8. Cliquez sur le bouton _"Create pull request"_ pour créer la pull request.
+
+La pull request est maintenant créée et visible dans l'onglet _"Pull requests"_
+du dépôt GitHub :
+
+![GitHub Classroom - Mini-projet (8)](./images/github-classroom-mini-projet-08.png)
+
+> [!NOTE]
+>
+> Vous pouvez ignorer le message d'avertissement concernant les caractères
+> cachés (_The head ref may contain hidden characters:
+> `"1-ajouter-les-instructions-de-d\u00E9veloppement"`_) si vous le voyez. Cela
+> est dû aux caractères accentués dans le nom de la branche et n'affecte pas le
+> fonctionnement de la pull request.
+
+#### Valider la pull request
+
+La très grande force des pull requests réside dans le fait qu'elles permettent
+de revoir les modifications avant de les fusionner dans la branche principale du
+projet.
+
+Pour cela, rendez-vous dans l'onglet _"Files changed"_ de la pull request :
+
+![GitHub Classroom - Mini-projet (9)](./images/github-classroom-mini-projet-09.png)
+
+Vous pouvez y voir toutes les modifications apportées dans la branche source par
+rapport à la branche de destination, y ajouter des commentaires, et même laisser
+des suggestions de modifications si nécessaire.
+
+Cela vous permettra de valider que les modifications sont correctes avant de les
+fusionner.
+
+Si des erreurs se sont glissées dans les modifications, vous pouvez toujours
+retourner dans votre environnement de développement, corriger les erreurs, et
+pousser les modifications vers la branche source. La pull request sera
+automatiquement mise à jour avec les nouvelles modifications.
+
+Itérez sur ce processus jusqu'à ce que vous soyez satisfait.e des modifications.
+
+#### Faire valider la pull request
+
+Une fois que vous êtes satisfait.e des modifications, il est temps de faire
+valider la pull request envers quelqu'un d'autre.
+
+Dans un projet professionnel, il est courant de demander à un.e collègue de
+revoir et valider les modifications avant de les fusionner dans la branche
+principale.
+
+Cela permet de s'assurer que le code est de qualité et respecte les standards du
+projet. De plus, cela permet de partager la connaissance du code entre les
+membres de l'équipe.
+
+Pour faire valider la pull request, vous pouvez retourner dans l'onglet
+_"Conversation"_ et ajouter un.e relecteur.trice en cliquant sur le bouton
+_"Reviewers"_ dans le menu à droite de la pull request.
+
+Comme votre projet fait partie de l'organisation GitHub Classroom du cours, vous
+pouvez m'ajouter (Ludovic - `ludelafo`) comme relecteur.
+
+La personne mise en relecteur.trice pourra ainsi revoir les modifications,
+laisser des commentaires si nécessaire, et approuver la pull request si tout est
+correct.
+
+Comme il s'agit de votre propre dépôt, vous pouvez également fusionner la pull
+request vous-même une fois que vous êtes satisfait.e des modifications.
+
+#### Fusionner la pull request
+
+Une fois la pull request validée par vos soins (et optionnellement par Ludovic
+dans le contexte de ce cours), il est temps de fusionner les modifications dans
+la branche principale `main`.
+
+Pour cela, cliquez sur le bouton vert _"Merge pull request"_ dans l'onglet
+_"Conversation"_ de la pull request.
+
+La fusion des modifications est maintenant effectuée et les modifications sont
+intégrées dans la branche `main`.
+
+Vous pouvez maintenant supprimer la branche source de la pull request en
+cliquant sur le bouton _"Delete branch"_, car elle n'est plus nécessaire.
+
+Félicitations ! Vous avez réussi à fusionner un changement dans la branche
+principale du projet en utilisant une pull request.
+
+![GitHub Classroom - Mini-projet (10)](./images/github-classroom-mini-projet-10.png)
+
+#### Recommencer la boucle de développement
+
+Pour chacune des prochaines tâches de développement, il est recommandé de suivre
+le même workflow Git et GitHub en créant une issue, une branche, une pull
+request, et en faisant valider les modifications avant de les fusionner.
+
+Cela permet de garder un historique clair des modifications apportées au projet
+et de s'assurer que le code est de qualité.
+
+Il existe de nombreuses manières de gérer un workflow Git et GitHub. Celui-ci
+est simple et efficace pour un projet de cette taille et vous prépare à des
+environnements de développement professionnels.
+
 ## Conclusion
 
 Félicitations ! Vous avez mis en place votre environnement de développement et
 initialisé votre projet Laravel pour le mini-projet.
+
+De plus, vous avez appris à utiliser Git et GitHub pour gérer le code source et
+suivre les modifications de manière professionnelle. Il s'agit d'une compétence
+essentielle pour toute personne qui programme.
 
 Vous êtes maintenant prêt.e à commencer à développer votre propre réseau social
 en utilisant Laravel.
@@ -852,7 +1431,7 @@ en utilisant Laravel.
 
 La solution du mini-projet est accessible dans un dépôt GitHub dédié à l'adresse
 suivante :
-<https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-mini-projet/tree/3d3e03c75bb29953fb0141471e7600096164eeb2>.
+<https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-mini-projet/tree/6c546ab3e17082e05c0a9116e2685c5f9edb59fa>.
 
 > [!NOTE]
 >
@@ -862,6 +1441,14 @@ suivante :
 >
 > De plus, cette solution référence un commit spécifique. Des modifications
 > peuvent avoir été apportées au dépôt depuis ce commit.
+>
+> Pour accéder à la version exacte de la solution correspondant à ce commit,
+> vous pouvez cloner le dépôt et utiliser la commande Git suivante pour basculer
+> sur le commit spécifique :
+>
+> ```bash
+> git checkout <commit-hash>
+> ```
 
 <!-- URLs -->
 

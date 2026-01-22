@@ -55,8 +55,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 >
 > Les retours se font de la manière suivante :
 >
-> - Corrigé des exercices.
 > - Corrigé du mini-projet.
+> - Corrigé des exercices.
 >
 > L'évaluation ne donne pas lieu à une note.
 
@@ -81,6 +81,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Principes clés](#principes-clés)
   - [Écosystème Laravel](#écosystème-laravel)
   - [Ressources et aide](#ressources-et-aide)
+  - [Laravel, des briques LEGO parfois un peu magiques](#laravel-des-briques-lego-parfois-un-peu-magiques)
   - [Installation de Laravel](#installation-de-laravel)
   - [Structure d'un projet Laravel](#structure-dun-projet-laravel)
   - [Lancer le serveur de développement](#lancer-le-serveur-de-développement)
@@ -416,6 +417,16 @@ Un framework comme Laravel offre plusieurs avantages :
 
 ### Principes clés
 
+#### Architecture MVC
+
+Laravel utilise l'architecture MVC (Model-View-Controller) :
+
+- **Model** : représente les données et la logique métier.
+- **View** : affiche les données à l'utilisateur.
+- **Controller** : gère les requêtes et coordonne Model et View.
+
+Cette architecture sera approfondie dans les séances suivantes.
+
 #### Convention over configuration
 
 Laravel suit le principe de "convention plutôt que configuration". Cela signifie
@@ -429,16 +440,6 @@ la base de données.
 
 Laravel dispose d'un système de routing puissant qui permet de définir des
 routes pour gérer les requêtes HTTP.
-
-#### Architecture MVC
-
-Laravel utilise l'architecture MVC (Model-View-Controller) :
-
-- **Model** : représente les données et la logique métier.
-- **View** : affiche les données à l'utilisateur.
-- **Controller** : gère les requêtes et coordonne Model et View.
-
-Cette architecture sera approfondie dans les séances suivantes.
 
 ### Écosystème Laravel
 
@@ -481,10 +482,30 @@ vos connaissances.
 
 - [laravel/laravel](https://github.com/laravel/laravel) : le dépôt principal du
   framework.
-- [laravel/framework](https://github.com/laravel/framework) : le code source du
-  framework.
 - [Awesome Laravel](https://github.com/chiraggude/awesome-laravel) : liste
   curatée de ressources Laravel.
+
+### Laravel, des briques LEGO parfois un peu magiques
+
+Laravel fournit de nombreuses fonctionnalités qui simplifient le développement,
+mais qui peuvent parfois dérouter les débutant.es et sembler "magiques".
+
+A votre niveau, il n'est pas nécessaire de comprendre en détail le
+fonctionnement interne de chaque fonctionnalité de Laravel. Cependant, il est
+important de savoir où trouver des informations et de la documentation pour
+approfondir vos connaissances au besoin.
+
+De plus, au fur et à mesure que vous progresserez dans le cours, nous
+expliquerons le fonctionnement de certaines de ces fonctionnalités "magiques"
+pour mieux comprendre ce qui se passe en coulisses.
+
+Il se peut que certains aspects de Laravel restent obscurs au début (voir même à
+la fin du cours). C'est normal et fait partie de l'apprentissage. Avec le temps
+et la pratique, vous gagnerez en compréhension et en maîtrise de ce puissant
+framework.
+
+Si tout n'est pas clair immédiatement, ne vous inquiétez pas : l'important est
+de savoir où chercher l'information et comment apprendre par vous-même.
 
 ### Installation de Laravel
 

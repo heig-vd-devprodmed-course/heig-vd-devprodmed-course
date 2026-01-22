@@ -18,6 +18,18 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 
 ## Exercices
 
+> [!NOTE]
+>
+> Bien que ces exercices puissent paraître simples et que leur solution est
+> disponible dans ce même document, il est fortement recommandé de les réaliser
+> sans consulter les solutions au préalable.
+>
+> Ils ont pour but de vous former et de pratiquer les concepts vus dans le
+> contenu de cours.
+>
+> Il est donc important de les faire par vous-même avant de vérifier vos
+> réponses avec les solutions fournies.
+
 ### Exercice 1
 
 Description de l'exercice 1.
