@@ -1,4 +1,4 @@
-# {COURSE_CODE} {ACADEMIC_YEAR} - Évaluation n
+# {COURSE_CODE} {ACADEMIC_YEAR} - Évaluation {EVALUATION_NUMBER}
 
 L'évaluation dure 180 minutes (3 heures).
 
