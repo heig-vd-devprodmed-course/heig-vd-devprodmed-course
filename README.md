@@ -32,20 +32,20 @@ Les détails de chaque séance du cours sont disponibles ci-dessous. Chaque séa
 est détaillée avec les contenus, les objectifs, les méthodes d'enseignement et
 d'apprentissage, et les méthodes d'évaluation.
 
-| Séance | Contenu(s)                                                                                                                   | État[^etat] |
-| -----: | :--------------------------------------------------------------------------------------------------------------------------- | :---------- |
-|     01 | Introduction et modalités du cours + [PHP, Composer et Laravel](./01-contenus-de-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
-|     02 | Bases de données, Eloquent et modèles                                                                                        | 🟡 En cours |
-|     03 | Routes, paramètres et contrôleurs                                                                                            | 🔴 À faire  |
-|     04 | Tailwind CSS, système de templating Blade et vues                                                                            | 🔴 À faire  |
-|     05 | Formulaires et validation                                                                                                    | 🔴 À faire  |
-|     06 | Authentification et autorisations                                                                                            | 🔴 À faire  |
-|  🚨 07 | Evaluation 1                                                                                                                 | 🔴 À faire  |
-|     08 | Architecture RESTful                                                                                                         | 🔴 À faire  |
-|     09 | Mini-projets libres                                                                                                          | 🔴 À faire  |
-|     10 | Mini-projets libres                                                                                                          | 🔴 À faire  |
-|  🚨 11 | Evaluation 2                                                                                                                 | 🔴 À faire  |
-|     12 | Récapitulatif du cours + Hébergement, mails et déploiement                                                                   | 🔴 À faire  |
+| Séance | Contenu(s)                                                                                                                      | État[^etat] |
+| -----: | :------------------------------------------------------------------------------------------------------------------------------ | :---------- |
+|     01 | Introduction et organisation du cours + [PHP, Composer et Laravel](./01-contenus-du-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
+|     02 | Bases de données, Eloquent et modèles                                                                                           | 🟡 En cours |
+|     03 | Routes, paramètres et contrôleurs                                                                                               | 🔴 À faire  |
+|     04 | Tailwind CSS, système de templating Blade et vues                                                                               | 🔴 À faire  |
+|     05 | Formulaires et validation                                                                                                       | 🔴 À faire  |
+|     06 | Authentification et autorisations                                                                                               | 🔴 À faire  |
+|  🚨 07 | Evaluation 1                                                                                                                    | 🔴 À faire  |
+|     08 | Architecture RESTful + mini-projets libres                                                                                      | 🔴 À faire  |
+|     09 | Mini-projets libres                                                                                                             | 🔴 À faire  |
+|     10 | Mini-projets libres                                                                                                             | 🔴 À faire  |
+|  🚨 11 | Evaluation 2                                                                                                                    | 🔴 À faire  |
+|     12 | Récapitulatif du cours + Hébergement, mails et déploiement                                                                      | 🔴 À faire  |
 
 ## 📜 Licence
 

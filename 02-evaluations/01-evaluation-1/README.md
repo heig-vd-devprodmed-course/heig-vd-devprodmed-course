@@ -3,45 +3,65 @@
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
-- [Contexte de l'évaluation](#contexte-de-lévaluation)
-- [Ressources autorisées](#ressources-autorisées)
-- [Grille d'évaluation](#grille-dévaluation)
+- [Déroulement](#déroulement)
+- [Partie théorique](#partie-théorique)
+  - [Ressources autorisées](#ressources-autorisées)
+- [Partie pratique](#partie-pratique)
+  - [Ressources autorisées](#ressources-autorisées-1)
+  - [Grille d'évaluation](#grille-dévaluation)
 
-## Contexte de l'évaluation
+## Déroulement
 
-L'évaluation sera réalisée sur l'ordinateur de l'étudiant.e à l'aide d'un
-environnement de développement adapté à Laravel.
+L'évaluation se déroulera en deux parties :
 
-L'évaluation dure 210 minutes (3 heures 30 minutes).
+1. Une partie théorique de 90 minutes (1 heure 30 minutes) portant sur les
+   concepts fondamentaux abordés en cours.
+2. Une partie pratique de 90 minutes (1 heure 30 minutes) portant sur la mise en
+   œuvre de ces concepts dans le mini-projet avec le framework Laravel.
+
+Une pause de 15 minutes sera prévue entre les deux parties.
+
+## Partie théorique
+
+L'évaluation théorique sera réalisée sur papier et portera sur les concepts
+fondamentaux abordés en cours.
+
+L'évaluation dure 90 minutes (1 heure 30 minutes).
+
+L'étudiant.e devra répondre à une série de questions concernant les notions clés
+du développement web avec Laravel.
+
+### Ressources autorisées
+
+- Aucune ressource n'est autorisée durant la partie théorique.
+
+## Partie pratique
+
+L'évaluation pratique sera réalisée sur l'ordinateur de l'étudiant.e à l'aide
+d'un environnement de développement adapté à Laravel et portera sur
+l'amélioration du mini-projet réalisé durant le cours.
+
+L'évaluation dure 90 minutes (1 heure 30 minutes).
 
 L'étudiant.e devra réaliser une série de tâches liées à l'amélioration du
 mini-projet réalisé durant le cours avec le framework Laravel. Les tâches sont à
 réaliser individuellement, mais l'entraide/la collaboration est autorisée (voir
 [Ressources autorisées](#ressources-autorisées)).
 
-## Ressources autorisées
+Le non-respect de ces consignes sera sanctionné avec la note 1 pour l'ensemble
+de l'évaluation (partie théorique + partie pratique).
+
+### Ressources autorisées
 
 - Toutes les ressources sont autorisées :
   - Internet, la documentation officielle, les outils d'intelligence
     artificielle, les notes de cours, les livres, les tutoriels, etc.
-- La communication entre étudiant.es est permise selon les règles définies
-  ci-dessous :
-  - Une personne ne peut aider qu'une seule autre personne à la fois.
-  - Il n'est pas autorisé de réaliser le travail à la place de la personne
-    aidée.
-  - L'aide apportée doit être réalisée de façon verbale uniquement (pas de
-    partage de code, d'écran, de fichiers, etc.).
-  - L'aide apportée doit être réalisée de la façon la plus discrète possible
-    pour ne pas déranger les autres étudiant.es.
-- Les échanges avec des personnes extérieures au cours ne sont pas autorisés
-  durant l'évaluation :
-  - Il est interdit de demander de l'aide à des personnes extérieures au cours,
-    que ce soit en personne, en ligne, ou par tout autre moyen durant
-    l'évaluation.
+- La communication avec d'autres personnes n'est pas autorisée.
 
-Le non-respect de ces consignes sera sanctionné avec la note 1.
+Le non-respect de ces consignes sera sanctionné avec la note 1 pour l'ensemble
+de l'évaluation (partie théorique + partie pratique).
 
-## Grille d'évaluation
+### Grille d'évaluation
 
 - 0 point – Les critères ne sont pas respectés : la production est absente, hors
   sujet ou témoigne d'une compréhension très limitée du sujet.

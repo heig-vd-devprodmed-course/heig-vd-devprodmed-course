@@ -1,6 +1,14 @@
 # DévProdMéd 2025-2026 - Évaluation 2
 
-## Contexte de l'évaluation
+## Table des matières
+
+- [Table des matières](#table-des-matières)
+- [Déroulement](#déroulement)
+- [Ressources autorisées](#ressources-autorisées)
+- [Grille d'évaluation](#grille-dévaluation)
+- [Ordre de passage](#ordre-de-passage)
+
+## Déroulement
 
 L'évaluation sera réalisée au travers d'une présentation orale sur des nouvelles
 fonctionnalités développées pour le mini-projet durant le cours ainsi qu'une
@@ -13,33 +21,31 @@ L'étudiant.e devra présenter une série de nouvelles fonctionnalités qu'iel a
 développées liées au mini-projet réalisé durant le cours avec le framework
 Laravel.
 
-## Déroulement
-
-- La personne vient 5 minutes avant son temps de passage (voir
-  [Ordre de passage](#ordre-de-passage)) et rentre dans la salle de présentation
-  de façon silencieuse - une autre personne est en train de présenter son
-  travail.
-- Elle tire au sort une question liée au mini-projet ou au framework Laravel
-  parmi une liste de questions préparées par l'enseignant.e et s'assied à la
-  table prévue à cet effet pour se préparer.
-- Elle dispose de 5 minutes pour préparer sa présentation orale avec la réponse
-  à la question tirée au sort.
-- Une fois la présentation précédente terminée, elle présente oralement ses
-  nouvelles fonctionnalités et répond à la question tirée au sort durant 10
-  minutes.
-- La personne est libre de gérer son temps comme elle le souhaite durant les 10
-  minutes de présentation pour présenter son travail et répondre à la question
-  tirée au sort.
-- Une fois les 10 minutes écoulées, l'enseignant.e arrête la présentation et
-  passe à la personne suivante. Un chronomètre sera utilisé pour gérer le temps
-  de chaque personne. Dès que le temps imparti est écoulé, l'enseignant.e
-  interrompt la présentation et passe à la personne suivante, même si la
-  personne n'a pas terminé. Ce n'est pas par manque de respect, mais pour
-  s'assurer que chaque personne dispose du même temps pour sa présentation et la
-  session de questions/réponses.
-- La personne qui doit présenter vient s'installer pendant que la personne qui a
-  présenté précédemment quitte la salle en redonnant la question tirée au sort à
-  l'enseignant.e.
+1. La personne vient 5 minutes avant son temps de passage (voir
+   [Ordre de passage](#ordre-de-passage)) et rentre dans la salle de
+   présentation de façon silencieuse - une autre personne est en train de
+   présenter son travail.
+2. Elle tire au sort une question liée au mini-projet ou au framework Laravel
+   parmi une liste de questions préparées par l'enseignant.e et s'assied à la
+   table prévue à cet effet pour se préparer.
+3. Elle dispose de 5 minutes pour préparer sa présentation orale avec la réponse
+   à la question tirée au sort.
+4. Une fois la présentation précédente terminée, elle présente oralement ses
+   nouvelles fonctionnalités et répond à la question tirée au sort durant 10
+   minutes.
+5. La personne est libre de gérer son temps comme elle le souhaite durant les 10
+   minutes de présentation pour présenter son travail et répondre à la question
+   tirée au sort.
+6. Une fois les 10 minutes écoulées, l'enseignant.e arrête la présentation et
+   passe à la personne suivante. Un chronomètre sera utilisé pour gérer le temps
+   de chaque personne. Dès que le temps imparti est écoulé, l'enseignant.e
+   interrompt la présentation et passe à la personne suivante, même si la
+   personne n'a pas terminé. Ce n'est pas par manque de respect, mais pour
+   s'assurer que chaque personne dispose du même temps pour sa présentation et
+   la session de questions/réponses.
+7. La personne qui doit présenter vient s'installer pendant que la personne qui
+   a présenté précédemment quitte la salle en redonnant la question tirée au
+   sort à l'enseignant.e.
 
 ## Ressources autorisées
 

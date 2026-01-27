@@ -21,6 +21,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Configurer Git et GitHub](#configurer-git-et-github)
   - [Valider l'installation et la configuration de l'environnement de développement](#valider-linstallation-et-la-configuration-de-lenvironnement-de-développement)
 - [Démarrer le mini-projet](#démarrer-le-mini-projet)
+  - [Installer Laravel (si nécessaire)](#installer-laravel-si-nécessaire)
   - [Initialiser le projet Laravel](#initialiser-le-projet-laravel)
   - [Démarrer le serveur de développement Laravel](#démarrer-le-serveur-de-développement-laravel)
   - [Naviguer dans la structure du projet](#naviguer-dans-la-structure-du-projet)
@@ -257,7 +258,7 @@ Suivez les instructions suivantes en fonction de votre système d'exploitation :
    </details>
 
 Une fois l'installation terminée, vous pouvez passer à la section
-[Valider l'installation de Laravel](#valider-linstallation-de-laravel).
+[Valider l'installation de Laravel Herd](#valider-linstallation-de-laravel-herd).
 
 #### Installer et configurer Laravel Herd sur macOS
 
@@ -269,7 +270,7 @@ Une fois l'installation terminée, vous pouvez passer à la section
 4. Ouvrez Laravel Herd depuis le dossier _"Applications"_.
 
 Une fois l'installation terminée, vous pouvez passer à la section
-[Valider l'installation de Laravel](#valider-linstallation-de-laravel).
+[Valider l'installation de Laravel Herd](#valider-linstallation-de-laravel-herd).
 
 #### Installer et configurer Laravel Herd sur Linux
 
@@ -279,9 +280,9 @@ dépendances nécessaires à Laravel sur Linux
 :<https://laravel.com/docs/12.x/installation>.
 
 Une fois l'installation terminée, vous pouvez passer à la section
-[Valider l'installation de Laravel](#valider-linstallation-de-laravel).
+[Valider l'installation de Laravel Herd](#valider-linstallation-de-laravel-herd).
 
-#### Valider l'installation de Laravel
+#### Valider l'installation de Laravel Herd
 
 Maintenant que Laravel (Herd) est installé, nous allons vérifier que tout
 fonctionne correctement.
@@ -318,22 +319,6 @@ Composer version 2.9.1 ...
 ```
 
 Cela indique que Composer est installé et prêt à être utilisé.
-
-Dans le terminal, exécutez la commande suivante pour vérifier que Laravel est
-installé correctement :
-
-```bash
-laravel --version
-```
-
-Le résultat devrait ressembler à ceci :
-
-```text
-Laravel Installer 5.23.0
-```
-
-Cela indique que l'outil de ligne de commande Laravel est installé et prêt à
-être utilisé.
 
 Dans le terminal, exécutez la commande suivante pour vérifier que npm est
 installé correctement :
@@ -468,6 +453,31 @@ Cela vous permettra de faire part de l'organisation GitHub Classroom du cours.
 - [x] Vous avez accès au dépôt GitHub privé pour le mini-projet.
 
 ## Démarrer le mini-projet
+
+### Installer Laravel (si nécessaire)
+
+Dans le terminal, exécutez la commande suivante pour vérifier si Laravel déjà
+installé :
+
+```bash
+laravel --version
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+Laravel Installer 5.23.0
+```
+
+Cela indique que l'outil de ligne de commande Laravel est installé et prêt à
+être utilisé.
+
+Si une erreur survient, installez l'outil de ligne de commande Laravel à l'aide
+de Composer :
+
+```bash
+composer global require laravel/installer
+```
 
 ### Initialiser le projet Laravel
 
@@ -1402,6 +1412,36 @@ principale du projet en utilisant une pull request.
 
 ![GitHub Classroom - Mini-projet (10)](./images/github-classroom-mini-projet-10.png)
 
+#### Récupérer les modifications fusionnées localement
+
+Après avoir fusionné la pull request sur GitHub, il est important de récupérer
+les modifications fusionnées dans votre dépôt Git local.
+
+Pour cela, retournez dans le terminal intégré de Visual Studio Code et exécutez
+la commande suivante pour basculer sur la branche `main` :
+
+```bash
+git checkout main
+```
+
+Ensuite, exécutez la commande suivante pour récupérer les dernières
+modifications de la branche `main` depuis le dépôt distant :
+
+```bash
+git pull
+```
+
+Cette commande met à jour votre branche `main` locale avec les modifications
+fusionnées depuis GitHub.
+
+Normalement, il ne devrait pas y avoir de conflits, car vous êtes seul.e à
+travailler sur ce projet. Cependant, dans un contexte professionnel avec
+plusieurs développeur.se.s, des conflits peuvent survenir si plusieurs personnes
+modifient le même fichier en même temps.
+
+Résolvez les conflits si nécessaire, puis vous serez prêt.e à continuer le
+développement.
+
 #### Recommencer la boucle de développement
 
 Pour chacune des prochaines tâches de développement, il est recommandé de suivre
@@ -1442,13 +1482,16 @@ suivante :
 > De plus, cette solution référence un commit spécifique. Des modifications
 > peuvent avoir été apportées au dépôt depuis ce commit.
 >
-> Pour accéder à la version exacte de la solution correspondant à ce commit,
+> Pour accéder à la version exacte de la solution correspondant à ce commit/tag,
 > vous pouvez cloner le dépôt et utiliser la commande Git suivante pour basculer
-> sur le commit spécifique :
+> sur le commit/tag spécifique :
 >
 > ```bash
-> git checkout <commit-hash>
+> git checkout <commit-hash> # ou git checkout <tag>
 > ```
+>
+> Remplacez `<commit-hash>` ou `<tag>` par l'identifiant du commit ou du tag
+> correspondant à la solution.
 
 <!-- URLs -->
 

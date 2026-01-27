@@ -32,7 +32,7 @@ The repository should follow the following structure:
 
 ```txt
 ./
-├── 01-contenus-de-cours/
+├── 01-contenus-du-cours/
 │   └── ...
 ├── 02-evaluations/
 │   ├── 01-evaluation/
@@ -77,7 +77,7 @@ Examples of improper folder naming conventions:
 
 ## Course contents structure
 
-The directory `01-contenus-de-cours/` (`COURSE_CONTENTS_FOLDER`) contains all
+The directory `01-contenus-du-cours/` (`COURSE_CONTENTS_FOLDER`) contains all
 course materials, organized into subdirectories for each content.
 
 Each content folder contains:

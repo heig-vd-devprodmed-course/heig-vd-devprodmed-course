@@ -12,9 +12,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > **Ressources annexes**
 >
 > - Autres formats du support de cours :
->   [Présentation (web)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-de-cours/02-php-composer-et-laravel/presentation.html)
+>   [Présentation (web)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/presentation.html)
 >   ·
->   [Présentation (PDF)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-de-cours/02-php-composer-et-laravel/02-php-composer-et-laravel-presentation.pdf)
+>   [Présentation (PDF)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/02-php-composer-et-laravel-presentation.pdf)
 > - Mini-projet : [Accéder au contenu](./01-mini-projet/README.md)
 > - Exercices : [Accéder au contenu](./02-exercices/README.md)
 >
@@ -71,7 +71,6 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Exemple : mail() vs PHPMailer](#exemple--mail-vs-phpmailer)
 - [Composer](#composer)
   - [Qu'est-ce que Composer ?](#quest-ce-que-composer-)
-  - [PHP et Composer vs JavaScript et npm](#php-et-composer-vs-javascript-et-npm)
   - [Concepts clés](#concepts-clés)
   - [Commandes de base](#commandes-de-base)
   - [Packagist](#packagist)
@@ -168,6 +167,10 @@ Les librairies externes offrent de nombreux avantages :
 - **Mises à jour** : les mainteneurs de la librairie corrigent les bugs et
   ajoutent des fonctionnalités.
 
+En se reposant sur des librairies externes, les développeur.euses peuvent se
+concentrer sur la création de fonctionnalités spécifiques à leur application
+plutôt que de réécrire des fonctionnalités de base.
+
 ### Exemple : mail() vs PHPMailer
 
 Un exemple concret de la différence entre PHP vanilla et l'utilisation d'une
@@ -247,6 +250,9 @@ Bien que le code soit plus long, PHPMailer offre :
 - Gestion des erreurs.
 - Meilleure délivrabilité des emails.
 
+Il n'a pas été nécessaire de réécrire toute la logique d'envoi d'emails, ce qui
+permet de gagner du temps et d'améliorer la qualité du code.
+
 ## Composer
 
 ### Qu'est-ce que Composer ?
@@ -260,29 +266,6 @@ Composer est le gestionnaire de dépendances standard pour PHP. Il permet de :
 
 Composer est à PHP ce que npm est à JavaScript, pip à Python, Maven à Java ou
 encore Cargo à Rust.
-
-### PHP et Composer vs JavaScript et npm
-
-Si vous avez déjà travaillé avec JavaScript, vous connaissez probablement npm
-(Node Package Manager). Le parallèle entre les deux écosystèmes est très étroit
-:
-
-| PHP                | JavaScript             | Description                         |
-| :----------------- | :--------------------- | :---------------------------------- |
-| PHP                | JavaScript/Node.js     | Le langage de programmation.        |
-| Composer           | npm                    | Le gestionnaire de dépendances.     |
-| `composer.json`    | `package.json`         | Fichier de configuration du projet. |
-| `composer.lock`    | `package-lock.json`    | Versions exactes des dépendances.   |
-| `vendor/`          | `node_modules/`        | Dossier des dépendances installées. |
-| Packagist          | npmjs.com              | Dépôt principal des paquets.        |
-| `composer require` | `npm install`          | Ajouter une dépendance.             |
-| `composer install` | `npm install`          | Installer les dépendances.          |
-| `composer update`  | `npm update`           | Mettre à jour les dépendances.      |
-| Laravel            | Express, Next.js, etc. | Frameworks populaires.              |
-
-Cette similitude facilite l'apprentissage si vous passez d'un écosystème à
-l'autre. Les concepts fondamentaux (gestion des dépendances, versioning,
-autoloading) sont les mêmes.
 
 ### Concepts clés
 
@@ -342,14 +325,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 ### Commandes de base
 
-| Commande                 | Description                                         |
-| :----------------------- | :-------------------------------------------------- |
-| `composer init`          | Crée un nouveau fichier `composer.json` interactif. |
-| `composer require`       | Ajoute une dépendance au projet.                    |
-| `composer install`       | Installe les dépendances depuis `composer.lock`.    |
-| `composer update`        | Met à jour les dépendances et le `composer.lock`.   |
-| `composer remove`        | Supprime une dépendance du projet.                  |
-| `composer dump-autoload` | Régénère les fichiers d'autoloading.                |
+| Commande           | Description                                       |
+| :----------------- | :------------------------------------------------ |
+| `composer init`    | Crée un nouveau fichier `composer.json`.          |
+| `composer require` | Ajoute une dépendance au projet.                  |
+| `composer install` | Installe les dépendances depuis `composer.lock`.  |
+| `composer update`  | Met à jour les dépendances et le `composer.lock`. |
+| `composer remove`  | Supprime une dépendance du projet.                |
 
 Exemples d'utilisation :
 
@@ -387,6 +369,13 @@ Quelques librairies populaires :
 - [`phpunit/phpunit`](https://packagist.org/packages/phpunit/phpunit) : Tests
   unitaires.
 
+Grâce à Packagist et Composer, il est facile d'ajouter des fonctionnalités
+complexes à vos projets PHP en quelques commandes seulement.
+
+Nous l'avions fait à la main dans le cours _"Programmation serveur 2
+(ProgServ2)"_ en téléchargeant PHPMailer manuellement. Composer automatise ce
+processus.
+
 ## Introduction à Laravel
 
 ### Qu'est-ce que Laravel ?
@@ -399,9 +388,8 @@ Laravel fournit :
 - Une structure de projet organisée.
 - Des outils pour les tâches courantes (authentification, base de données,
   emails, etc.).
-- Une syntaxe élégante et expressive.
 - Une documentation complète.
-- Une communauté active.
+- Une communauté (extrêmement) active.
 
 ### Pourquoi utiliser un framework ?
 
@@ -415,7 +403,17 @@ Un framework comme Laravel offre plusieurs avantages :
 - **Bonnes pratiques** : le framework encourage les bonnes pratiques de
   développement.
 
+Vous vous concentrez sur la logique métier de votre application plutôt que sur
+les détails techniques.
+
 ### Principes clés
+
+Laravel repose sur plusieurs principes clés qui facilitent le développement web
+:
+
+- Architecture MVC.
+- Convention over configuration.
+- Système de routing.
 
 #### Architecture MVC
 
@@ -423,7 +421,8 @@ Laravel utilise l'architecture MVC (Model-View-Controller) :
 
 - **Model** : représente les données et la logique métier.
 - **View** : affiche les données à l'utilisateur.
-- **Controller** : gère les requêtes et coordonne Model et View.
+- **Controller** : gère les requêtes (entrées/sorties) et coordonne Model et
+  View.
 
 Cette architecture sera approfondie dans les séances suivantes.
 
@@ -436,11 +435,6 @@ fonctionne automatiquement sans configuration supplémentaire.
 Par exemple, un modèle `User` cherchera automatiquement une table `users` dans
 la base de données.
 
-#### Système de routing
-
-Laravel dispose d'un système de routing puissant qui permet de définir des
-routes pour gérer les requêtes HTTP.
-
 ### Écosystème Laravel
 
 Laravel dispose d'un riche écosystème d'outils (qui seront vus dans les séances
@@ -449,14 +443,19 @@ suivantes) :
 - **Artisan** : l'interface en ligne de commande de Laravel.
 - **Blade** : le moteur de templates pour les vues.
 - **Eloquent** : l'ORM (Object-Relational Mapping) pour la base de données.
-- **Migrations** : gestion du schéma de base de données en PHP.
 - **Middleware** : filtrage des requêtes HTTP.
+- Et plus encore !
 
 Nous aborderons ces outils en détail dans les prochaines séances.
 
 ### Ressources et aide
 
-Laravel dispose d'une documentation complète et d'une communauté active.
+Laravel dispose d'un riche écosystème de ressources pour apprendre et obtenir de
+l'aide :
+
+- Documentation officielle.
+- Communauté active.
+- Dépôts GitHub.
 
 Durant le cours, ces différentes ressources seront utilisées pour approfondir
 vos connaissances.
@@ -482,13 +481,14 @@ vos connaissances.
 
 - [laravel/laravel](https://github.com/laravel/laravel) : le dépôt principal du
   framework.
-- [Awesome Laravel](https://github.com/chiraggude/awesome-laravel) : liste
-  curatée de ressources Laravel.
+- [Awesome Laravel](https://github.com/chiraggude/awesome-laravel) : liste de
+  ressources Laravel.
 
 ### Laravel, des briques LEGO parfois un peu magiques
 
-Laravel fournit de nombreuses fonctionnalités qui simplifient le développement,
-mais qui peuvent parfois dérouter les débutant.es et sembler "magiques".
+Laravel (ou tout autre framework web) fournit de nombreuses fonctionnalités qui
+simplifient le développement, mais qui peuvent parfois dérouter les débutant.es
+et sembler "magiques".
 
 A votre niveau, il n'est pas nécessaire de comprendre en détail le
 fonctionnement interne de chaque fonctionnalité de Laravel. Cependant, il est
@@ -512,11 +512,14 @@ de savoir où chercher l'information et comment apprendre par vous-même.
 Laravel s'installe via Composer :
 
 ```bash
-# Créer un nouveau projet Laravel
-composer create-project laravel/laravel mon-projet
-
-# Ou avec l'installateur Laravel (optionnel)
+# Installe l'installateur Laravel globalement avec Composer
 composer global require laravel/installer
+```
+
+Créer un nouveau projet Laravel :
+
+```bash
+# Crée un nouveau projet Laravel nommé "mon-projet"
 laravel new mon-projet
 ```
 
@@ -525,26 +528,25 @@ laravel new mon-projet
 Voici les principaux dossiers d'un projet Laravel :
 
 ```text
-mon-projet/
-├── app/                 # Code de l'application
-│   ├── Http/
-│   │   └── Controllers/ # Contrôleurs
-│   └── Models/          # Modèles Eloquent
-├── bootstrap/           # Fichiers de démarrage
-├── config/              # Fichiers de configuration
-├── database/            # Migrations et seeders
-├── public/              # Point d'entrée web (index.php)
-├── resources/           # Vues, assets non compilés
-│   └── views/           # Templates Blade
-├── routes/              # Définition des routes
-│   └── web.php          # Routes web
-├── storage/             # Fichiers générés (logs, cache)
-├── tests/               # Tests automatisés
-├── vendor/              # Dépendances Composer
-├── .env                 # Variables d'environnement
-├── artisan              # CLI Laravel
-└── composer.json        # Dépendances du projet
+./
+├── app/            # Code principal de l'application
+├── bootstrap/      # Fichiers de démarrage
+├── config/         # Fichiers de configuration
+├── database/       # Migrations et seeds
+├── node_modules/   # Dépendances JavaScript (si utilisées)
+├── public/         # Point d'entrée public (index.php)
+├── resources/      # Vues et ressources front-end
+├── routes/         # Définitions des routes
+├── storage/        # Fichiers générés (logs, cache, etc.)
+├── tests/          # Tests unitaires et fonctionnels
+└── vendor/         # Dépendances gérées par Composer
 ```
+
+Nous aborderons la structure en détail au fur et à mesure du cours. Pour
+l'instant, retenez que le dossier `app/` contient le code principal de
+l'application, le dossier `routes/` contient les définitions des routes (les
+entrées/sorties de l'application) et le dossier `resources/` contient les vues
+et les ressources front-end.
 
 ### Lancer le serveur de développement
 
@@ -555,10 +557,11 @@ Laravel inclut un serveur de développement intégré :
 cd mon-projet
 
 # Lancer le serveur de développement
-php artisan serve
+composer run dev
 ```
 
-L'application est accessible à l'adresse `http://localhost:8000`.
+Composer démarrera le serveur de développement et l'application sera alors
+accessible à l'adresse <http://localhost:8000>.
 
 ## PHP vs Composer vs Laravel
 
@@ -604,20 +607,23 @@ Webpack/Vite) pour la gestion de certains aspects front-end.
 Cette section résume les parallèles entre les deux mondes pour faciliter votre
 apprentissage.
 
-| Concept                  | PHP             | JavaScript          |
-| :----------------------- | :-------------- | :------------------ |
-| Langage                  | PHP             | JavaScript/Node.js  |
-| Gestionnaire de paquets  | Composer        | npm                 |
-| Fichier de configuration | `composer.json` | `package.json`      |
-| Fichier de verrouillage  | `composer.lock` | `package-lock.json` |
-| Dossier des dépendances  | `vendor/`       | `node_modules/`     |
-| Dépôt de paquets         | Packagist       | npmjs.com           |
-| Framework web populaire  | Laravel         | Express, React      |
+| Concept                       | PHP                | JavaScript          |
+| :---------------------------- | :----------------- | :------------------ |
+| Gestionnaire de paquets       | Composer           | npm                 |
+| Dépôt de paquets              | Packagist          | npmjs.com           |
+| Frameworks web populaires     | Laravel, Symfony   | Express, React      |
+| Fichier de configuration      | `composer.json`    | `package.json`      |
+| Fichier de verrouillage       | `composer.lock`    | `package-lock.json` |
+| Dossier des dépendances       | `vendor/`          | `node_modules/`     |
+| Ajouter une dépendance        | `composer require` | `npm install`       |
+| Installer les dépendances     | `composer install` | `npm install`       |
+| Mettre à jour les dépendances | `composer update`  | `npm update`        |
 
 Nous allons éviter de mélanger les deux écosystèmes dans ce cours, mais il est
-utile de comprendre les parallèles et il n'est pas impossible que nous
-utilisions occasionnellement des outils JavaScript pour le front-end dans les
-projets Laravel.
+utile de comprendre les parallèles.
+
+Il n'est pas impossible que nous utilisions occasionnellement des outils
+JavaScript pour le front-end dans les projets Laravel.
 
 ## Conclusion
 
