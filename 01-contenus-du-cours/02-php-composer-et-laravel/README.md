@@ -11,10 +11,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 >
 > **Ressources annexes**
 >
-> - Autres formats du support de cours :
->   [Présentation (web)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/presentation.html)
->   ·
->   [Présentation (PDF)](https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/02-php-composer-et-laravel-presentation.pdf)
+> - Autres formats du support de cours : [Présentation (web)][presentation-web]
+>   · [Présentation (PDF)][presentation-pdf]
 > - Mini-projet : [Accéder au contenu](./01-mini-projet/README.md)
 > - Exercices : [Accéder au contenu](./02-exercices/README.md)
 >
@@ -669,3 +667,7 @@ il est recommandé pour la prochaine séance de :
 
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
+[presentation-web]:
+	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/presentation.html
+[presentation-pdf]:
+	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/02-php-composer-et-laravel-presentation.pdf

@@ -1471,7 +1471,7 @@ en utilisant Laravel.
 
 La solution du mini-projet est accessible dans un dépôt GitHub dédié à l'adresse
 suivante :
-<https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-mini-projet/tree/6c546ab3e17082e05c0a9116e2685c5f9edb59fa>.
+<https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-mini-projet/tree/mini-projet-1>.
 
 > [!NOTE]
 >

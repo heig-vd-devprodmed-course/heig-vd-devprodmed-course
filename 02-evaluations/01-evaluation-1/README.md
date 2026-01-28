@@ -9,6 +9,7 @@
 - [Partie pratique](#partie-pratique)
   - [Ressources autorisées](#ressources-autorisées-1)
   - [Grille d'évaluation](#grille-dévaluation)
+- [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
 
 ## Déroulement
 
@@ -100,3 +101,38 @@ Note maximale : (nombre de points obtenus / nombre de points totaux) × 5 + 1.
 |   8 | Les vues spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles        |
 |   9 | Les contrôleurs spécifiques à la nouvelle fonctionnalité sont ajoutés/mis à jour et sont fonctionnels      |
 |  10 | Les validations spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles |
+
+## Sanctions possibles en cas de tricherie
+
+Source :
+[Règlement d'études Bachelor de la HEIG-VD](https://intra.heig-vd.ch/academique/cadre-de-reference/Documents/Rglt-Etudes-HEIG-VD.pdf).
+
+> **Art. 16. - Fraude, plagiat et usage de faux**
+>
+> 1 - Toute fraude, y compris le plagiat ou la tentative de fraude dans les
+> travaux d'évaluation, les examens et le travail de bachelor, **entraîne la
+> note de 1.0 au module**, impliquant la non-acquisition des crédits ECTS
+> correspondants, **voire l'invalidation du titre**, et peut faire l'objet d'une
+> des sanctions prévues à l'article 14.
+
+> **Art. 14. - Sanctions**
+>
+> 1 - L'étudiant qui ne respecte pas les règles ainsi que les directives ou les
+> consignes de la HEIG-VD, [...] est passible des sanctions disciplinaires
+> suivantes :
+>
+> 1. l'avertissement ;
+> 2. l'exclusion temporaire ;
+> 3. **l'exclusion de la filière, voire du domaine** si les règlements du
+>    domaine le prévoient.
+
+**Les personnes qui surveilleront l'évaluation sont informées des règles
+d'évaluation et des sanctions possibles en cas de triche.**
+
+Elles sont en charge de surveiller le bon déroulement de l'évaluation et de
+signaler les éventuels cas de triche. **Aucune tolérance ne sera accordée en cas
+de triche avérée ou de doute sur la bonne conduite de l'évaluation**.
+
+Vous avez travaillé dur pour arriver jusqu'ici et nous avons confiance en vos
+capacités à réussir cette évaluation. **Ne prenez pas le risque de nous décevoir
+et/ou de vous faire renvoyer**.
