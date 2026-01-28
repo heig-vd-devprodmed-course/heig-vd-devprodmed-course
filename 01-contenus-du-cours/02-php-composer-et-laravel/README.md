@@ -98,6 +98,11 @@ Ce contenu de cours a pour objectifs de permettre aux personnes qui étudient de
 comprendre les bases de PHP, Composer et Laravel, ainsi que le lien avec
 l'écosystème JavaScript et npm.
 
+Ce contenu repose sur la documentation officielle suivante :
+
+- <https://laravel.com/docs/12.x/installation>
+- <https://laravel.com/docs/12.x/configuration>
+
 De façon plus concise, à l'issue de cette séance, les personnes qui étudient
 devraient être capables de :
 
