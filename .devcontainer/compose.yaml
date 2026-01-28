@@ -1,0 +1,26 @@
+volumes:
+  mariadb_data:
+
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/base:trixie
+    command: sleep infinity
+    volumes:
+      - ..:/workspace:cached
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=devprodmed
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  plantuml:
+    image: plantuml/plantuml-server:latest
+    ports:
+      - 9090:8080

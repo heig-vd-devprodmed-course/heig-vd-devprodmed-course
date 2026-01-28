@@ -11,11 +11,10 @@
  * @size 4:3 960px 720px
  */
 
-@import "https://fonts.bunny.net/css?family=Lato:400,900|Roboto+Mono:400,700&display=swap";
+@import "https://fonts.bunny.net/css?family=atkinson-hyperlegible:400,700|Roboto+Mono:400,700";
 @import "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
 
 /* Colors */
-
 :root {
 	--color-primary: #f96;
 	--color-secondary: #7d8ca3;
@@ -29,7 +28,6 @@
 }
 
 /* Headings */
-
 h1,
 h2,
 h3,
@@ -37,7 +35,7 @@ h4,
 h5,
 h6 {
 	color: var(--color-secondary);
-	margin: 0;
+	margin: 0.5em 0 0;
 	font-size: 1.5rem;
 }
 
@@ -74,7 +72,6 @@ h6 a:link {
 }
 
 /* Header and footer */
-
 header,
 footer,
 section::after {
@@ -93,14 +90,23 @@ header {
 	top: 0;
 }
 
+header a {
+	color: var(--color-dimmed);
+	text-decoration: none;
+}
+
 footer {
 	left: 0;
 	right: 0;
 	bottom: 0;
 }
 
-/* Paragraphs and lists */
+footer a {
+	color: var(--color-dimmed);
+	text-decoration: none;
+}
 
+/* Paragraphs and lists */
 p,
 blockquote {
 	margin: 1em 0 0;
@@ -116,7 +122,6 @@ ol > li > p {
 }
 
 /* Code */
-
 code {
 	display: inline-block;
 	font-family: "Roboto Mono", monospace;
@@ -162,7 +167,6 @@ section pre > code {
 }
 
 /* Table */
-
 table {
 	border-spacing: 0;
 	border-collapse: collapse;
@@ -192,13 +196,11 @@ section table tbody > tr:nth-child(even) th {
 }
 
 /* Section */
-
 section {
 	background-color: var(--color-background);
 	color: var(--color-normal);
 	font-size: 35px;
-	font-family:
-		Lato, "Avenir Next", Avenir, "Trebuchet MS", "Segoe UI", sans-serif;
+	font-family: "Atkinson Hyperlegible", sans-serif;
 	height: 720px;
 	line-height: 1.35;
 	letter-spacing: 1.25px;
@@ -275,13 +277,7 @@ section > header:first-child + * {
 	margin-top: 0;
 }
 
-section:not(.lead) > p,
-blockquote {
-	text-align: justify;
-}
-
 /* Blockquote */
-
 blockquote {
 	font-style: italic;
 	margin: 1em 0 0;
@@ -293,7 +289,7 @@ blockquote::before,
 blockquote::after {
 	content: "“";
 	display: block;
-	font-family: "Times New Roman", serif;
+	font-family: "Atkinson Hyperlegible", serif;
 	font-weight: bold;
 	position: absolute;
 }
@@ -314,17 +310,62 @@ blockquote > *:first-child {
 }
 
 /* Custom classes */
-
 .two-columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.three-columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 1rem;
+}
+
+.four-columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 1rem;
+}
+
+.one-third-two-thirds-columns {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	gap: 1rem;
 }
 
+.forty-sixty-columns {
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+	gap: 1rem;
+}
+
 .center {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	text-align: center;
+}
+
+.rounded {
+	margin: 1em 0 0;
+	border-radius: 50%;
+}
+
+.rounded img {
+	border-radius: 50%;
+}
+
+.margin-0 {
+	margin: 0;
+}
+
+.thumbnail {
+	position: absolute;
+	bottom: 40px;
+	right: 40px;
+	color: white;
+	-webkit-text-stroke: 0.5px black;
+	font-weight: bold;
+}
+
+.thumbnail a {
+	color: white;
 }

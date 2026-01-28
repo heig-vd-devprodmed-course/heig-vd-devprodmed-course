@@ -1,18 +1,41 @@
 #!/usr/bin/env sh
 
-## Update packages list
+## Configure Bash
+# Aliases for common commands
+tee -a ~/.bash_aliases > /dev/null <<"EOF"
+alias tree='tree --dirsfirst -A -F'
+alias jpegoptim='jpegoptim --strip-all --all-progressive'
+alias optipng='optipng -o5 -strip all -fix'
+EOF
+
+## Enable globstar option for recursive globbing
+tee -a ~/.bashrc > /dev/null <<"EOF"
+shopt -s globstar nullglob
+EOF
+
+## Install required packages
+# Update packages list
 sudo apt update
 
-## Install packages to optimize images (jpegoptim, optipng)
+# Install common packages
+sudo apt install --yes neovim
+
+# Install packages to optimize images (jpegoptim, optipng)
 sudo apt install --yes jpegoptim optipng
 
-## Install packages to optimize documents (ps2pdf)
+# Install packages to optimize documents (ps2pdf)
 sudo apt install --yes ghostscript
 
-## Install packages to interact with SQLite databases
-sudo apt install --yes sqlite3
+# Install packages to interact with SQLite databases
+sudo apt install --yes sqlite3 php-sqlite3
 
-## Install NPM packages
-npm install
+# Install PHP and Composer
+sudo apt install --yes php-common php-cli php-mysql php-xml composer
 
-git config --global pull.rebase true
+## Install Laravel Installer
+composer global require laravel/installer
+
+# Add Composer global bin to PATH
+tee -a ~/.bashrc > /dev/null <<"EOF"
+export PATH="${HOME}/.composer/vendor/bin:${PATH}"
+EOF
