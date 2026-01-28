@@ -368,4 +368,5 @@ blockquote > *:first-child {
 
 .thumbnail a {
 	color: white;
+	text-decoration: none;
 }
