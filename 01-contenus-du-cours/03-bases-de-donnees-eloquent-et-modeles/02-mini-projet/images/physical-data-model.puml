@@ -1,0 +1,49 @@
+@startuml physical-data-model
+
+title Physical Data Model for Mini Social Network
+
+entity User {
+  * id: number <<generated>>
+  --
+  * firstName: string
+  * lastName: string
+  * username: string <<unique>>
+  * email: string <<unique>>
+  * password: string <<hashed>>
+  * created_at: timestamp <<generated>>
+  * updated_at: timestamp <<generated>>
+}
+
+entity Post {
+  * id: number <<generated>>
+  --
+  * user_id: number <<FK>>
+  * content: text
+  * created_at: timestamp <<generated>>
+  * updated_at: timestamp <<generated>>
+}
+
+entity Like {
+  * user_id: number <<PK, FK>>
+  * post_id: number <<PK, FK>>
+  --
+  * created_at: timestamp <<generated>>
+}
+
+User "1" --- "0..*" Post : creates
+User "1" --- "0..*" Like : likes
+Post "1" --- "0..*" Like : is liked by
+
+legend right
+Legend
+| **Symbol** | **Meaning** |
+| E | Entity |
+| 1 | Exactly one |
+| 0..1 | Zero or one |
+| 1..* | One or many |
+| 0..* | Zero or many |
+| PK | Primary Key |
+| FK | Foreign Key |
+| Dot (●)| Mandatory field |
+endlegend
+@enduml

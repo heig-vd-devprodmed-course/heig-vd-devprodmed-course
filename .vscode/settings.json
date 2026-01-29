@@ -5,6 +5,9 @@
 	"[markdown]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"[php]": {
+		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+	},
 	"cSpell.language": "fr,en",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnPaste": true,
@@ -14,6 +17,8 @@
 	"files.encoding": "utf8",
 	"files.eol": "\n",
 	"files.insertFinalNewline": true,
+	"intelephense.completion.maxItems": 200,
+	"intelephense.format.braces": "per",
 	"markdown.extension.toc.levels": "2..3",
 	"markdown.marp.breaks": "off",
 	"markdown.marp.html": "all",

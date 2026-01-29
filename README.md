@@ -40,7 +40,7 @@ d'apprentissage, et les méthodes d'évaluation.
 
 | Séance | Contenu(s)                                                                                                                                                                                                   | État[^etat] |
 | -----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
-|     01 | [Introduction et organisation du cours](./01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md) + [PHP, Composer et Laravel](./01-contenus-du-cours/02-php-composer-et-laravel/README.md) |             |
+|     01 | [Introduction et organisation du cours](./01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md) + [PHP, Composer et Laravel](./01-contenus-du-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
 |     02 | [Bases de données, Eloquent et modèles](./01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/README.md)                                                                                            | 🟢 Prêt     |
 |     03 | Routes, paramètres et contrôleurs                                                                                                                                                                            | 🟡 En cours |
 |     04 | Tailwind CSS, système de templating Blade et vues                                                                                                                                                            | 🔴 À faire  |

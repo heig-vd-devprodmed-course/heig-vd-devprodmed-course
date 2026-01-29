@@ -67,7 +67,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Migrations](#migrations)
   - [Structure d'une migration](#structure-dune-migration)
   - [Créer une nouvelle migration](#créer-une-nouvelle-migration)
-  - [Modifier une migration existante](#modifier-une-migration-existante)
+  - [Modifier une migration](#modifier-une-migration)
   - [Appliquer les migrations](#appliquer-les-migrations)
   - [Annuler les migrations](#annuler-les-migrations)
 - [Le concept d'ORM](#le-concept-dorm)
@@ -75,11 +75,13 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Inconvénients d'un ORM](#inconvénients-dun-orm)
 - [Eloquent : l'ORM de Laravel](#eloquent--lorm-de-laravel)
   - [Créer un modèle](#créer-un-modèle)
+  - [Utiliser un modèle](#utiliser-un-modèle)
   - [Opérations CRUD avec Eloquent](#opérations-crud-avec-eloquent)
   - [Gérer les relations entre modèles](#gérer-les-relations-entre-modèles)
 - [Requêtes et query builder](#requêtes-et-query-builder)
 - [Seeders](#seeders)
 - [Le modèle dans le patron de conception MVC](#le-modèle-dans-le-patron-de-conception-mvc)
+  - [Pourquoi commencer par le modèle ?](#pourquoi-commencer-par-le-modèle-)
 - [Utiliser Artisan pour gérer les modèles](#utiliser-artisan-pour-gérer-les-modèles)
 - [Aller plus loin](#aller-plus-loin)
   - [Les transactions](#les-transactions)
@@ -173,7 +175,8 @@ Grâce à ces variables d'environnement, Laravel abstrait les détails de connex
 applications.
 
 Il n'est donc plus nécessaire d'utiliser des fichiers de configuration INI comme
-étudié en ProgServ2, Laravel gère cela de manière plus moderne.
+étudié en ProgServ2, Laravel gère cela de manière plus moderne à l'aide des
+fichiers de variables d'environnement.
 
 ## Migrations
 
@@ -274,8 +277,7 @@ spécifiques de Laravel, telles que `Schema` et `Blueprint`, pour faciliter la
 définition de la structure de la base de données. Elles sont automatiquement
 importées par l'autoloader de Composer.
 
-Ces classes fournissent une API fluide pour définir les tables et leurs
-colonnes.
+Ces classes permettent de définir les tables et leurs colonnes.
 
 Par exemple, dans la méthode `up()`, nous créons une table `users` avec les
 colonnes suivantes :
@@ -356,7 +358,7 @@ nommée `demo` en se basant sur le nom de la migration `create_demo_table`. De c
 fait, Laravel a automatiquement généré le code de création et de suppression de
 cette table que vous pourrez modifier selon vos besoins.
 
-### Modifier une migration existante
+### Modifier une migration
 
 Imaginons que nous souhaitons modifier cette migration pour ajouter un champ
 `username` à la table `users` existante. Nous pourrions modifier la méthode
@@ -367,6 +369,8 @@ public function up(): void
 {
 }
 ```
+
+Cette migration
 
 > [!WARNING]
 >
@@ -454,7 +458,26 @@ Par convention, Laravel suppose que :
 - Les clés primaires s'appellent `id`.
 - Les timestamps sont gérés automatiquement.
 
-#### Attributs à assigner en masse
+### Utiliser un modèle
+
+Lorsqu'un modèle Eloquent est créé, il peut être utilisé pour interagir avec la
+table correspondante dans la base de données.
+
+Pour créer un nouvel enregistrement dans la table `users` :
+
+```php
+TODO
+```
+
+Une autre manière de créer un utilisateur est d'utiliser la méthode `create()` :
+
+```php
+TODO
+```
+
+Pour permettre l'assignation de masse grâce à la méthode `create()`, il est
+nécessaire de définir les attributs autorisés via la propriété `$fillable` dans
+le modèle.
 
 Par défaut, Eloquent protège contre l'assignation de masse. Il faut expliciter
 quels attributs peuvent être assignés :
@@ -466,15 +489,11 @@ class User extends Model
 }
 ```
 
-#### Timestamps automatiques
+Grâce à cette configuration, les attributs `name`, `email` et `password` peuvent
+être assignés en masse à l'aide de la méthode `create()`.
 
-Eloquent gère automatiquement `created_at` et `updated_at` :
-
-```php
-$user = User::find(1);
-echo $user->created_at; // Date et heure de création
-echo $user->updated_at; // Date et heure de dernière modification
-```
+Cela permet de filtrer les attributs qui peuvent être assignés en masse, ce qui
+améliore la sécurité en évitant les assignations non intentionnelles.
 
 ### Opérations CRUD avec Eloquent
 
@@ -549,6 +568,8 @@ $user = User::where('email', 'alice@example.com')->first();
 
 ## Seeders
 
+TODO
+
 ## Le modèle dans le patron de conception MVC
 
 Le modèle est la première partie du patron Model-View-Controller (MVC) :
@@ -578,6 +599,8 @@ class User extends Model
     }
 }
 ```
+
+### Pourquoi commencer par le modèle ?
 
 ## Utiliser Artisan pour gérer les modèles
 

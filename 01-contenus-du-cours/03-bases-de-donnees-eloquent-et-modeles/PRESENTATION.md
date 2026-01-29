@@ -8,6 +8,7 @@ description:
   "Bases de données, Eloquent et modèles pour le cours DévProdMéd enseigné à la
   HEIG-VD, Suisse"
 lang: "fr"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/presentation.html"
 header:
   "[**Bases de données, Eloquent et modèles**][contenu-complet-sur-github]"
 footer:

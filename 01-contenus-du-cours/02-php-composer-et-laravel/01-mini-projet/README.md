@@ -343,6 +343,12 @@ Si vous n'avez pas encore installé Visual Studio Code, suivez les instructions
 officielles pour l'installer sur votre système d'exploitation :
 <https://code.visualstudio.com/docs/setup/setup-overview>.
 
+#### Installer l'extension PHP Intelephense pour Visual Studio Code
+
+Ensuite, installez l'extension
+[PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
+pour améliorer votre expérience de développement avec PHP.
+
 #### Installer l'extension Laravel pour Visual Studio Code
 
 Ensuite, installez l'extension
@@ -1412,6 +1418,17 @@ principale du projet en utilisant une pull request.
 
 ![GitHub Classroom - Mini-projet (10)](./images/github-classroom-mini-projet-10.png)
 
+#### Valider que l'issue a bien été fermée
+
+Une fois la pull request fusionnée, l'issue associée est automatiquement fermée
+par GitHub.
+
+Vous pouvez vérifier cela en retournant dans l'onglet _"Issues"_ du dépôt
+GitHub.
+
+Vous devriez voir que l'issue _"Ajouter les instructions de développement"_ est
+marquée comme fermée. Si
+
 #### Récupérer les modifications fusionnées localement
 
 Après avoir fusionné la pull request sur GitHub, il est important de récupérer
@@ -1441,6 +1458,10 @@ modifient le même fichier en même temps.
 
 Résolvez les conflits si nécessaire, puis vous serez prêt.e à continuer le
 développement.
+
+Vous êtes libre de supprimer l'un des deux dossiers clonés précédemment
+(`devprodmed-mini-projet` ou `devprodmed-mini-projet-<github-username>`) pour
+éviter toute confusion.
 
 #### Recommencer la boucle de développement
 
