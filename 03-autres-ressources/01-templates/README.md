@@ -80,7 +80,7 @@ Examples of improper folder naming conventions:
 The directory `01-contenus-du-cours/` (`COURSE_CONTENTS_FOLDER`) contains all
 course materials, organized into subdirectories for each content.
 
-Each content folder contains:
+Each content folder may contain:
 
 - A README file (`README.md`) that contains detailed explanations and examples
   related to the content to be covered.
@@ -98,13 +98,21 @@ Each content folder contains:
 When creating new course content, always read and follow the structure of all
 relevant template files in the templates directory, including:
 
-- [The main content template](./contenu-de-cours/README.md)
-- [The exercises template](./contenu-de-cours/01-exercices/README.md)
-- [The mini-project template](./contenu-de-cours/02-mini-projet/README.md)
-- [The solution template](./contenu-de-cours/02-mini-projet/solution/README.md)
+- [The main README](../../README.md).
+- [The main content template](./contenu-de-cours/README.md).
+- [The exercises template](./contenu-de-cours/01-exercices/README.md).
+- [The mini-project template](./contenu-de-cours/02-mini-projet/README.md).
+- [The solution template](./contenu-de-cours/02-mini-projet/solution/README.md).
 
 When updating a course content, ensure that all related files and resources are
 also updated accordingly to maintain consistency.
+
+When creating new course content, always start by only creating the main content
+folder with its README file. The result will then be reviewed before adding more
+resources such as exercises or mini-projects.
+
+You can use the previously created course contents as examples to guide you in
+structuring new contents.
 
 ## Evaluations structure
 

@@ -1,0 +1,20 @@
+@startuml conceptual-data-model
+
+title Conceptual Data Model for Mini Social Network
+
+entity User {}
+
+entity Post {}
+
+entity Like {}
+
+User -- Post : creates
+User -- Like : likes
+Post -- Like : is liked by
+
+legend right
+Legend
+| **Symbol** | **Meaning** |
+| E | Entity |
+endlegend
+@enduml

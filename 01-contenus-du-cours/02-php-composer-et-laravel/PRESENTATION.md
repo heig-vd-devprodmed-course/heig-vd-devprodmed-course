@@ -8,6 +8,7 @@ description:
   "PHP, Composer et Laravel pour le cours DévProdMéd enseigné à la HEIG-VD,
   Suisse"
 lang: "fr"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-php-composer-et-laravel/presentation.html"
 header: "[**PHP, Composer et Laravel**][contenu-complet-sur-github]"
 footer:
   "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
