@@ -1,4 +1,9 @@
 @startuml logical-data-model
+' Some whitespace characters (` `) are set to allow enough space
+' See https://github.com/plantuml/backlog/issues/11
+
+skinparam linetype ortho
+skinparam nodesep 200
 
 title Logical Data Model for Mini Social Network
 
@@ -10,29 +15,30 @@ entity User {
   * username
   * email
   * password
-  * created_at
-  * updated_at
+  created_at
+  updated_at
 }
 
 entity Post {
   * id [PK]
   --
   * user_id [FK]
+  title
   * content
-  * created_at
-  * updated_at
+  created_at
+  updated_at
 }
 
 entity Like {
   * user_id [PK, FK]
   * post_id [PK, FK]
   --
-  * created_at
+  reaction
 }
 
-User "1" --- "0..*" Post : creates
-User "1" --- "0..*" Like : likes
-Post "1" --- "0..*" Like : is liked by
+User "1 " --- "0..*" Post : creates 
+User "1 " --- "0..*" Like : likes 
+Post "1 " --- "0..*" Like : is liked by 
 
 legend right
 Legend

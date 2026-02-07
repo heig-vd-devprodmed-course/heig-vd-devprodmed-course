@@ -99,8 +99,8 @@ de Laravel.
 
 Ce contenu repose sur la documentation officielle suivante :
 
-- <https://laravel.com/docs/12.x/database>
-- <https://laravel.com/docs/12.x/eloquent>
+- <https://laravel.com/docs/12.x/database> et ses sous-sections.
+- <https://laravel.com/docs/12.x/eloquent> et ses sous-sections.
 
 De façon plus concise, à l'issue de cette séance, les personnes qui étudient
 devraient être capables de :
