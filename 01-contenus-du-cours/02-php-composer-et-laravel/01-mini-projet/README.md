@@ -17,7 +17,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Avertissements et alertes](#avertissements-et-alertes)
 - [Mettre en place l'environnement de développement](#mettre-en-place-lenvironnement-de-développement)
   - [Installer et configurer Laravel Herd](#installer-et-configurer-laravel-herd)
-  - [Installer et configurer Visual Studio Code](#installer-et-configurer-visual-studio-code)
+  - [Installer et configurer votre environnement de développement](#installer-et-configurer-votre-environnement-de-développement)
   - [Configurer Git et GitHub](#configurer-git-et-github)
   - [Valider l'installation et la configuration de l'environnement de développement](#valider-linstallation-et-la-configuration-de-lenvironnement-de-développement)
 - [Démarrer le mini-projet](#démarrer-le-mini-projet)
@@ -31,6 +31,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Mettre à jour la documentation pour lancer le projet](#mettre-à-jour-la-documentation-pour-lancer-le-projet)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
+- [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
 
@@ -335,13 +336,31 @@ Le résultat devrait ressembler à ceci :
 
 Cela indique que npm est installé et prêt à être utilisé.
 
-### Installer et configurer Visual Studio Code
+### Installer et configurer votre environnement de développement
+
+Dans cette section, nous allons installer et configurer les outils nécessaires
+pour développer avec Laravel.
+
+Nous avons choisi d'utiliser Visual Studio Code comme éditeur de code pour ce
+cours, mais vous êtes libre d'utiliser l'éditeur de votre choix.
+
+[PHPStorm](https://www.jetbrains.com/phpstorm/) est une excellente alternative à
+Visual Studio Code, mais il s'agit d'un logiciel payant. Au travers de la
+HEIG-VD, vous avez accès à une licence gratuite pour tous les produits
+JetBrains, que vous pouvez obtenir en suivant les instructions sur la page
+suivante : <https://www.jetbrains.com/academy/student-pack/>.
 
 #### Installer Visual Studio Code
 
 Si vous n'avez pas encore installé Visual Studio Code, suivez les instructions
 officielles pour l'installer sur votre système d'exploitation :
 <https://code.visualstudio.com/docs/setup/setup-overview>.
+
+#### Installer l'extension PHP Intelephense pour Visual Studio Code
+
+Ensuite, installez l'extension
+[PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
+pour améliorer votre expérience de développement avec PHP.
 
 #### Installer l'extension Laravel pour Visual Studio Code
 
@@ -1412,6 +1431,17 @@ principale du projet en utilisant une pull request.
 
 ![GitHub Classroom - Mini-projet (10)](./images/github-classroom-mini-projet-10.png)
 
+#### Valider que l'issue a bien été fermée
+
+Une fois la pull request fusionnée, l'issue associée est automatiquement fermée
+par GitHub.
+
+Vous pouvez vérifier cela en retournant dans l'onglet _"Issues"_ du dépôt
+GitHub.
+
+Vous devriez voir que l'issue _"Ajouter les instructions de développement"_ est
+marquée comme fermée. Si
+
 #### Récupérer les modifications fusionnées localement
 
 Après avoir fusionné la pull request sur GitHub, il est important de récupérer
@@ -1441,6 +1471,10 @@ modifient le même fichier en même temps.
 
 Résolvez les conflits si nécessaire, puis vous serez prêt.e à continuer le
 développement.
+
+Vous êtes libre de supprimer l'un des deux dossiers clonés précédemment
+(`devprodmed-mini-projet` ou `devprodmed-mini-projet-<github-username>`) pour
+éviter toute confusion.
 
 #### Recommencer la boucle de développement
 
@@ -1492,6 +1526,21 @@ suivante :
 >
 > Remplacez `<commit-hash>` ou `<tag>` par l'identifiant du commit ou du tag
 > correspondant à la solution.
+
+## Aller plus loin
+
+- Seriez-vous capable de protéger votre branche `main` pour éviter de pousser
+  directement des modifications sans passer par une pull request ? Référez-vous
+  à la documentation officielle de GitHub pour les règles de protection de
+  branche :
+  <https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches>
+  et
+  <https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets>.
+- Seriez-vous capable de configurer GitHub pour supprimer automatiquement les
+  branches source des pull requests une fois qu'elles sont fusionnées ?
+  Référez-vous à la documentation officielle de GitHub pour la suppression
+  automatique des branches :
+  <https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches>.
 
 <!-- URLs -->
 

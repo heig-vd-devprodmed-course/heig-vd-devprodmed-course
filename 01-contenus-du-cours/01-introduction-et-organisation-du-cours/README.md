@@ -192,8 +192,8 @@ Quelques règles concernant l'utilisation de ces outils :
 concepts** que vous saurez utiliser efficacement les outils à disposition (AI ou
 autre) et **que vous pourrez vous démarquer des autres**.
 
-> Une personne issue du monde de l'ingénierie ne fait bien son travail que si
-> elle le remet en question.
+A titre personnel, je pense qu'une personne issue du monde de l'ingénierie ne
+fait bien son travail que si elle le remet en question.
 
 ## Bibliographie et ressources utilisées
 

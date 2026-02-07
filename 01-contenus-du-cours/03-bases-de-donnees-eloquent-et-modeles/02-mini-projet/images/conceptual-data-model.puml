@@ -1,0 +1,22 @@
+@startuml conceptual-data-model
+' Some whitespace characters (` `) are set to allow enough space
+' See https://github.com/plantuml/backlog/issues/11
+
+skinparam linetype polyline
+skinparam nodesep 100
+
+title Conceptual Data Model for Mini Social Network
+
+entity User {}
+
+entity Post {}
+
+User -- Post : creates
+User -- Post : likes
+
+legend right
+Legend
+| **Symbol** | **Meaning** |
+| E | Entity |
+endlegend
+@enduml
