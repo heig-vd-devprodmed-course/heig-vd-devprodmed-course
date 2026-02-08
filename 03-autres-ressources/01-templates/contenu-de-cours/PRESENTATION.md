@@ -8,6 +8,7 @@ description:
   "{COURSE_CONTENT} pour le cours {COURSE_CODE} enseigné à la {INSTITUTION},
   Suisse"
 lang: "fr"
+url: "{GITHUB_PAGES_URL}/{COURSE_CONTENTS_FOLDER}/{COURSE_CONTENT}/presentation.html"
 header: "[**{COURSE_CONTENT}**][contenu-complet-sur-github]"
 footer:
   "[**{INSTITUTION}**]({INSTITUTION_URL}) - [{COURSE_CODE}

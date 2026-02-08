@@ -1,0 +1,66 @@
+@startuml physical-data-model
+' Some whitespace characters (` `) are set to allow enough space
+' See https://github.com/plantuml/backlog/issues/11
+
+skinparam linetype ortho
+skinparam nodesep 300
+
+title Physical Data Model for Mini Social Network
+
+entity User {
+  * id: integer <<generated>>
+  --
+  * firstName: VARCHAR
+  * lastName: VARCHAR
+  * username: VARCHAR <<unique>>
+  * email: VARCHAR <<unique>>
+  * password: VARCHAR <<hashed>>
+  created_at: DATETIME <<generated>>
+  updated_at: DATETIME <<generated>>
+}
+
+entity Post {
+  * id: integer <<generated>>
+  --
+  * user_id: integer <<FK>>
+  title: VARCHAR
+  * content: TEXT
+  created_at: DATETIME <<generated>>
+  updated_at: DATETIME <<generated>>
+}
+
+entity Like {
+  * user_id: integer <<PK, FK>>
+  * post_id: integer <<PK, FK>>
+  --
+  reaction: VARCHAR <<Reaction>>
+}
+
+enum Reaction {
+  like <<default>>
+  love
+  haha
+  wow
+  sad
+  angry
+}
+
+User "1" --- "0..*" Post : creates 
+User "1  " --- "0..*  " Like : likes 
+Post "1" --- "0..*" Like : is liked by 
+Like -- Reaction
+
+legend right
+Legend
+| **Symbol** | **Meaning** |
+| E (green) | Entity |
+| E (red) | Enum |
+| 1 | Exactly one |
+| 0..1 | Zero or one |
+| 1..* | One or many |
+| 0..* | Zero or many |
+| PK | Primary Key |
+| FK | Foreign Key |
+| Dot (●)| Mandatory field |
+endlegend
+@enduml

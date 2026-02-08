@@ -8,6 +8,7 @@ description:
   "Introduction et organisation du cours pour le cours DévProdMéd enseigné à la
   HEIG-VD, Suisse"
 lang: "fr"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/01-introduction-et-organisation-du-cours/presentation.html"
 header:
   "[**Introduction et organisation du cours**][contenu-complet-sur-github]"
 footer:
@@ -192,6 +193,18 @@ Le cours sera évalué à l'aide de deux évaluations :
 
 ![bg right:40%][illustration-modalites-devaluation]
 
+## La programmation et l'anglais
+
+Le domaine de la programmation est très largement anglophone. La majorité des
+ressources que vous trouverez dans votre carrière sont en anglais, notamment la
+documentation de Laravel.
+
+Je vous renverrai régulièrement vers des ressources en anglais et le code que
+nous utiliserons sera en anglais. Le reste du cours restera néanmoins en
+français.
+
+Si l'anglais est une barrière pour vous, n'hésitez pas à me le faire savoir.
+
 ## Besoin de rafraîchissement ?
 
 L'unité d'enseignement DévProdMéd s'appuie sur les connaissances acquises en
@@ -257,8 +270,8 @@ Quelques règles concernant l'utilisation de ces outils :
 concepts** que vous saurez utiliser efficacement les outils à disposition (AI ou
 autre) et **que vous pourrez vous démarquer des autres**.
 
-> Une personne issue du monde de l'ingénierie ne fait bien son travail que si
-> elle le remet en question.
+A titre personnel, je pense qu'une personne issue du monde de l'ingénierie ne
+fait bien son travail que si elle le remet en question.
 
 ---
 

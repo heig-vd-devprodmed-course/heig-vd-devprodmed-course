@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ## Configure Bash
 # Aliases for common commands
@@ -25,6 +25,9 @@ sudo apt install --yes jpegoptim optipng
 
 # Install packages to optimize documents (ps2pdf)
 sudo apt install --yes ghostscript
+
+# Install network utilities (dig, nslookup, ping, ncat)
+sudo apt install --yes dnsutils iputils-ping ncat
 
 # Install packages to interact with SQLite databases
 sudo apt install --yes sqlite3 php-sqlite3
