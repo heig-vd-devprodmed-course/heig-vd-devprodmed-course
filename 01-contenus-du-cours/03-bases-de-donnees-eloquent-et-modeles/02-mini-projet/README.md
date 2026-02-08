@@ -1240,6 +1240,7 @@ Schema::create('likes', function (Blueprint $table) {
     $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
     $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
     $table->enum('reaction', ['like', 'love', 'haha', 'wow', 'sad', 'angry'])->default('like');
+    $table->timestamps();
 
     $table->unique(['user_id', 'post_id']);
 });
@@ -1333,7 +1334,7 @@ modèle `Like`) :
  */
 public function likes(): BelongsToMany
 {
-    return $this->belongsToMany(Post::class, 'likes')->using(Like::class);
+    return $this->belongsToMany(Post::class, 'likes')->using(Like::class)->withTimestamps()->withPivot('reaction');
 }
 ```
 
@@ -1358,15 +1359,20 @@ dans la migration du modèle `Like`. C'est la raison pour laquelle nous devons
 spécifier le nom de la table pivot dans la méthode `belongsToMany` en utilisant
 le deuxième argument de la méthode, qui est le nom de la table pivot. De plus,
 nous utilisons la méthode `using` pour spécifier que nous voulons utiliser le
-modèle `Like` pour gérer cette relation "Many to Many". Cela permet d'utiliser
-les fonctionnalités d'Eloquent pour accéder facilement aux likes d'un.e
-utilisateur.trice et des posts, en utilisant les relations définies dans les
-modèles.
+modèle `Like` pour gérer cette relation "Many to Many".
+
+La méthode `withTimestamps()` est nécessaire pour que les colonnes `created_at`
+et `updated_at` de la table pivot `likes` soient automatiquement mises à jour
+lorsque nous attachons ou détachons des posts à un.e utilisateur.trice en
+utilisant la relation "Many to Many".
 
 La méthode `withPivot('reaction')` est utilisée pour indiquer que nous voulons
 aussi récupérer la colonne `reaction` de la table pivot `likes` lorsque nous
-accédons aux likes d'un.e utilisateur.trice. Cela permet d'accéder à la réaction
-associée à chaque like en utilisant la syntaxe `$user->likes->pivot->reaction`.
+accédons aux likes d'un.e utilisateur.trice.
+
+Cela permet d'utiliser les fonctionnalités d'Eloquent pour accéder facilement
+aux likes d'un.e utilisateur.trice et des posts, en utilisant les relations
+définies dans les modèles.
 
 Passons maintenant au modèle `Post` pour définir la relation "Many to Many" avec
 le modèle `User` (en passant par le modèle `Like`).
@@ -1381,7 +1387,7 @@ modèle `Like`) :
  */
 public function likes(): BelongsToMany
 {
-    return $this->belongsToMany(User::class, 'likes')->using(Like::class)->withPivot('reaction');
+    return $this->belongsToMany(User::class, 'likes')->using(Like::class)->withTimestamps()->withPivot('reaction');
 }
 ```
 
@@ -1587,97 +1593,126 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Insert John Doe into the users table
-        DB::table('users')->insert([
-            'id' => 1,
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'username' => 'johndoe',
-            'email' => 'john.doe@example.com',
-        ]);
+        DB::transaction(
+            function () {
+                // Insert John Doe into the users table
+                DB::table('users')->insert([
+                    'id' => 1,
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                    'username' => 'johndoe',
+                    'email' => 'john.doe@example.com',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-        // Insert Jane Doe into the users table
-        DB::table('users')->insert([
-            'id' => 2,
-            'first_name' => 'Jane',
-            'last_name' => 'Doe',
-            'username' => 'janedoe',
-            'email' => 'jane.doe@example.com',
-        ]);
+                // Insert Jane Doe into the users table
+                DB::table('users')->insert([
+                    'id' => 2,
+                    'first_name' => 'Jane',
+                    'last_name' => 'Doe',
+                    'username' => 'janedoe',
+                    'email' => 'jane.doe@example.com',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-        // Insert some posts for John Doe
-        DB::table('posts')->insert([
-            [
-                'id' => 1,
-                'user_id' => 1,
-                'title' => "John's First Post",
-                'content' => "This is the content of John's first post.",
-            ],
-            [
-                'id' => 2,
-                'user_id' => 1,
-                'content' => "This is the content of John's second post.",
-            ],
-            [
-                'id' => 3,
-                'user_id' => 1,
-                'content' => "This is the content of John's third post.",
-            ]
-        ]);
+                // Insert some posts for John Doe
+                DB::table('posts')->insert([
+                    'id' => 1,
+                    'user_id' => 1,
+                    'title' => "John's First Post",
+                    'content' => "This is the content of John's first post.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-        // Insert some posts for Jane Doe
-        DB::table('posts')->insert([
-            [
-                'id' => 4,
-                'user_id' => 2,
-                'content' => "This is the content of Jane's first post.",
-            ],
-            [
-                'id' => 5,
-                'user_id' => 2,
-                'title' => "Jane's Second Post",
-                'content' => "This is the content of Jane's second post.",
-            ],
-            [
-                'id' => 6,
-                'user_id' => 2,
-                'title' => "Jane's Third Post",
-                'content' => "This is the content of Jane's third post.",
-            ]
-        ]);
+                DB::table('posts')->insert([
+                    'id' => 2,
+                    'user_id' => 1,
+                    'content' => "This is the content of John's second post.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-        // Insert some likes for John's posts
-        DB::table('likes')->insert([
-            [
-                'user_id' => 2,
-                'post_id' => 1,
-                'reaction' => 'like',
-            ],
-            [
-                'user_id' => 1, // John likes his own post
-                'post_id' => 2,
-                'reaction' => 'love',
-            ],
-        ]);
+                DB::table('posts')->insert([
+                    'id' => 3,
+                    'user_id' => 1,
+                    'content' => "This is the content of John's third post.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-        // Insert some likes for Jane's posts
-        DB::table('likes')->insert([
-            [
-                'user_id' => 1,
-                'post_id' => 4,
-                'reaction' => 'like',
-            ],
-            [
-                'user_id' => 1,
-                'post_id' => 5,
-                'reaction' => 'love',
-            ],
-            [
-                'user_id' => 2, // Jane likes her own post
-                'post_id' => 5,
-                'reaction' => 'wow',
-            ]
-        ]);
+                // Insert some posts for Jane Doe
+                DB::table('posts')->insert([
+                    'id' => 4,
+                    'user_id' => 2,
+                    'content' => "This is the content of Jane's first post.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                DB::table('posts')->insert([
+                    'id' => 5,
+                    'user_id' => 2,
+                    'title' => "Jane's Second Post",
+                    'content' => "This is the content of Jane's second post.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                DB::table('posts')->insert([
+                    'id' => 6,
+                    'user_id' => 2,
+                    'title' => "Jane's Third Post",
+                    'content' => "This is the content of Jane's third post.",
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                // Insert some likes for John's posts
+                DB::table('likes')->insert([
+                    [
+                        'user_id' => 2,
+                        'post_id' => 1,
+                        'reaction' => 'like',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ],
+                    [
+                        'user_id' => 1, // John likes his own post
+                        'post_id' => 2,
+                        'reaction' => 'love',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ],
+                ]);
+
+                // Insert some likes for Jane's posts
+                DB::table('likes')->insert([
+                    [
+                        'user_id' => 1,
+                        'post_id' => 4,
+                        'reaction' => 'like',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ],
+                    [
+                        'user_id' => 1,
+                        'post_id' => 5,
+                        'reaction' => 'love',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ],
+                    [
+                        'user_id' => 2, // Jane likes her own post
+                        'post_id' => 5,
+                        'reaction' => 'wow',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]
+                ]);
+            }
+        );
     }
 }
 ```
@@ -1693,9 +1728,20 @@ données dans la base de données. Plus de détails sont disponibles dans la
 documentation de Laravel sur le query builder :
 <https://laravel.com/docs/12.x/queries>.
 
+Ces requêtes sont encapsulées dans une transaction pour garantir que toutes les
+données sont insérées de manière atomique, ce qui signifie que si une erreur
+survient lors de l'insertion de données, toutes les modifications seront
+annulées pour éviter d'avoir des données partielles ou incohérentes dans la base
+de données. Plus de détails sont disponibles dans la documentation de Laravel
+sur les transactions :
+<https://laravel.com/docs/12.x/database#database-transactions>.
+
 Dans ce fichier, nous interagissons directement avec la base de données en
 utilisant la façade `DB` pour insérer des données dans les tables `users`,
-`posts` et `likes` plutôt que d'utiliser les modèles Eloquent.
+`posts` et `likes` plutôt que d'utiliser les modèles Eloquent. C'est la raison
+pour laquelle nous devons spécifier toutes les colonnes dont `created_at` et
+`updated_at` manuellement lors de l'insertion des données, car nous n'utilisons
+pas les fonctionnalités d'Eloquent qui gèrent automatiquement ces colonnes.
 
 Il s'agit simplement d'une autre manière de faire pour vous faire découvrir les
 différentes façons d'interagir avec la base de données dans Laravel, soit en
