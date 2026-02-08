@@ -66,7 +66,49 @@ document._
 
 ![bg right:40%][illustration-objectifs]
 
-TODO
+## Laravel et les bases de données
+
+## Migrations
+
+### Structure d'une migration
+
+### Créer une nouvelle migration
+
+### Modifier une migration
+
+### Appliquer les migrations
+
+### Annuler les migrations
+
+## Le concept d'ORM
+
+### Avantages d'un ORM
+
+### Inconvénients d'un ORM
+
+### Quand utiliser un ORM ?
+
+## Eloquent : l'ORM de Laravel
+
+### Créer un modèle
+
+### Utiliser un modèle
+
+### Opérations CRUD avec Eloquent
+
+### Gérer les relations entre modèles
+
+## Requêtes et query builder
+
+## Seeders
+
+## Le modèle dans le patron de conception MVC
+
+### Pourquoi commencer par le modèle ?
+
+## Utiliser Artisan pour gérer les modèles
+
+## Conclusion
 
 ## Questions
 
@@ -111,6 +153,6 @@ Est-ce que vous avez des questions ?
 [illustration-principale]:
 	https://images.unsplash.com/photo-1517486430290-35657bdcef51?fit=crop&h=720
 [illustration-objectifs]:
-	https://images.unsplash.com/photo-1519389950473-47ba0277781c?fit=crop&h=720
+	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
 [illustration-a-vous-de-jouer]:
 	https://images.unsplash.com/photo-1509198397868-475647b2a1e5?fit=crop&h=720
