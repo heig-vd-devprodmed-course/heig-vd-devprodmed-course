@@ -12,9 +12,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > **Ressources annexes**
 >
 > - Autres formats du support de cours : [Présentation (web)][presentation-web]
->   · [Présentation (PDF)][presentation-pdf].
-> - Exercices : [Accéder au contenu](./01-exercices/README.md).
-> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md).
+>   · [Présentation (PDF)][presentation-pdf]
+> - Exercices : [Accéder au contenu](./01-exercices/README.md)
+> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md)
 >
 > **Objectifs**
 >
@@ -530,6 +530,11 @@ class User extends Model
     {
         return $this->role === 'admin';
     }
+
+    public function getFullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }
 ```
 
@@ -550,6 +555,13 @@ $user->save();
 ```
 
 ### Opérations CRUD avec Eloquent
+
+Eloquent facilite les opérations CRUD sur les modèles :
+
+- **Create** : créer un nouvel enregistrement.
+- **Read** : lire des enregistrements existants.
+- **Update** : mettre à jour des enregistrements existants.
+- **Delete** : supprimer des enregistrements existants.
 
 #### Créer
 
@@ -640,11 +652,13 @@ Ceci permet de récupérer facilement les posts d'un utilisateur ou l'utilisateu
 d'un post :
 
 ```php
+// Récupérer un.e utilisateur.trice avec l'ID 1
 $user = User::find(1);
 
-// Récupérer les posts de l'utilisateur
+// Récupérer les posts de l'utilisateur.trice
 $posts = $user->posts;
 
+// Récupérer un post avec l'ID 1
 $post = Post::find(1);
 
 // Récupérer l'utilisateur du post
@@ -674,6 +688,9 @@ $count = User::where('active', true)->count();
 // Première correspond
 $user = User::where('email', 'alice@example.com')->first();
 ```
+
+La documentation officielle est **très** exhaustive et contient de nombreux
+exemples : <https://laravel.com/docs/12.x/queries>.
 
 ## Seeders
 
@@ -731,6 +748,19 @@ public function run(): void
 Dans cet exemple, nous utilisons la façade `DB` pour insérer un nouvel
 enregistrement dans la table `users`. Vous pouvez également utiliser les modèles
 Eloquent pour insérer des données de manière orientée objet.
+
+Pour exécuter les seeders, vous pouvez utiliser la commande suivante :
+
+```bash
+php artisan db:seed
+```
+
+Ou encore cette commande pour réinitialiser la base de données et exécuter les
+seeders :
+
+```bash
+php artisan migrate:fresh --seed
+```
 
 ## Le modèle dans le patron de conception MVC
 
