@@ -108,6 +108,21 @@ il est recommandé pour la prochaine séance de :
 - Finaliser les exercices qui n'ont pas été terminés en classe.
 - Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
 
+## Aller plus loin
+
+> [!TIP]
+>
+> Cette section est optionnelle.
+>
+> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
+> vos connaissances après avoir terminé les exercices et le mini-projet.
+
+Quelques ressources pour aller plus loin :
+
+- Ressource 1.
+- Ressource 2.
+- ...
+
 <!-- URLs -->
 
 [licence]: {LICENSE_URL}

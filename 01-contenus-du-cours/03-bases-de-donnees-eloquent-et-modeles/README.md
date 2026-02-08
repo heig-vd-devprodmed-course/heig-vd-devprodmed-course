@@ -25,8 +25,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 >   données.
 > - Décrire le concept de migrations avec Laravel.
 > - Décrire le concept d'un ORM tel qu'Eloquent.
+> - Décrire le concept de "query builder" de Laravel.
+> - Décrire le concept de "seeders" dans Laravel.
 > - Décrire la partie "modèle" du patron de conception MVC.
-> - Utiliser Eloquent avec Laravel.
 > - Implémenter ces concepts avec Laravel pour réaliser le petit réseau social
 >   du mini-projet.
 >
@@ -73,6 +74,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Le concept d'ORM](#le-concept-dorm)
   - [Avantages d'un ORM](#avantages-dun-orm)
   - [Inconvénients d'un ORM](#inconvénients-dun-orm)
+  - [Quand utiliser un ORM ?](#quand-utiliser-un-orm-)
 - [Eloquent : l'ORM de Laravel](#eloquent--lorm-de-laravel)
   - [Créer un modèle](#créer-un-modèle)
   - [Utiliser un modèle](#utiliser-un-modèle)
@@ -83,19 +85,17 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Le modèle dans le patron de conception MVC](#le-modèle-dans-le-patron-de-conception-mvc)
   - [Pourquoi commencer par le modèle ?](#pourquoi-commencer-par-le-modèle-)
 - [Utiliser Artisan pour gérer les modèles](#utiliser-artisan-pour-gérer-les-modèles)
-- [Aller plus loin](#aller-plus-loin)
-  - [Les transactions](#les-transactions)
-  - [Les factories](#les-factories)
 - [Conclusion](#conclusion)
 - [Exercices](#exercices)
 - [Mini-projet](#mini-projet)
 - [À faire pour la prochaine séance](#à-faire-pour-la-prochaine-séance)
+- [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
 
-Ce contenu de cours a pour objectifs de permettre aux personnes qui étudient de
-comprendre et d'appliquer les bases de données, les migrations et l'ORM Eloquent
-de Laravel.
+Dans ce contenu, nous allons explorer comment Laravel gère les bases de données,
+les migrations, les modèles Eloquent et les seeders. Nous verrons également
+comment utiliser Artisan pour créer et gérer les migrations et les modèles.
 
 Ce contenu repose sur la documentation officielle suivante :
 
@@ -109,8 +109,9 @@ devraient être capables de :
   données.
 - Décrire le concept de migrations avec Laravel.
 - Décrire le concept d'un ORM tel qu'Eloquent.
+- Décrire le concept de "query builder" de Laravel.
+- Décrire le concept de "seeders" dans Laravel.
 - Décrire la partie "modèle" du patron de conception MVC.
-- Utiliser Eloquent avec Laravel.
 - Implémenter ces concepts avec Laravel pour réaliser le petit réseau social du
   mini-projet.
 
@@ -175,7 +176,7 @@ Grâce à ces variables d'environnement, Laravel abstrait les détails de connex
 applications.
 
 Il n'est donc plus nécessaire d'utiliser des fichiers de configuration INI comme
-étudié en ProgServ2, Laravel gère cela de manière plus moderne à l'aide des
+étudié en ProgServ2 ; Laravel gère cela de manière plus moderne à l'aide des
 fichiers de variables d'environnement.
 
 ## Migrations
@@ -189,8 +190,10 @@ Les migrations offrent plusieurs avantages. Elles permettent de :
 - Collaborer facilement sur les modifications de la base de données.
 - Déployer la même structure sur plusieurs environnements.
 - Séparer la logique de gestion des données de la logique de structure de la
-  base de données. Il est ainsi plus facile de maintenir et d'évoluer la base de
-  données de façon indépendante du code applicatif.
+  base de données.
+
+Il est ainsi plus facile de maintenir et d'évoluer la base de données de façon
+indépendante du code applicatif.
 
 ### Structure d'une migration
 
@@ -285,7 +288,8 @@ colonnes suivantes :
 - `id` : clé primaire auto-incrémentée.
 - `name` : chaîne de caractères pour le nom de l'utilisateur.
 - `email` : chaîne de caractères unique pour l'adresse e-mail.
-- `email_verified_at` : timestamp nullable pour la vérification de l'e-mail.
+- `email_verified_at` : timestamp _"nullable"_ (= qui peut être nul/optionnel)
+  pour la vérification de l'e-mail.
 - `password` : chaîne de caractères pour le mot de passe.
 - `remember_token` : token pour la fonctionnalité "se souvenir de moi".
 - `timestamps` : colonnes `created_at` et `updated_at` pour suivre la création
@@ -314,7 +318,9 @@ Le résultat devrait ressembler à ceci :
 ```
 
 Cela crée un fichier de migration dans `database/migrations/`. Notez que le nom
-du fichier inclut un horodatage pour garantir l'ordre d'exécution des
+du fichier inclut un horodatage (= une date/un timestamp) pour garantir l'ordre
+d'exécution des migrations. En effet, les migrations sont exécutées dans l'ordre
+de leur horodatage, ce qui permet de gérer les dépendances entre les différentes
 migrations.
 
 Le contenu de ce nouveau fichier de migration ressemblera à ceci :
@@ -360,17 +366,27 @@ cette table que vous pourrez modifier selon vos besoins.
 
 ### Modifier une migration
 
-Imaginons que nous souhaitons modifier cette migration pour ajouter un champ
-`username` à la table `users` existante. Nous pourrions modifier la méthode
+Imaginons que nous souhaitons modifier cette migration pour ajouter une colonne
+`this_is_demo` à la table `demo` existante. Nous pourrions modifier la méthode
 `up()` comme suit :
 
 ```php
-public function up(): void
-{
-}
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('demo', function (Blueprint $table) {
+            $table->id();
+            $table->string('this_is_demo', 100)->nullable();
+            $table->timestamps();
+        });
+    }
 ```
 
-Cette migration
+Cette migration ajoute une colonne `this_is_demo` de type chaîne de caractères à
+la table `demo`. Cette colonne est définie comme _"nullable"_ (optionnelle) et a
+une longueur maximale de 100 caractères.
 
 > [!WARNING]
 >
@@ -383,22 +399,48 @@ Cette migration
 
 ### Appliquer les migrations
 
+Une fois les migrations créées ou modifiées, vous pouvez les appliquer à la base
+de données en utilisant la commande suivante :
+
 ```bash
 php artisan migrate
 ```
 
 Cette commande exécute tous les fichiers de migration qui n'ont pas encore été
-exécutés.
+exécutés. Les migrations sont appliquées dans l'ordre de leur horodatage, ce qui
+garantit que les modifications sont appliquées de manière cohérente.
+
+> [!WARNING]
+>
+> Ne modifiez jamais une migration qui a déjà été appliquée en production. Si
+> vous avez besoin de modifier la structure de la base de données qui a été
+> appliquée en production, créez une nouvelle migration.
+>
+> Sans quoi, des inconsistances pourraient apparaître entre les environnements
+> de développement et de production qui sont difficiles à résoudre.
 
 ### Annuler les migrations
+
+Si vous souhaitez annuler la dernière migration appliquée car vous avez fait une
+erreur ou souhaitez revenir en arrière, vous pouvez utiliser la commande
+suivante :
 
 ```bash
 php artisan migrate:rollback
 ```
 
+Cette commande annule la dernière migration appliquée en exécutant la méthode
+`down()` de la ou des migrations correspondantes.
+
+> [!WARNING]
+>
+> Annuler une migration qui a été appliquée en production peut entraîner des
+> pertes de données. Soyez très prudent.e lorsque vous utilisez cette commande,
+> surtout en production.
+
 ## Le concept d'ORM
 
-Un ORM (Object-Relational Mapping) est une technique qui permet de mapper les
+Un ORM (Object-Relational Mapping) est une technique qui permet de lier les
 tables de la base de données à des classes et les enregistrements à des objets.
 
 Au lieu d'écrire des requêtes SQL :
@@ -413,6 +455,9 @@ Avec un ORM, on utilise des objets :
 $user = User::find(1);
 ```
 
+Laravel inclut un ORM appelé Eloquent qui facilite la manipulation des données
+de la base de données de manière orientée objet.
+
 ### Avantages d'un ORM
 
 Les avantages d'un ORM :
@@ -424,7 +469,20 @@ Les avantages d'un ORM :
 
 ### Inconvénients d'un ORM
 
-TODO
+Les inconvénients d'un ORM :
+
+- **Performance** : peut être moins performant que des requêtes SQL optimisées.
+- **Abstraction** : peut masquer les détails de la base de données, ce qui peut
+  être problématique pour le débogage.
+- **Spécificité** : peut être spécifique à un framework ou un langage, limitant
+  la portabilité du code.
+
+### Quand utiliser un ORM ?
+
+De manière générale, un ORM est recommandé pour la plupart des applications car
+il permet de développer plus rapidement et de manière plus sécurisée. Cependant,
+pour des cas très spécifiques où la performance est critique, il peut être
+nécessaire d'écrire des requêtes SQL personnalisées.
 
 ## Eloquent : l'ORM de Laravel
 
@@ -432,6 +490,9 @@ Eloquent est l'ORM inclus dans Laravel. Un modèle Eloquent représente une tabl
 de la base de données.
 
 ### Créer un modèle
+
+Pour créer un modèle Eloquent, vous pouvez utiliser la commande Artisan suivante
+:
 
 ```bash
 php artisan make:model User
@@ -458,6 +519,20 @@ Par convention, Laravel suppose que :
 - Les clés primaires s'appellent `id`.
 - Les timestamps sont gérés automatiquement.
 
+Le modèle Eloquent encapsule la logique d'accès aux données et peut contenir des
+méthodes métier :
+
+```php
+class User extends Model
+{
+    // Méthode métier
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+}
+```
+
 ### Utiliser un modèle
 
 Lorsqu'un modèle Eloquent est créé, il peut être utilisé pour interagir avec la
@@ -466,34 +541,13 @@ table correspondante dans la base de données.
 Pour créer un nouvel enregistrement dans la table `users` :
 
 ```php
-TODO
+$user = new User();
+
+$user->name = 'Alice';
+$user->email = 'alice@example.com';
+
+$user->save();
 ```
-
-Une autre manière de créer un utilisateur est d'utiliser la méthode `create()` :
-
-```php
-TODO
-```
-
-Pour permettre l'assignation de masse grâce à la méthode `create()`, il est
-nécessaire de définir les attributs autorisés via la propriété `$fillable` dans
-le modèle.
-
-Par défaut, Eloquent protège contre l'assignation de masse. Il faut expliciter
-quels attributs peuvent être assignés :
-
-```php
-class User extends Model
-{
-    protected $fillable = ['name', 'email', 'password'];
-}
-```
-
-Grâce à cette configuration, les attributs `name`, `email` et `password` peuvent
-être assignés en masse à l'aide de la méthode `create()`.
-
-Cela permet de filtrer les attributs qui peuvent être assignés en masse, ce qui
-améliore la sécurité en évitant les assignations non intentionnelles.
 
 ### Opérations CRUD avec Eloquent
 
@@ -501,15 +555,11 @@ améliore la sécurité en évitant les assignations non intentionnelles.
 
 ```php
 $user = new User();
+
 $user->name = 'Alice';
 $user->email = 'alice@example.com';
-$user->save();
 
-// Ou en une seule ligne
-User::create([
-    'name' => 'Bob',
-    'email' => 'bob@example.com',
-]);
+$user->save();
 ```
 
 #### Lire
@@ -529,17 +579,17 @@ $users = User::where('email', 'like', '%example.com')->get();
 
 ```php
 $user = User::find(1);
-$user->name = 'Alice Updated';
-$user->save();
 
-// Ou directement
-User::where('id', 1)->update(['name' => 'Alice Updated']);
+$user->name = 'Alice Updated';
+
+$user->save();
 ```
 
 #### Supprimer
 
 ```php
 $user = User::find(1);
+
 $user->delete();
 
 // Ou directement
@@ -548,9 +598,68 @@ User::destroy(1);
 
 ### Gérer les relations entre modèles
 
-TODO
+Eloquent permet de définir des relations entre les modèles, telles que :
+
+- **One-to-One** : un.e utilisateur.trice a un profil.
+- **One-to-Many** : un.e utilisateur.trice a plusieurs posts.
+- **Many-to-Many** : un.e utilisateur.trice peut avoir plusieurs rôles et un
+  rôle peut être attribué à plusieurs utilisateur.trice.s.
+
+Il existe quelques autres types de relations, mais nous ne les aborderons pas
+dans ce cours.
+
+Lors de l'utilisation d'Eloquent, vous pouvez définir ces relations dans les
+modèles pour faciliter l'accès aux données liées. Ceci implique de créer des
+méthodes dans les modèles qui utilisent les fonctions d'Eloquent pour définir la
+nature de la relation.
+
+Par exemple, pour une relation One-to-Many entre `User` et `Post`, vous pourriez
+définir les méthodes suivantes :
+
+```php
+// app/Models/User.php
+class User extends Model
+{
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+}
+
+// app/Models/Post.php
+class Post extends Model
+{
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
+```
+
+Ceci permet de récupérer facilement les posts d'un utilisateur ou l'utilisateur
+d'un post :
+
+```php
+$user = User::find(1);
+
+// Récupérer les posts de l'utilisateur
+$posts = $user->posts;
+
+$post = Post::find(1);
+
+// Récupérer l'utilisateur du post
+$user = $post->user;
+```
 
 ## Requêtes et query builder
+
+Eloquent utilise un "query builder" pour construire les requêtes SQL de manière
+fluide (= chaîner plusieurs méthodes les unes après les autres) et orientée
+objet.
+
+Un query builder permet d’interagir avec la base de données sans écrire de SQL
+brut et sans passer par les modèles Eloquent. Il est souvent utilisé pour des
+requêtes plus complexes ou lorsque vous souhaitez une meilleure performance.
 
 ```php
 // Chaîner plusieurs conditions
@@ -568,9 +677,67 @@ $user = User::where('email', 'alice@example.com')->first();
 
 ## Seeders
 
-TODO
+Les seeders sont des classes qui permettent de remplir la base de données avec
+des données prédéfinies.
+
+Ces données factices peuvent être utilisées pour tester les fonctionnalités de
+l'application sans avoir à entrer manuellement des données réelles.
+
+Les seeders permettent également d'insérer des données de référence dans la base
+de données, comme des rôles d'utilisateur, des catégories prédéfinies ainsi que
+les utilisateur.trices qui pourront administrer l'application.
+
+Pour créer un seeder, vous pouvez utiliser la commande Artisan suivante :
+
+```bash
+php artisan make:seeder UserSeeder
+```
+
+Cela crée un fichier `database/seeders/UserSeeder.php` :
+
+```php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        //
+    }
+}
+```
+
+Vous pouvez ensuite remplir la méthode `run()` avec des instructions pour
+insérer des données dans la base de données. Par exemple :
+
+```php
+public function run(): void
+{
+    DB::table('users')->insert([
+        'name' => 'Alice',
+        'email' => 'alice@example.com',
+    ]);
+}
+```
+
+Dans cet exemple, nous utilisons la façade `DB` pour insérer un nouvel
+enregistrement dans la table `users`. Vous pouvez également utiliser les modèles
+Eloquent pour insérer des données de manière orientée objet.
 
 ## Le modèle dans le patron de conception MVC
+
+Un patron de conception (_"design pattern"_ en anglais) est une solution
+réutilisable à un problème de conception courant. Le patron MVC est largement
+utilisé dans le développement d'applications web pour séparer les préoccupations
+et faciliter la maintenance du code.
 
 Le modèle est la première partie du patron Model-View-Controller (MVC) :
 
@@ -578,46 +745,41 @@ Le modèle est la première partie du patron Model-View-Controller (MVC) :
 - **Vue** : affiche les données à l'utilisateur.
 - **Contrôleur** : gère les requêtes et coordonne le modèle et la vue.
 
-Le modèle Eloquent encapsule la logique d'accès aux données et peut contenir des
-méthodes métier :
-
-```php
-class User extends Model
-{
-    // Accesseur : formate le nom en majuscules
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => strtoupper($value),
-        );
-    }
-
-    // Méthode métier
-    public function isAdmin(): bool
-    {
-        return $this->role === 'admin';
-    }
-}
-```
+Le modèle est responsable de la gestion des données, de la validation, des
+règles métier et de l'interaction avec la base de données. C'est la partie
+centrale du patron MVC, car elle encapsule la logique métier et les données de
+l'application.
 
 ### Pourquoi commencer par le modèle ?
 
+Il est souvent recommandé de commencer par le modèle lors du développement d'une
+application, car cela permet de définir clairement les données et la logique
+métier avant de se préoccuper de l'affichage (vue) ou de la gestion des requêtes
+(contrôleur).
+
+En définissant d'abord le modèle, vous pouvez vous assurer que la structure de
+vos données est solide et que les règles métier sont correctement implémentées.
+Cela facilite ensuite la création de vues et de contrôleurs qui interagissent
+avec ce modèle de manière cohérente.
+
+Dans toute application, les technologies peut être amenées à évoluer, mais les
+données, elles, sont au cœur de l'application. En adoptant une approche centrée
+sur le modèle, vous pouvez construire une base solide pour votre application qui
+peut évoluer au fil du temps sans compromettre la structure des données ou la
+logique métier.
+
+La façon d'accéder aux données et de les manipuler peut changer, mais tant que
+le modèle est bien conçu, les autres parties de l'application peuvent s'adapter
+sans nécessiter de refonte majeure.
+
 ## Utiliser Artisan pour gérer les modèles
 
-TODO
+Laravel propose des commandes Artisan pour créer et gérer les modèles Eloquent
+de manière rapide et efficace.
 
-https://laravel.com/docs/12.x/eloquent#generating-model-classes
-
-## Aller plus loin
-
-### Les transactions
-
-### Les factories
-
-Laravel propose également un concept de "factories" pour générer des données
-factices pour les tests et le développement.
-
-TODO
+Pour utiliser Artisan pour créer un modèle et sa migration associée, vous pouvez
+voir la documentation officielle de Laravel à ce sujet :
+<https://laravel.com/docs/12.x/eloquent#generating-model-classes>.
 
 ## Conclusion
 
@@ -649,6 +811,21 @@ il est recommandé pour la prochaine séance de :
 - Relire le support de cours si nécessaire.
 - Finaliser les exercices qui n'ont pas été terminés en classe.
 - Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
+
+## Aller plus loin
+
+> [!TIP]
+>
+> Cette section est optionnelle.
+>
+> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
+> vos connaissances après avoir terminé les exercices et le mini-projet.
+
+Quelques ressources pour aller plus loin :
+
+- Les transactions :
+  <https://laravel.com/docs/12.x/database#database-transactions>.
+- Les factories : <https://laravel.com/docs/12.x/eloquent-factories>.
 
 <!-- URLs -->
 

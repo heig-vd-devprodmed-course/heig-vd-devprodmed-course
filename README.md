@@ -51,7 +51,7 @@ d'apprentissage, et les méthodes d'évaluation.
 |     09 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |     10 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |  🚨 11 | Évaluation 2                                                                                                                                                                                                 | 🔴 À faire  |
-|     12 | Récapitulatif du cours + Hébergement, mails et déploiement                                                                                                                                                   | 🔴 À faire  |
+|     12 | Récapitulatif du cours + Fonctionnalités avancées de Laravel                                                                                                                                                 | 🔴 À faire  |
 
 ## 📜 Licence
 

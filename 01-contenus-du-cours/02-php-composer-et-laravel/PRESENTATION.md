@@ -464,19 +464,19 @@ Est-ce que vous avez des questions ?
 
 - [Illustration principale][illustration-principale] par
   [Richard Jacobs](https://unsplash.com/@rj2747) sur
-  [Unsplash](https://unsplash.com/photos/grayscale-photo-of-elephants-drinking-water-8oenpCXktqQ)
+  [Unsplash](https://unsplash.com/photos/grayscale-photo-of-elephants-drinking-water-8oenpCXktqQ).
 - [Illustration][illustration-objectifs] par
   [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
-  [Unsplash](https://unsplash.com/photos/low-angle-view-of-ball-shoots-in-the-ring-j6brni7fpvs)
+  [Unsplash](https://unsplash.com/photos/low-angle-view-of-ball-shoots-in-the-ring-j6brni7fpvs).
 - [Illustration][illustration-limites-de-tout-ecrire-soi-meme] par
   [Heather Zabriskie](https://unsplash.com/@heatherz) sur
-  [Unsplash](https://unsplash.com/photos/vintage-brown-and-white-watch-lot-yBzrPGLjMQw)
+  [Unsplash](https://unsplash.com/photos/vintage-brown-and-white-watch-lot-yBzrPGLjMQw).
 - [Illustration][illustration-avantages-des-libraries-externes] par
   [Lorin Both](https://unsplash.com/@lorinboth) sur
-  [Unsplash](https://unsplash.com/photos/a-clock-hanging-from-the-ceiling-of-a-building-GJ_3j24tT1w)
+  [Unsplash](https://unsplash.com/photos/a-clock-hanging-from-the-ceiling-of-a-building-GJ_3j24tT1w).
 - [Illustration][illustration-a-vous-de-jouer] par
   [Nikita Kachanovsky](https://unsplash.com/@nkachanovskyyy) sur
-  [Unsplash](https://unsplash.com/photos/white-sony-ps4-dualshock-controller-over-persons-palm-FJFPuE1MAOM)
+  [Unsplash](https://unsplash.com/photos/white-sony-ps4-dualshock-controller-over-persons-palm-FJFPuE1MAOM).
 
 <!-- URLs -->
 

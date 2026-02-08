@@ -1529,6 +1529,13 @@ suivante :
 
 ## Aller plus loin
 
+> [!TIP]
+>
+> Cette section est optionnelle.
+>
+> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
+> vos connaissances après avoir terminé les exercices et le mini-projet.
+
 - Seriez-vous capable de protéger votre branche `main` pour éviter de pousser
   directement des modifications sans passer par une pull request ? Référez-vous
   à la documentation officielle de GitHub pour les règles de protection de

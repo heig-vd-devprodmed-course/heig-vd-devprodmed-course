@@ -15,9 +15,10 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [Réinitialiser le projet Laravel](#réinitialiser-le-projet-laravel)
-  - [Créer une issue pour suivre cette tâche](#créer-une-issue-pour-suivre-cette-tâche)
+  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche)
   - [Restaurer la base de données à son état initial](#restaurer-la-base-de-données-à-son-état-initial)
   - [Supprimer les fichiers de migration de base créés par Laravel](#supprimer-les-fichiers-de-migration-de-base-créés-par-laravel)
+  - [Valider et pousser les modifications](#valider-et-pousser-les-modifications)
   - [Créer la pull request pour cette tâche](#créer-la-pull-request-pour-cette-tâche)
   - [Supprimer les modèles et les fichiers associés créés par Laravel](#supprimer-les-modèles-et-les-fichiers-associés-créés-par-laravel)
   - [Ajouter les migrations nécessaires à Laravel](#ajouter-les-migrations-nécessaires-à-laravel)
@@ -31,16 +32,15 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Créer le modèle User](#créer-le-modèle-user)
   - [Créer le modèle Post](#créer-le-modèle-post)
   - [Créer le modèle Like](#créer-le-modèle-like)
-- [Populer la base de données avec des données factices](#populer-la-base-de-données-avec-des-données-factices)
-- [Tester les modèles Eloquent](#tester-les-modèles-eloquent)
-  - [Récupérer les utilisateur.trices](#récupérer-les-utilisateurtrices)
-  - [Récupérer les posts](#récupérer-les-posts)
-  - [Récupérer les likes](#récupérer-les-likes)
-  - [Récupérer les posts d'un.e utilisateur.trice](#récupérer-les-posts-dune-utilisateurtrice)
-  - [Récupérer les posts likés par un.e utilisateur.trice](#récupérer-les-posts-likés-par-une-utilisateurtrice)
-  - [Récupérer les utilisateur.trices ayant liké un post](#récupérer-les-utilisateurtrices-ayant-liké-un-post)
-  - [Créer un nouveau post](#créer-un-nouveau-post)
-  - [Liker un post](#liker-un-post)
+- [Peupler la base de données avec des données factices](#peupler-la-base-de-données-avec-des-données-factices)
+  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-4)
+  - [Créer le seeder](#créer-le-seeder)
+  - [Définir le seeder](#définir-le-seeder)
+  - [Appliquer le seeder](#appliquer-le-seeder)
+  - [Valider et pousser les modifications](#valider-et-pousser-les-modifications-4)
+  - [Créer la pull request pour cette tâche](#créer-la-pull-request-pour-cette-tâche-1)
+  - [Valider et fusionner la pull request](#valider-et-fusionner-la-pull-request-1)
+  - [Récupérer les modifications localement](#récupérer-les-modifications-localement-1)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Aller plus loin](#aller-plus-loin)
@@ -59,7 +59,7 @@ Ces fichiers peuvent être utilisés tels quels, mais pour ce mini-projet, nous
 allons les supprimer afin de créer nos propres modèles et migrations à partir de
 zéro.
 
-### Créer une issue pour suivre cette tâche
+### Créer l'issue et la branche pour suivre cette tâche
 
 Comme il s'agit d'une nouvelle tâche à effectuer sur le projet Laravel, nous
 allons créer une nouvelle issue dans le dépôt GitHub du projet pour suivre cette
@@ -147,6 +147,8 @@ de zéro.
 
 Supprimez tous les fichiers du dossier `database/migrations/`.
 
+### Valider et pousser les modifications
+
 A l'aide de la commande Git, vérifiez que les fichiers ont bien été supprimés :
 
 ```bash
@@ -169,10 +171,20 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
+> [!NOTE]
+>
+> Assurez-vous d'être bien sur la bonne branche correspondante à cette tâche
+> avant d'ajouter les modifications.
+
 Ceci indique que les fichiers de migration ont bien été supprimés, mais que les
 modifications n'ont pas encore été validées (_"commit"_) dans Git.
 
 Ajoutez ces suppressions à l'index Git avec la commande suivante :
+
+> [!NOTE]
+>
+> Assurez-vous d'être bien sur la bonne branche correspondante à cette tâche
+> avant d'ajouter les modifications.
 
 ```bash
 git add database/migrations/
@@ -779,6 +791,11 @@ vers le dépôt distant sur GitHub.
 
 À l'aide de la commande Git, ajoutez les nouveaux fichiers à l'index Git :
 
+> [!NOTE]
+>
+> Assurez-vous d'être bien sur la bonne branche correspondante à cette tâche
+> avant d'ajouter les modifications.
+
 ```bash
 git add .
 ```
@@ -806,6 +823,8 @@ request depuis la branche créée pour cette tâche vers la branche principale
 - Créez la pull request.
 - Validez la pull request.
 - Fusionnez-la dans la branche principale `main`.
+- Récupérez les modifications localement en basculant sur la branche principale
+  `main` et en exécutant la commande `git pull`.
 
 ### Créer le modèle Post
 
@@ -1102,6 +1121,11 @@ sur GitHub.
 
 À l'aide de la commande Git, ajoutez les nouveaux fichiers à l'index Git :
 
+> [!NOTE]
+>
+> Assurez-vous d'être bien sur la bonne branche correspondante à cette tâche
+> avant d'ajouter les modifications.
+
 ```bash
 git add .
 ```
@@ -1134,6 +1158,8 @@ fusionnez-la dans la branche principale `main`.
 - Créez la pull request.
 - Validez la pull request.
 - Fusionnez-la dans la branche principale `main`.
+- Récupérez les modifications localement en basculant sur la branche principale
+  `main` et en exécutant la commande `git pull`.
 
 </details>
 
@@ -1215,7 +1241,6 @@ Schema::create('likes', function (Blueprint $table) {
     $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
     $table->enum('reaction', ['like', 'love', 'haha', 'wow', 'sad', 'angry'])->default('like');
 
-    $table->index(['user_id', 'post_id']);
     $table->unique(['user_id', 'post_id']);
 });
 ```
@@ -1231,12 +1256,12 @@ composites, c'est pourquoi nous devons la laisser (source :
 <https://laravel.com/docs/12.x/eloquent#composite-primary-keys>).
 
 Pour palier à cette limitation, les colonnes `user_id` et `post_id` sont donc
-définies comme indexes et uniques en utilisant les méthodes
-`index(['user_id', 'post_id'])` et `unique(['user_id', 'post_id'])` pour imiter
-une clé primaire composite.
-
-Cela signifie qu'un.e utilisateur.trice ne peut aimer un même post qu'une seule
-fois, ce qui est logique dans le contexte d'un réseau social.
+définies comme uniques en utilisant la méthode `unique(['user_id', 'post_id'])`
+pour imiter une clé primaire composite (source :
+<https://laravel.com/docs/12.x/migrations#creating-indexes>). Cela garantit que
+chaque combinaison de `user_id` et `post_id` est unique dans la table `likes`,
+ce qui signifie qu'un.e utilisateur.trice ne peut aimer un même post qu'une
+seule fois.
 
 Cette manière de faire garantit que chaque like est unique pour une combinaison
 de `user_id` et `post_id`, tout en respectant les limitations de Laravel
@@ -1338,6 +1363,11 @@ les fonctionnalités d'Eloquent pour accéder facilement aux likes d'un.e
 utilisateur.trice et des posts, en utilisant les relations définies dans les
 modèles.
 
+La méthode `withPivot('reaction')` est utilisée pour indiquer que nous voulons
+aussi récupérer la colonne `reaction` de la table pivot `likes` lorsque nous
+accédons aux likes d'un.e utilisateur.trice. Cela permet d'accéder à la réaction
+associée à chaque like en utilisant la syntaxe `$user->likes->pivot->reaction`.
+
 Passons maintenant au modèle `Post` pour définir la relation "Many to Many" avec
 le modèle `User` (en passant par le modèle `Like`).
 
@@ -1382,6 +1412,19 @@ utilisant les relations définies dans les modèles.
 Ouvrez le fichier `routes/web.php` et ajoutez le code suivant pour tester les
 modèles Eloquent `User` et `Post` ainsi que la relation entre eux :
 
+> [!NOTE]
+>
+> Il se peut que votre Visual Studio Code affiche une erreur
+> `Undefined method 'likes'.intelephense(P1013)` sur les méthodes `likes` que
+> nous venons de définir dans les modèles `User` et `Post`.
+>
+> Il s'agit d'une limitation de l'extension Intelephense pour Visual Studio Code
+> qui ne parvient pas à analyser correctement les méthodes de relation "Many to
+> Many" définies dans les modèles Eloquent de Laravel.
+>
+> Cependant, cela n'affecte pas le fonctionnement de votre application Laravel,
+> et vous pouvez ignorer cette erreur dans Visual Studio Code.
+
 ```php
 use App\Models\User;
 use App\Models\Post;
@@ -1393,7 +1436,6 @@ Route::get('/test-like', function () {
     $post = Post::find(2);
 
     $user->likes()->attach($post->id, ['reaction' => 'love']);
-
 
     return $post->likes;
 });
@@ -1443,6 +1485,11 @@ sur GitHub.
 
 À l'aide de la commande Git, ajoutez les nouveaux fichiers à l'index Git :
 
+> [!NOTE]
+>
+> Assurez-vous d'être bien sur la bonne branche correspondante à cette tâche
+> avant d'ajouter les modifications.
+
 ```bash
 git add .
 ```
@@ -1475,54 +1522,353 @@ fusionnez-la dans la branche principale `main`.
 - Créez la pull request.
 - Validez la pull request.
 - Fusionnez-la dans la branche principale `main`.
+- Récupérez les modifications localement en basculant sur la branche principale
+  `main` et en exécutant la commande `git pull`.
 
 </details>
 
-## Populer la base de données avec des données factices
+## Peupler la base de données avec des données factices
 
-TODO
+Laravel offre une fonctionnalité de _"seeding"_ (peuplement) qui permet de
+peupler la base de données avec des données factices pour tester les
+fonctionnalités de l'application.
 
-## Tester les modèles Eloquent
+Dans cette section, nous allons créer un seeder pour peupler la base de données
+avec des données factices pour les modèles `User`, `Post` et `Like`.
 
-TODO
+Cela permettra de tester les fonctionnalités de l'application avec des données
+réalistes dans la base de données, ce qui est particulièrement utile pour les
+tests et le développement.
 
-### Récupérer les utilisateur.trices
+### Créer l'issue et la branche pour suivre cette tâche
 
-TODO
+En vous inspirant des tâches précédentes, créez une nouvelle issue et sa branche
+associée intitulée _"Créer un seeder pour peupler la base de données avec des
+données factices"_, comme étudié dans la séance précédente.
 
-### Récupérer les posts
+### Créer le seeder
 
-TODO
+La commande Artisan suivante permet de créer un seeder pour peupler la base de
+données avec des données factices pour les modèles `User`, `Post` et `Like`
+(source : <https://laravel.com/docs/12.x/seeding#writing-seeders>) :
 
-### Récupérer les likes
+```bash
+php artisan make:seeder DatabaseSeeder
+```
 
-TODO
+Le résultat devrait ressembler à ceci :
 
-### Récupérer les posts d'un.e utilisateur.trice
+```txt
+   INFO  Seeder [database/seeders/DatabaseSeeder.php] created successfully.
+```
 
-TODO
+Cette commande crée un fichier de seeder dans le dossier `database/seeders/`
+nommé `DatabaseSeeder.php`. Ce fichier est le seeder principal qui est exécuté
+lorsque nous lançons la commande de seeding pour peupler la base de données.
 
-### Récupérer les posts likés par un.e utilisateur.trice
+### Définir le seeder
 
-TODO
+Ouvrez le fichier `database/seeders/DatabaseSeeder.php` et ajoutez le code
+nécessaire pour peupler la base de données avec des données factices pour les
+modèles `User`, `Post` et `Like` :
 
-### Récupérer les utilisateur.trices ayant liké un post
+```php
+<?php
 
-TODO
+namespace Database\Seeders;
 
-### Créer un nouveau post
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-TODO
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // Insert John Doe into the users table
+        DB::table('users')->insert([
+            'id' => 1,
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'username' => 'johndoe',
+            'email' => 'john.doe@example.com',
+        ]);
 
-### Liker un post
+        // Insert Jane Doe into the users table
+        DB::table('users')->insert([
+            'id' => 2,
+            'first_name' => 'Jane',
+            'last_name' => 'Doe',
+            'username' => 'janedoe',
+            'email' => 'jane.doe@example.com',
+        ]);
 
-TODO
+        // Insert some posts for John Doe
+        DB::table('posts')->insert([
+            [
+                'id' => 1,
+                'user_id' => 1,
+                'title' => "John's First Post",
+                'content' => "This is the content of John's first post.",
+            ],
+            [
+                'id' => 2,
+                'user_id' => 1,
+                'content' => "This is the content of John's second post.",
+            ],
+            [
+                'id' => 3,
+                'user_id' => 1,
+                'content' => "This is the content of John's third post.",
+            ]
+        ]);
+
+        // Insert some posts for Jane Doe
+        DB::table('posts')->insert([
+            [
+                'id' => 4,
+                'user_id' => 2,
+                'content' => "This is the content of Jane's first post.",
+            ],
+            [
+                'id' => 5,
+                'user_id' => 2,
+                'title' => "Jane's Second Post",
+                'content' => "This is the content of Jane's second post.",
+            ],
+            [
+                'id' => 6,
+                'user_id' => 2,
+                'title' => "Jane's Third Post",
+                'content' => "This is the content of Jane's third post.",
+            ]
+        ]);
+
+        // Insert some likes for John's posts
+        DB::table('likes')->insert([
+            [
+                'user_id' => 2,
+                'post_id' => 1,
+                'reaction' => 'like',
+            ],
+            [
+                'user_id' => 1, // John likes his own post
+                'post_id' => 2,
+                'reaction' => 'love',
+            ],
+        ]);
+
+        // Insert some likes for Jane's posts
+        DB::table('likes')->insert([
+            [
+                'user_id' => 1,
+                'post_id' => 4,
+                'reaction' => 'like',
+            ],
+            [
+                'user_id' => 1,
+                'post_id' => 5,
+                'reaction' => 'love',
+            ],
+            [
+                'user_id' => 2, // Jane likes her own post
+                'post_id' => 5,
+                'reaction' => 'wow',
+            ]
+        ]);
+    }
+}
+```
+
+Prenez le temps de lire et de comprendre le code du seeder pour voir comment les
+données factices sont insérées dans la base de données pour les modèles `User`,
+`Post` et `Like`. Vous pouvez également modifier les données factices selon vos
+préférences pourvoir comment cela affecte les résultats lors de l'exécution du
+seeder.
+
+Ce fichier utilise la syntaxe "query builder" de Laravel pour insérer des
+données dans la base de données. Plus de détails sont disponibles dans la
+documentation de Laravel sur le query builder :
+<https://laravel.com/docs/12.x/queries>.
+
+Dans ce fichier, nous interagissons directement avec la base de données en
+utilisant la façade `DB` pour insérer des données dans les tables `users`,
+`posts` et `likes` plutôt que d'utiliser les modèles Eloquent.
+
+Il s'agit simplement d'une autre manière de faire pour vous faire découvrir les
+différentes façons d'interagir avec la base de données dans Laravel, soit en
+passant par les modèles Eloquent, soit en utilisant la syntaxe "query builder"
+avec la façade `DB`.
+
+Dans la suite du cours, nous allons principalement utiliser les modèles Eloquent
+pour interagir avec la base de données, mais il peut être utile de connaître la
+syntaxe "query builder" pour certaines situations où l'utilisation des modèles
+Eloquent n'est pas nécessaire ou pas optimale.
+
+### Appliquer le seeder
+
+Pour appliquer le seeder et peupler la base de données avec les données factices
+définies dans le fichier `DatabaseSeeder.php`, utilisez la commande Artisan
+suivante (source : <https://laravel.com/docs/12.x/seeding#running-seeders>)
+
+```bash
+php artisan db:seed
+```
+
+Une erreur devrait survenir lors de l'exécution de cette commande, car nous
+avions déjà inséré des données dans la base de données lors des tests
+précédents, et les contraintes d'unicité définies dans les migrations empêchent
+l'insertion de données dupliquées :
+
+```text
+ INFO  Seeding database.
+
+
+   Illuminate\Database\QueryException
+
+  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: users.password (Connection: sqlite, Database: /workspace/heig-vd-devprodmed-mini-projet/database/database.sqlite, SQL: insert into "users" ("id", "first_name", "last_name", "username", "email") values (1, John, Doe, johndoe, john.doe@example.com))
+```
+
+Heureusement pour nous, Laravel offre une option pour supprimer toutes les
+tables et exécuter les migrations avant d'exécuter le seeder :
+
+> [!WARNING]
+>
+> Cette commande supprimera toutes les tables existantes et recréera la base de
+> données à partir des migrations, puis exécutera le seeder pour peupler la base
+> de données avec les données factices.
+>
+> Dans un environnement de production, cette commande peut entraîner une perte
+> de données, il est donc important de l'utiliser avec précaution et de
+> s'assurer que vous êtes dans un environnement de développement ou de test
+> avant de l'exécuter.
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+Dropping all tables ................................................... 2.42ms DONE
+
+   INFO  Preparing database.
+
+  Creating migration table .............................................. 4.46ms DONE
+
+   INFO  Running migrations.
+
+  2026_01_29_142851_create_sessions_table ............................... 9.22ms DONE
+  2026_01_29_142857_create_cache_table ................................. 11.07ms DONE
+  2026_01_29_142954_create_jobs_table ................................... 5.32ms DONE
+  2026_01_29_143919_create_users_table .................................. 8.14ms DONE
+  2026_02_07_123042_create_posts_table .................................. 3.01ms DONE
+  2026_02_07_151302_create_likes_table .................................. 5.46ms DONE
+
+
+   INFO  Seeding database.
+```
+
+Toutes les tables sont maintenant recréées à partir des migrations, et la base
+de données est peuplée avec les données factices définies dans le fichier
+`DatabaseSeeder.php`. Vous pouvez vérifier cela en ouvrant le fichier
+`database/database.sqlite` et en consultant les tables `users`, `posts` et
+`likes` pour voir les données qui ont été enregistrées.
+
+### Valider et pousser les modifications
+
+En vous inspirant des tâches précédentes, utilisez les commandes Git pour
+ajouter les nouveaux fichiers à l'index Git, valider les modifications avec un
+message de commit approprié, et pousser les modifications vers le dépôt distant
+sur GitHub.
+
+<details>
+<summary>Afficher la solution</summary>
+
+À l'aide de la commande Git, ajoutez les nouveaux fichiers à l'index Git :
+
+> [!NOTE]
+>
+> Assurez-vous d'être bien sur la bonne branche correspondante à cette tâche
+> avant d'ajouter les modifications.
+
+```bash
+git add .
+```
+
+Puis, validez ces modifications avec un message de commit approprié :
+
+```bash
+git commit -m "Créer un seeder pour peupler la base de données avec des données factices"
+```
+
+Puis, poussez les modifications vers le dépôt distant sur GitHub :
+
+```bash
+git push
+```
+
+</details>
+
+### Créer la pull request pour cette tâche
+
+En vous inspirant des tâches précédentes, créez une pull request depuis la
+branche créée pour cette tâche.
+
+<details>
+<summary>Afficher la solution</summary>
+
+- Spécifiez son titre _"Créer un seeder pour peupler la base de données avec des
+  données factices"_.
+- Ajoutez une description si nécessaire.
+- Créez la pull request.
+
+</details>
+
+### Valider et fusionner la pull request
+
+En vous inspirant des tâches précédentes, validez la pull request créée pour
+cette tâche puis fusionnez-la dans la branche principale `main`.
+
+<details>
+<summary>Afficher la solution</summary>
+
+- Validez la pull request.
+- Fusionnez-la dans la branche principale `main`.
+
+</details>
+
+### Récupérer les modifications localement
+
+En vous inspirant des tâches précédentes, récupérez les modifications localement
+en basculant sur la branche principale `main` et en exécutant la commande Git
+appropriée.
+
+<details>
+<summary>Afficher la solution</summary>
+
+Basculer sur la branche principale `main` :
+
+```bash
+git checkout main
+```
+
+Récupérer les modifications localement :
+
+```bash
+git pull
+```
+
+</details>
 
 ## Conclusion
 
 Ce mini-projet met en place les fondations de la base de données pour le petit
-réseau social. Les migrations et les modèles Eloquent permettront de gérer les
-posts et les likes de manière simple et sécurisée.
+réseau social en utilisant les meilleures pratiques de développement à l'aide de
+Git et GitHub. Les migrations et les modèles Eloquent permettront de gérer les
+utilisateur.trices, posts et les likes de manière simple et sécurisée.
 
 Dans les futures étapes, nous pourrions ajouter des fonctionnalités qui
 demanderont des modifications à la structure de la base de données.
@@ -1530,9 +1876,19 @@ demanderont des modifications à la structure de la base de données.
 Dans ce cas, nous pourrions créer de nouvelles migrations pour modifier la
 structure existante sans perdre les données déjà présentes.
 
+Les seeders permettent de peupler la base de données avec des données factices
+pour tester les fonctionnalités de l'application. Ils sont particulièrement
+utiles pour les tests et le développement, car ils permettent de créer
+rapidement des données réalistes dans la base de données.
+
 Grâce à la mise en place de cette source de vérité (_"source of truth"_), nous
 pourrons désormais développer les fonctionnalités du petit réseau social en
 s'appuyant sur une base de données solide et bien conçue.
+
+Dans de futures séances, nous allons utiliser les modèles Eloquent pour
+interagir avec la base de données et implémenter les différentes fonctionnalités
+du petit réseau social, telles que la création de posts, l'ajout de likes, la
+gestion des utilisateur.trices, etc.
 
 ## Solution
 
@@ -1562,6 +1918,13 @@ suivante :
 
 ## Aller plus loin
 
+> [!TIP]
+>
+> Cette section est optionnelle.
+>
+> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
+> vos connaissances après avoir terminé les exercices et le mini-projet.
+
 - Seriez-vous capable d'utiliser une énumération PHP pour définir les
   différentes réactions possibles lors de la création d'un like ? Référez-vous à
   la documentation de Laravel pour les énumérations :
@@ -1569,7 +1932,8 @@ suivante :
 - Seriez-vous capable de mettre en place une _"Factory"_ pour générer des
   données factices de manière plus efficace et réaliste ? Référez-vous à la
   documentation de Laravel pour les factories :
-  <https://laravel.com/docs/12.x/eloquent-factories>.
+  <https://laravel.com/docs/12.x/eloquent-factories> et
+  <https://laravel.com/docs/12.x/seeding#using-model-factories>.
 
 <!-- URLs -->
 

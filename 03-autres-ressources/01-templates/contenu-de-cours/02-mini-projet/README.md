@@ -15,6 +15,7 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 - [Objectifs](#objectifs)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
+- [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
 
@@ -50,6 +51,17 @@ suivante : <TODO>.
 >
 > Remplacez `<commit-hash>` ou `<tag>` par l'identifiant du commit ou du tag
 > correspondant à la solution.
+
+## Aller plus loin
+
+> [!TIP]
+>
+> Cette section est optionnelle.
+>
+> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
+> vos connaissances après avoir terminé les exercices et le mini-projet.
+
+- Seriez-vous capable de ... ?
 
 <!-- URLs -->
 

@@ -12,12 +12,16 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Table des matières
 
-- [Table des matières](#table-des-matières).
-- [Exercices](#exercices).
-  - [Exercice 1](#exercice-1).
-  - [Exercice 2](#exercice-2).
-  - [Exercice 3](#exercice-3).
-  - [Exercice 4](#exercice-4).
+- [Table des matières](#table-des-matières)
+- [Exercices](#exercices)
+  - [Exercice 1](#exercice-1)
+  - [Exercice 2](#exercice-2)
+  - [Exercice 3](#exercice-3)
+  - [Exercice 4](#exercice-4)
+  - [Exercice 5](#exercice-5)
+  - [Exercice 6](#exercice-6)
+  - [Exercice 7](#exercice-7)
+  - [Exercice 8](#exercice-8)
 
 ## Exercices
 
@@ -51,130 +55,142 @@ trouve aux adresses suivantes :
 
 ### Exercice 2
 
-Créez une migration pour une table `animals` avec les colonnes suivantes :
-
-- `id` (clé primaire).
-- `name` (chaîne de caractères, max 255).
-- `species` (texte long).
-- `owner_id` (entier, clé étrangère vers la table `users`).
-- `created_at` et `updated_at` (timestamps).
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les migrations de base de données ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-Exécutez la commande :
-
-```bash
-php artisan make:migration create_posts_table
-```
-
-Puis éditez le fichier de migration :
-
-```php
-Schema::create('posts', function (Blueprint $table) {
-    $table->id();
-    $table->string('title');
-    $table->longText('content');
-    $table->foreignId('user_id')->constrained()->onDelete('cascade');
-    $table->timestamps();
-});
-```
-
-Enfin, exécutez :
-
-```bash
-php artisan migrate
-```
-
-</details>
-
-### Exercice 2
-
-Créez un modèle Eloquent `Post` et configurez-le pour que les attributs `title`
-et `content` puissent être assignés en masse.
-
-<details>
-<summary>Afficher la solution</summary>
-
-Créez le modèle avec :
-
-```bash
-php artisan make:model Post
-```
-
-Puis éditez `app/Models/Post.php` :
-
-```php
-class Post extends Model
-{
-    protected $fillable = ['title', 'content', 'user_id'];
-}
-```
+La documentation officielle de Laravel sur les migrations de base de données se
+trouve à l'adresse suivante : <https://laravel.com/docs/12.x/migrations>.
 
 </details>
 
 ### Exercice 3
 
-Écrivez le code Eloquent pour :
-
-1. Créer un nouveau post avec le titre "Mon premier post" et le contenu "Ceci
-   est mon premier post." pour l'utilisateur avec l'ID 1.
-2. Récupérer tous les posts de l'utilisateur avec l'ID 1.
-3. Mettre à jour le titre du post avec l'ID 1 en "Titre mis à jour".
-4. Supprimer le post avec l'ID 1.
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les seeders de base de données ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-```php
-// 1. Créer
-Post::create([
-    'title' => 'Mon premier post',
-    'content' => 'Ceci est mon premier post.',
-    'user_id' => 1,
-]);
-
-// 2. Récupérer
-$posts = Post::where('user_id', 1)->get();
-
-// 3. Mettre à jour
-$post = Post::find(1);
-$post->update(['title' => 'Titre mis à jour']);
-
-// 4. Supprimer
-Post::destroy(1);
-```
+La documentation officielle de Laravel sur les seeders de base de données se
+trouve à l'adresse suivante : <https://laravel.com/docs/12.x/seeding>.
 
 </details>
 
 ### Exercice 4
 
-Ajoutez une méthode `excerpt()` au modèle `Post` qui retourne les 100 premiers
-caractères du contenu suivi de "...".
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur le query builder de Laravel ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-Éditez `app/Models/Post.php` :
+La documentation officielle de Laravel sur le query builder se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/database#query-builder>.
 
-```php
-class Post extends Model
-{
-    protected $fillable = ['title', 'content', 'user_id'];
+</details>
 
-    public function excerpt(): string
-    {
-        return substr($this->content, 0, 100) . '...';
-    }
-}
+### Exercice 5
+
+Quelle est la commande pour créer un modèle Eloquent avec sa migration associée
+dans Laravel ? Où peut-on trouver cette information dans la documentation
+officielle de Laravel ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La commande pour créer un modèle Eloquent avec sa migration associée dans
+Laravel est la suivante :
+
+```bash
+php artisan make:model NomDuModel --migration
 ```
 
-Utilisation :
+Vous pouvez trouver cette information dans la documentation officielle de
+Laravel à l'adresse suivante :
+<https://laravel.com/docs/12.x/eloquent#generating-models>.
 
-```php
-$post = Post::find(1);
-echo $post->excerpt();
+</details>
+
+### Exercice 6
+
+Quelle est la commande pour appliquer les migrations de base de données dans
+Laravel ? Quelle est la commande pour annuler la dernière migration appliquée ?
+Où peut-on trouver ces informations dans la documentation officielle de Laravel
+?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La commande pour appliquer les migrations de base de données dans Laravel est la
+suivante :
+
+```bash
+php artisan migrate
 ```
+
+La commande pour annuler la dernière migration appliquée est la suivante :
+
+```bash
+php artisan migrate:rollback
+```
+
+Vous pouvez trouver ces informations dans la documentation officielle de Laravel
+à l'adresse suivante :
+<https://laravel.com/docs/12.x/migrations#running-migrations> et
+<https://laravel.com/docs/12.x/migrations#rolling-back-migrations>.
+
+</details>
+
+### Exercice 7
+
+Quelle est la commande pour créer un seeder de base de données dans Laravel ? Où
+peut-on trouver cette information dans la documentation officielle de Laravel ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La commande pour créer un seeder de base de données dans Laravel est la suivante
+:
+
+```bash
+php artisan make:seeder NomDuSeeder
+```
+
+Vous pouvez trouver cette information dans la documentation officielle de
+Laravel à l'adresse suivante :
+<https://laravel.com/docs/12.x/seeding#generating-seeders>.
+
+</details>
+
+### Exercice 8
+
+Quelle est la commande pour exécuter les seeders de base de données dans Laravel
+? S'il faut vider la base de données avant d'exécuter les seeders, quelle est la
+commande à utiliser ? Où peut-on trouver ces informations dans la documentation
+officielle de Laravel ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La commande pour exécuter les seeders de base de données dans Laravel est la
+suivante :
+
+```bash
+php artisan db:seed
+```
+
+Si vous souhaitez vider la base de données avant d'exécuter les seeders, vous
+pouvez utiliser la commande suivante :
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Vous pouvez trouver ces informations dans la documentation officielle de Laravel
+à l'adresse suivante : <https://laravel.com/docs/12.x/seeding#running-seeders>.
 
 </details>
 
