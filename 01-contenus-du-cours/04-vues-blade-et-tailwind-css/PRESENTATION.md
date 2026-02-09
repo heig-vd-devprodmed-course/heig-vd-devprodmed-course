@@ -5,11 +5,11 @@ size: "16:9"
 paginate: "true"
 author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
-  "Tailwind CSS, Blade et vues pour le cours DévProdMéd enseigné à la HEIG-VD,
+  "Vues, Blade et Tailwind CSS pour le cours DévProdMéd enseigné à la HEIG-VD,
   Suisse"
 lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-tailwind-css-blade-et-vues/presentation.html"
-header: "[**Tailwind CSS, Blade et vues**][contenu-complet-sur-github]"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/presentation.html"
+header: "[**Vues, Blade et Tailwind CSS**][contenu-complet-sur-github]"
 footer:
   "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
   2025-2026](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
@@ -17,7 +17,7 @@ footer:
 headingDivider: 6
 ---
 
-# Tailwind CSS, Blade et vues
+# Vues, Blade et Tailwind CSS
 
 <!--
 _class: lead
@@ -94,7 +94,7 @@ Est-ce que vous avez des questions ?
 <!-- URLs -->
 
 [contenu-complet-sur-github]:
-	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/04-tailwind-css-blade-et-vues/README.md
+	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/04-vues-blade-et-tailwind-css/README.md
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
 

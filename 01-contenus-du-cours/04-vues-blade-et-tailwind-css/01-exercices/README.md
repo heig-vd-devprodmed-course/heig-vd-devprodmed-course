@@ -1,4 +1,4 @@
-# Tailwind CSS, Blade et vues - Exercices
+# Vues, Blade et Tailwind CSS - Exercices
 
 L. Delafontaine, avec l'aide de
 [GitHub Copilot](https://github.com/features/copilot).

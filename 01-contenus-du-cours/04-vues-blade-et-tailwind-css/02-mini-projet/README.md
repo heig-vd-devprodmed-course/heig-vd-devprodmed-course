@@ -1,4 +1,4 @@
-# Tailwind CSS, Blade et vues - Mini-projet
+# Vues, Blade et Tailwind CSS - Mini-projet
 
 L. Delafontaine, avec l'aide de
 [GitHub Copilot](https://github.com/features/copilot).
