@@ -193,6 +193,17 @@ Le cours sera évalué à l'aide de deux évaluations :
 
 ![bg right:40%][illustration-modalites-devaluation]
 
+### Comment se préparer ?
+
+- Relire les supports de cours.
+- Pratiquer les exercices.
+- Travailler sur le mini-projet.
+- Discuter avec les autres étudiant.es et poser des questions.
+- Chaque support de cours contient des questions typiques d'évaluation.
+
+Il n'y a pas de secret : la meilleure façon de se préparer est de pratiquer et
+de travailler sur le mini-projet.
+
 ## La programmation et l'anglais
 
 Le domaine de la programmation est très largement anglophone. La majorité des

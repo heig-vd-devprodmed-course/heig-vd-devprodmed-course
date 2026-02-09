@@ -45,6 +45,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Modalités d'évaluation](#modalités-dévaluation)
   - [Évaluation écrite](#évaluation-écrite)
   - [Présentation orale](#présentation-orale)
+  - [Comment se préparer ?](#comment-se-préparer-)
 - [Besoin de rafraîchissement ?](#besoin-de-rafraîchissement-)
 - [_"Qu'en est-il de ChatGPT, etc. ?"_](#quen-est-il-de-chatgpt-etc-)
 - [Bibliographie et ressources utilisées](#bibliographie-et-ressources-utilisées)
@@ -136,6 +137,17 @@ Le cours sera évalué à l'aide de deux évaluations :
   - 8 minutes de préparation.
   - 8 minutes de présentation.
   - 2 minutes pour changer de personne.
+
+### Comment se préparer ?
+
+- Relire les supports de cours.
+- Pratiquer les exercices.
+- Travailler sur le mini-projet.
+- Discuter avec les autres étudiant.es et poser des questions.
+- Chaque support de cours contient des questions typiques d'évaluation.
+
+Il n'y a pas de secret : la meilleure façon de se préparer est de pratiquer et
+de travailler sur le mini-projet.
 
 ## Besoin de rafraîchissement ?
 
