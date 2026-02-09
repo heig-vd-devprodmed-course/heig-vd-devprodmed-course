@@ -88,8 +88,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Conclusion](#conclusion)
 - [Exercices](#exercices)
 - [Mini-projet](#mini-projet)
+- [Questions d'évaluation](#questions-dévaluation)
 - [À faire pour la prochaine séance](#à-faire-pour-la-prochaine-séance)
-- [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
 
@@ -833,6 +833,33 @@ mettre en pratique les concepts abordés.
 Vous trouverez les détails du mini-projet ici :
 [Mini-projet](./02-mini-projet/README.md).
 
+## Questions d'évaluation
+
+> [!NOTE]
+>
+> Les questions d'évaluation sont destinées à vous aider à vérifier votre
+> compréhension des concepts abordés dans le cours. Elles ne sont pas destinées
+> à être utilisées comme une liste de contrôle exhaustive des compétences à
+> maîtriser.
+>
+> Il est recommandé de les utiliser comme un guide pour vous aider à identifier
+> les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
+> connaissances ou de pratiquer davantage.
+
+- Qu'est-ce qu'une migration dans Laravel et quels sont ses avantages ?
+- Comment créer une nouvelle migration avec Artisan ?
+- Comment appliquer et annuler les migrations ?
+- Qu'est-ce qu'un ORM et quels sont ses avantages et inconvénients ?
+- Comment créer un modèle Eloquent et interagir avec la base de données à l'aide
+  de ce modèle ?
+- Comment gérer les relations entre les modèles Eloquent ?
+- Qu'est-ce que le query builder de Laravel et quand l'utiliser ?
+- Qu'est-ce qu'un seeder et comment l'utiliser pour remplir la base de données
+  avec des données factices ?
+- Quel est le rôle du modèle dans le patron de conception MVC et pourquoi est-il
+  recommandé de commencer par le modèle lors du développement d'une application
+  ?
+
 ## À faire pour la prochaine séance
 
 Chaque personne est libre de gérer son temps comme elle le souhaite. Cependant,
@@ -841,21 +868,6 @@ il est recommandé pour la prochaine séance de :
 - Relire le support de cours si nécessaire.
 - Finaliser les exercices qui n'ont pas été terminés en classe.
 - Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
-
-## Aller plus loin
-
-> [!TIP]
->
-> Cette section est optionnelle.
->
-> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
-> vos connaissances après avoir terminé les exercices et le mini-projet.
-
-Quelques ressources pour aller plus loin :
-
-- Les transactions :
-  <https://laravel.com/docs/12.x/database#database-transactions>.
-- Les factories : <https://laravel.com/docs/12.x/eloquent-factories>.
 
 <!-- URLs -->
 

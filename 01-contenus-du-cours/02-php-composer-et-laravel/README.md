@@ -90,6 +90,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Conclusion](#conclusion)
 - [Mini-projet](#mini-projet)
 - [Exercices](#exercices)
+- [Questions d'évaluation](#questions-dévaluation)
 - [À faire pour la prochaine séance](#à-faire-pour-la-prochaine-séance)
 
 ## Objectifs
@@ -658,6 +659,34 @@ mettre en pratique les concepts abordés.
 
 Vous trouverez les exercices et leur corrigé ici :
 [Exercices](./02-exercices/README.md).
+
+## Questions d'évaluation
+
+> [!NOTE]
+>
+> Les questions d'évaluation sont destinées à vous aider à vérifier votre
+> compréhension des concepts abordés dans le cours. Elles ne sont pas destinées
+> à être utilisées comme une liste de contrôle exhaustive des compétences à
+> maîtriser.
+>
+> Il est recommandé de les utiliser comme un guide pour vous aider à identifier
+> les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
+> connaissances ou de pratiquer davantage.
+
+- Quelle est la différence entre PHP vanilla et l'utilisation de librairies
+  externes ?
+- Quels sont les avantages d'utiliser des librairies externes plutôt que de tout
+  écrire soi-même ?
+- Qu'est-ce que Composer et à quoi sert-il ?
+- Quels sont les concepts clés de Composer (fichiers, dossiers, autoloading) ?
+- Où trouver des librairies PHP à utiliser dans vos projets ?
+- Qu'est-ce que Laravel et pourquoi utiliser un framework PHP ?
+- Quels sont les principes clés de Laravel (MVC, convention over configuration)
+  ?
+- Où trouver des ressources et de l'aide pour apprendre Laravel ?
+- Quelle est la différence entre PHP, Composer et Laravel ?
+- Quel est le lien entre l'écosystème PHP/Composer et l'écosystème
+  JavaScript/npm ?
 
 ## À faire pour la prochaine séance
 

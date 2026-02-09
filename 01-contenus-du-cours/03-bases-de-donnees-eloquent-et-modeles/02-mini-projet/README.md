@@ -43,6 +43,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Récupérer les modifications localement](#récupérer-les-modifications-localement-1)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
+- [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
 - [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
@@ -1602,8 +1603,8 @@ class DatabaseSeeder extends Seeder
                     'last_name' => 'Doe',
                     'username' => 'johndoe',
                     'email' => 'john.doe@example.com',
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => new \DateTime('2026-02-09 10:00:00'),
+                    'updated_at' => new \DateTime('2026-02-09 10:00:00'),
                 ]);
 
                 // Insert Jane Doe into the users table
@@ -1613,60 +1614,64 @@ class DatabaseSeeder extends Seeder
                     'last_name' => 'Doe',
                     'username' => 'janedoe',
                     'email' => 'jane.doe@example.com',
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => new \DateTime('2026-02-09 11:00:00'),
+                    'updated_at' => new \DateTime('2026-02-09 11:00:00'),
                 ]);
 
                 // Insert some posts for John Doe
                 DB::table('posts')->insert([
-                    'id' => 1,
-                    'user_id' => 1,
-                    'title' => "John's First Post",
-                    'content' => "This is the content of John's first post.",
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                DB::table('posts')->insert([
-                    'id' => 2,
-                    'user_id' => 1,
-                    'content' => "This is the content of John's second post.",
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                DB::table('posts')->insert([
-                    'id' => 3,
-                    'user_id' => 1,
-                    'content' => "This is the content of John's third post.",
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    [
+                        'id' => 1,
+                        'user_id' => 1,
+                        'title' => "John's First Post",
+                        'content' => "This is the content of John's first post.",
+                        'created_at' => new \DateTime('2026-02-09 12:00:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:00:00'),
+                    ],
+                    [
+                        'id' => 2,
+                        'user_id' => 1,
+                        'title' => null,
+                        'content' => "This is the content of John's second post.",
+                        'created_at' => new \DateTime('2026-02-09 12:05:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:05:00'),
+                    ],
+                    [
+                        'id' => 3,
+                        'user_id' => 1,
+                        'title' => null,
+                        'content' => "This is the content of John's third post.",
+                        'created_at' => new \DateTime('2026-02-09 12:10:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:10:00'),
+                    ]
                 ]);
 
                 // Insert some posts for Jane Doe
                 DB::table('posts')->insert([
-                    'id' => 4,
-                    'user_id' => 2,
-                    'content' => "This is the content of Jane's first post.",
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-                DB::table('posts')->insert([
-                    'id' => 5,
-                    'user_id' => 2,
-                    'title' => "Jane's Second Post",
-                    'content' => "This is the content of Jane's second post.",
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                DB::table('posts')->insert([
-                    'id' => 6,
-                    'user_id' => 2,
-                    'title' => "Jane's Third Post",
-                    'content' => "This is the content of Jane's third post.",
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    [
+                        'id' => 4,
+                        'user_id' => 2,
+                        'title' => null,
+                        'content' => "This is the content of Jane's first post.",
+                        'created_at' => new \DateTime('2026-02-09 12:05:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:05:00'),
+                    ],
+                    [
+                        'id' => 5,
+                        'user_id' => 2,
+                        'title' => "Jane's Second Post",
+                        'content' => "This is the content of Jane's second post.",
+                        'created_at' => new \DateTime('2026-02-09 12:10:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:10:00'),
+                    ],
+                    [
+                        'id' => 6,
+                        'user_id' => 2,
+                        'title' => "Jane's Third Post",
+                        'content' => "This is the content of Jane's third post.",
+                        'created_at' => new \DateTime('2026-02-09 12:15:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:15:00'),
+                    ]
                 ]);
 
                 // Insert some likes for John's posts
@@ -1675,15 +1680,15 @@ class DatabaseSeeder extends Seeder
                         'user_id' => 2,
                         'post_id' => 1,
                         'reaction' => 'like',
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => new \DateTime('2026-02-09 12:20:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:20:00'),
                     ],
                     [
                         'user_id' => 1, // John likes his own post
                         'post_id' => 2,
                         'reaction' => 'love',
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => new \DateTime('2026-02-09 12:25:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:25:00'),
                     ],
                 ]);
 
@@ -1693,22 +1698,22 @@ class DatabaseSeeder extends Seeder
                         'user_id' => 1,
                         'post_id' => 4,
                         'reaction' => 'like',
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => new \DateTime('2026-02-09 12:30:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:30:00'),
                     ],
                     [
                         'user_id' => 1,
                         'post_id' => 5,
                         'reaction' => 'love',
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => new \DateTime('2026-02-09 12:35:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:35:00'),
                     ],
                     [
                         'user_id' => 2, // Jane likes her own post
                         'post_id' => 5,
                         'reaction' => 'wow',
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'created_at' => new \DateTime('2026-02-09 12:40:00'),
+                        'updated_at' => new \DateTime('2026-02-09 12:40:00'),
                     ]
                 ]);
             }
@@ -1961,6 +1966,26 @@ suivante :
 >
 > Remplacez `<commit-hash>` ou `<tag>` par l'identifiant du commit ou du tag
 > correspondant à la solution.
+
+## Idées pour le mini-projet personnel
+
+> [!TIP]
+>
+> Plus tard dans le cours, vous aurez l'occasion de rajouter des fonctionnalités
+> à votre mini-projet personnel. Voici quelques idées de fonctionnalités que
+> vous pourriez implémenter.
+
+- Ajouter la possibilité pour les utilisateur.trices de commenter les posts.
+- Ajouter la possibilité pour les utilisateur.trices de suivre d'autres
+  utilisateur.trices.
+- Remplacer le système de like actuel par un système de notation (ex : de 1 à 5
+  étoiles) pour les posts.
+- Ajouter la possibilité pour les utilisateur.trices de rejoindre des groupes
+  d'intérêt et de partager des posts au sein de ces groupes.
+- Ajouter la possibilité pour les utilisateur.trices de personnaliser leur
+  profil avec une photo de profil, une biographie, etc.
+- Ajouter la possibilité pour les utilisateur.trices de recevoir des
+  notifications lorsqu'ils reçoivent un like ou un commentaire sur leurs posts.
 
 ## Aller plus loin
 

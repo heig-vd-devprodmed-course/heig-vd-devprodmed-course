@@ -52,6 +52,18 @@ suivante : <TODO>.
 > Remplacez `<commit-hash>` ou `<tag>` par l'identifiant du commit ou du tag
 > correspondant à la solution.
 
+## Idées pour le mini-projet personnel
+
+> [!TIP]
+>
+> Plus tard dans le cours, vous aurez l'occasion de rajouter des fonctionnalités
+> à votre mini-projet personnel. Voici quelques idées de fonctionnalités que
+> vous pourriez implémenter.
+
+- Idée 1.
+- Idée 2.
+- ...
+
 ## Aller plus loin
 
 > [!TIP]
