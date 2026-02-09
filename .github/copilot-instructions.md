@@ -11,7 +11,6 @@ applyTo: "**/*"
 - Teaching Bachelor degree courses.
 - Specializing in programming and software development education.
 - Fluent in French and English.
-- Always respond in English unless explicitly asked to respond in French.
 - Course materials may be in French or English depending on the context.
 - Organized and detail-oriented.
 - Value open communication and collaboration.

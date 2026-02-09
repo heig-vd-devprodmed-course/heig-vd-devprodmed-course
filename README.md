@@ -42,8 +42,8 @@ d'apprentissage, et les méthodes d'évaluation.
 | -----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
 |     01 | [Introduction et organisation du cours](./01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md) + [PHP, Composer et Laravel](./01-contenus-du-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
 |     02 | [Bases de données, Eloquent et modèles](./01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/README.md)                                                                                            | 🟢 Prêt     |
-|     03 | Tailwind CSS, Blade et vues                                                                                                                                                                                  | 🟡 En cours |
-|     04 | Routes, paramètres et contrôleurs                                                                                                                                                                            | 🔴 À faire  |
+|     03 | [Tailwind CSS, Blade et vues](./01-contenus-du-cours/04-tailwind-css-blade-et-vues/README.md)                                                                                                                | 🟢 Prêt     |
+|     04 | Routes, paramètres et contrôleurs                                                                                                                                                                            | 🟡 En cours |
 |     05 | Formulaires et validation                                                                                                                                                                                    | 🔴 À faire  |
 |     06 | Authentification et autorisations                                                                                                                                                                            | 🔴 À faire  |
 |  🚨 07 | Évaluation 1                                                                                                                                                                                                 | 🔴 À faire  |
@@ -51,7 +51,7 @@ d'apprentissage, et les méthodes d'évaluation.
 |     09 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |     10 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |  🚨 11 | Évaluation 2                                                                                                                                                                                                 | 🔴 À faire  |
-|     12 | Récapitulatif du cours + Fonctionnalités avancées de Laravel                                                                                                                                                 | 🔴 À faire  |
+|     12 | Récapitulatif du cours et perspectives d'avenir                                                                                                                                                              | 🔴 À faire  |
 
 ## 📜 Licence
 
