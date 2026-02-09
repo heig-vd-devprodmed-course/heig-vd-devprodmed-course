@@ -99,6 +99,23 @@ mettre en pratique les concepts abordés.
 Vous trouverez les détails du mini-projet ici :
 [Mini-projet](./02-mini-projet/README.md).
 
+## Questions d'évaluation
+
+> [!NOTE]
+>
+> Les questions d'évaluation sont destinées à vous aider à vérifier votre
+> compréhension des concepts abordés dans le cours. Elles ne sont pas destinées
+> à être utilisées comme une liste de contrôle exhaustive des compétences à
+> maîtriser.
+>
+> Il est recommandé de les utiliser comme un guide pour vous aider à identifier
+> les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
+> connaissances ou de pratiquer davantage.
+
+- Question 1.
+- Question 2.
+- ...
+
 ## À faire pour la prochaine séance
 
 Chaque personne est libre de gérer son temps comme elle le souhaite. Cependant,
@@ -107,21 +124,6 @@ il est recommandé pour la prochaine séance de :
 - Relire le support de cours si nécessaire.
 - Finaliser les exercices qui n'ont pas été terminés en classe.
 - Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
-
-## Aller plus loin
-
-> [!TIP]
->
-> Cette section est optionnelle.
->
-> Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
-> vos connaissances après avoir terminé les exercices et le mini-projet.
-
-Quelques ressources pour aller plus loin :
-
-- Ressource 1.
-- Ressource 2.
-- ...
 
 <!-- URLs -->
 
