@@ -33,23 +33,30 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ### Exercice 1
 
-Description de l'exercice 1.
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les vues et Blade ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-Solution de l'exercice 1.
+La documentation officielle de Laravel sur les vues et Blade se trouve aux
+adresses suivantes :
+
+- <https://laravel.com/docs/12.x/views>.
+- <https://laravel.com/docs/12.x/blade>.
 
 </details>
 
 ### Exercice 2
 
-Description de l'exercice 2.
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur l'internationalisation (i18n) ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-Solution de l'exercice 2.
+La documentation officielle de Laravel sur l'internationalisation (i18n) se
+trouve à l'adresse suivante : <https://laravel.com/docs/12.x/localization>.
 
 </details>
 
