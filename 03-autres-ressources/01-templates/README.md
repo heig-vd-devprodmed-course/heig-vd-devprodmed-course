@@ -99,10 +99,11 @@ When creating new course content, always read and follow the structure of all
 relevant template files in the templates directory, including:
 
 - [The main README](../../README.md).
-- [The main content template](./contenu-de-cours/README.md).
-- [The exercises template](./contenu-de-cours/01-exercices/README.md).
-- [The mini-project template](./contenu-de-cours/02-mini-projet/README.md).
-- [The solution template](./contenu-de-cours/02-mini-projet/solution/README.md).
+- [The presentation template](./contenu-du-cours/PRESENTATION.md).
+- [The main content template](./contenu-du-cours/README.md).
+- [The exercises template](./contenu-du-cours/01-exercices/README.md).
+- [The mini-project template](./contenu-du-cours/02-mini-projet/README.md).
+- [The solution template](./contenu-du-cours/02-mini-projet/solution/README.md).
 
 When updating a course content, ensure that all related files and resources are
 also updated accordingly to maintain consistency.
