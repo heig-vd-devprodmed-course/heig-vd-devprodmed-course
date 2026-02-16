@@ -1,19 +1,19 @@
 ---
 marp: true
-theme: "custom-marp-theme"
-size: "16:9"
-paginate: "true"
+theme: 'custom-marp-theme'
+size: '16:9'
+paginate: 'true'
 author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
-  "Vues, Blade et Tailwind CSS pour le cours DévProdMéd enseigné à la HEIG-VD,
-  Suisse"
-lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/presentation.html"
-header: "[**Vues, Blade et Tailwind CSS**][contenu-complet-sur-github]"
+  'Vues, Blade et Tailwind CSS pour le cours DévProdMéd enseigné à la HEIG-VD,
+  Suisse'
+lang: 'fr'
+url: 'https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/presentation.html'
+header: '[**Vues, Blade et Tailwind CSS**][contenu-complet-sur-github]'
 footer:
-  "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
+  '[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
   2025-2026](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
-  - [CC BY-SA 4.0][licence]"
+  - [CC BY-SA 4.0][licence]'
 headingDivider: 6
 ---
 
@@ -48,14 +48,104 @@ document._
 
 ## Objectifs
 
-- Objectif 1.
-- Objectif 2.
-- ...
-- Objectif n.
+- Décrire la partie "vue" du patron de conception MVC.
+- Décrire le concept de moteur de template et son intérêt.
+- Utiliser Blade pour créer des vues dans une application Laravel.
+- Utiliser les directives de Blade pour structurer les vues et afficher des
+  données.
+- Utiliser Blade pour créer des layouts réutilisables.
+- Utiliser les slots (par défaut et nommés) pour passer du contenu aux
+  composants.
+- Utiliser Blade pour créer des composants réutilisables.
+- Utiliser les layouts et les composants Blade pour structurer une application
+  Laravel.
+- Installer et configurer des dépendances externes avec Composer.
+- Mettre en place l'internationalisation (i18n) dans une application Laravel.
+- Utiliser les fichiers de traduction pour supporter plusieurs langues.
+- Utiliser les variables d'environnement pour adapter l'application.
+- Décrire la différence entre du CSS "classique" et un framework CSS utilitaire
+  comme Tailwind CSS.
+- Utiliser Tailwind CSS pour styliser les interfaces utilisateur.
 
 ![bg right:40%][illustration-objectifs]
 
----
+## Introduction aux vues dans le patron MVC
+
+## Les moteurs de templates
+
+## Blade : le moteur de templates de Laravel
+
+### Lien avec les routes
+
+### Passage et affichage de données
+
+### Syntaxe de base et directives
+
+### Création de vues avec Artisan
+
+## Layout Blade
+
+### Approche avec les composants
+
+### Structure d'un layout
+
+### Utilisation du layout
+
+## Slots par défaut et slots nommés
+
+## Composants Blade
+
+### Création d'un composant
+
+### Vue du composant
+
+### Classe du composant
+
+### Utilisation du composant et passage de propriétés
+
+### Passer des variables à des composants
+
+## Internationalisation (i18n)
+
+### Pourquoi l'internationalisation est importante
+
+### Vocabulaire
+
+### Configuration de la locale
+
+### Fichiers de traduction
+
+### Utilisation des traductions dans les vues
+
+### Traductions au pluriel
+
+## Gestion des dépendances avec Composer
+
+### Installation d'une dépendance
+
+### Librairie `laravel-lang/lang`
+
+## Variables d'environnement
+
+### Le fichier `.env`
+
+### Le fichier `.env.example`
+
+### Bonnes pratiques
+
+## Tailwind CSS
+
+### Approche CSS classique
+
+### Approche avec Tailwind CSS
+
+### Comparaison
+
+### Intégration avec Laravel et Vite
+
+### Aller plus loin avec Tailwind CSS
+
+## Conclusion
 
 ## Questions
 

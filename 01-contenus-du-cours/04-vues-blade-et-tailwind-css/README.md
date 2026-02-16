@@ -74,36 +74,41 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [Introduction aux vues dans le patron MVC](#introduction-aux-vues-dans-le-patron-mvc)
-  - [Le rôle des vues dans MVC](#le-rôle-des-vues-dans-mvc)
-  - [Séparation des responsabilités](#séparation-des-responsabilités)
 - [Les moteurs de templates](#les-moteurs-de-templates)
-  - [Problématique du PHP dans le HTML](#problématique-du-php-dans-le-html)
-  - [Avantages d'un moteur de template](#avantages-dun-moteur-de-template)
 - [Blade : le moteur de templates de Laravel](#blade--le-moteur-de-templates-de-laravel)
-  - [Caractéristiques principales](#caractéristiques-principales)
-  - [Syntaxe de base et directives](#syntaxe-de-base-et-directives)
   - [Lien avec les routes](#lien-avec-les-routes)
   - [Passage et affichage de données](#passage-et-affichage-de-données)
-  - [Appel de fonctions](#appel-de-fonctions)
-  - [Structures de contrôle](#structures-de-contrôle)
-  - [Documentation officielle sur les directives](#documentation-officielle-sur-les-directives)
+  - [Syntaxe de base et directives](#syntaxe-de-base-et-directives)
   - [Création de vues avec Artisan](#création-de-vues-avec-artisan)
-- [Layouts et composants Blade](#layouts-et-composants-blade)
-  - [Création de layouts réutilisables](#création-de-layouts-réutilisables)
-  - [Slots par défaut et slots nommés](#slots-par-défaut-et-slots-nommés)
-  - [Composants Blade](#composants-blade)
+- [Layout Blade](#layout-blade)
+  - [Approche avec les composants](#approche-avec-les-composants)
+  - [Structure d'un layout](#structure-dun-layout)
+  - [Utilisation du layout](#utilisation-du-layout)
+- [Slots par défaut et slots nommés](#slots-par-défaut-et-slots-nommés)
+- [Composants Blade](#composants-blade)
+  - [Création d'un composant](#création-dun-composant)
+  - [Vue du composant](#vue-du-composant)
+  - [Classe du composant](#classe-du-composant)
+  - [Utilisation du composant et passage de propriétés](#utilisation-du-composant-et-passage-de-propriétés)
+  - [Passer des variables à des composants](#passer-des-variables-à-des-composants)
 - [Internationalisation (i18n)](#internationalisation-i18n)
-  - [Concepts de l'internationalisation](#concepts-de-linternationalisation)
+  - [Pourquoi l'internationalisation est importante](#pourquoi-linternationalisation-est-importante)
+  - [Vocabulaire](#vocabulaire)
   - [Configuration de la locale](#configuration-de-la-locale)
   - [Fichiers de traduction](#fichiers-de-traduction)
   - [Utilisation des traductions dans les vues](#utilisation-des-traductions-dans-les-vues)
-  - [Gestion des dépendances avec Composer](#gestion-des-dépendances-avec-composer)
+  - [Traductions au pluriel](#traductions-au-pluriel)
+- [Gestion des dépendances avec Composer](#gestion-des-dépendances-avec-composer)
+  - [Installation d'une dépendance](#installation-dune-dépendance)
+  - [Librairie `laravel-lang/lang`](#librairie-laravel-langlang)
 - [Variables d'environnement](#variables-denvironnement)
   - [Le fichier `.env`](#le-fichier-env)
   - [Le fichier `.env.example`](#le-fichier-envexample)
-  - [Accès aux variables d'environnement](#accès-aux-variables-denvironnement)
+  - [Bonnes pratiques](#bonnes-pratiques)
 - [Tailwind CSS](#tailwind-css)
-  - [CSS classique vs frameworks CSS utilitaires](#css-classique-vs-frameworks-css-utilitaires)
+  - [Approche CSS classique](#approche-css-classique)
+  - [Approche avec Tailwind CSS](#approche-avec-tailwind-css)
+  - [Comparaison](#comparaison)
   - [Intégration avec Laravel et Vite](#intégration-avec-laravel-et-vite)
   - [Aller plus loin avec Tailwind CSS](#aller-plus-loin-avec-tailwind-css)
 - [Conclusion](#conclusion)
@@ -151,8 +156,6 @@ l'application. Dans cette séance, nous allons nous concentrer sur les vues
 (View), qui sont responsables de la présentation des données à la personne qui
 utilise l'application.
 
-### Le rôle des vues dans MVC
-
 Dans le patron MVC, les vues ont pour responsabilité de :
 
 - Afficher les données fournies par les contrôleurs (que nous verrons plus en
@@ -165,8 +168,6 @@ Dans le patron MVC, les vues ont pour responsabilité de :
 Les vues ne doivent pas accéder directement à la base de données ni effectuer de
 calculs complexes. Elles reçoivent des données déjà préparées et se contentent
 de les afficher de manière appropriée.
-
-### Séparation des responsabilités
 
 Cette séparation entre la logique métier (modèles), la logique de présentation
 (vues) et la logique de contrôle (contrôleurs) offre plusieurs avantages :
@@ -187,8 +188,6 @@ template Blade.
 
 Un moteur de template (template engine) est un outil qui permet de générer du
 contenu HTML dynamique en combinant des données avec des templates prédéfinis.
-
-### Problématique du PHP dans le HTML
 
 Sans moteur de template, il faudrait mélanger du code PHP directement dans le
 HTML, ce qui peut rapidement devenir difficile à maintenir :
@@ -224,8 +223,6 @@ Ce code fonctionne, mais il présente plusieurs problèmes :
 - Difficulté à distinguer le code PHP du HTML.
 - Pas de réutilisation facile de structures communes (en-tête, pied de page).
 
-### Avantages d'un moteur de template
-
 Un moteur de template moderne comme Blade résout ces problèmes en offrant :
 
 - **Syntaxe concise** : des directives courtes et expressives pour les
@@ -258,7 +255,7 @@ besoins courants du développement web.
 Blade est le moteur de template puissant et élégant inclus avec Laravel. Il
 permet de créer des vues dynamiques tout en gardant le code propre et lisible.
 
-### Caractéristiques principales
+Les caractéristiques principales de Blade incluent :
 
 - Les fichiers Blade utilisent l'extension `.blade.php`.
 - Blade ne vous empêche pas d'utiliser du PHP pur dans vos vues si nécessaire.
@@ -266,46 +263,6 @@ permet de créer des vues dynamiques tout en gardant le code propre et lisible.
   meilleures performances.
 - Blade offre des directives simples pour les opérations courantes (boucles,
   conditions, etc.).
-
-### Syntaxe de base et directives
-
-Blade utilise une syntaxe claire et concise pour afficher des données et
-structurer les templates.
-
-#### Affichage de données
-
-Pour afficher des données, Blade utilise la syntaxe `{{ }}` :
-
-```php
-<h1>{{ $title }}</h1>
-<p>Bienvenue, {{ $user->name }} !</p>
-```
-
-Cette syntaxe échappe automatiquement les données pour prévenir les attaques XSS
-(Cross-Site Scripting). C'est équivalent à utiliser `htmlspecialchars()` en PHP
-pur.
-
-##### Commentaires
-
-Les commentaires Blade ne sont pas inclus dans le HTML généré :
-
-```php
-{{-- Ceci est un commentaire Blade qui ne sera pas visible dans le HTML --}}
-```
-
-##### Directives PHP
-
-Blade offre aussi une directive pour exécuter du PHP brut si nécessaire :
-
-```php
-@php
-    $counter = 0;
-    $total = count($items);
-@endphp
-```
-
-Cependant, il est généralement préférable d'effectuer ces opérations dans les
-contrôleurs plutôt que dans les vues.
 
 ### Lien avec les routes
 
@@ -354,13 +311,32 @@ Il est ensuite possible d'afficher ces données dans la vue Blade correspondante
 ```php
 <h1>{{ $title }}</h1>
 
-<div class="profile">
+<div>
     <p>Nom : {{ $user->name }}</p>
     <p>Email : {{ $user->email }}</p>
 </div>
 ```
 
-### Appel de fonctions
+### Syntaxe de base et directives
+
+Blade utilise une syntaxe claire et concise pour afficher des données et
+structurer les templates et propose plusieurs directives (= fonctions) pour les
+opérations courantes.
+
+#### Affichage de données
+
+Pour afficher des données, Blade utilise la syntaxe `{{ }}` :
+
+```php
+<h1>{{ $title }}</h1>
+<p>Bienvenue, {{ $user->name }} !</p>
+```
+
+Cette syntaxe échappe automatiquement les données pour prévenir les attaques XSS
+(Cross-Site Scripting). C'est équivalent à utiliser `htmlspecialchars()` en PHP
+pur.
+
+#### Appel de fonctions
 
 Vous pouvez appeler des fonctions PHP et des méthodes d'objets directement dans
 les templates Blade :
@@ -371,11 +347,9 @@ les templates Blade :
 <p>Nom en majuscules : {{ strtoupper($user->name) }}</p>
 ```
 
-### Structures de contrôle
+#### Structures de contrôle
 
 Blade offre des directives élégantes pour les structures de contrôle courantes.
-
-#### Conditions
 
 ```php
 @if ($user->isAdmin())
@@ -386,28 +360,6 @@ Blade offre des directives élégantes pour les structures de contrôle courante
     <p>Vous êtes un utilisateur standard.</p>
 @endif
 ```
-
-Blade offre aussi des directives raccourcies pour les cas courants :
-
-```php
-@auth
-    <p>Vous êtes connecté.</p>
-@endauth
-
-@guest
-    <p>Veuillez vous connecter.</p>
-@endguest
-
-@isset($user)
-    <p>La variable user existe.</p>
-@endisset
-
-@empty($posts)
-    <p>Aucun post disponible.</p>
-@endempty
-```
-
-#### Boucles
 
 ```php
 @foreach ($posts as $post)
@@ -439,22 +391,6 @@ Blade offre aussi d'autres types de boucles :
 La directive `@forelse` est particulièrement utile car elle combine une boucle
 `foreach` avec une gestion du cas où la collection est vide.
 
-#### Variable `$loop`
-
-Dans les boucles `@foreach` et `@forelse`, Blade met à disposition une variable
-`$loop` qui contient des informations utiles sur l'itération en cours :
-
-```php
-@foreach ($posts as $post)
-    <article class="@if($loop->first) first @endif @if($loop->last) last @endif">
-        <h2>{{ $post->title }}</h2>
-        <p>Post {{ $loop->iteration }} sur {{ $loop->count }}</p>
-    </article>
-@endforeach
-```
-
-### Documentation officielle sur les directives
-
 La documentation officielle de Laravel offre une liste extrêmement complète des
 directives Blade disponibles, que vous pouvez consulter à l'adresse suivante :
 <https://laravel.com/docs/12.x/blade#blade-directives>.
@@ -482,17 +418,15 @@ php artisan make:view users.profile
 
 Cela créera le fichier `resources/views/users/profile.blade.php`.
 
-## Layouts et composants Blade
+## Layout Blade
 
-Les layouts et les composants permettent de créer des structures réutilisables
-pour éviter la duplication de code et faciliter la maintenance.
-
-### Création de layouts réutilisables
+Les layouts permettent de créer des structures réutilisables pour éviter la
+duplication de code et faciliter la maintenance.
 
 Un layout définit la structure de base d'une page (HTML, head, body, navigation,
 footer) qui peut être réutilisée sur plusieurs pages.
 
-#### Approche avec les composants
+### Approche avec les composants
 
 Laravel recommande d'utiliser des composants Blade pour créer des layouts. Un
 composant de layout est créé avec la commande Artisan :
@@ -506,7 +440,7 @@ Cette commande crée deux fichiers :
 - `app/View/Components/DefaultLayout.php` : la classe du composant.
 - `resources/views/components/default-layout.blade.php` : la vue du composant.
 
-#### Structure d'un layout
+### Structure d'un layout
 
 Voici un exemple de layout de base :
 
@@ -549,7 +483,7 @@ Voici un exemple de layout de base :
 La variable `{{ $slot }}` représente l'endroit où le contenu spécifique à chaque
 page sera inséré.
 
-#### Utilisation du layout
+### Utilisation du layout
 
 Pour utiliser ce layout dans une vue, vous utilisez le composant avec la syntaxe
 `<x-nom-du-composant>` :
@@ -564,11 +498,9 @@ Pour utiliser ce layout dans une vue, vous utilisez le composant avec la syntaxe
 Le contenu entre les balises du composant sera automatiquement inséré à
 l'emplacement de `{{ $slot }}` dans le layout.
 
-### Slots par défaut et slots nommés
+## Slots par défaut et slots nommés
 
-Les slots permettent de passer du contenu aux composants.
-
-#### Slot par défaut
+Les slots permettent de passer du contenu aux layouts ou aux composants.
 
 Le slot par défaut est représenté par `{{ $slot }}` dans le composant et reçoit
 tout le contenu entre les balises du composant :
@@ -579,29 +511,27 @@ tout le contenu entre les balises du composant :
 </x-card>
 ```
 
-#### Slots nommés
-
 Pour passer plusieurs sections de contenu à un composant, utilisez des slots
 nommés :
 
 ```php
-{{-- Composant card --}}
-<div class="card">
-    <div class="card-header">
+<article>
+    <header>
         {{ $header }}
-    </div>
-    <div class="card-body">
+    </header>
+    <div>
         {{ $slot }}
     </div>
     @isset($footer)
-        <div class="card-footer">
+        <footer>
             {{ $footer }}
-        </div>
+        </footer>
     @endisset
-</div>
+</article>
 ```
 
-#### Utilisation avec slots nommés
+Afin d'utiliser les slots nommés, vous devez les définir lors de l'utilisation
+du composant en utilisant la syntaxe `<x-slot:nom>` :
 
 ```php
 <x-card>
@@ -620,12 +550,12 @@ nommés :
 Les slots nommés utilisent la syntaxe `<x-slot:nom>` pour être définis lors de
 l'utilisation du composant.
 
-### Composants Blade
+## Composants Blade
 
 Les composants Blade sont des éléments d'interface réutilisables qui peuvent
 être utilisés dans plusieurs vues.
 
-#### Création d'un composant
+### Création d'un composant
 
 ```bash
 php artisan make:component Alert
@@ -638,7 +568,7 @@ Cela crée :
 
 Ces deux fichiers représentent respectivement la classe du composant et sa vue.
 
-#### Vue du composant
+### Vue du composant
 
 Exemple de composant d'alerte (`resources/views/components/alert.blade.php`) :
 
@@ -651,7 +581,7 @@ Exemple de composant d'alerte (`resources/views/components/alert.blade.php`) :
 Ce fichier définit la structure HTML de l'alerte, avec une classe dynamique
 basée sur la propriété `type` et un slot pour le contenu de l'alerte.
 
-#### Classe du composant
+### Classe du composant
 
 La classe permet de définir les propriétés acceptées par le composant
 (`app/View/Components/Alert.php`) :
@@ -680,7 +610,7 @@ class Alert extends Component
 Ce fichier définit une classe `Alert` qui accepte une propriété `type` avec une
 valeur par défaut de `info`.
 
-#### Utilisation du composant
+### Utilisation du composant et passage de propriétés
 
 Le fait d'avoir déclaré `public string $type` dans le constructeur du composant
 permet de passer une propriété `type` lors de l'utilisation du composant, qui
@@ -696,7 +626,7 @@ sera ensuite disponible dans la vue du composant :
 </x-alert>
 ```
 
-#### Passage de multiples propriétés
+### Passer des variables à des composants
 
 Les composants peuvent recevoir des données via leurs attributs. Par exemple,
 pour un composant de carte de post, vous pourriez avoir une classe comme
@@ -729,12 +659,12 @@ La vue associée (`resources/views/components/post-card.blade.php`) pourrait
 ressembler à ceci :
 
 ```php
-<article class="post-card">
+<article>
     <h2>{{ $post->title }}</h2>
-    <div class="content">{{ $post->content }}</div>
+    <div>{{ $post->content }}</div>
 
     @if ($showAuthor)
-        <p class="author">Par {{ $post->user->name }}</p>
+        <p>Par {{ $post->user->name }}</p>
     @endif
 </article>
 ```
@@ -759,9 +689,7 @@ et le `n` de _"internationalization"_) est le processus de conception d'une
 application pour qu'elle puisse être facilement adaptée à différentes langues et
 régions.
 
-### Concepts de l'internationalisation
-
-#### Pourquoi l'internationalisation est importante
+### Pourquoi l'internationalisation est importante
 
 Même si votre application n'est initialement destinée qu'à une seule langue, il
 est recommandé de mettre en place l'internationalisation dès le début du
@@ -772,7 +700,7 @@ développement pour plusieurs raisons :
 - **Professionnalisme** : sépare clairement le code de la présentation.
 - **Réutilisabilité** : permet de changer tous les textes sans toucher au code.
 
-#### Vocabulaire
+### Vocabulaire
 
 - **Locale** : code identifiant une langue et éventuellement une région (ex :
   `fr` pour français, `fr_CH` pour français de Suisse, `en_US` pour anglais
@@ -858,8 +786,6 @@ meilleure structure.
 
 ### Utilisation des traductions dans les vues
 
-#### Fonction `__()` (underscore double)
-
 La fonction `__()` (ou son alias `trans()`) permet de récupérer une traduction :
 
 ```php
@@ -873,15 +799,7 @@ traduction : `fichier.clé.sous-clé`.
 Les paramètres sont passés dans un tableau associatif et référencés dans la
 traduction avec la syntaxe `:nom`.
 
-#### Directive `@lang`
-
-La directive `@lang` est une alternative à la fonction `__()` :
-
-```php
-<h1>@lang('ui.home.title')</h1>
-```
-
-#### Traductions au pluriel
+### Traductions au pluriel
 
 Laravel gère automatiquement les formes plurielles avec `trans_choice()` :
 
@@ -900,12 +818,14 @@ Laravel choisira automatiquement la forme appropriée selon le nombre fourni.
 Ici, une expression régulière est utilisée pour gérer les cas de 0, 1 et 2 ou
 plus.
 
-### Gestion des dépendances avec Composer
+## Gestion des dépendances avec Composer
 
 Composer est le gestionnaire de dépendances de PHP, similaire à npm pour
-JavaScript ou pip pour Python.
+JavaScript ou pip pour Python. Nous pouvons l'utiliser pour installer des
+librairies externes qui facilitent le développement de notre application, tel
+que la gestion de l'internationalisation.
 
-#### Installation d'une dépendance
+### Installation d'une dépendance
 
 Pour installer une librairie externe, utilisez la commande `composer require` :
 
@@ -916,8 +836,6 @@ composer require laravel-lang/lang --dev
 L'option `--dev` indique que cette dépendance est uniquement nécessaire en
 développement et ne sera pas installée en production.
 
-#### Fichiers de Composer
-
 Pour rappel, les fichiers liés à Composer sont les suivants :
 
 - `composer.json` : liste les dépendances du projet et leurs versions.
@@ -925,7 +843,7 @@ Pour rappel, les fichiers liés à Composer sont les suivants :
   reproductibilité.
 - `vendor/` : répertoire contenant toutes les dépendances installées.
 
-#### Librairie `laravel-lang/lang`
+### Librairie `laravel-lang/lang`
 
 La librairie [`laravel-lang/lang`](https://laravel-lang.com/packages-lang.html)
 fournit des traductions prêtes à l'emploi pour Laravel dans plus de 80 langues :
@@ -969,22 +887,12 @@ APP_FALLBACK_LOCALE=fr
 APP_FAKER_LOCALE=fr_FR
 ```
 
-#### Caractéristiques importantes
-
 - Ce fichier n'est **jamais** ajouté dans Git (il est dans le fichier
   `.gitignore`).
 - Chaque personne qui développe a son propre fichier `.env` avec ses
   configurations locales.
 - Les valeurs sensibles (clés API, mots de passe) doivent rester dans ce fichier
   et ne jamais être versionnées.
-
-#### Types de variables courantes
-
-- `APP_*` : configuration de l'application (nom, environnement, debug, locale).
-- `DB_*` : configuration de la base de données.
-- `MAIL_*` : configuration de l'envoi d'emails.
-- `CACHE_*` : configuration du cache.
-- `SESSION_*` : configuration des sessions.
 
 ### Le fichier `.env.example`
 
@@ -1005,7 +913,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-#### Rôle du fichier `.env.example`
+Le rôle de ce fichier est de :
 
 - Documenter toutes les variables d'environnement nécessaires au projet.
 - Fournir des valeurs par défaut ou des exemples pour chaque variable.
@@ -1015,7 +923,7 @@ DB_PASSWORD=
 Lorsqu'une nouvelle personne clone le projet, elle doit copier `.env.example`
 vers `.env` et adapter les valeurs à son environnement local.
 
-#### Bonnes pratiques
+### Bonnes pratiques
 
 - Mettez à jour `.env.example` chaque fois que vous ajoutez une nouvelle
   variable d'environnement dans votre `.env`.
@@ -1023,61 +931,13 @@ vers `.env` et adapter les valeurs à son environnement local.
   sensibles réelles.
 - Documentez les variables avec des commentaires si nécessaire.
 
-### Accès aux variables d'environnement
-
-#### Fonction `env()`
-
-La fonction `env()` permet d'accéder aux variables d'environnement :
-
-```php
-$appName = env('APP_NAME', 'Laravel');
-$debug = env('APP_DEBUG', false);
-```
-
-Le deuxième paramètre est la valeur par défaut si la variable n'existe pas.
-
-> [!IMPORTANT]
->
-> N'utilisez la fonction `env()` que dans les fichiers de configuration
-> (`config/*.php`). Dans le reste de l'application, utilisez plutôt la fonction
-> `config()` pour accéder aux configurations.
-
-#### Fonction `config()`
-
-Les variables d'environnement sont généralement lues dans les fichiers de
-configuration et ensuite accessibles via `config()` :
-
-```php
-// Dans config/app.php
-'name' => env('APP_NAME', 'Laravel'),
-
-// Dans votre code
-$appName = config('app.name');
-```
-
-Cette approche permet de :
-
-- Mettre en cache les configurations pour de meilleures performances.
-- Centraliser la gestion des valeurs par défaut.
-
-#### Dans les vues Blade
-
-Vous pouvez accéder aux configurations directement dans les vues :
-
-```php
-<title>{{ config('app.name') }}</title>
-<p>Version : {{ config('app.version', '1.0.0') }}</p>
-```
-
 ## Tailwind CSS
 
 Tailwind CSS est un framework CSS utilitaire qui permet de construire des
 interfaces modernes rapidement en utilisant des classes CSS prédéfinies
 directement dans le HTML.
 
-### CSS classique vs frameworks CSS utilitaires
-
-#### Approche CSS classique
+### Approche CSS classique
 
 Avec du CSS classique, vous écrivez des règles CSS personnalisées pour styliser
 vos éléments :
@@ -1109,7 +969,7 @@ vos éléments :
 }
 ```
 
-#### Approche avec Tailwind CSS
+### Approche avec Tailwind CSS
 
 Avec Tailwind, vous utilisez des classes utilitaires directement dans le HTML :
 
@@ -1120,7 +980,7 @@ Avec Tailwind, vous utilisez des classes utilitaires directement dans le HTML :
 </div>
 ```
 
-#### Comparaison
+### Comparaison
 
 Nous n'allons pas aller trop dans les détails de Tailwind CSS dans ce cours,
 mais voici un tableau comparatif des deux approches :
@@ -1153,16 +1013,6 @@ Vite offre également le hot module replacement (HMR) pour un rafraîchissement
 instantané des changements dans le navigateur, ce qui améliore considérablement
 l'expérience de développement.
 
-#### Configuration par défaut
-
-Lors de la création d'un nouveau projet Laravel, Tailwind CSS est déjà configuré
-par défaut. Les fichiers importants sont :
-
-- `resources/css/app.css` : point d'entrée CSS.
-- `vite.config.js` : configuration de Vite.
-
-#### Directive `@vite` dans les vues
-
 Pour inclure les assets compilés par Vite dans vos vues Blade :
 
 ```php
@@ -1179,6 +1029,10 @@ Pour inclure les assets compilés par Vite dans vos vues Blade :
 
 La directive `@vite` génère automatiquement les bonnes balises `<link>` et
 `<script>` pour charger les assets.
+
+Il n'est pas nécessaire d'apprendre les détails de Vite pour ce cours, mais il
+est important de comprendre que Vite est l'outil qui permet à Tailwind CSS de
+fonctionner efficacement dans Laravel.
 
 ### Aller plus loin avec Tailwind CSS
 
@@ -1206,11 +1060,7 @@ Tailwind génère automatiquement un fichier CSS minimal contenant uniquement le
 classes que vous utilisez réellement dans votre application, ce qui résulte en
 des fichiers CSS très légers en production.
 
-#### Classes utilitaires de base
-
-Voici un aperçu des classes utilitaires les plus courantes dans Tailwind.
-
-##### Layout et espacement
+#### Layout et espacement
 
 ```html
 <!-- Display -->
@@ -1237,7 +1087,7 @@ Voici un aperçu des classes utilitaires les plus courantes dans Tailwind.
 <!-- 50% width, 16rem height -->
 ```
 
-##### Typographie
+#### Typographie
 
 ```html
 <!-- Taille de texte -->
@@ -1258,7 +1108,7 @@ Voici un aperçu des classes utilitaires les plus courantes dans Tailwind.
 <p class="text-right">Aligné à droite</p>
 ```
 
-##### Couleurs
+#### Couleurs
 
 ```html
 <!-- Couleur de texte -->
@@ -1278,7 +1128,7 @@ Voici un aperçu des classes utilitaires les plus courantes dans Tailwind.
 Les couleurs vont de 50 (très clair) à 950 (très foncé) pour la plupart des
 teintes.
 
-##### Bordures et arrondis
+#### Bordures et arrondis
 
 ```html
 <!-- Bordures -->
@@ -1292,7 +1142,7 @@ teintes.
 <div class="rounded-full">Complètement rond (cercle)</div>
 ```
 
-##### Ombres
+#### Ombres
 
 ```html
 <div class="shadow-sm">Ombre légère</div>
@@ -1300,9 +1150,7 @@ teintes.
 <div class="shadow-lg">Ombre prononcée</div>
 ```
 
-#### Responsive design et dark mode
-
-##### Responsive design
+#### Responsive design
 
 Tailwind utilise des préfixes pour appliquer des styles à différentes tailles
 d'écran :
@@ -1318,7 +1166,7 @@ d'écran :
 <h1 class="text-2xl md:text-4xl lg:text-5xl">Titre responsive</h1>
 ```
 
-##### Dark mode
+#### Dark mode
 
 Tailwind facilite l'implémentation du mode sombre avec le préfixe `dark:` :
 
