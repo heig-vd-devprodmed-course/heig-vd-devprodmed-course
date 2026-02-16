@@ -240,7 +240,7 @@ et
 
 **Vous pouvez utiliser tous les outils que vous souhaitez** (notes personnelles,
 Internet, outils d'IA, etc.), **sauf pendant les évaluations** (sauf mention
-contraire). Vous pouvez les utiliser dans la vie réelle ; ça serait utopique de
+contraire). Vous pouvez les utiliser dans la vie réelle ; il serait utopique de
 ma part de vous en priver.
 
 Cependant, d'après mon expérience, **ces outils ne sont pas suffisamment
@@ -263,7 +263,7 @@ Une excellente vidéo sur le sujet :
 
 ## _"Qu'en est-il de ChatGPT, etc. ?"_ (3)
 
-Quelques règles concernant l'utilisation de ces outils :
+Quelques règles concernant l'utilisation de ces outils pour vos rendus :
 
 - Vous **devez indiquer quand, pourquoi et comment vous avez utilisé une aide
   externe** (la raison, outils, sources, etc.), **soit dans le code, soit dans
@@ -298,7 +298,7 @@ Quelques règles concernant l'utilisation de ces outils :
 concepts** que vous saurez utiliser efficacement les outils à disposition (AI ou
 autre) et **que vous pourrez vous démarquer des autres**.
 
-A titre personnel, je pense qu'une personne issue du monde de l'ingénierie ne
+À titre personnel, je pense qu'une personne issue du monde de l'ingénierie ne
 fait bien son travail que si elle le remet en question.
 
 ---
@@ -320,6 +320,7 @@ _paginate: false
 ## Bibliographie et ressources utilisées
 
 - <https://laravel.com/docs>
+- <https://tailwindcss.com/docs>
 
 ![bg right:40%][illustration-bibliographie-et-ressources]
 

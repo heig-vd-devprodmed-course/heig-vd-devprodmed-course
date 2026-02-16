@@ -762,7 +762,7 @@ seeders :
 php artisan migrate:fresh --seed
 ```
 
-## Le modèle dans le patron de conception MVC
+## Introduction au modèle dans le patron de conception MVC
 
 Un patron de conception (_"design pattern"_ en anglais) est une solution
 réutilisable à un problème de conception courant. Le patron MVC est largement

@@ -1,9 +1,14 @@
 ---
 description: Instructions when working with Markdown files in this repository.
-applyTo: "**/*.md"
+applyTo: '**/*.md'
 ---
 
 # Markdown guidelines
+
+## General guidelines
+
+- Use gender-neutral language (_"language épicène"_ in French, e.g., "la
+  personne qui étudie", "la personne qui utilise le service").
 
 ## General formatting
 

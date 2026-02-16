@@ -169,7 +169,7 @@ et
 
 **Vous pouvez utiliser tous les outils que vous souhaitez** (notes personnelles,
 Internet, outils d'IA, etc.), **sauf pendant les évaluations** (sauf mention
-contraire). Vous pouvez les utiliser dans la vie réelle ; ça serait utopique de
+contraire). Vous pouvez les utiliser dans la vie réelle ; il serait utopique de
 ma part de vous en priver.
 
 Cependant, d'après mon expérience, **ces outils ne sont pas suffisamment
@@ -188,7 +188,7 @@ de vouloir utiliser une calculatrice.
 Une excellente vidéo sur le sujet :
 [_"La Fabrique à Idiots"_ - Micode](https://www.youtube.com/watch?v=4xq6bVbS-Pw).
 
-Quelques règles concernant l'utilisation de ces outils :
+Quelques règles concernant l'utilisation de ces outils pour vos rendus :
 
 - Vous **devez indiquer quand, pourquoi et comment vous avez utilisé une aide
   externe** (la raison, outils, sources, etc.), **soit dans le code, soit dans
@@ -213,7 +213,7 @@ Quelques règles concernant l'utilisation de ces outils :
 concepts** que vous saurez utiliser efficacement les outils à disposition (AI ou
 autre) et **que vous pourrez vous démarquer des autres**.
 
-A titre personnel, je pense qu'une personne issue du monde de l'ingénierie ne
+À titre personnel, je pense qu'une personne issue du monde de l'ingénierie ne
 fait bien son travail que si elle le remet en question.
 
 ## Bibliographie et ressources utilisées

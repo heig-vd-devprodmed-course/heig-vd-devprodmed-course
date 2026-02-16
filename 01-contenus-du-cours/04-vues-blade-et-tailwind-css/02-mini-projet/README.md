@@ -35,7 +35,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Pied de page](#pied-de-page)
   - [Ajouter les styles CSS avec Tailwind CSS](#ajouter-les-styles-css-avec-tailwind-css)
   - [Visualiser les résultats dans le navigateur](#visualiser-les-résultats-dans-le-navigateur-1)
-  - [Ajouter une icône pour le profile](#ajouter-une-icône-pour-le-profile)
+  - [Ajouter une icône pour le profil](#ajouter-une-icône-pour-le-profil)
   - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-1)
 - [Créer des vues pour les différentes pages](#créer-des-vues-pour-les-différentes-pages)
   - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-2)
@@ -59,7 +59,6 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
-- [afin de limiter le nombre de posts affichés par page.](#afin-de-limiter-le-nombre-de-posts-affichés-par-page)
 - [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
@@ -611,26 +610,26 @@ ajouter les balises HTML de base à notre layout commun :
 ```php
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-	<head>
-		<meta charset="utf-8" />
-		@isset($description)
-		<meta name="description" content="{{ $description }}" />
-		@endisset
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <meta charset="utf-8" />
+        @isset($description)
+        <meta name="description" content="{{ $description }}" />
+        @endisset
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		@isset($title)
-		<title>{{ $title }} - {{ config('app.name') }}</title>
-		@else
-		<title>{{ config('app.name') }}</title>
-		@endisset
+        @isset($title)
+        <title>{{ $title }} - {{ config('app.name') }}</title>
+        @else
+        <title>{{ config('app.name') }}</title>
+        @endisset
 
-		<!-- Styles / Scripts -->
-		@vite(['resources/css/app.css', 'resources/js/app.js'])
-	</head>
+        <!-- Styles / Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
 
-	<body>
-		<main>{{ $slot }}</main>
-	</body>
+    <body>
+        <main>{{ $slot }}</main>
+    </body>
 </html>
 ```
 
@@ -707,11 +706,12 @@ pour utiliser notre layout commun et afficher un message de test :
 
 ```php
 <x-default-layout>
-	<h1>Ceci est une vue de test</h1>
-	<p>
-		Si vous voyez ce message, cela signifie que le layout commun fonctionne
-		correctement !
-	</p>
+    <h1>Ceci est une vue de test</h1>
+
+    <p>
+        Si vous voyez ce message, cela signifie que le layout commun fonctionne
+        correctement !
+    </p>
 </x-default-layout>
 ```
 
@@ -788,6 +788,7 @@ page personnalisé (source :
     </x-slot>
 
     <h1>Ceci est une vue de test</h1>
+
     <p>
         Si vous voyez ce message, cela signifie que le layout commun fonctionne
         correctement !
@@ -842,35 +843,35 @@ de notre application de réseau social :
 ```php
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-	<head>
-		<meta charset="utf-8" />
-		@isset($description)
-		<meta name="description" content="{{ $description }}" />
-		@endisset
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <meta charset="utf-8" />
+        @isset($description)
+        <meta name="description" content="{{ $description }}" />
+        @endisset
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		@isset($title)
-		<title>{{ $title }} - {{ config('app.name') }}</title>
-		@else
-		<title>{{ config('app.name') }}</title>
-		@endisset
+        @isset($title)
+        <title>{{ $title }} - {{ config('app.name') }}</title>
+        @else
+        <title>{{ config('app.name') }}</title>
+        @endisset
 
-		<!-- Styles / Scripts -->
-		@vite(['resources/css/app.css', 'resources/js/app.js'])
-	</head>
+        <!-- Styles / Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
 
-	<body>
-		<header>
-			<nav>
-				<div>
-					<a href="{{ url('/') }}"> {{ config('app.name') }} </a>
-					<a href="{{ url('/profile') }}"> {{ __('ui.profile.title') }} </a>
-				</div>
-			</nav>
-		</header>
+    <body>
+        <header>
+            <nav>
+                <div>
+                    <a href="{{ url('/') }}"> {{ config('app.name') }} </a>
+                    <a href="{{ url('/profile') }}"> {{ __('ui.profile.title') }} </a>
+                </div>
+            </nav>
+        </header>
 
-		<main>{{ $slot }}</main>
-	</body>
+        <main>{{ $slot }}</main>
+    </body>
 </html>
 ```
 
@@ -908,44 +909,44 @@ informations de copyright et un lien vers la licence du projet :
 ```php
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-	<head>
-		<meta charset="utf-8" />
-		@isset($description)
-		<meta name="description" content="{{ $description }}" />
-		@endisset
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <meta charset="utf-8" />
+        @isset($description)
+        <meta name="description" content="{{ $description }}" />
+        @endisset
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		@isset($title)
-		<title>{{ $title }} - {{ config('app.name') }}</title>
-		@else
-		<title>{{ config('app.name') }}</title>
-		@endisset
+        @isset($title)
+        <title>{{ $title }} - {{ config('app.name') }}</title>
+        @else
+        <title>{{ config('app.name') }}</title>
+        @endisset
 
-		<!-- Styles / Scripts -->
-		@vite(['resources/css/app.css', 'resources/js/app.js'])
-	</head>
+        <!-- Styles / Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
 
-	<body>
-		<header>
-			<nav>
-				<div>
-					<a href="{{ url('/') }}"> {{ config('app.name') }} </a>
-					<a href="{{ url('/profile') }}"> {{ __('ui.profile.title') }} </a>
-				</div>
-			</nav>
-		</header>
+    <body>
+        <header>
+            <nav>
+                <div>
+                    <a href="{{ url('/') }}"> {{ config('app.name') }} </a>
+                    <a href="{{ url('/profile') }}"> {{ __('ui.profile.title') }} </a>
+                </div>
+            </nav>
+        </header>
 
-		<main>{{ $slot }}</main>
+        <main>{{ $slot }}</main>
 
-		<footer>
-			<div>
-				<div>
-					<p>{{ __('ui.about.copyright', ['year' => date('Y')]) }}</p>
-					<a href="{{ url('/about') }}"> {{ __('ui.about.title') }} </a>
-				</div>
-			</div>
-		</footer>
-	</body>
+        <footer>
+            <div>
+                <div>
+                    <p>{{ __('ui.about.copyright', ['year' => date('Y')]) }}</p>
+                    <a href="{{ url('/about') }}"> {{ __('ui.about.title') }} </a>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
 ```
 
@@ -1004,64 +1005,64 @@ améliorer l'apparence de notre application de réseau social :
 ```php
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-	<head>
-		<meta charset="utf-8" />
-		@isset($description)
-		<meta name="description" content="{{ $description }}" />
-		@endisset
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        <meta charset="utf-8" />
+        @isset($description)
+        <meta name="description" content="{{ $description }}" />
+        @endisset
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		@isset($title)
-		<title>{{ $title }} - {{ config('app.name') }}</title>
-		@else
-		<title>{{ config('app.name') }}</title>
-		@endisset
+        @isset($title)
+        <title>{{ $title }} - {{ config('app.name') }}</title>
+        @else
+        <title>{{ config('app.name') }}</title>
+        @endisset
 
-		<!-- Styles / Scripts -->
-		@vite(['resources/css/app.css', 'resources/js/app.js'])
-	</head>
+        <!-- Styles / Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
 
-	<body class="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-900">
-		<header class="bg-teal-600 text-white dark:bg-slate-800">
-			<nav class="container mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="h-16 flex items-center justify-between">
-					<a href="{{ url('/') }}" class="block hover:opacity-80 transition">
-						{{ config('app.name') }}
-					</a>
-					<a
-						href="{{ url('/profile') }}"
-						class="block hover:opacity-80 transition"
-					>
-						{{ __('ui.profile.title') }}
-					</a>
-				</div>
-			</nav>
-		</header>
+    <body class="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-900">
+        <header class="bg-teal-600 text-white dark:bg-slate-800">
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="h-16 flex items-center justify-between">
+                    <a href="{{ url('/') }}" class="block hover:opacity-80 transition">
+                        {{ config('app.name') }}
+                    </a>
+                    <a
+                        href="{{ url('/profile') }}"
+                        class="block hover:opacity-80 transition"
+                    >
+                        {{ __('ui.profile.title') }}
+                    </a>
+                </div>
+            </nav>
+        </header>
 
-		<main
-			class="container mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-grow dark:text-white max-w-2xl"
-		>
-			{{ $slot }}
-		</main>
+        <main
+            class="container mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-grow dark:text-white max-w-2xl"
+        >
+            {{ $slot }}
+        </main>
 
-		<footer class="bg-teal-600 text-white text-sm dark:bg-slate-800">
-			<div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
-				<div
-					class="h-16 flex flex-col items-center justify-between gap-4 sm:flex-row"
-				>
-					<p class="text-center sm:text-left">
-						{{ __('ui.about.copyright', ['year' => date('Y')]) }}
-					</p>
-					<a
-						href="{{ url('/about') }}"
-						class="block hover:opacity-80 transition"
-					>
-						{{ __('ui.about.title') }}
-					</a>
-				</div>
-			</div>
-		</footer>
-	</body>
+        <footer class="bg-teal-600 text-white text-sm dark:bg-slate-800">
+            <div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                <div
+                    class="h-16 flex flex-col items-center justify-between gap-4 sm:flex-row"
+                >
+                    <p class="text-center sm:text-left">
+                        {{ __('ui.about.copyright', ['year' => date('Y')]) }}
+                    </p>
+                    <a
+                        href="{{ url('/about') }}"
+                        class="block hover:opacity-80 transition"
+                    >
+                        {{ __('ui.about.title') }}
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
 ```
 
@@ -1131,7 +1132,7 @@ avec les outils de développement de votre navigateur), vous devriez voir que le
 couleurs de votre application s'adaptent en conséquence grâce à l'utilisation
 des classes de Tailwind CSS pour le dark mode.
 
-### Ajouter une icône pour le profile
+### Ajouter une icône pour le profil
 
 Vous pouvez également ajouter une icône pour le lien vers la page de profil dans
 le menu de navigation pour améliorer l'apparence de votre application.
@@ -1173,11 +1174,11 @@ pouvez faire cela dans votre layout commun :
 
 ```php
 <a href="{{ url('/profile') }}" class="block hover:opacity-80 transition">
-	<img
-		src="/icons/profile.svg"
-		alt="{{ __('ui.profile.title') }}"
-		class="h-8 w-8 rounded-full"
-	/>
+    <img
+        src="/icons/profile.svg"
+        alt="{{ __('ui.profile.title') }}"
+        class="h-8 w-8 rounded-full"
+    />
 </a>
 ```
 
@@ -1306,10 +1307,14 @@ pour utiliser notre layout commun et afficher des informations sur l'application
         {{ __('ui.about.description') }}
     </x-slot>
 
-    <h1 class="text-2xl font-bold">{{ __('ui.about.title') }}</h1>
+    <h1 class="text-2xl font-bold">
+    {{ __('ui.about.title') }}
+    </h1>
+
     <p class="mt-4">
         {{ __('ui.about.introduction') }}
     </p>
+
     <p class="mt-4">
         {{ __('ui.about.disclaimer') }}
     </p>
@@ -1419,7 +1424,10 @@ pour utiliser notre layout commun et afficher des informations sur l'application
         {{ __('ui.home.description') }}
     </x-slot>
 
-    <h1 class="text-2xl font-bold dark:text-white">{{ config('app.name') }}</h1>
+    <h1 class="text-2xl font-bold dark:text-white">
+        {{ config('app.name') }}
+    </h1>
+
     <p class="mt-4 dark:text-gray-300">
         {{ __('ui.home.introduction', ['app_name' => config('app.name')]) }}
     </p>
@@ -1564,7 +1572,9 @@ pour utiliser notre layout commun et afficher des informations sur l'application
         {{ __('ui.profile.description', ['username' => $user->username]) }}
     </x-slot>
 
-    <h1 class="text-2xl font-bold dark:text-white">{{ __('ui.profile.title', ['username' => $user->username]) }}</h1>
+    <h1 class="text-2xl font-bold dark:text-white">
+        {{ __('ui.profile.title', ['username' => $user->username]) }}
+    </h1>
 
     <p class="mt-4 dark:text-gray-300">
         {{ trans_choice('ui.profile.number_of_posts', count($posts)) }}
@@ -1652,22 +1662,23 @@ différentes vues de votre application.
 ### Créer le composant pour les posts
 
 Ouvrez votre terminal et utilisez la commande suivante pour créer un nouveau
-composant Blade appelé `Post` :
+composant Blade appelé `PostCard` :
 
 ```bash
-php artisan make:component Post
+php artisan make:component PostCard
 ```
 
 Le résultat de cette commande devrait être similaire à celui-ci :
 
 ```text
-   INFO  Component [app/View/Components/Post.php] created successfully.
-   INFO  View [resources/views/components/post.blade.php] created successfully.
+   INFO  Component [app/View/Components/PostCard.php] created successfully.
+   INFO  View [resources/views/components/post-card.blade.php] created successfully.
 ```
 
-Cette commande va créer deux fichiers : `app/View/Components/Post.php`, qui
-contient la classe du composant, et `resources/views/components/post.blade.php`,
-qui contient le template Blade du composant.
+Cette commande va créer deux fichiers : `app/View/Components/PostCard.php`, qui
+contient la classe du composant, et
+`resources/views/components/post-card.blade.php`, qui contient le template Blade
+du composant.
 
 ### Définir la vue du composant pour les posts
 
@@ -1675,7 +1686,7 @@ Les composants Blade sont composés de deux parties : la classe du composant, qu
 contient la logique du composant, et le template Blade du composant, qui
 contient le code HTML pour afficher le composant. Nous allons commencer par
 définir le template Blade du composant pour les posts dans le fichier
-`resources/views/components/post.blade.php` comme suit :
+`resources/views/components/post-card.blade.php` comme suit :
 
 > [!NOTE]
 >
@@ -1764,27 +1775,27 @@ composant Blade en utilisant des slots ou en passant des variables directement
 au composant. Dans ce cas, nous allons passer les données du post directement au
 composant en utilisant des variables.
 
-Pour cela, nous allons modifier le fichier `app/View/Components/Post.php` pour
-définir les propriétés du composant et le constructeur qui permettra de passer
-les données du post au composant. Voici comment vous pouvez faire cela :
+Pour cela, nous allons modifier le fichier `app/View/Components/PostCard.php`
+pour définir les propriétés du composant et le constructeur qui permettra de
+passer les données du post au composant. Voici comment vous pouvez faire cela :
 
 ```php
 <?php
 
 namespace App\View\Components;
 
-use App\Models\Post as PostModel;
+use App\Models\Post;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Post extends Component
+class PostCard extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public PostModel $post,
+        public Post $post,
     ) {
         //
     }
@@ -1794,21 +1805,15 @@ class Post extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.post');
+        return view('components.post-card');
     }
 }
 ```
 
 Nous avons défini une propriété publique `$post` dans la classe du composant,
-qui est de type `PostModel`. Le constructeur du composant prend un argument
-`$post` et l'assigne à la propriété du composant, ce qui nous permet de passer
-les données du post au composant lorsque nous l'utilisons dans nos vues.
-
-Pour éviter un conflit entre le nom de la classe du composant `Post` et le
-modèle `Post`, nous avons importé le modèle `Post` avec un alias `PostModel` en
-utilisant la syntaxe `use App\Models\Post as PostModel;`. Cela nous permet
-d'utiliser le nom `Post` pour la classe du composant et le nom `PostModel` pour
-le modèle, ce qui évite les conflits de noms dans notre code.
+qui est de type `Post`. Le constructeur du composant prend un argument `$post`
+et l'assigne à la propriété du composant, ce qui nous permet de passer les
+données du post au composant lorsque nous l'utilisons dans nos vues.
 
 Le simple fait de définir la propriété `$post` dans la classe du composant et de
 l'initialiser dans le constructeur nous permet de passer les données du post au
@@ -1816,7 +1821,21 @@ composant de manière simple et efficace, ce qui nous permet d'afficher les
 informations sur chaque post dans le template Blade du composant que nous avons
 défini précédemment.
 
-Vous pourriez appliquer la même approche pour passer d'autres données au layout commun que nous avons créé précédemment, par exemple pour le titre de la page, la description de la page, ou d'autres informations spécifiques à chaque page. Cela vous permettrait de rendre votre layout commun encore plus simple à utiliser et à personnaliser pour les différentes pages de votre application.
+Vous pourriez appliquer la même approche pour passer d'autres données au layout
+commun que nous avons créé précédemment, par exemple pour le titre de la page,
+la description de la page, ou d'autres informations spécifiques à chaque page,
+par exemple :
+
+```php
+<x-default-layout :title="__('ui.home.title')" :description="__('ui.home.description')">
+
+// ...
+
+</x-default-layout>
+```
+
+Cela vous permettrait de rendre votre layout commun encore plus simple à
+utiliser et à personnaliser pour les différentes pages de votre application.
 
 ### Passer les données au composant pour les posts
 
@@ -1825,29 +1844,29 @@ nous avons défini le template Blade du composant, nous pouvons utiliser ce
 composant dans nos vues pour afficher les posts de manière réutilisable.
 
 Ouvrez le fichier `resources/views/home.blade.php` et remplacez le code qui
-affiche les posts par l'utilisation du composant `x-post` que nous avons créé,
-en passant les données du post au composant. Voici comment vous pouvez faire
-cela :
+affiche les posts par l'utilisation du composant `x-post-card` que nous avons
+créé, en passant les données du post au composant. Voici comment vous pouvez
+faire cela :
 
 ```php
 @foreach ($posts as $post)
-    <x-post :post="$post" />
+    <x-post-card :post="$post" />
 @endforeach
 ```
 
 Nous utilisons la syntaxe `:post="$post"` pour passer la variable `$post` à la
-propriété `$post` du composant `Post`, ce qui permet au composant d'accéder aux
-données du post et de les afficher dans le template Blade du composant.
+propriété `$post` du composant `PostCard`, ce qui permet au composant d'accéder
+aux données du post et de les afficher dans le template Blade du composant.
 
 Faites de même pour le fichier `resources/views/profile.blade.php` en remplaçant
-le code qui affiche les posts par l'utilisation du composant `x-post` de la même
-manière.
+le code qui affiche les posts par l'utilisation du composant `x-post-card` de la
+même manière.
 
 ### Voir le résultat dans le navigateur
 
 Sauvez les modifications et actualisez la page dans le navigateur en visitant
 les URLs de la page d'accueil et de la page de profil. Vous devriez maintenant
-voir les posts affichés en utilisant le composant `x-post`, ce qui permet
+voir les posts affichés en utilisant le composant `x-post-card`, ce qui permet
 d'avoir un code plus propre et réutilisable pour afficher les posts dans
 différentes vues de votre application.
 
@@ -1984,7 +2003,11 @@ suivante :
 > Vous pouvez y revenir si vous avez du temps ou si vous souhaitez approfondir
 > vos connaissances après avoir terminé les exercices et le mini-projet.
 
-- Seriez-vous capable de ... ?
+- Seriez-vous capable d'ajouter du contenu à la page "à propos" de votre
+  application pour présenter les fonctionnalités de votre application de réseau
+  social ?
+- Seriez-vous capable de changer le thème de votre application avec Tailwind CSS
+  ?
 
 <!-- URLs -->
 
