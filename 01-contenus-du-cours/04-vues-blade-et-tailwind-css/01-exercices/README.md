@@ -16,6 +16,10 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Exercices](#exercices)
   - [Exercice 1](#exercice-1)
   - [Exercice 2](#exercice-2)
+  - [Exercice 3](#exercice-3)
+  - [Exercice 4](#exercice-4)
+  - [Exercice 5](#exercice-5)
+  - [Exercice 6](#exercice-6)
 
 ## Exercices
 
@@ -57,6 +61,57 @@ sur l'internationalisation (i18n) ?
 
 La documentation officielle de Laravel sur l'internationalisation (i18n) se
 trouve à l'adresse suivante : <https://laravel.com/docs/12.x/localization>.
+
+</details>
+
+### Exercice 3
+
+Où peut-on trouver la documentation officielle de Tailwind CSS ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Tailwind CSS se trouve à l'adresse suivante :
+<https://tailwindcss.com/docs>.
+
+</details>
+
+### Exercice 4
+
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les directives Blade ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Laravel sur les directives Blade se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/blade#blade-directives>.
+
+</details>
+
+### Exercice 5
+
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les composants Blade ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Laravel sur les composants Blade se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/blade#components>.
+
+</details>
+
+### Exercice 6
+
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les layouts Blade ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Laravel sur les layouts Blade se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/blade#building-layouts>.
 
 </details>
 

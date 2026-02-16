@@ -246,8 +246,8 @@ de 255 caractères.
 
 Comme SQLite ne supporte pas les énumérations, la colonne `reaction` de la table
 `likes` est définie comme un type `VARCHAR`. La logique de validation pour
-s'assurer que les valeurs de cette colonne sont limitées à "like", "love",
-"haha", "wow", "sad" ou "angry" sera implémentée au niveau de l'application
+s'assurer que les valeurs de cette colonne sont limitées à `like`, `love`,
+`haha`, `wow`, `sad` ou `angry` sera implémentée au niveau de l'application
 Laravel, plutôt que dans la base de données.
 
 </details>
@@ -309,7 +309,7 @@ Comme lors de l'initialisation du projet Laravel, plusieurs migrations ont été
 appliquées en une seule fois, lors de l'exécution de la commande
 `php artisan migrate`, le résultat devrait être similaire à ceci :
 
-```txt
+```text
    INFO  Rolling back migrations.
 
   0001_01_01_000002_create_jobs_table ............... 13.52ms DONE
@@ -359,7 +359,7 @@ git status
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
 On branch 3-réinitialiser-le-projet-laravel
 Your branch is up to date with 'origin/3-réinitialiser-le-projet-laravel'.
 
@@ -439,7 +439,7 @@ git status
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
 On branch 3-réinitialiser-le-projet-laravel
 Your branch is up to date with 'origin/3-réinitialiser-le-projet-laravel'.
 
@@ -528,7 +528,7 @@ php artisan migrate
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Running migrations.
 
   2026_01_29_142851_create_sessions_table ........... 12.98ms DONE
@@ -630,7 +630,7 @@ ainsi que le fichier de migration dans le dossier `database/migrations/`.
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Model [app/Models/User.php] created successfully.
 
    INFO  Migration [database/migrations/2026_01_29_143919_create_users_table.php] created successfully.
@@ -694,7 +694,7 @@ php artisan migrate
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Running migrations.
 
   2026_01_29_143919_create_users_table ................................. 11.13ms DONE
@@ -867,7 +867,7 @@ ainsi que le fichier de migration dans le dossier `database/migrations/`.
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Model [app/Models/Post.php] created successfully.
 
    INFO  Migration [database/migrations/2026_02_07_123042_create_posts_table.php] created successfully.
@@ -931,7 +931,7 @@ php artisan migrate
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Running migrations.
 
   2026_02_07_123042_create_posts_table .................................. 6.33ms DONE
@@ -1216,7 +1216,7 @@ Pour cela, nous allons utiliser la commande Artisan en deux temps :
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Migration [database/migrations/2026_02_07_151302_create_likes_table.php] created successfully.
 
    INFO  Model [app/Models/Like.php] created successfully.
@@ -1304,7 +1304,7 @@ php artisan migrate
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Running migrations.
 
   2026_02_07_151302_create_likes_table .................................. 7.47ms DONE
@@ -1571,7 +1571,7 @@ php artisan make:seeder DatabaseSeeder
 
 Le résultat devrait ressembler à ceci :
 
-```txt
+```text
    INFO  Seeder [database/seeders/DatabaseSeeder.php] created successfully.
 ```
 
@@ -1780,12 +1780,12 @@ précédents, et les contraintes d'unicité définies dans les migrations empêc
 l'insertion de données dupliquées :
 
 ```text
- INFO  Seeding database.
+   INFO  Seeding database.
 
 
-   Illuminate\Database\QueryException
+   Illuminate\Database\UniqueConstraintViolationException
 
-  SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: users.password (Connection: sqlite, Database: /workspace/heig-vd-devprodmed-mini-projet/database/database.sqlite, SQL: insert into "users" ("id", "first_name", "last_name", "username", "email") values (1, John, Doe, johndoe, john.doe@example.com))
+  SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: users.id (Connection: sqlite, Database: /workspace/heig-vd-devprodmed-mini-projet/database/database.sqlite, SQL: insert into "users" ("id", "first_name", "last_name", "username", "email", "created_at", "updated_at") values (1, John, Doe, johndoe, john.doe@example.com, 2026-02-09 10:00:00, 2026-02-09 10:00:00))
 ```
 
 Heureusement pour nous, Laravel offre une option pour supprimer toutes les
@@ -1809,7 +1809,7 @@ php artisan migrate:fresh --seed
 Le résultat devrait ressembler à ceci :
 
 ```text
-Dropping all tables ................................................... 2.42ms DONE
+  Dropping all tables ................................................... 2.42ms DONE
 
    INFO  Preparing database.
 

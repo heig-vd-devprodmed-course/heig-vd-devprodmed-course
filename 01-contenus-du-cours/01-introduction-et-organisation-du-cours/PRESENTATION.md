@@ -1,20 +1,20 @@
 ---
 marp: true
-theme: "custom-marp-theme"
-size: "16:9"
-paginate: "true"
+theme: 'custom-marp-theme'
+size: '16:9'
+paginate: 'true'
 author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
-  "Introduction et organisation du cours pour le cours DévProdMéd enseigné à la
-  HEIG-VD, Suisse"
-lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/01-introduction-et-organisation-du-cours/presentation.html"
+  'Introduction et organisation du cours pour le cours DévProdMéd enseigné à la
+  HEIG-VD, Suisse'
+lang: 'fr'
+url: 'https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/01-introduction-et-organisation-du-cours/presentation.html'
 header:
-  "[**Introduction et organisation du cours**][contenu-complet-sur-github]"
+  '[**Introduction et organisation du cours**][contenu-complet-sur-github]'
 footer:
-  "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
+  '[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
   2025-2026](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
-  - [CC BY-SA 4.0][licence]"
+  - [CC BY-SA 4.0][licence]'
 headingDivider: 6
 ---
 
@@ -239,8 +239,9 @@ et
 ## _"Qu'en est-il de ChatGPT, etc. ?"_ (1)
 
 **Vous pouvez utiliser tous les outils que vous souhaitez** (notes personnelles,
-Internet, outils d'IA, etc.), **sauf pendant les évaluations**. Vous pouvez les
-utiliser dans la vie réelle ; ça serait utopique de ma part de vous en priver.
+Internet, outils d'IA, etc.), **sauf pendant les évaluations** (sauf mention
+contraire). Vous pouvez les utiliser dans la vie réelle ; ça serait utopique de
+ma part de vous en priver.
 
 Cependant, d'après mon expérience, **ces outils ne sont pas suffisamment
 fiables** pour être utilisés sans supervision. **Ils peuvent vous aider, mais
@@ -265,15 +266,29 @@ Une excellente vidéo sur le sujet :
 Quelques règles concernant l'utilisation de ces outils :
 
 - Vous **devez indiquer quand, pourquoi et comment vous avez utilisé une aide
-  externe** (la raison, outils, sources, etc.).
-- Vous **devez être capable de faire et d'expliquer le travail par vous-même**.
-  Si ces outils ne sont plus présents, cela ne devrait pas affecter votre
-  capacité à faire le travail.
-- **En cas de doutes de notre part, nous vous questionnerons**. Vous pouvez être
-  pénalisé.e si vous ne savez pas expliquer votre travail. **Votre intégrité
-  personnelle et académique est en jeu.**
+  externe** (la raison, outils, sources, etc.), **soit dans le code, soit dans
+  un rapport annexe**.
+- Vous **devez expliquer le fonctionnement du code que vous avez utilisé**, que
+  ce soit du code généré par des outils d'intelligence artificielle ou du code
+  copié depuis des sources externes, **et comment il s'intègre dans votre
+  travail**.
 
 ## _Qu'en est-il de ChatGPT, etc. ?"_ (4)
+
+- En cas de doutes de notre part, vous pourriez être questionné.e.
+- **Si vos explications ne sont pas convaincantes, injustifiées, dans le
+  contexte ou si vous n'êtes pas transparent.e sur l'utilisation de ces
+  outils**, je considère que vous n'avez pas acquis les compétences nécessaires
+  du cours. **Vous serez alors pénalisé.e avec la note 1 pour l'évaluation
+  concernée**.
+
+<center>
+
+**Votre intégrité personnelle et académique est en jeu**.
+
+</center>
+
+## _Qu'en est-il de ChatGPT, etc. ?"_ (5)
 
 **Tout le monde va utiliser l'AI lorsque vous sortirez de vos études.**
 

@@ -33,7 +33,9 @@ entity Like {
   * user_id: integer <<PK, FK>>
   * post_id: integer <<PK, FK>>
   --
-  reaction: VARCHAR <<Reaction>>
+  * reaction: VARCHAR <<Reaction>>
+  created_at: DATETIME <<generated>>
+  updated_at: DATETIME <<generated>>
 }
 
 enum Reaction {

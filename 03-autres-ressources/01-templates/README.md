@@ -39,7 +39,8 @@ The repository should follow the following structure:
 │   └── 02-mini-projet-personnel/
 ├── 03-autres-ressources/
 │   └── ...
-├── build-all-presentations.sh*
+├── generate-diagrams.sh*
+├── generate-presentations.sh*
 ├── LICENSE.md
 └── README.md
 ```

@@ -9,6 +9,7 @@
 - [Partie pratique](#partie-pratique)
   - [Ressources autorisées](#ressources-autorisées-1)
   - [Grille d'évaluation](#grille-dévaluation)
+- [Contraintes](#contraintes)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
 
 ## Déroulement
@@ -80,15 +81,6 @@ Note maximale : (nombre de points obtenus / nombre de points totaux) × 5 + 1.
 > utiliser du HTML et du CSS de base (CSS optionnel), mais l'accent doit être
 > mis sur la fonctionnalité et la structure du code.
 
-> [!WARNING]
->
-> Le code ne doit pas contenir de code sortant du contexte de l'application (pas
-> de code ou commentaires inutiles, pas de code lié à d'autres projets, pas de
-> code "absurde" qui ne ferait pas sans dans le contexte donné, etc.).
->
-> Des points peuvent être retirés si le code contient des éléments inutiles ou
-> hors contexte.
-
 |   # | Description                                                                                                |
 | --: | :--------------------------------------------------------------------------------------------------------- |
 |   1 | Chaque nouvelle fonctionnalité à implémenter est décrite dans une issue dédiée                             |
@@ -101,6 +93,17 @@ Note maximale : (nombre de points obtenus / nombre de points totaux) × 5 + 1.
 |   8 | Les vues spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles        |
 |   9 | Les contrôleurs spécifiques à la nouvelle fonctionnalité sont ajoutés/mis à jour et sont fonctionnels      |
 |  10 | Les validations spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles |
+
+## Contraintes
+
+> [!CAUTION]
+>
+> Le non-respect de ces contraintes entraînera une note de 1 pour l'évaluation.
+
+- L'utilisation de code généré par des outils d'intelligence artificielle ou
+  copié depuis des sources externes est autorisé selon les règles évoquées dans
+  le contenu
+  [Introduction et modalités du cours](../../01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md#quen-est-il-de-chatgpt-etc-).
 
 ## Sanctions possibles en cas de tricherie
 

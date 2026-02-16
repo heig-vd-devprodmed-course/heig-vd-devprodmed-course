@@ -168,8 +168,9 @@ et
 ## _"Qu'en est-il de ChatGPT, etc. ?"_
 
 **Vous pouvez utiliser tous les outils que vous souhaitez** (notes personnelles,
-Internet, outils d'IA, etc.), **sauf pendant les évaluations**. Vous pouvez les
-utiliser dans la vie réelle ; ça serait utopique de ma part de vous en priver.
+Internet, outils d'IA, etc.), **sauf pendant les évaluations** (sauf mention
+contraire). Vous pouvez les utiliser dans la vie réelle ; ça serait utopique de
+ma part de vous en priver.
 
 Cependant, d'après mon expérience, **ces outils ne sont pas suffisamment
 fiables** pour être utilisés sans supervision. **Ils peuvent vous aider, mais
@@ -190,13 +191,20 @@ Une excellente vidéo sur le sujet :
 Quelques règles concernant l'utilisation de ces outils :
 
 - Vous **devez indiquer quand, pourquoi et comment vous avez utilisé une aide
-  externe** (la raison, outils, sources, etc.).
-- Vous **devez être capable de faire et d'expliquer le travail par vous-même**.
-  Si ces outils ne sont plus présents, cela ne devrait pas affecter votre
-  capacité à faire le travail.
-- **En cas de doutes de notre part, nous vous questionnerons**. Vous pouvez être
-  pénalisé.e si vous ne savez pas expliquer votre travail. **Votre intégrité
-  personnelle et académique est en jeu.**
+  externe** (la raison, outils, sources, etc.), **soit dans le code, soit dans
+  un rapport annexe**.
+- Vous **devez expliquer le fonctionnement du code que vous avez utilisé**, que
+  ce soit du code généré par des outils d'intelligence artificielle ou du code
+  copié depuis des sources externes, **et comment il s'intègre dans votre
+  travail**.
+- En cas de doutes de notre part, vous pourriez être questionné.e.
+- **Si vos explications ne sont pas convaincantes, injustifiées, dans le
+  contexte ou si vous n'êtes pas transparent.e sur l'utilisation de ces
+  outils**, je considère que vous n'avez pas acquis les compétences nécessaires
+  du cours. **Vous serez alors pénalisé.e avec la note 1 pour l'évaluation
+  concernée**.
+
+**Votre intégrité personnelle et académique est en jeu**.
 
 **Tout le monde va utiliser l'AI lorsque vous sortirez de vos études.**
 
@@ -210,6 +218,7 @@ fait bien son travail que si elle le remet en question.
 ## Bibliographie et ressources utilisées
 
 - <https://laravel.com/docs>
+- <https://tailwindcss.com/docs>
 
 <!-- URLs -->
 
