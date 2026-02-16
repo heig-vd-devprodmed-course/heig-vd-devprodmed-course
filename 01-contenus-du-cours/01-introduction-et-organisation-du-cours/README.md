@@ -198,11 +198,12 @@ Quelques règles concernant l'utilisation de ces outils :
   copié depuis des sources externes, **et comment il s'intègre dans votre
   travail**.
 - En cas de doutes de notre part, vous pourriez être questionné.e.
-- **Si vos explications ne sont pas convaincantes, injustifiées, dans le
-  contexte ou si vous n'êtes pas transparent.e sur l'utilisation de ces
-  outils**, je considère que vous n'avez pas acquis les compétences nécessaires
-  du cours. **Vous serez alors pénalisé.e avec la note 1 pour l'évaluation
-  concernée**.
+- **Si vos explications ne sont pas convaincantes, injustifiées dans le contexte
+  ou si vous n'êtes pas transparent.e sur l'utilisation de ces outils**, je
+  considère que vous n'avez pas acquis les compétences nécessaires du cours.
+  **Vous serez alors pénalisé.e avec la note 1 pour l'évaluation concernée**.
+- En cas de doutes, n'hésitez pas à me contacter pour discuter de votre
+  utilisation de ces outils.
 
 **Votre intégrité personnelle et académique est en jeu**.
 

@@ -281,6 +281,8 @@ Quelques règles concernant l'utilisation de ces outils :
   outils**, je considère que vous n'avez pas acquis les compétences nécessaires
   du cours. **Vous serez alors pénalisé.e avec la note 1 pour l'évaluation
   concernée**.
+- En cas de doutes, n'hésitez pas à me contacter pour discuter de votre
+  utilisation de ces outils.
 
 <center>
 
