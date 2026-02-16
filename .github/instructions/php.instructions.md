@@ -1,6 +1,6 @@
 ---
 description: Instructions when working with PHP files in this repository.
-applyTo: "**/*.php"
+applyTo: "**/*.php, **/*.md"
 ---
 
 # PHP guidelines

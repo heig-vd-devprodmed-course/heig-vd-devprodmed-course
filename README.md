@@ -11,9 +11,9 @@ Suisse !
 À l'issue de cette unité d'enseignement, la personne qui étudie sera capable de
 :
 
-- Maîtriser des architectures client-serveur en suivant des patrons de concept
-  reconnus (_"design patterns"_ - MVC).
-- Maîtriser un framework de développement web.
+- Maîtriser des architectures client-serveur en suivant des patrons de
+  conception reconnus (_"design patterns"_) (MVC).
+- Maîtriser les concepts de base d'un framework de développement web.
 - Maîtriser une couche mapping objet-relationnel (ORM) pour la gestion d'une
   base de données.
 - Maîtriser les fondamentaux de sécurité dans le développement d'application
@@ -42,7 +42,7 @@ d'apprentissage, et les méthodes d'évaluation.
 | -----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
 |     01 | [Introduction et organisation du cours](./01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md) + [PHP, Composer et Laravel](./01-contenus-du-cours/02-php-composer-et-laravel/README.md) | 🟢 Prêt     |
 |     02 | [Bases de données, Eloquent et modèles](./01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/README.md)                                                                                            | 🟢 Prêt     |
-|     03 | Tailwind CSS, Blade et vues                                                                                                                                                                                  | 🟡 En cours |
+|     03 | [Vues, Blade et Tailwind CSS](./01-contenus-du-cours/04-vues-blade-et-tailwind-css/README.md)                                                                                                                | 🟡 En cours |
 |     04 | Routes, paramètres et contrôleurs                                                                                                                                                                            | 🔴 À faire  |
 |     05 | Formulaires et validation                                                                                                                                                                                    | 🔴 À faire  |
 |     06 | Authentification et autorisations                                                                                                                                                                            | 🔴 À faire  |
@@ -51,7 +51,7 @@ d'apprentissage, et les méthodes d'évaluation.
 |     09 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |     10 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |  🚨 11 | Évaluation 2                                                                                                                                                                                                 | 🔴 À faire  |
-|     12 | Récapitulatif du cours + Fonctionnalités avancées de Laravel                                                                                                                                                 | 🔴 À faire  |
+|     12 | Récapitulatif du cours et perspectives d'avenir                                                                                                                                                              | 🔴 À faire  |
 
 ## 📜 Licence
 

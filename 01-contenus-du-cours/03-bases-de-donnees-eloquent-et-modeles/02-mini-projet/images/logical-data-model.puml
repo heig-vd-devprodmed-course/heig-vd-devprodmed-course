@@ -33,7 +33,9 @@ entity Like {
   * user_id [PK, FK]
   * post_id [PK, FK]
   --
-  reaction
+  * reaction
+  created_at
+  updated_at
 }
 
 User "1 " --- "0..*" Post : creates 

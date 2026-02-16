@@ -6,8 +6,8 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 
 > [!TIP]
 >
-> Trouvez d'autres informations relatives à ce contenu dans le
-> [contenu parent](../README.md).
+> Toutes les informations relatives à ce contenu sont décrites dans le
+> [contenu principal](../README.md).
 
 ## Table des matières
 

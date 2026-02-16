@@ -6,6 +6,7 @@
 - [Déroulement](#déroulement)
 - [Ressources autorisées](#ressources-autorisées)
 - [Grille d'évaluation](#grille-dévaluation)
+- [Contraintes](#contraintes)
 - [Ordre de passage](#ordre-de-passage)
   - [Groupe 1](#groupe-1)
   - [Groupe 2](#groupe-2)
@@ -96,6 +97,30 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
 |   3 | Les trois nouvelles fonctionnalités sont expliquées de manière compréhensible et leur implémentation est détaillée |
 |   4 | Le workflow de développement est présenté et commenté                                                              |
 |   5 | La réponse à la question tirée au sort est pertinente et complète                                                  |
+
+## Contraintes
+
+> [!CAUTION]
+>
+> Le non-respect de ces contraintes entraînera une note de 1 pour l'évaluation.
+
+- Seul PHP et les fonctionnalités offertes par Laravel sont autorisés pour
+  développer les nouvelles fonctionnalités. L'utilisation de JavaScript ou
+  d'autres langages de programmation n'est pas autorisée.[^javascript]
+- Au moins deux des trois nouvelles fonctionnalités présentées doivent demander
+  à modifier la base de données (ajout de table, modification de table, etc.).
+- Les nouvelles fonctionnalités présentées doivent être fonctionnelles et
+  testables. Elles ne doivent pas être des fonctionnalités théoriques ou
+  incomplètes.
+- Les nouvelles fonctionnalités présentées doivent être développées par la
+  personne qui présente et montrer un effort de personnalisation et
+  d'originalité. Elles ne doivent pas être des fonctionnalités génériques ou
+  triviales qui ne montrent pas une réelle compréhension du framework Laravel et
+  du développement web.
+- L'utilisation de code généré par des outils d'intelligence artificielle ou
+  copié depuis des sources externes est autorisé selon les règles évoquées dans
+  le contenu
+  [Introduction et modalités du cours](../../01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md#quen-est-il-de-chatgpt-etc-).
 
 ## Ordre de passage
 
@@ -251,3 +276,13 @@ de triche avérée ou de doute sur la bonne conduite de l'évaluation**.
 Vous avez travaillé dur pour arriver jusqu'ici et nous avons confiance en vos
 capacités à réussir cette évaluation. **Ne prenez pas le risque de nous décevoir
 et/ou de vous faire renvoyer**.
+
+<!-- Footnotes -->
+
+[^javascript]:
+    Si votre utilisation de JavaScript ou d'autres langages de programmation est
+    justifiée dans le contexte de votre mini-projet, vous pouvez en discuter
+    avec l'enseignant.e pour voir si une exception peut être faite. Cependant,
+    dans la plupart des cas, il est attendu que les nouvelles fonctionnalités
+    soient développées uniquement avec PHP et les fonctionnalités offertes par
+    Laravel.

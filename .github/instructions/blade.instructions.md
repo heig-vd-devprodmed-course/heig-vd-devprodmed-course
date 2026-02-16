@@ -1,7 +1,7 @@
 ---
 description:
   Instructions when working with Blade files (Laravel) in this repository.
-applyTo: "**/*.blade.php"
+applyTo: "**/*.blade.php, **/*.md"
 ---
 
 # Blade guidelines
