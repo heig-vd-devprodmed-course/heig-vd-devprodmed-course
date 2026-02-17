@@ -449,12 +449,12 @@ mini-projet.
 2. Si vous n'êtes pas encore connecté.e à GitHub, connectez-vous avec votre
    compte GitHub.
 3. Choisissez votre personne dans la liste pour rejoindre le GitHub Classroom.
-4. Il se peut qu'une erreur survienne. Vous devez accepter l'invitation qui a
-   été envoyée à votre compte GitHub pour rejoindre l'organisation GitHub du
-   cours. Acceptez-la en vous accédant au mail associé à votre compte GitHub.
-   Vous pouvez retrouvez le mail associé à votre compte dans les paramètres de
-   votre compte GitHub (icône de profil en haut à droite -> _"Settings"_), dans
-   la section _"Emails"_.
+4. Vous devez maintenant accepter l'invitation qui a été envoyée sur votre
+   adresse mail associée à votre compte GitHub pour rejoindre le GitHub
+   Classroom du cours (un message d'erreur peut survenir avant que vous
+   n'acceptiez l'invitation). Vous pouvez retrouvez le mail associé à votre
+   compte dans les paramètres de votre compte GitHub (icône de profil en haut à
+   droite -> _"Settings"_ -> _"Emails"_).
 5. Un dépôt GitHub privé sera créé pour vous, nommé
    `devprodmed-mini-projet-<github-username>`.
 
