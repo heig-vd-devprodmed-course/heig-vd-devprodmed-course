@@ -16,6 +16,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Objectifs](#objectifs)
 - [Avertissements et alertes](#avertissements-et-alertes)
 - [Mettre en place l'environnement de développement](#mettre-en-place-lenvironnement-de-développement)
+  - [Désinstaller MAMP](#désinstaller-mamp)
   - [Installer et configurer Laravel Herd](#installer-et-configurer-laravel-herd)
   - [Installer et configurer votre environnement de développement](#installer-et-configurer-votre-environnement-de-développement)
   - [Configurer Git et GitHub](#configurer-git-et-github)
@@ -29,6 +30,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Initialiser le dépôt Git et le lier à GitHub](#initialiser-le-dépôt-git-et-le-lier-à-github)
   - [Commencer le développement depuis un dépôt GitHub](#commencer-le-développement-depuis-un-dépôt-github)
   - [Mettre à jour la documentation pour lancer le projet](#mettre-à-jour-la-documentation-pour-lancer-le-projet)
+  - [Recommencer la boucle de développement](#recommencer-la-boucle-de-développement)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Aller plus loin](#aller-plus-loin)
@@ -173,6 +175,14 @@ la configuration.
 De plus, nous allons utiliser GitHub Classroom pour gérer le code source du
 mini-projet. Cela sera l'occasion de prendre encore plus l'habitude d'utiliser
 Git et GitHub dans un contexte de développement professionnel.
+
+### Désinstaller MAMP
+
+Pour les personnes sur Windows, il est recommandé de désinstaller MAMP pour
+éviter les conflits avec Laravel Herd.
+
+Pour les personnes sur macOS, il n'est pas nécessaire de désinstaller MAMP, mais
+vous pouvez le faire si vous le souhaitez.
 
 ### Installer et configurer Laravel Herd
 
@@ -439,7 +449,13 @@ mini-projet.
 2. Si vous n'êtes pas encore connecté.e à GitHub, connectez-vous avec votre
    compte GitHub.
 3. Choisissez votre personne dans la liste pour rejoindre le GitHub Classroom.
-4. Un dépôt GitHub privé sera créé pour vous, nommé
+4. Vous devez maintenant accepter l'invitation qui a été envoyée sur votre
+   adresse mail associée à votre compte GitHub pour rejoindre le GitHub
+   Classroom du cours (un message d'erreur peut survenir avant que vous
+   n'acceptiez l'invitation). Vous pouvez retrouvez le mail associé à votre
+   compte dans les paramètres de votre compte GitHub (icône de profil en haut à
+   droite -> _"Settings"_ -> _"Emails"_).
+5. Un dépôt GitHub privé sera créé pour vous, nommé
    `devprodmed-mini-projet-<github-username>`.
 
 Vous devriez maintenant avoir accès à votre dépôt GitHub privé pour le
@@ -447,22 +463,12 @@ mini-projet sur une page similaire à celle-ci :
 
 ![GitHub Classroom - Mini-projet (1)](./images/github-classroom-mini-projet-01.png)
 
-#### Accepter l'invitation à rejoindre l'organisation GitHub Classroom du cours
-
-Lorsque vous rejoignez le GitHub Classroom, une invitation est envoyée à votre
-compte GitHub pour rejoindre l'organisation GitHub du cours.
-
-Acceptez-la en vous accédant au mail associé à votre compte GitHub.
-
-Cela vous permettra de faire part de l'organisation GitHub Classroom du cours.
-
 ### Valider l'installation et la configuration de l'environnement de développement
 
 - [x] PHP est installé et fonctionne correctement.
 - [x] Composer est installé et fonctionne correctement.
 - [x] Laravel est installé et fonctionne correctement.
 - [x] npm est installé et fonctionne correctement.
-- [x] MySQL est installé et fonctionne correctement.
 - [x] Visual Studio Code est installé et fonctionne correctement.
 - [x] L'extension Laravel pour Visual Studio Code est installée.
 - [x] L'extension Database Client pour Visual Studio Code est installée.
@@ -503,8 +509,11 @@ composer global require laravel/installer
 A présent que l'environnement de développement est prêt, nous allons initialiser
 le mini-projet avec Laravel.
 
-Après avoir ouvert le dossier de votre mini-projet dans Visual Studio Code,
-ouvrez le terminal intégré si ce n'est pas déjà fait.
+Ouvrez Visual Studio Code et ouvrez le dossier `devprodmed-mini-projet` que vous
+avez créé précédemment.
+
+Ouvrez ensuite un terminal intégré dans Visual Studio Code (si ce n'est pas déjà
+fait) en allant dans le menu _"Terminal"_ > _"New Terminal"_.
 
 Ceci devrait automatiquement ouvrir l'emplacement du dossier du mini-projet dans
 le terminal intégré.
@@ -521,6 +530,17 @@ Cette commande permet de naviguer dans le dossier parent du dossier actuel.
 Ensuite, exécutez la commande suivante pour créer un nouveau projet Laravel dans
 le dossier préalablement ouvert `devprodmed-mini-projet` :
 
+> [!WARNING]
+>
+> **Informations pour les personnes sur Windows**
+>
+> Si une erreur du type "Le processus ne peut pas accéder au fichier car il est
+> utilisé par un autre processus" survient, il est nécessaire de fermer le
+> dossier du projet dans Visual Studio Code et d'exécuter la commande
+> `laravel new devprodmed-mini-projet --force` depuis un nouveau terminal (pas
+> le terminal intégré de Visual Studio Code). Une fois la commande exécutée,
+> vous pourrez rouvrir le dossier du projet dans Visual Studio Code.
+
 ```bash
 laravel new devprodmed-mini-projet --force
 ```
@@ -528,6 +548,30 @@ laravel new devprodmed-mini-projet --force
 Un menu interactif vous demande de choisir certaines options. Choisissez les
 options suivantes à l'aide des flèches du clavier et appuyez sur la touche
 _Entrée_ pour valider vos choix :
+
+> [!WARNING]
+>
+> **Informations pour les personnes sur Windows**
+>
+> 1. Il se peut que l'affichage soit un peu différent sur Windows, mais les
+>    options à choisir restent les mêmes. Vous pouvez simplement les saisir
+>    manuellement.
+> 2. Il semblerait que la tentative de mise à jour de Laravel puisse poser
+>    problème et que vous soyez coincé dans une boucle infinie de mise à jour.
+>    Si cela arrive, arrêter la boucle infinie de mise à jour en appuyant sur
+>    `Ctrl + C` dans le terminal pour interrompre le processus, puis relancez la
+>    commande `laravel new devprodmed-mini-projet --force` et choisissez
+>    l'option "No" pour ne pas mettre à jour Laravel.
+> 3. Si une erreur du type "Le processus ne peut pas accéder au fichier car il
+>    est utilisé par un autre processus" survient, il est nécessaire de fermer
+>    le dossier du projet dans Visual Studio Code et d'exécuter la commande
+>    `laravel new devprodmed-mini-projet --force` depuis un nouveau terminal
+>    (pas le terminal intégré de Visual Studio Code). Une fois la commande
+>    exécutée, vous pourrez rouvrir le dossier du projet dans Visual Studio
+>    Code.
+> 4. L'installation et la configuration du projet Laravel peut prendre plusieurs
+>    minutes (pour une raison inconnue). Normalement, cela ne devrait pas poser
+>    de problème, mais soyez patient.es pendant le processus d'installation.
 
 ```text
    _                               _
@@ -593,6 +637,42 @@ Laravel :
 ```bash
 composer run dev
 ```
+
+> [!WARNING]
+>
+> **Pour les personnes sur Windows**
+>
+> Il se peut que la commande `composer run dev` ne fonctionne pas correctement
+> sur Windows avec un message d'erreur `Failed to listen on 127.0.0.1:8000`. Le
+> terminal sera bloqué et rien ne se passera.
+>
+> Pour résoudre ce cela, commencez par quitter le processus avec `CTRL + C`.
+>
+> Dans les icônes en bas à droite de votre écran, vous devriez voir une icône de
+> Laravel Herd (un petit "H"). Faites un clic droit sur cette icône et
+> sélectionnez l'option "Open configuration files".
+>
+> Un explorateur de fichiers s'ouvrira à l'emplacement
+> `C:\Users\<votre-nom-d'utilisateur>\.config\herd`.
+>
+> Ouvrez le fichier `bin/php84/php.ini` avec un éditeur de texte (comme Visual
+> Studio Code) et cherchez la ligne suivante :
+>
+> ```ini
+> variables_order = "EGPCS"
+> ```
+>
+> Modifiez cette ligne pour qu'elle ressemble à ceci :
+>
+> ```ini
+> variables_order = "GPCS"
+> ```
+>
+> Sauvez le fichier après avoir effectué la modification, puis relancez la
+> commande `composer run dev` dans le terminal intégré de Visual Studio Code.
+> Elle devrait maintenant fonctionner correctement.
+>
+> Source : <https://github.com/beyondcode/herd-community/issues/737>.
 
 Le serveur de développement Laravel devrait démarrer et être accessible à
 l'adresse suivante : <http://localhost:8000>.
@@ -889,16 +969,35 @@ développement.
 Pour simuler cela, nous allons cloner le projet dans un nouveau dossier et le
 configurer pour le développement.
 
-#### Cloner le dépôt GitHub du mini-projet
+Cela sera particulièrement utile dans le futur si vous souhaitez travailler sur
+le projet depuis une autre machine, si vous souhaitez simplement repartir d'une
+copie fraîche du projet ou encore si vous travaillez en équipe sur un projet
+collaboratif.
 
-Dans GitHub, récupérez l'URL SSH du dépôt GitHub privé pour le mini-projet en
-cliquant sur le bouton _"Code"_ et en sélectionnant l'option _"SSH"_, comme
-illustré ci-dessous :
+#### Cloner votre dépôt GitHub du mini-projet
+
+Dans GitHub, récupérez l'URL SSH du dépôt GitHub privé pour **votre**
+mini-projet en cliquant sur le bouton _"Code"_ et en sélectionnant l'option
+_"SSH"_, comme illustré ci-dessous :
+
+> [!NOTE]
+>
+> L'illustration ci-dessous est un exemple et ne correspond pas à votre dépôt
+> GitHub. Assurez-vous de copier l'URL SSH de **votre** dépôt GitHub privé pour
+> le mini-projet et non celui de l'illustration qui correspond à la solution du
+> mini-projet à la fin de chaque séance.
 
 ![GitHub Classroom - Mini-projet (2)](./images/github-classroom-mini-projet-02.png)
 
 Une fois l'URL SSH copiée, retournez dans le terminal intégré de Visual Studio
 Code.
+
+> [!NOTE]
+>
+> L'URL SSH est recommandée pour cloner le dépôt car elle permet d'utiliser une
+> authentification sécurisée avec des clés SSH, ce qui est plus pratique que
+> d'utiliser l'URL HTTPS qui nécessite de saisir votre nom d'utilisateur et mot
+> de passe à chaque fois que vous poussez des modifications vers GitHub.
 
 Naviguez vers le dossier parent du dossier `devprodmed-mini-projet` (nous ne
 souhaitons pas cloner le dépôt à l'intérieur du dossier existant) en exécutant
@@ -925,6 +1024,13 @@ Vous devriez retrouver un nouveau dossier nommé
 mini-projet dans votre système de fichiers.
 
 Ouvrez ce dossier dans une nouvelle fenêtre Visual Studio Code.
+
+> [!NOTE]
+>
+> Vous aurez donc deux projets Laravel sur votre machine. C'est normal. Cela
+> permet de simuler le fait de cloner le projet depuis GitHub sur une nouvelle
+> machine. Plus tard dans ce contenu, vous serez invité.e à supprimer un des
+> deux projets pour éviter toute confusion.
 
 #### Installer les dépendances
 
@@ -1476,7 +1582,7 @@ Vous êtes libre de supprimer l'un des deux dossiers clonés précédemment
 (`devprodmed-mini-projet` ou `devprodmed-mini-projet-<github-username>`) pour
 éviter toute confusion.
 
-#### Recommencer la boucle de développement
+### Recommencer la boucle de développement
 
 Pour chacune des prochaines tâches de développement, il est recommandé de suivre
 le même workflow Git et GitHub en créant une issue, une branche, une pull
