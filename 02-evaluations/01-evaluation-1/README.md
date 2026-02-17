@@ -1,5 +1,7 @@
 # DévProdMéd 2025-2026 - Évaluation 1
 
+- Date : 01.04.2026 pour les deux classes.
+
 ## Table des matières
 
 - [Table des matières](#table-des-matières)

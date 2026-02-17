@@ -1,5 +1,7 @@
 # DévProdMéd 2025-2026 - Évaluation 2
 
+- Dates : 05.05.2026 pour la classe T139 et 06.05.2026 pour la classe T147.
+
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
@@ -196,8 +198,6 @@ Gabriel
 Christophe
 Dylan
 Valentin
-Sarah
-Léa
 Sasita
 Benoît
 Loann
@@ -212,13 +212,12 @@ Marike
 Yannis
 Enya
 Tanguy
-Inoé
 -->
 
 |   # | Étudiant.e   | Heure de préparation | Heure de présentation |
 | --: | :----------- | :------------------- | :-------------------- |
-|   1 | Volontaire ? | 12:30 - 12:38        | 12:40 - 12:48         |
-|   2 | Volontaire ? | 12:40 - 12:48        | 12:50 - 12:58         |
+|   1 | Sarah        | 12:30 - 12:38        | 12:40 - 12:48         |
+|   2 | Inoé         | 12:40 - 12:48        | 12:50 - 12:58         |
 |   3 |              | 12:50 - 12:58        | 13:00 - 13:08         |
 |   4 |              | 13:00 - 13:08        | 13:10 - 13:18         |
 |   5 |              | 13:10 - 13:18        | 13:20 - 13:28         |
@@ -238,7 +237,7 @@ Inoé
 |  18 |              | 15:40 - 15:48        | 15:50 - 15:58         |
 |  19 |              | 15:50 - 15:58        | 16:00 - 16:08         |
 |  20 |              | 16:00 - 16:08        | 16:10 - 16:18         |
-|  21 | Volontaire ? | 16:10 - 16:18        | 16:20 - 16:28         |
+|  21 | Léa          | 16:10 - 16:18        | 16:20 - 16:28         |
 |  22 | Volontaire ? | 16:20 - 16:28        | 16:30 - 16:38         |
 |  23 | Volontaire ? | 16:30 - 16:38        | 16:40 - 16:48         |
 

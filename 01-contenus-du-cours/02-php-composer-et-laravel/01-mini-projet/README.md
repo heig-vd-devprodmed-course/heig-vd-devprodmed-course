@@ -374,6 +374,21 @@ pour améliorer votre expérience de développement avec PHP.
 
 #### Installer l'extension Laravel pour Visual Studio Code
 
+> [!NOTE]
+>
+> **Informations pour les personnes sur macOS**
+>
+> Il semblerait que l'extension Laravel pour Visual Studio Code affiche une
+> erreur lorsque vous allez sauvegarder un fichier dans le projet Laravel. Cette
+> erreur est liée à une configuration de macOS qui empêche l'extension d'accéder
+> à l'exécutable `php` installé par Laravel Herd.
+>
+> Une solution est en cours de recherche mais ce n'est pas bloquant. Vous pouvez
+> ignorer cette erreur pour le moment.
+>
+> Je (Ludovic) vous avertirai dès qu'une solution sera trouvée et que vous
+> pourrez corriger cette erreur.
+
 Ensuite, installez l'extension
 [Laravel for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=laravel.vscode-laravel)
 pour améliorer votre expérience de développement avec Laravel.
