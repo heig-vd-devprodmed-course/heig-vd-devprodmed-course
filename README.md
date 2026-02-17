@@ -11,15 +11,13 @@ Suisse !
 À l'issue de cette unité d'enseignement, la personne qui étudie sera capable de
 :
 
-- Maîtriser des architectures client-serveur en suivant des patrons de
-  conception reconnus (_"design patterns"_) (MVC).
-- Maîtriser les concepts de base d'un framework de développement web.
+- Maîtriser des architectures client-serveur en suivant des patrons de concept
+  reconnus (_"design patterns"_ - MVC).
+- Maîtriser un framework de développement web.
 - Maîtriser une couche mapping objet-relationnel (ORM) pour la gestion d'une
   base de données.
 - Maîtriser les fondamentaux de sécurité dans le développement d'application
   web.
-- Réaliser des services web (_"web services"_) simples utilisant une
-  architecture _"RESTful"_.
 
 Grâce à ces compétences, la personne qui étudie sera en mesure de développer des
 applications web professionnelles en utilisant des frameworks modernes et en
@@ -46,11 +44,11 @@ d'apprentissage, et les méthodes d'évaluation.
 |     04 | Routes, paramètres et contrôleurs                                                                                                                                                                            | 🔴 À faire  |
 |     05 | Formulaires et validation                                                                                                                                                                                    | 🔴 À faire  |
 |     06 | Authentification et autorisations                                                                                                                                                                            | 🔴 À faire  |
-|  🚨 07 | Évaluation 1                                                                                                                                                                                                 | 🔴 À faire  |
+|  🚨 07 | [Évaluation 1](./02-evaluations/01-evaluation-1/README.md)                                                                                                                                                   | 🟡 En cours |
 |     08 | Architecture RESTful + Mini-projets libres                                                                                                                                                                   | 🔴 À faire  |
 |     09 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
 |     10 | Mini-projets libres                                                                                                                                                                                          | 🔴 À faire  |
-|  🚨 11 | Évaluation 2                                                                                                                                                                                                 | 🔴 À faire  |
+|  🚨 11 | [Évaluation 2](./02-evaluations/02-evaluation-2/README.md)                                                                                                                                                   | 🟡 En cours |
 |     12 | Récapitulatif du cours et perspectives d'avenir                                                                                                                                                              | 🔴 À faire  |
 
 ## 📜 Licence
