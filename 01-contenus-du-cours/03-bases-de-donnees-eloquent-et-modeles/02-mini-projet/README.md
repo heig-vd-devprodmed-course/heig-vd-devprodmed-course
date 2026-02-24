@@ -621,6 +621,16 @@ nécessaires.
 A l'aide de la commande Artisan, créez le modèle Eloquent `User` avec la
 migration associée :
 
+> [!IMPORTANT]
+>
+> Assurez-vous d'avoir le dossier `app/Models/` dans votre projet Laravel. Si le
+> dossier `app/Models/` n'existe pas, créez-le manuellement avant d'exécuter la
+> commande suivante.
+>
+> Sans ce dossier, Laravel créera le modèle `User` dans le dossier `app/` au
+> lieu de `app/Models/`, ce qui n'est pas la convention recommandée pour les
+> modèles Eloquent dans Laravel.
+
 ```bash
 php artisan make:model User --migration
 ```

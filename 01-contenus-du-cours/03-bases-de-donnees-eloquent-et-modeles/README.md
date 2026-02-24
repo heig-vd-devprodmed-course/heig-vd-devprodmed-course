@@ -577,10 +577,10 @@ $user->save();
 #### Lire
 
 ```php
-// Récupérer un utilisateur par ID
+// Récupérer un.e utilisateur.trice par ID
 $user = User::find(1);
 
-// Récupérer tous les utilisateurs
+// Récupérer tou.tes les utilisateur.trices
 $users = User::all();
 
 // Récupérer avec une condition
@@ -661,7 +661,7 @@ $posts = $user->posts;
 // Récupérer un post avec l'ID 1
 $post = Post::find(1);
 
-// Récupérer l'utilisateur du post
+// Récupérer l'utilisateur.trice du post
 $user = $post->user;
 ```
 
@@ -872,8 +872,8 @@ il est recommandé pour la prochaine séance de :
 <!-- URLs -->
 
 [presentation-web]:
-	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-bases-de-donnees-eloquent-et-modeles/presentation.html
+	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/presentation.html
 [presentation-pdf]:
-	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/02-bases-de-donnees-eloquent-et-modeles/02-bases-de-donnees-eloquent-et-modeles-presentation.pdf
+	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/03-bases-de-donnees-eloquent-et-modeles-presentation.pdf
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
