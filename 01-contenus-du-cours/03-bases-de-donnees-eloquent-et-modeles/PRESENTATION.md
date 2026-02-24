@@ -1,20 +1,20 @@
 ---
 marp: true
-theme: "custom-marp-theme"
-size: "16:9"
-paginate: "true"
+theme: 'custom-marp-theme'
+size: '16:9'
+paginate: 'true'
 author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
-  "Bases de données, Eloquent et modèles pour le cours DévProdMéd enseigné à la
-  HEIG-VD, Suisse"
-lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/presentation.html"
+  'Bases de données, Eloquent et modèles pour le cours DévProdMéd enseigné à la
+  HEIG-VD, Suisse'
+lang: 'fr'
+url: 'https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/presentation.html'
 header:
-  "[**Bases de données, Eloquent et modèles**][contenu-complet-sur-github]"
+  '[**Bases de données, Eloquent et modèles**][contenu-complet-sur-github]'
 footer:
-  "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
+  '[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
   2025-2026](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
-  - [CC BY-SA 4.0][licence]"
+  - [CC BY-SA 4.0][licence]'
 headingDivider: 6
 ---
 
@@ -118,7 +118,7 @@ Avantages de cette approche :
 
 Plus besoin de fichiers de configuration INI comme en ProgServ2.
 
-## Migrations (1)
+## Migrations
 
 Les migrations sont des fichiers qui décrivent la structure de la base de
 données ainsi que son évolution au fil du temps.
@@ -232,7 +232,7 @@ en dernier.
 **Annuler une migration en production peut entraîner des pertes de données.
 Soyez très prudent.e.**
 
-## Le concept d'ORM (1)
+## Le concept d'ORM
 
 Un ORM (Object-Relational Mapping) permet de lier les tables de la base de
 données à des classes et les enregistrements à des objets.
@@ -403,10 +403,10 @@ $user->save();
 #### Lire
 
 ```php
-// Récupérer un utilisateur par ID
+// Récupérer un.e utilisateur.trice par ID
 $user = User::find(1);
 
-// Récupérer tous les utilisateurs
+// Récupérer tou.tes les utilisateur.trices
 $users = User::all();
 
 // Récupérer avec une condition
@@ -476,7 +476,7 @@ $posts = $user->posts;
 // Récupérer un post avec l'ID 1
 $post = Post::find(1);
 
-// Récupérer l'utilisateur du post
+// Récupérer l'utilisateur.trice du post
 $user = $post->user;
 ```
 
@@ -577,7 +577,7 @@ Le patron **MVC** (Model-View-Controller) est largement utilisé dans le
 développement d'applications web pour séparer les préoccupations :
 
 - **Modèle** : représente les données et la logique métier.
-- **Vue** : affiche les données à l'utilisateur (interface).
+- **Vue** : affiche les données à l'utilisateur.trice (interface).
 - **Contrôleur** : gère les requêtes et coordonne le modèle et la vue.
 
 ## Le modèle dans le patron de conception MVC (2)
@@ -604,7 +604,7 @@ restent au cœur de l'application.
 Une approche centrée sur le modèle permet de construire une base solide qui peut
 évoluer au fil du temps sans compromettre la structure des données.
 
-## Utiliser Artisan pour gérer les modèles (1)
+## Utiliser Artisan pour gérer les modèles
 
 Laravel propose des commandes Artisan pour créer et gérer les modèles Eloquent
 de manière rapide et efficace.
@@ -658,7 +658,7 @@ Est-ce que vous avez des questions ?
 <!-- URLs -->
 
 [contenu-complet-sur-github]:
-	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/02-bases-de-donnees-eloquent-et-modeles/README.md
+	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/README.md
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
 

@@ -32,10 +32,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > - Utiliser Blade pour créer des composants réutilisables.
 > - Utiliser les layouts et les composants Blade pour structurer une application
 >   Laravel.
-> - Installer et configurer des dépendances externes avec Composer.
 > - Mettre en place l'internationalisation (i18n) dans une application Laravel.
 > - Utiliser les fichiers de traduction pour supporter plusieurs langues.
-> - Utiliser les variables d'environnement pour adapter l'application.
 > - Décrire la différence entre du CSS "classique" et un framework CSS
 >   utilitaire comme Tailwind CSS.
 > - Utiliser Tailwind CSS pour styliser les interfaces utilisateur.
@@ -98,17 +96,10 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Fichiers de traduction](#fichiers-de-traduction)
   - [Utilisation des traductions dans les vues](#utilisation-des-traductions-dans-les-vues)
   - [Traductions au pluriel](#traductions-au-pluriel)
-- [Gestion des dépendances avec Composer](#gestion-des-dépendances-avec-composer)
-  - [Installation d'une dépendance](#installation-dune-dépendance)
   - [Librairie `laravel-lang/lang`](#librairie-laravel-langlang)
-- [Variables d'environnement](#variables-denvironnement)
-  - [Le fichier `.env`](#le-fichier-env)
-  - [Le fichier `.env.example`](#le-fichier-envexample)
-  - [Bonnes pratiques](#bonnes-pratiques)
 - [Tailwind CSS](#tailwind-css)
   - [Approche CSS classique](#approche-css-classique)
   - [Approche avec Tailwind CSS](#approche-avec-tailwind-css)
-  - [Comparaison](#comparaison)
   - [Intégration avec Laravel et Vite](#intégration-avec-laravel-et-vite)
   - [Aller plus loin avec Tailwind CSS](#aller-plus-loin-avec-tailwind-css)
 - [Conclusion](#conclusion)
@@ -139,10 +130,8 @@ devraient être capables de :
 - Utiliser Blade pour créer des composants réutilisables.
 - Utiliser les layouts et les composants Blade pour structurer une application
   Laravel.
-- Installer et configurer des dépendances externes avec Composer.
 - Mettre en place l'internationalisation (i18n) dans une application Laravel.
 - Utiliser les fichiers de traduction pour supporter plusieurs langues.
-- Utiliser les variables d'environnement pour adapter l'application.
 - Décrire la différence entre du CSS "classique" et un framework CSS utilitaire
   comme Tailwind CSS.
 - Utiliser Tailwind CSS pour styliser les interfaces utilisateur.
@@ -230,8 +219,46 @@ Un moteur de template moderne comme Blade résout ces problèmes en offrant :
 - **Échappement automatique** : protection automatique contre les failles XSS.
 - **Héritage de templates** : possibilité de créer des layouts réutilisables.
 - **Composants** : création d'éléments d'interface réutilisables.
-- **Compilation** : les templates sont compilés en PHP pur pour des performances
-  optimales.
+
+## Blade : le moteur de templates de Laravel
+
+Blade est le moteur de template puissant et élégant inclus avec Laravel. Il
+permet de créer des vues dynamiques tout en gardant le code propre et lisible.
+
+Les caractéristiques principales de Blade incluent :
+
+- Les fichiers Blade utilisent l'extension `.blade.php`.
+- Blade ne vous empêche pas d'utiliser du PHP pur dans vos vues si nécessaire.
+- Les templates Blade sont compilés en PHP pur et mis en cache pour de
+  meilleures performances.
+- Blade offre des directives simples pour les opérations courantes (boucles,
+  conditions, etc.).
+
+En reprenant le même exemple que précédemment, voici comment il serait écrit
+avec Blade :
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $title }}</title>
+</head>
+<body>
+    <h1>{{ $title }}</h1>
+    @if (isset($user))
+        <p>Bienvenue, {{ $user->name }} !</p>
+    @else
+        <p>Veuillez vous connecter.</p>
+    @endif
+
+    <ul>
+    @foreach ($items as $item)
+        <li>{{ $item->name }}</li>
+    @endforeach
+    </ul>
+</body>
+</html>
+```
 
 **Autres moteurs de templates**
 
@@ -249,20 +276,6 @@ incluent :
 Laravel a choisi de développer son propre moteur de template (Blade) pour offrir
 une intégration parfaite avec le framework et une syntaxe optimisée pour les
 besoins courants du développement web.
-
-## Blade : le moteur de templates de Laravel
-
-Blade est le moteur de template puissant et élégant inclus avec Laravel. Il
-permet de créer des vues dynamiques tout en gardant le code propre et lisible.
-
-Les caractéristiques principales de Blade incluent :
-
-- Les fichiers Blade utilisent l'extension `.blade.php`.
-- Blade ne vous empêche pas d'utiliser du PHP pur dans vos vues si nécessaire.
-- Les templates Blade sont compilés en PHP pur et mis en cache pour de
-  meilleures performances.
-- Blade offre des directives simples pour les opérations courantes (boucles,
-  conditions, etc.).
 
 ### Lien avec les routes
 
@@ -321,7 +334,21 @@ Il est ensuite possible d'afficher ces données dans la vue Blade correspondante
 
 Blade utilise une syntaxe claire et concise pour afficher des données et
 structurer les templates et propose plusieurs directives (= fonctions) pour les
-opérations courantes.
+opérations courantes, notamment :
+
+- Affichage de données.
+- Commentaires.
+- Appel de fonctions.
+- Structures de contrôle (conditions, boucles, etc.).
+- Et bien plus encore (inclusions, composants, etc.).
+
+La documentation officielle de Laravel offre une liste extrêmement complète des
+directives Blade disponibles, que vous pouvez consulter à l'adresse suivante :
+<https://laravel.com/docs/12.x/blade#blade-directives>.
+
+Nous utiliserons de nombreuses directives Blade tout au long du cours, et il est
+important de se familiariser avec la documentation pour découvrir les
+différentes options à votre disposition.
 
 #### Affichage de données
 
@@ -333,8 +360,18 @@ Pour afficher des données, Blade utilise la syntaxe `{{ }}` :
 ```
 
 Cette syntaxe échappe automatiquement les données pour prévenir les attaques XSS
-(Cross-Site Scripting). C'est équivalent à utiliser `htmlspecialchars()` en PHP
-pur.
+(Cross-Site Scripting).
+
+C'est équivalent à utiliser `htmlspecialchars()` en PHP pur.
+
+#### Commentaires
+
+Les commentaires dans Blade sont écrits avec la syntaxe `{{-- --}}` et ne seront
+pas inclus dans le HTML généré :
+
+```php
+{{-- Ceci est un commentaire Blade --}}
+```
 
 #### Appel de fonctions
 
@@ -353,11 +390,11 @@ Blade offre des directives élégantes pour les structures de contrôle courante
 
 ```php
 @if ($user->isAdmin())
-    <p>Vous êtes administrateur.</p>
+    <p>Vous êtes administrateur.trice.</p>
 @elseif ($user->isModerator())
-    <p>Vous êtes modérateur.</p>
+    <p>Vous êtes modérateur.trice.</p>
 @else
-    <p>Vous êtes un utilisateur standard.</p>
+    <p>Vous êtes un.e utilisateur.trice standard.</p>
 @endif
 ```
 
@@ -390,14 +427,6 @@ Blade offre aussi d'autres types de boucles :
 
 La directive `@forelse` est particulièrement utile car elle combine une boucle
 `foreach` avec une gestion du cas où la collection est vide.
-
-La documentation officielle de Laravel offre une liste extrêmement complète des
-directives Blade disponibles, que vous pouvez consulter à l'adresse suivante :
-<https://laravel.com/docs/12.x/blade#blade-directives>.
-
-Nous utiliserons de nombreuses directives Blade tout au long du cours, et il est
-important de se familiariser avec la documentation pour découvrir les
-différentes options à votre disposition.
 
 ### Création de vues avec Artisan
 
@@ -446,20 +475,12 @@ Voici un exemple de layout de base :
 
 ```php
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>
-        @isset($title)
-            {{ $title }} - {{ config('app.name') }}
-        @else
-            {{ config('app.name') }}
-        @endisset
-    </title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Mon Application</title>
 </head>
 <body>
     <header>
@@ -474,7 +495,7 @@ Voici un exemple de layout de base :
     </main>
 
     <footer>
-        <p>&copy; {{ date('Y') }} {{ config('app.name') }}</p>
+        <p>&copy; {{ date('Y') }} Mon Application</p>
     </footer>
 </body>
 </html>
@@ -536,13 +557,13 @@ du composant en utilisant la syntaxe `<x-slot:nom>` :
 ```php
 <x-card>
     <x-slot:header>
-        <h2>Titre de la carte</h2>
+        <h2>Titre</h2>
     </x-slot:header>
 
-    <p>Contenu principal de la carte.</p>
+    <p>Contenu principal.</p>
 
     <x-slot:footer>
-        <button>En savoir plus</button>
+        <button>Acheter</button>
     </x-slot:footer>
 </x-card>
 ```
@@ -588,11 +609,7 @@ La classe permet de définir les propriétés acceptées par le composant
 
 ```php
 <?php
-
-namespace App\View\Components;
-
-use Illuminate\View\Component;
-use Illuminate\View\View;
+// Imports et namespace omis pour la clarté...
 
 class Alert extends Component
 {
@@ -702,6 +719,9 @@ développement pour plusieurs raisons :
 
 ### Vocabulaire
 
+Lorsqu'on parle d'internationalisation, il est important de connaître les termes
+suivants :
+
 - **Locale** : code identifiant une langue et éventuellement une région (ex :
   `fr` pour français, `fr_CH` pour français de Suisse, `en_US` pour anglais
   américain).
@@ -724,8 +744,8 @@ APP_FAKER_LOCALE=fr_FR
 
 - `APP_LOCALE` : langue par défaut de l'application.
 - `APP_FALLBACK_LOCALE` : langue de secours si une traduction est manquante.
-- `APP_FAKER_LOCALE` : locale utilisée par Faker pour générer des données
-  factices.
+- `APP_FAKER_LOCALE` : locale utilisée par Faker (une librairie pour générer des
+  données factices).
 
 Ces variables sont ensuite référencées dans `config/app.php` :
 
@@ -734,6 +754,17 @@ Ces variables sont ensuite référencées dans `config/app.php` :
 'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 ```
+
+Le fichier `config/app.php` contient toute la configuration de l'application.
+
+Bien qu'il soit possible de modifier directement les valeurs dans ce fichier, il
+est recommandé d'utiliser les variables d'environnement pour une meilleure
+flexibilité.
+
+En effet, le fichier de configuration utilise la fonction `env()` pour récupérer
+les valeurs des variables d'environnement du fichier `.env`, ce qui permet de
+les adapter facilement selon l'environnement (développement, test, production)
+sans modifier le code.
 
 ### Fichiers de traduction
 
@@ -768,15 +799,11 @@ declare(strict_types=1);
 return [
     'home' => [
         'title' => 'Accueil',
-        'welcome' => 'Bienvenue sur :appName !',
+        'welcome' => 'Bienvenue sur :app_name !',
     ],
     'profile' => [
         'title' => 'Profil',
         'edit' => 'Modifier le profil',
-    ],
-    'posts' => [
-        'title' => 'Publications',
-        'likes_count' => "{0} Aucun like|{1} :count like|[2,*] :count likes",
     ],
 ];
 ```
@@ -801,10 +828,30 @@ traduction avec la syntaxe `:nom`.
 
 ### Traductions au pluriel
 
-Laravel gère automatiquement les formes plurielles avec `trans_choice()` :
+Laravel gère automatiquement les formes plurielles avec `trans_choice()`.
+
+Soit un fichier de traduction `lang/fr/ui.php` avec la clé suivante :
 
 ```php
-<p>{{ trans_choice('ui.posts.likes_count', $likesCount, ['count' => $likesCount]) }}</p>
+<?php
+
+declare(strict_types=1);
+
+return [
+    // ... autres traductions ...
+    'posts' => [
+        'title' => 'Publications',
+        'likes_count' => "{0} Aucun like|{1} :count like|[2,*] :count likes",
+    ],
+    // ... autres traductions ...
+];
+```
+
+Il est possible d'afficher la traduction appropriée selon le nombre de likes
+avec la fonction `trans_choice()` dans la vue :
+
+```php
+<p>{{ trans_choice('ui.posts.likes_count', $likesCount) }}</p>
 ```
 
 Dans le fichier de traduction, utilisez `|` pour séparer les formes singulière
@@ -817,31 +864,6 @@ et plurielle :
 Laravel choisira automatiquement la forme appropriée selon le nombre fourni.
 Ici, une expression régulière est utilisée pour gérer les cas de 0, 1 et 2 ou
 plus.
-
-## Gestion des dépendances avec Composer
-
-Composer est le gestionnaire de dépendances de PHP, similaire à npm pour
-JavaScript ou pip pour Python. Nous pouvons l'utiliser pour installer des
-librairies externes qui facilitent le développement de notre application, tel
-que la gestion de l'internationalisation.
-
-### Installation d'une dépendance
-
-Pour installer une librairie externe, utilisez la commande `composer require` :
-
-```bash
-composer require laravel-lang/lang --dev
-```
-
-L'option `--dev` indique que cette dépendance est uniquement nécessaire en
-développement et ne sera pas installée en production.
-
-Pour rappel, les fichiers liés à Composer sont les suivants :
-
-- `composer.json` : liste les dépendances du projet et leurs versions.
-- `composer.lock` : fige les versions exactes installées pour garantir la
-  reproductibilité.
-- `vendor/` : répertoire contenant toutes les dépendances installées.
 
 ### Librairie `laravel-lang/lang`
 
@@ -863,73 +885,12 @@ Cela génère automatiquement les fichiers de traduction pour Laravel (auth,
 pagination, passwords, validation) dans la langue choisie, vous évitant de
 devoir tout traduire manuellement.
 
-## Variables d'environnement
+Ces traductions de base sont utilisées par certaines fonctionnalités de Laravel,
+comme les messages d'erreur de validation, les messages d'authentification, etc.
 
-Les variables d'environnement permettent de configurer une application
-différemment selon l'environnement (développement, test, production) sans
-modifier le code.
-
-### Le fichier `.env`
-
-Le fichier `.env` à la racine du projet contient les variables d'environnement
-spécifiques à votre machine locale :
-
-```text
-APP_NAME="My Social Network"
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost:8000
-
-DB_CONNECTION=sqlite
-
-APP_LOCALE=fr
-APP_FALLBACK_LOCALE=fr
-APP_FAKER_LOCALE=fr_FR
-```
-
-- Ce fichier n'est **jamais** ajouté dans Git (il est dans le fichier
-  `.gitignore`).
-- Chaque personne qui développe a son propre fichier `.env` avec ses
-  configurations locales.
-- Les valeurs sensibles (clés API, mots de passe) doivent rester dans ce fichier
-  et ne jamais être versionnées.
-
-### Le fichier `.env.example`
-
-Le fichier `.env.example` est un modèle de fichier `.env` qui, lui, est ajouté
-dans Git :
-
-```text
-APP_NAME=Laravel
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-Le rôle de ce fichier est de :
-
-- Documenter toutes les variables d'environnement nécessaires au projet.
-- Fournir des valeurs par défaut ou des exemples pour chaque variable.
-- Faciliter la configuration initiale pour les nouvelles personnes sur le
-  projet.
-
-Lorsqu'une nouvelle personne clone le projet, elle doit copier `.env.example`
-vers `.env` et adapter les valeurs à son environnement local.
-
-### Bonnes pratiques
-
-- Mettez à jour `.env.example` chaque fois que vous ajoutez une nouvelle
-  variable d'environnement dans votre `.env`.
-- Utilisez des valeurs génériques dans `.env.example`, jamais de valeurs
-  sensibles réelles.
-- Documentez les variables avec des commentaires si nécessaire.
+Cette librairie sera particulièrement utile dans de futures séances où nous
+utiliserons des fonctionnalités de Laravel qui reposent sur ces traductions,
+comme les formulaires d'authentification ou les messages de validation.
 
 ## Tailwind CSS
 
@@ -980,20 +941,25 @@ Avec Tailwind, vous utilisez des classes utilitaires directement dans le HTML :
 </div>
 ```
 
-### Comparaison
+Les avantages de Tailwind CSS incluent :
 
-Nous n'allons pas aller trop dans les détails de Tailwind CSS dans ce cours,
-mais voici un tableau comparatif des deux approches :
+- Rapidité de développement grâce à des classes prédéfinies (pas besoin
+  d'inventer des noms de classes).
+- Pas de CSS personnalisé à maintenir, ce qui réduit les risques de conflits et
+  de code obsolète.
+- Tout est au même endroit (HTML), ce qui facilite la compréhension de la
+  structure et du style d'un composant.
+- Cohérence visuelle grâce à un système de design intégré.
+- CSS minimal généré automatiquement en production.
 
-| Aspect                 | CSS classique                                                     | Tailwind CSS                                  |
-| :--------------------- | :---------------------------------------------------------------- | :-------------------------------------------- |
-| Nomenclature           | Nécessite d'inventer des noms de classes                          | Classes utilitaires prédéfinies               |
-| Fichiers CSS           | Fichiers CSS séparés qui grossissent                              | CSS minimal généré automatiquement            |
-| Maintenance            | Recherche entre HTML et CSS                                       | Tout au même endroit                          |
-| Cohérence              | Risque de valeurs incohérentes                                    | Système de design unifié                      |
-| Lisibilité             | HTML plus propre, CSS plus verbeux                                | HTML plus verbeux, pas de CSS custom          |
-| Courbe d'apprentissage | Connaissance CSS standard                                         | Apprendre les conventions Tailwind            |
-| Pérennité              | Plus de code personnalisé à maintenir en fonction des navigateurs | Moins de code personnalisé, classes éprouvées |
+Les inconvénients de Tailwind CSS incluent :
+
+- HTML plus verbeux avec de nombreuses classes.
+- Courbe d'apprentissage pour maîtriser les conventions de nommage des classes.
+- Moins de contrôle granulaire sur le CSS (bien que Tailwind offre des options
+  de personnalisation avancées).
+- Dépendance à un framework externe (mais largement adopté et maintenu).
+- Peut ne pas être adapté pour des projets très simples ou des sites statiques.
 
 ### Intégration avec Laravel et Vite
 
@@ -1040,6 +1006,12 @@ Comme le contenu du cours ne repose pas sur Tailwind CSS, nous n'allons pas
 entrer dans les détails de son utilisation, mais voici un aperçu des concepts
 clés et des classes utilitaires de base pour vous donner une idée de ce que
 Tailwind offre.
+
+**Le cours ne mettra pas l'accent sur Tailwind CSS**. Il est utilisé
+principalement pour fournir une base d'interface élégante et cohérente, mais
+l'accent du cours est sur Laravel et la programmation côté serveur. Vous n'avez
+pas besoin de maîtriser Tailwind pour réussir dans ce cours, mais nous
+l'utiliserons pour styliser les interfaces de manière efficace.
 
 **Ce contenu est optionnel est n'est là que pour vous aider à démarrer avec
 Tailwind CSS si vous souhaitez aller plus loin.**
@@ -1191,7 +1163,7 @@ Tailwind gère aussi les états hover, focus, active, etc. :
 <input class="border focus:border-blue-500 focus:ring-2 focus:ring-blue-200" />
 
 <!-- Styles combinés -->
-<a class="text-blue-500 hover:text-blue-700 hover:underline"> Lien </a>
+<a class="text-blue-500 hover:text-blue-700 hover:underline">Lien</a>
 ```
 
 ## Conclusion
