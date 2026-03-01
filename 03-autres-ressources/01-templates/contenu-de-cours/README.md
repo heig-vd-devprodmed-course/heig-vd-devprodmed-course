@@ -68,15 +68,8 @@ Ce travail est sous licence [{LICENSE_NAME}][licence].
 Ce contenu de cours a pour objectifs de permettre aux personnes qui étudient de
 TODO.
 
-De façon plus concise, à l'issue de cette séance, les personnes qui étudient
-devraient être capables de :
-
-- Objectif 1.
-- Objectif 2.
-- ...
-- Objectif n.
-
----
+La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
+bloc d'information en haut de ce contenu.
 
 ## Conclusion
 

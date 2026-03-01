@@ -37,6 +37,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > - Décrire la différence entre du CSS "classique" et un framework CSS
 >   utilitaire comme Tailwind CSS.
 > - Utiliser Tailwind CSS pour styliser les interfaces utilisateur.
+> - Implémenter ces concepts avec Laravel pour réaliser le petit réseau social
+>   du mini-projet.
 >
 > **Méthodes d'enseignement et d'apprentissage**
 >
@@ -116,25 +118,15 @@ le contexte d'une application Laravel. Les personnes qui étudient apprendront �
 structurer leurs vues de manière réutilisable, à mettre en place
 l'internationalisation, et à styliser leurs applications avec Tailwind CSS.
 
-De façon plus concise, à l'issue de cette séance, les personnes qui étudient
-devraient être capables de :
+Ce contenu repose sur la documentation officielle suivante :
 
-- Décrire la partie "vue" du patron de conception MVC.
-- Décrire le concept de moteur de template et son intérêt.
-- Utiliser Blade pour créer des vues dans une application Laravel.
-- Utiliser les directives de Blade pour structurer les vues et afficher des
-  données.
-- Utiliser Blade pour créer des layouts réutilisables.
-- Utiliser les slots (par défaut et nommés) pour passer du contenu aux
-  composants.
-- Utiliser Blade pour créer des composants réutilisables.
-- Utiliser les layouts et les composants Blade pour structurer une application
-  Laravel.
-- Mettre en place l'internationalisation (i18n) dans une application Laravel.
-- Utiliser les fichiers de traduction pour supporter plusieurs langues.
-- Décrire la différence entre du CSS "classique" et un framework CSS utilitaire
-  comme Tailwind CSS.
-- Utiliser Tailwind CSS pour styliser les interfaces utilisateur.
+- <https://laravel.com/docs/12.x/views> et ses sous-sections.
+- <https://laravel.com/docs/12.x/blade> et ses sous-sections.
+- <https://laravel.com/docs/12.x/localization> et ses sous-sections.
+- <https://laravel.com/docs/12.x/vite> et ses sous-sections.
+
+La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
+bloc d'information en haut de ce contenu.
 
 ## Introduction aux vues dans le patron MVC
 
@@ -1013,158 +1005,10 @@ l'accent du cours est sur Laravel et la programmation côté serveur. Vous n'ave
 pas besoin de maîtriser Tailwind pour réussir dans ce cours, mais nous
 l'utiliserons pour styliser les interfaces de manière efficace.
 
-**Ce contenu est optionnel est n'est là que pour vous aider à démarrer avec
-Tailwind CSS si vous souhaitez aller plus loin.**
-
-#### Design system intégré
-
-Tailwind fournit un système cohérent pour :
-
-- Les espacements (margin, padding) : `m-4`, `p-2`, `mx-auto`.
-- Les couleurs : `bg-blue-500`, `text-red-600`, `border-gray-300`.
-- La typographie : `text-xl`, `font-bold`, `leading-relaxed`.
-- Les ombres : `shadow-sm`, `shadow-md`, `shadow-lg`.
-- Les bordures : `border`, `rounded-lg`, `border-2`.
-
-#### Purge du CSS inutilisé
-
-Tailwind génère automatiquement un fichier CSS minimal contenant uniquement les
-classes que vous utilisez réellement dans votre application, ce qui résulte en
-des fichiers CSS très légers en production.
-
-#### Layout et espacement
-
-```html
-<!-- Display -->
-<div class="block">...</div>
-<div class="flex">...</div>
-<div class="grid">...</div>
-<div class="hidden">...</div>
-
-<!-- Flexbox -->
-<div class="flex items-center justify-between">...</div>
-
-<!-- Padding et margin -->
-<div class="p-4 m-2">...</div>
-<!-- padding: 1rem, margin: 0.5rem -->
-<div class="px-4 py-2">...</div>
-<!-- padding horizontal/vertical -->
-<div class="mt-4 mb-6">...</div>
-<!-- margin top/bottom -->
-
-<!-- Width et height -->
-<div class="w-full h-screen">...</div>
-<!-- 100% width, 100vh height -->
-<div class="w-1/2 h-64">...</div>
-<!-- 50% width, 16rem height -->
-```
-
-#### Typographie
-
-```html
-<!-- Taille de texte -->
-<p class="text-sm">Petit texte</p>
-<p class="text-base">Texte normal</p>
-<p class="text-xl">Grand texte</p>
-<p class="text-4xl">Très grand texte</p>
-
-<!-- Graisse et style -->
-<p class="font-light">Léger</p>
-<p class="font-normal">Normal</p>
-<p class="font-bold">Gras</p>
-<p class="italic">Italique</p>
-
-<!-- Alignement -->
-<p class="text-left">Aligné à gauche</p>
-<p class="text-center">Centré</p>
-<p class="text-right">Aligné à droite</p>
-```
-
-#### Couleurs
-
-```html
-<!-- Couleur de texte -->
-<p class="text-gray-900">Texte très foncé</p>
-<p class="text-blue-500">Texte bleu</p>
-<p class="text-red-600">Texte rouge</p>
-
-<!-- Couleur de fond -->
-<div class="bg-white">Fond blanc</div>
-<div class="bg-gray-100">Fond gris clair</div>
-<div class="bg-blue-500">Fond bleu</div>
-
-<!-- Couleur de bordure -->
-<div class="border border-gray-300">Bordure grise</div>
-```
-
-Les couleurs vont de 50 (très clair) à 950 (très foncé) pour la plupart des
-teintes.
-
-#### Bordures et arrondis
-
-```html
-<!-- Bordures -->
-<div class="border">Bordure simple</div>
-<div class="border-2">Bordure épaisse</div>
-<div class="border-t">Bordure en haut seulement</div>
-
-<!-- Arrondis -->
-<div class="rounded">Coins arrondis légers</div>
-<div class="rounded-lg">Coins bien arrondis</div>
-<div class="rounded-full">Complètement rond (cercle)</div>
-```
-
-#### Ombres
-
-```html
-<div class="shadow-sm">Ombre légère</div>
-<div class="shadow-md">Ombre moyenne</div>
-<div class="shadow-lg">Ombre prononcée</div>
-```
-
-#### Responsive design
-
-Tailwind utilise des préfixes pour appliquer des styles à différentes tailles
-d'écran :
-
-```html
-<!-- Pile sur mobile, grille sur desktop -->
-<div class="flex flex-col md:flex-row">
-	<div class="w-full md:w-1/2">Colonne 1</div>
-	<div class="w-full md:w-1/2">Colonne 2</div>
-</div>
-
-<!-- Texte petit sur mobile, grand sur desktop -->
-<h1 class="text-2xl md:text-4xl lg:text-5xl">Titre responsive</h1>
-```
-
-#### Dark mode
-
-Tailwind facilite l'implémentation du mode sombre avec le préfixe `dark:` :
-
-```html
-<div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-	<h1>Titre qui s'adapte au thème</h1>
-	<p class="text-gray-600 dark:text-gray-300">
-		Texte qui reste lisible en mode sombre.
-	</p>
-</div>
-```
-
-#### États interactifs
-
-Tailwind gère aussi les états hover, focus, active, etc. :
-
-```html
-<!-- Changement de couleur au survol -->
-<button class="bg-blue-500 hover:bg-blue-700 text-white">Survolez-moi</button>
-
-<!-- Style au focus -->
-<input class="border focus:border-blue-500 focus:ring-2 focus:ring-blue-200" />
-
-<!-- Styles combinés -->
-<a class="text-blue-500 hover:text-blue-700 hover:underline">Lien</a>
-```
+Pour les personnes intéressées à approfondir Tailwind CSS, la documentation
+officielle est une excellente ressource : <https://tailwindcss.com/docs>. Les
+sujets abordés dans la section "Core concepts" permettent d'avoir d'excellentes
+bases de compréhension des concepts fondamentaux.
 
 ## Conclusion
 

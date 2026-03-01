@@ -102,18 +102,8 @@ Ce contenu repose sur la documentation officielle suivante :
 - <https://laravel.com/docs/12.x/database> et ses sous-sections.
 - <https://laravel.com/docs/12.x/eloquent> et ses sous-sections.
 
-De façon plus concise, à l'issue de cette séance, les personnes qui étudient
-devraient être capables de :
-
-- Décrire comment Laravel peut interagir avec plusieurs types de bases de
-  données.
-- Décrire le concept de migrations avec Laravel.
-- Décrire le concept d'un ORM tel qu'Eloquent.
-- Décrire le concept de "query builder" de Laravel.
-- Décrire le concept de "seeders" dans Laravel.
-- Décrire la partie "modèle" du patron de conception MVC.
-- Implémenter ces concepts avec Laravel pour réaliser le petit réseau social du
-  mini-projet.
+La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
+bloc d'information en haut de ce contenu.
 
 ## Laravel et les bases de données
 

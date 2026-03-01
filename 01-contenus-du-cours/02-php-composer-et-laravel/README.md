@@ -104,16 +104,8 @@ Ce contenu repose sur la documentation officielle suivante :
 - <https://laravel.com/docs/12.x/installation> et ses sous-sections.
 - <https://laravel.com/docs/12.x/configuration> et ses sous-sections.
 
-De façon plus concise, à l'issue de cette séance, les personnes qui étudient
-devraient être capables de :
-
-- Décrire la différence entre l'écriture de code PHP (vanilla) et l'utilisation
-  de librairies externes.
-- Utiliser Composer pour gérer des librairies externes.
-- Décrire les principes de base de Laravel.
-- Lister où trouver des ressources et de l'aide sur Laravel.
-- Décrire la différence entre PHP, Composer et des frameworks comme Laravel.
-- Décrire le lien entre PHP, JavaScript, Composer et npm.
+La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
+bloc d'information en haut de ce contenu.
 
 ## PHP vanilla vs librairies externes
 
