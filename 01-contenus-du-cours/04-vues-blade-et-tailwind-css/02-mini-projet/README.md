@@ -1732,7 +1732,7 @@ définir le template Blade du composant pour les posts dans le fichier
     </div>
 
     <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
-        <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+        <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
             <span class="font-semibold">
                 {{ trans_choice('ui.posts.likes_count', count($post->likes)) }}
             </span>
