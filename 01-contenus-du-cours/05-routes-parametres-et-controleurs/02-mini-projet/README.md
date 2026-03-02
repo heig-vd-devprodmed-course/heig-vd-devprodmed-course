@@ -16,29 +16,26 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Objectifs](#objectifs)
 - [Identifier les routes et les contrôleurs nécessaires pour l'application](#identifier-les-routes-et-les-contrôleurs-nécessaires-pour-lapplication)
 - [Supprimer les routes de tests des séances précédentes](#supprimer-les-routes-de-tests-des-séances-précédentes)
-- [Créer le contrôleur pour gérer les Posts](#créer-le-contrôleur-pour-gérer-les-posts)
+- [Mettre à jour le composant `PostCard` pour accéder au profil de l'auteur.trice du post ainsi qu'à la page de détails du post](#mettre-à-jour-le-composant-postcard-pour-accéder-au-profil-de-lauteurtrice-du-post-ainsi-quà-la-page-de-détails-du-post)
   - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche)
+  - [Mettre à jour le composant `PostCard`](#mettre-à-jour-le-composant-postcard)
+  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request)
+- [Créer le contrôleur pour gérer les profiles](#créer-le-contrôleur-pour-gérer-les-profiles)
+  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-1)
   - [Créer le contrôleur](#créer-le-contrôleur)
   - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur)
-  - [Méthode `index`](#méthode-index)
-  - [Méthode `show`](#méthode-show)
-  - [Méthode `create`](#méthode-create)
-  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request)
-- [Créer le contrôleur pour gérer les Users](#créer-le-contrôleur-pour-gérer-les-users)
-  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-1)
-  - [Créer le contrôleur](#créer-le-contrôleur-1)
-  - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur-1)
   - [Définir les méthodes du contrôleur pour gérer les différentes actions](#définir-les-méthodes-du-contrôleur-pour-gérer-les-différentes-actions)
   - [Lier les controllers aux vues correspondantes](#lier-les-controllers-aux-vues-correspondantes)
   - [Tester les routes de votre application](#tester-les-routes-de-votre-application)
   - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-1)
-- [Créer le contrôleur pour gérer les Likes](#créer-le-contrôleur-pour-gérer-les-likes)
+- [Créer le contrôleur pour gérer les posts](#créer-le-contrôleur-pour-gérer-les-posts)
   - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-2)
-  - [Créer le contrôleur](#créer-le-contrôleur-2)
-  - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur-2)
-  - [Définir les méthodes du contrôleur pour gérer les différentes actions](#définir-les-méthodes-du-contrôleur-pour-gérer-les-différentes-actions-1)
-  - [Lier les controllers aux vues correspondantes](#lier-les-controllers-aux-vues-correspondantes-1)
-  - [Tester les routes de votre application](#tester-les-routes-de-votre-application-1)
+  - [Créer le contrôleur](#créer-le-contrôleur-1)
+  - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur-1)
+  - [Méthode `index`](#méthode-index)
+  - [Méthode `show`](#méthode-show)
+  - [Méthode `create`](#méthode-create)
+  - [Méthode `edit`](#méthode-edit)
   - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-2)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
@@ -64,6 +61,10 @@ votre application et les actions que vous souhaitez permettre pour chaque
 ressource (par exemple : afficher la liste des posts, afficher un post
 spécifique, créer un post, etc.).
 
+Utilisez les méthodes HTTP appropriées pour chaque action (par exemple, `GET`
+pour afficher des pages, `POST` pour créer des ressources, `PUT/PATCH` pour
+mettre à jour des ressources, `DELETE` pour supprimer des ressources).
+
 <details>
 <summary>Exemple de réponse</summary>
 
@@ -76,7 +77,38 @@ spécifique, créer un post, etc.).
 > N'hésitez pas à proposer d'autres ressources ou actions que celles mentionnées
 > dans cet exemple.
 
-TODO
+**Pages principales**
+
+- `GET /` : page d'accueil. Dans un premier temps, elle pourra simplement
+  afficher la liste des posts. Plus tard, d'autres fonctionnalités pourront être
+  ajoutées à cette page.
+- `GET /about` : page "À propos" pour présenter l'application et son objectif.
+
+**Profil utilisateur**
+
+- `GET /@{user}` : page pour afficher le profil d'un utilisateur spécifique.
+- `GET /profile` : page pour afficher le profil de l'utilisateur connecté.
+- `GET /profile/edit` : page pour afficher le formulaire d'édition du profil de
+  l'utilisateur connecté.
+
+**Posts**
+
+- `GET /posts` : page pour afficher la liste de tous les posts.
+- `GET /posts/{post}` : page pour afficher les détails d'un post spécifique.
+- `GET /posts/{post}/edit` : page pour afficher le formulaire d'édition d'un
+  post existant.
+- `GET /posts/create` : page pour afficher le formulaire de création d'un
+  nouveau post.
+- `POST /posts` : action pour traiter la soumission du formulaire de création
+  d'un nouveau post.
+- `PUT/PATCH /posts/{post}` : action pour traiter la soumission du formulaire de
+  mise à jour d'un post existant.
+- `DELETE /posts/{post}` : action pour supprimer un post spécifique.
+
+**Likes**
+
+- `PATCH/PUT /posts/{post}/likes` : action pour créer our retirer un like sur un
+  post spécifique.
 
 </details>
 
@@ -126,7 +158,65 @@ Validez la pull request et fusionnez-la une fois que les modifications sont
 terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
 cette tâche.
 
-## Créer le contrôleur pour gérer les Posts
+## Mettre à jour le composant `PostCard` pour accéder au profil de l'auteur.trice du post ainsi qu'à la page de détails du post
+
+### Créer l'issue et la branche pour suivre cette tâche
+
+Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
+branche correspondante à partir de la branche principale `main`.
+
+Basculez sur la branche que vous venez de créer, puis suivez les étapes
+suivantes pour mettre en place l'internationalisation dans votre application
+Laravel.
+
+### Mettre à jour le composant `PostCard`
+
+### Pousser les modifications et fusionner la pull request
+
+Une fois les modifications terminées, validez les modifications dans Git, puis
+vous pouvez créer la pull request.
+
+Validez la pull request et fusionnez-la une fois que les modifications sont
+terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
+cette tâche.
+
+N'oubliez pas de récupérer les modifications localement après la fusion de la
+pull request.
+
+## Créer le contrôleur pour gérer les profiles
+
+### Créer l'issue et la branche pour suivre cette tâche
+
+Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
+branche correspondante à partir de la branche principale `main`.
+
+Basculez sur la branche que vous venez de créer, puis suivez les étapes
+suivantes pour mettre en place l'internationalisation dans votre application
+Laravel.
+
+### Créer le contrôleur
+
+### Lier les routes au contrôleur
+
+### Définir les méthodes du contrôleur pour gérer les différentes actions
+
+### Lier les controllers aux vues correspondantes
+
+### Tester les routes de votre application
+
+### Pousser les modifications et fusionner la pull request
+
+Une fois les modifications terminées, validez les modifications dans Git, puis
+vous pouvez créer la pull request.
+
+Validez la pull request et fusionnez-la une fois que les modifications sont
+terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
+cette tâche.
+
+N'oubliez pas de récupérer les modifications localement après la fusion de la
+pull request.
+
+## Créer le contrôleur pour gérer les posts
 
 Dans cette section, nous allons créer le contrôleur pour gérer les posts de
 notre application de réseau social. Ce contrôleur sera responsable de la logique
@@ -433,7 +523,7 @@ contenu du post, l'auteur du post, les likes du post, etc.).
 
 #### Tester la route
 
-#### Méthode `edit`
+### Méthode `edit`
 
 #### Créer la vue
 
@@ -442,72 +532,6 @@ contenu du post, l'auteur du post, les likes du post, etc.).
 #### Mettre à jour les traductions
 
 #### Tester la route
-
-### Pousser les modifications et fusionner la pull request
-
-Une fois les modifications terminées, validez les modifications dans Git, puis
-vous pouvez créer la pull request.
-
-Validez la pull request et fusionnez-la une fois que les modifications sont
-terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
-cette tâche.
-
-N'oubliez pas de récupérer les modifications localement après la fusion de la
-pull request.
-
-## Créer le contrôleur pour gérer les Users
-
-### Créer l'issue et la branche pour suivre cette tâche
-
-Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
-branche correspondante à partir de la branche principale `main`.
-
-Basculez sur la branche que vous venez de créer, puis suivez les étapes
-suivantes pour mettre en place l'internationalisation dans votre application
-Laravel.
-
-### Créer le contrôleur
-
-### Lier les routes au contrôleur
-
-### Définir les méthodes du contrôleur pour gérer les différentes actions
-
-### Lier les controllers aux vues correspondantes
-
-### Tester les routes de votre application
-
-### Pousser les modifications et fusionner la pull request
-
-Une fois les modifications terminées, validez les modifications dans Git, puis
-vous pouvez créer la pull request.
-
-Validez la pull request et fusionnez-la une fois que les modifications sont
-terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
-cette tâche.
-
-N'oubliez pas de récupérer les modifications localement après la fusion de la
-pull request.
-
-## Créer le contrôleur pour gérer les Likes
-
-### Créer l'issue et la branche pour suivre cette tâche
-
-Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
-branche correspondante à partir de la branche principale `main`.
-
-Basculez sur la branche que vous venez de créer, puis suivez les étapes
-suivantes pour mettre en place l'internationalisation dans votre application
-Laravel.
-
-### Créer le contrôleur
-
-### Lier les routes au contrôleur
-
-### Définir les méthodes du contrôleur pour gérer les différentes actions
-
-### Lier les controllers aux vues correspondantes
-
-### Tester les routes de votre application
 
 ### Pousser les modifications et fusionner la pull request
 
