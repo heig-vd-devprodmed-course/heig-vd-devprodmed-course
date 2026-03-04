@@ -12,9 +12,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > **Ressources annexes**
 >
 > - Autres formats du support de cours : [Présentation (web)][presentation-web]
->   · [Présentation (PDF)][presentation-pdf]
-> - Exercices : [Accéder au contenu](./01-exercices/README.md)
-> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md)
+>   · [Présentation (PDF)][presentation-pdf].
+> - Exercices : [Accéder au contenu](./01-exercices/README.md).
+> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md).
 >
 > **Objectifs**
 >
@@ -347,7 +347,7 @@ utilisateurs, etc.), ce qui facilite la maintenance et la compréhension du code
 La commande de base pour créer un contrôleur dans Laravel est la suivante :
 
 ```bash
-php artisan make:controller NomDuControlleurController
+php artisan make:controller NomDuContrôleurController
 ```
 
 Il est conventionnel de nommer les contrôleurs avec le suffixe `Controller`
@@ -453,7 +453,13 @@ l'identifiant `{id}`.
 Il est possible de définir des routes pour les autres méthodes du contrôleur
 (comme `create()`, `store()`, `edit()`, `update()`, `destroy()`) de manière
 similaire, en utilisant les méthodes HTTP appropriées (`POST`, `PUT`, `DELETE`,
-etc.) et en associant les routes correspondantes à ces méthodes.
+etc.) et en associant les routes correspondantes à ces méthodes :
+
+```php
+Route::post('/posts', [PostController::class, 'store']);
+Route::put('/posts/{id}', [PostController::class, 'update']);
+Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+```
 
 ### Créer un contrôleur de ressource
 
@@ -463,7 +469,7 @@ edit, update, destroy) en une seule commande (source :
 <https://laravel.com/docs/12.x/controllers#resource-controllers>) :
 
 ```bash
-php artisan make:controller NomDuControlleurController --resource
+php artisan make:controller NomDuContrôleurController --resource
 ```
 
 Un contrôleur de ressource est une classe de contrôleur qui contient toutes les
