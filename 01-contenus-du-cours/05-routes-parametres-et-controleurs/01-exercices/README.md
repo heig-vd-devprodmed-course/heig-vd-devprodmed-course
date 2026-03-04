@@ -90,13 +90,13 @@ suivante : <https://laravel.com/docs/12.x/controllers>.
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
 sur les actions gérées par défaut mises à disposition lors de l'utilisation d'un
-contrôleur de type \_"resource" ?
+contrôleur de type _"resource"_ ?
 
 <details>
 <summary>Afficher la solution</summary>
 
 La documentation officielle de Laravel sur les actions gérées par défaut mises à
-disposition lors de l'utilisation d'un contrôleur de type \_"resource" se trouve
+disposition lors de l'utilisation d'un contrôleur de type _"resource"_ se trouve
 à l'adresse suivante :
 <https://laravel.com/docs/12.x/controllers#actions-handled-by-resource-controllers>.
 
