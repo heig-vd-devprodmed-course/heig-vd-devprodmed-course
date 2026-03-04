@@ -1,20 +1,20 @@
 ---
 marp: true
-theme: 'custom-marp-theme'
-size: '16:9'
-paginate: 'true'
+theme: "custom-marp-theme"
+size: "16:9"
+paginate: "true"
 author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
-  'Bases de données, Eloquent et modèles pour le cours DévProdMéd enseigné à la
-  HEIG-VD, Suisse'
-lang: 'fr'
-url: 'https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/presentation.html'
+  "Bases de données, Eloquent et modèles pour le cours DévProdMéd enseigné à la
+  HEIG-VD, Suisse"
+lang: "fr"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/03-bases-de-donnees-eloquent-et-modeles/presentation.html"
 header:
-  '[**Bases de données, Eloquent et modèles**][contenu-complet-sur-github]'
+  "[**Bases de données, Eloquent et modèles**][contenu-complet-sur-github]"
 footer:
-  '[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
+  "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
   2025-2026](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
-  - [CC BY-SA 4.0][licence]'
+  - [CC BY-SA 4.0][licence]"
 headingDivider: 6
 ---
 
@@ -480,7 +480,7 @@ $post = Post::find(1);
 $user = $post->user;
 ```
 
-## Requêtes et query builder (1)
+## Requêtes et query builder
 
 Eloquent utilise un _"query builder"_ pour construire les requêtes SQL de
 manière fluide (= chaîner plusieurs méthodes) et orientée objet.

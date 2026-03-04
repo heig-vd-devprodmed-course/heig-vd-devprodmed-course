@@ -66,6 +66,54 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 Mettre en place l'interface utilisateur du petit réseau social en utilisant
 Tailwind CSS et Blade.
 
+> [!IMPORTANT]
+>
+> Il se peut que vos styles CSS "disparaissent" durant la réalisation de ce
+> mini-projet et que vous ayez des pages qui ne soient plus stylisées (avoir
+> uniquement la structure sans les styles de Tailwind), ce qui pourrait vous
+> faire penser que vous avez cassé quelque chose mais ce n'est pas forcément le
+> cas.
+>
+> Comme décrit dans le support de cours, Tailwind CSS repose sur des
+> technologies issues du monde de Node.js. De ce fait, Laravel intègre Vite afin
+> de pouvoir gérer correctement les styles CSS avec Tailwind dans une
+> application Laravel.
+>
+> Il n'est donc pas impossible qu'il faille reconstruire les styles CSS de
+> Tailwind en utilisant les commandes suivantes dans votre terminal à la racine
+> de votre projet Laravel :
+>
+> ```bash
+> npm install
+>
+> npm run build
+>
+> composer run dev
+> ```
+>
+> La première commande a donc pour but de s'assurer que toutes les dépendances
+> Node.js sont installées (ce qui devrait être le cas).
+>
+> La seconde commande va effectuer le nécessaire pour construire et préparer les
+> styles CSS liés à Tailwind, ce qui devrait mettre à jour des fichiers
+> nécessaires pour que tout refonctionne correctement.
+>
+> Finalement la dernière commande lance le serveur de développement, ce qui
+> permet de valider si vos styles CSS sont bien réapparus.
+>
+> Je (Ludovic) n'ai pas d'explications de pourquoi les styles se cassent de
+> cette manière (n'ayant moi-même pas rencontré ce problème, mon explication
+> serait peut-être que Vite crashe en arrière plan lors d'une fusion de branches
+> sur Windows).
+>
+> Mais c'est aussi une des raisons pour lesquelles nous avons mis à jour le
+> fichier README.md pour contenir toutes les instructions pour initialiser le
+> projet localement (les mêmes commandes que décrites ci-dessus).
+>
+> De cette manière, que ce soit aujourd'hui, la semaine prochaine ou dans
+> plusieurs mois, lorsque vous reprendrez ce projet, vous pourrez réutiliser
+> cette marche à suivre pour remettre en place un environnement fonctionnel. 🙂
+
 ## Identifier les pages de l'interface utilisateur et leur structure
 
 Avant de commencer à coder, il est important d'identifier les différentes pages

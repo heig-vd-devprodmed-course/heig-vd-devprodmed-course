@@ -12,9 +12,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > **Ressources annexes**
 >
 > - Autres formats du support de cours : [Présentation (web)][presentation-web]
->   · [Présentation (PDF)][presentation-pdf]
-> - Exercices : [Accéder au contenu](./01-exercices/README.md)
-> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md)
+>   · [Présentation (PDF)][presentation-pdf].
+> - Exercices : [Accéder au contenu](./01-exercices/README.md).
+> - Mini-projet : [Accéder au contenu](./02-mini-projet/README.md).
 >
 > **Objectifs**
 >
@@ -77,10 +77,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Paramètres de route](#paramètres-de-route)
 - [Contrôleurs](#contrôleurs)
   - [Créer un contrôleur](#créer-un-contrôleur)
-  - [Associer une route à un contrôleur](#associer-une-route-à-un-contrôleur)
-  - [Gérer les requêtes HTTP dans un contrôleur](#gérer-les-requêtes-http-dans-un-contrôleur)
-  - [Retourner des réponses HTTP depuis un contrôleur](#retourner-des-réponses-http-depuis-un-contrôleur)
-- [Tester les routes et les contrôleurs](#tester-les-routes-et-les-contrôleurs)
+  - [Créer la méthode d'un contrôleur](#créer-la-méthode-dun-contrôleur)
+  - [Associer une route à une méthode du contrôleur](#associer-une-route-à-une-méthode-du-contrôleur)
+  - [Créer un contrôleur de ressource](#créer-un-contrôleur-de-ressource)
 - [Gérer les erreurs dans les contrôleurs](#gérer-les-erreurs-dans-les-contrôleurs)
 - [Le patron MVC : récapitulatif](#le-patron-mvc--récapitulatif)
 - [Conclusion](#conclusion)
@@ -345,19 +344,150 @@ utilisateurs, etc.), ce qui facilite la maintenance et la compréhension du code
 
 ### Créer un contrôleur
 
-TODO
+La commande de base pour créer un contrôleur dans Laravel est la suivante :
 
-### Associer une route à un contrôleur
+```bash
+php artisan make:controller NomDuContrôleurController
+```
 
-TODO
+Il est conventionnel de nommer les contrôleurs avec le suffixe `Controller`
+(`UserController`, `PostController`, etc.) pour indiquer clairement leur rôle
+dans l'application.
 
-### Gérer les requêtes HTTP dans un contrôleur
+Cette commande crée un nouveau fichier de contrôleur dans le répertoire
+`app/Http/Controllers/`, avec une classe de contrôleur de base qui peut être
+remplie avec les méthodes nécessaires pour gérer les différentes actions liées à
+la ressource.
 
-TODO
+### Créer la méthode d'un contrôleur
 
-### Retourner des réponses HTTP depuis un contrôleur
+Lorsqu'un contrôleur est créé, il contient une classe vide. Il est nécessaire
+d'ajouter des méthodes à cette classe pour gérer les différentes actions liées à
+la ressource.
 
-TODO
+Selon la documentation de Laravel, il existe une convention pour les méthodes
+d'un contrôleur de ressource, qui sont les suivantes (source :
+<https://laravel.com/docs/12.x/controllers#actions-handled-by-resource-controllers>)
+:
+
+- `index()` : Affiche une liste de ressources.
+- `create()` : Affiche un formulaire pour créer une nouvelle ressource.
+- `store(Request $request)` : Traite la soumission du formulaire de création et
+  stocke la nouvelle ressource.
+- `show($id)` : Affiche une ressource spécifique.
+- `edit($id)` : Affiche un formulaire pour éditer une ressource existante.
+- `update(Request $request, $id)` : Traite la soumission du formulaire d'édition
+  et met à jour la ressource existante.
+- `destroy($id)` : Supprime une ressource spécifique.
+
+Il nous est donc possible de créer ces méthodes dans notre contrôleur pour gérer
+les différentes actions liées à la ressource que nous souhaitons manipuler (par
+exemple, les publications dans notre application de réseau social).
+
+Par exemple, la méthode `index()` pourrait être utilisée pour afficher une liste
+de publications, tandis que la méthode `show($id)` pourrait être utilisée pour
+afficher une publication spécifique en fonction de son identifiant :
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Post;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    public function index()
+    {
+        $posts = Post::orderBy('created_at', 'desc')->with('user')->with('likes')->get();
+
+        return view('posts.index', ['posts' => $posts]);
+    }
+
+    public function show(string $id)
+    {
+        $post = Post::with('user')->with('likes')->findOrFail($id);
+
+        return view('posts.show', ['post' => $post]);
+    }
+}
+```
+
+Ici, la méthode `index()` récupère toutes les publications de la base de
+données, les trie par date de création, et les retourne à la vue `posts.index`.
+
+La méthode `show($id)` récupère une publication spécifique en fonction de son
+identifiant et la retourne à la vue `posts.show`.
+
+### Associer une route à une méthode du contrôleur
+
+Une fois les méthodes du contrôleur créées, il est nécessaire d'associer les
+routes correspondantes pour que les requêtes HTTP soient dirigées vers les
+bonnes méthodes du contrôleur.
+
+Par exemple, pour associer la route `/posts` à la méthode `index()` du
+`PostController`, on pourrait définir la route suivante dans le fichier
+`routes/web.php` :
+
+```php
+use App\Http\Controllers\PostController;
+
+Route::get('/posts', [PostController::class, 'index']);
+```
+
+De même, pour associer la route `/posts/{id}` à la méthode `show($id)` du
+`PostController`, on pourrait définir la route suivante :
+
+```php
+Route::get('/posts/{id}', [PostController::class, 'show']);
+```
+
+Avec ces définitions de routes, lorsqu'une requête HTTP GET est envoyée à l'URL
+`/posts`, la méthode `index()` du `PostController` sera exécutée pour récupérer
+et afficher la liste des publications. De même, lorsqu'une requête HTTP GET est
+envoyée à l'URL `/posts/{id}`, la méthode `show($id)` du `PostController` sera
+exécutée pour récupérer et afficher la publication spécifique correspondant à
+l'identifiant `{id}`.
+
+Il est possible de définir des routes pour les autres méthodes du contrôleur
+(comme `create()`, `store()`, `edit()`, `update()`, `destroy()`) de manière
+similaire, en utilisant les méthodes HTTP appropriées (`POST`, `PUT`, `DELETE`,
+etc.) et en associant les routes correspondantes à ces méthodes :
+
+```php
+Route::post('/posts', [PostController::class, 'store']);
+Route::put('/posts/{id}', [PostController::class, 'update']);
+Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+```
+
+### Créer un contrôleur de ressource
+
+Laravel fournit également une fonctionnalité pour créer un contrôleur de
+ressource complet avec toutes les méthodes standard (index, create, store, show,
+edit, update, destroy) en une seule commande (source :
+<https://laravel.com/docs/12.x/controllers#resource-controllers>) :
+
+```bash
+php artisan make:controller NomDuContrôleurController --resource
+```
+
+Un contrôleur de ressource est une classe de contrôleur qui contient toutes les
+méthodes standard pour gérer les actions liées à une ressource spécifique. Cela
+permet de gagner du temps lors de la création d'un contrôleur, car toutes les
+méthodes de base sont déjà définies, et il suffit de les remplir avec la logique
+nécessaire pour gérer les différentes actions.
+
+Il est également possible de définir une route de ressource qui associe
+automatiquement les routes standard aux méthodes du contrôleur de ressource :
+
+```php
+Route::resource('posts', PostController::class);
+```
+
+Avec cette unique ligne de code, Laravel génère automatiquement les routes pour
+toutes les actions standard (index, create, store, show, edit, update, destroy)
+et les associe aux méthodes correspondantes du `PostController`.
 
 ## Gérer les erreurs dans les contrôleurs
 

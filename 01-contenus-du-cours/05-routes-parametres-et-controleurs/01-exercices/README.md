@@ -19,7 +19,6 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Exercice 3](#exercice-3)
   - [Exercice 4](#exercice-4)
   - [Exercice 5](#exercice-5)
-  - [Exercice 6](#exercice-6)
 
 ## Exercices
 
@@ -38,80 +37,68 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 ### Exercice 1
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les vues et Blade ?
+sur les routes ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les vues et Blade se trouve aux
-adresses suivantes :
-
-- <https://laravel.com/docs/12.x/views>.
-- <https://laravel.com/docs/12.x/blade>.
+La documentation officielle de Laravel sur les routes se trouve à l'adresse
+suivante : <https://laravel.com/docs/12.x/routing>.
 
 </details>
 
 ### Exercice 2
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur l'internationalisation (i18n) ?
+sur les requêtes ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur l'internationalisation (i18n) se
-trouve à l'adresse suivante : <https://laravel.com/docs/12.x/localization>.
+La documentation officielle de Laravel sur les requêtes se trouve à l'adresse
+suivante : <https://laravel.com/docs/12.x/requests>.
 
 </details>
 
 ### Exercice 3
 
-Où peut-on trouver la documentation officielle de Tailwind CSS ?
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les réponses ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Tailwind CSS se trouve à l'adresse suivante :
-<https://tailwindcss.com/docs>.
+La documentation officielle de Laravel sur les réponses se trouve à l'adresse
+suivante : <https://laravel.com/docs/12.x/responses>.
 
 </details>
 
 ### Exercice 4
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les directives Blade ?
+sur les contrôleurs ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les directives Blade se trouve à
-l'adresse suivante : <https://laravel.com/docs/12.x/blade#blade-directives>.
+La documentation officielle de Laravel sur les contrôleurs se trouve à l'adresse
+suivante : <https://laravel.com/docs/12.x/controllers>.
 
 </details>
 
 ### Exercice 5
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les composants Blade ?
+sur les actions gérées par défaut mises à disposition lors de l'utilisation d'un
+contrôleur de type _"resource"_ ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les composants Blade se trouve à
-l'adresse suivante : <https://laravel.com/docs/12.x/blade#components>.
-
-</details>
-
-### Exercice 6
-
-Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les layouts Blade ?
-
-<details>
-<summary>Afficher la solution</summary>
-
-La documentation officielle de Laravel sur les layouts Blade se trouve à
-l'adresse suivante : <https://laravel.com/docs/12.x/blade#building-layouts>.
+La documentation officielle de Laravel sur les actions gérées par défaut mises à
+disposition lors de l'utilisation d'un contrôleur de type _"resource"_ se trouve
+à l'adresse suivante :
+<https://laravel.com/docs/12.x/controllers#actions-handled-by-resource-controllers>.
 
 </details>
 
