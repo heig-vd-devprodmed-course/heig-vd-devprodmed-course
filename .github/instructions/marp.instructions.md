@@ -1,7 +1,7 @@
 ---
 description:
   Instructions when working with Marp presentations in this repository.
-applyTo: '**/PRESENTATION.md, **/QUIZ.md'
+applyTo: "**/PRESENTATION.md, **/QUIZ.md"
 ---
 
 # Marp guidelines
@@ -13,7 +13,6 @@ applyTo: '**/PRESENTATION.md, **/QUIZ.md'
   - OR 10-12 lines of text (prose).
   - OR 15-20 lines of code with minimal text.
   - OR 6-8 lines of text + 10 lines of code.
-
 - If a slide exceeds these limits, consider splitting it into multiple slides to
   maintain readability and engagement. Split content logically, ensuring each
   slide focuses on a single concept or closely related ideas using the following

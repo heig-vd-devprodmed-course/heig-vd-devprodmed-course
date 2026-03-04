@@ -46,15 +46,41 @@ _Pour plus de détails, consulter le [contenu complet sur
 GitHub][contenu-complet-sur-github] ou en cliquant sur l'en-tête de ce
 document._
 
-## Objectifs (1)
+## Objectifs
 
-- TODO
+## Introduction aux contrôleurs dans le patron MVC
 
----
+## Rappels sur le protocole HTTP
+
+### Ressources
+
+### Requêtes et réponses HTTP
+
+### Méthodes HTTP
+
+### En-têtes HTTP
+
+### Corps de requête/réponse
+
+## Routes
+
+## Paramètres de route
+
+## Contrôleurs
+
+### Créer un contrôleur
+
+### Créer la méthode d'un contrôleur
+
+### Associer une route à une méthode du contrôleur
+
+### Créer un contrôleur de ressource
+
+## Gérer les erreurs dans les contrôleurs
+
+## Le patron MVC : récapitulatif
 
 ## Conclusion
-
-- TODO
 
 ## Questions
 
