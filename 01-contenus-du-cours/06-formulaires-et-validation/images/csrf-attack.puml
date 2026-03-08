@@ -74,17 +74,17 @@ note over browser, evilSite
     action="ma-banque.ch/transfers"
     method="POST"
   >
-    <input name="iban" type="hidden" value="1000">
-    <input name="sum" type="hidden" value="CHXX XXXX XXXX XXXX XXXX X">
+    <input name="iban" type="hidden" value="CHXX XXXX XXXX XXXX XXXX X">
+    <input name="sum" type="hidden" value="1000">
     <button type="submit">Accepter le virement de Bob</button>
   </form>
 end note
 
-browser -> evilSite: Alice clique sur le bouton.
+browser -> browser: Alice clique sur le bouton.
 
 == L'attaque se produit ==
 
-browser -> legitSite: La requête par vers ""ma-banque.ch/tranfers"" avec le cookie, le montant à envoyer et l'IBAN de l'attaquant.e.
+browser -> legitSite: La requête part vers ""ma-banque.ch/tranfers"" avec le cookie, le montant à envoyer et l'IBAN de l'attaquant.e.
 
 note over browser, legitSite
   Le navigateur envoie automatiquement le cookie car la requête va vers ""ma-banque.ch"".

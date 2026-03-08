@@ -92,7 +92,7 @@ note over browser, evilSite
   </form>
 end note
 
-browser -> evilSite: Alice clique sur le bouton.
+browser -> browser: Alice clique sur le bouton.
 
 == L'attaque est bloquée ==
 
