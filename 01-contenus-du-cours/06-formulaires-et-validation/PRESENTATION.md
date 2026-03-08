@@ -5,11 +5,11 @@ size: "16:9"
 paginate: "true"
 author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
-  "Routes, paramètres et contrôleurs pour le cours DévProdMéd enseigné à la
-  HEIG-VD, Suisse"
+  "Formulaires et validation pour le cours DévProdMéd enseigné à la HEIG-VD,
+  Suisse"
 lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/05-routes-parametres-et-controleurs/presentation.html"
-header: "[**Routes, paramètres et contrôleurs**][contenu-complet-sur-github]"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/06-formulaires-et-validation/presentation.html"
+header: "[**Formulaires et validation**][contenu-complet-sur-github]"
 footer:
   "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
   2025-2026](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)
@@ -17,7 +17,7 @@ footer:
 headingDivider: 6
 ---
 
-# Routes, paramètres et contrôleurs
+# Formulaires et validation
 
 <!--
 _class: lead
@@ -425,7 +425,7 @@ Est-ce que vous avez des questions ?
 <!-- URLs -->
 
 [contenu-complet-sur-github]:
-	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/05-routes-parametres-et-controleurs/README.md
+	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/06-formulaires-et-validation/README.md
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
 
