@@ -18,7 +18,6 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Exercice 2](#exercice-2)
   - [Exercice 3](#exercice-3)
   - [Exercice 4](#exercice-4)
-  - [Exercice 5](#exercice-5)
 
 ## Exercices
 
@@ -37,68 +36,62 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 ### Exercice 1
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les routes ?
+sur les formulaires ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les routes se trouve à l'adresse
-suivante : <https://laravel.com/docs/12.x/routing>.
+Ceci est une question un peu piège. Ce n'est pas le but, rassurez-vous, mais
+plutôt un constat.
+
+En effet, la documentation officielle de Laravel ne comporte pas directement une
+documentation sur les formulaires.
+
+Cependant, la section principale qui traite de la gestion des formulaires dans
+Laravel est la section sur la validation [des formulaires], qui se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/validation>.
 
 </details>
 
 ### Exercice 2
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les requêtes ?
+sur les protections CSRF ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les requêtes se trouve à l'adresse
-suivante : <https://laravel.com/docs/12.x/requests>.
+La documentation officielle de Laravel sur les protections CSRF se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/csrf>.
 
 </details>
 
 ### Exercice 3
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les réponses ?
+sur les sessions, et plus particulièrement sur les _"flash messages"_ ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les réponses se trouve à l'adresse
-suivante : <https://laravel.com/docs/12.x/responses>.
+La documentation officielle de Laravel sur les sessions se trouve à l'adresse
+suivante : <https://laravel.com/docs/12.x/session>.
+
+La section spécifique sur les _"flash messages"_ se trouve à l'adresse suivante
+: <https://laravel.com/docs/12.x/session#flash-data>.
 
 </details>
 
 ### Exercice 4
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les contrôleurs ?
+sur la gestion des fichiers, notamment pour les uploads ?
 
 <details>
 <summary>Afficher la solution</summary>
 
-La documentation officielle de Laravel sur les contrôleurs se trouve à l'adresse
-suivante : <https://laravel.com/docs/12.x/controllers>.
-
-</details>
-
-### Exercice 5
-
-Où peut-on trouver dans la documentation officielle de Laravel la documentation
-sur les actions gérées par défaut mises à disposition lors de l'utilisation d'un
-contrôleur de type _"resource"_ ?
-
-<details>
-<summary>Afficher la solution</summary>
-
-La documentation officielle de Laravel sur les actions gérées par défaut mises à
-disposition lors de l'utilisation d'un contrôleur de type _"resource"_ se trouve
-à l'adresse suivante :
-<https://laravel.com/docs/12.x/controllers#actions-handled-by-resource-controllers>.
+La documentation officielle de Laravel sur la gestion des fichiers se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/filesystem>.
 
 </details>
 

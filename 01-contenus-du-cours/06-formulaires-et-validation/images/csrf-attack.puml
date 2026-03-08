@@ -1,0 +1,107 @@
+@startuml csrf-attack
+skinparam boxPadding 100
+skinparam maxMessageSize 150
+skinparam noteTextAlignment left
+skinparam sequenceMessageAlign direction
+skinparam wrapWidth 600
+autonumber
+
+participant "Alice\n(navigateur)" as browser #LightBlue
+participant "ma-banque.ch\n(site légitime)" as legitSite #LightGreen
+participant "ma-bangue.ch\n(site malveillant)" as evilSite #Pink
+
+title Attaque CSRF - Comment ça marche ?
+
+note over browser, evilSite
+  Alice a de l'argent sur son compte bancaire.
+
+  L'attaquant.e veut transférer une partie de cet argent vers son propre compte.
+end note
+
+== Alice se connecte normalement ==
+
+browser -> legitSite: Alice se connecte à ""ma-banque.ch"" avec ""username""/""password""
+legitSite -> browser: Connexion réussie. Voici ton cookie de session.
+browser -> browser: Le navigateur stocke le cookie automatiquement.
+
+note over browser, legitSite
+  Pour toutes les futures interactions, le cookie de session sera automatiquement envoyé.
+end note
+
+== Alice effectue un virement vers Bob ==
+
+note over browser, legitSite
+  Rappel : le cookie de session est automatiquement envoyé.
+end note
+
+browser -> legitSite: Accède à ""ma-banque.ch/transfers""
+legitSite -> browser: Un formulaire est retourné pour effectuer le transfert.
+
+note over browser, legitSite
+  Le formulaire pourrait ressembler à celui-ci :
+
+  <form
+    action="ma-banque.ch/transfers"
+    method="POST"
+  >
+    <input name="iban" type="text">
+    <input name="sum" type="number">
+    <button type="submit">Transférer</button>
+  </form>
+end note
+
+browser -> legitSite: Alice soumet le formulaire.
+
+note over browser, legitSite
+  La banque fait le nécessaire et Bob reçoit l'argent d'Alice.
+end note
+
+== Alice tombe victime d'une attaque de phishing ==
+
+note over browser, evilSite
+  Alice recoit un mail de la part de ""notifications@ma-bangue.ch"" avec un virement à valider pour recevoir de l'argent de la part de Bob.
+
+  Alice ne s'est pas rendue compte que c'était un mail de phishing/spam (""ma-banque.ch"" vs ""ma-bangue.ch"") !
+end note
+
+browser -> evilSite: Alice ouvre l'URL spécifiée dans le mail et accède à ""ma-bangue.ch"".
+evilSite -> browser: Une fausse page est retournée avec la même mise en page que ""ma-banque.ch"" (phishing).
+
+note over browser, evilSite
+  La fausse page pourrait contenir un formulaire qui ressemblerait à celui-ci :
+
+  <form
+    action="ma-banque.ch/transfers"
+    method="POST"
+  >
+    <input name="iban" type="hidden" value="1000">
+    <input name="sum" type="hidden" value="CHXX XXXX XXXX XXXX XXXX X">
+    <button type="submit">Accepter le virement de Bob</button>
+  </form>
+end note
+
+browser -> evilSite: Alice clique sur le bouton.
+
+== L'attaque se produit ==
+
+browser -> legitSite: La requête par vers ""ma-banque.ch/tranfers"" avec le cookie, le montant à envoyer et l'IBAN de l'attaquant.e.
+
+note over browser, legitSite
+  Le navigateur envoie automatiquement le cookie car la requête va vers ""ma-banque.ch"".
+end note
+
+legitSite -> legitSite: ""ma-banque"" reçoit une requête légitime de la part d'Alice pour effectuer un transfert.
+
+note over browser, evilSite
+  La banque fait le nécessaire et l'attanquant.e reçoit l'argent d'Alice.
+
+  Alice a effecuté un transfert alors qu'elle ne le souhaitait pas ! L'attaque s'est déroulée sans qu'Alice ne s'en rende compte ou qu'elle ait pu donner son accord.
+end note
+
+note over browser, evilSite
+  **Problème** : ""ma-banque.ch"" n'a aucun moyen de savoir si la requête vient vraiment d'Alice ou d'un site malveillant. Le cookie est envoyé automatiquement par le navigateur!
+  
+  **Bénéfice pour l'attaquant.e** : La personne reçoit l'argent d'Alice!
+end note
+
+@enduml
