@@ -21,15 +21,13 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > À l'issue de cette séance, les personnes qui étudient devraient être capables
 > de :
 >
-> - Décrire la partie "contrôleur" du patron de conception MVC.
-> - Lister les différentes méthodes HTTP et leur utilisation.
-> - Décrire le concept de routes dans une application Laravel.
-> - Définir des routes avec des paramètres dans Laravel.
-> - Créer des contrôleurs dans Laravel.
-> - Utiliser les contrôleurs pour gérer les requêtes HTTP et retourner des
->   réponses.
-> - Résumer les concepts du patron MVC, leur rôle dans une application web et
->   les dossiers où les trouver dans une application Laravel.
+> - Comprendre les concepts liés aux formulaires et à la validation dans le
+>   développement d'applications web.
+> - Comprendre comment les formulaires et les sessions interagissent dans une
+>   application web.
+> - Comprendre les implications de sécurité liées à la gestion des formulaires
+>   et des sessions, et comment s'en protéger.
+> - Comprendre comment gérer les fichiers téléversés via des formulaires.
 > - Implémenter ces concepts avec Laravel pour réaliser le petit réseau social
 >   du mini-projet.
 >
@@ -79,7 +77,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Les formulaires dans Laravel](#les-formulaires-dans-laravel)
   - [Actions et méthodes HTTP des formulaires](#actions-et-méthodes-http-des-formulaires)
   - [Se protéger contre les attaques CSRF](#se-protéger-contre-les-attaques-csrf)
-  - [Le rôle de l'APP\_KEY dans les sessions et la protection CSRF](#le-rôle-de-lapp_key-dans-les-sessions-et-la-protection-csrf)
+  - [Le rôle de l'APP_KEY dans les sessions et la protection CSRF](#le-rôle-de-lapp_key-dans-les-sessions-et-la-protection-csrf)
   - [Validation des données de formulaire](#validation-des-données-de-formulaire)
   - [Traduire les messages d'erreur de validation](#traduire-les-messages-derreur-de-validation)
   - [Conserver les données de formulaire en cas d'erreur de validation](#conserver-les-données-de-formulaire-en-cas-derreur-de-validation)
@@ -130,21 +128,25 @@ Un formulaire se compose généralement de plusieurs éléments, tels que des ch
 de texte, des boutons de soumission, des cases à cocher, des listes déroulantes,
 etc. :
 
-```html
+```php
 <form action="/posts" method="POST">
-	<label for="title">Titre du post</label>
-	<input type="text" name="title" id="title" placeholder="Titre du post" />
+    <label for="title">Titre</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Titre du post" />
 
-	<label for="content">Contenu du post</label>
-	<textarea
-		name="content"
-		id="content"
-		placeholder="Contenu du post"
-		required
-		minlength="10"
-	></textarea>
+    <label for="content">Contenu</label>
+    <textarea
+        name="content"
+        id="content"
+        placeholder="Contenu du post"
+        required
+        minlength="10"
+    ></textarea>
 
-	<button type="submit">Créer le post</button>
+    <button type="submit">Créer le post</button>
 </form>
 ```
 
@@ -311,9 +313,9 @@ URL doit correspondre à une route définie dans Laravel. Par exemple, si nous
 avons un formulaire pour créer un post, l'action pourrait être définie comme
 suit :
 
-```html
+```php
 <form action="/posts" method="POST">
-	<!-- Champs du formulaire -->
+    <!-- Champs du formulaire -->
 </form>
 ```
 
@@ -331,10 +333,10 @@ d'autres méthodes HTTP (comme `PUT`, `PATCH`, ou `DELETE`) en utilisant un cham
 caché `_method` dans le formulaire. Par exemple, pour simuler une requête
 `DELETE`, nous pourrions faire :
 
-```html
+```php
 <form action="/posts/1" method="POST">
-	<input type="hidden" name="_method" value="DELETE" />
-	<button type="submit">Supprimer le post</button>
+    <input type="hidden" name="_method" value="DELETE" />
+    <button type="submit">Supprimer le post</button>
 </form>
 ```
 
@@ -349,11 +351,11 @@ Laravel propose une directive Blade `@method` qui génère automatiquement ce
 champ pour simuler la méthode HTTP souhaitée. Par exemple, pour simuler une
 requête `DELETE`, nous pourrions faire :
 
-```html
+```php
 <form action="/posts/1" method="POST">
-	@method('DELETE')
+    @method('DELETE')
 
-	<button type="submit">Supprimer le post</button>
+    <button type="submit">Supprimer le post</button>
 </form>
 ```
 
@@ -489,27 +491,27 @@ définies dans les contrôleurs ou dans des classes de validation dédiées.
 Prenons l'exemple d'un formulaire de création de post avec le formulaire suivant
 :
 
-```html
+```php
 <form method="POST" action="{{ url('/posts') }}">
-	@csrf
+    @csrf
 
-	<label for="title"> Titre du post </label>
-	<input
-		id="title"
-		type="text"
-		name="title"
-		placeholder="Saisissez le titre du post"
-	/>
+    <label for="title"> Titre du post </label>
+    <input
+        id="title"
+        type="text"
+        name="title"
+        placeholder="Saisissez le titre du post"
+    />
 
-	<label for="content"> Contenu du post </label>
-	<textarea
-		id="content"
-		name="content"
-		rows="5"
-		placeholder="Saisissez le contenu du post"
-	></textarea>
+    <label for="content"> Contenu du post </label>
+    <textarea
+        id="content"
+        name="content"
+        rows="5"
+        placeholder="Saisissez le contenu du post"
+    ></textarea>
 
-	<button type="submit">Soumettre le formulaire</button>
+    <button type="submit">Soumettre le formulaire</button>
 </form>
 ```
 
@@ -642,31 +644,31 @@ d'erreur de validation associés à chaque champ :
 
 ```php
 <form method="POST" action="{{ url('/posts') }}">
-	@csrf
+    @csrf
 
-	<label for="title"> Titre du post </label>
-	<input
-		id="title"
-		type="text"
-		name="title"
-		placeholder="Saisissez le titre du post"
-	/>
-	@error('title')
-	<p>{{ $message }}</p>
-	@enderror
+    <label for="title"> Titre du post </label>
+    <input
+        id="title"
+        type="text"
+        name="title"
+        placeholder="Saisissez le titre du post"
+    />
+    @error('title')
+    <p>{{ $message }}</p>
+    @enderror
 
-	<label for="content"> Contenu du post </label>
-	<textarea
-		id="content"
-		name="content"
-		rows="5"
-		placeholder="Saisissez le contenu du post"
-	></textarea>
-	@error('content')
-	<p>{{ $message }}</p>
-	@enderror
+    <label for="content"> Contenu du post </label>
+    <textarea
+        id="content"
+        name="content"
+        rows="5"
+        placeholder="Saisissez le contenu du post"
+    ></textarea>
+    @error('content')
+    <p>{{ $message }}</p>
+    @enderror
 
-	<button type="submit">Soumettre le formulaire</button>
+    <button type="submit">Soumettre le formulaire</button>
 </form>
 ```
 
@@ -760,33 +762,33 @@ valeur saisie précédemment, vous pouvez faire :
 
 ```php
 <form method="POST" action="{{ url('/posts') }}">
-	@csrf
+    @csrf
 
-	<label for="title"> Titre du post </label>
-	<input
-		id="title"
-		type="text"
-		name="title"
-		value="{{ old('title') }}"
-		placeholder="Saisissez le titre du post"
-	/>
-	@error('title')
-	<p>{{ $message }}</p>
-	@enderror
+    <label for="title"> Titre du post </label>
+    <input
+        id="title"
+        type="text"
+        name="title"
+        value="{{ old('title') }}"
+        placeholder="Saisissez le titre du post"
+    />
+    @error('title')
+    <p>{{ $message }}</p>
+    @enderror
 
-	<label for="content"> Contenu du post </label>
-	<textarea
-		id="content"
-		name="content"
-		rows="5"
-		placeholder="Saisissez le contenu du post"
-	>{{ old('content') }}</textarea
-	>
-	@error('content')
-	<p>{{ $message }}</p>
-	@enderror
+    <label for="content"> Contenu du post </label>
+    <textarea
+        id="content"
+        name="content"
+        rows="5"
+        placeholder="Saisissez le contenu du post"
+    >{{ old('content') }}</textarea
+    >
+    @error('content')
+    <p>{{ $message }}</p>
+    @enderror
 
-	<button type="submit">Soumettre le formulaire</button>
+    <button type="submit">Soumettre le formulaire</button>
 </form>
 ```
 

@@ -48,343 +48,351 @@ document._
 
 ## Objectifs (1)
 
-- Décrire la partie "contrôleur" du patron de conception MVC.
-- Lister les différentes méthodes HTTP et leur utilisation.
-- Décrire le concept de routes dans une application Laravel.
-- Définir des routes avec des paramètres dans Laravel.
+- Comprendre les concepts liés aux formulaires et à la validation dans le
+  développement d'applications web.
+- Comprendre comment les formulaires et les sessions interagissent dans une
+  application web.
 
 ![bg right:40%][illustration-objectifs]
 
 ## Objectifs (2)
 
-- Créer des contrôleurs dans Laravel.
-- Utiliser les contrôleurs pour gérer les requêtes HTTP et retourner des
-  réponses.
-- Résumer les concepts du patron MVC et les dossiers où les trouver dans
-  Laravel.
+- Comprendre les implications de sécurité liées à la gestion des formulaires et
+  des sessions, et comment s'en protéger.
+- Comprendre comment gérer les fichiers téléversés via des formulaires.
 - Implémenter ces concepts avec Laravel pour réaliser le petit réseau social du
   mini-projet.
 
 ![bg right:40%][illustration-objectifs]
 
-## Introduction aux contrôleurs dans le patron MVC
+## Les formulaires, un rappel
 
-Le patron MVC sépare une application en trois composants :
+Un formulaire est un élément HTML qui permet de collecter des données auprès des
+utilisateur.trice.s et de les envoyer au serveur pour traitement.
 
-- **Modèle** : données et logique métier.
-- **Vue** : présentation des données.
-- **Contrôleur** : gestion des requêtes HTTP et du flux.
+Les formulaires sont essentiels pour permettre aux utilisateur.trice.s
+d'interagir avec une application web.
 
-Le contrôleur agit comme un pont entre les vues et les modèles, gérant leurs
-interactions.
+![bg right:40%][illustration-objectifs]
 
-## Rappels sur le protocole HTTP
+### Structure d'un formulaire
 
-HTTP est le protocole de communication pour les applications web.
+<div class="two-columns">
+<div>
 
-Termes clés :
+Un formulaire se compose de plusieurs éléments : champs de texte, boutons de
+soumission, cases à cocher, listes déroulantes, etc.
 
-- Ressources.
-- Requêtes et réponses HTTP.
-- Méthodes HTTP.
-- En-têtes HTTP.
-- Corps de requête/réponse.
+Chaque champ est associé à un label pour améliorer l'accessibilité.
 
-### Ressources (1)
-
-Une ressource est une entité identifiable, représentée par une URL.
-
-`https://gaps.heig-vd.ch/consultation/fiches/uv/uv.php?id=6082`
-
-Composants :
-
-- Protocole (`https://`).
-- Nom de domaine (`gaps.heig-vd.ch`).
-- Chemin d'accès (`/consultation/fiches/uv/uv.php`).
-- Paramètres de requête (`?id=6082`).
-
-### Ressources (2)
-
-Dans une application de réseau social :
-
-- Ressources : utilisateur.trices, publications, commentaires, etc.
-- Organisation hiérarchique : `/posts/123`.
-- Structure conçue à partir de la base de données et des modèles Laravel.
-
-Les ressources sont parfois appelées "endpoints" ou "routes", mais elles font
-référence aux entités manipulées par l'application.
-
-### Requêtes et réponses HTTP
-
-HTTP utilise un modèle requête-réponse :
-
-- Un client (votre navigateur) envoie une requête au serveur.
-- Le serveur traite et répond avec une réponse.
-
-Exemple : création d'une publication.
-
-- Requête `POST` avec données dans le corps.
-- Réponse : page HTML, JSON, redirection, etc.
-
-Le contrôleur traite la requête et détermine la réponse appropriée.
-
-### Méthodes HTTP
-
-Les méthodes HTTP indiquent l'action à effectuer :
-
-- **`GET`** : récupérer une ressource ou collection.
-- **`POST`** : créer une nouvelle ressource.
-- **`PUT`** / **`PATCH`** : mettre à jour une ressource.
-- **`DELETE`** : supprimer une ressource.
-
-Un navigateur envoie `GET` pour les liens et `POST` pour les formulaires par
-défaut.
-
-### En-têtes HTTP
-
-Paires clé-valeur fournissant des informations supplémentaires.
-
-Exemples :
-
-- Type de contenu.
-- Informations d'authentification.
-- Préférences de langue.
-
-Exemple : `Content-Type: application/json` indique un corps au format JSON.
-
-### Corps de requête/réponse
-
-Contient les données envoyées par le client ou le serveur.
-
-Exemple : lors de la création d'une publication, le corps de la requête `POST`
-contient les données de la publication (JSON ou données de formulaire).
-
-## Routes (1)
-
-Les routes sont les chemins d'URL permettant d'accéder aux ressources.
-
-Dans Laravel :
-
-- `routes/web.php` : routes web.
-- `routes/api.php` : routes d'API (pour une future séance).
-
-Les routes associent des URL à des actions via les méthodes HTTP.
-
-## Routes (2)
+</div>
+<div>
 
 ```php
-Route::get('/profile', function () {
-    $user = User::where('username', 'janedoe')->first();
+<form action="/posts" method="POST">
+    <label for="title">Titre</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Titre du post" />
 
-    $posts = Post::where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')
-        ->with(['user', 'likes'])
-        ->get();
+    <label for="content">Contenu</label>
+    <textarea
+        name="content"
+        id="content"
+        placeholder="Contenu du post"
+        required
+        minlength="10"
+    ></textarea>
 
-    return view('profile', ['user' => $user, 'posts' => $posts]);
-});
+    <button type="submit">Créer le post</button>
+</form>
 ```
 
-Répond à une requête GET sur `/profile` et retourne une vue.
+</div>
 
-## Paramètres de route (1)
+### Les attributs d'un formulaire
 
-Les routes peuvent inclure des paramètres dynamiques :
+- `action` et `method` définissent l'URL de destination et la méthode HTTP.
+- Attributs de validation HTML5 : `required`, `minlength`, etc.
+- L'attribut `name` définit la clé pour accéder aux données côté serveur.
 
-```php
-Route::get('/profile/{username}', function ($username) {
-    $user = User::where('username', $username)->first();
+La validation HTML5 est une première ligne de défense, mais la validation côté
+serveur est essentielle.
 
-    $posts = Post::where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')
-        ->with(['user', 'likes'])
-        ->get();
+### Envoyer les données d'un formulaire
 
-    return view('profile', ['user' => $user, 'posts' => $posts]);
-});
-```
+- L'attribut `action` définit l'URL vers laquelle les données seront envoyées.
+- L'attribut `method` définit la méthode HTTP (`GET` ou `POST` par défaut).
+- L'attribut `name` permet d'accéder aux données côté serveur.
 
-## Paramètres de route (2)
+![bg right:40%][illustration-objectifs]
 
-La syntaxe `/{username}` capture la partie de l'URL et la passe à la fonction.
+### Recevoir les données d'un formulaire
 
-Validation des paramètres avec des contraintes :
+Les données sont accessibles via des objets ou tableaux associatifs.
 
-```php
-Route::get('/profile/{username}', function ($username) {
-    // ...
-})->where('username', '[A-Za-z0-9\-]+');
-```
+En PHP : superglobales `$_GET` et `$_POST`.
 
-Si l'URL ne correspond pas, Laravel retourne une erreur 404. Permet de s'assurer
-que les données reçues sont valides avant traitement.
+Les données doivent être validées côté serveur pour assurer la sécurité.
 
-## Contrôleurs (1)
+![bg right:40%][illustration-objectifs]
 
-Gérer toutes les routes dans le fichier `routes/web.php` avec des fonctions
-anonymes devient difficile à maintenir.
+## Les sessions, un rappel
 
-**Solution** : déléguer la logique à des contrôleurs dédiés.
+Une session permet de stocker des données spécifiques à un.e utilisateur.trice
+sur le serveur, associées via un cookie de session.
 
-Avantages :
+Les sessions maintiennent l'état entre les requêtes HTTP. Elles permettent de
+garder un annuaire des utilisateur.trices connecté.es avec leurs données
 
-- Meilleure organisation du code.
-- Respect du patron MVC.
-- Facilite la maintenance.
+![bg right:40%][illustration-objectifs]
 
-## Contrôleurs (2)
+### Créer une session
 
-Chaque contrôleur est responsable d'un ensemble de fonctionnalités liées à une
-ressource :
+Le serveur démarre une session (ex : `session_start()` en PHP).
 
-- `PostController` : gérer les publications.
-- `UserController` : gérer les utilisateur.trices.
-- etc.
+Génère un identifiant unique stocké dans un cookie envoyé au navigateur.
 
-Facilite la compréhension et la maintenance du code.
+Le navigateur renvoie ce cookie avec chaque requête ultérieure.
 
-### Créer un contrôleur
+![bg right:40%][illustration-objectifs]
 
-Commande de base :
+### Accéder aux données de session
 
-```bash
-php artisan make:controller NomDuContrôleurController
-```
+Les données sont accessibles via des objets ou tableaux (ex : `$_SESSION` en
+PHP).
 
-Convention : suffixe `Controller` (`UserController`, `PostController`, etc.).
+Exemple : `$_SESSION['username'] = 'Alice';`
 
-Crée un fichier dans `app/Http/Controllers/` avec une classe de base vide.
+![bg right:40%][illustration-objectifs]
 
-### Créer la méthode d'un contrôleur (1)
+### Supprimer une session
 
-Convention pour les méthodes d'un contrôleur de ressource :
+Utiliser une fonction dédiée (ex : `session_destroy()` en PHP).
 
-- `index()` : affiche une liste de ressources.
-- `create()` : affiche un formulaire de création.
-- `store(Request $request)` : traite le formulaire de création.
-- `show($id)` : affiche une ressource spécifique.
-- `edit($id)` : affiche un formulaire d'édition.
-- `update(Request $request, $id)` : traite le formulaire d'édition.
-- `destroy($id)` : supprime une ressource.
+Supprimer également le cookie de session côté client pour éviter toute
+confusion.
 
-### Créer la méthode d'un contrôleur (2)
+![bg right:40%][illustration-objectifs]
 
-Exemple de méthodes :
+## Les formulaires et les sessions
 
-```php
-class PostController extends Controller
-{
-    public function index()
-    {
-        $posts = Post::orderBy('created_at', 'desc')
-            ->with('user')->with('likes')->get();
+Les formulaires et les sessions travaillent ensemble :
 
-        return view('posts.index', ['posts' => $posts]);
-    }
-```
+- Les sessions maintiennent l'état de l'utilisateur.trice entre les requêtes.
+- Les données de formulaire peuvent être stockées en session pour les réutiliser
+  (erreurs de validation, données saisies, etc.).
+
+![bg right:40%][illustration-objectifs]
+
+## Les formulaires dans Laravel
+
+Laravel fournit des fonctionnalités supplémentaires pour faciliter la gestion
+des formulaires :
+
+- Validation des données intégrée.
+- Protection contre les attaques CSRF.
+- Routes et contrôleurs pour traiter les requêtes.
+
+![bg right:40%][illustration-objectifs]
+
+### Actions et méthodes HTTP des formulaires
+
+L'attribut `action` doit correspondre à une route définie dans Laravel.
+
+L'attribut `method` spécifie la méthode HTTP (`POST`, `GET`).
+
+Laravel permet de simuler d'autres méthodes HTTP (`PUT`, `PATCH`, `DELETE`) avec
+`@method()`.
+
+### Se protéger contre les attaques CSRF
+
+Laravel fournit une protection intégrée contre les attaques CSRF.
+
+Un token CSRF unique est généré pour chaque session et doit être inclus dans
+chaque formulaire avec `@csrf`.
+
+#### Attaque CSRF - Comment ça marche ?
+
+Un.e attaquant.e fait exécuter une action non désirée par un.e utilisateur.trice
+authentifié.e.
+
+Exemple : transfert d'argent depuis le compte bancaire d'Alice vers celui de
+l'attaquant.e via un formulaire caché sur un site malveillant.
+
+![bg right:40%][illustration-objectifs]
 
 ---
 
-```php
-    public function show(string $id)
-    {
-        $post = Post::with('user')->with('likes')->findOrFail($id);
+![bg h:90%](./images/csrf-attack-01.svg)
 
-        return view('posts.show', ['post' => $post]);
-    }
-}
-```
+---
 
-### Associer une route à une méthode du contrôleur (1)
+![bg h:90%](./images/csrf-attack-02.svg)
 
-Associer les routes aux méthodes du contrôleur :
+---
 
-```php
-use App\Http\Controllers\PostController;
+![bg h:90%](./images/csrf-attack-03.svg)
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
-```
+---
 
-Lorsqu'une requête est envoyée, la méthode correspondante est exécutée.
+![bg h:90%](./images/csrf-attack-04.svg)
 
-### Associer une route à une méthode du contrôleur (2)
+#### Protection CSRF - La solution avec un token
 
-Définir des routes pour d'autres méthodes :
+Laravel génère un token CSRF unique pour chaque session.
 
-```php
-Route::post('/posts', [PostController::class, 'store']);
-Route::put('/posts/{id}', [PostController::class, 'update']);
-Route::delete('/posts/{id}', [PostController::class, 'destroy']);
-```
+Le token est vérifié à chaque soumission de formulaire.
 
-Utiliser les méthodes HTTP appropriées (`POST`, `PUT`, `DELETE`, etc.).
+Si les tokens ne correspondent pas, la requête est rejetée.
 
-### Créer un contrôleur de ressource
+![bg right:40%][illustration-objectifs]
 
-Laravel permet de créer un contrôleur complet :
+---
 
-```bash
-php artisan make:controller PostController --resource
-```
+![bg h:90%](./images/csrf-protection-01.svg)
 
-Génère toutes les méthodes standard (`index`, `create`, `store`, `show`, `edit`,
-`update`, `destroy`).
+---
 
-```php
-Route::resource('posts', PostController::class);
-```
+![bg h:90%](./images/csrf-protection-02.svg)
 
-Une seule ligne génère toutes les routes pour les actions CRUD.
+---
 
-## Gérer les erreurs dans les contrôleurs
+![bg h:90%](./images/csrf-protection-03.svg)
 
-Laravel fournit des mécanismes pour gérer les exceptions.
+---
 
-Lorsqu'une ressource n'est pas trouvée par exemple (avec `findOrFail()` par
-exemple), Laravel retourne une erreur 404.
+![bg h:90%](./images/csrf-protection-04.svg)
 
-Laravel gère automatiquement plusieurs types d'erreurs que nous étudierons plus
-en détail dans une future séance.
+### Le rôle de l'APP_KEY dans les sessions et la protection CSRF
 
-La documentation offre des ressources précieuses :
-<https://laravel.com/docs/12.x/errors>.
+La clé d'application (`APP_KEY`) est générée avec `php artisan key:generate`.
 
-## Le patron MVC : récapitulatif (1)
+Elle chiffre les données de session et génère les tokens CSRF.
 
-Le patron MVC sépare l'application en trois composants :
+Ne jamais partager cette clé ou la rendre publique.
 
-- **Modèle** : données et logique métier (base de données, validations,
-  relations).
-- **Vue** : présentation des données (interface utilisateur).
-- **Contrôleur** : gestion des requêtes HTTP et du flux (pont entre modèles et
-  vues).
+### Validation des données de formulaire
 
-Ces composants interagissent pour créer une application web structurée et
-maintenable.
+Laravel fournit un système de validation intégré.
 
-## Le patron MVC : récapitulatif (2)
+Les règles de validation peuvent être définies dans les contrôleurs ou dans des
+classes dédiées (Form Requests).
 
-Organisation dans Laravel :
+Exemple : `'title' => 'nullable|string|max:255'`
 
-- **Modèles** : `app/Models/` et migrations dans `database/migrations/`.
-- **Vues** : `app/View/` (classes) et `resources/views/` (fichiers Blade).
-- **Contrôleurs** : `app/Http/Controllers/`.
+### Validation des données de formulaire (2)
 
-Le patron MVC est extrêmement courant dans le développement web et est utilisé
-par de nombreux frameworks.
+Si la validation échoue, Laravel redirige automatiquement vers le formulaire
+précédent avec les erreurs.
 
-Une bonne compréhension de ce model vous sera très utile le futur.
+De nombreuses règles de validation prédéfinies : `required`, `string`, `max`,
+`email`, `unique`, etc.
+
+#### Messages d'erreur de validation
+
+Laravel génère automatiquement des messages d'erreur pour chaque champ qui
+échoue.
+
+Affichage dans les vues avec `@error('field_name')` et `$message`.
+
+Possibilité d'afficher tous les messages avec `$errors->all()`.
+
+### Traduire les messages d'erreur de validation
+
+Les messages d'erreur sont définis dans les fichiers de traduction de Laravel.
+
+Fichier : `resources/lang/fr/validation.php`.
+
+Personnaliser les noms des champs avec la clé `attributes`.
+
+### Conserver les données de formulaire en cas d'erreur de validation
+
+La directive Blade `old()` permet de récupérer les anciennes valeurs.
+
+Exemple : `value="{{ old('title') }}"`.
+
+Les données sont stockées en session après une erreur de validation.
+
+### Accéder aux données de formulaire dans les contrôleurs
+
+Les données validées sont accessibles via `$validated`.
+
+Exemple : `$validated = $request->validate([...]);`.
+
+Utiliser ces données pour créer ou mettre à jour des ressources en base de
+données.
+
+### Rediriger après la soumission d'un formulaire
+
+Laravel fournit plusieurs fonctions de redirection :
+
+- `redirect()->action([Controller::class, 'method'], [...])`.
+- `to_route('route.name')`.
+- `back()`.
+
+### Réutiliser les règles de validation dans plusieurs contrôleurs
+
+Créer des classes de validation dédiées (Form Requests) avec
+`php artisan make:request`.
+
+Les règles sont définies dans la méthode `rules()`.
+
+Injecter la classe dans le contrôleur pour valider automatiquement les données.
+
+## Gérer les fichiers d'un formulaire
+
+Laravel fournit des fonctionnalités pour gérer les fichiers téléversés.
+
+### Le type de champ `file`
+
+Utiliser `<input type="file">` dans le formulaire.
+
+Ajouter `enctype="multipart/form-data"` à l'attribut du formulaire.
+
+### Validation des fichiers
+
+Règles spécifiques : `file`, `image`, `mimes`, `max`, etc.
+
+Exemple : `'profile_picture' => 'nullable|image|max:2048'`.
+
+La règle `image` accepte : jpg, jpeg, png, bmp, gif, webp.
+
+### Stocker les fichiers téléversés
+
+Laravel fournit un système de stockage intégré avec différents disques.
+
+Utiliser la façade `Storage` pour déplacer les fichiers.
+
+Exemple : `Storage::disk('public')->put('profile-pictures', $file)`.
+
+### Stocker les fichiers téléversés (2)
+
+Stocker le chemin du fichier en base de données, pas le fichier lui-même.
+
+Supprimer l'ancien fichier si nécessaire avant d'en stocker un nouveau.
+
+### Gérer les disques de stockage
+
+Configurer différents disques : local, cloud (S3, Google Cloud), etc.
+
+Créer un lien symbolique avec `php artisan storage:link` pour rendre les
+fichiers du disque `public` accessibles.
+
+Accéder aux fichiers avec `asset('storage/filename')`.
 
 ## Conclusion
 
-Les routes et contrôleurs permettent de gérer les requêtes HTTP de manière
-structurée.
+Les formulaires et la validation sont essentiels pour interagir avec les
+utilisateur.trice.s.
 
-Le patron MVC sépare clairement les responsabilités.
+Laravel fournit des outils puissants pour gérer les formulaires (validation,
+fichiers, précédentes saisies, etc.).
 
-Vous avez maintenant les bases pour développer des applications avec Laravel en
-utilisant le patron MVC.
+La protection CSRF et la validation côté serveur sont indispensables pour la
+sécurité de l'application.
 
 ![bg right:40%][illustration-principale]
 
