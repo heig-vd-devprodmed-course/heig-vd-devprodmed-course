@@ -82,7 +82,7 @@ interactions.
 
 HTTP est le protocole de communication pour les applications web.
 
-Termes clés :
+**Termes clés** :
 
 - Ressources.
 - Requêtes et réponses HTTP.
@@ -96,7 +96,7 @@ Une ressource est une entité identifiable, représentée par une URL.
 
 `https://gaps.heig-vd.ch/consultation/fiches/uv/uv.php?id=6082`
 
-Composants :
+**Composants** :
 
 - Protocole (`https://`).
 - Nom de domaine (`gaps.heig-vd.ch`).
@@ -118,13 +118,13 @@ référence aux entités manipulées par l'application.
 
 HTTP utilise un modèle requête-réponse :
 
-- Un client (votre navigateur) envoie une requête au serveur.
-- Le serveur traite et répond avec une réponse.
+1. Un client (votre navigateur) envoie une requête au serveur.
+2. Le serveur traite et répond avec une réponse.
 
 Exemple : création d'une publication.
 
-- Requête `POST` avec données dans le corps.
-- Réponse : page HTML, JSON, redirection, etc.
+1. Requête `POST` avec données dans le corps.
+2. Réponse : page HTML, JSON, redirection, etc.
 
 Le contrôleur traite la requête et détermine la réponse appropriée.
 
@@ -144,7 +144,7 @@ défaut.
 
 Paires clé-valeur fournissant des informations supplémentaires.
 
-Exemples :
+**Exemples** :
 
 - Type de contenu.
 - Informations d'authentification.
@@ -154,10 +154,16 @@ Exemple : `Content-Type: application/json` indique un corps au format JSON.
 
 ### Corps de requête/réponse
 
-Contient les données envoyées par le client ou le serveur.
+Contient les données envoyées ou reçue par le client ou le serveur.
 
 Exemple : lors de la création d'une publication, le corps de la requête `POST`
 contient les données de la publication (JSON ou données de formulaire).
+
+En retour, l'application peut répondre avec une page HTML, un JSON, ou une
+redirection.
+
+Lors de chaque requête ou réponse, des données sont transférées pour permettre
+l'interaction entre le client et le serveur.
 
 ## Routes (1)
 
@@ -226,7 +232,7 @@ anonymes devient difficile à maintenir.
 
 **Solution** : déléguer la logique à des contrôleurs dédiés.
 
-Avantages :
+**Avantages** :
 
 - Meilleure organisation du code.
 - Respect du patron MVC.
@@ -239,9 +245,11 @@ ressource :
 
 - `PostController` : gérer les publications.
 - `UserController` : gérer les utilisateur.trices.
+- `LikeController` : gérer les likes.
+- `MyProfileController` : gérer le profil de la personne connectée.
 - etc.
 
-Facilite la compréhension et la maintenance du code.
+➡️ Facilite la compréhension et la maintenance du code.
 
 ### Créer un contrôleur
 
@@ -415,9 +423,6 @@ Est-ce que vous avez des questions ?
 - [Illustration][illustration-objectifs] par
   [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
   [Unsplash](https://unsplash.com/photos/low-angle-view-of-ball-shoots-in-the-ring-j6brni7fpvs)
-
----
-
 - [Illustration][illustration-a-vous-de-jouer] par
   [Nikita Kachanovsky](https://unsplash.com/@nkachanovskyyy) sur
   [Unsplash](https://unsplash.com/photos/white-sony-ps4-dualshock-controller-over-persons-palm-FJFPuE1MAOM)
