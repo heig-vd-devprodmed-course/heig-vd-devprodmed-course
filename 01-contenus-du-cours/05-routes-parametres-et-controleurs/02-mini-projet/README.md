@@ -56,8 +56,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Objectifs
 
-Mettre en place l'interface utilisateur du petit réseau social en utilisant
-Tailwind CSS et Blade.
+Mettre en place les routes et les contrôleurs nécessaires pour notre application
+de réseau social afin de gérer les fonctionnalités principales de l'application,
+comme l'affichage des profils utilisateur.trice.s, la gestion des posts, etc.
 
 > [!IMPORTANT]
 >
@@ -137,8 +138,8 @@ mettre à jour des ressources, `DELETE` pour supprimer des ressources).
 
 **Likes**
 
-- `PATCH/PUT /posts/{post}/likes` : action pour créer ou retirer un like sur un
-  post spécifique.
+- `PATCH/PUT /likes/{post}` : action pour créer ou retirer un like sur un post
+  spécifique.
 
 **Authentification**
 

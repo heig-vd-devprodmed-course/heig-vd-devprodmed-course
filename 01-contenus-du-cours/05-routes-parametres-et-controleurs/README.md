@@ -350,6 +350,16 @@ La commande de base pour créer un contrôleur dans Laravel est la suivante :
 php artisan make:controller NomDuContrôleurController
 ```
 
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  Controller [app/Http/Controllers/NomDuContrôleurController.php] created successfully.
+```
+
+Le nouveau contrôleur est créé dans le répertoire `app/Http/Controllers/` avec
+une classe de contrôleur de base qui peut être remplie avec les méthodes
+nécessaires pour gérer les différentes actions liées à la ressource.
+
 Il est conventionnel de nommer les contrôleurs avec le suffixe `Controller`
 (`UserController`, `PostController`, etc.) pour indiquer clairement leur rôle
 dans l'application.
@@ -642,6 +652,6 @@ il est recommandé pour la prochaine séance de :
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
 [presentation-web]:
-	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/presentation.html
+	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/05-routes-parametres-et-controleurs/presentation.html
 [presentation-pdf]:
-	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/04-vues-blade-et-tailwind-css-presentation.pdf
+	https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/05-routes-parametres-et-controleurs/05-routes-parametres-et-controleurs-presentation.pdf

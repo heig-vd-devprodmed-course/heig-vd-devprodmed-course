@@ -8,7 +8,7 @@ description:
   "Routes, paramètres et contrôleurs pour le cours DévProdMéd enseigné à la
   HEIG-VD, Suisse"
 lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/presentation.html"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/05-routes-parametres-et-controleurs/presentation.html"
 header: "[**Routes, paramètres et contrôleurs**][contenu-complet-sur-github]"
 footer:
   "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
@@ -425,7 +425,7 @@ Est-ce que vous avez des questions ?
 <!-- URLs -->
 
 [contenu-complet-sur-github]:
-	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/04-vues-blade-et-tailwind-css/README.md
+	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/05-routes-parametres-et-controleurs/README.md
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
 

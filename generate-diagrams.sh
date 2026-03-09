@@ -2,7 +2,7 @@
 
 ## Variables
 WORKDIR=$(pwd)
-PLANTUML_DOCKER_IMAGE="plantuml/plantuml:1.2025"
+PLANTUML_DOCKER_IMAGE="plantuml/plantuml:1.2026"
 
 ## Script
 # Check if PlantUML is available locally
@@ -15,6 +15,7 @@ else
         docker run --rm
         --volume="${WORKDIR}:/data"
         --user "$(id -u):$(id -g)"
+        --env _JAVA_OPTIONS="-Duser.home=/tmp"
         "$PLANTUML_DOCKER_IMAGE"
     )
 fi
@@ -30,7 +31,7 @@ PLANT_UML_ARGS=(
 )
 
 echo "Converting diagrams to SVG files..."
-"${PLANTUML_CMD[@]}" -DMULTI_PART=1 "${PLANT_UML_ARGS[@]}" **/*.puml
+"${PLANTUML_CMD[@]}" -DMULTI_PART=1 "${PLANT_UML_ARGS[@]}" "**/*.puml"
 
 echo "Renaming multipart SVG files..."
 multipart_files=()

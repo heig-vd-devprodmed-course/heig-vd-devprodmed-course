@@ -1,0 +1,147 @@
+@startuml csrf-protection
+skinparam boxPadding 100
+skinparam maxMessageSize 150
+skinparam noteTextAlignment left
+skinparam sequenceMessageAlign direction
+skinparam wrapWidth 600
+autonumber
+
+' Uncomment to visualize the diagram in multiparts
+'!define MULTI_PART
+
+!$TITLE = "Protection CSRF - La solution avec un token"
+
+!if (%variable_exists("MULTI_PART"))
+  right footer $TITLE (%page%/%lastpage%) 
+!else
+  ignore newpage
+!endif
+
+title $TITLE
+
+participant "Alice\n(navigateur)" as browser #LightBlue
+participant "ma-banque.ch\n(site protégé)" as legitSite #LightGreen
+participant "ma-bangue.ch\n(site malveillant)" as evilSite #Pink
+
+note over browser, evilSite
+  Alice a de l'argent sur son compte bancaire.
+
+  L'attaquant.e veut transférer une partie de cet argent vers son propre compte.
+  
+  Cette fois-ci, ""ma-banque.ch"" est protégé contre les attaques CSRF avec des tokens.
+end note
+
+== Alice se connecte normalement ==
+
+browser -> legitSite: Alice se connecte à ""ma-banque.ch"" avec ""username""/""password""
+legitSite -> browser: Connexion réussie. Voici ton cookie de session.
+browser -> browser: Le navigateur stocke le cookie automatiquement.
+
+note over browser, legitSite
+  Pour toutes les futures interactions, le cookie de session sera automatiquement envoyé.
+end note
+
+newpage $TITLE
+
+== Alice effectue un virement vers Bob ==
+
+note over browser, legitSite
+  Rappel : le cookie de session est automatiquement envoyé.
+end note
+
+browser -> legitSite: Accède à ""ma-banque.ch/transfers""
+legitSite -> legitSite: Génère un token secret unique: ""abc123xyz"" et le stocke dans la session d'Alice.
+legitSite -> browser: Un formulaire est retourné pour effectuer le transfert.
+
+note over browser, legitSite
+  Le formulaire contient maintenant un token CSRF caché :
+
+  <form
+    action="ma-banque.ch/transfers"
+    method="POST"
+  >
+    <input name="_token" type="hidden" value="abc123xyz">
+    <input name="iban" type="text">
+    <input name="sum" type="number">
+    <button type="submit">Transférer</button>
+  </form>
+end note
+
+browser -> legitSite: Alice soumet le formulaire avec le token ""abc123xyz"".
+legitSite -> legitSite: Vérifie le cookie de session ET le token ""abc123xyz"".
+
+note over browser, legitSite
+  ""ma-banque.ch"" vérifie les points suivants :
+  
+  <&check> Le cookie est valide.
+  <&check> Le token ""abc123xyz"" correspond au token dans la session d'Alice.
+  
+  <&arrow-right> OK, c'est bien Alice qui fait cette requête !
+
+  La banque fait le nécessaire et Bob reçoit l'argent d'Alice.
+end note
+
+newpage $TITLE
+
+== Alice tombe victime d'une tentative d'attaque de phishing ==
+
+note over browser, evilSite
+  Alice recoit un mail de la part de ""notifications@ma-bangue.ch"" avec un virement à valider pour recevoir de l'argent de la part de Bob.
+
+  Alice ne s'est pas rendue compte que c'était un mail de phishing/spam (""ma-banque.ch"" vs ""ma-bangue.ch"") !
+end note
+
+browser -> evilSite: Alice ouvre l'URL spécifiée dans le mail et accède à ""ma-bangue.ch"".
+evilSite -> browser: Une fausse page est retournée avec la même mise en page que ""ma-banque.ch"" (phishing).
+
+note over browser, evilSite
+  La fausse page contient un formulaire sans token :
+
+  <form
+    action="ma-banque.ch/transfers"
+    method="POST"
+  >
+    <input name="iban" type="hidden" value="CHXX XXXX XXXX XXXX XXXX X">
+    <input name="sum" type="hidden" value="1000">
+    <button type="submit">Accepter le virement de Bob</button>
+  </form>
+end note
+
+browser -> browser: Alice clique sur le bouton.
+
+newpage $TITLE
+
+== L'attaque est bloquée ==
+
+browser -> legitSite: La requête part vers ""ma-banque.ch/transfers"" avec le cookie et l'IBAN de l'attaquant.e, mais sans token valide.
+
+note over browser, legitSite
+  Le navigateur envoie automatiquement le cookie car la requête va vers ""ma-banque.ch"".
+  
+  Mais le site malveillant ne connaît pas le token secret généré par ""ma-banque.ch"" !
+
+  Le site malveillant pourrait envoyer un token aléatoire, mais cela ne changerait rien à la suite.
+end note
+
+legitSite -> legitSite: Vérifie le cookie de session et le token reçu par le formulaire.
+
+note over browser, legitSite
+  ""ma-banque.ch"" vérifie les points suivants :
+  
+  <&check> Le cookie est valide.
+  <&x> Le token n'existe pas dans la session d'Alice (ou n'est pas valide).
+  
+  <&arrow-right> Rejeté ! Cette requête n'est pas légitime.
+
+  Le transfert est bloqué. L'attaquant.e ne reçoit rien!
+end note
+
+legitSite -> browser: retourne un message d'erreur à Alice indiquant le problème et le fait qu'elle est sans doute tombée victime d'une attaque de phishing.
+
+note over browser, evilSite
+  **Solution** : même si le site malveillant peut déclencher l'envoi du cookie (automatique), il ne peut pas connaître le token secret qui était dans le formulaire légitime !
+  
+  **Résultat** : l'argent d'Alice est protégé !
+end note
+
+@enduml
