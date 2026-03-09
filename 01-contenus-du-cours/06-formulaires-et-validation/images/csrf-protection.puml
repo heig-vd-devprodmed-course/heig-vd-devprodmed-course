@@ -6,11 +6,22 @@ skinparam sequenceMessageAlign direction
 skinparam wrapWidth 600
 autonumber
 
+' Uncomment to visualize the diagram in multiparts
+'!define MULTI_PART
+
+!$TITLE = "Protection CSRF - La solution avec un token"
+
+!if (%variable_exists("MULTI_PART"))
+  right footer $TITLE (%page%/%lastpage%) 
+!else
+  ignore newpage
+!endif
+
+title $TITLE
+
 participant "Alice\n(navigateur)" as browser #LightBlue
 participant "ma-banque.ch\n(site protégé)" as legitSite #LightGreen
 participant "ma-bangue.ch\n(site malveillant)" as evilSite #Pink
-
-title Protection CSRF - La solution avec un token
 
 note over browser, evilSite
   Alice a de l'argent sur son compte bancaire.
@@ -29,6 +40,8 @@ browser -> browser: Le navigateur stocke le cookie automatiquement.
 note over browser, legitSite
   Pour toutes les futures interactions, le cookie de session sera automatiquement envoyé.
 end note
+
+newpage $TITLE
 
 == Alice effectue un virement vers Bob ==
 
@@ -68,6 +81,8 @@ note over browser, legitSite
   La banque fait le nécessaire et Bob reçoit l'argent d'Alice.
 end note
 
+newpage $TITLE
+
 == Alice tombe victime d'une tentative d'attaque de phishing ==
 
 note over browser, evilSite
@@ -93,6 +108,8 @@ note over browser, evilSite
 end note
 
 browser -> browser: Alice clique sur le bouton.
+
+newpage $TITLE
 
 == L'attaque est bloquée ==
 

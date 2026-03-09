@@ -18,6 +18,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Exercice 2](#exercice-2)
   - [Exercice 3](#exercice-3)
   - [Exercice 4](#exercice-4)
+  - [Exercice 5](#exercice-5)
+  - [Exercice 6](#exercice-6)
+  - [Exercice 7](#exercice-7)
 
 ## Exercices
 
@@ -56,6 +59,33 @@ l'adresse suivante : <https://laravel.com/docs/12.x/validation>.
 ### Exercice 2
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les règles de validation disponibles pour les formulaires ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Laravel sur les règles de validation disponibles
+pour les formulaires se trouve à l'adresse suivante :
+<https://laravel.com/docs/12.x/validation#available-validation-rules>.
+
+</details>
+
+### Exercice 3
+
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur les redirections ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Laravel sur les redirections se trouve à
+l'adresse suivante : <https://laravel.com/docs/12.x/responses#redirects>.
+
+</details>
+
+### Exercice 4
+
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
 sur les protections CSRF ?
 
 <details>
@@ -66,7 +96,7 @@ l'adresse suivante : <https://laravel.com/docs/12.x/csrf>.
 
 </details>
 
-### Exercice 3
+### Exercice 5
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
 sur les sessions, et plus particulièrement sur les _"flash messages"_ ?
@@ -82,7 +112,23 @@ La section spécifique sur les _"flash messages"_ se trouve à l'adresse suivant
 
 </details>
 
-### Exercice 4
+### Exercice 6
+
+Où peut-on trouver dans la documentation officielle de Laravel la documentation
+sur le chiffrement des données, notamment pour les sessions ?
+
+<details>
+<summary>Afficher la solution</summary>
+
+La documentation officielle de Laravel sur le chiffrement des données se trouve
+à l'adresse suivante : <https://laravel.com/docs/12.x/encryption>.
+
+La section spécifique sur les sessions se trouve à l'adresse suivante :
+<https://laravel.com/docs/12.x/session>.
+
+</details>
+
+### Exercice 7
 
 Où peut-on trouver dans la documentation officielle de Laravel la documentation
 sur la gestion des fichiers, notamment pour les uploads ?

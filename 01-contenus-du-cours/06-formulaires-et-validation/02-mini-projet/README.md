@@ -44,6 +44,15 @@ php artisan make:migration add_profile_picture_to_users_table
 php artisan migrate
 
 php artisan storage:link
+
+php artisan make:request StorePostRequest
+
+php artisan make:request UpdatePostRequest
+
+php artisan make:request UpdateMyProfileRequest
+
+php artisan make:request UpdateLikeRequest
+
 ```
 
 ```text
@@ -63,6 +72,13 @@ php artisan storage:link
 
    INFO  The [public/storage] link has been connected to [storage/app/public].
 
+   INFO  Request [app/Http/Requests/StorePostRequest.php] created successfully.
+
+   INFO  Request [app/Http/Requests/UpdatePostRequest.php] created successfully.
+
+   INFO  Request [app/Http/Requests/UpdateMyProfileRequest.php] created successfully.
+
+   INFO  Request [app/Http/Requests/UpdateLikeRequest.php] created successfully.
 ```
 
 ## Mettre en place les formulaires pour gérer les posts
