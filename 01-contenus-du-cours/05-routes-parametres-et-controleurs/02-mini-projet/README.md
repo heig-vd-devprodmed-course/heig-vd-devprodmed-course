@@ -287,10 +287,21 @@ page de détails du post :
 
 Notez l'ajout de différents liens dans ce composant :
 
+> [!NOTE]
+>
+> Ces liens que nous ajoutons maintenant seront visibles dans l'interface, mais
+> ne seront pas encore fonctionnels.
+>
+> Ils mèneront à des pages qui n'existent pas encore, mais nous allons les créer
+> dans les sections suivantes.
+>
+> Au terme du mini-projet, tous ces liens seront fonctionnels et mèneront à des
+> pages affichant les informations correspondantes.
+
 - Le nom de l'auteur.trice du post est maintenant un lien qui mène à son profil
-  (par exemple, <http://localhost:8000/@john_doe>).
+  (par exemple, <http://localhost:8000/@johndoe>).
 - L'avatar de l'auteur.trice du post est également un lien qui mène à son profil
-  (par exemple, <http://localhost:8000/@john_doe>).
+  (par exemple, <http://localhost:8000/@johndoe>).
 - Le titre du post est maintenant un lien qui mène à la page de détails du post
   (par exemple, <http://localhost:8000/posts/1>).
 - Le contenu du post est également un lien qui mène à la page de détails du post
@@ -476,8 +487,8 @@ chiffres et des tirets ou des underscores (ce qui correspond à un format de nom
 d'utilisateur typique).
 
 Si une personne accède à une URL correspondant à ce format (par exemple,
-<http://localhost:8000/@john_doe>), la méthode `show` du contrôleur
-`ProfileController` sera appelée avec le paramètre `username` égal à `john_doe`.
+<http://localhost:8000/@johndoe>), la méthode `show` du contrôleur
+`ProfileController` sera appelée avec le paramètre `username` égal à `johndoe`.
 
 Si une personne accède à une URL qui ne correspond pas à ce format (par exemple,
 <http://localhost:8000/@𝓶𝓸𝓷_𝓾𝓼𝓮𝓻𝓷𝓪𝓶𝓮>), Laravel ne trouvera pas de route
@@ -489,7 +500,7 @@ Maintenant que nous avons créé le contrôleur `ProfileController` et que nous
 avons lié la route pour afficher le profil d'un.e utilisateur.trice spécifique à
 la méthode `show` de ce contrôleur, nous pouvons tester cette fonctionnalité en
 accédant à une URL correspondant au format défini dans la route (par exemple,
-<http://localhost:8000/@john_doe>).
+<http://localhost:8000/@johndoe>).
 
 Si tout fonctionne correctement, vous devriez voir la page de profil de
 l'utilisateur.trice `john_doe` s'afficher, avec la liste de tous ses posts.
