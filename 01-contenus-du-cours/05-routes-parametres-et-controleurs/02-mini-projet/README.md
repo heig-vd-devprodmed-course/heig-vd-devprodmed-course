@@ -186,6 +186,13 @@ branche correspondante à partir de la branche principale `main`.
 Basculez sur la branche que vous venez de créer, puis modifiez ensuite le
 fichier `routes/web.php` pour ne garder que le contenu suivant :
 
+> [!NOTE]
+>
+> Il est normal que nous supprimions la route `/profile` que nous avons créée
+> précédemment pour tester l'affichage d'un profil d'utilisateur.trice
+> spécifique, car nous allons créer une route plus appropriée pour cela dans les
+> prochaines sections.
+
 ```php
 <?php
 
