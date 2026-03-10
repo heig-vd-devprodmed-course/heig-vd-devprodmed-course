@@ -14,11 +14,12 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
+- [Identifier les étapes à suivre](#identifier-les-étapes-à-suivre)
 - [TODO](#todo)
 - [Mettre en place les formulaires pour gérer les posts](#mettre-en-place-les-formulaires-pour-gérer-les-posts)
 - [Mettre en place les formulaires pour gérer le profil utilisateur.trice](#mettre-en-place-les-formulaires-pour-gérer-le-profil-utilisateurtrice)
+  - [Améliorer la page de profil utilisateur.trice](#améliorer-la-page-de-profil-utilisateurtrice)
 - [Mettre en place le formulaire pour liker un post](#mettre-en-place-le-formulaire-pour-liker-un-post)
-- [Améliorer la page de profil utilisateur.trice](#améliorer-la-page-de-profil-utilisateurtrice)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
@@ -29,6 +30,45 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 Mettre en place tous les formulaires nécessaires pour permettre aux
 utilisateur.trice.s de créer, éditer et supprimer des posts, ainsi que de gérer
 leur profil utilisateur.trice.
+
+## Identifier les étapes à suivre
+
+Maintenant que nous avons une bonne compréhension du patron de conception MVC et
+que nous avons vu comment gérer les modèles, les vues et les contrôleurs, nous
+allons pouvoir mettre en place les formulaires nécessaires pour permettre aux
+utilisateur.trice.s de créer, éditer et supprimer des posts, ainsi que de gérer
+leur profil utilisateur.trice.
+
+Ces différentes tâchent requièrent de toucher à tous les aspects de
+l'application : base de données, vue, composants, etc. Prenez quelques minutes
+pour lister les tâches que vous allez devoir réaliser pour cette partie avec
+leurs implications.
+
+<details>
+<summary>Exemple de réponse</summary>
+
+> [!NOTE]
+>
+> Ceci est un exemple de réponse possible. D'autres réponses sont possibles et
+> valides. L'objectif est de réfléchir aux tâches que vous allez devoir faire.
+>
+> N'hésitez pas à proposer d'autres tâches que celles mentionnées dans cet
+> exemple.
+
+- Créer les formulaires de création, d'édition et de suppression de posts.
+- Mettre à jour les routes et les méthodes de contrôleur pour gérer la création,
+  la mise à jour et la suppressions des posts associés.
+- Mettre à jour les vues pour gérer les posts.
+- Mettre à jour les traductions pour la gestion des posts.
+- Créer une migration pour rajouter un champ pour l'image de profil de la
+  personne.
+- Créer les formulaires de mise à jour et de suppression du profil.
+- Mettre à jour les routes et les méthodes de contrôleur pour gérer la création,
+  la mise à jour et la suppressions du profil.
+- Mettre à jour les vues pour gérer le profil.
+- Mettre à jour les traductions pour la gestion du profil.
+
+</details>
 
 ## TODO
 
@@ -85,9 +125,9 @@ php artisan make:request UpdateLikeRequest
 
 ## Mettre en place les formulaires pour gérer le profil utilisateur.trice
 
-## Mettre en place le formulaire pour liker un post
+### Améliorer la page de profil utilisateur.trice
 
-## Améliorer la page de profil utilisateur.trice
+## Mettre en place le formulaire pour liker un post
 
 ## Conclusion
 
@@ -141,6 +181,8 @@ suivante :
 - Seriez-vous capable de transformer l'entête du profil pour utiliser un
   composant `ProfileHeader` dédié, de manière similaire à ce que nous avons fait
   pour le composant `PostCard` ?
+- Seriez-vous capable de transformer les formulaires en composants dédiés, de
+  manière similaire à ce que nous avons fait pour le composant `PostCard` ?
 
 <!-- URLs -->
 

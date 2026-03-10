@@ -81,7 +81,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Validation des données de formulaire](#validation-des-données-de-formulaire)
   - [Traduire les messages d'erreur de validation](#traduire-les-messages-derreur-de-validation)
   - [Conserver les données de formulaire en cas d'erreur de validation](#conserver-les-données-de-formulaire-en-cas-derreur-de-validation)
-  - [Accéder aux données de formulaire dans les contrôleurs](#accéder-aux-données-de-formulaire-dans-les-contrôleurs)
+  - [Accéder aux données des formulaires](#accéder-aux-données-des-formulaires)
   - [Rediriger après la soumission d'un formulaire](#rediriger-après-la-soumission-dun-formulaire)
   - [Réutiliser les règles de validation dans plusieurs contrôleurs](#réutiliser-les-règles-de-validation-dans-plusieurs-contrôleurs)
 - [Gérer les fichiers d'un formulaire](#gérer-les-fichiers-dun-formulaire)
