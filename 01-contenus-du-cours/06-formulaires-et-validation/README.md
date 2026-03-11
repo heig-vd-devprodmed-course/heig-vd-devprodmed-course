@@ -83,7 +83,6 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Conserver les données de formulaire en cas d'erreur de validation](#conserver-les-données-de-formulaire-en-cas-derreur-de-validation)
   - [Accéder aux données des formulaires](#accéder-aux-données-des-formulaires)
   - [Rediriger après la soumission d'un formulaire](#rediriger-après-la-soumission-dun-formulaire)
-  - [Réutiliser les règles de validation dans plusieurs contrôleurs](#réutiliser-les-règles-de-validation-dans-plusieurs-contrôleurs)
 - [Gérer les fichiers d'un formulaire](#gérer-les-fichiers-dun-formulaire)
   - [Le type de champ `file`](#le-type-de-champ-file)
   - [Validation des fichiers](#validation-des-fichiers)
@@ -94,6 +93,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Mini-projet](#mini-projet)
 - [Questions d'évaluation](#questions-dévaluation)
 - [À faire pour la prochaine séance](#à-faire-pour-la-prochaine-séance)
+- [Contenu optionnel](#contenu-optionnel)
+  - [Réutiliser les règles de validation dans plusieurs contrôleurs](#réutiliser-les-règles-de-validation-dans-plusieurs-contrôleurs)
 
 ## Objectifs
 
@@ -894,135 +895,6 @@ développement. La documentation officielle de Laravel sur les redirections est
 disponible à l'adresse suivante :
 <https://laravel.com/docs/12.x/responses#redirects>.
 
-### Réutiliser les règles de validation dans plusieurs contrôleurs
-
-Il est possible de réutiliser les règles de validation dans plusieurs
-contrôleurs en créant des classes de validation dédiées, appelées "Form Request"
-dans Laravel.
-
-Cela est utile pour regrouper les règles de validation liées à une ressource
-spécifique dans une classe dédiée. Cela permet de séparer la logique de
-validation des contrôleurs.
-
-Pour créer une classe de validation, vous pouvez utiliser la commande Artisan
-suivante :
-
-```bash
-php artisan make:request StorePostRequest
-```
-
-Le résultat devrait ressembler à ceci :
-
-```text
-   INFO  Request [app/Http/Requests/StorePostRequest.php] created successfully.
-```
-
-La classe de validation `StorePostRequest` est créée dans le répertoire
-`app/Http/Requests`.
-
-Il est conventionnel de nommer les classes de validation en fonction de l'action
-qu'elles sont destinées à valider, par exemple `StorePostRequest` pour valider
-les données lors de la création d'un post, et `UpdatePostRequest` pour valider
-les données lors de la mise à jour d'un post.
-
-La classe de validation contient une méthode `rules()` où vous pouvez définir
-les règles de validation pour les données du formulaire.
-
-Par exemple, pour gérer la création de nouveaux posts, la classe
-`StorePostRequest` pourrait ressembler à ceci :
-
-```php
-<?php
-
-namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
-
-class StorePostRequest extends FormRequest
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            'title' => 'nullable|string|max:255',
-            'content' => 'required|string|max:5000',
-        ];
-    }
-}
-```
-
-La méthode `authorize()` est utilisée pour déterminer si l'utilisateur.trice est
-autorisé.e à effectuer cette requête. Par défaut, elle retourne `false`, ce qui
-signifie que toutes les requêtes seront rejetées.
-
-Vous devez modifier cette méthode pour retourner `true` ou implémenter une
-logique d'autorisation appropriée pour permettre l'accès à cette requête. Dans
-une prochaine séance, nous verrons comment implémenter une logique
-d'autorisation plus avancée pour contrôler l'accès à certaines actions dans
-votre application.
-
-La méthode `rules()` retourne un tableau associatif des règles de validation
-pour les données du formulaire. Ces règles sont les mêmes que celles que nous
-avons utilisées précédemment dans les contrôleurs, mais elles sont maintenant
-regroupées dans une classe dédiée.
-
-Pour utiliser cette classe de validation dans votre contrôleur, vous pouvez
-l'injecter dans la méthode du contrôleur qui traite la soumission du formulaire.
-Par exemple, dans le `PostController`, vous pouvez faire :
-
-```php
-public function store(StorePostRequest $request)
-{
-    // La requête est valide...
-
-    // Les données validées sont directement accessibles...
-    $validated = $request->validated();
-
-    // Stocke le post...
-}
-```
-
-En injectant la classe `StorePostRequest` dans la méthode `store`, Laravel
-exécutera automatiquement la validation des données du formulaire en utilisant
-les règles définies dans la classe de validation.
-
-Si la validation échoue, Laravel redirigera automatiquement l'utilisateur.trice
-vers le formulaire précédent avec les messages d'erreur de validation.
-
-Notez l'utilisation de la méthode `validated()` pour accéder aux données
-validées et non `validate()` comme utilisée initialement. La validation est déjà
-effectuée par la classe de validation, et `validated()` retourne les données qui
-ont été validées avec succès.
-
-Cela permet de simplifier le code de vos contrôleurs en déléguant la logique de
-validation à des classes dédiées, ce qui rend votre code plus propre et plus
-facile à maintenir.
-
-Même si les règles de validation sont les mêmes entre deux actions différentes
-(ex : création et mise à jour), il est recommandé de créer des classes de
-validation distinctes pour chaque action (ex : `StorePostRequest` et
-`UpdatePostRequest`) afin de séparer clairement les responsabilités et de
-faciliter la maintenance du code à long terme.
-
-Surtout que les règles de validation peuvent différer entre les actions de
-création et de mise à jour, par exemple, lors de la création d'un post, le champ
-`title` peut être optionnel, tandis que lors de la mise à jour d'un post, le
-champ `title` peut être obligatoire. En ayant des classes de validation
-distinctes, vous pouvez facilement gérer ces différences sans compliquer la
-logique de validation dans une seule classe.
-
 ## Gérer les fichiers d'un formulaire
 
 Laravel fournit également des fonctionnalités pour gérer les fichiers
@@ -1308,6 +1180,142 @@ il est recommandé pour la prochaine séance de :
 - Relire le support de cours si nécessaire.
 - Finaliser les exercices qui n'ont pas été terminés en classe.
 - Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
+
+## Contenu optionnel
+
+Le contenu suivant est optionnel et n'est pas nécessaire pour la compréhension
+des concepts de base des formulaires et de la validation dans Laravel.
+Cependant, il peut être utile pour approfondir votre compréhension et pour
+explorer des fonctionnalités plus avancées de Laravel.
+
+### Réutiliser les règles de validation dans plusieurs contrôleurs
+
+Il est possible de réutiliser les règles de validation dans plusieurs
+contrôleurs en créant des classes de validation dédiées, appelées "Form Request"
+dans Laravel.
+
+Cela est utile pour regrouper les règles de validation liées à une ressource
+spécifique dans une classe dédiée. Cela permet de séparer la logique de
+validation des contrôleurs.
+
+Pour créer une classe de validation, vous pouvez utiliser la commande Artisan
+suivante :
+
+```bash
+php artisan make:request StorePostRequest
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  Request [app/Http/Requests/StorePostRequest.php] created successfully.
+```
+
+La classe de validation `StorePostRequest` est créée dans le répertoire
+`app/Http/Requests`.
+
+Il est conventionnel de nommer les classes de validation en fonction de l'action
+qu'elles sont destinées à valider, par exemple `StorePostRequest` pour valider
+les données lors de la création d'un post, et `UpdatePostRequest` pour valider
+les données lors de la mise à jour d'un post.
+
+La classe de validation contient une méthode `rules()` où vous pouvez définir
+les règles de validation pour les données du formulaire.
+
+Par exemple, pour gérer la création de nouveaux posts, la classe
+`StorePostRequest` pourrait ressembler à ceci :
+
+```php
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StorePostRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'title' => 'nullable|string|max:255',
+            'content' => 'required|string|max:5000',
+        ];
+    }
+}
+```
+
+La méthode `authorize()` est utilisée pour déterminer si l'utilisateur.trice est
+autorisé.e à effectuer cette requête. Par défaut, elle retourne `false`, ce qui
+signifie que toutes les requêtes seront rejetées.
+
+Vous devez modifier cette méthode pour retourner `true` ou implémenter une
+logique d'autorisation appropriée pour permettre l'accès à cette requête. Dans
+une prochaine séance, nous verrons comment implémenter une logique
+d'autorisation plus avancée pour contrôler l'accès à certaines actions dans
+votre application.
+
+La méthode `rules()` retourne un tableau associatif des règles de validation
+pour les données du formulaire. Ces règles sont les mêmes que celles que nous
+avons utilisées précédemment dans les contrôleurs, mais elles sont maintenant
+regroupées dans une classe dédiée.
+
+Pour utiliser cette classe de validation dans votre contrôleur, vous pouvez
+l'injecter dans la méthode du contrôleur qui traite la soumission du formulaire.
+Par exemple, dans le `PostController`, vous pouvez faire :
+
+```php
+public function store(StorePostRequest $request)
+{
+    // La requête est valide...
+
+    // Les données validées sont directement accessibles...
+    $validated = $request->validated();
+
+    // Stocke le post...
+}
+```
+
+En injectant la classe `StorePostRequest` dans la méthode `store`, Laravel
+exécutera automatiquement la validation des données du formulaire en utilisant
+les règles définies dans la classe de validation.
+
+Si la validation échoue, Laravel redirigera automatiquement l'utilisateur.trice
+vers le formulaire précédent avec les messages d'erreur de validation.
+
+Notez l'utilisation de la méthode `validated()` pour accéder aux données
+validées et non `validate()` comme utilisée initialement. La validation est déjà
+effectuée par la classe de validation, et `validated()` retourne les données qui
+ont été validées avec succès.
+
+Cela permet de simplifier le code de vos contrôleurs en déléguant la logique de
+validation à des classes dédiées, ce qui rend votre code plus propre et plus
+facile à maintenir.
+
+Même si les règles de validation sont les mêmes entre deux actions différentes
+(ex : création et mise à jour), il est recommandé de créer des classes de
+validation distinctes pour chaque action (ex : `StorePostRequest` et
+`UpdatePostRequest`) afin de séparer clairement les responsabilités et de
+faciliter la maintenance du code à long terme.
+
+Surtout que les règles de validation peuvent différer entre les actions de
+création et de mise à jour, par exemple, lors de la création d'un post, le champ
+`title` peut être optionnel, tandis que lors de la mise à jour d'un post, le
+champ `title` peut être obligatoire. En ayant des classes de validation
+distinctes, vous pouvez facilement gérer ces différences sans compliquer la
+logique de validation dans une seule classe.
 
 <!-- URLs -->
 

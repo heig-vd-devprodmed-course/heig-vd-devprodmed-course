@@ -14,18 +14,32 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
-- [Identifier les étapes à suivre](#identifier-les-étapes-à-suivre)
-- [TODO](#todo)
+- [Identifier les tâches à réaliser](#identifier-les-tâches-à-réaliser)
 - [Mettre en place les formulaires pour gérer les posts](#mettre-en-place-les-formulaires-pour-gérer-les-posts)
   - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche)
   - [Formulaire de création](#formulaire-de-création)
   - [Formulaire d'édition](#formulaire-dédition)
   - [Formulaire de suppression](#formulaire-de-suppression)
   - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request)
-- [Mettre en place les formulaires pour gérer le profil utilisateur.trice](#mettre-en-place-les-formulaires-pour-gérer-le-profil-utilisateurtrice)
-  - [Améliorer la page de profil utilisateur.trice](#améliorer-la-page-de-profil-utilisateurtrice)
 - [Mettre en place le formulaire pour liker un post](#mettre-en-place-le-formulaire-pour-liker-un-post)
-- [Utiliser des Form Requests pour valider les formulaires](#utiliser-des-form-requests-pour-valider-les-formulaires)
+  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-1)
+  - [TODO](#todo)
+  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-1)
+- [Mettre en place les formulaires pour gérer le profil utilisateur.trice](#mettre-en-place-les-formulaires-pour-gérer-le-profil-utilisateurtrice)
+  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-2)
+  - [Créer et appliquer la migration pour ajouter l'image de profil](#créer-et-appliquer-la-migration-pour-ajouter-limage-de-profil)
+  - [Créer les vues](#créer-les-vues)
+  - [Créer les traductions](#créer-les-traductions)
+  - [Créer le contrôleur](#créer-le-contrôleur)
+  - [Définir les actions de chaque méthode](#définir-les-actions-de-chaque-méthode)
+  - [Créer le lien symbolique pour accéder aux fichiers publiques](#créer-le-lien-symbolique-pour-accéder-aux-fichiers-publiques)
+  - [Lier le contrôleur aux routes](#lier-le-contrôleur-aux-routes)
+  - [Mettre à jour le lien pour accéder à son profil](#mettre-à-jour-le-lien-pour-accéder-à-son-profil)
+  - [Tester la mise à jour du profil](#tester-la-mise-à-jour-du-profil)
+  - [Améliorer la page de profil utilisateur.trice](#améliorer-la-page-de-profil-utilisateurtrice)
+  - [Tester la suppression du profil](#tester-la-suppression-du-profil)
+  - [Améliorer la documentation](#améliorer-la-documentation)
+  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-2)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
@@ -37,7 +51,12 @@ Mettre en place tous les formulaires nécessaires pour permettre aux
 utilisateur.trice.s de créer, éditer et supprimer des posts, ainsi que de gérer
 leur profil utilisateur.trice.
 
-## Identifier les étapes à suivre
+Dans cette séance, nous souhaitons également permettre aux personnes d'avoir une
+image de profil pour leur compte utilisateur.trice. Nous allons donc devoir
+toucher à tous les aspects que nous avons étudié jusqu'ici : base de données,
+modèles, vues, contrôleurs, etc.
+
+## Identifier les tâches à réaliser
 
 Maintenant que nous avons une bonne compréhension du patron de conception MVC
 (modèles, vues et contrôleurs), nous allons pouvoir mettre en place les
@@ -75,57 +94,6 @@ leurs implications.
 
 </details>
 
-## TODO
-
-```bash
-php artisan make:controller --singleton MyProfileController
-
-php artisan make:view my-profile.show
-
-php artisan make:view my-profile.edit
-
-php artisan make:migration add_profile_picture_to_users_table
-
-php artisan migrate
-
-php artisan storage:link
-
-php artisan make:request StorePostRequest
-
-php artisan make:request UpdatePostRequest
-
-php artisan make:request UpdateMyProfileRequest
-
-php artisan make:request UpdateLikeRequest
-
-```
-
-```text
-   INFO  Controller [app/Http/Controllers/MyProfileController.php] created successfully.
-
-   INFO  View [resources/views/my-profile/show.blade.php] created successfully.
-
-   INFO  View [resources/views/my-profile/edit.blade.php] created successfully.
-
-
-   INFO  Migration [database/migrations/2026_03_04_143945_add_profile_picture_to_users_table.php] created successfully.
-
-   INFO  Running migrations.
-
-  2026_03_04_143945_add_profile_picture_to_users_table ........................... 8.14ms DONE
-
-
-   INFO  The [public/storage] link has been connected to [storage/app/public].
-
-   INFO  Request [app/Http/Requests/StorePostRequest.php] created successfully.
-
-   INFO  Request [app/Http/Requests/UpdatePostRequest.php] created successfully.
-
-   INFO  Request [app/Http/Requests/UpdateMyProfileRequest.php] created successfully.
-
-   INFO  Request [app/Http/Requests/UpdateLikeRequest.php] created successfully.
-```
-
 ## Mettre en place les formulaires pour gérer les posts
 
 Dans cette section, nous allons mettre en place les formulaires nécessaires pour
@@ -137,7 +105,7 @@ Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
 branche correspondante à partir de la branche principale `main`.
 
 Basculez sur la branche que vous venez de créer, puis suivez les étapes
-suivantes pour mettre en place les formulaires pour gérer les posts.
+suivantes pour mettre en place la tâche à effectuer.
 
 ### Formulaire de création
 
@@ -294,7 +262,7 @@ jour la fonction `store` du contrôleur avec le code suivant :
             'content' => 'required|string|max:5000',
         ]);
 
-        $user = User::where('username', 'janedoe')->first();
+        $user = User::where('id', 2)->first();
         $post = new Post();
 
         $post->title = $validated['title'];
@@ -312,9 +280,9 @@ soumission d'un formulaire avec la méthode HTTP POST pour la création d'une
 nouvelle ressource (un nouveau post).
 
 Lors de la création du post, pour le moment, nous associons ce nouveau post à
-l'utilisatrice Jane Doe (username `janedoe`). Dans une future séance, nous
-gérerons les utilisateur.trices authentifiées et nous pourrons mettre à jour le
-code pour associer le post à la personne actuellement connectée.
+l'utilisatrice Jane Doe (ID `2`). Dans une future séance, nous gérerons les
+utilisateur.trices authentifiées et nous pourrons mettre à jour le code pour
+associer le post à la personne actuellement connectée.
 
 Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
 aux questions suivantes :
@@ -673,7 +641,8 @@ post.
 Un nouveau bouton de suppression devrait maintenant être présent, vous
 permettant de supprimer un post ! Le formulaire associé devrait être invisible.
 
-Essayez de supprimer certains posts.
+Essayez de supprimer certains posts. Un message de confirmation devrait vous
+permettre de confirmer l'action !
 
 Lorsqu'un nouveau post a été supprimé avec succès, vous devriez avoir accès à la
 page contenant tous les posts restants !
@@ -690,17 +659,1031 @@ cette tâche.
 N'oubliez pas de récupérer les modifications localement après la fusion de la
 pull request.
 
+## Mettre en place le formulaire pour liker un post
+
+Dans cette section, nous allons mettre en place le formulaire pour aimer/réagir
+à un post.
+
+### Créer l'issue et la branche pour suivre cette tâche
+
+Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
+branche correspondante à partir de la branche principale `main`.
+
+Basculez sur la branche que vous venez de créer, puis suivez les étapes
+suivantes pour mettre en place la tâche à effectuer.
+
+### TODO
+
+### Pousser les modifications et fusionner la pull request
+
+Une fois les modifications terminées, validez les modifications dans Git, puis
+vous pouvez créer la pull request.
+
+Validez la pull request et fusionnez-la une fois que les modifications sont
+terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
+cette tâche.
+
+N'oubliez pas de récupérer les modifications localement après la fusion de la
+pull request.
+
 ## Mettre en place les formulaires pour gérer le profil utilisateur.trice
+
+Dans cette section, nous allons mettre en place les formulaires nécessaires pour
+permettre aux utilisateur.trice.s de gérer leur profil utilisateur.trice.
+
+Cette partie demande à toucher à la plupart des aspects que nous avons étudié
+jusqu'ici.
+
+Pour réaliser cette tâche, nous allons devoir réaliser les points suivants :
+
+- Modifier la base de données pour permettre aux personnes d'avoir une image de
+  profil.
+- Créer les vues avec les formulaires nécessaires pour permettre la mise à jour
+  du profil.
+- Créer les contrôleurs pour gérer les requêtes.
+
+Lorsque nous développons ce genre de nouvelles fonctionnalités, il n'y a pas
+d'ordre défini. Je (Ludovic) recommande de toujours partir des données puis de
+"monter dans les couches" jusqu'au client final (le navigateur de la personne
+qui utilisera le service) car les données sont la source absolue de vérité.
+
+Si vous préférez commencer dans l'ordre inverse en commençant depuis le client
+(le navigateur de la personne qui utilisera le service), c'est tout à fait
+valide aussi. Si c'est votre souhait, vous pourriez suivre l'ordre suivant :
+
+1. [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-2)
+2. [Mettre à jour le lien pour accéder à son profil](#mettre-à-jour-le-lien-pour-accéder-à-son-profil)
+3. [Créer le contrôleur](#créer-le-contrôleur)
+4. [Définir les actions de chaque méthode](#définir-les-actions-de-chaque-méthode)
+5. [Créer le lien symbolique pour accéder aux fichiers publiques](#créer-le-lien-symbolique-pour-accéder-aux-fichiers-publiques)
+6. [Lier le contrôleur aux routes](#lier-le-contrôleur-aux-routes)
+7. [Créer les vues](#créer-les-vues)
+8. [Créer les traductions](#créer-les-traductions)
+9. [Créer et appliquer la migration pour ajouter l'image de profil](#créer-et-appliquer-la-migration-pour-ajouter-limage-de-profil)
+
+Puis reprendre à la section
+[Tester la mise à jour du profil](#tester-la-mise-à-jour-du-profil).
+
+### Créer l'issue et la branche pour suivre cette tâche
+
+Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
+branche correspondante à partir de la branche principale `main`.
+
+Basculez sur la branche que vous venez de créer, puis suivez les étapes
+suivantes pour mettre en place la tâche à effectuer.
+
+### Créer et appliquer la migration pour ajouter l'image de profil
+
+Nous allons créer une migration nommée `add_profile_picture_to_users_table` pour
+rajouter un champ `profile_picture` à la table `users` de notre base de données.
+
+Vous souvenez-vous de la commande pour créer une nouvelle migration ?
+
+Si besoin, utilisez la documentation officielle pour retrouver la commande.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```bash
+php artisan make:migration add_profile_picture_to_users_table
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  Migration [database/migrations/2026_03_04_143945_add_profile_picture_to_users_table.php] created successfully.
+```
+
+</details>
+
+Essayez maintenant de modifier le fichier de migration récemment créé en mettant
+à jour les méthodes `up()` et `down()` pour ajouter/supprimer une colonne
+`profile_picture` optionnelle.
+
+Vous remarquerez que Laravel a su déduire automatiquement que vous souhaitez
+modifier la table `users` grâce au nom donné à la migration.
+
+Pour ajouter/supprimer des colonnes, utilisez la documentation officielle
+disponible ici si besoin :
+<https://laravel.com/docs/12.x/migrations#column-modifiers>.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('profile_picture')->nullable()->after('username');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('profile_picture');
+        });
+    }
+};
+```
+
+Prenez quelques minutes pour comprendre cette migration.
+
+La migration ajoute une nouvelle colonne `profile_picture` à la table `users`.
+De cette manière, nous allons pouvoir stocker le chemin d'accès à l'image de
+profile pour chaque utilisateur.trice. Ce champ est optionnel (_"nullable"_).
+
+</details>
+
+Maintenant que la migration est définie, nous pouvons l'appliquer.
+
+Vous souvenez-vous de la commande pour appliquer une migration ?
+
+Si besoin, utilisez la documentation officielle pour retrouver la commande.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```bash
+php artisan migrate
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  Running migrations.
+
+  2026_03_04_143945_add_profile_picture_to_users_table ........................... 8.14ms DONE
+```
+
+</details>
+
+La base de données ayant été mise à jour, les modèles peuvent automatiquement
+utiliser la nouvelle colonne. Nous pouvons passer aux vues pour présenter
+l'information à l'utilisateur.trice.
+
+### Créer les vues
+
+Pour permettre aux utilisateur.trices de pouvoir gérer leur profil, il est
+nécessaire de créer deux nouvelles vues :
+
+1. `my-profile.show` : la vue pour visualiser son propre profil.
+2. `my-profile.edit` : la vue pour mettre à jour son profil.
+
+Le nom `my-profile` permet de séparer les éléments propres à la gestion de son
+propre profil par rapport aux profiles publiques des autres utilisateur.trice.
+
+Il n'est pas nécessaire de fournir une vue de création de profil (comme ça a pu
+être le cas avec les posts par exemple) car l'utilisateur.trice sera créé lors
+de la création de son compte au travers de l'inscription au service. Cet aspect
+sera étudié dans la prochaine séance.
+
+Vous souvenez-vous de la commande pour créer une nouvelle vue ?
+
+Si besoin, utilisez la documentation officielle pour retrouver la commande.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```bash
+php artisan make:view my-profile.show
+
+php artisan make:view my-profile.edit
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  View [resources/views/my-profile/show.blade.php] created successfully.
+
+   INFO  View [resources/views/my-profile/edit.blade.php] created successfully.
+```
+
+</details>
+
+Remplacez le contenu du fichier `resources/views/my-profile/show.blade.php` avec
+le contenu suivant :
+
+```php
+<x-default-layout>
+    <x-slot:title>
+        {{ __('ui.my_profile.show.title') }}
+    </x-slot>
+
+    <x-slot:description>
+        {{ __('ui.my_profile.show.description') }}
+    </x-slot>
+
+    <article class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 text-center">
+        <div class="flex justify-center mb-6">
+            <div
+                class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                @if ($user->profile_picture)
+                    <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="{{ $user->username }}"
+                        class="w-full h-full object-cover">
+                @else
+                    <img src="/icons/profile.svg" alt="{{ $user->username }}" class="h-32 w-32 text-gray-400">
+                @endif
+            </div>
+        </div>
+
+        <h1 class="text-2xl font-bold dark:text-white">
+            {{ $user->first_name }} {{ $user->last_name }}
+        </h1>
+
+        <p class="text-lg text-gray-600 dark:text-gray-400 mt-1">
+            {{ '@' . $user->username }}
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-400 mt-1">
+            {{ $user->email }}
+        </p>
+
+        <p class="mt-4 dark:text-gray-300">
+            {{ __('ui.my_profile.show.member_since', ['date' => $user->created_at->isoFormat('LL')]) }}
+        </p>
+
+        <div class="flex justify-center gap-3 mt-6">
+            <a href="{{ route('my-profile.edit') }}"
+                class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800">
+                {{ __('ui.my_profile.show.actions.edit') }}
+            </a>
+            <a href="{{ url('/@' . $user->username) }}"
+                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
+                {{ __('ui.my_profile.show.actions.view_public') }}
+            </a>
+        </div>
+    </article>
+</x-default-layout>
+```
+
+Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
+aux questions suivantes :
+
+- Comment sont utilisées les traductions dans cette vue ? Comment sont-elles
+  structurées ?
+- Comment est utilisé l'image de profil de l'utilisateur.trice dans cette vue ?
+  Comment est-elle récupérée depuis le disque ?
+- Quelles sont les actions possibles sur le profil depuis cette vue ?
+
+Remplacez le contenu du fichier `resources/views/my-profile/edit.blade.php` avec
+le contenu suivant :
+
+```php
+<x-default-layout>
+    <x-slot:title>
+        {{ __('ui.my_profile.edit.title') }}
+    </x-slot>
+
+    <x-slot:description>
+        {{ __('ui.my_profile.edit.description') }}
+    </x-slot>
+
+    <article class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
+        <header class="mb-6">
+            <h1 class="text-2xl font-bold dark:text-white">
+                {{ __('ui.my_profile.edit.title') }}
+            </h1>
+
+            <p class="mt-4 dark:text-gray-300">
+                {{ __('ui.my_profile.edit.description') }}
+            </p>
+        </header>
+
+        <form method="POST" enctype="multipart/form-data" action="{{ url('/my-profile') }}">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-4">
+                <label for="profile-picture" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ __('ui.my_profile.form.fields.profile_picture.label') }}
+                </label>
+                <input type="file" id="profile-picture" name="profile_picture"
+                    accept="image/jpeg,image/png,image/bmp,image/gif,image/webp"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 dark:focus:ring-purple-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 dark:file:bg-purple-900 dark:file:text-purple-200 dark:hover:file:bg-purple-800">
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    {{ __('ui.my_profile.form.fields.profile_picture.help') }}
+                </p>
+                @error('profile_picture')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ __('ui.my_profile.form.fields.username.label') }}
+                </label>
+                <input type="text" id="username" name="username" value="{{ old('username', $user->username) }}"
+                    placeholder="{{ __('ui.my_profile.form.fields.username.placeholder') }}"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 dark:focus:ring-purple-500 focus:border-transparent @error('username') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
+                @error('username')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ __('ui.my_profile.form.fields.email.label') }}
+                </label>
+                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
+                    placeholder="{{ __('ui.my_profile.form.fields.email.placeholder') }}"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 dark:focus:ring-purple-500 focus:border-transparent @error('email') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
+                @error('email')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ __('ui.my_profile.form.fields.first_name.label') }}
+                </label>
+                <input type="text" id="first-name" name="first_name"
+                    value="{{ old('first_name', $user->first_name) }}"
+                    placeholder="{{ __('ui.my_profile.form.fields.first_name.placeholder') }}"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 dark:focus:ring-purple-500 focus:border-transparent @error('first_name') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
+                @error('first_name')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="last-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ __('ui.my_profile.form.fields.last_name.label') }}
+                </label>
+                <input type="text" id="last-name" name="last_name" value="{{ old('last_name', $user->last_name) }}"
+                    placeholder="{{ __('ui.my_profile.form.fields.last_name.placeholder') }}"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 dark:focus:ring-purple-500 focus:border-transparent @error('last_name') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
+                @error('last_name')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <a href="{{ url('/my-profile') }}"
+                            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
+                            {{ __('ui.my_profile.form.actions.cancel') }}
+                        </a>
+                        <button type="submit" form="delete-profile-form"
+                            onclick="return confirm('{{ __('ui.my_profile.form.actions.delete_confirm') }}')"
+                            class="px-4 py-2 bg-red-600 dark:bg-red-900 text-white rounded-md hover:bg-red-700 dark:hover:bg-red-800 cursor-pointer">
+                            {{ __('ui.my_profile.form.actions.delete') }}
+                        </button>
+                    </div>
+                    <button type="submit"
+                        class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800 cursor-pointer">
+                        {{ __('ui.my_profile.form.actions.submit') }}
+                    </button>
+                </div>
+            </footer>
+        </form>
+
+        <form id="delete-profile-form" method="POST" action="{{ url('/my-profile') }}" class="hidden">
+            @csrf
+            @method('DELETE')
+        </form>
+    </article>
+</x-default-layout>
+```
+
+Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
+aux questions suivantes :
+
+- Comment sont utilisées les traductions dans cette vue ? Comment sont-elles
+  structurées ?
+- Quelles sont les actions possibles sur le profil depuis cette vue ?
+- Comment sont structurés les formulaires ? Quels éléments les composent ?
+- Quels sont les noms (selon l'attribut `name`) donnés à chaque champ du
+  formulaire ?
+- Pour chaque formulaire, vers quelle URL les données sont envoyées ? Avec
+  quelle méthode HTTP ?
+- Est-ce que les formulaires sont protégés contre les attaques CSRF ? Si oui,
+  comment ?
+- Quels sont les mécanismes mis en place pour afficher les erreurs de
+  validations ?
+- Est-ce que les données sont préservées en cas d'erreur de validation ? Comment
+  cela s'articule ?
+- Comment sont utilisées les traductions dans cette vue ? Comment sont-elles
+  structurées ?
+
+Les vues sont maintenant créées, nous pouvons définir les traductions utilisées
+dans celles-ci.
+
+### Créer les traductions
+
+En utilisant les réflexions que vous avez eues sur les traductions dans la
+section précédente, mettez à jour le fichier `lang/fr/ui.php` avec des
+traductions adaptées pour représenter chaque élément.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    // Autres traductions...
+    'my_profile' => [
+        'edit' => [
+            'title' => 'Modifier son profil',
+            'description' => 'Page pour modifier son propre profil utilisateur',
+        ],
+        'show' => [
+            'title' => 'Mon profil - :username',
+            'description' => 'Page de visualisation de son propre profil utilisateur.',
+            'member_since' => 'Membre depuis le :date.',
+            'actions' => [
+                'edit' => 'Modifier le profil',
+                'view_public' => 'Voir le profil public',
+            ],
+        ],
+        'form' => [
+            'fields' => [
+                'profile_picture' => [
+                    'label' => 'Photo de profil',
+                    'help' => 'Formats acceptés: JPG, JPEG, PNG, BMP, GIF, WEBP. Taille maximale: 2 Mo.',
+                ],
+                'username' => [
+                    'label' => "Nom d'utilisateur",
+                    'placeholder' => "Entrez votre nom d'utilisateur",
+                ],
+                'email' => [
+                    'label' => 'Adresse e-mail',
+                    'placeholder' => 'Entrez votre adresse e-mail',
+                ],
+                'first_name' => [
+                    'label' => 'Prénom',
+                    'placeholder' => 'Entrez votre prénom',
+                ],
+                'last_name' => [
+                    'label' => 'Nom',
+                    'placeholder' => 'Entrez votre nom',
+                ],
+            ],
+            'actions' => [
+                'submit' => 'Sauvegarder',
+                'cancel' => 'Annuler',
+                'delete' => 'Supprimer le compte',
+                'delete_confirm' => 'Souhaitez-vous vraiment supprimer votre compte ? Cette action est irréversible.',
+            ],
+        ],
+    ],
+    // Autres traductions...
+];
+```
+
+</details>
+
+En utilisant les réflexions que vous avez eues sur les traductions dans la
+section précédente, mettez à jour le fichier `lang/fr/validation.php` avec des
+traductions adaptées pour représenter chaque élément.
+
+Pour rappel, le fichier `lang/fr/validation.php` convient les traductions pour
+les erreurs de validation ainsi que les attributs utilisés dans les règles de
+validation.
+
+Il s'agit ici de mettre à jour la clé `attributs` mis à jour précédemment pour
+les posts avec les attributs propres au profil.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    // Autres traductions...
+    'attributes' => [
+        // Autres traductions des attributs...
+        'email'           => 'adresse e-mail',
+        'first_name'      => 'prénom',
+        'last_name'       => 'nom',
+        'profile_picture' => 'photo de profil',
+        'username'        => "nom d'utilisateur",
+        // Autres traductions des attributs...
+    ],
+    // Autres traductions...
+];
+```
+
+</details>
+
+Les vues devraient maintenant utiliser toutes les traductions mises à
+disposition.
+
+### Créer le contrôleur
+
+Les modèles et les vues ont été mis à jour/créés, il ne nous reste qu'à créer
+les routes pour gérer les requêtes venant de nos client.es (leur navigateur).
+
+Pour cela, nous allons créer un contrôleur de type _"singleton"_ (source :
+<https://laravel.com/docs/12.x/controllers#singleton-resource-controllers>).
+
+Un contrôleur standard a pour but de gérer une collection de ressources (des
+pots, des likes, des commentaires, etc.).
+
+Un contrôleur de type _"singleton"_ ne gère qu'une seule ressource, par exemple
+un profile (accessible à la route `/profile`). C'est un cas d'usage parfait ici.
+
+Pour créer un contrôleur de type _"singleton"_, utilisez la commande habituelle
+pour créer un contrôleur avec l'argument `--singleton`.
+
+Vous souvenez-vous de la commande pour créer un nouveau contrôleur ? Comment
+nommeriez-vous ce nouveau contrôleur ?
+
+Si besoin, utilisez la documentation officielle pour retrouver la commande.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```text
+php artisan make:controller --singleton MyProfileController
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  Controller [app/Http/Controllers/MyProfileController.php] created successfully.
+```
+
+</details>
+
+Un contrôleur devrait avoir été créé avec la plupart des méthodes contenant la
+fonction `abort(404);`. Si par mégarde ces méthodes seraient appelées par nos
+routes, une erreur 404 sera retournée.
+
+### Définir les actions de chaque méthode
+
+Dans le contexte du profil utilisateur, nous souhaitons être capable de réaliser
+les opérations suivantes :
+
+- Visualiser son profil.
+- Mettre à jour son profil.
+- Supprimer son profil.
+
+Pour cela, nous allons donc implémenter les méthodes `show()`, `edit()`,
+`update()` et `destroy()`.
+
+Ouvrez le fichier `app/Http/Controllers/MyProfileController.php` et modifiez-le
+avec le contenu suivant :
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+
+class MyProfileController extends Controller
+{
+    /**
+     * Show the form for creating the resource.
+     */
+    public function create(): never
+    {
+        abort(404);
+    }
+
+    /**
+     * Store the newly created resource in storage.
+     */
+    public function store(Request $request): never
+    {
+        abort(404);
+    }
+
+    /**
+     * Display the resource.
+     */
+    public function show()
+    {
+        $user = User::where('id', 2)->first();
+
+        return view('my-profile.show', ['user' => $user]);
+    }
+
+    /**
+     * Show the form for editing the resource.
+     */
+    public function edit()
+    {
+        $user = User::where('id', 2)->first();
+
+        return view('my-profile.edit', ['user' => $user]);
+    }
+
+    /**
+     * Update the resource in storage.
+     */
+    public function update(Request $request)
+    {
+        $user = User::where('id', 2)->first();
+
+        $validated = $request->validate([
+            'username' => ['required', 'alpha_dash:ascii', 'min:2', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
+        ]);
+
+        $file = $request->file('profile_picture');
+
+        // Vérifie si une image de profil a été téléversée
+        if ($file) {
+            // Vérifie si l'utilisateur.trice a une image de profil
+            if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
+
+            // Stocke la nouvelle image de profil et récupère son chemin
+            $path = Storage::disk('public')->put('profile-pictures', $file);
+
+            // Remplace le champ profile_picture dans les données validées par le chemin de l'image stockée
+            $validated['profile_picture'] = $path;
+        }
+
+        // Met à jour les informations de l'utilisateur.trice
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+        $user->first_name = $validated['first_name'];
+        $user->last_name = $validated['last_name'];
+
+        // Si une image de profil a été téléversée, renseigne le chemin pour y accéder
+        if (isset($validated['profile_picture'])) {
+            $user->profile_picture = $validated['profile_picture'];
+        }
+
+        $user->save();
+
+        return redirect('/my-profile');
+    }
+
+    /**
+     * Remove the resource from storage.
+     */
+    public function destroy()
+    {
+        $user = User::where('id', 2)->first();
+
+        if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
+            Storage::disk('public')->delete($user->profile_picture);
+        }
+
+        $user->delete();
+
+        return redirect('/');
+    }
+}
+```
+
+Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
+aux questions suivantes :
+
+> [!NOTE]
+>
+> Il est normal que toutes les actions soient liées au profil de Jane Doe (ID
+> `2`). Comme nous n'avons pas encore mis en place l'authentification, il est
+> nécessaire de stocker l'information en dur dans le code avec le compte
+> correspondant à l'ID 2 (Jane Doe).
+
+- Quelles sont les règles de validation appliquées sur le profil ? Que fait la
+  règle de validation `alpha_dash:ascii` ? Que permet-elle comme type de nom
+  d'utilisateur.trice ?
+- A quelle méthode HTTP répond chaque méthode de la classe `MyProfileController`
+  ?
+- Que font les méthodes `show()` et `edit()` ?
+- Que fait la méthode `update()` ? Comment est-ce que l'image de profil est
+  validée ? Comment est-ce que l'image de profil est sauvegardée sur le disque ?
+- Une fois le profil mis à jour, où est-ce que l'utilisateur.trice est
+  redirigé.e ?
+- Que fait la méthode `delete()` ? Que se passe-t-il si l'utilisateur.trice a
+  une image de profil ?
+- Une fois le profil supprimé, où est-ce que l'utilisateur.trice est redirigé.e
+  ?
+
+Comme nous allons devoir stocker les images de profil des utilisateur.trices, il
+est nécessaire de configurer le stockage.
+
+### Créer le lien symbolique pour accéder aux fichiers publiques
+
+Le contrôleur est créé, le stockage configuré, il faut maintenant pouvoir
+l'utiliser depuis les routes.
+
+Afin que les images de profils soient publiquement accessibles, il est
+nécessaire de configurer le stockage pour créer un lien symbolique (source :
+<https://laravel.com/docs/12.x/filesystem#the-public-disk>).
+
+Pour créer automatiquement le lien symbolique, exécutez la commande suivante :
+
+```bash
+php artisan storage:link
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  The [public/storage] link has been connected to [storage/app/public].
+```
+
+Une fois la commande exécutée, un nouveau dossier `storage` dans le dossier
+`public` devrait avoir été créé. Ce dossier `storage` est un lien symbolique (un
+raccourci) vers le dossier `storage/app/public`, permettant à notre application
+Laravel d'utiliser et d'accéder aux photos de profil depuis le monde extérieur
+(Internet).
+
+### Lier le contrôleur aux routes
+
+Pour lier notre contrôleur au monde extérieur, il est nécessaire de le lier aux
+routes.
+
+Lorsqu'un utilise un contrôleur de type _"singleton"_, il est possible
+d'utiliser le code suivant pour lier les routes au contrôleur :
+
+```php
+Route::singleton('my-profile', MyProfileController::class)
+```
+
+Par défaut, un contrôleur de type _"singleton"_ n'expose que les méthodes
+`show()`, `edit()` et `update()`. La méthode `destroy()` n'est pas prise en
+compte.
+
+Pour que la méthode `destroy()` puisse être utilisée, il est nécessaire
+d'ajouter la méthode `destroyable()` à la route (source :
+<https://laravel.com/docs/12.x/controllers#creatable-singleton-resources>).
+
+Ouvrez le fichier `routes/web.php` et mettez-le à jour avec le contenu suivant :
+
+```php
+<?php
+
+// Autres imports...
+
+use App\Http\Controllers\MyProfileController;
+
+// Autres routes...
+
+Route::singleton('my-profile', MyProfileController::class)->destroyable();
+```
+
+L'intégralité de la nouvelle fonctionnalité a été implémentée ! Nous pouvons
+maintenant la tester.
+
+### Mettre à jour le lien pour accéder à son profil
+
+L'image de profil dans l'entête de notre application redirige encore vers la
+page `/profile`, qui n'existe plus dans nos routes.
+
+Nous allons pouvoir mettre à jour ce lien pour rediriger vers `/my-profile`.
+
+Ouvrez le fichier `resources/views/components/default-layout.blade.php` et
+mettez-le à jour avec le contenu suivant :
+
+```diff
+diff --git a/resources/views/components/default-layout.blade.php b/resources/views/components/default-layout.blade.php
+index bce1a48..5fba57e 100644
+--- a/resources/views/components/default-layout.blade.php
++++ b/resources/views/components/default-layout.blade.php
+@@ -31,7 +31,7 @@ class="block bg-teal-700 dark:bg-purple-900 px-3 py-1 rounded-md hover:bg-teal-8
+                         {{ __('ui.posts.index.title') }}
+                     </a>
+                 </div>
+-                <a href="{{ url('/profile') }}" class="block hover:opacity-80 transition">
++                <a href="{{ url('/my-profile') }}" class="block hover:opacity-80 transition">
+                     <img src="/icons/profile.svg" alt="{{ __('ui.profile.title') }}" class="h-8 w-8 rounded-full" />
+                 </a>
+             </div>
+```
+
+### Tester la mise à jour du profil
+
+Sauvegardez tous les fichiers modifiés jusqu'ici et accédez à la page de son
+profil personnel.
+
+Une page de profil devrait s'afficher.
+
+Tentez de mettre à jour son profil avec :
+
+- Une image de profil plus petite que 2 megabytes.
+- Une image de profil plus grande que 2 megabytes.
+- Un nom d'utilisateur.trice qui contient des accents ou des caractères
+  spéciaux.
+- Le username `johndoe`, déjà utilisé.
+- L'adresse mail `john.doe@example.com`, déjà utilisée.
+
+Lors de l'utilisation d'image, vous devriez remarquer qu'elle s'affiche lorsque
+le profil est sauvegardé !
+
+- Où sont stockées ces images ?
+- Que se passe-t-il lorsque vous mettez à jour l'image de profil plusieurs fois
+  ? Est-ce que les anciennes images restent ?
+- Que se passe-t-il si vous accédez au profil publique de la personne ?
+
+Vous devriez remarquer que la page publique du profil n'utilise pas encore
+l'image de profil. Profitons-en pour la mettre à jour et l'utiliser.
 
 ### Améliorer la page de profil utilisateur.trice
 
-## Mettre en place le formulaire pour liker un post
+La première version de la page de profil manque quelques informations utiles à
+présenter. Mettons-la à jour.
 
-## Utiliser des Form Requests pour valider les formulaires
+Ouvrez le fichier `resources/views/profile.blade.php` et remplacez le contenu
+avec le suivant :
+
+```php
+<x-default-layout>
+    <x-slot:title>
+        {{ __('ui.profile.title', ['username' => $user->username]) }}
+    </x-slot>
+
+    <x-slot:description>
+        {{ __('ui.profile.description', ['username' => $user->username]) }}
+    </x-slot>
+
+    <article class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 text-center mb-8">
+        <div class="flex justify-center mb-6">
+            <div
+                class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                @if ($user->profile_picture)
+                    <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="{{ $user->username }}"
+                        class="w-full h-full object-cover">
+                @else
+                    <img src="/icons/profile.svg" alt="{{ $user->username }}" class="h-32 w-32 text-gray-400">
+                @endif
+            </div>
+        </div>
+
+        <h1 class="text-2xl font-bold dark:text-white">
+            {{ $user->first_name }} {{ $user->last_name }}
+        </h1>
+
+        <p class="text-lg text-gray-600 dark:text-gray-400 mt-1">
+            {{ '@' . $user->username }}
+        </p>
+
+        <p class="mt-4 dark:text-gray-300">
+            {{ __('ui.profile.member_since', ['date' => $user->created_at->isoFormat('LL')]) }}
+        </p>
+    </article>
+
+    <div class="mb-6">
+        <h2 class="text-xl font-bold dark:text-white">
+            {{ __('ui.profile.posts_heading', ['first_name' => $user->first_name, 'last_name' => $user->last_name]) }}
+        </h2>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            {{ trans_choice('ui.profile.number_of_posts', count($posts)) }}
+        </p>
+    </div>
+
+    <div class="space-y-6">
+        @forelse ($posts as $post)
+            <x-post-card :post="$post" />
+        @empty
+            <p class="text-center text-gray-500 dark:text-gray-400">
+                {{ __('ui.posts.no_posts') }}
+            </p>
+        @endforelse
+    </div>
+</x-default-layout>
+```
+
+Ajoutez les traductions manquantes au fichier `lang/fr/ui.php` :
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    // Autres traductions...
+    'profile' => [
+        // Autres traductions liées au profile...
+        'posts_heading' => 'Posts de :first_name :last_name',
+        'member_since' => 'Membre depuis le :date.'
+        // Autres traductions liées au profile...
+    ],
+    // Autres traductions...
+];
+```
+
+Sauvegardez ces fichiers et rafraîchissez la page de profil publique. La photo
+de profil devrait s'afficher (si présente) et la mise en page générale devrait
+être améliorée.
+
+### Tester la suppression du profil
+
+Testez de supprimer le profil de Jane Doe. Un message de confirmation devrait
+survenir.
+
+Une fois le profil supprimé, non seulement le profil devrait avoir été supprimé,
+mais tous les posts associés devraient également avoir été supprimés. Ceci est
+possible grâce à la suppression en cascade que nous avions configuré pour la
+base données.
+
+Suivez la section suivante pour réinitialiser votre projet si nécessaire.
+
+### Améliorer la documentation
+
+Comme un certain nombres de choses doivent être réalisées pour gérer le stockage
+correctement, nous pouvons profiter pour mettre à jour la documentation pour
+lancer le projet Laravel dans le fichier `README.md`.
+
+Modifiez le fichier `README.md` avec le contenu suivant :
+
+````diff
+diff --git a/README.md b/README.md
+index 06c54be..4a0d0bd 100644
+--- a/README.md
++++ b/README.md
+@@ -53,13 +53,27 @@ ## Développement local
+     php artisan key:generate
+     ```
+
+-5. Créer la base de données et exécuter les migrations :
++5. Créer le lien symbolique pour les fichiers téléversés :
++
++    ```bash
++    php artisan storage:link
++    ```
++
++6. Créer la base de données et exécuter les migrations :
+
+     ```bash
+     php artisan migrate
+     ```
+
+-6. Démarrer le serveur de développement Laravel :
++    S'il est nécessaire de réinitialiser la base de données, utiliser la commande `php artisan migrate:reset` puis `php artisan migrate` à nouveau.
++
++7. Optionnel : en mode développement, il est possible de peupler la base de données avec des données fictives :
++
++    ```bash
++    migrate db:seed
++    ```
++
++8. Démarrer le serveur de développement Laravel :
+
+     ```bash
+     composer run dev
+````
+
+Cela vous permettra (ou d'autres personnes) de pouvoir reprendre le projet dans
+le futur.
+
+Suivez maintenant les instructions du point 6 pour réinitialiser la base de
+données, réappliquer les migrations et peupler la base de données avec les
+données fictives.
+
+### Pousser les modifications et fusionner la pull request
+
+Une fois les modifications terminées, validez les modifications dans Git, puis
+vous pouvez créer la pull request.
+
+Validez la pull request et fusionnez-la une fois que les modifications sont
+terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
+cette tâche.
+
+N'oubliez pas de récupérer les modifications localement après la fusion de la
+pull request.
 
 ## Conclusion
 
-TODO
+Dans cette séance, nous avons vu comment mettre en place des formulaires pour
+permettre à l'utilisateur.trice de gérer des posts (création, mise à jour,
+suppression) et comment gérer les erreurs de validation.
+
+Nous avons également vu comment créer une page de profil pour
+l'utilisateur.trice, comment lui permettre de mettre à jour son profil, comment
+gérer le téléversement de fichiers (l'image de profil) et comment afficher ces
+informations dans les différentes vues.
+
+Au travers de cette séance, nous sommes revenus sur des concepts vus
+précédemment, notamment lié au patron MVC mais nous les avons appliqués à de
+nouveaux contextes pour vous permettre de mieux les assimiler et de les
+maîtriser.
 
 ## Solution
 
