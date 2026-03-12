@@ -459,7 +459,7 @@ Ou un champ spécifique avec la directive `@error('nom_du_champ')` et `$message`
 ### Traduire les messages d'erreur de validation
 
 Lors d'une précédente séance, nous avions mis en place l'internationalisation
-(i18n) avec Laravel. Ceci a créé le fichier `resources/lang/fr/validation.php`.
+(i18n) avec Laravel. Ceci a créé le fichier `lang/fr/validation.php`.
 
 Ce fichier contient tous les messages d'erreur de validation possibles et
 utilisés par Laravel.
