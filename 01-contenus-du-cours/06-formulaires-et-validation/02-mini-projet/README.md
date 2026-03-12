@@ -2047,7 +2047,12 @@ suivante :
 > à votre mini-projet personnel. Voici quelques idées de fonctionnalités que
 > vous pourriez implémenter.
 
-- TODO
+- Permettre à l'utilisateur.trice de mettre à jour son mot de passe depuis la
+  page de profil.
+- Permettre à l'utilisateur.trice de voir la liste de ses posts depuis la page
+  de profil.
+- Ajouter des champs au profil ou aux posts pour représenter des points
+  particuliers sur ces deux ressources.
 
 ## Aller plus loin
 
@@ -2063,6 +2068,10 @@ suivante :
   pour le composant `PostCard` ?
 - Seriez-vous capable de transformer les formulaires en composants dédiés, de
   manière similaire à ce que nous avons fait pour le composant `PostCard` ?
+- Seriez-vous capable d'utiliser les _"Form Request"_ pour valider les requêtes
+  des différentes requêtes comme présenté dans la section
+  [Réutiliser les règles de validation dans plusieurs contrôleurs](../README.md#réutiliser-les-règles-de-validation-dans-plusieurs-contrôleurs)
+  de la théorie ?
 
 <!-- URLs -->
 
