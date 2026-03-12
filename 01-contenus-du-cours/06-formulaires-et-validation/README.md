@@ -710,8 +710,8 @@ facilitant la correction des erreurs.
 
 Lors d'une précédente séance, nous avons vu comment mettre en place
 l'internationalisation (i18n) dans une application Laravel qui a automatiquement
-créé un fichier de traduction `resources/lang/fr/validation.php` contenant les
-messages d'erreur de validation utilisés par Laravel.
+créé un fichier de traduction `lang/fr/validation.php` contenant les messages
+d'erreur de validation utilisés par Laravel.
 
 Ce fichier spécifique de traduction est utilisé par Laravel pour générer tous
 les messages possibles d'erreur de validation qui pourrait se produire avec des
@@ -722,8 +722,8 @@ messages peuvent être facilement traduits dans différentes langues.
 Vous pouvez modifier ce fichier pour personnaliser les messages d'erreur ou
 créer des fichiers de traduction pour d'autres langues.
 
-Par exemple, dans le fichier `resources/lang/fr/validation.php`, la contrainte
-`min` pour les chaînes de caractères est définie comme suit :
+Par exemple, dans le fichier `lang/fr/validation.php`, la contrainte `min` pour
+les chaînes de caractères est définie comme suit :
 
 ```php
 'min'                    => [

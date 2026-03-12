@@ -332,9 +332,8 @@ nous allons les créer dans les sections suivantes.
 
 ### Mettre à jour les traductions
 
-Ouvrez le fichier `resources/lang/fr/ui.php` et ajoutez les traductions
-suivantes pour les nouveaux textes que nous avons ajoutés dans le composant
-`PostCard` :
+Ouvrez le fichier `lang/fr/ui.php` et ajoutez les traductions suivantes pour les
+nouveaux textes que nous avons ajoutés dans le composant `PostCard` :
 
 ```php
 // ...les autres traductions...
@@ -747,9 +746,9 @@ devons également mettre à jour les traductions pour les différentes chaînes 
 caractères utilisées dans les vues liées à cette ressource (par exemple, les
 titres et les descriptions).
 
-Pour cela, ouvrez le fichier `resources/lang/fr/ui.php` et ajoutez les
-traductions suivantes pour les différentes chaînes de caractères utilisées dans
-la vue `posts.index` :
+Pour cela, ouvrez le fichier `lang/fr/ui.php` et ajoutez les traductions
+suivantes pour les différentes chaînes de caractères utilisées dans la vue
+`posts.index` :
 
 > [!TIP]
 >
@@ -759,7 +758,7 @@ la vue `posts.index` :
 > votre projet.
 >
 > Je (Ludovic) vous propose la structure suivante pour organiser les traductions
-> de votre application dans le fichier `resources/lang/fr/ui.php` :
+> de votre application dans le fichier `lang/fr/ui.php` :
 >
 > - Les traductions sont liées à chaque ressource de votre application (par
 >   exemple, `posts`, `users`, `likes`, etc.) - chaque ressource a une section
@@ -985,9 +984,8 @@ du post. Cela va automatiquement chercher la vue dans le dossier
 Mettons à jour les traductions pour les différentes chaînes de caractères
 utilisées dans la vue `posts.show`.
 
-Ouvrez le fichier `resources/lang/fr/ui.php` et ajoutez les traductions
-suivantes pour les différentes chaînes de caractères utilisées dans la vue
-`posts.show` :
+Ouvrez le fichier `lang/fr/ui.php` et ajoutez les traductions suivantes pour les
+différentes chaînes de caractères utilisées dans la vue `posts.show` :
 
 ```php
 // ...les autres traductions...
@@ -1109,9 +1107,8 @@ formulaire de création d'un nouveau post.
 
 #### Mettre à jour les traductions
 
-Ouvrez le fichier `resources/lang/fr/ui.php` et ajoutez les traductions
-suivantes pour les différentes chaînes de caractères utilisées dans la vue
-`posts.create` :
+Ouvrez le fichier `lang/fr/ui.php` et ajoutez les traductions suivantes pour les
+différentes chaînes de caractères utilisées dans la vue `posts.create` :
 
 ```php
 // ...les autres traductions...
@@ -1242,9 +1239,8 @@ pourrons les ajouter ultérieurement si nécessaire).
 
 #### Mettre à jour les traductions
 
-Ouvrez le fichier `resources/lang/fr/ui.php` et ajoutez les traductions
-suivantes pour les différentes chaînes de caractères utilisées dans la vue
-`posts.edit` :
+Ouvrez le fichier `lang/fr/ui.php` et ajoutez les traductions suivantes pour les
+différentes chaînes de caractères utilisées dans la vue `posts.edit` :
 
 ```php
 // ...les autres traductions...
@@ -1386,9 +1382,8 @@ automatiquement les trois posts les plus récents récupérés par la route.
 
 ### Mettre à jour les traductions
 
-Ouvrez le fichier `resources/lang/fr/ui.php` et ajoutez les traductions
-suivantes pour les différentes chaînes de caractères utilisées dans la vue de la
-page d'accueil :
+Ouvrez le fichier `lang/fr/ui.php` et ajoutez les traductions suivantes pour les
+différentes chaînes de caractères utilisées dans la vue de la page d'accueil :
 
 ```php
 // ...les autres traductions...
