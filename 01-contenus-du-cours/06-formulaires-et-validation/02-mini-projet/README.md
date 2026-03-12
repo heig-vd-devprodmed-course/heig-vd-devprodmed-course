@@ -23,17 +23,22 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request)
 - [Mettre en place le formulaire pour liker un post](#mettre-en-place-le-formulaire-pour-liker-un-post)
   - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-1)
-  - [TODO](#todo)
+  - [Mettre à jour le contrôleur](#mettre-à-jour-le-contrôleur)
+  - [Mettre à jour la vue](#mettre-à-jour-la-vue-3)
+  - [Créer le contrôleur](#créer-le-contrôleur)
+  - [Définir les actions de chaque méthode](#définir-les-actions-de-chaque-méthode)
+  - [Lier le contrôleur aux routes](#lier-le-contrôleur-aux-routes)
+  - [Tester le formulaire](#tester-le-formulaire-3)
   - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-1)
 - [Mettre en place les formulaires pour gérer le profil utilisateur.trice](#mettre-en-place-les-formulaires-pour-gérer-le-profil-utilisateurtrice)
   - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-2)
   - [Créer et appliquer la migration pour ajouter l'image de profil](#créer-et-appliquer-la-migration-pour-ajouter-limage-de-profil)
   - [Créer les vues](#créer-les-vues)
   - [Créer les traductions](#créer-les-traductions)
-  - [Créer le contrôleur](#créer-le-contrôleur)
-  - [Définir les actions de chaque méthode](#définir-les-actions-de-chaque-méthode)
+  - [Créer le contrôleur](#créer-le-contrôleur-1)
+  - [Définir les actions de chaque méthode](#définir-les-actions-de-chaque-méthode-1)
   - [Créer le lien symbolique pour accéder aux fichiers publiques](#créer-le-lien-symbolique-pour-accéder-aux-fichiers-publiques)
-  - [Lier le contrôleur aux routes](#lier-le-contrôleur-aux-routes)
+  - [Lier le contrôleur aux routes](#lier-le-contrôleur-aux-routes-1)
   - [Mettre à jour le lien pour accéder à son profil](#mettre-à-jour-le-lien-pour-accéder-à-son-profil)
   - [Tester la mise à jour du profil](#tester-la-mise-à-jour-du-profil)
   - [Améliorer la page de profil utilisateur.trice](#améliorer-la-page-de-profil-utilisateurtrice)
@@ -664,6 +669,40 @@ pull request.
 Dans cette section, nous allons mettre en place le formulaire pour aimer/réagir
 à un post.
 
+Afin d'être capable de réagir à un post, nous devons imaginer deux cas de figure
+:
+
+1. La personne n'a pas encore liké un post.
+2. La personne a déjà liké le post qu'elle visite.
+
+Afin de gérer ces deux, il est nécessaire d'implémenter un peu de logique
+supplémentaire :
+
+1. Il est nécessaire de vérifier, lors de l'accès aux détails d'un post, si la
+   personne connectée a déjà aimé le post.
+2. Si ce n'est pas le cas, le formulaire peut s'afficher sans contraintes
+   particulières.
+3. Si, par contre, la personne a déjà aimé le post, il faut afficher la réaction
+   que la personne a sélectionné pour notifier qu'elle a déjà aimé le post.
+
+Puis, finalement, la personne va pouvoir aimer le post. Ici, trois cas de figure
+se présentent à nous :
+
+1. La personne aime le post pour la première fois -> le post est aimé sans
+   contraintes particulières.
+2. La personne change de réaction par rapport à sa première fois -> la réaction
+   est mise à jour sans contraintes particulières.
+3. La personne sélectionne la même réaction que sa première fois -> la réaction
+   est supprimée.
+
+Pour le troisième cas, nous partons du principe que si la personne a sélectionné
+la même réaction que la première, cela signifie qu'elle souhaite "enlever" la
+réaction, et donc la supprimer.
+
+Le diagramme d'activité suivant résume ces cas d'utilisation :
+
+![Diagramme d'activité : réagir à un post](./images/post-reactions-activity.svg)
+
 ### Créer l'issue et la branche pour suivre cette tâche
 
 Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
@@ -672,7 +711,296 @@ branche correspondante à partir de la branche principale `main`.
 Basculez sur la branche que vous venez de créer, puis suivez les étapes
 suivantes pour mettre en place la tâche à effectuer.
 
-### TODO
+### Mettre à jour le contrôleur
+
+Afin de savoir si la personne a déjà aimé le post, il est nécessaire
+d'interroger la base de données pour récupérer la potentielle réaction de la
+personne.
+
+Pour cela, ouvrez le fichier `app/Http/Controllers/PostController.php` et mettez
+à jour la méthode `show()` avec le contenu suivant :
+
+```php
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $post = Post::with('user')->with('likes')->findOrFail($id);
+
+        // Get current user's reaction if exists
+        $user = User::find(2);
+        $reaction = $post->likes()->where('user_id', $user->id)->first();
+
+        // Vérifie si la personne a déjà liké ce post
+        if ($reaction) {
+            // Récupère la réaction au post
+            $reaction = $reaction->pivot->reaction;
+        }
+
+        return view('posts.show', ['post' => $post, 'reaction' => $reaction]);
+    }
+```
+
+Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
+aux questions suivantes :
+
+> [!NOTE]
+>
+> Il est normal que toutes les actions soient liées au profil de Jane Doe (ID
+> `2`). Comme nous n'avons pas encore mis en place l'authentification, il est
+> nécessaire de stocker l'information en dur dans le code avec le compte
+> correspondant à l'ID 2 (Jane Doe).
+
+- Comment est-ce que la réaction est récupérée de la base de données ?
+- Que signifie le mot-clé `pivot` ?
+
+### Mettre à jour la vue
+
+Maintenant que la réaction a été récupérée de la base de données, nous pouvons
+l'utiliser pour déterminer le formulaire à générer.
+
+Dans le fichier `resources/views/posts/show.blade.php`, remplacez le footer par
+le contenu suivant :
+
+```php
+        <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
+            <form method="POST" action="{{ url('/likes/' . $post->id) }}" class="mb-4">
+                @csrf
+                @method('PUT')
+                <div class="flex flex-wrap justify-between gap-2">
+                    <button type="submit" name="reaction" value="like"
+                        class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'like' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
+                        👍
+                    </button>
+                    <button type="submit" name="reaction" value="love"
+                        class="w-12 h-12 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 {{ $reaction === 'love' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
+                        ❤️
+                    </button>
+                    <button type="submit" name="reaction" value="haha"
+                        class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'haha' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
+                        😂
+                    </button>
+                    <button type="submit" name="reaction" value="wow"
+                        class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'wow' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
+                        😮
+                    </button>
+                    <button type="submit" name="reaction" value="sad"
+                        class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'sad' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
+                        😢
+                    </button>
+                    <button type="submit" name="reaction" value="angry"
+                        class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'angry' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
+                        😡
+                    </button>
+                </div>
+            </form>
+            <ul class="flex flex-wrap gap-2">
+                @forelse ($post->likes as $user)
+                    <li class="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+                        <a href="{{ url('@' . $user->username) }}" class="font-semibold hover:underline">
+                            {{ '@' . $user->username }}
+                        </a>
+                        <span>
+                            @if ($user->pivot->reaction === 'like')
+                                👍
+                            @elseif($user->pivot->reaction === 'love')
+                                ❤️
+                            @elseif($user->pivot->reaction === 'haha')
+                                😂
+                            @elseif($user->pivot->reaction === 'wow')
+                                😮
+                            @elseif($user->pivot->reaction === 'sad')
+                                😢
+                            @elseif($user->pivot->reaction === 'angry')
+                                😡
+                            @endif
+                        </span>
+                    </li>
+                @empty
+                    <span class="text-sm text-gray-600 dark:text-gray-400">
+                        {{ trans_choice('ui.posts.likes_count', 0) }}
+                    </span>
+                @endforelse
+            </ul>
+        </footer>
+```
+
+Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
+aux questions suivantes :
+
+- Comment est structuré le formulaire ? Quels éléments le composent ?
+- Vers quelle URL les données sont envoyées ? Avec quelle méthode HTTP ? Est-ce
+  que la route associée existe-t-elle dans notre projet ?
+- Est-ce que le formulaire est protégé contre les attaques CSRF ? Si oui,
+  comment ?
+- Comment la réaction sélectionnée par la personne est-elle envoyée lors de la
+  soumission du formulaire ?
+- Si une réaction est déjà liée au post, comment est-elle utilisée pour
+  déterminer la réaction à afficher ?
+- Existe-t-il des mécanismes mis en place pour afficher les erreurs de
+  validations ? Pourquoi ?
+
+Vous pouvez vous aider de la [théorie](../README.md) pour répondre à chacune de
+ces questions.
+
+### Créer le contrôleur
+
+Au travers des questions précédentes, vous avez sans doute identifié que la
+route pour gérer les likes n'était pas présente dans notre projet.
+
+Nous allons donc créer un contrôleur `LikeController` dédié pour gérer les likes
+sur les posts.
+
+Vous souvenez-vous de la commande pour créer un nouveau contrôleur ? Comment
+nommeriez-vous ce nouveau contrôleur ?
+
+Si besoin, utilisez la documentation officielle pour retrouver la commande.
+
+<details>
+<summary>Afficher la réponse</summary>
+
+```text
+php artisan make:controller LikeController
+```
+
+Le résultat devrait ressembler à ceci :
+
+```text
+   INFO  Controller [app/Http/Controllers/LikeController.php] created successfully.
+```
+
+</details>
+
+Un contrôleur vierge devrait avoir été créé.
+
+### Définir les actions de chaque méthode
+
+Dans le contexte des likes, nous souhaitons être capable de réaliser les
+opérations suivantes :
+
+- Aimer un post.
+- Changer de réaction sur un post.
+- Supprimer la réaction du post.
+
+Pour cela, nous allons implémenter une méthode `update()` dans notre nouveau
+contrôleur.
+
+Ouvrez le fichier `app/Http/Controllers/LikeController.php` et modifiez-le avec
+le contenu suivant :
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class LikeController extends Controller
+{
+    public function update(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'reaction' => ['required', 'in:like,love,haha,wow,sad,angry'],
+        ]);
+
+        $post = Post::findOrFail($id);
+        $user = User::where('id', 2)->first();
+        $reaction = $validated['reaction'];
+
+        // Vérifie si la personne avait déjà liké ce post
+        $existingLike = $post->likes()->where('user_id', $user->id)->first();
+
+        if ($existingLike) {
+            // Vérifie si la personne a sélectionné la même réaction que celle qu'elle avait déjà sélectionnée
+            if ($existingLike->pivot->reaction === $reaction) {
+                // Retire la réaction
+                $post->likes()->detach($user->id);
+            } else {
+                // Met à jour la réaction avec la nouvelle réaction
+                $post->likes()->updateExistingPivot($user->id, ['reaction' => $reaction]);
+            }
+        } else {
+            // Like le post avec la réaction sélectionnée
+            $post->likes()->attach($user->id, ['reaction' => $reaction]);
+        }
+
+        return redirect("/posts/$id");
+    }
+}
+```
+
+Prenez quelques minutes pour comprendre ce bout de code et essayez de répondre
+aux questions suivantes :
+
+> [!NOTE]
+>
+> Il est normal que toutes les actions soient liées au profil de Jane Doe (ID
+> `2`). Comme nous n'avons pas encore mis en place l'authentification, il est
+> nécessaire de stocker l'information en dur dans le code avec le compte
+> correspondant à l'ID 2 (Jane Doe).
+
+- Quelles sont les règles de validation appliquées sur le profil ? Que fait la
+  règle de validation `in` ? Que permet-elle comme type de réactions ?
+- A quelle méthode HTTP répond la méthode `update()` ?
+- Que fait la méthode `update()` ? Comment est-ce que la réaction est gérée ?
+  Quels sont les cas de figure possibles dans cette méthode ?
+- Une fois la réaction mise à jour (nouvelle réaction, changement de réaction ou
+  suppression de réaction), où est-ce que l'utilisateur.trice est redirigé.e ?
+
+### Lier le contrôleur aux routes
+
+Pour lier notre contrôleur au monde extérieur, il est nécessaire de le lier aux
+routes.
+
+Ouvrez le fichier `routes/web.php` et mettez-le à jour avec le contenu suivant :
+
+```php
+<?php
+
+// Autres imports...
+
+use App\Http\Controllers\LikeController;
+
+// Autres routes...
+
+Route::match(['put', 'patch'], '/likes/{post}', [LikeController::class, 'update']);
+```
+
+La méthode `match` permet de regrouper plusieurs méthodes HTTP afin que toutes
+les méthodes HTTP mentionnées appelle la même fonction du côté de Laravel
+(source : <https://laravel.com/docs/12.x/routing#available-router-methods>).
+
+De cette manière, la même fonction sera appelé pour répondre autant aux
+formulaires qui utiliseraient la méthode la méthode `PATCH` (avec la directive
+`@method('PATCH')`) que `PUT` (avec la directive `@method('PUT')`), deux
+méthodes HTTP utilisées pour mettre à jour des ressources.
+
+Il existe une nuance entre `PATCH` et `PUT`, mais nous n'allons pas les
+différencier dans ce cours. Si cela vous intéresse, la différence est décrite
+sur MDN aux adresses suivantes :
+
+- <https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PUT>.
+- <https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PATCH>.
+
+L'intégralité de la nouvelle fonctionnalité a été implémentée ! Nous pouvons
+maintenant la tester.
+
+### Tester le formulaire
+
+Sauvegardez tous les fichiers modifiés et tentez de liker un post.
+
+Lors du choix d'un like, la page devrait se rafraîchir et la réaction
+sélectionnée devrait être mise en évidence.
+
+Si la réaction est à nouveau sélectionnée, la réaction est retirée du post.
+
+La liste complète des personnes ayant réagi au post devrait également s'afficher
+sous le formulaire.
+
+Les personnes peuvent maintenant aimer/réagir à des posts, bravo !
 
 ### Pousser les modifications et fusionner la pull request
 
@@ -1420,7 +1748,7 @@ Laravel d'utiliser et d'accéder aux photos de profil depuis le monde extérieur
 Pour lier notre contrôleur au monde extérieur, il est nécessaire de le lier aux
 routes.
 
-Lorsqu'un utilise un contrôleur de type _"singleton"_, il est possible
+Lorsque nous utilisons un contrôleur de type _"singleton"_, il est possible
 d'utiliser le code suivant pour lier les routes au contrôleur :
 
 ```php

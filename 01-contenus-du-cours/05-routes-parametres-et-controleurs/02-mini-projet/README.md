@@ -922,7 +922,9 @@ contenu suivant pour afficher les détails d'un post spécifique :
                         </span>
                     </li>
                 @empty
-                    <span class="text-sm text-gray-600 dark:text-gray-400">Aucune réaction</span>
+                    <span class="text-sm text-gray-600 dark:text-gray-400">
+                        {{ trans_choice('ui.posts.likes_count', 0) }}
+                    </span>
                 @endforelse
             </ul>
         </footer>
