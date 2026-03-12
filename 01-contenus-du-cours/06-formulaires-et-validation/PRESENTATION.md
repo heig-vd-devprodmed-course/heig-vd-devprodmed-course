@@ -73,7 +73,7 @@ utilisateur.trice.s et de les envoyer au serveur pour traitement.
 Les formulaires sont essentiels pour permettre aux utilisateur.trice.s
 d'interagir avec une application web.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-formulaires-html]
 
 ### Structure d'un formulaire
 
@@ -127,7 +127,7 @@ serveur est essentielle.
 - L'attribut `method` définit la méthode HTTP (`GET` ou `POST` par défaut).
 - L'attribut `name` permet d'accéder aux données côté serveur.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-envoyer-les-donnees-des-formulaires]
 
 ### Recevoir les données d'un formulaire
 
@@ -137,7 +137,7 @@ En PHP : superglobales `$_GET` et `$_POST`.
 
 Les données doivent être validées côté serveur pour assurer la sécurité.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-envoyer-les-donnees-des-formulaires]
 
 ## Les sessions, un rappel
 
@@ -147,7 +147,7 @@ sur le serveur, associées via un cookie de session.
 Les sessions maintiennent l'état entre les requêtes HTTP. Elles permettent de
 garder un annuaire des utilisateur.trices connecté.es avec leurs données
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-les-sessions]
 
 ### Créer une session
 
@@ -157,7 +157,7 @@ Génère un identifiant unique stocké dans un cookie envoyé au navigateur.
 
 Le navigateur renvoie ce cookie avec chaque requête ultérieure.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-les-sessions]
 
 ### Accéder aux données de session
 
@@ -166,7 +166,7 @@ PHP).
 
 Exemple : `$_SESSION['username'] = 'Alice';`
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-les-sessions]
 
 ### Supprimer une session
 
@@ -175,7 +175,7 @@ Utiliser une fonction dédiée (ex : `session_destroy()` en PHP).
 Supprimer également le cookie de session côté client pour éviter toute
 confusion.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-les-sessions]
 
 ## Les formulaires et les sessions
 
@@ -185,7 +185,7 @@ Les formulaires et les sessions travaillent ensemble :
 - Les données de formulaire peuvent être stockées en session pour les réutiliser
   (erreurs de validation, données saisies, etc.).
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-les-sessions]
 
 ## Les formulaires dans Laravel
 
@@ -194,25 +194,57 @@ des formulaires :
 
 - Validation des données intégrée.
 - Protection contre les attaques CSRF.
-- Routes et contrôleurs pour traiter les requêtes.
+- Gestion des erreurs de validation.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-formulaires-html]
 
 ### Actions et méthodes HTTP des formulaires
+
+<div class="two-columns">
+<div>
 
 L'attribut `action` doit correspondre à une route définie dans Laravel.
 
 L'attribut `method` spécifie la méthode HTTP (`POST`, `GET`).
 
-Laravel permet de simuler d'autres méthodes HTTP (`PUT`, `PATCH`, `DELETE`) avec
-`@method()`.
+Laravel permet de simuler d'autres méthodes HTTP (`PUT`, `PATCH` et `DELETE`)
+avec `@method()`.
+
+</div>
+<div>
+
+```php
+<form action="/posts/1" method="POST">
+    <input
+        type="hidden"
+        name="_method"
+        value="DELETE"
+    />
+
+    <button type="submit">Supprimer</button>
+</form>
+```
+
+```php
+<form action="/posts/1" method="POST">
+    @method('DELETE')
+
+    <button type="submit">Supprimer</button>
+</form>
+```
+
+</div>
+</div>
 
 ### Se protéger contre les attaques CSRF
 
-Laravel fournit une protection intégrée contre les attaques CSRF.
+- Les formulaires présentent différentes vulnérabilités :
+  - Injections SQL.
+  - Attaques XSS.
+  - Etc.
+- Une attaque connue est l'attaque CSRF (Cross-Site Request Forgery).
 
-Un token CSRF unique est généré pour chaque session et doit être inclus dans
-chaque formulaire avec `@csrf`.
+![bg right:40%][illustration-se-proteger-contre-les-attaques-csrf]
 
 #### Attaque CSRF - Comment ça marche ?
 
@@ -222,7 +254,7 @@ authentifié.e.
 Exemple : transfert d'argent depuis le compte bancaire d'Alice vers celui de
 l'attaquant.e via un formulaire caché sur un site malveillant.
 
-![bg right:40%][illustration-objectifs]
+![bg right:40%][illustration-se-proteger-contre-les-attaques-csrf]
 
 ---
 
@@ -242,13 +274,32 @@ l'attaquant.e via un formulaire caché sur un site malveillant.
 
 #### Protection CSRF - La solution avec un token
 
+<div class="two-columns">
+<div>
+
 Laravel génère un token CSRF unique pour chaque session.
 
 Le token est vérifié à chaque soumission de formulaire.
 
 Si les tokens ne correspondent pas, la requête est rejetée.
 
-![bg right:40%][illustration-objectifs]
+</div>
+<div>
+
+```php
+<form action="/posts" method="POST">
+    @csrf
+
+    <!-- Champs du formulaire -->
+
+    <button type="submit">
+      Soumettre le formulaire
+    </button>
+</form>
+```
+
+</div>
+</div>
 
 ---
 
@@ -268,20 +319,29 @@ Si les tokens ne correspondent pas, la requête est rejetée.
 
 ### Le rôle de l'APP_KEY dans les sessions et la protection CSRF
 
-La clé d'application (`APP_KEY`) est générée avec `php artisan key:generate`.
+Lors d'une séance précédente, nous avons dû configurer la `APP_KEY` de notre
+application avec `php artisan key:generate`.
 
-Elle chiffre les données de session et génère les tokens CSRF.
+Cette commande met à jour le fichier `.env` avec une clé unique.
 
-Ne jamais partager cette clé ou la rendre publique.
+Cette clé chiffre les données de session et génère les tokens CSRF de façon
+sécurisée.
 
-### Validation des données de formulaire
+**Ne jamais partager cette clé ou la rendre publique.**
+
+### Validation des données de formulaire (1)
 
 Laravel fournit un système de validation intégré.
 
 Les règles de validation peuvent être définies dans les contrôleurs ou dans des
 classes dédiées (Form Requests).
 
-Exemple : `'title' => 'nullable|string|max:255'`
+**Exemples** :
+
+- `'title' => 'nullable|string|max:255'`
+- `'title' => ['nullable', 'string', 'max:255']`
+
+Les deux manières sont valides.
 
 ### Validation des données de formulaire (2)
 
@@ -291,97 +351,424 @@ précédent avec les erreurs.
 De nombreuses règles de validation prédéfinies : `required`, `string`, `max`,
 `email`, `unique`, etc.
 
+La documentation officielle présente toutes les règles disponibles :
+<https://laravel.com/docs/12.x/validation#available-validation-rules>.
+
+Prenons un exemple de formulaire dans les slides suivantes.
+
+---
+
+```php
+<form method="POST" action="{{ url('/posts') }}">
+    @csrf
+
+    <label for="title">Titre du post</label>
+    <input
+        id="title"
+        type="text"
+        name="title"
+        placeholder="Saisissez le titre du post"
+    />
+
+    <label for="content">Contenu du post</label>
+    <textarea
+        id="content"
+        name="content"
+        rows="5"
+        placeholder="Saisissez le contenu du post"
+    ></textarea>
+
+    <button type="submit">Soumettre le formulaire</button>
+</form>
+```
+
+---
+
+```php
+public function store(Request $request)
+{
+    $validated = $request->validate([
+      'title' => 'nullable|string|max:255',
+      'content' => 'required|string|min:10|max:5000',
+    ]);
+
+    $post = new Post();
+
+    $post->title = $validated['title'];
+    $post->content = $validated['content'];
+
+    $post->save();
+
+    return redirect("/posts/$post->id");
+}
+```
+
 #### Messages d'erreur de validation
+
+<div class="two-columns">
+<div>
 
 Laravel génère automatiquement des messages d'erreur pour chaque champ qui
 échoue.
 
-Affichage dans les vues avec `@error('field_name')` et `$message`.
+Possibilité d'afficher tous les messages avec `$errors->all()`
 
-Possibilité d'afficher tous les messages avec `$errors->all()`.
+Ou un champ spécifique avec la directive `@error('nom_du_champ')` et `$message`.
+
+</div>
+<div>
+
+```php
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+```
+
+</div>
+</div>
+
+---
+
+```php
+<form method="POST" action="{{ url('/posts') }}">
+    @csrf
+
+    <label for="title">Titre du post</label>
+    <input id="title" type="text" name="title" placeholder="Saisissez le titre du post"/>
+
+    @error('title')
+    <p>{{ $message }}</p>
+    @enderror
+
+    <label for="content">Contenu du post</label>
+    <textarea id="content" name="content" rows="5" placeholder="Le contenu du post"
+    ></textarea>
+
+    @error('content')
+    <p>{{ $message }}</p>
+    @enderror
+
+    <button type="submit">Soumettre le formulaire</button>
+</form>
+```
 
 ### Traduire les messages d'erreur de validation
 
-Les messages d'erreur sont définis dans les fichiers de traduction de Laravel.
+Lors d'une précédente séance, nous avions mis en place l'internationalisation
+(i18n) avec Laravel. Ceci a créé le fichier `resources/lang/fr/validation.php`.
 
-Fichier : `resources/lang/fr/validation.php`.
+Ce fichier contient tous les messages d'erreur de validation possibles et
+utilisés par Laravel.
 
-Personnaliser les noms des champs avec la clé `attributes`.
+**Exemple** : _"Le texte de :attribute doit contenir au moins :min caractères."_
 
 ### Conserver les données de formulaire en cas d'erreur de validation
 
-La directive Blade `old()` permet de récupérer les anciennes valeurs.
+Lorsqu'une erreur de validation survient, les données des formulaires sont
+stockées en session accessibles avec la directive `@old`. Si aucune valeur n'est
+trouvée, la directive retourne `null`.
 
-Exemple : `value="{{ old('title') }}"`.
+- `value="{{ old('title') }}"` : récupère la valeur précédente du champ `title`
+  en cas d'erreur de validation.
+- `value="{{ old('title', $post->title) }}"` : récupère la valeur précédente du
+  champ `title` ou la valeur actuelle de `$post->title`.
 
-Les données sont stockées en session après une erreur de validation.
+### Accéder aux données des formulaires
 
-### Accéder aux données de formulaire dans les contrôleurs
+<div class="two-columns">
+<div>
 
 Les données validées sont accessibles via `$validated`.
 
-Exemple : `$validated = $request->validate([...]);`.
+Peuvent être ensuite utilisée pour créer ou mettre à jour des ressources en base
+de données.
 
-Utiliser ces données pour créer ou mettre à jour des ressources en base de
-données.
+</div>
+<div>
+
+```php
+public function store(Request $request)
+{
+    $validated = $request->validate([
+      'title' => 'nullable|string|max:255',
+      'content' => 'required|string|min:10|max:5000',
+    ]);
+
+    // Création d'un modèle
+    $post = new Post();
+
+    // Accéder aux données validées
+    $post->title = $validated['title'];
+    $post->content = $validated['content'];
+
+    // Sauvegarder le modèle dans la base de données
+    $post->save();
+
+    // Redirection
+    return redirect("/posts/$post->id");
+}
+```
+
+</div>
+</div>
 
 ### Rediriger après la soumission d'un formulaire
 
-Laravel fournit plusieurs fonctions de redirection :
+Une fois le formulaire soumis et traité, il est courant de rediriger
+l'utilisateur.trice vers une autre page :
 
-- `redirect()->action([Controller::class, 'method'], [...])`.
-- `to_route('route.name')`.
-- `back()`.
+```php
+return redirect("/posts/$post->id");
+```
 
-### Réutiliser les règles de validation dans plusieurs contrôleurs
+Il existe plusieurs méthodes de redirection. La documentation donne des exemples
+pour chaque cas d'utilisation :
+<https://laravel.com/docs/12.x/responses#redirects>.
 
-Créer des classes de validation dédiées (Form Requests) avec
-`php artisan make:request`.
+### Réutiliser les règles de validation dans plusieurs contrôleurs (1)
+
+Il est possible de réutiliser les règles de validation dans plusieurs
+contrôleurs avec des classes dédiées appelées _"Form Requests"_ :
+
+```bash
+php artisan make:request
+```
+
+Le fichier de la classe est créé dans le dossier `app/Http/Requests`.
 
 Les règles sont définies dans la méthode `rules()`.
 
-Injecter la classe dans le contrôleur pour valider automatiquement les données.
+---
+
+<div class="two-columns">
+<div>
+
+```php
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StorePostRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'title' => 'nullable|string|max:255',
+            'content' => 'required|string|max:5000',
+        ];
+    }
+}
+```
+
+</div>
+<div>
+
+```php
+public function store(StorePostRequest $request)
+{
+    // La requête est valide...
+
+    // Les données validées sont directement accessibles...
+    $validated = $request->validated();
+
+    // Stocke le post...
+}
+```
+
+</div>
+</div>
 
 ## Gérer les fichiers d'un formulaire
 
-Laravel fournit des fonctionnalités pour gérer les fichiers téléversés.
+- Les fichiers sont des données particulières qui nécessitent une gestion
+  spécifique.
+- Laravel fournit des fonctionnalités pour gérer les fichiers.
+
+![bg right:40%][illustration-formulaires-html]
 
 ### Le type de champ `file`
 
-Utiliser `<input type="file">` dans le formulaire.
+<div class="two-columns">
+<div>
 
-Ajouter `enctype="multipart/form-data"` à l'attribut du formulaire.
+- Utiliser `<input type="file">` dans le formulaire.
+- Ajouter `enctype="multipart/form-data"` à l'attribut du formulaire. Cela
+  permet de transférer les fichiers correctement.
+- La personne pourra alors sélectionner un fichier.
+
+</div>
+<div>
+
+```php
+<form
+    method="POST"
+    action="{{ url('/profile') }}"
+    enctype="multipart/form-data"
+>
+  @csrf
+
+  <label for="profile_picture">
+      Photo de profil
+  </label>
+  <input
+    id="profile_picture"
+    type="file"
+    name="profile_picture"
+  />
+
+  <button type="submit">Soumettre</button>
+</form>
+```
+
+</div>
+</div>
 
 ### Validation des fichiers
 
-Règles spécifiques : `file`, `image`, `mimes`, `max`, etc.
+<div class="two-columns">
+<div>
 
-Exemple : `'profile_picture' => 'nullable|image|max:2048'`.
+- Règles spécifiques : `file`, `image`, `mimes`, `max`, etc.
+- La règle `image` accepte : JPG, JPEG, PNG, BMP, GIF ou WEBP.
+- Possibilité de définir une taille maximale avec `max` (en kilobytes).
 
-La règle `image` accepte : jpg, jpeg, png, bmp, gif, webp.
+</div>
+<div>
 
-### Stocker les fichiers téléversés
+```php
+public function update(Request $request)
+{
+    $validated = $request->validate([
+        'profile_picture' => [
+          'nullable',
+          'image',
+          'max:2048', // 2MB max
+        ],
+    ]);
 
-Laravel fournit un système de stockage intégré avec différents disques.
+    // ...
+}
+```
 
-Utiliser la façade `Storage` pour déplacer les fichiers.
+</div>
+</div>
 
-Exemple : `Storage::disk('public')->put('profile-pictures', $file)`.
+### Stocker les fichiers téléversés (1)
+
+- Laravel fournit un système de stockage intégré avec différents _"disques"_
+  (espaces de stockage).
+- Laravel offre deux disques par défaut :
+  - `local` (stockage local et privé) - Dossier `storage/app/private`.
+  - `public` (stockage public) - Dossier `storage/app/public`.
+- La classe `Storage` permet de gérer les fichiers (noms aléatoires) :
+
+  ```php
+  $path = Storage::disk('public')->put('profile-pictures', $file);
+  ```
 
 ### Stocker les fichiers téléversés (2)
 
-Stocker le chemin du fichier en base de données, pas le fichier lui-même.
+```php
+public function update(Request $request): RedirectResponse
+{
+    $user = User::where('username', 'janedoe')->first();
 
-Supprimer l'ancien fichier si nécessaire avant d'en stocker un nouveau.
+    $validated = $request->validate([
+        'username' => [
+          'required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)
+        ],
+        'email' => [
+          'required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)
+        ],
+        'first_name' => ['required', 'string', 'max:255'],
+        'last_name' => ['required', 'string', 'max:255'],
+        'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
+    ]);
+```
 
-### Gérer les disques de stockage
+---
 
-Configurer différents disques : local, cloud (S3, Google Cloud), etc.
+```php
+    $file = $request->file('profile_picture');
 
-Créer un lien symbolique avec `php artisan storage:link` pour rendre les
-fichiers du disque `public` accessibles.
+    // Vérifie si une image de profil a été téléversée
+    if ($file) {
+        // Vérifie si l'utilisateur.trice a une image de profil
+        if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
+            Storage::disk('public')->delete($user->profile_picture);
+        }
 
-Accéder aux fichiers avec `asset('storage/filename')`.
+        // Stocke la nouvelle image de profil et récupère son chemin
+        $path = Storage::disk('public')->put('profile-pictures', $file);
+
+        // Remplace le champ profile_picture dans
+        // les données validées par le chemin de l'image stockée
+        $validated['profile_picture'] = $path;
+    }
+```
+
+---
+
+```php
+    // Met à jour les informations de l'utilisateur.trice
+    $user->username = $validated['username'];
+    $user->email = $validated['email'];
+    $user->first_name = $validated['first_name'];
+    $user->last_name = $validated['last_name'];
+
+    // Si une image de profil a été téléversée, renseigne le chemin pour y accéder
+    if (isset($validated['profile_picture'])) {
+        $user->profile_picture = $validated['profile_picture'];
+    }
+
+    $user->save();
+
+    return redirect('/my-profile');
+}
+```
+
+### Stocker les fichiers téléversés (3)
+
+- **Nous ne stockons pas l'image elle-même dans la base de données, mais plutôt
+  le chemin vers l'image stockée sur le disque**.
+- Cela permet de garder la base de données légère et d'optimiser les
+  performances.
+- **Si l'application est déplacée vers un autre environnement** (ex : de
+  développement à production), **les fichiers stockés sur le disque doivent eux
+  aussi être transférés**.
+
+### Gérer les disques de stockage (1)
+
+- Par défaut, les fichiers sont stockés dans le disque `local` (dossiers
+  `storage/app/private` et `storage/app/public`).
+- Pour rendre les fichiers accessibles publiquement, il faut les stocker dans le
+  disque `public` (dossier `storage/app/public`).
+- Afin d'accéder à ce dossier public depuis l'extérieur, il est nécessaire de
+  créer un lien symbolique entre `public/storage` et `storage/app/public` avec
+  la commande suivante :
+
+  ```bash
+  php artisan storage:link
+  ```
+
+### Gérer les disques de stockage (2)
+
+- L'exécution de la commande `php artisan storage:link` crée un lien symbolique
+  `public/storage` pointant vers `storage/app/public`.
+- Les fichiers stockés dans le disque `public` sont maintenant accessibles via
+  `asset('storage/nom_du_fichier')`, et ce, depuis n'importe quelle partie de
+  l'application.
 
 ## Conclusion
 
@@ -423,9 +810,18 @@ Est-ce que vous avez des questions ?
 - [Illustration][illustration-objectifs] par
   [Aline de Nadai](https://unsplash.com/@alinedenadai) sur
   [Unsplash](https://unsplash.com/photos/low-angle-view-of-ball-shoots-in-the-ring-j6brni7fpvs)
-
----
-
+- [Illustration][illustration-formulaires-html] par
+  [Kelly Sikkema](https://unsplash.com/@kellysikkema) sur
+  [Unsplash](https://unsplash.com/photos/stack-of-papers-flat-lay-photography-tQQ4BwN_UFs)
+- [Illustration][illustration-envoyer-les-donnees-des-formulaires] par
+  [Anastasiia Nelen](https://unsplash.com/@mnelen) sur
+  [Unsplash](https://unsplash.com/photos/a-blue-and-white-box-SAHWzVB3bcc)
+- [Illustration][illustration-les-sessions] par
+  [Markus Spiske](https://unsplash.com/@markusspiske) sur
+  [Unsplash](https://unsplash.com/photos/text-nBwhHm69x4I)
+- [Illustration][illustration-se-proteger-contre-les-attaques-csrf] par
+  [John Salvino](https://unsplash.com/@jsalvino) sur
+  [Unsplash](https://unsplash.com/photos/gray-steel-chain-locked-on-gate-bqGBbLq_yfc)
 - [Illustration][illustration-a-vous-de-jouer] par
   [Nikita Kachanovsky](https://unsplash.com/@nkachanovskyyy) sur
   [Unsplash](https://unsplash.com/photos/white-sony-ps4-dualshock-controller-over-persons-palm-FJFPuE1MAOM)
@@ -443,5 +839,13 @@ Est-ce que vous avez des questions ?
 	https://images.unsplash.com/photo-1517486430290-35657bdcef51?fit=crop&h=720
 [illustration-objectifs]:
 	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
+[illustration-formulaires-html]:
+	https://images.unsplash.com/photo-1554224155-1696413565d3?fit=crop&h=720
+[illustration-envoyer-les-donnees-des-formulaires]:
+	https://images.unsplash.com/photo-1659896975336-3f3f989d3396?fit=crop&h=720
+[illustration-les-sessions]:
+	https://images.unsplash.com/photo-1601714582667-574b826b99a6?fit=crop&h=720
+[illustration-se-proteger-contre-les-attaques-csrf]:
+	https://images.unsplash.com/photo-1508345228704-935cc84bf5e2?fit=crop&h=720
 [illustration-a-vous-de-jouer]:
 	https://images.unsplash.com/photo-1509198397868-475647b2a1e5?fit=crop&h=720

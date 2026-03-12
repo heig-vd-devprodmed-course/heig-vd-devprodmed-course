@@ -1,0 +1,46 @@
+@startuml post-reactions-activity
+skinparam boxPadding 100
+skinparam maxMessageSize 150
+skinparam noteTextAlignment left
+skinparam sequenceMessageAlign direction
+skinparam wrapWidth 150
+
+title "Diagramme d'activité : réagir à un post"
+
+start
+
+:Accéder aux détails d'un post;
+
+if (La personne a déjà aimé ce post ?) then (Oui)
+  :Afficher le formulaire avec la réaction actuelle mise en évidence;
+else (Non)
+  :Afficher le formulaire sans contraintes particulières;
+endif
+
+:La personne sélectionne une réaction;
+
+if (La personne a déjà aimé ce post ?) then (Oui)
+  if (Même réaction que la précédente ?) then (Oui)
+    :Supprimer la réaction existante;
+    note right
+      La personne "unlike" le post
+    end note
+  else (Non)
+    :Mettre à jour la réaction existante;
+    note right
+      Changer de réaction
+    end note
+  endif
+else (Non)
+  :Créer une nouvelle réaction;
+  note right
+    Première fois que la personne
+    aime ce post
+  end note
+endif
+
+:Rediriger vers la page de détails du post;
+
+stop
+
+@enduml

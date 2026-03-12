@@ -81,9 +81,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Validation des données de formulaire](#validation-des-données-de-formulaire)
   - [Traduire les messages d'erreur de validation](#traduire-les-messages-derreur-de-validation)
   - [Conserver les données de formulaire en cas d'erreur de validation](#conserver-les-données-de-formulaire-en-cas-derreur-de-validation)
-  - [Accéder aux données de formulaire dans les contrôleurs](#accéder-aux-données-de-formulaire-dans-les-contrôleurs)
+  - [Accéder aux données des formulaires](#accéder-aux-données-des-formulaires)
   - [Rediriger après la soumission d'un formulaire](#rediriger-après-la-soumission-dun-formulaire)
-  - [Réutiliser les règles de validation dans plusieurs contrôleurs](#réutiliser-les-règles-de-validation-dans-plusieurs-contrôleurs)
 - [Gérer les fichiers d'un formulaire](#gérer-les-fichiers-dun-formulaire)
   - [Le type de champ `file`](#le-type-de-champ-file)
   - [Validation des fichiers](#validation-des-fichiers)
@@ -94,6 +93,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Mini-projet](#mini-projet)
 - [Questions d'évaluation](#questions-dévaluation)
 - [À faire pour la prochaine séance](#à-faire-pour-la-prochaine-séance)
+- [Contenu optionnel](#contenu-optionnel)
+  - [Réutiliser les règles de validation dans plusieurs contrôleurs](#réutiliser-les-règles-de-validation-dans-plusieurs-contrôleurs)
 
 ## Objectifs
 
@@ -335,8 +336,13 @@ caché `_method` dans le formulaire. Par exemple, pour simuler une requête
 
 ```php
 <form action="/posts/1" method="POST">
-    <input type="hidden" name="_method" value="DELETE" />
-    <button type="submit">Supprimer le post</button>
+    <input
+        type="hidden"
+        name="_method"
+        value="DELETE"
+    />
+
+    <button type="submit">Supprimer</button>
 </form>
 ```
 
@@ -355,7 +361,7 @@ requête `DELETE`, nous pourrions faire :
 <form action="/posts/1" method="POST">
     @method('DELETE')
 
-    <button type="submit">Supprimer le post</button>
+    <button type="submit">Supprimer</button>
 </form>
 ```
 
@@ -385,7 +391,7 @@ public function destroy(string $id)
 {
     Post::destroy($id);
 
-    return to_route('posts.index');
+    return redirect("/posts");
 }
 ```
 
@@ -394,6 +400,12 @@ modèle `Post` pour supprimer le post avec l'ID spécifié, puis redirige
 l'utilisateur.trice vers la liste des posts.
 
 ### Se protéger contre les attaques CSRF
+
+Lorsque nous travaillons avec les formulaires, plusieurs types d'attaque peuvent
+avoir lieu (attaques d'injection SQL, attaques XSS, etc.).
+
+L'une des attaques les plus courantes est l'attaque CSRF (Cross-Site Request
+Forgery).
 
 Laravel met à disposition une protection intégrée contre les attaques CSRF
 (Cross-Site Request Forgery) pour tous les formulaires qui envoient des données
@@ -448,6 +460,29 @@ l'attaque décrite précédemment :
 
 ![Protection CSRF - La solution avec un token](./images/csrf-protection.svg)
 
+Laravel implémente cette protection de manière transparente pour les
+développeur.euse.s, grâce à la directive Blade `@csrf`, qui génère
+automatiquement le champ caché nécessaire pour inclure le token CSRF dans chaque
+formulaire.
+
+Par exemple :
+
+```php
+<form action="/posts" method="POST">
+    @csrf
+
+    <!-- Champs du formulaire -->
+
+    <button type="submit">
+      Soumettre le formulaire
+    </button>
+</form>
+```
+
+De cette manière, les développeur.euse.s n'ont pas à se soucier de la gestion du
+token CSRF, et peuvent être assurés que leurs formulaires sont protégés contre
+les attaques CSRF.
+
 ### Le rôle de l'APP_KEY dans les sessions et la protection CSRF
 
 Lorsque vous initialisez une nouvelle application Laravel, une clé d'application
@@ -495,7 +530,7 @@ Prenons l'exemple d'un formulaire de création de post avec le formulaire suivan
 <form method="POST" action="{{ url('/posts') }}">
     @csrf
 
-    <label for="title"> Titre du post </label>
+    <label for="title">Titre du post</label>
     <input
         id="title"
         type="text"
@@ -503,7 +538,7 @@ Prenons l'exemple d'un formulaire de création de post avec le formulaire suivan
         placeholder="Saisissez le titre du post"
     />
 
-    <label for="content"> Contenu du post </label>
+    <label for="content">Contenu du post</label>
     <textarea
         id="content"
         name="content"
@@ -533,10 +568,7 @@ public function store(Request $request)
 
     $post->save();
 
-    return redirect()->action(
-        [PostController::class, 'show'],
-        ['id' => $post->id]
-    );
+    return redirect("/posts/$post->id");
 }
 ```
 
@@ -646,24 +678,17 @@ d'erreur de validation associés à chaque champ :
 <form method="POST" action="{{ url('/posts') }}">
     @csrf
 
-    <label for="title"> Titre du post </label>
-    <input
-        id="title"
-        type="text"
-        name="title"
-        placeholder="Saisissez le titre du post"
-    />
+    <label for="title">Titre du post</label>
+    <input id="title" type="text" name="title" placeholder="Saisissez le titre du post"/>
+
     @error('title')
     <p>{{ $message }}</p>
     @enderror
 
-    <label for="content"> Contenu du post </label>
-    <textarea
-        id="content"
-        name="content"
-        rows="5"
-        placeholder="Saisissez le contenu du post"
+    <label for="content">Contenu du post</label>
+    <textarea id="content" name="content" rows="5" placeholder="Le contenu du post"
     ></textarea>
+
     @error('content')
     <p>{{ $message }}</p>
     @enderror
@@ -672,29 +697,30 @@ d'erreur de validation associés à chaque champ :
 </form>
 ```
 
-Les directives Blade `@error('field_name')` permettent de vérifier si une erreur
-de validation existe pour le champ spécifié (`field_name`). Si une erreur
-existe, le message d'erreur associé est affiché à l'intérieur du bloc `@error`.
+Les directives Blade `@error('nom_du_champ')` permettent de vérifier si une
+erreur de validation existe pour le champ spécifié (`nom_du_champ`). Si une
+erreur existe, le message d'erreur associé est affiché à l'intérieur du bloc
+`@error`.
+
 Cela permet d'informer l'utilisateur.trice des erreurs de validation spécifiques
 à chaque champ du formulaire, améliorant ainsi l'expérience utilisateur.trice et
 facilitant la correction des erreurs.
 
 ### Traduire les messages d'erreur de validation
 
-Par défaut, les messages d'erreur de validation sont définis dans les fichiers
-de traduction de Laravel, ce qui permet de les traduire facilement dans
-différentes langues. Vous pouvez personnaliser ces messages d'erreur en créant
-des fichiers de traduction spécifiques pour votre application.
-
 Lors d'une précédente séance, nous avons vu comment mettre en place
 l'internationalisation (i18n) dans une application Laravel qui a automatiquement
 créé un fichier de traduction `resources/lang/fr/validation.php` contenant les
-messages d'erreur de validation utilisés par Laravel. Vous pouvez modifier ce
-fichier pour personnaliser les messages d'erreur ou créer des fichiers de
-traduction pour d'autres langues.
+messages d'erreur de validation utilisés par Laravel.
 
-Grâce à l'internationalisation, les messages d'erreur sont affichés dans la
-langue préférée de l'utilisateur.trice.
+Ce fichier spécifique de traduction est utilisé par Laravel pour générer tous
+les messages possibles d'erreur de validation qui pourrait se produire avec des
+applications Laravel. De cette manière, des messages d'erreur explicites peuvent
+être retournés à l'utilisateur.trice en cas d'erreur de validation, et ces
+messages peuvent être facilement traduits dans différentes langues.
+
+Vous pouvez modifier ce fichier pour personnaliser les messages d'erreur ou
+créer des fichiers de traduction pour d'autres langues.
 
 Par exemple, dans le fichier `resources/lang/fr/validation.php`, la contrainte
 `min` pour les chaînes de caractères est définie comme suit :
@@ -713,10 +739,11 @@ données (tableaux, fichiers, numériques, chaînes de caractères) et utilise d
 placeholders (`:attribute`, `:min`) qui sont remplacés par les valeurs réelles
 lors de l'affichage du message d'erreur.
 
-Si le titre de notre post est trop court (moins de 3 caractères), la traduction
-utilisée sera `Le texte de :attribute doit contenir au moins :min caractères.`
-et le message d'erreur affiché à l'utilisateur.trice sera alors : _"Le texte de
-title doit contenir au moins 3 caractères."_.
+Par exemple, si le titre de notre post est trop court (moins de 3 caractères
+grâce à la contrainte `min:3`), la traduction utilisée sera
+`Le texte de :attribute doit contenir au moins :min caractères.` et le message
+d'erreur affiché à l'utilisateur.trice sera alors : _"Le texte de title doit
+contenir au moins 3 caractères."_.
 
 Vous avez peut-être remarqué que la traduction le terme `title` pour l'attribut
 à remplacer dans le message d'erreur.
@@ -743,15 +770,15 @@ dans le tableau `attributes` :
 ```
 
 De cette manière, lorsque le message d'erreur de validation est généré, le
-placeholder `:attribute` sera remplacé par "titre" au lieu de "title", ce qui
-rendra le message d'erreur plus compréhensible pour les utilisateur.trice.s
+placeholder `:attribute` sera remplacé par _"titre"_ au lieu de _"title"_, ce
+qui rendra le message d'erreur plus compréhensible pour les utilisateur.trice.s
 francophones.
 
 ### Conserver les données de formulaire en cas d'erreur de validation
 
 Si des erreurs de validation surviennent lors de la soumission d'un formulaire,
 il est important de conserver les données saisies par l'utilisateur.trice pour
-éviter qu'il.elle ne doive ressaiser toutes les informations du formulaire.
+éviter qu'il.elle ne doive resaisir toutes les informations du formulaire.
 
 Laravel propose une directive Blade `old()` qui permet de récupérer les
 anciennes valeurs des champs de formulaire en cas d'erreur de validation. Cette
@@ -802,7 +829,7 @@ Si aucune valeur n'a été saisie pour un champ avant la soumission du formulair
 ou si le formulaire est affiché pour la première fois, la directive `old()`
 renverra une chaîne vide, laissant le champ de formulaire vide.
 
-### Accéder aux données de formulaire dans les contrôleurs
+### Accéder aux données des formulaires
 
 Si la validation des données du formulaire réussit, les données validées sont
 accessibles dans le contrôleur via la variable `$validated` (ou tout autre nom
@@ -836,7 +863,7 @@ public function store(Request $request)
     // Sauvegarder le modèle dans la base de données
     $post->save();
 
-    // Rediriger vers la page de détail du post ou une autre page appropriée
+    return redirect("/posts/$post->id");
 }
 ```
 
@@ -859,10 +886,7 @@ Par exemple, pour rediriger vers la page de détail d'un post après sa créatio
 vous pouvez faire :
 
 ```php
-return redirect()->action(
-    [PostController::class, 'show'],
-    ['id' => $post->id]
-);
+return redirect("/posts/$post->id");
 ```
 
 Il existe plusieurs façons de rediriger dans Laravel, et le choix de la méthode
@@ -870,6 +894,299 @@ de redirection dépend du contexte de votre application et de vos préférences 
 développement. La documentation officielle de Laravel sur les redirections est
 disponible à l'adresse suivante :
 <https://laravel.com/docs/12.x/responses#redirects>.
+
+## Gérer les fichiers d'un formulaire
+
+Laravel fournit également des fonctionnalités pour gérer les fichiers
+téléchargés via les formulaires.
+
+### Le type de champ `file`
+
+Lorsque vous souhaitez permettre aux utilisateur.trice.s de _"téléverser"_ (_"to
+upload"_ en anglais) des fichiers via un formulaire, vous devez utiliser le type
+de champ `file` dans votre formulaire HTML. Par exemple, pour permettre le
+téléchargement d'une image de profil, vous pouvez faire :
+
+```php
+<form
+    method="POST"
+    action="{{ url('/profile') }}"
+    enctype="multipart/form-data"
+>
+  @csrf
+
+  <label for="profile_picture">
+      Photo de profil
+  </label>
+  <input
+    id="profile_picture"
+    type="file"
+    name="profile_picture"
+  />
+
+  <button type="submit">Soumettre</button>
+</form>
+```
+
+Il est important de noter que lorsque vous utilisez un champ de type `file`,
+vous devez également ajouter l'attribut `enctype="multipart/form-data"` à votre
+formulaire. Cet attribut indique au navigateur que le formulaire contient des
+fichiers à télécharger, et permet au serveur de traiter correctement les données
+du formulaire. Une bonne ressource est disponible sur MDN à l'adresse suivante :
+<https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_and_retrieving_form_data#a_special_case_sending_files>.
+
+### Validation des fichiers
+
+Lors de la validation des données d'un formulaire qui contient des fichiers,
+Laravel fournit des règles de validation spécifiques pour les fichiers, telles
+que `file`, `image`, `mimes`, `max`, etc.
+
+Par exemple, pour valider une image de profil, vous pouvez faire :
+
+```php
+public function update(Request $request): RedirectResponse
+{
+    $validated = $request->validate([
+        'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
+    ]);
+
+    // ...
+}
+```
+
+Dans cet exemple, la règle de validation `image` vérifie que le fichier
+téléchargé est une image (jpg, jpeg, png, bmp, gif ou webp (source :
+<https://laravel.com/docs/12.x/validation#rule-image>)), et la règle `max:2048`
+vérifie que la taille du fichier ne dépasse pas 2MB (2048 kilo-octets).
+
+La documentation de Laravel fournit des règles de validation supplémentaires
+pour les fichiers, que vous pouvez consulter à l'adresse suivante :
+<https://laravel.com/docs/12.x/validation#validating-files>.
+
+### Stocker les fichiers téléversés
+
+Laravel met à disposition un système de stockage intégré qui permet de stocker
+les fichiers téléversés de manière sécurisée et organisée. Vous pouvez
+configurer différents "disques" de stockage pour stocker les fichiers
+localement, sur un service de stockage en nuage (ex : Amazon S3, Google Cloud
+Storage), ou sur un autre système de fichiers.
+
+Par défaut, les fichiers téléversés sont stockés dans le répertoire
+`storage/app`. Deux dossiers sont disponibles dans ce répertoire :
+
+1. `public` pour les fichiers qui doivent être accessibles publiquement.
+2. `private` pour les fichiers qui doivent être protégés et ne pas être
+   accessibles directement via une URL.
+
+Afin de spécifier où les fichiers téléversés doivent être stockés, vous pouvez
+utiliser la façade `Storage` dans votre contrôleur pour déplacer les fichiers
+vers le disque de stockage approprié.
+
+Par exemple, pour stocker une image de profil dans le disque `public`, vous
+pouvez faire :
+
+```php
+$path = Storage::disk('public')->put('profile-pictures', $file);
+```
+
+Dans cet exemple, le fichier téléversé est stocké dans le dossier
+`profile-pictures` du disque `public`, et la variable `$path` contient le chemin
+relatif du fichier stocké. Vous pouvez ensuite enregistrer ce chemin dans la
+base de données pour référencer le fichier dans votre application.
+
+Un exemple complet serait le suivant :
+
+```php
+public function update(Request $request): RedirectResponse
+{
+    $user = User::where('username', 'janedoe')->first();
+
+    $validated = $request->validate([
+        'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+        'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+        'first_name' => ['required', 'string', 'max:255'],
+        'last_name' => ['required', 'string', 'max:255'],
+        'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
+    ]);
+
+    $file = $request->file('profile_picture');
+
+    // Vérifie si une image de profil a été téléversée
+    if ($file) {
+        // Vérifie si l'utilisateur.trice a une image de profil
+        if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
+            Storage::disk('public')->delete($user->profile_picture);
+        }
+
+        // Stocke la nouvelle image de profil et récupère son chemin
+        $path = Storage::disk('public')->put('profile-pictures', $file);
+
+        // Remplace le champ profile_picture dans
+        // les données validées par le chemin de l'image stockée
+        $validated['profile_picture'] = $path;
+    }
+
+    // Met à jour les informations de l'utilisateur.trice
+    $user->username = $validated['username'];
+    $user->email = $validated['email'];
+    $user->first_name = $validated['first_name'];
+    $user->last_name = $validated['last_name'];
+
+    // Si une image de profil a été téléversée, renseigne le chemin pour y accéder
+    if (isset($validated['profile_picture'])) {
+        $user->profile_picture = $validated['profile_picture'];
+    }
+
+    $user->save();
+
+    return redirect('/my-profile');
+}
+```
+
+Dans cet exemple, la méthode `update` du `UserController` gère la mise à jour du
+profil d'un utilisateur.trice, y compris le téléversement d'une nouvelle image
+de profil.
+
+Si une image de profil est téléversée, le code vérifie d'abord si
+l'utilisateur.trice a déjà une image de profil existante, et si c'est le cas, il
+supprime l'ancienne image du disque de stockage pour éviter d'accumuler des
+fichiers inutiles.
+
+Ensuite, la nouvelle image est stockée dans le disque `public`, et le chemin de
+l'image stockée est enregistré dans la base de données pour référencer l'image
+dans l'application.
+
+Lorsque vous affichez l'image de profil dans votre application, vous pouvez
+utiliser le chemin stocké dans la base de données pour générer l'URL de l'image.
+Par exemple, si vous utilisez le disque `public`, vous pouvez faire :
+
+```php
+<img src="{{ asset('storage/' . $user->profile_picture) }}" alt="Photo de profil">
+```
+
+Ainsi, comme le fichier a été stocké dans le disque `public`, il est accessible
+via l'URL générée par la fonction `asset()`, qui pointe vers le dossier
+`storage` de votre application.
+
+Il est important de retenir que **nous ne stockons pas l'image elle-même dans la
+base de données, mais plutôt le chemin vers l'image stockée sur le disque**.
+Cela permet de gérer les fichiers de manière plus efficace et de réduire la
+taille de la base de données.
+
+**Si l'application est déplacée vers un autre environnement** (ex : de
+développement à production), **les fichiers stockés sur le disque doivent eux
+aussi être transférés**.
+
+### Gérer les disques de stockage
+
+Laravel permet de configurer différents disques de stockage pour gérer les
+fichiers téléversés de manière flexible.
+
+Vous pouvez configurer des disques pour stocker les fichiers localement, sur un
+service de stockage en nuage (ex : Amazon S3, Google Cloud Storage), ou sur un
+autre système de fichiers.
+
+Pour le moment, nous n'allons gérer que le disque de stockage local.
+
+Afin que l'exemple précédent fonctionne correctement, vous devez créer un lien
+symbolique entre le répertoire `storage/app/public` et le répertoire
+`public/storage` de votre application. Cela permet de rendre les fichiers
+stockés dans le disque `public` accessibles via une URL.
+
+Pour cela, Laravel nous met à disposition une commande Artisan qui crée ce lien
+symbolique pour nous :
+
+```bash
+php artisan storage:link
+```
+
+Une fois cette commande exécutée, un lien symbolique est créé entre
+`storage/app/public` et `public/storage`, ce qui permet d'accéder aux fichiers
+stockés dans le disque `public` via l'URL générée par la fonction
+`asset('storage/nom_du_fichier')`.
+
+Plus d'options de configuration des disques de stockage sont disponibles dans la
+documentation officielle de Laravel à l'adresse suivante :
+<https://laravel.com/docs/12.x/filesystem#configuration>.
+
+## Conclusion
+
+Dans cette séance, nous avons vu comment gérer les formulaires et la validation
+des données dans une application Laravel. Nous avons abordé tous les concepts de
+base des formulaires HTML (protection contre les attaques CSRF, validation,
+gestion des messages d'erreur, conservation des données, redirection, etc.).
+
+De plus, nous avons vu comment gérer les fichiers téléversés via les formulaires
+et comment ils sont stockés de manière sécurisée à l'aide du système de stockage
+de Laravel.
+
+Maintenant que nous avons couvert les concepts de base des formulaires et de la
+validation dans Laravel, nous allons mettre ces concepts en pratique à travers
+des exercices et un mini-projet.
+
+## Exercices
+
+Nous vous invitons maintenant à réaliser les exercices de la séance afin de
+mettre en pratique les concepts abordés.
+
+Vous trouverez les exercices et leur corrigé ici :
+[Exercices](./01-exercices/README.md).
+
+## Mini-projet
+
+Nous vous invitons maintenant à réaliser le mini-projet de la séance afin de
+mettre en pratique les concepts abordés.
+
+Vous trouverez les détails du mini-projet ici :
+[Mini-projet](./02-mini-projet/README.md).
+
+## Questions d'évaluation
+
+> [!NOTE]
+>
+> Les questions d'évaluation sont destinées à vous aider à vérifier votre
+> compréhension des concepts abordés dans le cours. Elles ne sont pas destinées
+> à être utilisées comme une liste de contrôle exhaustive des compétences à
+> maîtriser.
+>
+> Il est recommandé de les utiliser comme un guide pour vous aider à identifier
+> les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
+> connaissances ou de pratiquer davantage.
+
+- Qu'est-ce qu'un formulaire et à quoi sert-il dans une application web ?
+- Quels sont les éléments de base d'un formulaire HTML ?
+- Comment les données d'un formulaire sont-elles envoyées au serveur ?
+- Comment les données d'un formulaire sont-elles reçues et traitées par le
+  serveur ?
+- Qu'est-ce qu'une session et à quoi sert-elle dans une application web ?
+- Comment les formulaires et les sessions sont-ils utilisés ensemble dans une
+  application web ?
+- Comment les formulaires sont-ils gérés dans Laravel ?
+- Comment se protéger contre les attaques CSRF dans Laravel ?
+- Comment valider les données de formulaire dans Laravel ?
+- Comment afficher les messages d'erreur de validation dans une vue Blade ?
+- Comment traduire les messages d'erreur de validation dans Laravel ?
+- Comment conserver les données de formulaire en cas d'erreur de validation dans
+  Laravel ?
+- Comment accéder aux données de formulaire validées dans un contrôleur Laravel
+  ?
+- Comment rediriger après la soumission d'un formulaire dans Laravel ?
+
+## À faire pour la prochaine séance
+
+Chaque personne est libre de gérer son temps comme elle le souhaite. Cependant,
+il est recommandé pour la prochaine séance de :
+
+- Relire le support de cours si nécessaire.
+- Finaliser les exercices qui n'ont pas été terminés en classe.
+- Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
+
+## Contenu optionnel
+
+Le contenu suivant est optionnel et n'est pas nécessaire pour la compréhension
+des concepts de base des formulaires et de la validation dans Laravel.
+Cependant, il peut être utile pour approfondir votre compréhension et pour
+explorer des fonctionnalités plus avancées de Laravel.
 
 ### Réutiliser les règles de validation dans plusieurs contrôleurs
 
@@ -999,285 +1316,6 @@ création et de mise à jour, par exemple, lors de la création d'un post, le ch
 champ `title` peut être obligatoire. En ayant des classes de validation
 distinctes, vous pouvez facilement gérer ces différences sans compliquer la
 logique de validation dans une seule classe.
-
-## Gérer les fichiers d'un formulaire
-
-Laravel fournit également des fonctionnalités pour gérer les fichiers
-téléchargés via les formulaires.
-
-### Le type de champ `file`
-
-Lorsque vous souhaitez permettre aux utilisateur.trice.s de téléverser (_"to
-upload"_ en anglais) des fichiers via un formulaire, vous devez utiliser le type
-de champ `file` dans votre formulaire HTML. Par exemple, pour permettre le
-téléchargement d'une image de profil, vous pouvez faire :
-
-```php
-<form method="POST" action="{{ url('/profile') }}" enctype="multipart/form-data">
-  @csrf
-
-  <label for="profile_picture">Photo de profil</label>
-  <input
-    id="profile_picture"
-    type="file"
-    name="profile_picture"
-  />
-
-  <button type="submit">Soumettre le formulaire</button>
-</form>
-```
-
-Il est important de noter que lorsque vous utilisez un champ de type `file`,
-vous devez également ajouter l'attribut `enctype="multipart/form-data"` à votre
-formulaire. Cet attribut indique au navigateur que le formulaire contient des
-fichiers à télécharger, et permet au serveur de traiter correctement les données
-du formulaire. Une bonne ressource est disponible sur MDN à l'adresse suivante :
-<https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_and_retrieving_form_data#a_special_case_sending_files>.
-
-### Validation des fichiers
-
-Lors de la validation des données d'un formulaire qui contient des fichiers,
-Laravel fournit des règles de validation spécifiques pour les fichiers, telles
-que `file`, `image`, `mimes`, `max`, etc.
-
-Par exemple, pour valider une image de profil, vous pouvez faire :
-
-```php
-public function update(Request $request): RedirectResponse
-{
-    $validated = $request->validate([
-        'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
-    ]);
-
-    // ...
-}
-```
-
-Dans cet exemple, la règle de validation `image` vérifie que le fichier
-téléchargé est une image (jpg, jpeg, png, bmp, gif ou webp (source :
-<https://laravel.com/docs/12.x/validation#rule-image>)), et la règle `max:2048`
-vérifie que la taille du fichier ne dépasse pas 2MB (2048 kilo-octets).
-
-La documentation de Laravel fournit des règles de validation supplémentaires
-pour les fichiers, que vous pouvez consulter à l'adresse suivante :
-<https://laravel.com/docs/12.x/validation#validating-files>.
-
-### Stocker les fichiers téléversés
-
-Laravel met à disposition un système de stockage intégré qui permet de stocker
-les fichiers téléversés de manière sécurisée et organisée. Vous pouvez
-configurer différents "disques" de stockage pour stocker les fichiers
-localement, sur un service de stockage en nuage (ex : Amazon S3, Google Cloud
-Storage), ou sur un autre système de fichiers.
-
-Par défaut, les fichiers téléversés sont stockés dans le répertoire
-`storage/app`. Deux dossiers sont disponibles dans ce répertoire :
-
-1. `public` pour les fichiers qui doivent être accessibles publiquement.
-2. `private` pour les fichiers qui doivent être protégés et ne pas être
-   accessibles directement via une URL.
-
-Afin de spécifier où les fichiers téléversés doivent être stockés, vous pouvez
-utiliser la façade `Storage` dans votre contrôleur pour déplacer les fichiers
-vers le disque de stockage approprié.
-
-Par exemple, pour stocker une image de profil dans le disque `public`, vous
-pouvez faire :
-
-```php
-$path = Storage::disk('public')->put('profile-pictures', $file);
-```
-
-Dans cet exemple, le fichier téléversé est stocké dans le dossier
-`profile-pictures` du disque `public`, et la variable `$path` contient le chemin
-relatif du fichier stocké. Vous pouvez ensuite enregistrer ce chemin dans la
-base de données pour référencer le fichier dans votre application.
-
-Un exemple complet serait le suivant :
-
-```php
-public function update(Request $request): RedirectResponse
-{
-    $user = User::where('username', 'janedoe')->first();
-
-    $validated = $request->validate([
-        'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-        'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-        'first_name' => ['required', 'string', 'max:255'],
-        'last_name' => ['required', 'string', 'max:255'],
-        'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
-    ]);
-
-    $file = $request->file('profile_picture');
-
-    // Vérifie si une image de profil a été téléversée
-    if ($file) {
-        // Vérifie si l'utilisateur.trice a une image de profil
-        if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
-            Storage::disk('public')->delete($user->profile_picture);
-        }
-
-        // Stocke la nouvelle image de profil et récupère son chemin
-        $path = Storage::disk('public')->put('profile-pictures', $file);
-
-        // Remplace le champ profile_picture dans les données validées par le chemin de l'image stockée
-        $validated['profile_picture'] = $path;
-    }
-
-    // Met à jour les informations de l'utilisateur.trice
-    $user->username = $validated['username'];
-    $user->email = $validated['email'];
-    $user->first_name = $validated['first_name'];
-    $user->last_name = $validated['last_name'];
-
-    // Si une image de profil a été téléversée, renseigne le chemin pour y accéder
-    if (isset($validated['profile_picture'])) {
-        $user->profile_picture = $validated['profile_picture'];
-    }
-
-    $user->save();
-
-    return redirect('/my-profile');
-}
-```
-
-Dans cet exemple, la méthode `update` du `UserController` gère la mise à jour du
-profil d'un utilisateur.trice, y compris le téléversement d'une nouvelle image
-de profil.
-
-Si une image de profil est téléversée, le code vérifie d'abord si
-l'utilisateur.trice a déjà une image de profil existante, et si c'est le cas, il
-supprime l'ancienne image du disque de stockage pour éviter d'accumuler des
-fichiers inutiles.
-
-Ensuite, la nouvelle image est stockée dans le disque `public`, et le chemin de
-l'image stockée est enregistré dans la base de données pour référencer l'image
-dans l'application.
-
-Lorsque vous affichez l'image de profil dans votre application, vous pouvez
-utiliser le chemin stocké dans la base de données pour générer l'URL de l'image.
-Par exemple, si vous utilisez le disque `public`, vous pouvez faire :
-
-```php
-<img src="{{ asset('storage/' . $user->profile_picture) }}" alt="Photo de profil">
-```
-
-Ainsi, comme le fichier a été stocké dans le disque `public`, il est accessible
-via l'URL générée par la fonction `asset()`, qui pointe vers le dossier
-`storage` de votre application.
-
-Il est important de retenir que **nous ne stockons pas l'image elle-même dans la
-base de données, mais plutôt le chemin vers l'image stockée sur le disque**.
-Cela permet de gérer les fichiers de manière plus efficace et de réduire la
-taille de la base de données.
-
-**Si l'application est déplacée vers un autre environnement** (ex : de
-développement à production), **les fichiers stockés sur le disque doivent eux
-aussi être transférés**.
-
-### Gérer les disques de stockage
-
-Laravel permet de configurer différents disques de stockage pour gérer les
-fichiers téléversés de manière flexible.
-
-Vous pouvez configurer des disques pour stocker les fichiers localement, sur un
-service de stockage en nuage (ex : Amazon S3, Google Cloud Storage), ou sur un
-autre système de fichiers.
-
-Pour le moment, nous n'allons gérer que le disque de stockage local.
-
-Afin que l'exemple précédent fonctionne correctement, vous devez créer un lien
-symbolique entre le répertoire `storage/app/public` et le répertoire
-`public/storage` de votre application. Cela permet de rendre les fichiers
-stockés dans le disque `public` accessibles via une URL.
-
-Pour cela, Laravel nous met à disposition une commande Artisan qui crée ce lien
-symbolique pour nous :
-
-```bash
-php artisan storage:link
-```
-
-Une fois cette commande exécutée, un lien symbolique est créé entre
-`storage/app/public` et `public/storage`, ce qui permet d'accéder aux fichiers
-stockés dans le disque `public` via l'URL générée par la fonction
-`asset('storage/filename')`.
-
-Plus d'options de configuration des disques de stockage sont disponibles dans la
-documentation officielle de Laravel à l'adresse suivante :
-<https://laravel.com/docs/12.x/filesystem#configuration>.
-
-## Conclusion
-
-Dans cette séance, nous avons vu comment gérer les formulaires et la validation
-des données dans une application Laravel. Nous avons abordé tous les concepts de
-base des formulaires HTML (protection contre les attaques CSRF, validation,
-gestion des messages d'erreur, conservation des données, redirection, etc.).
-
-De plus, nous avons vu comment gérer les fichiers téléversés via les formulaires
-et comment ils sont stockés de manière sécurisée à l'aide du système de stockage
-de Laravel.
-
-Maintenant que nous avons couvert les concepts de base des formulaires et de la
-validation dans Laravel, nous allons mettre ces concepts en pratique à travers
-des exercices et un mini-projet.
-
-## Exercices
-
-Nous vous invitons maintenant à réaliser les exercices de la séance afin de
-mettre en pratique les concepts abordés.
-
-Vous trouverez les exercices et leur corrigé ici :
-[Exercices](./01-exercices/README.md).
-
-## Mini-projet
-
-Nous vous invitons maintenant à réaliser le mini-projet de la séance afin de
-mettre en pratique les concepts abordés.
-
-Vous trouverez les détails du mini-projet ici :
-[Mini-projet](./02-mini-projet/README.md).
-
-## Questions d'évaluation
-
-> [!NOTE]
->
-> Les questions d'évaluation sont destinées à vous aider à vérifier votre
-> compréhension des concepts abordés dans le cours. Elles ne sont pas destinées
-> à être utilisées comme une liste de contrôle exhaustive des compétences à
-> maîtriser.
->
-> Il est recommandé de les utiliser comme un guide pour vous aider à identifier
-> les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
-> connaissances ou de pratiquer davantage.
-
-- Qu'est-ce qu'un formulaire et à quoi sert-il dans une application web ?
-- Quels sont les éléments de base d'un formulaire HTML ?
-- Comment les données d'un formulaire sont-elles envoyées au serveur ?
-- Comment les données d'un formulaire sont-elles reçues et traitées par le
-  serveur ?
-- Qu'est-ce qu'une session et à quoi sert-elle dans une application web ?
-- Comment les formulaires et les sessions sont-ils utilisés ensemble dans une
-  application web ?
-- Comment les formulaires sont-ils gérés dans Laravel ?
-- Comment se protéger contre les attaques CSRF dans Laravel ?
-- Comment valider les données de formulaire dans Laravel ?
-- Comment afficher les messages d'erreur de validation dans une vue Blade ?
-- Comment traduire les messages d'erreur de validation dans Laravel ?
-- Comment conserver les données de formulaire en cas d'erreur de validation dans
-  Laravel ?
-- Comment accéder aux données de formulaire validées dans un contrôleur Laravel
-  ?
-- Comment rediriger après la soumission d'un formulaire dans Laravel ?
-
-## À faire pour la prochaine séance
-
-Chaque personne est libre de gérer son temps comme elle le souhaite. Cependant,
-il est recommandé pour la prochaine séance de :
-
-- Relire le support de cours si nécessaire.
-- Finaliser les exercices qui n'ont pas été terminés en classe.
-- Finaliser la partie du mini-projet qui n'a pas été terminée en classe.
 
 <!-- URLs -->
 
