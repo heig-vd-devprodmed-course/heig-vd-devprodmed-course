@@ -18,6 +18,8 @@ Suisse !
   base de données.
 - Maîtriser les fondamentaux de sécurité dans le développement d'application
   web.
+- Réaliser des services web (_"web services"_) simples utilisant une
+  architecture _"RESTful"_.
 
 Grâce à ces compétences, la personne qui étudie sera en mesure de développer des
 applications web professionnelles en utilisant des frameworks modernes et en
@@ -43,13 +45,13 @@ d'apprentissage, et les méthodes d'évaluation.
 |     03 | [Vues, Blade et Tailwind CSS](./01-contenus-du-cours/04-vues-blade-et-tailwind-css/README.md)                                                                                                                | 🟢 Prêt     |
 |     04 | [Routes, paramètres et contrôleurs](./01-contenus-du-cours/05-routes-parametres-et-controleurs/README.md)                                                                                                    | 🟢 Prêt     |
 |     05 | [Formulaires et validation](./01-contenus-du-cours/06-formulaires-et-validation/README.md)                                                                                                                   | 🟢 Prêt     |
-|     06 | Authentification et autorisations                                                                                                                                                                            | 🟡 En cours |
+|     06 | [Authentification et autorisations](./01-contenus-du-cours/07-authentification-et-autorisations/README.md)                                                                                                   | 🟡 En cours |
 |  🚨 07 | [Évaluation 1](./02-evaluations/01-evaluation-1/README.md)                                                                                                                                                   | 🟡 En cours |
 |     08 | [Architecture RESTful](./01-contenus-du-cours/08-architecture-restful/README.md) + Mini-projets libres (1/3)                                                                                                 | 🔴 À faire  |
 |     09 | Mini-projets libres (2/3)                                                                                                                                                                                    | 🔴 À faire  |
 |     10 | Mini-projets libres (3/3)                                                                                                                                                                                    | 🔴 À faire  |
 |  🚨 11 | [Évaluation 2](./02-evaluations/02-evaluation-2/README.md)                                                                                                                                                   | 🟡 En cours |
-|     12 | Récapitulatif du cours et perspectives d'avenir                                                                                                                                                              | 🔴 À faire  |
+|     12 | Récapitulatif du cours et aller plus loin                                                                                                                                                                    | 🔴 À faire  |
 
 ## 📜 Licence
 
