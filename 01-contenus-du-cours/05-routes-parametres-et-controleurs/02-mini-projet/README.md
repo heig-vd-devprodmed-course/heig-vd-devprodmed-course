@@ -158,10 +158,10 @@ mettre à jour des ressources, `DELETE` pour supprimer des ressources).
 - `GET /auth/register` : page pour afficher le formulaire d'inscription.
 - `POST /auth/register` : action pour traiter la soumission du formulaire
   d'inscription.
-- `GET /auth/my-profile` : page pour afficher son propre profil (le profil de
+- `GET /my-profile` : page pour afficher son propre profil (le profil de
   l'utilisateur.trice connecté.e).
-- `GET /auth/my-profile/edit` : page pour afficher le formulaire d'édition de
-  son propre profil (le profil de l'utilisateur.trice connecté.e().
+- `GET my-profile/edit` : page pour afficher le formulaire d'édition de son
+  propre profil (le profil de l'utilisateur.trice connecté.e().
 
 </details>
 

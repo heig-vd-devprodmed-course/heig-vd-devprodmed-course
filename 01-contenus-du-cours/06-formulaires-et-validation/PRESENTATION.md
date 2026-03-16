@@ -682,7 +682,7 @@ public function update(Request $request)
 ```php
 public function update(Request $request): RedirectResponse
 {
-    $user = User::where('username', 'janedoe')->first();
+    $user = User::where('id', 2)->first();
 
     $validated = $request->validate([
         'username' => [
