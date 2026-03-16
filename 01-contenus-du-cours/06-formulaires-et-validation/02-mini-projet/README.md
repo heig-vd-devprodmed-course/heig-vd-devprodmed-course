@@ -728,7 +728,6 @@ Pour cela, ouvrez le fichier `app/Http/Controllers/PostController.php` et mettez
     {
         $post = Post::with('user')->with('likes')->findOrFail($id);
 
-        // Get current user's reaction if exists
         $user = User::find(2);
         $reaction = $post->likes()->where('user_id', $user->id)->first();
 
@@ -1246,7 +1245,7 @@ le contenu suivant :
         </p>
 
         <div class="flex justify-center gap-3 mt-6">
-            <a href="{{ route('my-profile.edit') }}"
+            <a href="{{ url('/my-profile/edit') }}"
                 class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800">
                 {{ __('ui.my_profile.show.actions.edit') }}
             </a>
@@ -1434,7 +1433,7 @@ return [
             'description' => 'Page pour modifier son propre profil utilisateur',
         ],
         'show' => [
-            'title' => 'Mon profil - :username',
+            'title' => 'Visualiser mon profil',
             'description' => 'Page de visualisation de son propre profil utilisateur.',
             'member_since' => 'Membre depuis le :date.',
             'actions' => [

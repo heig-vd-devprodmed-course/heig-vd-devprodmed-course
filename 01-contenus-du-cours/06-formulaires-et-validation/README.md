@@ -601,7 +601,7 @@ Laravel :
 ```php
 public function update(Request $request): RedirectResponse
 {
-    $user = User::where('username', 'janedoe')->first();
+    $user = User::where('id', 2)->first();
 
     $validated = $request->validate([
         'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
@@ -999,7 +999,7 @@ Un exemple complet serait le suivant :
 ```php
 public function update(Request $request): RedirectResponse
 {
-    $user = User::where('username', 'janedoe')->first();
+    $user = User::where('id', 2)->first();
 
     $validated = $request->validate([
         'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
