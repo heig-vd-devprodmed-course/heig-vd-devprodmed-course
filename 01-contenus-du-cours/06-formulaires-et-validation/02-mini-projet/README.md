@@ -1814,6 +1814,42 @@ Une page de profil devrait s'afficher.
 
 Tentez de mettre à jour son profil avec :
 
+> [!NOTE]
+>
+> **Une erreur _"The POST data is too large."_ survient ? Lisez les points
+> suivants pour comprendre ce qu'il se passe.**
+>
+> Selon la taille de votre image, il se peut qu'une erreur se produise et qu'une
+> erreur _"The POST data is too large."_ survienne.
+>
+> Voici les différents cas possibles :
+>
+> - Si votre image est inférieure à 2 megabytes, vous pouvez la téléverser pour
+>   tester la fonctionnalité de gestion de l'image de profil. Ceci devrait
+>   fonctionner sans problème.
+> - Si votre image est comprise entre 2 et 8 megabytes, une erreur de validation
+>   devrait survenir, vous indiquant que le fichier n'a pas pu être téléversé
+>   (car il dépasse la taille maximale autorisée).
+> - Si votre image est supérieure à 8 megabytes, Laravel risque de ne pas être
+>   en mesure de gérer la requête, ce qui peut entraîner une erreur
+>   [413 Content Too Large](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/413).
+>   Dans ce cas, il n'est même pas possible d'atteindre la logique de validation
+>   de Laravel, car PHP rejette la requête avant que Laravel puisse la traiter.
+>
+> La raison derrière cette limite de 8 megabytes est liée à la configuration par
+> défaut de PHP pour la taille maximale des fichiers téléversés. Si un fichier
+> dépasse cette limite, PHP rejette la requête avant même que Laravel puisse la
+> traiter, ce qui entraîne une erreur 413 au lieu d'une erreur de validation
+> standard.
+>
+> Il serait possible de configurer PHP pour accepter des fichiers plus
+> volumineux, mais cela dépasse le cadre de ce projet et n'est pas recommandé
+> pour des raisons de performance et de sécurité.
+>
+> Pour le moment, vous pouvez effectuer vos tests avec une image de profil plus
+> petite que 8 megabytes pour éviter tout problème et vous assurer que la
+> fonctionnalité fonctionne correctement.
+
 - Une image de profil plus petite que 2 megabytes.
 - Une image de profil plus grande que 2 megabytes.
 - Un nom d'utilisateur.trice qui contient des accents ou des caractères

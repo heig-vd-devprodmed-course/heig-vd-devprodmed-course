@@ -688,27 +688,14 @@ public function update(Request $request): RedirectResponse
   développement à production), **les fichiers stockés sur le disque doivent eux
   aussi être transférés**.
 
-### Gérer les disques de stockage (1)
+### Gérer les disques de stockage
 
-- Par défaut, les fichiers sont stockés dans le disque `local` (dossiers
-  `storage/app/private` et `storage/app/public`).
-- Pour rendre les fichiers accessibles publiquement, il faut les stocker dans le
-  disque `public` (dossier `storage/app/public`).
-- Afin d'accéder à ce dossier public depuis l'extérieur, il est nécessaire de
-  créer un lien symbolique entre `public/storage` et `storage/app/public` avec
-  la commande suivante :
+- Afin d'accéder aux fichiers publiques depuis l'extérieur (Internet), un
+  certain nombre de configurations sont nécessaires.
+- Le [support de cours][contenu-complet-sur-github] et le mini-projet vous
+  guideront à travers ces étapes.
 
-  ```bash
-  php artisan storage:link
-  ```
-
-### Gérer les disques de stockage (2)
-
-- L'exécution de la commande `php artisan storage:link` crée un lien symbolique
-  `public/storage` pointant vers `storage/app/public`.
-- Les fichiers stockés dans le disque `public` sont maintenant accessibles via
-  `asset('storage/nom_du_fichier')`, et ce, depuis n'importe quelle partie de
-  l'application.
+![bg right:40%][illustration-formulaires-html]
 
 ## Conclusion
 
