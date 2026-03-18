@@ -86,13 +86,13 @@ Note maximale : (nombre de points obtenus / nombre de points totaux) × 5 + 1.
 |   # | Description                                                                                                |
 | --: | :--------------------------------------------------------------------------------------------------------- |
 |   1 | Chaque nouvelle fonctionnalité à implémenter est décrite dans une issue dédiée                             |
-|   2 | Chaque issue à une branche dédiée à la nouvelle fonctionnalité                                             |
+|   2 | Chaque issue a une branche dédiée à la nouvelle fonctionnalité                                             |
 |   3 | Chaque branche donne lieu à une pull request avec les modifications propres à la nouvelle fonctionnalité   |
 |   4 | Chaque pull request est fusionnée et la branche associée détruite                                          |
-|   5 | Les traductions spécifiques à la nouvelle fonctionnalité sont ajoutées et sont fonctionnelles              |
-|   6 | Les migrations spécifiques à la nouvelle fonctionnalité sont ajoutées et sont fonctionnelles               |
-|   7 | Les modèles spécifiques à la nouvelle fonctionnalité sont ajoutés/mis à jour et sont fonctionnels          |
-|   8 | Les vues spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles        |
+|   5 | Les migrations spécifiques à la nouvelle fonctionnalité sont ajoutées et sont fonctionnelles               |
+|   6 | Les modèles spécifiques à la nouvelle fonctionnalité sont ajoutés/mis à jour et sont fonctionnels          |
+|   7 | Les vues spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles        |
+|   8 | Les traductions spécifiques à la nouvelle fonctionnalité sont ajoutées et sont fonctionnelles              |
 |   9 | Les contrôleurs spécifiques à la nouvelle fonctionnalité sont ajoutés/mis à jour et sont fonctionnels      |
 |  10 | Les validations spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles |
 

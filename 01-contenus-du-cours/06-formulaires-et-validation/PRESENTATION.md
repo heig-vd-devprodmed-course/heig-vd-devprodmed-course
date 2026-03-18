@@ -529,66 +529,6 @@ Il existe plusieurs méthodes de redirection. La documentation donne des exemple
 pour chaque cas d'utilisation :
 <https://laravel.com/docs/12.x/responses#redirects>.
 
-### Réutiliser les règles de validation dans plusieurs contrôleurs (1)
-
-Il est possible de réutiliser les règles de validation dans plusieurs
-contrôleurs avec des classes dédiées appelées _"Form Requests"_ :
-
-```bash
-php artisan make:request
-```
-
-Le fichier de la classe est créé dans le dossier `app/Http/Requests`.
-
-Les règles sont définies dans la méthode `rules()`.
-
----
-
-<div class="two-columns">
-<div>
-
-```php
-<?php
-
-namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
-
-class StorePostRequest extends FormRequest
-{
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'title' => 'nullable|string|max:255',
-            'content' => 'required|string|max:5000',
-        ];
-    }
-}
-```
-
-</div>
-<div>
-
-```php
-public function store(StorePostRequest $request)
-{
-    // La requête est valide...
-
-    // Les données validées sont directement accessibles...
-    $validated = $request->validated();
-
-    // Stocke le post...
-}
-```
-
-</div>
-</div>
-
 ## Gérer les fichiers d'un formulaire
 
 - Les fichiers sont des données particulières qui nécessitent une gestion
@@ -748,27 +688,14 @@ public function update(Request $request): RedirectResponse
   développement à production), **les fichiers stockés sur le disque doivent eux
   aussi être transférés**.
 
-### Gérer les disques de stockage (1)
+### Gérer les disques de stockage
 
-- Par défaut, les fichiers sont stockés dans le disque `local` (dossiers
-  `storage/app/private` et `storage/app/public`).
-- Pour rendre les fichiers accessibles publiquement, il faut les stocker dans le
-  disque `public` (dossier `storage/app/public`).
-- Afin d'accéder à ce dossier public depuis l'extérieur, il est nécessaire de
-  créer un lien symbolique entre `public/storage` et `storage/app/public` avec
-  la commande suivante :
+- Afin d'accéder aux fichiers publiques depuis l'extérieur (Internet), un
+  certain nombre de configurations sont nécessaires.
+- Le [support de cours][contenu-complet-sur-github] et le mini-projet vous
+  guideront à travers ces étapes.
 
-  ```bash
-  php artisan storage:link
-  ```
-
-### Gérer les disques de stockage (2)
-
-- L'exécution de la commande `php artisan storage:link` crée un lien symbolique
-  `public/storage` pointant vers `storage/app/public`.
-- Les fichiers stockés dans le disque `public` sont maintenant accessibles via
-  `asset('storage/nom_du_fichier')`, et ce, depuis n'importe quelle partie de
-  l'application.
+![bg right:40%][illustration-formulaires-html]
 
 ## Conclusion
 
