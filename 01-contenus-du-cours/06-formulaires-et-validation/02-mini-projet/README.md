@@ -421,7 +421,7 @@ précédente, il n'y a rien à faire ici pour le moment.
 #### Mettre à jour les routes et le contrôleur
 
 Ouvrez maintenant le fichier `app/Http/Controllers/PostController.php`. Mettez à
-jour la fonction `store` du contrôleur avec le code suivant :
+jour la fonction `update` du contrôleur avec le code suivant :
 
 ```php
     /**
@@ -1968,7 +1968,7 @@ index 06c54be..4a0d0bd 100644
 +7. Optionnel : en mode développement, il est possible de peupler la base de données avec des données fictives :
 +
 +    ```bash
-+    migrate db:seed
++    php artisan db:seed
 +    ```
 +
 +8. Démarrer le serveur de développement Laravel :
@@ -2052,6 +2052,10 @@ suivante :
   de profil.
 - Ajouter des champs au profil ou aux posts pour représenter des points
   particuliers sur ces deux ressources.
+- Permettre à l'utilisateur.trice d'archiver ses posts au lieu de les supprimer,
+  et de les restaurer depuis une page dédiée.
+- Permettre à l'utilisateur.trice de supprimer définitivement ses posts depuis
+  une page dédiée.
 
 ## Aller plus loin
 
