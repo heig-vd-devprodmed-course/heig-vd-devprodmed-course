@@ -27,9 +27,12 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Associer la personne authentifiée à son propre profil](#associer-la-personne-authentifiée-à-son-propre-profil)
 - [N'autoriser que l'auteur.trice à modifier ses propres posts](#nautoriser-que-lauteurtrice-à-modifier-ses-propres-posts)
   - [Créer une politique d'autorisation](#créer-une-politique-dautorisation)
+  - [Mettre à jour la politique d'autorisation](#mettre-à-jour-la-politique-dautorisation)
   - [Utiliser la politique d'autorisation dans le contrôleur](#utiliser-la-politique-dautorisation-dans-le-contrôleur)
   - [Tester les autorisations](#tester-les-autorisations)
 - [Restreindre l'accès aux routes pour les personnes non authentifiées](#restreindre-laccès-aux-routes-pour-les-personnes-non-authentifiées)
+  - [Utiliser le middleware d'authentification](#utiliser-le-middleware-dauthentification)
+  - [Tester les restrictions d'accès](#tester-les-restrictions-daccès)
 - [Masquer les éléments de l'interface utilisateur pour les personnes non authentifiées ou non autorisées](#masquer-les-éléments-de-linterface-utilisateur-pour-les-personnes-non-authentifiées-ou-non-autorisées)
   - [Masquer les fonctionnalités de modification et de suppression des posts](#masquer-les-fonctionnalités-de-modification-et-de-suppression-des-posts)
 - [Tester les fonctionnalités d'authentification](#tester-les-fonctionnalités-dauthentification)
@@ -70,7 +73,13 @@ leurs implications.
 > N'hésitez pas à proposer d'autres tâches que celles mentionnées dans cet
 > exemple.
 
-- TODO
+- Modifier la base de données et les modèles pour ajouter les champs nécessaires
+  à l'authentification.
+- Créer les vues pour l'inscription et la connexion.
+- Créer les contrôleurs et les routes pour gérer l'inscription et la connexion.
+- Associer les posts, les likes et les profils à la personne authentifiée.
+- N'autoriser que l'auteur.trice d'un post à le modifier ou le supprimer.
+- Restreindre l'accès aux routes pour les personnes non authentifiées.
 
 </details>
 
@@ -1288,6 +1297,8 @@ examiner le code généré puis répondez aux questions suivantes :
   d'autorisation ?
 - Que contient chaque méthode par défaut ? Pourquoi ?
 
+### Mettre à jour la politique d'autorisation
+
 Mettons à jour la politique `PostPolicy` pour n'autoriser que l'auteur.trice
 d'un post à le gérer :
 
@@ -1482,6 +1493,8 @@ Maintenant que nous avons mis en place les fonctionnalités d'authentification e
 les autorisations pour la modification des posts, nous allons restreindre
 l'accès aux routes pour les personnes non authentifiées.
 
+### Utiliser le middleware d'authentification
+
 Pour cela, nous allons utiliser le middleware `auth` de Laravel qui vérifie si
 une personne est connectée avant de lui permettre d'accéder à certaines routes
 (source : <https://laravel.com/docs/12.x/middleware#authentication-middleware>).
@@ -1572,6 +1585,21 @@ middleware `auth` sait où rediriger les personnes non authentifiées.
 Cela permet à Laravel de rediriger automatiquement les personnes non
 authentifiées vers la page de connexion lorsqu'elles essaient d'accéder à une
 route protégée par le middleware `auth`.
+
+### Tester les restrictions d'accès
+
+Vous pouvez maintenant tester les restrictions d'accès que nous avons mises en
+place pour les personnes non authentifiées.
+
+Assurez-vous d'être déconnecté.e de votre compte, puis essayez d'accéder à une
+route protégée (par exemple, la page de création d'un post à l'URL
+`/posts/create`). Vous devriez être redirigé.e vers la page de connexion et
+connectez-vous avec un compte utilisateur.trice.
+
+Une fois connecté.e, vous devriez être redirigé.e vers la page que vous essayiez
+d'accéder initialement (par exemple, la page de création d'un post) et pouvoir y
+accéder sans problème (grâce à la méthode `intended()` utilisée dans la méthode
+de connexion du contrôleur d'authentification).
 
 ## Masquer les éléments de l'interface utilisateur pour les personnes non authentifiées ou non autorisées
 
