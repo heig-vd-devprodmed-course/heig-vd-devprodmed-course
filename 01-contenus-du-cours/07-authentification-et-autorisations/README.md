@@ -21,13 +21,15 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > À l'issue de cette séance, les personnes qui étudient devraient être capables
 > de :
 >
-> - Comprendre les concepts d'authentification et d'autorisation.
+> - Décrire les concepts d'authentification et d'autorisation.
 > - Stocker et vérifier les mots de passe de manière sécurisée.
-> - Utiliser les facades `Auth` et `Hash` de Laravel.
-> - Implémenter un système d'inscription, de connexion et de déconnexion.
+> - Définir et utiliser la classes `Auth` de Laravel pour gérer
+>   l'authentification des utilisateur.trices.
+> - Définir et utiliser la classe `Hash` de Laravel pour hacher et vérifier les
+>   mots de passe.
 > - Définir et utiliser des gates et des policies pour gérer les autorisations.
 > - Protéger des routes avec des middlewares d'authentification.
-> - Associer les ressources (posts, likes) aux personnes authentifiées.
+> - Associer les ressources aux personnes authentifiées.
 >
 > **Méthodes d'enseignement et d'apprentissage**
 >
@@ -268,6 +270,9 @@ Laravel gère automatiquement les sessions et fournit des mécanismes pour stock
 les informations d'authentification dans la session. La classe `Auth` de Laravel
 simplifie considérablement la gestion de l'authentification basée sur les
 sessions.
+
+L'application peut ainsi savoir qui est connecté et appliquer les règles
+d'autorisation en conséquence.
 
 ## Les classes Auth et Hash
 
@@ -644,10 +649,10 @@ Le middleware `auth` vérifie que la personne est authentifiée avant d'autorise
 l'accès à une route. Si la personne n'est pas connectée, elle est redirigée vers
 la page de connexion.
 
-**Appliquer le middleware à une route** :
+**Appliquer le middleware à une route particulière** :
 
 ```php
-Route::get('/my-profile', function () {
+Route::get('/dashboard', function () {
     // Accessible uniquement aux personnes authentifiées
 })->middleware('auth');
 ```
@@ -665,7 +670,7 @@ Route::middleware('auth')->group(function () {
 **Appliquer le middleware dans un contrôleur** :
 
 ```php
-Route::singleton('my-profile', MyProfileController::class)->destroyable()->middleware('auth');
+Route::resource('posts', MyProfileController::class)->middleware('auth');
 ```
 
 ### Combiner middlewares et policies
@@ -676,12 +681,12 @@ connectée, et la policy vérifie qu'elle a les permissions nécessaires pour
 effectuer une action spécifique :
 
 ```php
-Route::middleware('auth')->group(function () {
-    Route::put('/posts/{post}', function (Post $post) {
-        Gate::authorize('update', $post);
-        // ...
-    });
-});
+public function update(Request $request, Post $post)
+{
+    Gate::authorize('update', $post);
+
+    // Continue la mise à jour du post dans le contrôleur PostController...
+}
 ```
 
 ## Conclusion

@@ -76,10 +76,13 @@ leurs implications.
 - Modifier la base de données et les modèles pour ajouter les champs nécessaires
   à l'authentification.
 - Créer les vues pour l'inscription et la connexion.
-- Créer les contrôleurs et les routes pour gérer l'inscription et la connexion.
+- Créer les contrôleurs et les routes pour gérer l'inscription, la connexion et
+  la déconnexion.
 - Associer les posts, les likes et les profils à la personne authentifiée.
 - N'autoriser que l'auteur.trice d'un post à le modifier ou le supprimer.
 - Restreindre l'accès aux routes pour les personnes non authentifiées.
+- Modifier l'interface utilisateur pour masquer les éléments de l'interface
+  utilisateur pour les personnes non authentifiées ou non autorisées.
 
 </details>
 
@@ -93,7 +96,8 @@ Pour cela, nous allons devoir :
 1. Modifier la base de données et les modèles pour ajouter les champs
    nécessaires à l'authentification.
 2. Créer les vues pour l'inscription et la connexion.
-3. Créer les contrôleurs et les routes pour gérer l'inscription et la connexion.
+3. Créer les contrôleurs et les routes pour gérer l'inscription, la connexion et
+   la déconnexion.
 4. Protéger les ressources précédemment créées pour que seules les personnes
    authentifiées puissent y accéder.
 
