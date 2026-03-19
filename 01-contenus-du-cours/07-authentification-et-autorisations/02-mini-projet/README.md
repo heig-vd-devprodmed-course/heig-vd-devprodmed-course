@@ -1906,10 +1906,3 @@ suivante :
 
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
-
-````
-
-```
-
-```
-````
