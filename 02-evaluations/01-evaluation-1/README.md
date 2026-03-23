@@ -11,7 +11,7 @@
 - [Partie pratique](#partie-pratique)
   - [Ressources autorisées](#ressources-autorisées-1)
   - [Grille d'évaluation](#grille-dévaluation)
-- [Contraintes](#contraintes)
+  - [Contraintes](#contraintes)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
 
 ## Déroulement
@@ -35,6 +35,12 @@ L'évaluation dure 90 minutes (1 heure 30 minutes).
 L'étudiant.e devra répondre à une série de questions concernant les notions clés
 du développement web avec Laravel.
 
+Les questions peuvent porter sur des notions théoriques, des bout de code à
+expliquer/compléter, des questions à choix multiples, etc.
+
+Chaque cours a une section _"Objectifs"_ et _"Questions d'évaluation"_ à votre
+disposition pour vous aider à préparer cette partie théorique.
+
 ### Ressources autorisées
 
 - Aucune ressource n'est autorisée durant la partie théorique.
@@ -49,11 +55,17 @@ L'évaluation dure 90 minutes (1 heure 30 minutes).
 
 L'étudiant.e devra réaliser une série de tâches liées à l'amélioration du
 mini-projet réalisé durant le cours avec le framework Laravel. Les tâches sont à
-réaliser individuellement, mais l'entraide/la collaboration est autorisée (voir
-[Ressources autorisées](#ressources-autorisées)).
+réaliser individuellement, mais certaines ressources sont autorisées (voir
+[Ressources autorisées](#ressources-autorisées-1)).
 
-Le non-respect de ces consignes sera sanctionné avec la note 1 pour l'ensemble
-de l'évaluation (partie théorique + partie pratique).
+Le dépôt du code se fera sur GitHub Classroom. Pour accéder au dépôt, utilisez
+le lien suivant : <https://classroom.github.com/a/ZARVNTFA> puis sélectionnez
+votre personne dans la liste pour rejoindre le GitHub Classroom.
+
+Un dépôt GitHub privé sera créé pour vous, et vous pourrez y pousser votre code
+pendant l'évaluation. **Assurez-vous d'avoir mis en place votre environnement de
+développement avant le début de l'évaluation pour éviter tout problème
+technique.**
 
 ### Ressources autorisées
 
@@ -61,9 +73,6 @@ de l'évaluation (partie théorique + partie pratique).
   - Internet, la documentation officielle, les outils d'intelligence
     artificielle, les notes de cours, les livres, les tutoriels, etc.
 - La communication avec d'autres personnes n'est pas autorisée.
-
-Le non-respect de ces consignes sera sanctionné avec la note 1 pour l'ensemble
-de l'évaluation (partie théorique + partie pratique).
 
 ### Grille d'évaluation
 
@@ -96,16 +105,32 @@ Note maximale : (nombre de points obtenus / nombre de points totaux) × 5 + 1.
 |   9 | Les contrôleurs spécifiques à la nouvelle fonctionnalité sont ajoutés/mis à jour et sont fonctionnels      |
 |  10 | Les validations spécifiques à la nouvelle fonctionnalité sont ajoutées/mises à jour et sont fonctionnelles |
 
-## Contraintes
-
-> [!CAUTION]
->
-> Le non-respect de ces contraintes entraînera une note de 1 pour l'évaluation.
+### Contraintes
 
 - L'utilisation de code généré par des outils d'intelligence artificielle ou
   copié depuis des sources externes est autorisé selon les règles évoquées dans
   le contenu
   [Introduction et modalités du cours](../../01-contenus-du-cours/01-introduction-et-organisation-du-cours/README.md#quen-est-il-de-chatgpt-etc-).
+  Une charte d'utilisation sera rappelée avant le début de l'évaluation.
+
+**Je (Ludovic) vous déconseille fortement d'utiliser des outils d'intelligence
+artificielle pour générer du code durant l'évaluation.**
+
+En effet, ces outils peuvent générer du code qui semble correct à première vue,
+mais qui peut contenir des erreurs ou des incohérences difficiles à détecter en
+peu de temps. De plus, l'utilisation de ces outils peut vous faire perdre du
+temps précieux à essayer de comprendre et corriger le code généré, ce qui peut
+nuire à votre performance globale lors de l'évaluation.
+
+Vous avez toutes les compétences nécessaires pour réussir cette évaluation sans
+recourir à ces outils. L'évaluation est construite pour ne pas nécessiter de ces
+outils, et je suis convaincu que vous pouvez accomplir les tâches demandées en
+utilisant vos connaissances et votre expérience acquises durant le cours.
+
+Utilisez les outils/ressources à votre disposition de manière judicieuse
+seulement si vous les maîtrisez (rappelez-vous : une calculatrice ne sert à rien
+si vous ne savez pas ce que vous souhaitez calculer ou si vous ne savez pas
+l'utiliser correctement).
 
 ## Sanctions possibles en cas de tricherie
 
@@ -141,3 +166,6 @@ de triche avérée ou de doute sur la bonne conduite de l'évaluation**.
 Vous avez travaillé dur pour arriver jusqu'ici et nous avons confiance en vos
 capacités à réussir cette évaluation. **Ne prenez pas le risque de nous décevoir
 et/ou de vous faire renvoyer**.
+
+Le non-respect de ces consignes sera sanctionné avec la note 1 pour l'ensemble
+de l'évaluation (partie théorique + partie pratique).

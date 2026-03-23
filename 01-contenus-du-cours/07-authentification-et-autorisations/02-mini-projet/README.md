@@ -693,13 +693,6 @@ exemple de code que vous pouvez utiliser comme point de départ :
             </p>
         </header>
 
-        @if (session('success'))
-            <div
-                class="mb-4 p-4 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded-md">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <form method="POST" action="{{ url('/auth/login') }}">
             @csrf
 
