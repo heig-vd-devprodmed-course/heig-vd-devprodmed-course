@@ -14,12 +14,37 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
+- [Installer un outil capable d'effectuer des requêtes HTTP pour tester l'API de votre application](#installer-un-outil-capable-deffectuer-des-requêtes-http-pour-tester-lapi-de-votre-application)
+- [TODO](#todo)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
 - [Aller plus loin](#aller-plus-loin)
 
 ## Objectifs
+
+## Installer un outil capable d'effectuer des requêtes HTTP pour tester l'API de votre application
+
+Afin de tester les différentes routes de votre application, il est recommandé
+d'utiliser un outil capable d'effectuer des requêtes HTTP.
+
+Pour cela, il existe de nombreux outils disponibles. Parmi les plus populaires,
+on peut citer :
+
+- [Bruno](https://www.usebruno.com/).
+- [curl](https://curl.se/).
+- [Insomnia](https://insomnia.rest/).
+- [Postman](https://www.postman.com/).
+
+Si vous avez déjà un outil de ce type installé sur votre ordinateur, vous pouvez
+l'utiliser pour tester les routes de votre application.
+
+Sinon, vous pouvez en installer un parmi ceux mentionnés ci-dessus. Nous
+recommandons d'utiliser Bruno, un des derniers outils gratuits et open source
+disponibles sur le marché, qui offre une interface utilisateur moderne et facile
+à utiliser pour tester votre application.
+
+## TODO
 
 ```bash
 php artisan install:api

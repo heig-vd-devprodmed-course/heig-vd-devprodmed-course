@@ -23,10 +23,12 @@ ajoutant de nouvelles fonctionnalités à chaque séance, pour arriver à un ré
 social de base fonctionnel.
 
 L'objectif de cette évaluation est de présenter oralement de nouvelles
-fonctionnalités que vous avez développées pour ce mini-projet. Ces nouvelles
-fonctionnalités peuvent être librement choisies afin de transformer le réseau
-social générique que vous avez développé en une application plus personnalisée
-et originale.
+fonctionnalités que vous avez développées pour ce mini-projet et répondre à une
+question tirée au sort liée au mini-projet ou au framework Laravel.
+
+Ces nouvelles fonctionnalités peuvent être librement choisies afin de
+transformer le réseau social générique que vous avez développé en une
+application plus personnalisée et originale.
 
 Sentez-vous libre de laisser libre cours à votre créativité pour développer des
 fonctionnalités qui vous intéressent et qui vous semblent pertinentes pour votre
