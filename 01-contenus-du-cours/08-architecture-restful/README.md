@@ -88,6 +88,7 @@ architecture RESTful dans une application web avec le framework Laravel.
 Ce contenu repose sur la documentation officielle suivante :
 
 - <https://laravel.com/docs/12.x/sanctum> et ses sous-sections.
+- <https://laravel.com/docs/12.x/passport> et ses sous-sections.
 - <https://laravel.com/docs/12.x/eloquent-serialization#hiding-attributes-from-json>.
 
 La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
@@ -291,8 +292,9 @@ gérer l'authentification et les autorisations.
 
 ### Laravel Sanctum pour l'authentification des API RESTful
 
-Laravel Sanctum est un package Laravel qui permet de gérer l'authentification
-des API RESTful de manière simple et sécurisée.
+[Laravel Sanctum](https://laravel.com/docs/12.x/sanctum) est un package Laravel
+qui permet de gérer l'authentification des API RESTful de manière simple et
+sécurisée.
 
 Il permet de générer des tokens d'authentification pour les utilisateurs de
 l'application, qui peuvent être utilisés pour authentifier les requêtes API.
@@ -379,28 +381,7 @@ Vous trouverez les détails du mini-projet ici :
 > les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
 > connaissances ou de pratiquer davantage.
 
-- Quel est le rôle des vues dans le patron de conception MVC ?
-- Quels sont les avantages d'utiliser un moteur de template par rapport à du PHP
-  pur dans le HTML ?
-- Pourquoi est-il important de mettre en place l'internationalisation dès le
-  début du développement, même pour une application monolingue ?
-- Comment créer une vue Blade avec la commande Artisan ?
-- Comment passe-t-on du contenu à un composant Blade ?
-- Quelle est la différence entre un slot par défaut et un slot nommé ?
-- Comment créer un composant Blade avec Artisan ?
-- Pourquoi utilise-t-on le préfixe `:` devant certains attributs de composants
-  (ex : `:post="$post"`) ?
-- À quoi servent les variables `APP_LOCALE` et `APP_FALLBACK_LOCALE` ?
-- Quelle est la différence entre un fichier de traduction PHP et un fichier JSON
-  ?
-- Comment accède-t-on à une traduction dans une vue Blade ?
-- Comment gère-t-on les formes plurielles dans les traductions Laravel ?
-- Quelle est la différence entre les fichiers `.env` et `.env.example` ?
-- Pourquoi ne doit-on jamais commiter le fichier `.env` dans Git ?
-- Quelle fonction doit-on utiliser pour accéder aux configurations dans le code
-  de l'application (en dehors des fichiers de configuration) ?
-- Quelle est la différence entre l'approche CSS classique et l'approche
-  utility-first de Tailwind ?
+- TODO
 
 ## À faire pour la prochaine séance
 
