@@ -62,6 +62,9 @@ l'application : base de données, vue, composants, etc. Prenez quelques minutes
 pour lister les tâches que vous allez devoir réaliser pour cette partie avec
 leurs implications.
 
+Pour quelles tâches allez-vous devoir suivre le workflow GitHub (issues,
+branches, pull requests) ?
+
 <details>
 <summary>Exemple de réponse</summary>
 
@@ -83,6 +86,18 @@ leurs implications.
 - Restreindre l'accès aux routes pour les personnes non authentifiées.
 - Modifier l'interface utilisateur pour masquer les éléments de l'interface
   utilisateur pour les personnes non authentifiées ou non autorisées.
+
+Le workflow GitHub (issues, branches, pull requests) devra être suivi pour
+toutes les tâches mentionnées ci-dessus, car elles impliquent des modifications
+de code qui doivent être suivies et validées.
+
+**Pour le reste du contenu, la création d'issues, de branches et de pull
+requests est laissée à votre discrétion.** Je vous recommande cependant de
+suivre ce workflow pour toutes les tâches que vous jugez importantes ou qui
+impliquent des modifications significatives du code, même si elles ne sont pas
+explicitement mentionnées dans la liste ci-dessus. Cela vous permettra de mieux
+suivre vos progrès et de faciliter la collaboration si vous travaillez en
+équipe.
 
 </details>
 
