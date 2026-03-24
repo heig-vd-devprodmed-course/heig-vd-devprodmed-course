@@ -5,6 +5,7 @@
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
+- [Objectifs](#objectifs)
 - [Déroulement](#déroulement)
 - [Ressources autorisées](#ressources-autorisées)
 - [Grille d'évaluation](#grille-dévaluation)
@@ -13,6 +14,44 @@
   - [Groupe 1](#groupe-1)
   - [Groupe 2](#groupe-2)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
+
+## Objectifs
+
+Tout au long du cours DévProdMéd, vous avez développé un mini-projet de réseau
+social avec le framework Laravel de façon progressive et accompagnée, en
+ajoutant de nouvelles fonctionnalités à chaque séance, pour arriver à un réseau
+social de base fonctionnel.
+
+L'objectif de cette évaluation est de présenter oralement de nouvelles
+fonctionnalités que vous avez développées pour ce mini-projet. Ces nouvelles
+fonctionnalités peuvent être librement choisies afin de transformer le réseau
+social générique que vous avez développé en une application plus personnalisée
+et originale.
+
+Sentez-vous libre de laisser libre cours à votre créativité pour développer des
+fonctionnalités qui vous intéressent et qui vous semblent pertinentes pour votre
+mini-projet de réseau social !
+
+Vous pouvez vous inspirer de réseaux sociaux existants, de fonctionnalités que
+vous aimeriez voir dans un réseau social, ou même inventer des fonctionnalités
+totalement nouvelles et originales.
+
+Voici quelques idées que vous pourriez implémenter, mais n'hésitez pas à en
+proposer d'autres :
+
+- Réaliser un réseau social de partage de recettes de cuisine.
+- Réaliser un réseau social de partage et notation de musique.
+- Réaliser un réseau social de partage de jeux vidéo.
+- Etc.
+
+Si vous manquez d'inspiration, chaque contenu du mini-projet a une section
+_"Idées pour le mini-projet personnel"_ à votre disposition pour vous aider à
+trouver des idées de fonctionnalités à développer pour votre mini-projet.
+
+L'objectif de cette évaluation est de présenter oralement les nouvelles
+fonctionnalités que vous avez développées pour ce mini-projet durant le cours,
+ainsi que de répondre à une question aléatoire liée au mini-projet ou au
+framework Laravel.
 
 ## Déroulement
 
@@ -39,17 +78,18 @@ Laravel.
    à la question tirée au sort.
 6. Une fois la présentation précédente terminée, elle présente oralement ses
    nouvelles fonctionnalités et répond à la question tirée au sort durant 8
-   minutes.
+   minutes. **Il n'y a pas de temps à perdre pour se mettre en place**. Le temps
+   de présentation commence à l'heure prévue, même si la personne n'est pas
+   encore prête ou installée.
 7. La personne est libre de gérer son temps comme elle le souhaite durant les 8
    minutes de présentation pour présenter son travail et répondre à la question
    tirée au sort.
 8. Une fois les 8 minutes écoulées, l'enseignant.e arrête la présentation et
    passe à la personne suivante. Un chronomètre sera utilisé pour gérer le temps
-   de chaque personne. Dès que le temps imparti est écoulé, l'enseignant.e
-   interrompt la présentation et passe à la personne suivante, même si la
-   personne n'a pas terminé. Ce n'est pas par manque de respect, mais pour
-   s'assurer que chaque personne dispose du même temps pour sa présentation et
-   la session de questions/réponses.
+   de chaque personne. **Dès que le temps imparti est écoulé, la présentation
+   est interrompue** et passe à la personne suivante, **même si la personne n'a
+   pas terminé**. Ce n'est pas par manque de respect, mais pour s'assurer que
+   chaque personne dispose du même temps pour sa présentation.
 9. La personne rend la question tirée au sort à l'enseignant.e avant de quitter
    la salle.
 10. La personne qui doit présenter vient s'installer dès que la personne qui a
@@ -71,8 +111,6 @@ Laravel.
 - Aucune ressource externe n'est autorisée durant la préparation ou la
   présentation orale et la session de questions/réponses (pas d'Internet, pas de
   documentation, pas d'outils d'intelligence artificielle, etc.).
-
-Le non-respect de ces consignes sera sanctionné avec la note 1.
 
 ## Grille d'évaluation
 
@@ -102,23 +140,26 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
 
 ## Contraintes
 
-> [!CAUTION]
->
-> Le non-respect de ces contraintes entraînera une note de 1 pour l'évaluation.
-
-- Seul PHP et les fonctionnalités offertes par Laravel sont autorisés pour
+- Au moins trois nouveaux aspects distincts doivent être présentés selon les
+  contraintes suivantes :
+  - Un aspect doit entraîner la création d'au moins un nouveau modèle Eloquent
+    avec sa table de base de données, ses vues, ses routes et son contrôleur
+    associés.
+  - Un aspect doit entraîner la mise à disposition (même simple) d'une API
+    RESTful pour interagir avec la fonctionnalité.
+  - Un aspect doit être liée à l'authentification et/ou à l'autorisation (ex :
+    gestion des rôles et permissions, etc.).
+- Ces différents aspects peuvent donner lieu à une même fonctionnalité combinée
+  ou à plusieurs fonctionnalités distinctes.
+- Les nouveaux aspects présentés doivent être fonctionnels et testables. Ils ne
+  doivent pas être des aspects théoriques ou incomplètes.
+- Les nouveaux aspects présentés doivent être développés par la personne qui
+  présente et montrer un effort de personnalisation et d'originalité. Ils ne
+  doivent pas être des aspects génériques ou triviaux qui ne montrent pas une
+  réelle compréhension du framework Laravel et du développement web.
+- Seuls PHP et les fonctionnalités offertes par Laravel sont autorisés pour
   développer les nouvelles fonctionnalités. L'utilisation de JavaScript ou
-  d'autres langages de programmation n'est pas autorisée.[^javascript]
-- Au moins deux des trois nouvelles fonctionnalités présentées doivent demander
-  à modifier la base de données (ajout de table, modification de table, etc.).
-- Les nouvelles fonctionnalités présentées doivent être fonctionnelles et
-  testables. Elles ne doivent pas être des fonctionnalités théoriques ou
-  incomplètes.
-- Les nouvelles fonctionnalités présentées doivent être développées par la
-  personne qui présente et montrer un effort de personnalisation et
-  d'originalité. Elles ne doivent pas être des fonctionnalités génériques ou
-  triviales qui ne montrent pas une réelle compréhension du framework Laravel et
-  du développement web.
+  d'autres langages de programmation n'est pas autorisée[^javascript].
 - L'utilisation de code généré par des outils d'intelligence artificielle ou
   copié depuis des sources externes est autorisé selon les règles évoquées dans
   le contenu
@@ -285,3 +326,5 @@ et/ou de vous faire renvoyer**.
     dans la plupart des cas, il est attendu que les nouvelles fonctionnalités
     soient développées uniquement avec PHP et les fonctionnalités offertes par
     Laravel.
+
+Le non-respect de ces consignes sera sanctionné avec la note 1.
