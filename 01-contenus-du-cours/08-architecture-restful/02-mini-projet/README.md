@@ -14,33 +14,6 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
-- [Identifier les routes et les contrôleurs nécessaires pour l'application](#identifier-les-routes-et-les-contrôleurs-nécessaires-pour-lapplication)
-- [Supprimer les routes et les contrôleurs de base créés par Laravel](#supprimer-les-routes-et-les-contrôleurs-de-base-créés-par-laravel)
-- [Installer un outil capable d'effectuer des requêtes HTTP pour tester les routes de votre application](#installer-un-outil-capable-deffectuer-des-requêtes-http-pour-tester-les-routes-de-votre-application)
-- [Créer le contrôleur pour gérer les Posts](#créer-le-contrôleur-pour-gérer-les-posts)
-  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche)
-  - [Créer le contrôleur](#créer-le-contrôleur)
-  - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur)
-  - [Définir les méthodes du contrôleur pour gérer les différentes actions](#définir-les-méthodes-du-contrôleur-pour-gérer-les-différentes-actions)
-  - [Lier les controllers aux vues correspondantes](#lier-les-controllers-aux-vues-correspondantes)
-  - [Tester les routes de votre application](#tester-les-routes-de-votre-application)
-  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request)
-- [Créer le contrôleur pour gérer les Users](#créer-le-contrôleur-pour-gérer-les-users)
-  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-1)
-  - [Créer le contrôleur](#créer-le-contrôleur-1)
-  - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur-1)
-  - [Définir les méthodes du contrôleur pour gérer les différentes actions](#définir-les-méthodes-du-contrôleur-pour-gérer-les-différentes-actions-1)
-  - [Lier les controllers aux vues correspondantes](#lier-les-controllers-aux-vues-correspondantes-1)
-  - [Tester les routes de votre application](#tester-les-routes-de-votre-application-1)
-  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-1)
-- [Créer le contrôleur pour gérer les Likes](#créer-le-contrôleur-pour-gérer-les-likes)
-  - [Créer l'issue et la branche pour suivre cette tâche](#créer-lissue-et-la-branche-pour-suivre-cette-tâche-2)
-  - [Créer le contrôleur](#créer-le-contrôleur-2)
-  - [Lier les routes au contrôleur](#lier-les-routes-au-contrôleur-2)
-  - [Définir les méthodes du contrôleur pour gérer les différentes actions](#définir-les-méthodes-du-contrôleur-pour-gérer-les-différentes-actions-2)
-  - [Lier les controllers aux vues correspondantes](#lier-les-controllers-aux-vues-correspondantes-2)
-  - [Tester les routes de votre application](#tester-les-routes-de-votre-application-2)
-  - [Pousser les modifications et fusionner la pull request](#pousser-les-modifications-et-fusionner-la-pull-request-2)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
@@ -48,269 +21,100 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Objectifs
 
-Mettre en place l'interface utilisateur du petit réseau social en utilisant
-Tailwind CSS et Blade.
-
-## Identifier les routes et les contrôleurs nécessaires pour l'application
-
-Avant de commencer à coder, il est important d'identifier les différentes routes
-et contrôleurs nécessaires pour notre application de réseau social.
-
-Cela nous permettra de structurer notre application de manière efficace et de
-savoir quelles fonctionnalités nous devons implémenter.
-
-En vous basant sur les réflexions de la base de données et des modèles que vous
-avez réalisés précédemment, essayez d'identifier les différentes ressources de
-votre application et les actions que vous souhaitez permettre pour chaque
-ressource (par exemple : afficher la liste des posts, afficher un post
-spécifique, créer un post, etc.).
-
-<details>
-<summary>Exemple de réponse</summary>
-
-> [!NOTE]
->
-> Ceci est un exemple de réponse possible. D'autres réponses sont possibles et
-> valides. L'objectif est de réfléchir aux ressources et aux actions associées à
-> chaque ressource de votre application.
->
-> N'hésitez pas à proposer d'autres ressources ou actions que celles mentionnées
-> dans cet exemple.
-
-TODO
-
-</details>
-
-## Supprimer les routes et les contrôleurs de base créés par Laravel
-
-Comme lors de la séance précédente, lors de l'initialisation d'un projet
-Laravel, certains fichiers de base sont créés automatiquement.
-
-Ces fichiers peuvent être utilisés tels quels, mais pour ce mini-projet, nous
-allons les supprimer afin de créer nos propres vues et routes à partir de zéro.
-
-Comme pour les séances précédentes, nous allons suivre les bonnes pratiques de
-développement en créant une branche dédiée à cette tâche, en créant une pull
-request pour suivre les modifications, et en fusionnant la pull request une fois
-que les modifications sont terminées.
-
-Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
-branche correspondante à partir de la branche principale `main`.
-
-Basculez sur la branche que vous venez de créer, puis supprimez le fichier
-`app/Http/Controllers/Controller.php`.
-
-Modifiez ensuite le fichier `routes/web.php` pour ne garder que le contenu
-suivant :
-
-```php
-<?php
-
-use Illuminate\Support\Facades\Route;
-
-Route::get('/about', function () {
-    return view('about');
-});
-```
-
-Une fois que vous avez supprimé le contrôleur de base et la route pour affiche
-la page "À propos", validez les modifications dans Git, puis vous pouvez créer
-la pull request.
-
-Validez la pull request et fusionnez-la une fois que les modifications sont
-terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
-cette tâche.
-
-## Installer un outil capable d'effectuer des requêtes HTTP pour tester les routes de votre application
-
-Afin de tester les différentes routes de votre application, il est recommandé
-d'utiliser un outil capable d'effectuer des requêtes HTTP.
-
-Pour cela, il existe de nombreux outils disponibles. Parmi les plus populaires,
-on peut citer :
-
-- [Bruno](https://www.usebruno.com/).
-- [curl](https://curl.se/).
-- [Insomnia](https://insomnia.rest/).
-- [Postman](https://www.postman.com/).
-
-Si vous avez déjà un outil de ce type installé sur votre ordinateur, vous pouvez
-l'utiliser pour tester les routes de votre application.
-
-Sinon, vous pouvez en installer un parmi ceux mentionnés ci-dessus. Nous
-recommandons d'utiliser Bruno, un des derniers outils gratuits et open source
-disponibles sur le marché, qui offre une interface utilisateur moderne et facile
-à utiliser pour tester votre application.
-
-## Créer le contrôleur pour gérer les Posts
-
-Dans cette section, nous allons créer le contrôleur pour gérer les posts de
-notre application de réseau social. Ce contrôleur sera responsable de la logique
-métier liée aux posts, comme la création, la lecture, la mise à jour et la
-suppression des posts.
-
-### Créer l'issue et la branche pour suivre cette tâche
-
-Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
-branche correspondante à partir de la branche principale `main`.
-
-Basculez sur la branche que vous venez de créer, puis suivez les étapes
-suivantes pour mettre en place l'internationalisation dans votre application
-Laravel.
-
-### Créer le contrôleur
-
-Pour créer un contrôleur dans Laravel, vous pouvez utiliser la commande Artisan
-suivante dans votre terminal :
-
-> [!IMPORTANT]
->
-> Assurez-vous d'avoir le dossier `app/Http/Controllers/` dans votre projet
-> Laravel. Si le dossier `app/Http/Controllers/` n'existe pas, créez-le
-> manuellement avant d'exécuter la commande suivante.
->
-> Sans ce dossier, Laravel créera le contrôleur `Controller` dans le dossier
-> `app/` au lieu de `app/Http/Controllers/`, ce qui n'est pas la convention
-> recommandée pour les contrôleurs dans Laravel.
-
 ```bash
-php artisan make:controller PostController --resource
+php artisan install:api
 ```
-
-Le résultat devrait ressembler à ceci :
 
 ```text
-   INFO  Controller [app/Http/Controllers/PostController.php] created successfully.
+./composer.json has been updated
+Running composer update laravel/sanctum
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 1 install, 0 updates, 0 removals
+  - Locking laravel/sanctum (v4.3.1)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 1 install, 0 updates, 0 removals
+  - Downloading laravel/sanctum (v4.3.1)
+  - Installing laravel/sanctum (v4.3.1): Extracting archive
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+
+   INFO  Discovering packages.
+
+  laravel-lang/config ................................................... DONE
+  laravel-lang/lang ..................................................... DONE
+  laravel-lang/locales .................................................. DONE
+  laravel-lang/publisher ................................................ DONE
+  laravel/pail .......................................................... DONE
+  laravel/sail .......................................................... DONE
+  laravel/sanctum ....................................................... DONE
+  laravel/tinker ........................................................ DONE
+  nesbot/carbon ......................................................... DONE
+  nunomaduro/collision .................................................. DONE
+  nunomaduro/termwind ................................................... DONE
+  pestphp/pest-plugin-laravel ........................................... DONE
+
+97 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+
+   INFO  No publishable resources for tag [laravel-assets].
+
+> @php artisan lang:update
+
+   INFO  Collecting translations...
+
+  LaravelLang\Lang\Plugin ........................................ 6.07ms DONE
+
+   INFO  Storing changes...
+
+  fr.json ........................................................ 0.30ms DONE
+  fr/auth.php .................................................... 0.61ms DONE
+  fr/pagination.php .............................................. 0.20ms DONE
+  fr/passwords.php ............................................... 0.17ms DONE
+  fr/validation.php .............................................. 1.83ms DONE
+
+Found 5 security vulnerability advisories affecting 4 packages.
+Run "composer audit" for a full list of advisories.
+
+   INFO  Published API routes file.
+
+ One new database migration has been published. Would you like to run all pending database migrations? (yes/no) [yes]:
+ > yes
+
+   INFO  Running migrations.
+
+  2026_03_23_125948_create_personal_access_tokens_table ..................................................................... 13.97ms DONE
+
+
+   INFO  API scaffolding installed. Please add the [Laravel\Sanctum\HasApiTokens] trait to your User model.
 ```
 
-L'argument `--resource` indique à Laravel de générer un contrôleur avec des
-méthodes (au sens programmation orientée objet (POO) du terme) prédéfinies pour
-les actions courantes suivantes :
-
-- `index` : affiche une liste de tous les posts.
-- `create` : affiche un formulaire pour créer un nouveau post.
-- `store` : traite la soumission du formulaire de création d'un nouveau post.
-- `show` : affiche un post spécifique.
-- `edit` : affiche un formulaire pour éditer un post existant.
-- `update` : traite la soumission du formulaire de mise à jour d'un post
-  existant.
-- `destroy` : supprime un post spécifique.
-
-### Lier les routes au contrôleur
-
-Maintenant que le contrôleur `PostController` a été créé, nous devons lier les
-routes correspondantes à ce contrôleur pour que les différentes actions soient
-accessibles via des URL spécifiques.
-
-Pour cela, ouvrez le fichier `routes/web.php` et ajoutez la ligne suivante pour
-les posts :
-
-```php
-use App\Http\Controllers\PostController;
-
-// ...les autres imports et routes...
-
-Route::resource('posts', PostController::class);
+```bash
+php artisan make:controller TokenController --resource
 ```
 
-Cette ligne de code utilise la méthode `Route::resource` pour lier
-automatiquement les routes pour le contrôleur `PostController` :
+```text
+   INFO  Controller [app/Http/Controllers/TokenController.php] created successfully.
+```
 
-- `GET /posts` : pour afficher la liste de tous les posts (action `index`).
-- `GET /posts/create` : pour afficher le formulaire de création d'un nouveau
-  post (action `create`).
-- `POST /posts` : pour traiter la soumission du formulaire de création d'un
-  nouveau post (action `store`).
-- `GET /posts/{post}` : pour afficher un post spécifique (action `show`).
-- `GET /posts/{post}/edit` : pour afficher le formulaire d'édition d'un post
-  existant (action `edit`).
-- `PUT/PATCH /posts/{post}` : pour traiter la soumission du formulaire de mise à
-  jour d'un post existant (action `update`).
-- `DELETE /posts/{post}` : pour supprimer un post spécifique (action `destroy`).
+```bash
+php artisan make:view tokens.index
+```
 
-### Définir les méthodes du contrôleur pour gérer les différentes actions
+```text
+   INFO  View [resources/views/tokens/index.blade.php] created successfully.
+```
 
-### Lier les controllers aux vues correspondantes
+```bash
+php artisan make:view tokens.create
+```
 
-### Tester les routes de votre application
-
-### Pousser les modifications et fusionner la pull request
-
-Une fois les modifications terminées, validez les modifications dans Git, puis
-vous pouvez créer la pull request.
-
-Validez la pull request et fusionnez-la une fois que les modifications sont
-terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
-cette tâche.
-
-N'oubliez pas de récupérer les modifications localement après la fusion de la
-pull request.
-
-## Créer le contrôleur pour gérer les Users
-
-### Créer l'issue et la branche pour suivre cette tâche
-
-Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
-branche correspondante à partir de la branche principale `main`.
-
-Basculez sur la branche que vous venez de créer, puis suivez les étapes
-suivantes pour mettre en place l'internationalisation dans votre application
-Laravel.
-
-### Créer le contrôleur
-
-### Lier les routes au contrôleur
-
-### Définir les méthodes du contrôleur pour gérer les différentes actions
-
-### Lier les controllers aux vues correspondantes
-
-### Tester les routes de votre application
-
-### Pousser les modifications et fusionner la pull request
-
-Une fois les modifications terminées, validez les modifications dans Git, puis
-vous pouvez créer la pull request.
-
-Validez la pull request et fusionnez-la une fois que les modifications sont
-terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
-cette tâche.
-
-N'oubliez pas de récupérer les modifications localement après la fusion de la
-pull request.
-
-## Créer le contrôleur pour gérer les Likes
-
-### Créer l'issue et la branche pour suivre cette tâche
-
-Commencez par créer l'issue sur GitHub pour suivre cette tâche, puis créez la
-branche correspondante à partir de la branche principale `main`.
-
-Basculez sur la branche que vous venez de créer, puis suivez les étapes
-suivantes pour mettre en place l'internationalisation dans votre application
-Laravel.
-
-### Créer le contrôleur
-
-### Lier les routes au contrôleur
-
-### Définir les méthodes du contrôleur pour gérer les différentes actions
-
-### Lier les controllers aux vues correspondantes
-
-### Tester les routes de votre application
-
-### Pousser les modifications et fusionner la pull request
-
-Une fois les modifications terminées, validez les modifications dans Git, puis
-vous pouvez créer la pull request.
-
-Validez la pull request et fusionnez-la une fois que les modifications sont
-terminées. Vous pouvez ensuite supprimer la branche que vous avez créée pour
-cette tâche.
-
-N'oubliez pas de récupérer les modifications localement après la fusion de la
-pull request.
+```text
+   INFO  View [resources/views/tokens/create.blade.php] created successfully.
+```
 
 ## Conclusion
 
