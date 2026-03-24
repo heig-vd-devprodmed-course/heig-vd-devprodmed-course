@@ -87,8 +87,9 @@ technique.**
 
 > [!IMPORTANT]
 >
-> Vous être libre d'effectuer des commits de créer des issues de tests avant le
-> début de l'évaluation si vous le souhaitez. Vous ne serez pas pénalisé.e.
+> Vous être libre d'effectuer des commits et de créer des issues de tests avant
+> le début de l'évaluation si vous le souhaitez pour valider votre installation.
+> Vous ne serez pas pénalisé.e.
 
 ### Ressources autorisées
 
