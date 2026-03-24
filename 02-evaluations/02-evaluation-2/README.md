@@ -48,10 +48,8 @@ Si vous manquez d'inspiration, chaque contenu du mini-projet a une section
 _"Idées pour le mini-projet personnel"_ à votre disposition pour vous aider à
 trouver des idées de fonctionnalités à développer pour votre mini-projet.
 
-L'objectif de cette évaluation est de présenter oralement les nouvelles
-fonctionnalités que vous avez développées pour ce mini-projet durant le cours,
-ainsi que de répondre à une question aléatoire liée au mini-projet ou au
-framework Laravel.
+Je (Ludovic) serai également disponible pour discuter de vos idées et vous aider
+à les concrétiser si vous le souhaitez. N'hésitez pas !
 
 ## Déroulement
 
