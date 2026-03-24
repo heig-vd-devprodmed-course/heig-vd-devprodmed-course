@@ -5,6 +5,7 @@
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
+- [Objectifs](#objectifs)
 - [Déroulement](#déroulement)
 - [Partie théorique](#partie-théorique)
   - [Ressources autorisées](#ressources-autorisées)
@@ -13,6 +14,17 @@
   - [Grille d'évaluation](#grille-dévaluation)
   - [Contraintes](#contraintes)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
+
+## Objectifs
+
+L'objectif de cette évaluation est de permettre à l'étudiant.e de démontrer sa
+maîtrise des concepts fondamentaux du développement web avec le framework
+Laravel, ainsi que sa capacité à les appliquer dans un contexte de projet réel.
+
+L'évaluation vise à évaluer à la fois les connaissances théoriques et les
+compétences pratiques de l'étudiant.e, en mettant l'accent la compréhension, la
+qualité du code, la structure de l'application, et la capacité à suivre les
+bonnes pratiques de développement avec Laravel.
 
 ## Déroulement
 
@@ -38,8 +50,9 @@ du développement web avec Laravel.
 Les questions peuvent porter sur des notions théoriques, des bout de code à
 expliquer/compléter, des questions à choix multiples, etc.
 
-Chaque cours a une section _"Objectifs"_ et _"Questions d'évaluation"_ à votre
-disposition pour vous aider à préparer cette partie théorique.
+Chaque contenu de cours a une section _"Objectifs"_ et _"Questions
+d'évaluation"_ à votre disposition pour vous aider à préparer cette partie
+théorique.
 
 ### Ressources autorisées
 
