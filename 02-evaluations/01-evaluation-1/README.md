@@ -75,10 +75,20 @@ Le dépôt du code se fera sur GitHub Classroom. Pour accéder au dépôt, utili
 le lien suivant : <https://classroom.github.com/a/ZARVNTFA> puis sélectionnez
 votre personne dans la liste pour rejoindre le GitHub Classroom.
 
+> [!IMPORTANT]
+>
+> **Pensez à cloner le bon dépôt GitHub (celui qui vous est attribué) et à ne
+> pas cloner celui fourni dans le README.md (qui n'est là que pour exemple) !**
+
 Un dépôt GitHub privé sera créé pour vous, et vous pourrez y pousser votre code
 pendant l'évaluation. **Assurez-vous d'avoir mis en place votre environnement de
 développement avant le début de l'évaluation pour éviter tout problème
 technique.**
+
+> [!IMPORTANT]
+>
+> Vous être libre d'effectuer des commits de créer des issues de tests avant le
+> début de l'évaluation si vous le souhaitez. Vous ne serez pas pénalisé.e.
 
 ### Ressources autorisées
 
