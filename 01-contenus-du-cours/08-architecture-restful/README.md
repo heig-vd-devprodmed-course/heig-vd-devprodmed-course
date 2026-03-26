@@ -68,6 +68,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [API](#api)
   - [Structure d'une API RESTful](#structure-dune-api-restful)
   - [Versionner une API RESTful](#versionner-une-api-restful)
+  - [Tester une API RESTful](#tester-une-api-restful)
 - [Développer une API RESTful avec Laravel](#développer-une-api-restful-avec-laravel)
   - [Différencier les routes MVC et les routes API](#différencier-les-routes-mvc-et-les-routes-api)
   - [Laravel Sanctum pour l'authentification des API RESTful](#laravel-sanctum-pour-lauthentification-des-api-restful)
@@ -209,7 +210,7 @@ l'aide de méthodes HTTP standard (GET, POST, PUT, DELETE, etc.) pour effectuer
 des opérations de lecture, de création, de mise à jour ou de suppression sur la
 ressource.
 
-Ainsi, une ressource "posts" pourrait être accessible via l'URL `/api/posts` et
+Ainsi, une ressource `posts` pourrait être accessible via l'URL `/api/posts` et
 pourrait être manipulée à l'aide des méthodes HTTP suivantes :
 
 - `GET /api/posts` : pour récupérer la liste des posts.
@@ -232,6 +233,17 @@ pourrait être manipulée à l'aide des méthodes HTTP suivantes :
   - Réponse(s) possible(s) : 204 (No Content) en cas de succès, 404 (Not Found)
     si le post n'existe pas, etc.
 
+Le tableau ci-dessous résume les différentes méthodes HTTP et les réponses
+possibles pour la ressource `posts` :
+
+| Méthode     | URL               | Description       |  Réponse |
+| :---------- | :---------------- | :---------------- | -------: |
+| `GET`       | `/api/posts`      | Liste des posts   |      200 |
+| `POST`      | `/api/posts`      | Créer un post     | 201, 400 |
+| `GET`       | `/api/posts/{id}` | Détails d'un post | 200, 404 |
+| `PUT/PATCH` | `/api/posts/{id}` | Modifier un post  | 200, 404 |
+| `DELETE`    | `/api/posts/{id}` | Supprimer un post | 204, 404 |
+
 La liste complète des codes d'état HTTP et de leur signification est disponible
 sur le site de Mozilla Developer Network (MDN) à l'adresse suivante :
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>.
@@ -252,6 +264,28 @@ les clients existants, une nouvelle version de l'API pourrait être créée (par
 exemple, `/api/v2/posts`) pour permettre aux clients de continuer à utiliser la
 version stable de l'API pendant que les nouvelles fonctionnalités sont
 développées ou que les modifications sont apportées.
+
+### Tester une API RESTful
+
+Lors de l'utilisation d'une API RESTful, il n'y a pas d'interface utilisateur
+graphique pour interagir avec l'API, contrairement à une application web
+classique.
+
+Il est donc nécessaire d'utiliser des outils spécifiques pour tester les API
+RESTful, qui fournissent une interface pour envoyer des requêtes HTTP à l'API et
+afficher les réponses du serveur.
+
+Pour cela, il existe de nombreux outils disponibles. Parmi les plus populaires,
+on peut citer :
+
+- [Bruno](https://www.usebruno.com/) (recommandé).
+- [curl](https://curl.se/).
+- [Insomnia](https://insomnia.rest/).
+- [Postman](https://www.postman.com/).
+
+Grâce à ces outils, il est possible de tester les différentes routes de l'API en
+envoyant des requêtes HTTP avec les données appropriées et en vérifiant les
+réponses du serveur pour s'assurer que l'API fonctionne correctement.
 
 ## Développer une API RESTful avec Laravel
 
@@ -329,14 +363,27 @@ tokens d'authentification pour leur compte et les utiliser avec l'API.
 
 Une fois que les utilisateur.trices auront généré un ou des tokens
 d'authentification pour leur compte, ils pourront utiliser ces tokens pour
-authentifier les requêtes API en les incluant dans les en-têtes de la requête
-(par exemple, `Authorization: Bearer <token>`).
+authentifier les requêtes API en les incluant dans les en-têtes de la requête.
+
+L'entête à utiliser pour inclure le token d'authentification dans les requêtes
+API est généralement l'entête `Authorization` avec la valeur `Bearer <token>`,
+où `<token>` est le token d'authentification généré par l'utilisateur.trice. Par
+exemple, une requête API authentifiée pourrait ressembler à ceci :
+
+```bash
+curl -s -H "Authorization: Bearer <token>" http://localhost:8000/api/posts
+```
 
 Laravel Sanctum gère automatiquement l'authentification des requêtes API en
 vérifiant les tokens d'authentification inclus dans les en-têtes de la requête.
+
 Si le token est valide, la requête est authentifiée et le serveur peut traiter
 la requête en fonction des permissions et des rôles de l'utilisateur associé au
 token d'authentification.
+
+Laravel Sanctum associe automatiquement la personne authentifiée à la requête
+API et permet d'accéder à ses données et à ses permissions pour gérer l'accès
+aux différentes fonctionnalités de l'API.
 
 ### Gérer les permissions et les rôles des utilisateur.trices avec les tokens d'authentification
 
@@ -350,7 +397,19 @@ utilisés pour authentifier les requêtes API.
 
 ## Conclusion
 
-TODO
+En conclusion, l'architecture RESTful est une architecture adaptée pour
+développer des services web qui doivent être consommés par d'autres applications
+ou par des clients légers comme des applications mobiles ou des applications
+JavaScript côté client.
+
+Laravel permet de développer des applications RESTful en respectant les
+principes de l'architecture REST au travers d'une API avec Laravel Sanctum pour
+gérer l'authentification des API RESTful de manière simple et sécurisée.
+
+Grâce à Laravel Sanctum, il est possible de créer des tokens d'authentification
+pour les utilisateur.trices de l'application, qui peuvent être utilisés pour
+authentifier et autoriser les requêtes API en associant des permissions et des
+rôles à chaque token.
 
 ## Exercices
 

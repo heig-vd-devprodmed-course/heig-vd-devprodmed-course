@@ -50,7 +50,7 @@ document._
 
 - Décrire les concepts d'authentification et d'autorisation.
 - Stocker et vérifier les mots de passe de manière sécurisée.
-- Définir et utiliser la classes `Auth` de Laravel pour gérer l'authentification
+- Définir et utiliser la classe `Auth` de Laravel pour gérer l'authentification
   des utilisateur.trices.
 
 ![bg right:40%][illustration-objectifs]

@@ -62,6 +62,17 @@ question aléatoire liée au mini-projet ou au framework Laravel.
 L'évaluation dure 16 minutes (8 minutes de préparation et 8 minutes de
 présentation).
 
+> [!NOTE]
+>
+> Vos présentations seront enregistrées pour permettre aux personnes en charge
+> de l'évaluation de les revoir et de les évaluer de manière juste et précise.
+>
+> **Les enregistrements seront utilisés uniquement à des fins d'évaluation et ne
+> seront pas partagés publiquement.**
+>
+> Elles seront **supprimées** dans les trois mois suivant la fin de l'évaluation
+> et l'attribution des notes.
+
 L'étudiant.e devra présenter une série de nouvelles fonctionnalités qu'iel aura
 développées liées au mini-projet réalisé durant le cours avec le framework
 Laravel.
@@ -130,13 +141,13 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
 > utiliser du HTML et du CSS de base (CSS optionnel), mais l'accent doit être
 > mis sur la présentation.
 
-|   # | Description                                                                                                        |
-| --: | :----------------------------------------------------------------------------------------------------------------- |
-|   1 | La présentation orale est claire, structurée et couvre les points essentiels                                       |
-|   2 | Le but de l'application est correctement expliqué                                                                  |
-|   3 | Les trois nouvelles fonctionnalités sont expliquées de manière compréhensible et leur implémentation est détaillée |
-|   4 | Le workflow de développement est présenté et commenté                                                              |
-|   5 | La réponse à la question tirée au sort est pertinente et complète                                                  |
+|   # | Description                                                                                              |
+| --: | :------------------------------------------------------------------------------------------------------- |
+|   1 | La présentation orale est claire, structurée et couvre les points essentiels                             |
+|   2 | Le but de l'application est correctement expliqué                                                        |
+|   3 | Les trois nouveaux aspects sont expliqués de manière compréhensible et leur implémentation est détaillée |
+|   4 | Le workflow de développement est présenté et commenté                                                    |
+|   5 | La réponse à la question tirée au sort est pertinente et complète                                        |
 
 ## Contraintes
 
