@@ -66,6 +66,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Dans le futur peut-être... architecture REST](#dans-le-futur-peut-être-architecture-rest)
   - [Architectures REST/RESTful](#architectures-restrestful)
 - [API](#api)
+  - [Format des données](#format-des-données)
   - [Structure d'une API RESTful](#structure-dune-api-restful)
   - [Versionner une API RESTful](#versionner-une-api-restful)
   - [Tester une API RESTful](#tester-une-api-restful)
@@ -97,6 +98,13 @@ bloc d'information en haut de ce contenu.
 
 ## MVC, REST et RESTful
 
+Jusqu'à présent, nous avons vu comment développer une application web avec le
+patron de conception MVC (Model-View-Controller) en utilisant le framework
+Laravel.
+
+Il existe d'autres architectures pour développer des applications web, notamment
+REST et RESTful.
+
 ### Jusqu'à présent... architecture MVC
 
 Jusqu'à présent, nous avons vu comment développer une application web avec le
@@ -106,7 +114,7 @@ ainsi que gérer l'authentification et les autorisations dans une application
 Laravel.
 
 Cette architecture MVC est très adaptée pour développer des applications web
-classiques, souvent adaptée pour interagir avec des utilisateurs via une
+classiques, souvent utilisée pour interagir avec notre application via une
 interface graphique (leur navigateur web).
 
 Cette architecture retourne habituellement un HTML complet au client qui
@@ -114,49 +122,69 @@ l'affiche dans le navigateur et gère les sessions à l'aide de cookies.
 
 Cependant, elle n'est pas adaptée pour développer des services web qui doivent
 être consommés (= interagir avec notre application/utiliser les données de notre
-application) par d'autres applications ou par des clients légers comme des
-applications mobiles ou des applications JavaScript côté client (qui ne peuvent
-pas gérer facilement les sessions à l'aide de cookies).
+application) par d'autres applications qui, elles, ne peuvent pas comprendre un
+HTML complet et qui ne peuvent pas gérer les sessions à l'aide de cookies.
+
+Des exemples de clients qui ne peuvent pas comprendre un HTML complet et qui ne
+peuvent pas gérer les sessions à l'aide de cookies sont les applications
+mobiles, des scripts en ligne de commande, ou encore des applications JavaScript
+_"single-page applications (SPA)"_ à l'aide de Vue.js, React ou Angular (selon
+comment elles sont développées).
+
+Comment permettre à ces clients de consommer les fonctionnalités ou les données
+de notre application Laravel ?
+
+### Dans le futur peut-être... architecture REST
 
 Heureusement pour nous, Laravel permet de développer des services web en
 utilisant une architecture REST(ful), qui est une architecture adaptée pour
 développer des services web qui doivent être consommés par d'autres applications
-ou par des clients légers.
+ou par des clients légers (applications mobiles, applications JavaScript côté
+client, etc.) qui ne peuvent pas comprendre un HTML complet et qui ne peuvent
+pas gérer les sessions à l'aide de cookies.
 
-Cela est particulièrement utile pour les applications mobiles ou les
-applications JavaScript _"single-page applications (SPA)"_ à l'aide de Vue.js,
-React ou Angular.
-
-### Dans le futur peut-être... architecture REST
-
-Un jour peut-être, vous aurez le besoin de mettre à disposition des
-fonctionnalités de votre application à d'autres applications ou à des clients
-légers (applications mobiles, applications JavaScript côté client, etc.).
-
-Dans ce cas, il est probable que vous aurez besoin de mettre en place une
+Pour cela, il est probable que vous aurez besoin de mettre en place une
 architecture _"representational state transfer (REST)"_ dans votre application
 Laravel.
 
-Une application REST est une application qui suit les principes de
-l'architecture REST, qui sont les suivants (source :
-<https://en.wikipedia.org/wiki/REST#Architectural_constraints>) :
+Une application REST est une application qui suit les principes suivants (source
+: <https://en.wikipedia.org/wiki/REST#Architectural_constraints>) :
 
-1. Client-serveur : l'application est composée d'un client qui consomme les
-   services d'un serveur.
-2. Sans état : le serveur ne stocke aucune information sur l'état du client
+1. _"Client-serveur : l'application est composée d'un client qui consomme les
+   services d'un serveur."_
+   - Un client peut être un navigateur web, une application mobile, un script en
+     ligne de commande, etc.
+2. _"Sans état : le serveur ne stocke aucune information sur l'état du client
    entre les différentes requêtes. Chaque requête doit contenir toutes les
-   informations nécessaires pour que le serveur puisse la traiter.
-3. Cacheable : les réponses du serveur peuvent être mises en cache par le client
-   pour améliorer les performances.
-4. Interface uniforme : l'interface entre le client et le serveur doit être
-   uniforme et standardisée.
-5. Système en couches : l'architecture peut être composée de plusieurs couches
-   (par exemple, une couche pour accéder à la base de données, une couche pour
-   la logique métier, une couche pour l'interface utilisateur, une couche pour
-   le traitement des requêtes, une couche pour l'authentification/autorisations,
-   etc.)
-6. Code à la demande (optionnel) : le serveur peut envoyer du code exécutable au
-   client pour qu'il l'exécute.
+   informations nécessaires pour que le serveur puisse la traiter."_
+   - Cela signifie que le serveur ne doit pas utiliser de sessions pour stocker
+     des informations sur le client, mais plutôt que le client doit inclure
+     toutes les informations nécessaires dans chaque requête (par exemple, en
+     utilisant des tokens d'authentification pour authentifier les requêtes).
+3. _"Cacheable : les réponses du serveur peuvent être mises en cache par le
+   client pour améliorer les performances."_
+   - Cela signifie que le serveur doit inclure des en-têtes de cache appropriés
+     dans les réponses pour permettre au client de mettre en cache les réponses
+     et d'améliorer les performances de l'application.
+4. _"Interface uniforme : l'interface entre le client et le serveur doit être
+   uniforme et standardisée."_
+   - Cela signifie que le serveur doit suivre des conventions standard pour
+     l'URL, les méthodes HTTP, les formats de données, etc. pour permettre au
+     client de comprendre comment interagir avec le serveur de manière
+     cohérente. Souvent, il s'agira d'utiliser des structures JSON pour les
+     données échangées entre le client et le serveur.
+5. _"Système en couches : l'architecture peut être composée de plusieurs
+   couches."_
+   - Par exemple, une couche pour accéder à la base de données, une couche pour
+     la logique métier, une couche pour l'interface utilisateur, une couche pour
+     le traitement des requêtes, une couche pour
+     l'authentification/autorisations, etc.
+6. _"Code à la demande (optionnel) : le serveur peut envoyer du code exécutable
+   au client pour qu'il l'exécute."_
+   - Selon la technologie utilisée, cela peut être du code JavaScript envoyé par
+     le serveur pour être exécuté par le client, ou du code HTML avec des
+     balises `<script>` qui contiennent du code JavaScript à exécuter par le
+     client.
 
 Au travers de la structure et des conventions mises à disposition par Laravel,
 il est possible de respecter ces principes pour développer des services web qui
@@ -168,8 +196,15 @@ Développer une application web qui suit parfaitement les principes de
 l'architecture REST peut être difficile, voire impossible dans certains cas.
 
 C'est pourquoi on parle souvent d'architecture RESTful, qui est une architecture
-qui suit les principes de l'architecture REST de manière approximative, mais qui
-est suffisamment proche pour être considérée comme une architecture REST.
+qui suit les principes au plus proche de l'architecture REST, mais sans
+respecter tous les principes de l'architecture REST.
+
+Les principes les plus importants à respecter pour développer une application
+RESTful sont les principes suivants :
+
+- Client-serveur.
+- Interface uniforme.
+- Système en couches.
 
 Laravel permet de développer des applications RESTful, c'est-à-dire des
 applications qui suivent les principes de l'architecture REST au travers d'une
@@ -184,8 +219,32 @@ Une API permet à une application de fournir des fonctionnalités ou des donnée
 d'autres applications de manière standardisée et contrôlée.
 
 Les API sont souvent utilisées pour permettre à des applications mobiles ou à
-des applications JavaScript côté client de consommer les fonctionnalités ou les
-données d'une application web.
+des scripts en ligne de commande consommer les fonctionnalités ou les données
+d'une application web.
+
+### Format des données
+
+Grâce au protocole HTTP, les clients peuvent définir le format des données
+qu'ils souhaitent recevoir du serveur en utilisant les en-têtes de la requête.
+
+Par exemple, un client peut inclure l'en-tête `Accept: application/json` dans sa
+requête pour indiquer au serveur qu'il souhaite recevoir les données au format
+JSON. Si le serveur est capable de fournir les données au format JSON, il peut
+répondre avec les données au format JSON. Sinon, il peut répondre avec un code
+d'état HTTP approprié (par exemple, 406 Not Acceptable) pour indiquer que le
+format demandé n'est pas disponible.
+
+De même, un client peut inclure l'en-tête `Content-Type: application/json` dans
+sa requête pour indiquer au serveur que les données envoyées dans le corps de la
+requête sont au format JSON. Le serveur peut alors traiter les données en
+conséquence.
+
+Le serveur pourra alors lui-même inclure des en-têtes dans sa réponse pour
+indiquer le format des données qu'il renvoie, par exemple en incluant l'en-tête
+`Content-Type: application/json` pour indiquer que les données renvoyées sont au
+format JSON ou encore `Content-Type: text/html` pour indiquer que les données
+renvoyées sont au format HTML (la logique actuelle de votre application
+Laravel).
 
 Le format de données le plus couramment utilisé pour les API RESTful est le
 format JSON, mais d'autres formats comme XML peuvent également être utilisés.
@@ -200,8 +259,9 @@ l'application et suit généralement les conventions suivantes :
 - Les opérations sur les ressources sont effectuées à l'aide de méthodes HTTP
   standard (GET, POST, PUT, DELETE, etc.).
 - Les réponses du serveur sont généralement au format JSON.
-- L'authentification et les autorisations sont gérées à l'aide de tokens (par
-  exemple, des tokens JWT ou des tokens d'API).
+- L'authentification et les autorisations sont gérées à l'aide de tokens
+  (_"jetons d'accès"_ en français) (par exemple, des tokens JWT ou des tokens
+  d'API).
 - Les erreurs sont gérées de manière standardisée (par exemple, en utilisant des
   codes d'état HTTP appropriés et en fournissant des messages d'erreur clairs).
 
@@ -310,7 +370,7 @@ contrôleurs gèrent des aspects spécifiques de l'application comme les Posts, 
 Likes, les Users, etc.), même si nous n'avons pas encore mis en place de routes
 spécifiques pour l'API.
 
-### Différencier les routes MVC et les routes API
+### Différencier les routes MVC des routes API
 
 Dans une application Laravel, il est possible de différencier les routes qui
 sont destinées à être utilisées pour l'interface utilisateur (routes MVC) et les

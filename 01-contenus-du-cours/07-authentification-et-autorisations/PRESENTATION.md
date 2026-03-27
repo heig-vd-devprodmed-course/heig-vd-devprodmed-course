@@ -78,9 +78,10 @@ d'utiliser des solutions plus complexes.
 
 ## Authentification et autorisations, un rappel
 
-- La sécurité d'une application repose sur deux aspects complémentaires :
-  1. L'authentification
-  2. Les autorisations
+La sécurité d'une application repose sur deux aspects complémentaires :
+
+1. L'authentification.
+2. Les autorisations.
 
 ![bg right:40%][illustration-authentification]
 ![bg right:40% vertical][illustration-autorisation]

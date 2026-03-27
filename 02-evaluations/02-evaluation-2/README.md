@@ -70,8 +70,7 @@ présentation).
 > **Les enregistrements seront utilisés uniquement à des fins d'évaluation et ne
 > seront pas partagés publiquement.**
 >
-> Elles seront **supprimées** dans les trois mois suivant la fin de l'évaluation
-> et l'attribution des notes.
+> Elles seront **supprimées** à la fin du semestre.
 
 L'étudiant.e devra présenter une série de nouvelles fonctionnalités qu'iel aura
 développées liées au mini-projet réalisé durant le cours avec le framework
