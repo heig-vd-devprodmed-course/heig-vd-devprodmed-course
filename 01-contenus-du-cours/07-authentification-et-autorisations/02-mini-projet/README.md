@@ -58,9 +58,10 @@ mécanismes nécessaires pour permettre aux utilisateur.trice.s de se créer un
 compte, se connecter, et gérer leur compte avec leurs propres posts.
 
 Ces différentes tâchent requièrent de toucher à tous les aspects de
-l'application : base de données, vue, composants, etc. Prenez quelques minutes
-pour lister les tâches que vous allez devoir réaliser pour cette partie avec
-leurs implications.
+l'application : base de données, vue, composants, etc.
+
+Prenez quelques minutes pour lister les tâches que vous allez devoir réaliser
+pour cette partie avec leurs implications.
 
 <details>
 <summary>Exemple de réponse</summary>

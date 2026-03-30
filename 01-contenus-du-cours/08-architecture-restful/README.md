@@ -71,7 +71,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Versionner une API RESTful](#versionner-une-api-restful)
   - [Tester une API RESTful](#tester-une-api-restful)
 - [Développer une API RESTful avec Laravel](#développer-une-api-restful-avec-laravel)
-  - [Différencier les routes MVC et les routes API](#différencier-les-routes-mvc-et-les-routes-api)
+  - [Différencier les routes MVC des routes API](#différencier-les-routes-mvc-des-routes-api)
   - [Laravel Sanctum pour l'authentification des API RESTful](#laravel-sanctum-pour-lauthentification-des-api-restful)
   - [Créer les tokens pour les utilisateur.trices](#créer-les-tokens-pour-les-utilisateurtrices)
   - [Utiliser les tokens pour authentifier les requêtes API](#utiliser-les-tokens-pour-authentifier-les-requêtes-api)
@@ -95,6 +95,8 @@ Ce contenu repose sur la documentation officielle suivante :
 
 La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
 bloc d'information en haut de ce contenu.
+
+Il s'agit du dernier contenu du cours !
 
 ## MVC, REST et RESTful
 

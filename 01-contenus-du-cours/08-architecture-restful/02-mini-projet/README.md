@@ -14,6 +14,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
+- [Avant de commencer...](#avant-de-commencer)
 - [Installer un outil capable d'effectuer des requêtes HTTP pour tester l'API de votre application](#installer-un-outil-capable-deffectuer-des-requêtes-http-pour-tester-lapi-de-votre-application)
   - [Installer un outil de requêtes HTTP](#installer-un-outil-de-requêtes-http)
   - [Comprendre et utiliser l'interface de votre outil de requêtes HTTP](#comprendre-et-utiliser-linterface-de-votre-outil-de-requêtes-http)
@@ -39,8 +40,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Tester la modification de posts](#tester-la-modification-de-posts)
   - [Tester la suppression de posts](#tester-la-suppression-de-posts)
   - [Tester un post inexistant](#tester-un-post-inexistant)
-- [Optionnel : versionner la collection d'API dans Bruno avec Git](#optionnel--versionner-la-collection-dapi-dans-bruno-avec-git)
+- [Optionnel : versionner la collection de requêtes Bruno avec Git](#optionnel--versionner-la-collection-de-requêtes-bruno-avec-git)
 - [Conclusion](#conclusion)
+- [Et pour finir...](#et-pour-finir)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
 - [Aller plus loin](#aller-plus-loin)
@@ -60,6 +62,37 @@ Pour y parvenir, nous allons :
 - Créer une API RESTful versionnée pour les posts avec des permissions
   granulaires.
 - Tester l'API avec un outil de requêtes HTTP.
+
+## Avant de commencer...
+
+Avant de commencer, prenez quelques minutes pour réfléchir à ce que vous allez
+faire et comment vous allez vous y prendre.
+
+- Quels sont les éléments clés d'une API RESTful que vous devez implémenter pour
+  votre application ?
+- Comment allez-vous structurer votre code pour séparer les routes web des
+  routes API ?
+- Comment allez-vous gérer l'authentification et les permissions pour votre API
+  ?
+- Comment allez-vous tester votre API pour vous assurer qu'elle fonctionne
+  correctement et qu'elle est sécurisée ?
+- Quels sont les différents scénarios que vous devez tester pour votre API (ex :
+  accès avec un token valide, accès avec un token invalide, accès sans token,
+  etc.) ?
+- Comment allez-vous organiser la réalisation du travail ?
+
+Prenez le temps de planifier votre travail et de vous assurer que vous avez une
+bonne compréhension de ce que vous devez faire avant de commencer à coder. Cela
+vous aidera à être plus efficace et à éviter les erreurs ou les oublis.
+
+Il s'agit du dernier contenu que je (Ludovic) souhaitais vous transmettre pour
+ce cours. Profitez de ce dernier mini-projet pour mettre en pratique tout ce que
+vous avez appris jusqu'à présent et pour vous préparer à la réalisation de votre
+mini-projet personnel.
+
+Utilisez toutes les bonnes pratiques de développement que vous avez apprises
+jusqu'à présent et utilisez Git et GitHub pour structurer votre code de manière
+claire et maintenable.
 
 ## Installer un outil capable d'effectuer des requêtes HTTP pour tester l'API de votre application
 
@@ -1524,7 +1557,7 @@ d'erreur de ressource non trouvée (404 Not Found).
 La réponse devrait contenir un message d'erreur indiquant que la ressource
 demandée n'a pas été trouvée, avec un code de statut HTTP 404 Not Found.
 
-## Optionnel : versionner la collection d'API dans Bruno avec Git
+## Optionnel : versionner la collection de requêtes Bruno avec Git
 
 Si vous utilisez Bruno pour tester votre API, vous pouvez également versionner
 votre collection d'API avec Git pour garder une trace de vos différentes
@@ -1571,6 +1604,16 @@ En respectant les bonnes pratiques de développement d'API RESTful, nous avons
 de chaque requête (200 OK, 201 Created, 204 No Content, 403 Forbidden, 404 Not
 Found, etc.), ce qui facilite la compréhension et l'utilisation de l'API par les
 client.es externes.
+
+## Et pour finir...
+
+Il s'agissait du dernier mini-projet accompagné de ce cours. Vous avez
+maintenant toutes les bases nécessaires pour créer des applications avec Laravel
+avec tous ses aspects principaux.
+
+Vous pouvez être fier.e de ce que vous avez accompli jusqu'à présent, et vous
+avez déjà une bonne expérience pratique avec Laravel, ce qui vous sera très
+utile pour la suite du cours et pour vos projets futurs.
 
 ## Solution
 

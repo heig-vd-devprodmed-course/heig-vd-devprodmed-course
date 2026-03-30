@@ -59,6 +59,8 @@ document._
 - Mettre en œuvre une architecture RESTful dans une application web avec le
   framework Laravel.
 
+Il s'agit du dernier contenu du cours !
+
 ![bg right:40%][illustration-objectifs]
 
 ## MVC, REST et RESTful
@@ -272,6 +274,17 @@ $request->user()->tokenCan('posts:create');
 
 Est-ce que vous avez des questions ?
 
+## Feedback
+
+Le [formulaire de feedback][feedback] vous **permet de partager votre retour**
+sur le cours _"DévProdMéd"_.
+
+Il ne prend **que quelques minutes** et est **anonyme**.
+
+Les résultats seront discutés à la fin du cours. **Merci beaucoup !**
+
+[![bg right:40% w:85%][feedback-qr-code]][feedback]
+
 ## À vous de jouer !
 
 - (Re)lire le contenu de cours.
@@ -309,6 +322,9 @@ Est-ce que vous avez des questions ?
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/04-vues-blade-et-tailwind-css/README.md
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
+[feedback]: https://framaforms.org/devprodmed-2025-2026-feedback-1774862374
+[feedback-qr-code]:
+	https://quickchart.io/qr?format=png&ecLevel=Q&size=400&margin=1&text=https://framaforms.org/devprodmed-2025-2026-feedback-1774862374
 
 <!-- Illustrations -->
 
