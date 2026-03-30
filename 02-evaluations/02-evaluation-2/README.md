@@ -74,7 +74,14 @@ présentation).
 
 L'étudiant.e devra présenter une série de nouvelles fonctionnalités qu'iel aura
 développées liées au mini-projet réalisé durant le cours avec le framework
-Laravel.
+Laravel et répondre à une question tirée au sort liée au mini-projet ou au
+framework Laravel.
+
+Les questions d'évaluation dans chaque contenu de cours sont des exemples de
+questions qui pourraient être tirées au sort pour cette évaluation. Cependant,
+il est possible que d'autres questions soient ajoutées.
+
+Voici le déroulement de l'évaluation :
 
 1. La personne vient 5 minutes avant son temps de passage (voir
    [Ordre de passage](#ordre-de-passage)) et attend son tour à l'extérieur de la
@@ -120,7 +127,9 @@ Laravel.
   souhaite.
 - Aucune ressource externe n'est autorisée durant la préparation ou la
   présentation orale et la session de questions/réponses (pas d'Internet, pas de
-  documentation, pas d'outils d'intelligence artificielle, etc.).
+  documentation, pas d'outils d'intelligence artificielle, etc.). L'ordinateur
+  est autorisé pour préparer votre présentation et montrer votre travail, mais
+  pas pour chercher des informations ou de l'aide en ligne.
 
 ## Grille d'évaluation
 
@@ -140,13 +149,13 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
 > utiliser du HTML et du CSS de base (CSS optionnel), mais l'accent doit être
 > mis sur la présentation.
 
-|   # | Description                                                                                              |
-| --: | :------------------------------------------------------------------------------------------------------- |
-|   1 | La présentation orale est claire, structurée et couvre les points essentiels                             |
-|   2 | Le but de l'application est correctement expliqué                                                        |
-|   3 | Les trois nouveaux aspects sont expliqués de manière compréhensible et leur implémentation est détaillée |
-|   4 | Le workflow de développement est présenté et commenté                                                    |
-|   5 | La réponse à la question tirée au sort est pertinente et complète                                        |
+|   # | Description                                                                                                        |
+| --: | :----------------------------------------------------------------------------------------------------------------- |
+|   1 | La présentation orale est claire, structurée et couvre les points essentiels                                       |
+|   2 | Le but de l'application est correctement expliqué                                                                  |
+|   3 | Les trois nouveaux aspects sont présentés,expliqués de manière compréhensible et leur implémentation est détaillée |
+|   4 | Le workflow de développement est présenté et commenté                                                              |
+|   5 | La réponse à la question tirée au sort est pertinente et complète                                                  |
 
 ## Contraintes
 
