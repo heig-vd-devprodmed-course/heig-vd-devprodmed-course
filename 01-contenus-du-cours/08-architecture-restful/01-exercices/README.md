@@ -15,6 +15,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Table des matières](#table-des-matières)
 - [Exercices](#exercices)
   - [Exercice 1](#exercice-1)
+  - [Exercice 2](#exercice-2)
 
 ## Exercices
 
@@ -56,6 +57,14 @@ Laravel et des API pour bien comprendre la documentation et comprendre quelles
 responsabilités ont les différentes parties du code.
 
 </details>
+
+### Exercice 2
+
+Faut-il effectuer quelque chose de particulier pour que Laravel Sanctum puisse
+gérer les permissions liées aux tokens d'accès ? Si oui, que faut-il faire ?
+
+Utilisez la documentation officielle de Laravel Sanctum pour trouver la réponse
+à cette question.
 
 <!-- URLs -->
 

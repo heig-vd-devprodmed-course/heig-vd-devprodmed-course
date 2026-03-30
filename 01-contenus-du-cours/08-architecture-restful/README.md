@@ -502,7 +502,20 @@ Vous trouverez les détails du mini-projet ici :
 > les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
 > connaissances ou de pratiquer davantage.
 
-- TODO
+- Quels sont les principes fondamentaux d'une architecture REST ?
+- Quelle est la différence entre une architecture REST et une architecture
+  RESTful ?
+- Quand et pourquoi utiliser une architecture RESTful pour développer des
+  services web ?
+- Comment mettre en œuvre une architecture RESTful dans une application web avec
+  le framework Laravel ?
+- Comment différencier les routes MVC des routes API dans une application
+  Laravel ?
+- Comment utiliser Laravel Sanctum pour gérer l'authentification des API RESTful
+  dans une application Laravel ?
+- Comment créer des tokens d'authentification pour les utilisateur.trices dans
+  une application Laravel avec Laravel Sanctum ? Comment en gérer les
+  permissions et les rôles associés à ces tokens d'authentification ?
 
 ## À faire pour la prochaine séance
 

@@ -18,11 +18,14 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Installer un outil capable d'effectuer des requêtes HTTP pour tester l'API de votre application](#installer-un-outil-capable-deffectuer-des-requêtes-http-pour-tester-lapi-de-votre-application)
   - [Installer un outil de requêtes HTTP](#installer-un-outil-de-requêtes-http)
   - [Comprendre et utiliser l'interface de votre outil de requêtes HTTP](#comprendre-et-utiliser-linterface-de-votre-outil-de-requêtes-http)
-- [Installer Laravel Sanctum](#installer-laravel-sanctum)
+- [Installer et configurer Laravel Sanctum](#installer-et-configurer-laravel-sanctum)
+  - [Installer Laravel Sanctum](#installer-laravel-sanctum)
+  - [Configurer Laravel Sanctum](#configurer-laravel-sanctum)
 - [Mettre à jour le modèle User](#mettre-à-jour-le-modèle-user)
 - [Gérer les tokens d'accès](#gérer-les-tokens-daccès)
   - [Créer le contrôleur TokenController](#créer-le-contrôleur-tokencontroller)
   - [Implémenter le contrôleur TokenController](#implémenter-le-contrôleur-tokencontroller)
+  - [Lier le contrôleur aux routes](#lier-le-contrôleur-aux-routes)
   - [Créer les vues pour la gestion des tokens](#créer-les-vues-pour-la-gestion-des-tokens)
   - [Implémenter les vues](#implémenter-les-vues)
   - [Mettre à jour les fichiers de traduction](#mettre-à-jour-les-fichiers-de-traduction)
@@ -84,6 +87,10 @@ faire et comment vous allez vous y prendre.
 Prenez le temps de planifier votre travail et de vous assurer que vous avez une
 bonne compréhension de ce que vous devez faire avant de commencer à coder. Cela
 vous aidera à être plus efficace et à éviter les erreurs ou les oublis.
+
+Utilisez la documentation officielle de Laravel Sanctum et les ressources en
+ligne pour vous aider à comprendre les concepts et les étapes nécessaires pour
+implémenter une API RESTful sécurisée avec Laravel.
 
 Il s'agit du dernier contenu que je (Ludovic) souhaitais vous transmettre pour
 ce cours. Profitez de ce dernier mini-projet pour mettre en pratique tout ce que
@@ -154,14 +161,19 @@ Voici les éléments clés de l'interface de Bruno :
 - La barre d'outils en haut : elle contient des boutons pour envoyer la requête,
   enregistrer la requête, dupliquer la requête, etc.
 
-## Installer Laravel Sanctum
+## Installer et configurer Laravel Sanctum
 
-Laravel Sanctum est un paquet officiel de Laravel qui fournit un système
-d'authentification basé sur des tokens pour les API. Il nous permettra de
-sécuriser les routes de notre API avec des tokens d'accès personnels.
+Dans cette section, nous allons installer Laravel Sanctum, un paquet officiel de
+Laravel qui fournit un système d'authentification basé sur des tokens pour les
+API.
 
-Pour l'installer, exécutez la commande suivante à la racine de votre projet
-Laravel :
+Nous allons l'utiliser pour sécuriser les routes de notre API avec des tokens
+d'accès personnels.
+
+### Installer Laravel Sanctum
+
+Pour installer Laravel Sanctum, exécutez la commande suivante à la racine de
+votre projet Laravel :
 
 ```bash
 php artisan install:api
@@ -255,6 +267,63 @@ Essayez de déduire le rôle de chaque colonne et comment elles sont utilisées
 pour gérer les tokens d'accès dans Laravel Sanctum. Pour le moment, ne vous
 inquiétez pas de comprendre tous les détails, nous reviendrons plus tard sur ces
 colonnes.
+
+### Configurer Laravel Sanctum
+
+Laravel Sanctum nous met à disposition une configuration par défaut qui est
+suffisante pour la plupart des cas d'utilisation lors de l'utilisation de
+tokens.
+
+Un token est un secret qui permet d'effectuer des requêtes authentifiées. Ce
+token peut avoir une ou plusieurs permissions associées ainsi qu'une date
+d'expiration.
+
+Afin de pouvoir valider les permissions (_"abilities"_ en anglais) d'un token,
+il est nécessaire d'ajouter des middlewares spécifiques à la configuration
+globale de Laravel (source :
+<https://laravel.com/docs/12.x/sanctum#token-abilities>).
+
+Pour cela, il est nécessaire de modifier le fichier `bootstrap/app.php` pour y
+ajouter les middlewares suivants :
+
+```diff
+diff --git a/bootstrap/app.php b/bootstrap/app.php
+index 1b0807a..c465550 100644
+--- a/bootstrap/app.php
++++ b/bootstrap/app.php
+@@ -3,6 +3,8 @@
+ use Illuminate\Foundation\Application;
+ use Illuminate\Foundation\Configuration\Exceptions;
+ use Illuminate\Foundation\Configuration\Middleware;
++use Laravel\Sanctum\Http\Middleware\CheckAbilities;
++use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
+
+ return Application::configure(basePath: dirname(__DIR__))
+     ->withRouting(
+@@ -12,7 +14,10 @@
+         health: '/up',
+     )
+     ->withMiddleware(function (Middleware $middleware): void {
+-        //
++        $middleware->alias([
++            'abilities' => CheckAbilities::class,
++            'ability' => CheckForAnyAbility::class,
++        ]);
+     })
+     ->withExceptions(function (Exceptions $exceptions): void {
+         //
+```
+
+Le fichier `bootstrap/app.php` contient la configuration globale de votre
+application Laravel.
+
+C'est là que vous pouvez configurer les routes, les middlewares, les exceptions,
+etc. pour votre application.
+
+En ajoutant les middlewares de validation des permissions de Sanctum dans ce
+fichier, nous les rendons disponibles pour toutes les routes de notre
+application, ce qui nous permet de les utiliser facilement pour protéger les
+routes de notre API avec des permissions granulaires.
 
 ## Mettre à jour le modèle User
 
@@ -523,6 +592,49 @@ Quelques points importants à noter dans ce contrôleur :
   clair n'est disponible qu'une seule fois, au moment de la création.
 - La méthode `destroy` supprime le token correspondant à l'identifiant fourni
   pour l'utilisateur.trice connecté.e.
+
+### Lier le contrôleur aux routes
+
+Ajoutez les routes nécessaires pour accéder à ces méthodes dans le fichier
+`routes/web.php` :
+
+> [!NOTE]
+>
+> En effet, les tokens sont gérés depuis l'interface web de l'application, il
+> est donc logique de les placer dans les routes web. Les routes API, quant à
+> elles, sont destinées à être utilisées par des clients externes (comme des
+> applications mobiles ou des scripts en ligne de commande) et sont généralement
+> placées dans le fichier `routes/api.php` pour les séparer des routes web.
+
+```diff
+diff --git a/routes/web.php b/routes/web.php
+index ee9e3cb..8732b86 100644
+--- a/routes/web.php
++++ b/routes/web.php
+@@ -5,6 +5,7 @@
+ use App\Http\Controllers\MyProfileController;
+ use App\Http\Controllers\PostController;
+ use App\Http\Controllers\ProfileController;
++use App\Http\Controllers\TokenController;
+ use App\Models\Post;
+ use Illuminate\Support\Facades\Route;
+
+@@ -34,3 +35,5 @@
+     Route::post('/auth/login', 'login');
+     Route::post('/auth/logout', 'logout')->middleware('auth');
+ });
++
++Route::resource('tokens', TokenController::class)->only(['index', 'create', 'store', 'destroy'])->middleware('auth');
+```
+
+La méthode `only` permet de spécifier uniquement les méthodes du contrôleur que
+nous voulons exposer via les routes, ce qui est une bonne pratique pour éviter
+d'exposer des routes inutiles ou non sécurisées.
+
+Comme les tokens n'ont pas besoin d'être affichés ou modifiés, nous n'avons pas
+besoin de routes pour les méthodes `show`, `edit` et `update`. Nous exposons
+uniquement les routes pour les méthodes `index`, `create`, `store` et `destroy`,
+qui sont nécessaires pour la gestion des tokens.
 
 ### Créer les vues pour la gestion des tokens
 
