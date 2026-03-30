@@ -76,11 +76,11 @@ Il s'agit du dernier contenu du cours !
 ### Jusqu'à présent... architecture MVC
 
 - Architecture MVC : routes, contrôleurs, vues, modèles, authentification.
-- Adaptée pour les clients capables d'applications web classiques avec interface
-  graphique.
-- Retourne du HTML complet, gère les sessions via cookies.
-- Pas adaptée pour des clients légers (applications mobiles, scripts en ligne de
-  commande) qui ne peuvent pas gérer facilement les sessions via cookies.
+- Adaptée pour des applications web classiques avec interface graphique.
+- Retourne du HTML complet, gère les sessions via cookies ⇒ votre navigateur
+  peut comprendre et afficher les réponses.
+- Pas adaptée pour des clients qui ne peuvent pas gérer de l'HTML et gérer les
+  sessions (applications mobiles, scripts en ligne de commande).
 
 ### Dans le futur peut-être... architecture REST (1)
 
