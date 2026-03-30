@@ -155,10 +155,10 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
   - Un aspect doit entraîner la création d'au moins un nouveau modèle Eloquent
     avec sa table de base de données, ses vues, ses routes et son contrôleur
     associés.
-  - Un aspect doit entraîner la mise à disposition (même simple) d'une API
-    RESTful pour interagir avec la fonctionnalité.
   - Un aspect doit être liée à l'authentification et/ou à l'autorisation (ex :
     gestion des rôles et permissions, etc.).
+  - Un aspect doit entraîner la mise à disposition (même simple) d'une API
+    RESTful pour interagir avec la fonctionnalité.
 - Ces différents aspects peuvent donner lieu à une même fonctionnalité combinée
   ou à plusieurs fonctionnalités distinctes.
 - Les nouveaux aspects présentés doivent être fonctionnels et testables. Ils ne

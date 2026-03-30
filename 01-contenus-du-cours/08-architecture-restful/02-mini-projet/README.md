@@ -16,7 +16,7 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 - [Objectifs](#objectifs)
 - [Installer un outil capable d'effectuer des requêtes HTTP pour tester l'API de votre application](#installer-un-outil-capable-deffectuer-des-requêtes-http-pour-tester-lapi-de-votre-application)
   - [Installer un outil de requêtes HTTP](#installer-un-outil-de-requêtes-http)
-  - [Comprendre l'interface de votre outil de requêtes HTTP](#comprendre-linterface-de-votre-outil-de-requêtes-http)
+  - [Comprendre et utiliser l'interface de votre outil de requêtes HTTP](#comprendre-et-utiliser-linterface-de-votre-outil-de-requêtes-http)
 - [Installer Laravel Sanctum](#installer-laravel-sanctum)
 - [Mettre à jour le modèle User](#mettre-à-jour-le-modèle-user)
 - [Gérer les tokens d'accès](#gérer-les-tokens-daccès)
@@ -38,6 +38,8 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
   - [Tester la création de posts](#tester-la-création-de-posts)
   - [Tester la modification de posts](#tester-la-modification-de-posts)
   - [Tester la suppression de posts](#tester-la-suppression-de-posts)
+  - [Tester un post inexistant](#tester-un-post-inexistant)
+- [Optionnel : versionner la collection d'API dans Bruno avec Git](#optionnel--versionner-la-collection-dapi-dans-bruno-avec-git)
 - [Conclusion](#conclusion)
 - [Solution](#solution)
 - [Idées pour le mini-projet personnel](#idées-pour-le-mini-projet-personnel)
@@ -83,7 +85,7 @@ recommandons d'utiliser Bruno, un des derniers outils gratuits et open source
 disponibles sur le marché, qui offre une interface utilisateur moderne et facile
 à utiliser pour tester votre application.
 
-### Comprendre l'interface de votre outil de requêtes HTTP
+### Comprendre et utiliser l'interface de votre outil de requêtes HTTP
 
 Ouvrez l'outil que vous avez choisi et prenez quelques minutes pour explorer son
 interface.
@@ -244,10 +246,10 @@ depuis le navigateur.
 
 ```diff
 diff --git a/app/Models/User.php b/app/Models/User.php
+index 1e640a5..53f5d78 100644
 --- a/app/Models/User.php
 +++ b/app/Models/User.php
-@@ -4,8 +4,10 @@ namespace App\Models;
-
+@@ -5,9 +5,12 @@
  use Illuminate\Foundation\Auth\User as Authenticatable;
  use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -256,15 +258,16 @@ diff --git a/app/Models/User.php b/app/Models/User.php
  class User extends Authenticatable
  {
 +    use HasApiTokens;
-
-TODO
++
+     /**
+      * Get the posts for the user.
+      */
 ```
 
 Le trait `HasApiTokens` apporte au modèle `User` les méthodes suivantes,
 fournies par Sanctum :
 
-- `createToken(string $name, array $abilities = ['*'], ...)` : crée un nouveau
-  token d'accès pour l'utilisateur.trice.
+- `createToken()` : crée un nouveau token d'accès pour l'utilisateur.trice.
 - `tokens()` : retourne la relation vers les tokens de l'utilisateur.trice.
 
 ## Gérer les tokens d'accès
@@ -369,13 +372,35 @@ class TokenController extends Controller
 
         $token_name = $validated['name'];
         $token_scopes = $validated['scopes'] ?? [];
-        $expiration_date = isset($validated['expiration_date'])
-            ? now()->parse($validated['expiration_date'])->endOfDay()
-            : null;
+        $expiration_date = isset($validated['expiration_date']) ? now()->parse($validated['expiration_date'])->endOfDay() : null;
 
         $token = $user->createToken($token_name, $token_scopes, $expiration_date);
 
         return redirect('/tokens')->with('plain_text_token', $token->plainTextToken);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
     }
 
     /**
@@ -518,12 +543,10 @@ liste des tokens de l'utilisateur.trice :
     @if (session('plain_text_token'))
         <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900 border border-yellow-400 dark:border-yellow-600 rounded-md">
             <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-2">
-                {{ __('ui.tokens.index.created.notice') }}
+                {{ __('ui.tokens.index.new_token_created') }}
             </p>
             <code
-                class="block break-all text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 p-2 rounded border border-yellow-300 dark:border-yellow-700">TODO
-                {{ session('plain_text_token') }}
-            </code>
+                class="block break-all text-sm bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 p-2 rounded border border-yellow-300 dark:border-yellow-700">{{ session('plain_text_token') }}</code>
         </div>
     @endif
 
@@ -596,6 +619,19 @@ liste des tokens de l'utilisateur.trice :
 </x-default-layout>
 ```
 
+Prenez quelques minutes pour lire et comprendre ce code. Essayez de répondre aux
+questions suivantes :
+
+- Où et comment le token en clair est-il affiché à l'utilisateur.trice après sa
+  création ?
+- Comment les permissions associées à chaque token sont-elles affichées dans le
+  tableau ?
+- Comment la date de dernière utilisation et la date d'expiration sont-elles
+  affichées de manière conviviale pour l'utilisateur.trice ?
+
+<details>
+<summary>Afficher les réponses</summary>
+
 Cette vue affiche :
 
 - Un message de confirmation avec le token en clair si un token vient d'être
@@ -619,6 +655,8 @@ non en clair), et il n'est affiché qu'une seule fois à l'utilisateur.trice au
 moment de sa création, grâce à la session flash. Par la suite, il n'est jamais
 affiché ou stocké en clair, ce qui garantit que les tokens d'accès restent
 secrets et sécurisés.
+
+</details>
 
 Remplissez ensuite la vue `resources/views/tokens/create.blade.php` avec le
 formulaire de création de token :
@@ -653,7 +691,7 @@ formulaire de création de token :
                 </label>
                 <input id="name" type="text" name="name" value="{{ old('name') }}"
                     placeholder="{{ __('ui.tokens.form.fields.name.placeholder') }}"
-                    class="w-full px-3 py-2 border rounded-md">
+                    class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:border-transparent @error('name') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
                 @error('name')
                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                 @enderror
@@ -664,17 +702,34 @@ formulaire de création de token :
                     <legend class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         {{ __('ui.tokens.form.fields.scopes.label') }}
                     </legend>
-                    TODO: Remplacer la boucle par des valeurs en dur pour la simplicité de l'exemple
-                    @foreach (['posts:create', 'posts:read', 'posts:update', 'posts:delete'] as $scope)
-                        <div class="flex items-center mb-2">
-                            <input type="checkbox" id="scope-{{ $scope }}" name="scopes[]"
-                                value="{{ $scope }}" {{ in_array($scope, old('scopes', [])) ? 'checked' : '' }}
-                                class="mr-2">
-                            <label for="scope-{{ $scope }}" class="text-sm text-gray-700 dark:text-gray-300">
-                                {{ __('ui.tokens.form.fields.scopes.options.' . str_replace(':', '_', $scope)) }}
-                            </label>
-                        </div>
-                    @endforeach
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="scope-posts:create" name="scopes[]" value="posts:create"
+                            {{ in_array('posts:create', old('scopes', [])) ? 'checked' : '' }} class="mr-2">
+                        <label for="scope-posts:create" class="text-sm text-gray-700 dark:text-gray-300">
+                            {{ __('ui.tokens.form.fields.scopes.options.posts_create') }}
+                        </label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="scope-posts:read" name="scopes[]" value="posts:read"
+                            {{ in_array('posts:read', old('scopes', [])) ? 'checked' : '' }} class="mr-2">
+                        <label for="scope-posts:read" class="text-sm text-gray-700 dark:text-gray-300">
+                            {{ __('ui.tokens.form.fields.scopes.options.posts_read') }}
+                        </label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="scope-posts:update" name="scopes[]" value="posts:update"
+                            {{ in_array('posts:update', old('scopes', [])) ? 'checked' : '' }} class="mr-2">
+                        <label for="scope-posts:update" class="text-sm text-gray-700 dark:text-gray-300">
+                            {{ __('ui.tokens.form.fields.scopes.options.posts_update') }}
+                        </label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="scope-posts:delete" name="scopes[]" value="posts:delete"
+                            {{ in_array('posts:delete', old('scopes', [])) ? 'checked' : '' }} class="mr-2">
+                        <label for="scope-posts:delete" class="text-sm text-gray-700 dark:text-gray-300">
+                            {{ __('ui.tokens.form.fields.scopes.options.posts_delete') }}
+                        </label>
+                    </div>
                     @error('scopes')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                     @enderror
@@ -682,14 +737,12 @@ formulaire de création de token :
             </div>
 
             <div class="mb-6">
-                <label for="expiration_date"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label for="expiration_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {{ __('ui.tokens.form.fields.expiration_date.label') }}
                 </label>
-                <input id="expiration_date" type="date" name="expiration_date"
-                    value="{{ old('expiration_date') }}"
+                <input id="expiration_date" type="date" name="expiration_date" value="{{ old('expiration_date') }}"
                     min="{{ now()->addDay()->toDateString() }}"
-                    class="w-full px-3 py-2 border rounded-md">
+                    class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:border-transparent @error('expiration_date') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                     {{ __('ui.tokens.form.fields.expiration_date.help') }}</p>
                 @error('expiration_date')
@@ -700,11 +753,11 @@ formulaire de création de token :
             <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
                 <div class="flex items-center justify-between">
                     <a href="{{ url('/tokens') }}"
-                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md">
+                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
                         {{ __('ui.tokens.form.actions.cancel') }}
                     </a>
                     <button type="submit"
-                        class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md cursor-pointer">
+                        class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800 cursor-pointer">
                         {{ __('ui.tokens.form.actions.submit') }}
                     </button>
                 </div>
@@ -713,6 +766,19 @@ formulaire de création de token :
     </article>
 </x-default-layout>
 ```
+
+Prenez quelques minutes pour lire et comprendre ce code. Essayez de répondre aux
+questions suivantes :
+
+- Quels sont les champs du formulaire de création de token et comment sont-ils
+  validés dans le contrôleur ?
+- Comment les permissions disponibles sont-elles présentées à
+  l'utilisateur.trice dans le formulaire ?
+- Comment la date d'expiration est-elle gérée dans le formulaire et validée dans
+  le contrôleur ?
+
+<details>
+<summary>Afficher les réponses</summary>
 
 Ce formulaire permet à l'utilisateur.trice de :
 
@@ -737,11 +803,41 @@ Si souhaité, l'utilisateur.trice peut également définir une date d'expiration
 pour le token, ce qui ajoute une couche de sécurité supplémentaire en limitant
 la durée de validité du token.
 
+</details>
+
 Mettez ensuite à jour la page de profil pour ajouter un lien vers la gestion des
-tokens d'accès :
+tokens d'accès (`resources/views/my-profile/show.blade.php`) :
 
 ```diff
-TODO
+diff --git a/resources/views/my-profile/show.blade.php b/resources/views/my-profile/show.blade.php
+index 26aa707..be350b8 100644
+--- a/resources/views/my-profile/show.blade.php
++++ b/resources/views/my-profile/show.blade.php
+@@ -36,7 +36,7 @@ class="w-full h-full object-cover">
+             {{ __('ui.my_profile.show.member_since', ['date' => $user->created_at->isoFormat('LL')]) }}
+         </p>
+
+-        <div class="flex justify-center gap-3 mt-6">
++        <div class="flex flex-col sm:flex-row justify-center gap-3 mt-6">
+             <a href="{{ url('/my-profile/edit') }}"
+                 class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800">
+                 {{ __('ui.my_profile.show.actions.edit') }}
+@@ -45,10 +45,14 @@ class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-t
+                 class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
+                 {{ __('ui.my_profile.show.actions.view_public') }}
+             </a>
++            <a href="{{ url('/tokens') }}"
++                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
++                {{ __('ui.my_profile.show.actions.manage_tokens') }}
++            </a>
+             <form method="POST" action="{{ url('/auth/logout') }}" class="inline">
+                 @csrf
+                 <button type="submit"
+-                    class="px-4 py-2 bg-red-600 dark:bg-red-800 text-white rounded-md hover:bg-red-700 dark:hover:bg-red-900 cursor-pointer">
++                    class="w-full px-4 py-2 bg-red-600 dark:bg-red-800 text-white rounded-md hover:bg-red-700 dark:hover:bg-red-900 cursor-pointer">
+                     {{ __('ui.my_profile.show.actions.logout') }}
+                 </button>
+             </form>
 ```
 
 ### Mettre à jour les fichiers de traduction
@@ -749,23 +845,31 @@ TODO
 Ajoutez les traductions nécessaires dans le fichier `lang/fr/ui.php` pour les
 nouveaux éléments de l'interface de gestion des tokens :
 
-TODO: faire un vrai diff. et ajouter les traductions au profil.
-
 ```diff
 diff --git a/lang/fr/ui.php b/lang/fr/ui.php
+index 63a1469..d315b31 100644
 --- a/lang/fr/ui.php
 +++ b/lang/fr/ui.php
-@@ -130,6 +130,62 @@ return [
+@@ -85,6 +85,7 @@
+             'actions' => [
+                 'edit' => 'Modifier le profil',
+                 'view_public' => 'Voir le profil public',
++                'manage_tokens' => "Gérer les jetons d'accès",
+                 'logout' => 'Se déconnecter',
+             ],
+         ],
+@@ -133,6 +134,60 @@
+         'disclaimer' => "Ce réseau social est un projet réalisé dans le cadre d'un cours de la HEIG-VD, Suisse.",
          'copyright' => '© :year Tous droits réservés.',
      ],
 +    'tokens' => [
 +        'index' => [
-+            'title' => 'tokens d\'accès',
-+            'description' => 'Gérez vos tokens d\'accès pour :app_name.',
++            'title' => "Jetons d'accès",
++            'description' => "Gérez vos jetons d'accès pour :app_name.",
 +            'created' => [
-+                'notice' => 'Votre token a été créé. Copiez-le maintenant, il ne sera plus affiché.',
++                'notice' => 'Votre jeton a été créé. Copiez-le maintenant, il ne sera plus affiché.',
 +            ],
-+            'no_tokens' => 'Aucun token d\'accès.',
++            'no_tokens' => "Aucun jeton d'accès.",
 +            'table' => [
 +                'name' => 'Nom',
 +                'scopes' => 'Permissions',
@@ -775,18 +879,18 @@ diff --git a/lang/fr/ui.php b/lang/fr/ui.php
 +                'no_expiry' => 'Sans expiration',
 +                'actions' => 'Actions',
 +                'delete' => 'Supprimer',
-+                'delete_confirm' => 'Souhaitez-vous vraiment supprimer ce token ? Cette action est irréversible.',
++                'delete_confirm' => 'Souhaitez-vous vraiment supprimer ce jeton ? Cette action est irréversible.',
 +            ],
 +        ],
 +        'create' => [
-+            'title' => 'Créer un nouveau token d\'accès',
-+            'description' => 'Créez un nouveau token d\'accès pour :app_name.',
++            'title' => "Créer un nouveau jeton d'accès",
++            'description' => "Créez un nouveau jeton d'accès pour :app_name.",
 +        ],
 +        'form' => [
 +            'fields' => [
 +                'name' => [
 +                    'label' => 'Nom',
-+                    'placeholder' => 'Nom du token',
++                    'placeholder' => 'Nom du jeton',
 +                ],
 +                'scopes' => [
 +                    'label' => 'Permissions',
@@ -797,18 +901,47 @@ diff --git a/lang/fr/ui.php b/lang/fr/ui.php
 +                        'posts_delete' => 'Supprimer des posts',
 +                    ],
 +                ],
++                'content' => [
++                    'label' => 'Contenu',
++                    'placeholder' => 'Contenu du jeton',
++                ],
 +                'expiration_date' => [
 +                    'label' => 'Expiration (optionnel)',
-+                    'help' => 'Laissez vide pour un token sans expiration.',
++                    'help' => 'Laissez vide pour un jeton sans expiration.',
 +                ],
 +            ],
 +            'actions' => [
-+                'submit' => 'Créer le token',
++                'submit' => 'Créer le jeton',
 +                'cancel' => 'Annuler',
 +            ],
 +        ],
 +    ],
      'posts' => [
+         'no_posts' => 'Aucun post à afficher.',
+         'likes_count' => '{0} Aucun like|{1} :count like|[2,*] :count likes',
+```
+
+Mettez ensuite à jour le fichier de traduction des erreurs de validation
+`lang/fr/validation.php` pour les règles de validation des tokens :
+
+```diff
+diff --git a/lang/fr/validation.php b/lang/fr/validation.php
+index a68fda7..b7fe4f4 100644
+--- a/lang/fr/validation.php
++++ b/lang/fr/validation.php
+@@ -17,9 +17,12 @@
+     'attributes' => [
+         'content'         => 'contenu',
+         'email'           => 'adresse e-mail',
++        'expiration_date' => "date d'expiration",
+         'first_name'      => 'prénom',
+         'last_name'       => 'nom',
++        'name'            => 'nom',
+         'profile_picture' => 'photo de profil',
++        'scopes'          => 'permissions',
+         'title'           => 'titre',
+         'username'        => "nom d'utilisateur",
+     ],
 ```
 
 ### Créer et supprimer des tokens
@@ -903,7 +1036,7 @@ nécessite un token d'accès valide pour fonctionner.
 
 Le résultat de cette requête devrait ressembler à ceci :
 
-![Exemple de réponse JSON avec les informations de l'utilisateur.trice](./images/bruno-get-user.png)
+![Exemple de réponse JSON avec les informations de l'utilisateur.trice et ses informations sensibles](./images/bruno-get-user-with-sensitive-fields.png)
 
 Si vous obtenez cette réponse, cela signifie que l'authentification avec le
 token d'accès fonctionne correctement, et que vous pouvez maintenant utiliser ce
@@ -932,7 +1065,19 @@ mettre à jour le modèle `User` pour y ajouter une propriété `$hidden` qui
 indique les champs à exclure lors de la sérialisation en JSON :
 
 ```diff
-TODO
+diff --git a/app/Models/User.php b/app/Models/User.php
+index 53f5d78..4cacec9 100644
+--- a/app/Models/User.php
++++ b/app/Models/User.php
+@@ -11,6 +11,8 @@ class User extends Authenticatable
+ {
+     use HasApiTokens;
+
++    protected $hidden = ['password', 'remember_token'];
++
+     /**
+      * Get the posts for the user.
+      */
 ```
 
 Cette modification indique à Laravel de ne pas inclure les champs `password` et
@@ -943,6 +1088,8 @@ l'API.
 Retestez à nouveau la route `/api/user` avec un token d'accès valide, et vous
 devriez voir que les champs `password` et `remember_token` ne sont plus présents
 dans la réponse JSON !
+
+![Exemple de réponse JSON sans les champs sensibles](./images/bruno-get-user-without-sensitive-fields.png)
 
 ## Créer une API RESTful pour les posts
 
@@ -1067,6 +1214,8 @@ class ApiPostController extends Controller
         Gate::authorize('delete', $post);
 
         $post->delete();
+
+        return response()->noContent();
     }
 }
 ```
@@ -1081,18 +1230,21 @@ Quelques points importants à noter :
   garantit que même si un token d'accès possède la permission `posts:update` ou
   `posts:delete`, il ne pourra modifier ou supprimer que les posts pour lesquels
   l'utilisateur.trice est autorisé.e (par exemple, ses propres posts).
+- La méthode `destroy` retourne une réponse avec le code HTTP 204 No Content (=
+  il n'y a pas de contenu retourné), ce qui est une bonne pratique pour les
+  endpoints de suppression dans une API RESTful.
 
 ### Mettre à jour les routes API
 
 Mettez à jour le fichier `routes/api.php` pour y déclarer les routes de l'API
-des posts. Chaque action est protégée par le middleware `auth:sanctum` et
-requiert une permission (_"ability"_) spécifique du token :
+des posts :
 
 ```diff
 diff --git a/routes/api.php b/routes/api.php
+index ccc387f..16d4a86 100644
 --- a/routes/api.php
 +++ b/routes/api.php
-@@ -1,9 +1,16 @@
+@@ -1,8 +1,15 @@
  <?php
 
 +use App\Http\Controllers\Api\v1\ApiPostController;
@@ -1103,25 +1255,46 @@ diff --git a/routes/api.php b/routes/api.php
      return $request->user();
  })->middleware('auth:sanctum');
 +
-+Route::apiResource('posts', ApiPostController::class)
++Route::apiResource('v1/posts', ApiPostController::class)
 +    ->middlewareFor(['index', 'show'], ['auth:sanctum', 'abilities:posts:read'])
 +    ->middlewareFor(['store'], ['auth:sanctum', 'abilities:posts:create'])
 +    ->middlewareFor(['update'], ['auth:sanctum', 'abilities:posts:update'])
 +    ->middlewareFor(['destroy'], ['auth:sanctum', 'abilities:posts:delete']);
 ```
 
-Les routes générées par `Route::apiResource('posts', ...)` sont les suivantes :
+Prenez quelques minutes pour lire et comprendre ce code. Essayez de répondre aux
+questions suivantes :
 
-| Méthode HTTP  | URI               | Action    | Permission requise |
-| :------------ | :---------------- | :-------- | :----------------- |
-| `GET`         | `/api/posts       | `index`   | `posts:read`       |
-| `GET`         | `/api/posts/{id}` | `show`    | `posts:read`       |
-| `POST`        | `/api/posts       | `store`   | `posts:create`     |
-| `PUT`/`PATCH` | `/api/posts/{id}` | `update`  | `posts:update`     |
-| `DELETE`      | `/api/posts/{id}` | `destroy` | `posts:delete`     |
+- Que signifie le préfixe `v1` dans la déclaration de la route
+  `Route::apiResource('v1/posts', ...)` et pourquoi est-il important ?
+- Quelles sont les routes générées par la déclaration
+  `Route::apiResource('v1/posts', ...)` et quelles actions du contrôleur
+  sont-elles associées à chaque route ?
+- Comment le middleware `middlewareFor` est-il utilisé pour appliquer des
+  middlewares différents selon l'action de la route ?
+- Comment les permissions sont-elles vérifiées pour chaque action de l'API des
+  posts grâce au middleware `abilities` ?
+
+<details>
+<summary>Afficher les réponses</summary>
+
+Les routes générées par `Route::apiResource('v1/posts', ...)` sont les suivantes
+:
+
+| Méthode HTTP  | URI                  | Action    | Permission requise |
+| :------------ | :------------------- | :-------- | :----------------- |
+| `GET`         | `/api/v1/posts       | `index`   | `posts:read`       |
+| `GET`         | `/api/v1/posts/{id}` | `show`    | `posts:read`       |
+| `POST`        | `/api/v1/posts       | `store`   | `posts:create`     |
+| `PUT`/`PATCH` | `/api/v1/posts/{id}` | `update`  | `posts:update`     |
+| `DELETE`      | `/api/v1/posts/{id}` | `destroy` | `posts:delete`     |
 
 La méthode `middlewareFor` permet d'appliquer des middlewares différents selon
 l'action.
+
+Chaque action est protégée par le middleware `auth:sanctum` et requiert une
+permission (_"ability"_) spécifique du token d'accès grâce au middleware
+`abilities`.
 
 Par exemple, `abilities:posts:read` vérifie que le token utilisé possède la
 permission `posts:read` avant d'autoriser l'accès à la liste ou au détail d'un
@@ -1129,6 +1302,8 @@ post.
 
 Le même principe s'applique pour les autres actions avec leurs permissions
 respectives.
+
+</details>
 
 ## Tester l'API
 
@@ -1142,21 +1317,55 @@ Commencez par créer un token avec les permissions suivantes :
 - `posts:read`.
 
 Une fois le token crée, utilisez-le pour faire une requête GET à l'endpoint
-`/api/posts`.
+`/api/v1/posts`.
 
 Votre requête et sa réponse associée devraient ressembler à ceci :
 
-![Exemple de requête GET à l'endpoint /api/posts avec un token d'accès](./images/bruno-get-all-posts.png)
+![Exemple de requête GET à l'endpoint /api/v1/posts avec un token d'accès](./images/bruno-get-all-posts.png)
+
+<details>
+<summary>Afficher l'équivalent avec curl</summary>
+
+```bash
+# Récupérer la liste des posts
+curl -v \
+  -H "Authorization: Bearer <votre-token>" \
+  -H "Accept: application/json" \
+  http://localhost:8000/api/v1/posts
+```
+
+</details>
+
+La réponse devrait être un tableau JSON contenant les posts existants, avec
+leurs informations associées (auteur, nombre de likes, etc.) avec un code de
+statut HTTP 200 OK, signifiant que la requête a réussi et que les données ont
+été retournées correctement.
 
 ### Tester la récupération d'un post spécifique
 
-Faites une requête GET à l'endpoint `/api/posts/{id}` en remplaçant `{id}` par
-l'identifiant d'un post existant. Par exemple, si vous avez un post avec
-l'identifiant `1`, faites une requête GET à l'endpoint `/api/posts/1`.
+Faites une requête GET à l'endpoint `/api/v1/posts/{id}` en remplaçant `{id}`
+par l'identifiant d'un post existant. Par exemple, si vous avez un post avec
+l'identifiant `1`, faites une requête GET à l'endpoint `/api/v1/posts/1`.
 
 Votre requête et sa réponse associée devraient ressembler à ceci :
 
-![Exemple de requête GET à l'endpoint /api/posts/1 avec un token d'accès](./images/bruno-get-one-post.png)
+![Exemple de requête GET à l'endpoint /api/v1/posts/1 avec un token d'accès](./images/bruno-get-one-post.png)
+
+<details>
+<summary>Afficher l'équivalent avec curl</summary>
+
+```bash
+# Récupérer un post spécifique
+curl -v \
+  -H "Authorization: Bearer <votre-token>" \
+  -H "Accept: application/json" \
+  http://localhost:8000/api/v1/posts/1
+```
+
+</details>
+
+La réponse devrait être un objet JSON contenant les informations du post avec
+l'identifiant spécifié, avec un code de statut HTTP 200 OK.
 
 ### Tester la création de posts
 
@@ -1165,9 +1374,9 @@ Commencez par créer un token avec les permissions suivantes :
 - `posts:create`.
 
 Une fois le token crée, utilisez-le pour faire une requête POST à l'endpoint
-`/api/posts` en incluant les données du post à créer dans le corps de la requête
-au format JSON. Par exemple, vous pouvez envoyer le JSON suivant dans le corps
-de la requête pour créer un nouveau post :
+`/api/v1/posts` en incluant les données du post à créer dans le corps de la
+requête au format JSON. Par exemple, vous pouvez envoyer le JSON suivant dans le
+corps de la requête pour créer un nouveau post :
 
 ```json
 {
@@ -1180,9 +1389,43 @@ Votre requête et sa réponse associée devraient ressembler à ceci :
 
 ![Exemple de requête POST à l'endpoint /api/posts avec un token d'accès](./images/bruno-create-post.png)
 
+<details>
+<summary>Afficher l'équivalent avec curl</summary>
+
+```bash
+# Créer un nouveau post
+curl -v -X POST \
+  -H "Authorization: Bearer <votre-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Mon titre", "content": "Mon contenu"}' \
+  http://localhost:8000/api/v1/posts
+```
+
+</details>
+
+La réponse devrait être un objet JSON contenant les informations du post
+nouvellement créé, avec un code de statut HTTP 200 OK.
+
 Essayez également de faire une requête POST avec un token qui n'a pas la
-permission `posts:create`, et vérifiez que vous obtenez une réponse d'erreur
-d'autorisation (403 Forbidden).
+permission `posts:create` (par exemple, le token utilisé pour les requêtes de
+lecture), et vérifiez que vous obtenez une réponse d'erreur d'autorisation (403
+Forbidden).
+
+![Exemple de réponse d'erreur d'autorisation avec un token sans la permission posts:create](./images/bruno-create-post-forbidden.png)
+
+La réponse devrait contenir un message d'erreur indiquant que
+l'utilisateur.trice n'est pas autorisé.e à effectuer cette action, avec un code
+de statut HTTP 403 Forbidden.
+
+Vous remarquerez peut-être que le message d'erreur est très verbeux (= détaillé)
+et contient l'exception complète générée par le middleware d'autorisation.
+
+Cela est dû au fait que nous avons activé le mode de débogage de Laravel en
+définissant `APP_DEBUG=true` dans le fichier `.env`. En production, il est
+recommandé de désactiver le mode de débogage (`APP_DEBUG=false`) pour éviter
+d'exposer des informations sensibles dans les messages d'erreur. Ici, ce n'est
+pas un problème car nous sommes en développement et cela nous permet de mieux
+comprendre le fonctionnement du middleware d'autorisation.
 
 Cela confirme que l'endpoint de création de post est bien protégé par le
 middleware `abilities:posts:create` et que seuls les tokens d'accès avec la
@@ -1195,10 +1438,11 @@ Commencez par créer un token avec les permissions suivantes :
 - `posts:update`.
 
 Une fois le token crée, utilisez-le pour faire une requête PUT à l'endpoint
-`/api/posts/{id}` en remplaçant `{id}` par l'identifiant d'un post existant, et
-en incluant les données modifiées du post dans le corps de la requête au format
-JSON. Par exemple, vous pouvez envoyer le JSON suivant dans le corps de la
-requête pour modifier un post :
+`/api/v1/posts/{id}` en remplaçant `{id}` par l'identifiant d'un post existant
+**que vous avez créé** (car le middleware d'autorisation vérifie que vous êtes
+autorisé.e à modifier ce post), et en incluant les données modifiées du post
+dans le corps de la requête au format JSON. Par exemple, vous pouvez envoyer le
+JSON suivant dans le corps de la requête pour modifier un post :
 
 ```json
 {
@@ -1209,7 +1453,24 @@ requête pour modifier un post :
 
 Votre requête et sa réponse associée devraient ressembler à ceci :
 
-![Exemple de requête PUT à l'endpoint /api/posts/1 avec un token d'accès](./images/bruno-update-post.png)
+![Exemple de requête PUT à l'endpoint /api/v1/posts/1 avec un token d'accès](./images/bruno-update-post.png)
+
+<details>
+<summary>Afficher l'équivalent avec curl</summary>
+
+```bash
+# Modifier un post
+curl -v -X PUT \
+  -H "Authorization: Bearer <votre-token>" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Titre modifié", "content": "Contenu modifié"}' \
+  http://localhost:8000/api/v1/posts/1
+```
+
+</details>
+
+La réponse devrait être un objet JSON contenant les informations du post
+modifié, avec un code de statut HTTP 200 OK.
 
 A nouveau, essayez de faire une requête PUT avec un token qui n'a pas la
 permission `posts:update`, et vérifiez que vous obtenez une réponse d'erreur
@@ -1222,74 +1483,94 @@ Commencez par créer un token avec les permissions suivantes :
 - `posts:delete`.
 
 Une fois le token crée, utilisez-le pour faire une requête DELETE à l'endpoint
-`/api/posts/{id}` en remplaçant `{id}` par l'identifiant d'un post existant. Par
-exemple, si vous avez un post avec l'identifiant `1`, faites une requête DELETE
-à l'endpoint `/api/posts/1`.
+`/api/v1/posts/{id}` en remplaçant `{id}` par l'identifiant d'un post existant
+**que vous avez créé** (car le middleware d'autorisation vérifie que vous êtes
+autorisé.e à supprimer ce post). Par exemple, si vous avez un post avec
+l'identifiant `1`, faites une requête DELETE à l'endpoint `/api/v1/posts/1`.
 
-Votre requête devrait ressembler à ceci :
-`13|W3RuKVCOpJmiiFtdYIL5fP2evYDcnNGUBfu99xsf018f7073`
+Votre requête et sa réponse associée devraient ressembler à ceci :
 
-Créez d'abord un token d'accès depuis l'interface web de votre application
-(accessible à l'adresse `/tokens`), puis utilisez-le pour authentifier vos
-requêtes.
+![Exemple de requête DELETE à l'endpoint /api/v1/posts/1 avec un token d'accès](./images/bruno-delete-post.png)
 
-Voici quelques exemples avec `curl` :
-
-```bash
-# Récupérer la liste des posts
-curl -s \
-  -H "Authorization: Bearer <votre-token>" \
-  http://localhost:8000/api/posts
-```
-
-```bash
-# Récupérer un post spécifique
-curl -s \
-  -H "Authorization: Bearer <votre-token>" \
-  http://localhost:8000/api/posts/1
-```
-
-```bash
-# Créer un nouveau post
-curl -s -X POST \
-  -H "Authorization: Bearer <votre-token>" \
-  -H "Content-Type: application/json" \
-  -d '{"title": "Mon titre", "content": "Mon contenu"}' \
-  http://localhost:8000/api/posts
-```
-
-```bash
-# Modifier un post
-curl -s -X PUT \
-  -H "Authorization: Bearer <votre-token>" \
-  -H "Content-Type: application/json" \
-  -d '{"title": "Titre modifié", "content": "Contenu modifié"}' \
-  http://localhost:8000/api/posts/1
-```
+<details>
+<summary>Afficher l'équivalent avec curl</summary>
 
 ```bash
 # Supprimer un post
-curl -s -X DELETE \
+curl -v -X DELETE \
   -H "Authorization: Bearer <votre-token>" \
-  http://localhost:8000/api/posts/1
+  -H "Accept: application/json" \
+  http://localhost:8000/api/v1/posts/1
 ```
 
-Remplacez `<votre-token>` par le token en clair affiché lors de sa création.
+</details>
 
-> [!TIP]
->
-> Si vous utilisez Bruno ou Postman, vous pouvez créer une collection de
-> requêtes et y stocker votre token d'accès pour l'utiliser dans toutes les
-> requêtes de la collection sans avoir à le saisir à chaque fois.
+La réponse devrait être vide avec un code de statut HTTP 204 No Content,
+signifiant que le post a été supprimé avec succès.
+
+A nouveau, essayez de faire une requête PUT avec un token qui n'a pas la
+permission `posts:delete`, et vérifiez que vous obtenez une réponse d'erreur
+d'autorisation (403 Forbidden).
+
+### Tester un post inexistant
+
+Essayez de faire une requête GET, PUT ou DELETE à l'endpoint
+`/api/v1/posts/{id}` en remplaçant `{id}` par un identifiant de post qui
+n'existe pas (par exemple, `9999`), et vérifiez que vous obtenez une réponse
+d'erreur de ressource non trouvée (404 Not Found).
+
+![Exemple de réponse d'erreur de ressource non trouvée avec un post inexistant](./images/bruno-not-found.png)
+
+La réponse devrait contenir un message d'erreur indiquant que la ressource
+demandée n'a pas été trouvée, avec un code de statut HTTP 404 Not Found.
+
+## Optionnel : versionner la collection d'API dans Bruno avec Git
+
+Si vous utilisez Bruno pour tester votre API, vous pouvez également versionner
+votre collection d'API avec Git pour garder une trace de vos différentes
+requêtes et de leurs évolutions au fil du temps.
+
+Pour cela, cliquez sur les trois points à côté du nom de votre collection d'API
+dans Bruno, puis sélectionnez _"Reveal in File Manager"_ pour ouvrir le dossier
+contenant les fichiers de votre collection.
+
+Copiez le dossier de votre collection dans le répertoire de votre projet
+Laravel, par exemple dans un dossier `bruno-collections/`.
+
+Vous pouvez ensuite versionner ce dossier avec Git en l'ajoutant à votre dépôt,
+ce qui vous permettra de suivre les modifications apportées à vos requêtes d'API
+au fil du temps, de revenir à des versions précédentes si nécessaire, et de
+partager votre collection avec d'autres personnes.
 
 ## Conclusion
 
 Notre application dispose désormais d'une API RESTful sécurisée avec Laravel
-Sanctum. Les utilisateur.trices peuvent créer des tokens d'accès personnels avec
-des permissions granulaires (`posts:read`, `posts:create`, `posts:update`,
-`posts:delete`) directement depuis l'interface web de l'application. Ces tokens
-permettent à des client.es externes d'interagir avec les posts de l'application
-de manière sécurisée et contrôlée.
+Sanctum.
+
+Les utilisateur.trices peuvent créer des tokens d'accès personnels avec des
+permissions granulaires (`posts:read`, `posts:create`, `posts:update`,
+`posts:delete`) directement depuis l'interface web de l'application.
+
+Ces tokens permettent à des client.es externes d'interagir avec les posts de
+l'application de manière sécurisée et contrôlée.
+
+Ces tokens peuvent avoir une ou plusieurs permissions associées, ce qui permet
+de contrôler précisément les actions que chaque token peut effectuer lorsqu'il
+est utilisé pour authentifier des requêtes à l'API. Par exemple, un token avec
+uniquement la permission `posts:read` ne pourra être utilisé que pour lire les
+posts, tandis qu'un token avec les permissions `posts:create` et `posts:update`
+pourra être utilisé pour créer et modifier des posts.
+
+L'API RESTful que nous avons créée expose les endpoints nécessaires pour
+récupérer la liste des posts, récupérer un post spécifique, créer, modifier et
+supprimer des posts, tout en vérifiant les permissions associées à chaque token
+d'accès.
+
+En respectant les bonnes pratiques de développement d'API RESTful, nous avons
+également utilisé les codes de statut HTTP appropriés pour indiquer le résultat
+de chaque requête (200 OK, 201 Created, 204 No Content, 403 Forbidden, 404 Not
+Found, etc.), ce qui facilite la compréhension et l'utilisation de l'API par les
+client.es externes.
 
 ## Solution
 
@@ -1327,8 +1608,6 @@ suivante :
 
 - Seriez-vous capable d'ajouter d'autres ressources à votre API RESTful, comme
   les likes ou les profils des utilisateur.trices ?
-- Seriez-vous capable de mettre en place des permissions supplémentaires pour
-  votre API RESTful, comme `likes:create` ou `profile:update` ?
 
 ## Aller plus loin
 
