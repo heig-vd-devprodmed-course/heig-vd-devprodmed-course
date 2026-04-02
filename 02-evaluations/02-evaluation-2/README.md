@@ -13,6 +13,7 @@
 - [Ordre de passage](#ordre-de-passage)
   - [Groupe 1](#groupe-1)
   - [Groupe 2](#groupe-2)
+- [Conseils](#conseils)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
 
 ## Objectifs
@@ -176,6 +177,10 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
   présente et montrer un effort de personnalisation et d'originalité. Ils ne
   doivent pas être des aspects génériques ou triviaux qui ne montrent pas une
   réelle compréhension du framework Laravel et du développement web.
+- Plusieurs personnes peuvent présenter des aspects similaires, mais chaque
+  personne doit présenter des aspects qui lui sont propres et qui ne sont pas
+  simplement copiés ou légèrement modifiés à partir du travail d'autres
+  personnes.
 - Seuls PHP et les fonctionnalités offertes par Laravel sont autorisés pour
   développer les nouvelles fonctionnalités. L'utilisation de JavaScript ou
   d'autres langages de programmation n'est pas autorisée[^javascript].
@@ -300,6 +305,16 @@ Tanguy
 |  21 | Léa          | 16:10 - 16:18        | 16:20 - 16:28         |
 |  22 | Volontaire ? | 16:20 - 16:28        | 16:30 - 16:38         |
 |  23 | Volontaire ? | 16:30 - 16:38        | 16:40 - 16:48         |
+
+## Conseils
+
+- Ne voyez pas trop gros ! Il vaut mieux présenter trois fonctionnalités simples
+  et fonctionnelles que trois fonctionnalités complexes mais incomplètes ou non
+  fonctionnelles.
+- Préparez votre présentation à l'avance pour être sûr de respecter les critères
+  d'évaluation et de présenter un travail de qualité.
+- Soyez clair et structuré dans votre présentation pour faciliter la
+  compréhension de votre travail.
 
 ## Sanctions possibles en cas de tricherie
 
