@@ -21,17 +21,12 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 > À l'issue de cette séance, les personnes qui étudient devraient être capables
 > de :
 >
-> - Décrire la partie "contrôleur" du patron de conception MVC.
-> - Lister les différentes méthodes HTTP et leur utilisation.
-> - Décrire le concept de routes dans une application Laravel.
-> - Définir des routes avec des paramètres dans Laravel.
-> - Créer des contrôleurs dans Laravel.
-> - Utiliser les contrôleurs pour gérer les requêtes HTTP et retourner des
->   réponses.
-> - Résumer les concepts du patron MVC, leur rôle dans une application web et
->   les dossiers où les trouver dans une application Laravel.
-> - Implémenter ces concepts avec Laravel pour réaliser le petit réseau social
->   du mini-projet.
+> - Décrire les principes fondamentaux d'une architecture REST.
+> - Différencier les architectures REST et RESTful.
+> - Décrire quand et pourquoi utiliser une architecture RESTful pour développer
+>   des services web.
+> - Mettre en œuvre une architecture RESTful dans une application web avec le
+>   framework Laravel.
 >
 > **Méthodes d'enseignement et d'apprentissage**
 >
@@ -66,23 +61,21 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
-- [Introduction aux contrôleurs dans le patron MVC](#introduction-aux-contrôleurs-dans-le-patron-mvc)
-- [Rappels sur le protocole HTTP](#rappels-sur-le-protocole-http)
-  - [Ressources](#ressources)
-  - [Requêtes et réponses HTTP](#requêtes-et-réponses-http)
-  - [Méthodes HTTP](#méthodes-http)
-  - [En-têtes HTTP](#en-têtes-http)
-  - [Corps de requête/réponse](#corps-de-requêteréponse)
-- [Routes](#routes)
-- [Paramètres de route](#paramètres-de-route)
-- [Contrôleurs](#contrôleurs)
-  - [Créer un contrôleur](#créer-un-contrôleur)
-  - [Associer une route à un contrôleur](#associer-une-route-à-un-contrôleur)
-  - [Gérer les requêtes HTTP dans un contrôleur](#gérer-les-requêtes-http-dans-un-contrôleur)
-  - [Retourner des réponses HTTP depuis un contrôleur](#retourner-des-réponses-http-depuis-un-contrôleur)
-- [Tester les routes et les contrôleurs](#tester-les-routes-et-les-contrôleurs)
-- [Gérer les erreurs dans les contrôleurs](#gérer-les-erreurs-dans-les-contrôleurs)
-- [Le patron MVC : récapitulatif](#le-patron-mvc--récapitulatif)
+- [MVC, REST et RESTful](#mvc-rest-et-restful)
+  - [Jusqu'à présent... architecture MVC](#jusquà-présent-architecture-mvc)
+  - [Dans le futur peut-être... architecture REST](#dans-le-futur-peut-être-architecture-rest)
+  - [Architectures REST/RESTful](#architectures-restrestful)
+- [API](#api)
+  - [Format des données](#format-des-données)
+  - [Structure d'une API RESTful](#structure-dune-api-restful)
+  - [Versionner une API RESTful](#versionner-une-api-restful)
+  - [Tester une API RESTful](#tester-une-api-restful)
+- [Développer une API RESTful avec Laravel](#développer-une-api-restful-avec-laravel)
+  - [Différencier les routes MVC des routes API](#différencier-les-routes-mvc-des-routes-api)
+  - [Laravel Sanctum pour l'authentification des API RESTful](#laravel-sanctum-pour-lauthentification-des-api-restful)
+  - [Créer les tokens pour les utilisateur.trices](#créer-les-tokens-pour-les-utilisateurtrices)
+  - [Utiliser les tokens pour authentifier les requêtes API](#utiliser-les-tokens-pour-authentifier-les-requêtes-api)
+  - [Gérer les permissions et les rôles des utilisateur.trices avec les tokens d'authentification](#gérer-les-permissions-et-les-rôles-des-utilisateurtrices-avec-les-tokens-dauthentification)
 - [Conclusion](#conclusion)
 - [Exercices](#exercices)
 - [Mini-projet](#mini-projet)
@@ -91,383 +84,394 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Objectifs
 
-Ce contenu de cours a pour objectifs de permettre aux personnes qui étudient de
-maîtriser la création de routes avec des paramètres et l'utilisation de
-contrôleurs dans Laravel afin de gérer les requêtes HTTP et de retourner des
-réponses appropriées, en coordination avec les modèles et les vues.
+Ce contenu de cours a pour objectifs d'être capable de mettre en place une
+architecture RESTful dans une application web avec le framework Laravel.
 
 Ce contenu repose sur la documentation officielle suivante :
 
-- <https://laravel.com/docs/12.x/routing> et ses sous-sections.
-- <https://laravel.com/docs/12.x/requests> et ses sous-sections.
-- <https://laravel.com/docs/12.x/responses> et ses sous-sections.
-- <https://laravel.com/docs/12.x/controllers> et ses sous-sections.
-- <https://laravel.com/docs/12.x/errors> et ses sous-sections.
+- <https://laravel.com/docs/12.x/sanctum> et ses sous-sections.
+- <https://laravel.com/docs/12.x/passport> et ses sous-sections.
+- <https://laravel.com/docs/12.x/eloquent-serialization#hiding-attributes-from-json>.
 
 La liste complète des objectifs est disponible dans la section _"Objectifs"_ du
 bloc d'information en haut de ce contenu.
 
-## Introduction aux contrôleurs dans le patron MVC
+Il s'agit du dernier contenu du cours !
 
-Le patron de conception MVC (Model-View-Controller) sépare une application en
-trois composants principaux. Lors d'une séance précédentes, nous avons déjà
-abordé les modèles (Model) - qui représentent les données et la logique métier
-de l'application - ainsi que les vues (View) - qui sont responsables de la
-présentation des données à la personne qui utilise l'application. Dans cette
-séance, nous allons nous concentrer sur les contrôleurs (Controller), qui sont
-responsables de la gestion des requêtes HTTP et du flux de l'application.
+## MVC, REST et RESTful
 
-Dans le patron MVC, les contrôleurs ont pour responsabilité de :
+Jusqu'à présent, nous avons vu comment développer une application web avec le
+patron de conception MVC (Model-View-Controller) en utilisant le framework
+Laravel.
 
-- Recevoir les requêtes HTTP.
-- Interagir avec les modèles pour récupérer ou manipuler des données.
-- Appeler les vues pour afficher les résultats.
-- Retourner des réponses HTTP appropriées.
+Il existe d'autres architectures pour développer des applications web, notamment
+REST et RESTful.
 
-Les contrôleurs agissent comme un pont entre les vues et les modèles, en gérant
-les interactions entre ces deux composants.
+### Jusqu'à présent... architecture MVC
 
-## Rappels sur le protocole HTTP
+Jusqu'à présent, nous avons vu comment développer une application web avec le
+framework Laravel en utilisant une architecture _"model–view–controller (MVC)"_.
+Nous avons vu comment créer des routes, des contrôleurs, des vues, des modèles,
+ainsi que gérer l'authentification et les autorisations dans une application
+Laravel.
 
-Le protocole HTTP est le protocole de communication utilisé pour les
-applications web. Ce protocole utilise plusieurs termes clés, notamment :
+Cette architecture MVC est très adaptée pour développer des applications web
+classiques, souvent utilisée pour interagir avec notre application via une
+interface graphique (leur navigateur web).
 
-- Les ressources.
-- Les requêtes et réponses HTTP.
-- Les méthodes HTTP.
-- Les en-têtes HTTP.
-- Les corps de requête/réponse.
+Cette architecture retourne habituellement un HTML complet au client qui
+l'affiche dans le navigateur et gère les sessions à l'aide de cookies.
 
-### Ressources
+Cependant, elle n'est pas adaptée pour développer des services web qui doivent
+être consommés (= interagir avec notre application/utiliser les données de notre
+application) par d'autres applications qui, elles, ne peuvent pas comprendre un
+HTML complet et qui ne peuvent pas gérer les sessions à l'aide de cookies.
 
-Une ressource est une entité identifiable dans une application web, généralement
-représentée par une URL.
+Des exemples de clients qui ne peuvent pas comprendre un HTML complet et qui ne
+peuvent pas gérer les sessions à l'aide de cookies sont les applications
+mobiles, des scripts en ligne de commande, ou encore des applications JavaScript
+_"single-page applications (SPA)"_ à l'aide de Vue.js, React ou Angular (selon
+comment elles sont développées).
 
-Par exemple, la fiche d'unité de ce cours sur GAPS à l'adresse suivante :
-<https://gaps.heig-vd.ch/consultation/fiches/uv/uv.php?id=6082>.
+Comment permettre à ces clients de consommer les fonctionnalités ou les données
+de notre application Laravel ?
 
-Cette URL représente une ressource spécifique à l'aide de :
+### Dans le futur peut-être... architecture REST
 
-- Un protocole (`https://`).
-- Un nom de domaine (`gaps.heig-vd.ch`).
-- Un chemin d'accès (`/consultation/fiches/uv/uv.php`).
-- Des paramètres de requête (`?id=6082`).
+Heureusement pour nous, Laravel permet de développer des services web en
+utilisant une architecture REST(ful), qui est une architecture adaptée pour
+développer des services web qui doivent être consommés par d'autres applications
+ou par des clients légers (applications mobiles, applications JavaScript côté
+client, etc.) qui ne peuvent pas comprendre un HTML complet et qui ne peuvent
+pas gérer les sessions à l'aide de cookies.
 
-Cette URL permet d'accéder à une ressource spécifique, qui est la fiche de
-l'unité d'enseignement "Développement de produit média (DévProdMéd)". Lorsque
-quelqu'un accède à cette URL, une requête HTTP est envoyée au serveur, qui
-traite la requête et retourne une réponse contenant les données de la fiche de
-l'unité d'enseignement.
+Pour cela, il est probable que vous aurez besoin de mettre en place une
+architecture _"representational state transfer (REST)"_ dans votre application
+Laravel.
 
-Autre exemple, dans notre application de réseau social, les ressources
-pourraient être les utilisateur.trices, les publications, les commentaires, etc.
-Chaque ressource peut être manipulée à l'aide de différentes méthodes HTTP.
+Une application REST est une application qui suit les principes suivants (source
+: <https://en.wikipedia.org/wiki/REST#Architectural_constraints>) :
 
-La structure des ressources sont souvent conçue à partir de la base de données
-et des modèles Laravel pour refléter cette organisation des ressources, ce qui
-facilite la gestion des données et la création de routes correspondantes.
+1. _"Client-serveur : l'application est composée d'un client qui consomme les
+   services d'un serveur."_
+   - Un client peut être un navigateur web, une application mobile, un script en
+     ligne de commande, etc.
+2. _"Sans état : le serveur ne stocke aucune information sur l'état du client
+   entre les différentes requêtes. Chaque requête doit contenir toutes les
+   informations nécessaires pour que le serveur puisse la traiter."_
+   - Cela signifie que le serveur ne doit pas utiliser de sessions pour stocker
+     des informations sur le client, mais plutôt que le client doit inclure
+     toutes les informations nécessaires dans chaque requête (par exemple, en
+     utilisant des tokens d'authentification pour authentifier les requêtes).
+3. _"Cacheable : les réponses du serveur peuvent être mises en cache par le
+   client pour améliorer les performances."_
+   - Cela signifie que le serveur doit inclure des en-têtes de cache appropriés
+     dans les réponses pour permettre au client de mettre en cache les réponses
+     et d'améliorer les performances de l'application.
+4. _"Interface uniforme : l'interface entre le client et le serveur doit être
+   uniforme et standardisée."_
+   - Cela signifie que le serveur doit suivre des conventions standard pour
+     l'URL, les méthodes HTTP, les formats de données, etc. pour permettre au
+     client de comprendre comment interagir avec le serveur de manière
+     cohérente. Souvent, il s'agira d'utiliser des structures JSON pour les
+     données échangées entre le client et le serveur.
+5. _"Système en couches : l'architecture peut être composée de plusieurs
+   couches."_
+   - Par exemple, une couche pour accéder à la base de données, une couche pour
+     la logique métier, une couche pour l'interface utilisateur, une couche pour
+     le traitement des requêtes, une couche pour
+     l'authentification/autorisations, etc.
+6. _"Code à la demande (optionnel) : le serveur peut envoyer du code exécutable
+   au client pour qu'il l'exécute."_
+   - Selon la technologie utilisée, cela peut être du code JavaScript envoyé par
+     le serveur pour être exécuté par le client, ou du code HTML avec des
+     balises `<script>` qui contiennent du code JavaScript à exécuter par le
+     client.
 
-Les ressources sont généralement organisées de manière hiérarchique dans les
-URL. Par exemple, une URL pour accéder à une publication spécifique pourrait
-ressembler à `/posts/123`, où `123` est l'identifiant de la publication.
+Au travers de la structure et des conventions mises à disposition par Laravel,
+il est possible de respecter ces principes pour développer des services web qui
+suivent l'architecture REST/RESTful.
 
-Les ressources sont parfois appelées "endpoints" ou "routes" dans le contexte
-des applications web, mais il est important de comprendre que les ressources
-font référence aux entités manipulées par l'application, tandis que les routes
-font référence aux chemins d'URL qui permettent d'accéder à ces ressources.
+### Architectures REST/RESTful
 
-### Requêtes et réponses HTTP
+Développer une application web qui suit parfaitement les principes de
+l'architecture REST peut être difficile, voire impossible dans certains cas.
 
-HTTP est basé sur un modèle de requête-réponse, où le client envoie une requête
-au serveur, et le serveur répond avec une réponse. Le corps de la requête ou de
-la réponse contient les données envoyées par le client ou le serveur.
+C'est pourquoi on parle souvent d'architecture RESTful, qui est une architecture
+qui suit les principes au plus proche de l'architecture REST, mais sans
+respecter tous les principes de l'architecture REST.
 
-Par exemple, lors de la création d'une nouvelle publication, les données de la
-publication seraient incluses dans le corps de la requête `POST`.
+Les principes les plus importants à respecter pour développer une application
+RESTful sont les principes suivants :
 
-Ainsi, lorsqu'une personne qui utilise l'application effectue une action (comme
-cliquer sur un lien ou soumettre un formulaire), une requête HTTP est envoyée au
-serveur, qui est ensuite traitée par un contrôleur pour déterminer la réponse
-appropriée à retourner.
+- Client-serveur.
+- Interface uniforme.
+- Système en couches.
 
-La réponse peut être une page HTML, des données JSON, une redirection vers une
-autre URL, ou tout autre type de réponse HTTP.
+Laravel permet de développer des applications RESTful, c'est-à-dire des
+applications qui suivent les principes de l'architecture REST au travers d'une
+API.
 
-### Méthodes HTTP
+## API
 
-Les méthodes HTTP sont des verbes qui indiquent l'action à effectuer sur une
-ressource. Les méthodes les plus courantes sont :
+Une _"application programming interface (API)"_ est un ensemble de règles et de
+protocoles qui permettent à différentes applications de communiquer entre elles.
 
-- **`GET`** : Récupérer une ressource ou une collection de ressources.
-- **`POST`** : Créer une nouvelle ressource.
-- **`PUT`** ou **`PATCH`** : Mettre à jour une ressource.
-- **`DELETE`** : Supprimer une ressource.
+Une API permet à une application de fournir des fonctionnalités ou des données à
+d'autres applications de manière standardisée et contrôlée.
 
-Par exemple, pour récupérer une publication spécifique, on utiliserait une
-requête `GET` sur l'URL `/posts/123`. Pour créer une nouvelle publication, on
-utiliserait une requête `POST` sur l'URL `/posts` avec les données de la
-publication dans le corps de la requête.
+Les API sont souvent utilisées pour permettre à des applications mobiles ou à
+des scripts en ligne de commande consommer les fonctionnalités ou les données
+d'une application web.
 
-Pour rappel, un navigateur web envoie des requêtes `GET` lorsqu'on accède à une
-URL, et des requêtes `POST` lorsqu'on soumet un formulaire par défaut.
+### Format des données
 
-Si l'on souhaite utiliser les autres méthodes HTTP (`PUT`, `PATCH`, `DELETE`),
-il est nécessaire de configurer les formulaires HTML pour simuler ces requêtes
-ou passer par du JavaScript.
+Grâce au protocole HTTP, les clients peuvent définir le format des données
+qu'ils souhaitent recevoir du serveur en utilisant les en-têtes de la requête.
 
-### En-têtes HTTP
+Par exemple, un client peut inclure l'en-tête `Accept: application/json` dans sa
+requête pour indiquer au serveur qu'il souhaite recevoir les données au format
+JSON. Si le serveur est capable de fournir les données au format JSON, il peut
+répondre avec les données au format JSON. Sinon, il peut répondre avec un code
+d'état HTTP approprié (par exemple, 406 Not Acceptable) pour indiquer que le
+format demandé n'est pas disponible.
 
-Les en-têtes HTTP sont des paires clé-valeur qui fournissent des informations
-supplémentaires sur la requête ou la réponse. Par exemple, les en-têtes peuvent
-indiquer le type de contenu, les informations d'authentification, les
-préférences de langue, etc.
+De même, un client peut inclure l'en-tête `Content-Type: application/json` dans
+sa requête pour indiquer au serveur que les données envoyées dans le corps de la
+requête sont au format JSON. Le serveur peut alors traiter les données en
+conséquence.
 
-Par exemple, un en-tête `Content-Type: application/json` indique que le corps de
-la requête ou de la réponse est au format JSON.
+Le serveur pourra alors lui-même inclure des en-têtes dans sa réponse pour
+indiquer le format des données qu'il renvoie, par exemple en incluant l'en-tête
+`Content-Type: application/json` pour indiquer que les données renvoyées sont au
+format JSON ou encore `Content-Type: text/html` pour indiquer que les données
+renvoyées sont au format HTML (la logique actuelle de votre application
+Laravel).
 
-### Corps de requête/réponse
+Le format de données le plus couramment utilisé pour les API RESTful est le
+format JSON, mais d'autres formats comme XML peuvent également être utilisés.
 
-Le corps de la requête ou de la réponse contient les données envoyées par le
-client ou le serveur. Par exemple, lors de la création d'une nouvelle
-publication, le corps de la requête `POST` pourrait contenir les données de la
-publication au format JSON ou en tant que données de formulaire.
+### Structure d'une API RESTful
 
-## Routes
+Une API RESTful est généralement structurée autour de ressources, qui sont des
+entités ou des objets qui représentent des données ou des fonctionnalités de
+l'application et suit généralement les conventions suivantes :
 
-Comme évoqué précédemment, les routes sont les chemins d'URL qui permettent
-d'accéder à des ressources spécifiques dans une application web. Dans Laravel,
-les routes sont généralement définies dans les fichiers de routes situés dans le
-répertoire `routes/`, avec `web.php` pour les routes web et `api.php` pour les
-routes d'API (que nous étudierons plus tard dans le cours).
+- Les ressources sont identifiées par des URL uniques.
+- Les opérations sur les ressources sont effectuées à l'aide de méthodes HTTP
+  standard (GET, POST, PUT, DELETE, etc.).
+- Les réponses du serveur sont généralement au format JSON.
+- L'authentification et les autorisations sont gérées à l'aide de tokens
+  (_"jetons d'accès"_ en français) (par exemple, des tokens JWT ou des tokens
+  d'API).
+- Les erreurs sont gérées de manière standardisée (par exemple, en utilisant des
+  codes d'état HTTP appropriés et en fournissant des messages d'erreur clairs).
 
-Les routes permettent de définir les URL de l'application et de les associer à
-des actions spécifiques à l'aide des méthodes HTTP.
+Chaque ressource est accessible via une URL unique et peut être manipulée à
+l'aide de méthodes HTTP standard (GET, POST, PUT, DELETE, etc.) pour effectuer
+des opérations de lecture, de création, de mise à jour ou de suppression sur la
+ressource.
 
-Par exemple, issu du dernier contenu, nous avions défini une route pour afficher
-un profil d'utilisateur :
+Ainsi, une ressource `posts` pourrait être accessible via l'URL `/api/posts` et
+pourrait être manipulée à l'aide des méthodes HTTP suivantes :
 
-```php
-Route::get('/profile', function () {
-    $user = User::where('username', 'janedoe')->first();
+- `GET /api/posts` : pour récupérer la liste des posts.
+  - Réponse(s) possible(s) : 200 (OK).
+- `POST /api/posts` : pour créer un nouveau post.
+  - Requêtes attendues : les données du post à créer (par exemple, le titre, le
+    contenu, etc.) au format JSON dans le corps de la requête.
+  - Réponse(s) possible(s) : 201 (Created) en cas de succès avec les données du
+    post créé, 400 (Bad Request) en cas de données invalides avec les attributs
+    d'erreur, etc.
+- `GET /api/posts/{id}` : pour récupérer les détails d'un post spécifique.
+  - Réponse(s) possible(s) : 200 (OK) en cas de succès avec les données du post,
+    404 (Not Found) si le post n'existe pas, etc.
+- `PUT/PATCH /api/posts/{id}` : pour mettre à jour un post spécifique.
+  - Entrées attendues : les données du post à mettre à jour (par exemple, le
+    titre, le contenu, etc.) au format JSON dans le corps de la requête.
+  - Réponse(s) possible(s) : 200 (OK) en cas de succès avec les données du post
+    mis à jour, 404 (Not Found) si le post n'existe pas, etc.
+- `DELETE /api/posts/{id}` : pour supprimer un post spécifique.
+  - Réponse(s) possible(s) : 204 (No Content) en cas de succès, 404 (Not Found)
+    si le post n'existe pas, etc.
 
-    $posts = Post::where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')
-        ->with(['user', 'likes'])
-        ->get();
+Le tableau ci-dessous résume les différentes méthodes HTTP et les réponses
+possibles pour la ressource `posts` :
 
-    return view('profile', ['user' => $user, 'posts' => $posts]);
-});
+| Méthode     | URL               | Description       |  Réponse |
+| :---------- | :---------------- | :---------------- | -------: |
+| `GET`       | `/api/posts`      | Liste des posts   |      200 |
+| `POST`      | `/api/posts`      | Créer un post     | 201, 400 |
+| `GET`       | `/api/posts/{id}` | Détails d'un post | 200, 404 |
+| `PUT/PATCH` | `/api/posts/{id}` | Modifier un post  | 200, 404 |
+| `DELETE`    | `/api/posts/{id}` | Supprimer un post | 204, 404 |
+
+La liste complète des codes d'état HTTP et de leur signification est disponible
+sur le site de Mozilla Developer Network (MDN) à l'adresse suivante :
+<https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>.
+
+### Versionner une API RESTful
+
+Il est souvent recommandé de versionner une API RESTful pour permettre aux
+clients de continuer à utiliser une version stable de l'API pendant que de
+nouvelles fonctionnalités sont développées ou que des modifications sont
+apportées à l'API.
+
+Pour cela, il est courant d'inclure la version de l'API dans l'URL (par exemple,
+`/api/v1/posts` pour la version 1 de l'API) ou dans les en-têtes de la requête.
+
+A l'avenir, si de nouvelles fonctionnalités sont ajoutées à l'API ou si des
+modifications sont apportées à l'API qui pourraient casser la compatibilité avec
+les clients existants, une nouvelle version de l'API pourrait être créée (par
+exemple, `/api/v2/posts`) pour permettre aux clients de continuer à utiliser la
+version stable de l'API pendant que les nouvelles fonctionnalités sont
+développées ou que les modifications sont apportées.
+
+### Tester une API RESTful
+
+Lors de l'utilisation d'une API RESTful, il n'y a pas d'interface utilisateur
+graphique pour interagir avec l'API, contrairement à une application web
+classique.
+
+Il est donc nécessaire d'utiliser des outils spécifiques pour tester les API
+RESTful, qui fournissent une interface pour envoyer des requêtes HTTP à l'API et
+afficher les réponses du serveur.
+
+Pour cela, il existe de nombreux outils disponibles. Parmi les plus populaires,
+on peut citer :
+
+- [Bruno](https://www.usebruno.com/) (recommandé).
+- [curl](https://curl.se/).
+- [Insomnia](https://insomnia.rest/).
+- [Postman](https://www.postman.com/).
+
+Grâce à ces outils, il est possible de tester les différentes routes de l'API en
+envoyant des requêtes HTTP avec les données appropriées et en vérifiant les
+réponses du serveur pour s'assurer que l'API fonctionne correctement.
+
+## Développer une API RESTful avec Laravel
+
+Au travers du mini-projet réalisé jusqu'à présent, nous avons développé une
+application web avec le framework Laravel qui suit une architecture MVC
+classique mais dont la structure et les conventions mises à disposition par
+Laravel permettent de respecter facilement les principes de l'architecture
+REST/RESTful.
+
+En effet, nous avons déjà mis en place une structure de routes, de contrôleurs
+et de modèles qui suit les conventions de Laravel et qui permet de développer
+des services web RESTful.
+
+C'est entre autres grâce à la méthodologie de développement que nous avons
+adoptée, qui consiste à construire notre application depuis la base de données
+(modèles et migrations) jusqu'à l'interface utilisateur (vues), en passant par
+les contrôleurs et les routes, que nous avons pu mettre en place une structure
+qui respecte les principes de l'architecture REST/RESTful.
+
+Déjà aujourd'hui, notre application web suit une architecture RESTful (les
+contrôleurs gèrent des aspects spécifiques de l'application comme les Posts, les
+Likes, les Users, etc.), même si nous n'avons pas encore mis en place de routes
+spécifiques pour l'API.
+
+### Différencier les routes MVC des routes API
+
+Dans une application Laravel, il est possible de différencier les routes qui
+sont destinées à être utilisées pour l'interface utilisateur (routes MVC) et les
+routes qui sont destinées à être utilisées pour l'API (routes API).
+
+Les routes MVC sont généralement définies dans le fichier `routes/web.php` et
+sont destinées à être utilisées pour l'interface utilisateur de l'application.
+
+Les routes API sont généralement définies dans le fichier `routes/api.php` et
+sont destinées à être utilisées pour l'API de l'application. Elles sont
+généralement préfixées par `/api` et utilisent un middleware spécifique pour
+gérer l'authentification et les autorisations.
+
+### Laravel Sanctum pour l'authentification des API RESTful
+
+[Laravel Sanctum](https://laravel.com/docs/12.x/sanctum) est un package Laravel
+qui permet de gérer l'authentification des API RESTful de manière simple et
+sécurisée.
+
+Il permet de générer des tokens d'authentification pour les utilisateurs de
+l'application, qui peuvent être utilisés pour authentifier les requêtes API.
+
+Il offre également des fonctionnalités pour gérer les permissions et les rôles
+des utilisateurs, ainsi que pour gérer les tokens d'authentification (par
+exemple, pour les révoquer ou les renouveler).
+
+### Créer les tokens pour les utilisateur.trices
+
+Au travers de Laravel Sanctum, il est possible de créer des tokens
+d'authentification pour les utilisateur.trices de l'application, qui peuvent
+être utilisés pour authentifier les requêtes API.
+
+Cela peut être fait en proposant une interface dans l'application pour que les
+utilisateur.trices puissent générer des tokens d'authentification.
+
+Nous aurons donc un nouveau domaine/une nouvelle ressource/une nouvelle section
+dans notre application pour gérer les tokens d'authentification, qui permettra
+aux utilisateur.trices de générer des tokens d'authentification pour leur
+compte.
+
+Cela nécessite de créer les vues associées pour permettre aux utilisateur.trices
+de générer des tokens d'authentification, ainsi que les routes et les
+contrôleurs associés pour gérer la logique de génération des tokens
+d'authentification.
+
+Une fois ces éléments mis en place, les utilisateur.trices pourront générer des
+tokens d'authentification pour leur compte et les utiliser avec l'API.
+
+### Utiliser les tokens pour authentifier les requêtes API
+
+Une fois que les utilisateur.trices auront généré un ou des tokens
+d'authentification pour leur compte, ils pourront utiliser ces tokens pour
+authentifier les requêtes API en les incluant dans les en-têtes de la requête.
+
+L'entête à utiliser pour inclure le token d'authentification dans les requêtes
+API est généralement l'entête `Authorization` avec la valeur `Bearer <token>`,
+où `<token>` est le token d'authentification généré par l'utilisateur.trice. Par
+exemple, une requête API authentifiée pourrait ressembler à ceci :
+
+```bash
+curl -s -H "Authorization: Bearer <token>" http://localhost:8000/api/posts
 ```
 
-La route ci-dessus répond à une requête GET sur l'URL `/profile` et exécute une
-fonction anonyme qui récupère les données nécessaires et retourne une vue.
+Laravel Sanctum gère automatiquement l'authentification des requêtes API en
+vérifiant les tokens d'authentification inclus dans les en-têtes de la requête.
 
-Nous pouvons également définir des routes pour d'autres actions, comme la
-création d'une nouvelle publication, la récupération d'une publication
-spécifique, la mise à jour d'une publication, etc.
+Si le token est valide, la requête est authentifiée et le serveur peut traiter
+la requête en fonction des permissions et des rôles de l'utilisateur associé au
+token d'authentification.
 
-## Paramètres de route
+Laravel Sanctum associe automatiquement la personne authentifiée à la requête
+API et permet d'accéder à ses données et à ses permissions pour gérer l'accès
+aux différentes fonctionnalités de l'API.
 
-Les routes peuvent également inclure des paramètres, qui sont des parties
-dynamiques de l'URL. Par exemple, une route pour afficher un profil spécifique
-pourrait ressembler à ceci :
+### Gérer les permissions et les rôles des utilisateur.trices avec les tokens d'authentification
 
-```php
-Route::get('/profile/{username}', function ($username) {
-    $user = User::where('username', $username)->first();
+Laravel Sanctum permet également de gérer les permissions et les rôles des
+utilisateur.trices en associant des permissions et des rôles aux tokens
+d'authentification.
 
-    $posts = Post::where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')
-        ->with(['user', 'likes'])
-        ->get();
-
-    return view('profile', ['user' => $user, 'posts' => $posts]);
-});
-```
-
-Dans cet exemple, `{username}` est un paramètre de route qui capture la partie
-de l'URL correspondant au nom d'utilisateur. Lorsque quelqu'un accède à une URL
-comme `/profile/janedoe`, la valeur `janedoe` est capturée et passée à la
-fonction anonyme en tant que variable `$username`.
-
-Lors de la requête HTTP GET de l'URL `/profile/janedoe`, la fonction anonyme
-récupère l'utilisateur avec le nom d'utilisateur `janedoe` et les publications
-associées à cet utilisateur, puis retourne la vue `profile` avec ces données en
-tant que réponse HTTP.
-
-La réponse HTTP contiendra alors une page HTML affichant le profil de
-l'utilisateur.trice avec le nom d'utilisateur.trice correspondant à la valeur du
-paramètre de route ainsi que les publications associées à cet utilisateur.trice.
-
-Il est possible de valider les paramètres de route en utilisant des expressions
-régulières et/ou des fonctions spécifiques pour s'assurer qu'ils correspondent à
-un format spécifique. Par exemple, pour s'assurer que le paramètre `username` ne
-contient que des lettres, des chiffres et des tirets, on pourrait ajouter une
-contrainte à la route :
-
-```php
-Route::get('/profile/{username}', function ($username) {
-    // ...
-})->where('username', '[A-Za-z0-9\-]+');
-```
-
-Ici, la méthode `where` est utilisée pour définir une contrainte sur le
-paramètre `username`, indiquant qu'il doit correspondre à l'expression régulière
-spécifiée.
-
-Si une URL ne correspond pas à la route définie (par exemple, si le paramètre
-`username` contient des caractères interdits), Laravel retournera une réponse
-404 Not Found.
-
-Cela permet de s'assurer que les routes sont utilisées de manière appropriée et
-que les données reçues sont valides avant de les traiter dans le contrôleur.
-
-La documentation officielle de Laravel fournit plus de détails sur les routes et
-les paramètres de route, y compris la possibilité d'utiliser des paramètres
-optionnels, des groupes de routes, des préfixes de route, etc. :
-<https://laravel.com/docs/12.x/routing#route-parameters>.
-
-## Contrôleurs
-
-Bien qu'il serait possible de gérer toutes les routes/requêtes de cette manière,
-cela peut rapidement devenir difficile à maintenir et à organiser. C'est là que
-les contrôleurs entrent en jeu.
-
-Cependant, dans une application plus complexe, il est préférable de déléguer la
-logique de gestion des requêtes à des contrôleurs dédiés plutôt que d'utiliser
-des fonctions anonymes dans les fichiers de routes. Cela permet de mieux
-organiser le code et de respecter le patron MVC.
-
-De cette manière, chaque contrôleur peut être responsable d'un ensemble de
-fonctionnalités liées à une ressource spécifique (par exemple, un
-`PostController` pour gérer les publications, un `UserController` pour gérer les
-utilisateurs, etc.), ce qui facilite la maintenance et la compréhension du code.
-
-### Créer un contrôleur
-
-TODO
-
-### Associer une route à un contrôleur
-
-TODO
-
-### Gérer les requêtes HTTP dans un contrôleur
-
-TODO
-
-### Retourner des réponses HTTP depuis un contrôleur
-
-TODO
-
-## Tester les routes et les contrôleurs
-
-Il est important de tester les routes et les contrôleurs pour s'assurer qu'ils
-fonctionnent correctement.
-
-Laravel fournit des outils pour faciliter les tests, notamment la possibilité de
-simuler des requêtes HTTP et de vérifier les réponses. Les tests peuvent être
-écrits en utilisant PHPUnit, qui est intégré à Laravel.
-
-La documentation officielle de Laravel fournit une section détaillée sur les
-tests, y compris comment tester les routes et les contrôleurs :
-<https://laravel.com/docs/12.x/testing>.
-
-Bien que les tests soient un sujet important, ils ne sont pas abordés en détail
-dans ce cours. Dans un premier temps, nous allons tester nos routes et
-contrôleurs manuellement à l'aide d'outils spécifiques, tels que :
-
-- [Bruno](https://www.usebruno.com/), [curl](https://curl.se/),
-  [Insomnia](https://insomnia.rest/), [Postman](https://www.postman.com/) ou
-  tout autre outil de test d'API pour tester les routes.
-- Le navigateur web pour tester les routes web (**uniquement pour les méthodes
-  `GET` et `POST` au travers de formulaires**).
-
-## Gérer les erreurs dans les contrôleurs
-
-Il est également important de gérer les erreurs dans les contrôleurs pour
-s'assurer que l'application réagit de manière appropriée en cas de problèmes,
-tels que des données manquantes, des ressources non trouvées, des erreurs de
-validation, etc.
-
-Laravel fournit des mécanismes pour gérer les erreurs, notamment la possibilité
-de lancer des exceptions et de les gérer à l'aide de gestionnaires d'exceptions
-personnalisés. La documentation officielle de Laravel fournit une section
-détaillée sur la gestion des erreurs : <https://laravel.com/docs/12.x/errors>.
-
-## Le patron MVC : récapitulatif
-
-Le patron de conception MVC (Model-View-Controller) est une architecture
-logicielle qui sépare une application en trois composants principaux :
-
-- **Modèle (Model)** : représente les données et la logique métier de
-  l'application. Il interagit avec la base de données et contient les règles de
-  validation, les relations entre les données, etc.
-- **Vue (View)** : responsable de la présentation des données à la personne qui
-  utilise l'application. Elle affiche les données fournies par les contrôleurs
-  et présente l'interface utilisateur de manière claire et attractive.
-- **Contrôleur (Controller)** : responsable de la gestion des requêtes HTTP et
-  du flux de l'application. Il reçoit les requêtes, interagit avec les modèles
-  pour récupérer ou manipuler des données, appelle les vues pour afficher les
-  résultats, et retourne des réponses HTTP appropriées.
-
-Dans Laravel, ces composants sont organisés dans des dossiers spécifiques :
-
-- Les modèles sont généralement situés dans le dossier `app/Models`. Les
-  migrations associées aux modèles sont situées dans le dossier
-  `database/migrations`.
-- Les vues sont situées dans les dossiers `app/View` et `resources/views`.
-- Les contrôleurs sont situés dans le dossier `app/Http/Controllers`.
-
-Grâce à cette organisation, il est plus facile de maintenir une séparation
-claire entre la logique métier, la logique de présentation et la logique de
-contrôle, ce qui facilite la maintenance, la réutilisabilité, la testabilité et
-la collaboration dans le développement de l'application.
-
-En suivant les conventions de Laravel pour l'organisation des fichiers et des
-dossiers, les développeur.euses peuvent rapidement comprendre où trouver les
-différents composants de l'application et comment ils interagissent entre eux.
+Cela permet de contrôler l'accès aux différentes fonctionnalités de l'API en
+fonction des permissions et des rôles associés aux tokens d'authentification
+utilisés pour authentifier les requêtes API.
 
 ## Conclusion
 
-Dans cette séance, nous avons exploré les contrôleurs dans le contexte du patron
-MVC et appris à créer des contrôleurs dans Laravel. Voici les points clés à
-retenir :
+En conclusion, l'architecture RESTful est une architecture adaptée pour
+développer des services web qui doivent être consommés par d'autres applications
+ou par des clients légers comme des applications mobiles ou des applications
+JavaScript côté client.
 
-- Les **contrôleurs** sont responsables de la gestion des requêtes HTTP et du
-  flux de l'application dans le patron MVC.
-- Ils interagissent avec les **modèles** pour récupérer ou manipuler des
-  données.
-- Ils appellent les **vues** pour afficher les résultats.
-- Ils retournent des **réponses HTTP** appropriées. (View), qui sont
-  responsables de la présentation des données à la personne qui utilise
-  l'application.
+Laravel permet de développer des applications RESTful en respectant les
+principes de l'architecture REST au travers d'une API avec Laravel Sanctum pour
+gérer l'authentification des API RESTful de manière simple et sécurisée.
 
-Dans le patron MVC, les vues ont pour responsabilité de :
-
-- Afficher les données fournies par les contrôleurs (que nous verrons plus en
-  détail dans une prochaine séance).
-- Présenter l'interface utilisateur de manière claire et attractive.
-- Structurer le contenu HTML de manière logique et sémantique.
-- Ne pas contenir de logique métier (cette responsabilité appartient aux modèles
-  et contrôleurs).
-
-Les vues ne doivent pas accéder directement à la base de données ni effectuer de
-calculs complexes. Elles reçoivent des données déjà préparées et se contentent
-de les afficher de manière appropriée.
-
-Cette séparation entre la logique métier (modèles), la logique de présentation
-(vues) et la logique de contrôle (contrôleurs) offre plusieurs avantages :
-
-- **Maintenabilité** : les modifications de l'interface utilisateur n'affectent
-  pas la logique métier.
-- **Réutilisabilité** : les mêmes données peuvent être affichées de différentes
-  manières (web, mobile, API).
-- **Testabilité** : chaque composant peut être testé indépendamment.
-- **Collaboration** : les personnes qui développent peuvent se spécialiser dans
-  différents aspects de l'application.
-
-Vous avez maintenant de solides bases pour comprendre et développer des
-applications avec Laravel en utilisant le patron MVC.
+Grâce à Laravel Sanctum, il est possible de créer des tokens d'authentification
+pour les utilisateur.trices de l'application, qui peuvent être utilisés pour
+authentifier et autoriser les requêtes API en associant des permissions et des
+rôles à chaque token.
 
 ## Exercices
 
@@ -498,28 +502,20 @@ Vous trouverez les détails du mini-projet ici :
 > les domaines dans lesquels vous pourriez avoir besoin de renforcer vos
 > connaissances ou de pratiquer davantage.
 
-- Quel est le rôle des vues dans le patron de conception MVC ?
-- Quels sont les avantages d'utiliser un moteur de template par rapport à du PHP
-  pur dans le HTML ?
-- Pourquoi est-il important de mettre en place l'internationalisation dès le
-  début du développement, même pour une application monolingue ?
-- Comment créer une vue Blade avec la commande Artisan ?
-- Comment passe-t-on du contenu à un composant Blade ?
-- Quelle est la différence entre un slot par défaut et un slot nommé ?
-- Comment créer un composant Blade avec Artisan ?
-- Pourquoi utilise-t-on le préfixe `:` devant certains attributs de composants
-  (ex : `:post="$post"`) ?
-- À quoi servent les variables `APP_LOCALE` et `APP_FALLBACK_LOCALE` ?
-- Quelle est la différence entre un fichier de traduction PHP et un fichier JSON
-  ?
-- Comment accède-t-on à une traduction dans une vue Blade ?
-- Comment gère-t-on les formes plurielles dans les traductions Laravel ?
-- Quelle est la différence entre les fichiers `.env` et `.env.example` ?
-- Pourquoi ne doit-on jamais commiter le fichier `.env` dans Git ?
-- Quelle fonction doit-on utiliser pour accéder aux configurations dans le code
-  de l'application (en dehors des fichiers de configuration) ?
-- Quelle est la différence entre l'approche CSS classique et l'approche
-  utility-first de Tailwind ?
+- Quels sont les principes fondamentaux d'une architecture REST ?
+- Quelle est la différence entre une architecture REST et une architecture
+  RESTful ?
+- Quand et pourquoi utiliser une architecture RESTful pour développer des
+  services web ?
+- Comment mettre en œuvre une architecture RESTful dans une application web avec
+  le framework Laravel ?
+- Comment différencier les routes MVC des routes API dans une application
+  Laravel ?
+- Comment utiliser Laravel Sanctum pour gérer l'authentification des API RESTful
+  dans une application Laravel ?
+- Comment créer des tokens d'authentification pour les utilisateur.trices dans
+  une application Laravel avec Laravel Sanctum ? Comment en gérer les
+  permissions et les rôles associés à ces tokens d'authentification ?
 
 ## À faire pour la prochaine séance
 

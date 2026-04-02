@@ -13,6 +13,7 @@
 - [Ordre de passage](#ordre-de-passage)
   - [Groupe 1](#groupe-1)
   - [Groupe 2](#groupe-2)
+- [Conseils](#conseils)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
 
 ## Objectifs
@@ -23,10 +24,12 @@ ajoutant de nouvelles fonctionnalités à chaque séance, pour arriver à un ré
 social de base fonctionnel.
 
 L'objectif de cette évaluation est de présenter oralement de nouvelles
-fonctionnalités que vous avez développées pour ce mini-projet. Ces nouvelles
-fonctionnalités peuvent être librement choisies afin de transformer le réseau
-social générique que vous avez développé en une application plus personnalisée
-et originale.
+fonctionnalités que vous avez développées pour ce mini-projet et répondre à une
+question tirée au sort liée au mini-projet ou au framework Laravel.
+
+Ces nouvelles fonctionnalités peuvent être librement choisies afin de
+transformer le réseau social générique que vous avez développé en une
+application plus personnalisée et originale.
 
 Sentez-vous libre de laisser libre cours à votre créativité pour développer des
 fonctionnalités qui vous intéressent et qui vous semblent pertinentes pour votre
@@ -60,9 +63,26 @@ question aléatoire liée au mini-projet ou au framework Laravel.
 L'évaluation dure 16 minutes (8 minutes de préparation et 8 minutes de
 présentation).
 
+> [!NOTE]
+>
+> Vos présentations seront enregistrées pour permettre aux personnes en charge
+> de l'évaluation de les revoir et de les évaluer de manière juste et précise.
+>
+> **Les enregistrements seront utilisés uniquement à des fins d'évaluation et ne
+> seront pas partagés publiquement.**
+>
+> Elles seront **supprimées** à la fin du semestre.
+
 L'étudiant.e devra présenter une série de nouvelles fonctionnalités qu'iel aura
 développées liées au mini-projet réalisé durant le cours avec le framework
-Laravel.
+Laravel et répondre à une question tirée au sort liée au mini-projet ou au
+framework Laravel.
+
+Les questions d'évaluation dans chaque contenu de cours sont des exemples de
+questions qui pourraient être tirées au sort pour cette évaluation. Cependant,
+il est possible que d'autres questions soient ajoutées.
+
+Voici le déroulement de l'évaluation :
 
 1. La personne vient 5 minutes avant son temps de passage (voir
    [Ordre de passage](#ordre-de-passage)) et attend son tour à l'extérieur de la
@@ -108,7 +128,9 @@ Laravel.
   souhaite.
 - Aucune ressource externe n'est autorisée durant la préparation ou la
   présentation orale et la session de questions/réponses (pas d'Internet, pas de
-  documentation, pas d'outils d'intelligence artificielle, etc.).
+  documentation, pas d'outils d'intelligence artificielle, etc.). L'ordinateur
+  est autorisé pour préparer votre présentation et montrer votre travail, mais
+  pas pour chercher des informations ou de l'aide en ligne.
 
 ## Grille d'évaluation
 
@@ -132,7 +154,7 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
 | --: | :----------------------------------------------------------------------------------------------------------------- |
 |   1 | La présentation orale est claire, structurée et couvre les points essentiels                                       |
 |   2 | Le but de l'application est correctement expliqué                                                                  |
-|   3 | Les trois nouvelles fonctionnalités sont expliquées de manière compréhensible et leur implémentation est détaillée |
+|   3 | Les trois nouveaux aspects sont présentés,expliqués de manière compréhensible et leur implémentation est détaillée |
 |   4 | Le workflow de développement est présenté et commenté                                                              |
 |   5 | La réponse à la question tirée au sort est pertinente et complète                                                  |
 
@@ -143,10 +165,10 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
   - Un aspect doit entraîner la création d'au moins un nouveau modèle Eloquent
     avec sa table de base de données, ses vues, ses routes et son contrôleur
     associés.
-  - Un aspect doit entraîner la mise à disposition (même simple) d'une API
-    RESTful pour interagir avec la fonctionnalité.
   - Un aspect doit être liée à l'authentification et/ou à l'autorisation (ex :
     gestion des rôles et permissions, etc.).
+  - Un aspect doit entraîner la mise à disposition (même simple) d'une API
+    RESTful pour interagir avec la fonctionnalité.
 - Ces différents aspects peuvent donner lieu à une même fonctionnalité combinée
   ou à plusieurs fonctionnalités distinctes.
 - Les nouveaux aspects présentés doivent être fonctionnels et testables. Ils ne
@@ -155,6 +177,10 @@ Note maximale : nombre de points obtenus × 0.5 + 1.
   présente et montrer un effort de personnalisation et d'originalité. Ils ne
   doivent pas être des aspects génériques ou triviaux qui ne montrent pas une
   réelle compréhension du framework Laravel et du développement web.
+- Plusieurs personnes peuvent présenter des aspects similaires, mais chaque
+  personne doit présenter des aspects qui lui sont propres et qui ne sont pas
+  simplement copiés ou légèrement modifiés à partir du travail d'autres
+  personnes.
 - Seuls PHP et les fonctionnalités offertes par Laravel sont autorisés pour
   développer les nouvelles fonctionnalités. L'utilisation de JavaScript ou
   d'autres langages de programmation n'est pas autorisée[^javascript].
@@ -279,6 +305,16 @@ Tanguy
 |  21 | Léa          | 16:10 - 16:18        | 16:20 - 16:28         |
 |  22 | Volontaire ? | 16:20 - 16:28        | 16:30 - 16:38         |
 |  23 | Volontaire ? | 16:30 - 16:38        | 16:40 - 16:48         |
+
+## Conseils
+
+- Ne voyez pas trop gros ! Il vaut mieux présenter trois fonctionnalités simples
+  et fonctionnelles que trois fonctionnalités complexes mais incomplètes ou non
+  fonctionnelles.
+- Préparez votre présentation à l'avance pour être sûr de respecter les critères
+  d'évaluation et de présenter un travail de qualité.
+- Soyez clair et structuré dans votre présentation pour faciliter la
+  compréhension de votre travail.
 
 ## Sanctions possibles en cas de tricherie
 
