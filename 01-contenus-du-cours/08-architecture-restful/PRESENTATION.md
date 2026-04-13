@@ -7,7 +7,7 @@ author: "L. Delafontaine, avec l'aide de GitHub Copilot"
 description:
   "Architecture RESTful pour le cours DévProdMéd enseigné à la HEIG-VD, Suisse"
 lang: "fr"
-url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/04-vues-blade-et-tailwind-css/presentation.html"
+url: "https://heig-vd-devprodmed-course.github.io/heig-vd-devprodmed-course/01-contenus-du-cours/08-architecture-restful/presentation.html"
 header: "[**Architecture RESTful**][contenu-complet-sur-github]"
 footer:
   "[**HEIG-VD**](https://heig-vd.ch) - [DévProdMéd
@@ -319,7 +319,7 @@ Les résultats seront discutés à la fin du cours. **Merci beaucoup !**
 <!-- URLs -->
 
 [contenu-complet-sur-github]:
-	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/04-vues-blade-et-tailwind-css/README.md
+	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/tree/main/01-contenus-du-cours/08-architecture-restful/README.md
 [licence]:
 	https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course/blob/main/LICENSE.md
 [feedback]: https://framaforms.org/devprodmed-2025-2026-feedback-1774862374
