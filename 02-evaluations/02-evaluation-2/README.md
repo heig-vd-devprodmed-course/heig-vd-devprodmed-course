@@ -11,8 +11,8 @@
 - [Grille d'évaluation](#grille-dévaluation)
 - [Contraintes](#contraintes)
 - [Ordre de passage](#ordre-de-passage)
-  - [Groupe 1](#groupe-1)
-  - [Groupe 2](#groupe-2)
+  - [Classe T139](#classe-t139)
+  - [Classe T147](#classe-t147)
 - [Conseils](#conseils)
 - [Sanctions possibles en cas de tricherie](#sanctions-possibles-en-cas-de-tricherie)
 
@@ -197,7 +197,10 @@ L'ordre sera défini aléatoirement au plus vite. Si des volontaires sont d'acco
 pour passer en premier.e ou en dernier.e, ça serait avec grand plaisir. Merci de
 me le faire savoir.
 
-### Groupe 1
+### Classe T139
+
+- Date : 05.05.2026
+- Heure : 12:30 - 17:00
 
 <!--
 Ryad
@@ -253,7 +256,10 @@ Ana
 |  22 | Volontaire ? | 16:20 - 16:28        | 16:30 - 16:38         |
 |  23 | Volontaire ? | 16:30 - 16:38        | 16:40 - 16:48         |
 
-### Groupe 2
+### Classe T147
+
+- Date : 06.05.2026
+- Heure : 12:30 - 17:00
 
 <!--
 Nuno Guilherme
