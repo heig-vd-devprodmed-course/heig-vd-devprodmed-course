@@ -1011,9 +1011,7 @@ index 63a1469..d315b31 100644
 +        'index' => [
 +            'title' => "Jetons d'accès",
 +            'description' => "Gérez vos jetons d'accès pour :app_name.",
-+            'created' => [
-+                'notice' => 'Votre jeton a été créé. Copiez-le maintenant, il ne sera plus affiché.',
-+            ],
++            'new_token_created' => 'Votre jeton a été créé. Copiez-le maintenant, il ne sera plus affiché.',
 +            'no_tokens' => "Aucun jeton d'accès.",
 +            'table' => [
 +                'name' => 'Nom',
