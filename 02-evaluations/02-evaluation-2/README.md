@@ -87,7 +87,8 @@ Voici le déroulement de l'évaluation :
 1. La personne vient 5 minutes avant son temps de passage (voir
    [Ordre de passage](#ordre-de-passage)) et attend son tour à l'extérieur de la
    salle d'évaluation.
-2. Une personne viendra chercher la personne une fois que ce sera son tour.
+2. **A l'heure indiquée pour votre temps de préparation, rentrez dans la salle**
+   (par l'arrière de la salle). **Personne ne viendra vous chercher, rentrez.**
 3. La personne entre dans la salle d'évaluation et tire au sort une question
    liée au mini-projet ou au framework Laravel parmi une liste de questions
    préparées par l'enseignant.e.
