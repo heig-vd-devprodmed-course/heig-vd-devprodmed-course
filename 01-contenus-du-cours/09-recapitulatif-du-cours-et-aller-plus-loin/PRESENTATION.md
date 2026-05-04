@@ -49,6 +49,8 @@ adresse][contenu-complet-sur-github].
 
 ## Déploiement d'une application Laravel sur Infomaniak
 
+## Déplacer vos mini-projets sur votre compte GitHub personnel
+
 ## Retours sur les évaluations
 
 ## Questions
