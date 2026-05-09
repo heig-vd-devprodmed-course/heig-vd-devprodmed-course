@@ -50,8 +50,8 @@ d'apprentissage, et les méthodes d'évaluation.
 |     08 | [Architecture RESTful](./01-contenus-du-cours/08-architecture-restful/README.md) + [Préparation à l'évaluation 2 (1/3)](./02-evaluations/02-evaluation-2/README.md)                                          | 🟢 Prêt     |
 |     09 | [Préparation à l'évaluation 2 (2/3)](./02-evaluations/02-evaluation-2/README.md)                                                                                                                             | 🟢 Prêt     |
 |     10 | [Préparation à l'évaluation 2 (3/3)](./02-evaluations/02-evaluation-2/README.md)                                                                                                                             | 🟢 Prêt     |
-|  🚨 11 | [Évaluation 2](./02-evaluations/02-evaluation-2/README.md)                                                                                                                                                   | 🟢 Prêt |
-|     12 | Récapitulatif du cours et aller plus loin                                                                                                                                                                    | 🟡 En cours  |
+|  🚨 11 | [Évaluation 2](./02-evaluations/02-evaluation-2/README.md)                                                                                                                                                   | 🟢 Prêt     |
+|     12 | [Récapitulatif du cours et aller plus loin](./01-contenus-du-cours/09-recapitulatif-du-cours-et-aller-plus-loin/README.md)                                                                                   | 🟢 Prêt     |
 
 ## 📜 Licence
 
