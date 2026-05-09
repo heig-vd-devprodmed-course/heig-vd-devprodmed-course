@@ -5,34 +5,6 @@ L. Delafontaine, avec l'aide de
 
 Ce travail est sous licence [CC BY-SA 4.0][licence].
 
-> [!TIP]
->
-> Voici quelques informations relatives à ce contenu.
->
-> **Ressources annexes**
->
-> - Autres formats du support de cours : [Présentation (web)][presentation-web]
->   · [Présentation (PDF)][presentation-pdf].
->
-> **Objectifs**
->
-> À l'issue de cette séance, les personnes qui étudient devraient être capables
-> de :
->
-> - TODO
->
-> **Méthodes d'enseignement et d'apprentissage**
->
-> Les méthodes d'enseignement et d'apprentissage utilisées pour animer la séance
-> sont les suivantes :
->
-> - Présentation magistrale.
-> - Discussions collectives.
->
-> **Méthodes d'évaluation**
->
-> Ce contenu ne donne pas lieu à une évaluation.
-
 ## Table des matières
 
 - [Table des matières](#table-des-matières)
@@ -40,7 +12,9 @@ Ce travail est sous licence [CC BY-SA 4.0][licence].
 
 ## Objectifs
 
-- TODO
+Le contenu de ce document est décrit dans la présentation associée, disponible
+ici : [Présentation (web)][presentation-web] · [Présentation
+(PDF)][presentation-pdf].
 
 <!-- URLs -->
 
