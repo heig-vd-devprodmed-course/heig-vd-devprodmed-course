@@ -69,8 +69,9 @@ Voici quelques conseils pour vous aider à démarrer :
   d'explorer pour gérer votre projet. N'hésitez pas à les utiliser !
   [1](https://docs.github.com/en/repositories)
   [2](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
-  [3](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)
-  [4](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
+  [3](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches)
+  [4](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)
+  [5](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
 
 ## Lavarel et frameworks réactifs
 
@@ -100,6 +101,20 @@ fonctionnalités courantes déjà mises en place, ce qui peut vous faire gagner 
 temps et vous permettre de vous concentrer sur les aspects spécifiques de votre
 application.
 
+## Tailwind CSS et librairies de composants
+
+Il existe de nombreuses librairies de composants basées sur Tailwind CSS qui
+peuvent vous aider à construire rapidement une interface utilisateur attrayante
+et fonctionnelle pour votre application Laravel.
+
+Ces librairies offrent une variété de composants préconçus qui réduisent la
+quantité de code que vous devez écrire pour créer une interface utilisateur
+moderne et responsive.
+
+Exemples : [daisyUI](https://daisyui.com/) (mon favori) /
+[shadcn/ui](https://ui.shadcn.com/) / [Flowbite](https://flowbite.com/) /
+[preline](https://preline.co).
+
 ## Déployer une application Laravel sur Infomaniak
 
 Nous avions déjà étudié comment déployer une application PHP sur Infomaniak
@@ -107,7 +122,7 @@ durant le cours ProgServ2.
 
 J'ai pu mettre en place une documentation pour déployer une application Laravel
 sur Infomaniak, que vous pouvez consulter
-[ici](https://github.com/heig-vd-progserv-course/heig-vd-progserv1-course/tree/main/06.02-deployer-un-site-ou-une-application-web-sur-internet).
+[ici](https://github.com/heig-vd-progserv-course/heig-vd-progserv1-course/blob/main/01-contenus-du-cours/06.02-deployer-un-site-ou-une-application-web-sur-internet/README.md).
 
 Cela vous sera sans doute utile pour déployer votre projet d'articulation si
 vous êtes amené.e à utiliser Laravel pour le réaliser.
